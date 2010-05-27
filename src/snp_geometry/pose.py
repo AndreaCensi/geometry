@@ -1,5 +1,5 @@
-from numpy import zeros, eye, dot, array, linalg, deg2rad, arccos, \
-    ndarray, rad2deg, float32, float64
+from numpy import zeros, eye, dot, array, linalg, degrees, arccos, \
+    ndarray, radians, float32, float64
 from math import atan2
 from snp_geometry.utils import rotz
     
@@ -114,13 +114,13 @@ class Pose:
     
     def __eq__(self, other):
         distance_rotation, distance_translation = self.distance(other)
-        tolerance_rotation = deg2rad(0.0001)
+        tolerance_rotation = radians(0.0001)
         tolerance_translation = 0.0001
         return (distance_rotation < tolerance_rotation) and (distance_translation < tolerance_translation)
     
     def __str__(self):
         p = self.get_2d_position()
-        r = rad2deg(self.get_2d_orientation())
+        r = degrees(self.get_2d_orientation())
         # TODO: output 3D if 3D
         return '<Pose pos=[%+.3fm %+.3fm] rot=%.2fdeg>' % (p[0], p[1], r)
         
