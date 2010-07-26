@@ -1,2 +1,2 @@
-from pose import Pose
+from pose import Pose, Velocity
 from utils import *

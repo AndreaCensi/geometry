@@ -1,11 +1,52 @@
-from numpy import zeros, eye, dot, array, linalg, degrees, arccos, \
+import numpy
+from numpy import zeros, eye, dot, array, degrees, arccos, \
     ndarray, radians, float32, float64
+from numpy.linalg import norm
 from math import atan2
-from snp_geometry.utils import rotz
+
+from scipy.linalg import logm, expm
+
+from snp_geometry.utils import rotz, map_hat, hat_map
+from snp_geometry.numpy_checks import require_array_with_shape, require_finite,\
+    require_orthogonal
+
+
+class Velocity:
+    def __init__(self, linear, angular):
+        # todo: make conversions
+        self.linear = linear
+        self.angular = angular
+        require_finite(self.linear)
+        require_finite(self.angular)
+        
+    @staticmethod
+    def from_matrix_representation(V):
+        ''' Creates a Velocity object from its Lie algebra matrix representation.
+         
+            V: 4 x 4 skew symmetric numpy array '''
+        require_finite(V)
+        require_array_with_shape(V, (4,4))
+        if not all(V[3,:] == [0,0,0,0]):
+            raise ValueError('Malformed velocity %s' % str(V))
+        angular = map_hat(V[0:3,0:3])
+        linear = V[0:3,3]
+        return Velocity(linear, angular)
+    
+    def to_matrix_representation(self):
+        M = zeros((4,4))
+        M[0:3,0:3] = hat_map(self.angular)
+        M[0:3,3] = self.linear
+        return M
+        
+    def exponential(self):
+        ''' Converts the velocity into the corresponding pose. '''
+        M = self.to_matrix_representation()
+        P = expm(M)
+        return Pose.from_matrix_representation(P)
     
 class Pose:
     ''' Objects of this class represent poses (position and attitude)
-        in 6D. There are utility functions to extract 2D quantities 
+        in 3D (SE(3)). There are utility functions to extract 2D quantities 
         (position in R^2, attitude scalar = angle ). 
     '''
     def __init__(self, position=None, attitude=None):
@@ -18,7 +59,7 @@ class Pose:
             Attitude can be:
             * None (-> identity)
             * a float (2d orientation, interpreted as angle around z axis)
-            * a (3,3) ndarray 
+            * a (3,3) ndarray, interpreted as rotation matrix
             
             Other values will raise ValueError or TypeError.
         
@@ -109,7 +150,7 @@ class Pose:
         if C < -1:
             C = -1
         distance_rotation = arccos(C)
-        distance_translation = linalg.norm(self.position - other.position)
+        distance_translation = norm(self.position - other.position)
         return (distance_rotation, distance_translation)
     
     def __eq__(self, other):
@@ -124,6 +165,33 @@ class Pose:
         # TODO: output 3D if 3D
         return '<Pose pos=[%+.3fm %+.3fm] rot=%.2fdeg>' % (p[0], p[1], r)
         
+    
+    def get_xytheta(self):
+        ''' Returns a numpy array containing (x,y,theta) 
+        Raises an exception if this is a 3D pose. '''
+        # TODO: make exception
+        x, y = self.get_2d_position()
+        theta = self.get_2d_orientation()
+        return array([x, y, theta])
+
+    def logarithm(self):
+        ''' Returns the velocity corresponding to this pose. '''
+        M = self.to_matrix_representation()
+        V = logm(M)
+        # make the top 3,3 exactly skew
+        V[0:3,0:3] = 0.5 * ( V[0:3,0:3] - V[0:3,0:3].transpose()) 
+        return Velocity.from_matrix_representation(V) 
+        
+    def to_matrix_representation(self):
+        ''' Returns the matrix representation of this pose as 
+            a 4 x 4 matrix. '''
+        # matrix representation of this pose
+        M = numpy.zeros((4,4))
+        M[0:3,0:3] = self.attitude[:,:]
+        M[0:3,3] = self.position[:]
+        M[3,3] = 1
+        return M
+    
     @staticmethod
     def pose_diff(A, B):
         ''' Returns a pose X such that A.oplus(X) = B '''
@@ -136,11 +204,20 @@ class Pose:
         # TODO: write unit tests for this
         x, y, theta = xytheta
         return Pose(position=[x, y], attitude=theta)
-    
-    def get_xytheta(self):
-        ''' Returns a numpy array containing (x,y,theta) 
-        Raises an exception if this is a 3D pose. '''
-        # TODO: make exception
-        x, y = self.get_2d_position()
-        theta = self.get_2d_orientation()
-        return array([x, y, theta])
+
+    @staticmethod
+    def from_matrix_representation(V):
+        ''' Creates a Velocity object from its Lie algebra matrix representation.
+         
+            V: 4 x 4 skew symmetric numpy array '''
+        require_finite(V)
+        require_array_with_shape(V, (4,4))
+        if not (V[3,:] == [0,0,0,1]).all():
+            raise ValueError('Malformed pose matrix %s' % str(V))
+        attitude = V[0:3,0:3]
+        require_orthogonal(attitude)
+        position = V[0:3,3]
+        return Pose(position, attitude)
+                        
+                        
+                        

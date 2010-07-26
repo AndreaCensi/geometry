@@ -1,7 +1,7 @@
 from snp_geometry import Pose
 import unittest
 from numpy import random, pi, array, ndarray
-from numpy.testing import *
+from numpy.testing import assert_almost_equal
 import numpy
 
 class CompositionTests(unittest.TestCase):
