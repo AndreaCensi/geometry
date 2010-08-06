@@ -26,7 +26,7 @@ class Velocity:
             V: 4 x 4 skew symmetric numpy array '''
         require_finite(V)
         require_array_with_shape(V, (4,4))
-        if not all(V[3,:] == [0,0,0,0]):
+        if not (V[3,:] == [0,0,0,0]).all():
             raise ValueError('Malformed velocity %s' % str(V))
         angular = map_hat(V[0:3,0:3])
         linear = V[0:3,3]
@@ -180,6 +180,9 @@ class Pose:
         V = logm(M)
         # make the top 3,3 exactly skew
         V[0:3,0:3] = 0.5 * ( V[0:3,0:3] - V[0:3,0:3].transpose()) 
+        # Make the last row exactly 0
+        V[3,:] = 0
+        
         return Velocity.from_matrix_representation(V) 
         
     def to_matrix_representation(self):
@@ -194,7 +197,8 @@ class Pose:
     
     @staticmethod
     def pose_diff(A, B):
-        ''' Returns a pose X such that A.oplus(X) = B '''
+        ''' Returns a pose X such that B.oplus(X) = A.
+            Mnemonics: X = A - B '''
         # TODO: write unit tests for this
         return B.inverse().oplus(A)
 

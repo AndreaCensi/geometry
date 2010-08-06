@@ -47,7 +47,7 @@ def require_length(a, length):
 def require_skew_symmetric(a):
     require_array_with_shape(a, square_shape())
     diag = a.diagonal()
-    if not all(diag == 0):
+    if not (diag == 0).all():
         raise ValueError('Expected skew symmetric, but diagonal is %s.' % diag)
     for i in range(a.shape[0]):
         for j in range(a.shape[1]):

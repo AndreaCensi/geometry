@@ -15,7 +15,6 @@ class PoseAndVelTests(CompositionTests):
     def testIdentity(self):
         self.assertSamePose( Pose([0,0],0),\
                              Velocity(zeros(3),zeros(3)).exponential())
-
         
     def testConversions1(self):
         """ Testing conversions with exponential and logarithm """
