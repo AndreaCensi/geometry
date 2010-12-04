@@ -3,7 +3,6 @@ from numpy import zeros, eye, dot, array, degrees, arccos, \
     ndarray, radians, float32, float64
 from numpy.linalg import norm
 from math import atan2
-
 from scipy.linalg import logm, expm
 
 from .utils import rotz, map_hat, hat_map
@@ -178,6 +177,9 @@ class Pose:
         ''' Returns the velocity corresponding to this pose. '''
         M = self.to_matrix_representation()
         V = logm(M)
+        # Make sure that the result is real (it might be complex due
+        # to numerical noise in M)
+        V = numpy.array(V.real)
         # make the top 3,3 exactly skew
         V[0:3, 0:3] = 0.5 * (V[0:3, 0:3] - V[0:3, 0:3].transpose()) 
         # Make the last row exactly 0
