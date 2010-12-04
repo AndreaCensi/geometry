@@ -6,8 +6,8 @@ from math import atan2
 
 from scipy.linalg import logm, expm
 
-from snp_geometry.utils import rotz, map_hat, hat_map
-from snp_geometry.numpy_checks import require_array_with_shape, require_finite,\
+from .utils import rotz, map_hat, hat_map
+from .numpy_checks import require_array_with_shape, require_finite, \
     require_orthogonal
 
 
@@ -25,17 +25,17 @@ class Velocity:
          
             V: 4 x 4 skew symmetric numpy array '''
         require_finite(V)
-        require_array_with_shape(V, (4,4))
-        if not (V[3,:] == [0,0,0,0]).all():
+        require_array_with_shape(V, (4, 4))
+        if not (V[3, :] == [0, 0, 0, 0]).all():
             raise ValueError('Malformed velocity %s' % str(V))
-        angular = map_hat(V[0:3,0:3])
-        linear = V[0:3,3]
+        angular = map_hat(V[0:3, 0:3])
+        linear = V[0:3, 3]
         return Velocity(linear, angular)
     
     def to_matrix_representation(self):
-        M = zeros((4,4))
-        M[0:3,0:3] = hat_map(self.angular)
-        M[0:3,3] = self.linear
+        M = zeros((4, 4))
+        M[0:3, 0:3] = hat_map(self.angular)
+        M[0:3, 3] = self.linear
         return M
         
     def exponential(self):
@@ -179,9 +179,9 @@ class Pose:
         M = self.to_matrix_representation()
         V = logm(M)
         # make the top 3,3 exactly skew
-        V[0:3,0:3] = 0.5 * ( V[0:3,0:3] - V[0:3,0:3].transpose()) 
+        V[0:3, 0:3] = 0.5 * (V[0:3, 0:3] - V[0:3, 0:3].transpose()) 
         # Make the last row exactly 0
-        V[3,:] = 0
+        V[3, :] = 0
         
         return Velocity.from_matrix_representation(V) 
         
@@ -189,10 +189,10 @@ class Pose:
         ''' Returns the matrix representation of this pose as 
             a 4 x 4 matrix. '''
         # matrix representation of this pose
-        M = numpy.zeros((4,4))
-        M[0:3,0:3] = self.attitude[:,:]
-        M[0:3,3] = self.position[:]
-        M[3,3] = 1
+        M = numpy.zeros((4, 4))
+        M[0:3, 0:3] = self.attitude[:, :]
+        M[0:3, 3] = self.position[:]
+        M[3, 3] = 1
         return M
     
     @staticmethod
@@ -215,12 +215,12 @@ class Pose:
          
             V: 4 x 4 skew symmetric numpy array '''
         require_finite(V)
-        require_array_with_shape(V, (4,4))
-        if not (V[3,:] == [0,0,0,1]).all():
+        require_array_with_shape(V, (4, 4))
+        if not (V[3, :] == [0, 0, 0, 1]).all():
             raise ValueError('Malformed pose matrix %s' % str(V))
-        attitude = V[0:3,0:3]
+        attitude = V[0:3, 0:3]
         require_orthogonal(attitude)
-        position = V[0:3,3]
+        position = V[0:3, 3]
         return Pose(position, attitude)
                         
                         

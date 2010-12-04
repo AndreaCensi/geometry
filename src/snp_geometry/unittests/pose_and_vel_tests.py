@@ -1,24 +1,24 @@
-from numpy import random, pi, array, zeros
-from numpy.random import randn 
+from numpy import pi, array, zeros
+from numpy.random import randn, rand
 from numpy.testing.utils import assert_almost_equal
 
-from snp_geometry import Pose, Velocity
-from snp_geometry.unittests.pose_tests import CompositionTests
+from .. import Pose, Velocity
+from .pose_tests import CompositionTests
 
 
 def getRandom2DPose():
-    return Pose(position=random.randn(2), attitude=random.rand(1) * pi)
+    return Pose(position=randn(2), attitude=rand(1) * pi)
 
 
 class PoseAndVelTests(CompositionTests):
     
     def testIdentity(self):
-        self.assertSamePose( Pose([0,0],0),\
-                             Velocity(zeros(3),zeros(3)).exponential())
+        self.assertSamePose(Pose([0, 0], 0), \
+                             Velocity(zeros(3), zeros(3)).exponential())
         
     def testConversions1(self):
         """ Testing conversions with exponential and logarithm """
-        example_poses = [ Pose([0,0],0) ] + map(lambda i: getRandom2DPose(), range(5))
+        example_poses = [ Pose([0, 0], 0) ] + map(lambda i: getRandom2DPose(), range(5)) #@UnusedVariable
         for pose in example_poses: 
             velocity = pose.logarithm()
             pose2 = velocity.exponential()
@@ -26,8 +26,8 @@ class PoseAndVelTests(CompositionTests):
            
     def testConversions2(self):
         """ Testing conversions with exponential and logarithm """
-        example_velocities = [ Velocity(array([0,0,0]),array([0,0,0])), 
-                               Velocity(randn(3),randn(3)) ]
+        example_velocities = [ Velocity(array([0, 0, 0]), array([0, 0, 0])),
+                               Velocity(randn(3), randn(3)) ]
         for velocity in example_velocities: 
             pose = velocity.exponential()
             velocity2 = pose.logarithm()
