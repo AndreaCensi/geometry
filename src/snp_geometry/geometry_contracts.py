@@ -2,15 +2,10 @@ import numpy as np
 
 from contracts import new_contract, contracts, check, fail
 
-
 @new_contract
 @contracts(x='array[N],N>0')
 def unit_length(x):
     return np.allclose(1, np.linalg.norm(x))
-
-check('unit_length', np.array([1]))
-check('unit_length', np.array([0, 1]))
-fail('unit_length', np.array([0, 2]))
 
 new_contract('direction', 'array[3], unit_length')
 new_contract('unit_quaternion', 'array[4], unit_length')
