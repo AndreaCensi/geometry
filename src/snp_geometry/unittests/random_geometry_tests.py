@@ -4,6 +4,8 @@ import numpy as np
 
 from snp_geometry import random_rotation, random_quaternion, random_direction
 from contracts import check, fail
+from snp_geometry.random_geometry import geodesic_distance_on_S2, \
+    axis_angle_to_rotation_matrix
 
 
 N = 100
@@ -11,16 +13,16 @@ N = 100
 class GeometryTests(unittest.TestCase):
     
     def test_random_quaternions(self):
-        for i in range(N):
-            q = random_quaternion()
+        for i in range(N): #@UnusedVariable
+            random_quaternion()
         
     def test_random_rotations(self):
-        for i in range(N):
-            R = random_rotation()
+        for i in range(N): #@UnusedVariable
+            random_rotation()
     
     def test_random_directions(self):
-        for i in range(N):
-            s = random_direction()
+        for i in range(N): #@UnusedVariable
+            random_direction()
         
     def test_checks(self):
         R = np.zeros((10, 10))
@@ -38,3 +40,22 @@ class GeometryTests(unittest.TestCase):
         check('unit_length', np.array([1]))
         check('unit_length', np.array([0, 1]))
         fail('unit_length', np.array([0, 2]))
+        
+        
+    def test_distances(self):
+        for i in range(N): #@UnusedVariable
+            s = random_direction()
+            dist = geodesic_distance_on_S2 
+            np.testing.assert_allclose(dist(s, s), 0)
+            np.testing.assert_allclose(dist(s, -s), np.pi)
+
+    def text_distances_rotations(self):
+        for i in range(N): #@UnusedVariable
+            s = random_direction()
+            angle = np.random.uniform() * 2 * np.pi
+            axis = random_direction()
+            R = axis_angle_to_rotation_matrix(axis, angle)
+            s2 = np.dot(R, s)
+            dist = geodesic_distance_on_S2(s, s2)
+            np.testing.assert_allclose(dist, angle)
+        

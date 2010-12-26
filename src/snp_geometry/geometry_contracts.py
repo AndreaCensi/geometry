@@ -1,6 +1,6 @@
 import numpy as np
 
-from contracts import new_contract, contracts, check, fail
+from contracts import new_contract, contracts
 
 @new_contract
 @contracts(x='array[N],N>0')
@@ -24,6 +24,5 @@ def orthogonal(x):
 @contracts(x='array[3x3], orthogonal')
 def rotation_matrix(x):
     det = np.linalg.det(x)
-    np.testing.assert_allclose(det, 1)
-    
+    np.testing.assert_allclose(det, 1) 
     

@@ -25,6 +25,15 @@ def random_direction():
 #    r0_mat = mat(r0).T
 #    return abs(myacos((trace(r0_mat.T * r_mat)-1)/2))
 
+
+@contracts(s='direction', v='direction', returns='float,>=0,<=3.1416')
+def geodesic_distance_on_S2(s, v):
+    ''' Returns the geodesic distance between two points on the sphere. '''
+    # special case: return a 0 (no precision issues) if the vectors are the same
+    if (s == v).all(): return 0.0
+    dot_product = np.clip((s * v).sum(), -1, 1) # safe to clip if directions
+    return np.arccos(dot_product) # safe to arccos() if clipped
+
 @contracts(returns='unit_quaternion')
 def random_quaternion():
     ''' Generate a random quaternion.
@@ -71,10 +80,31 @@ def quaternion_to_rotation_matrix(x):
     
     return np.array([r1, r2, r3])
 
-        
+# TODO add finite
+@contracts(axis='direction', angle='float', returns='unit_quaternion')
+def axis_angle_to_quaternion(axis, angle):
+    return np.array([
+            axis[0] * sin(angle / 2),
+            axis[1] * sin(angle / 2),
+            axis[2] * sin(angle / 2),
+            cos(angle / 2)
+        ])
+
+@contracts(axis='direction', angle='float', returns='rotation_matrix')
+def axis_angle_to_rotation_matrix(axis, angle):
+    q = axis_angle_to_quaternion(axis, angle)
+    return quaternion_to_rotation_matrix(q)
+    
+    
+
 @contracts(returns='array[3x3], orthogonal')
 def random_orthogonal_transform():
     # TODO: to write
     pass
+
+@contracts(how_many='int,>0,N', returns='array[3xN]')
+def random_directions(how_many):
+    ''' Returns a list of random directions. '''
+    return np.array([random_direction().T for i in range(how_many)]) #@UnusedVariable
 
 
