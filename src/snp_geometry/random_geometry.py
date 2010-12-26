@@ -105,6 +105,6 @@ def random_orthogonal_transform():
 @contracts(how_many='int,>0,N', returns='array[3xN]')
 def random_directions(how_many):
     ''' Returns a list of random directions. '''
-    return np.array([random_direction().T for i in range(how_many)]) #@UnusedVariable
+    return np.vstack([random_direction() for i in range(how_many)]).T #@UnusedVariable
 
 

@@ -5,7 +5,7 @@ import numpy as np
 from snp_geometry import random_rotation, random_quaternion, random_direction
 from contracts import check, fail
 from snp_geometry.random_geometry import geodesic_distance_on_S2, \
-    axis_angle_to_rotation_matrix
+    axis_angle_to_rotation_matrix, random_directions
 
 
 N = 100
@@ -20,7 +20,7 @@ class GeometryTests(unittest.TestCase):
         for i in range(N): #@UnusedVariable
             random_rotation()
     
-    def test_random_directions(self):
+    def test_random_direction(self):
         for i in range(N): #@UnusedVariable
             random_direction()
         
@@ -41,6 +41,10 @@ class GeometryTests(unittest.TestCase):
         check('unit_length', np.array([0, 1]))
         fail('unit_length', np.array([0, 2]))
         
+    def test_random_directions(self):
+        N = 20
+        x = random_directions(N)
+        assert x.shape == (3, N)
         
     def test_distances(self):
         for i in range(N): #@UnusedVariable
