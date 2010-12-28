@@ -2,7 +2,6 @@ from numpy import cos, sin, array, zeros
 from .numpy_checks import require_length, \
     require_skew_symmetric, require_array_with_shape
 
-
 def rotz(theta):
     ''' Returns a 3x3 rotation matrix corresponding to rotation around the z axis. '''
     return array([ 
@@ -38,3 +37,18 @@ def map_hat(H):
     v[0] = -H[1, 2]
 
     return v
+
+
+def assert_allclose(actual, desired, rtol=1e-7, atol=0,
+                    err_msg='', verbose=True):
+    ''' Backporting assert_allclose from 1.5 to 1.4 '''
+    from numpy.testing.utils import assert_array_compare
+    import numpy as np
+    def compare(x, y):
+        return np.allclose(x, y, rtol=rtol, atol=atol)
+    actual, desired = np.asanyarray(actual), np.asanyarray(desired)
+    header = 'Not equal to tolerance rtol=%g, atol=%g' % (rtol, atol)
+    assert_array_compare(compare, actual, desired, err_msg=str(err_msg),
+                         verbose=verbose, header=header)
+
+

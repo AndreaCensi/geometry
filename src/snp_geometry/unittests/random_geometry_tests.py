@@ -6,6 +6,7 @@ from snp_geometry import random_rotation, random_quaternion, random_direction
 from contracts import check, fail
 from snp_geometry.random_geometry import geodesic_distance_on_S2, \
     axis_angle_to_rotation_matrix, random_directions
+from snp_geometry.utils import assert_allclose
 
 
 N = 100
@@ -50,8 +51,8 @@ class GeometryTests(unittest.TestCase):
         for i in range(N): #@UnusedVariable
             s = random_direction()
             dist = geodesic_distance_on_S2 
-            np.testing.assert_allclose(dist(s, s), 0)
-            np.testing.assert_allclose(dist(s, -s), np.pi)
+            assert_allclose(dist(s, s), 0)
+            assert_allclose(dist(s, -s), np.pi)
 
     def text_distances_rotations(self):
         for i in range(N): #@UnusedVariable
@@ -61,5 +62,5 @@ class GeometryTests(unittest.TestCase):
             R = axis_angle_to_rotation_matrix(axis, angle)
             s2 = np.dot(R, s)
             dist = geodesic_distance_on_S2(s, s2)
-            np.testing.assert_allclose(dist, angle)
+            assert_allclose(dist, angle)
         
