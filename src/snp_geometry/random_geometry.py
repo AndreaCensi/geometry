@@ -1,4 +1,3 @@
-
 import numpy as np
 
 from numpy import cos, sin, sqrt
@@ -96,7 +95,6 @@ def axis_angle_to_rotation_matrix(axis, angle):
     return quaternion_to_rotation_matrix(q)
     
     
-
 @contracts(returns='array[3x3], orthogonal')
 def random_orthogonal_transform():
     # TODO: to write
