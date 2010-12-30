@@ -4,6 +4,7 @@ from numpy import cos, sin, sqrt
 from numpy.random import uniform
 
 from contracts import contracts 
+from snp_geometry.utils import hat_map
 
 
 @contracts(returns='direction')
@@ -57,11 +58,11 @@ def random_rotation():
         Wraps :py:func:`random_quaternion`.
     '''
     q = random_quaternion()
-    return quaternion_to_rotation_matrix(q)
+    return rotation_from_quaternion(q)
 
 
 @contracts(x='unit_quaternion', returns='rotation_matrix')
-def quaternion_to_rotation_matrix(x):
+def rotation_from_quaternion(x):
     '''
         From: <http://en.wikipedia.org/w/index.php?title=Quaternions_and_spatial_rotation&oldid=402924915>
     '''
@@ -79,21 +80,64 @@ def quaternion_to_rotation_matrix(x):
     
     return np.array([r1, r2, r3])
 
+quaternion_to_rotation_matrix = rotation_from_quaternion
 # TODO add finite
 @contracts(axis='direction', angle='float', returns='unit_quaternion')
-def axis_angle_to_quaternion(axis, angle):
+def quaternion_from_axis_angle(axis, angle):
     return np.array([
+            cos(angle / 2),
             axis[0] * sin(angle / 2),
             axis[1] * sin(angle / 2),
-            axis[2] * sin(angle / 2),
-            cos(angle / 2)
+            axis[2] * sin(angle / 2)
         ])
 
+@contracts(q='unit_quaternion', returns='tuple(direction, (float,<3.15))')
+def axis_angle_from_quaternion(q):
+    angle = 2 * np.arccos(q[0])
+    if angle == 0: # XXX: use tolerance
+        axis = default_axis
+    else:
+        axis = q[1:] / sin(angle / 2)
+    if angle > np.pi:
+        angle -= 2 * np.pi
+    elif angle < -np.pi:
+        angle += 2 * np.pi
+        
+    return axis, angle
+         
+@contracts(returns='direction')
+def default_axis(): 
+    return  np.array([0, 0, 1])
+
 @contracts(axis='direction', angle='float', returns='rotation_matrix')
-def axis_angle_to_rotation_matrix(axis, angle):
-    q = axis_angle_to_quaternion(axis, angle)
-    return quaternion_to_rotation_matrix(q)
+def rotation_from_axis_angle(axis, angle):
+    w = axis
+    w_hat = hat_map(w)
+    w_hat2 = np.dot(w_hat, w_hat)
+    R = np.eye(3) + w_hat * np.sin(angle) + w_hat2 * (1 - np.cos(angle))
+    return R
+
+@contracts(R='rotation_matrix', returns='tuple(direction,(float,<3.15))')
+def axis_angle_from_rotation(R):
+    angle = np.arccos((R.trace() - 1) / 2)
     
+    if angle == 0:
+        return default_axis(), 0
+    else:
+        v = np.array([R[2, 1] - R[1, 2],
+                      R[0, 2] - R[2, 0],
+                      R[1, 0] - R[0, 1]])
+        axis = (1 / (2 * np.sin(angle))) * v
+        return axis, angle
+    
+@contracts(axis='direction', angle='float', returns='rotation_matrix')
+def rotation_from_axis_angle2(axis, angle):
+    q = quaternion_from_axis_angle(axis, angle)
+    return rotation_from_quaternion(q)
+    
+
+rotation_matrix_from_axis_angle = rotation_from_axis_angle
+axis_angle_to_rotation_matrix = rotation_matrix_from_axis_angle
     
 @contracts(returns='array[3x3], orthogonal')
 def random_orthogonal_transform():

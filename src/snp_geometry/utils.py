@@ -1,6 +1,7 @@
 from numpy import cos, sin, array, zeros
 from .numpy_checks import require_length, \
     require_skew_symmetric, require_array_with_shape
+from contracts.main import contracts
 
 def rotz(theta):
     ''' Returns a 3x3 rotation matrix corresponding to rotation around the z axis. '''
@@ -16,9 +17,8 @@ def rot2d(theta):
             [ cos(theta), -sin(theta)],
             [ sin(theta), cos(theta)]]) 
 
+@contracts(v='array[3]', returns='array[3x3]')
 def hat_map(v):
-    require_length(v, 3)
-
     h = zeros((3, 3))
     h[0, 1] = -v[2]
     h[0, 2] = v[1]
