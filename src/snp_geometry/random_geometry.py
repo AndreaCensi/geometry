@@ -7,6 +7,8 @@ from contracts import contracts
 from snp_geometry.utils import hat_map
 
 
+# conventions: q=( a + bi + cj + dk), with a>0
+
 @contracts(returns='direction')
 def random_direction():
     ''' Generates a random direction in S^2. '''
@@ -42,15 +44,16 @@ def random_quaternion():
     s = uniform()
     sigma1 = sqrt(1 - s)
     sigma2 = sqrt(s)
-    theta1 = uniform(0, 2 * np.pi)
-    theta2 = uniform(0, 2 * np.pi)
+    theta1 = uniform() * 2 * np.pi
+    theta2 = uniform() * 2 * np.pi
 
-    q = [cos(theta2) * sigma2,
-         sin(theta1) * sigma1,
-         cos(theta1) * sigma1,
-         sin(theta2) * sigma2 ]
+    q = np.array([cos(theta2) * sigma2,
+                  sin(theta1) * sigma1,
+                  cos(theta1) * sigma1,
+                  sin(theta2) * sigma2 ])
     
-    return np.array(q)
+    q *= np.sign(q[0])
+    return q
 
 @contracts(returns='rotation_matrix')
 def random_rotation():
@@ -80,17 +83,50 @@ def rotation_from_quaternion(x):
     
     return np.array([r1, r2, r3])
 
+@contracts(R='rotation_matrix', returns='unit_quaternion')
+def quaternion_from_rotation(R):
+    ''' Robust method mentioned on wikipedia:
+        http://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation
+        
+        TODO: add the more robust method with 4x4 matrix and eigenvector
+    '''
+    largest = np.argmax(R.diagonal())
+    permutations = {0: [0, 1, 2], 1: [1, 2, 0], 2: [2, 0, 1]}
+    u, v, w = permutations[largest]
+    rr = 1 + R[u, u] - R[v, v] - R[w, w]
+    assert rr >= 0
+    r = np.sqrt(rr)
+    if r == 0: # TODO: add tolerance
+        return quaternion_from_axis_angle(default_axis(), 0.0)
+    else:
+        q0 = (R[w, v] - R[v, w]) / (2 * r)
+        qu = (r / 2)
+        qv = (R[u, v] + R[v, u]) / (2 * r)
+        qw = (R[w, u] + R[u, w]) / (2 * r)
+        
+        Q = np.zeros(4)
+        Q[0] = q0
+        Q[u + 1] = qu
+        Q[v + 1] = qv
+        Q[w + 1] = qw
+        if Q[0] < 0:
+            Q = -Q
+        return Q
+
+# TODO: remove
 quaternion_to_rotation_matrix = rotation_from_quaternion
+
 # TODO add finite
 @contracts(axis='direction', angle='float', returns='unit_quaternion')
 def quaternion_from_axis_angle(axis, angle):
-    return np.array([
+    Q = np.array([
             cos(angle / 2),
             axis[0] * sin(angle / 2),
             axis[1] * sin(angle / 2),
             axis[2] * sin(angle / 2)
         ])
-
+    Q = Q * np.sign(Q[0])
+    return Q
 @contracts(q='unit_quaternion', returns='tuple(direction, (float,<3.15))')
 def axis_angle_from_quaternion(q):
     angle = 2 * np.arccos(q[0])
@@ -114,6 +150,7 @@ def rotation_from_axis_angle(axis, angle):
     w = axis
     w_hat = hat_map(w)
     w_hat2 = np.dot(w_hat, w_hat)
+    # Rodriguez' formula
     R = np.eye(3) + w_hat * np.sin(angle) + w_hat2 * (1 - np.cos(angle))
     return R
 
@@ -122,7 +159,7 @@ def axis_angle_from_rotation(R):
     angle = np.arccos((R.trace() - 1) / 2)
     
     if angle == 0:
-        return default_axis(), 0
+        return default_axis(), 0.0
     else:
         v = np.array([R[2, 1] - R[1, 2],
                       R[0, 2] - R[2, 0],
@@ -135,7 +172,7 @@ def rotation_from_axis_angle2(axis, angle):
     q = quaternion_from_axis_angle(axis, angle)
     return rotation_from_quaternion(q)
     
-
+# old aliases to remove
 rotation_matrix_from_axis_angle = rotation_from_axis_angle
 axis_angle_to_rotation_matrix = rotation_matrix_from_axis_angle
     
@@ -148,5 +185,3 @@ def random_orthogonal_transform():
 def random_directions(how_many):
     ''' Returns a list of random directions. '''
     return np.vstack([random_direction() for i in range(how_many)]).T #@UnusedVariable
-
-
