@@ -6,8 +6,8 @@ from math import atan2
 from scipy.linalg import logm, expm
 
 from .utils import rotz, map_hat, hat_map
-from .numpy_checks import require_array_with_shape, require_finite, \
-    require_orthogonal
+from .numpy_checks import require_finite
+from contracts.main import contracts, check
 
 
 class Velocity:
@@ -19,12 +19,11 @@ class Velocity:
         require_finite(self.angular)
         
     @staticmethod
+    @contracts(V='array[4x4]')
     def from_matrix_representation(V):
         ''' Creates a Velocity object from its Lie algebra matrix representation.
-         
-            V: 4 x 4 skew symmetric numpy array '''
+          '''
         require_finite(V)
-        require_array_with_shape(V, (4, 4))
         if not (V[3, :] == [0, 0, 0, 0]).all():
             raise ValueError('Malformed velocity %s' % str(V))
         angular = map_hat(V[0:3, 0:3])
@@ -212,16 +211,16 @@ class Pose:
         return Pose(position=[x, y], attitude=theta)
 
     @staticmethod
+    @contracts(V='array[4x4]')
     def from_matrix_representation(V):
-        ''' Creates a Velocity object from its Lie algebra matrix representation.
-         
-            V: 4 x 4 skew symmetric numpy array '''
+        ''' Creates a Pose object from its Lie algebra matrix representation.
+              
+        '''
         require_finite(V)
-        require_array_with_shape(V, (4, 4))
         if not (V[3, :] == [0, 0, 0, 1]).all():
             raise ValueError('Malformed pose matrix %s' % str(V))
         attitude = V[0:3, 0:3]
-        require_orthogonal(attitude)
+        check('rotation_matrix', attitude)
         position = V[0:3, 3]
         return Pose(position, attitude)
                         

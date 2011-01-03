@@ -13,7 +13,7 @@ from snp_geometry.utils import hat_map
 def random_direction():
     ''' Generates a random direction in S^2. '''
     # Generate a random direction
-    z = uniform(-1., 1.)
+    z = uniform(-1, +1)
     t = uniform(0, 2 * np.pi)
     r = sqrt(1 - z ** 2)
     x = r * cos(t)
@@ -35,6 +35,15 @@ def geodesic_distance_on_S2(s, v):
     if (s == v).all(): return 0.0
     dot_product = np.clip((s * v).sum(), -1, 1) # safe to clip if directions
     return np.arccos(dot_product) # safe to arccos() if clipped
+
+@contracts(s='array[K],unit_length', v='array[K],unit_length', returns='float,>=0,<=3.1416')
+def geodesic_distance_on_sphere(s, v):
+    ''' Returns the geodesic distance between two points on the sphere. '''
+    # special case: return a 0 (no precision issues) if the vectors are the same
+    if (s == v).all(): return 0.0
+    dot_product = np.clip((s * v).sum(), -1, 1) # safe to clip if directions
+    return np.arccos(dot_product) # safe to arccos() if clipped
+
 
 @contracts(returns='unit_quaternion')
 def random_quaternion():
@@ -91,7 +100,9 @@ def quaternion_from_rotation(R):
         TODO: add the more robust method with 4x4 matrix and eigenvector
     '''
     largest = np.argmax(R.diagonal())
-    permutations = {0: [0, 1, 2], 1: [1, 2, 0], 2: [2, 0, 1]}
+    permutations = {0: [0, 1, 2],
+                    1: [1, 2, 0],
+                    2: [2, 0, 1]}
     u, v, w = permutations[largest]
     rr = 1 + R[u, u] - R[v, v] - R[w, w]
     assert rr >= 0
@@ -125,8 +136,9 @@ def quaternion_from_axis_angle(axis, angle):
             axis[1] * sin(angle / 2),
             axis[2] * sin(angle / 2)
         ])
-    Q = Q * np.sign(Q[0])
+    Q *= np.sign(Q[0])
     return Q
+
 @contracts(q='unit_quaternion', returns='tuple(direction, (float,<3.15))')
 def axis_angle_from_quaternion(q):
     angle = 2 * np.arccos(q[0])

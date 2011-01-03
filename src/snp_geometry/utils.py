@@ -3,6 +3,7 @@ from .numpy_checks import require_length, \
     require_skew_symmetric, require_array_with_shape
 from contracts.main import contracts
 
+@contracts(theta='number', returns='rotation_matrix')
 def rotz(theta):
     ''' Returns a 3x3 rotation matrix corresponding to rotation around the z axis. '''
     return array([ 
@@ -17,7 +18,7 @@ def rot2d(theta):
             [ cos(theta), -sin(theta)],
             [ sin(theta), cos(theta)]]) 
 
-@contracts(v='array[3]', returns='array[3x3]')
+@contracts(v='array[3]', returns='array[3x3],skew_symmetric')
 def hat_map(v):
     h = zeros((3, 3))
     h[0, 1] = -v[2]
@@ -26,8 +27,8 @@ def hat_map(v):
     h = h - h.transpose();
     return h
 
+@contracts(H='array[3x3],skew_symmetric', returns='array[3]')
 def map_hat(H):
-    
     require_array_with_shape(H, (3, 3))
     require_skew_symmetric(H)
 
@@ -37,18 +38,3 @@ def map_hat(H):
     v[0] = -H[1, 2]
 
     return v
-
-
-def assert_allclose(actual, desired, rtol=1e-7, atol=0,
-                    err_msg='', verbose=True):
-    ''' Backporting assert_allclose from 1.5 to 1.4 '''
-    from numpy.testing.utils import assert_array_compare
-    import numpy as np
-    def compare(x, y):
-        return np.allclose(x, y, rtol=rtol, atol=atol)
-    actual, desired = np.asanyarray(actual), np.asanyarray(desired)
-    header = 'Not equal to tolerance rtol=%g, atol=%g' % (rtol, atol)
-    assert_array_compare(compare, actual, desired, err_msg=str(err_msg),
-                         verbose=verbose, header=header)
-
-

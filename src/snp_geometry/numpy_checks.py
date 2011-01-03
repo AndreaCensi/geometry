@@ -43,7 +43,8 @@ def require_length(a, length):
     if len(a) != length:
         raise ValueError('Expecting something of length %s, got %s which has len %s' % 
                          (length, a.shape, len(a)))  
-          
+    
+    
 def require_skew_symmetric(a):
     require_array_with_shape(a, square_shape())
     diag = a.diagonal()
@@ -52,18 +53,18 @@ def require_skew_symmetric(a):
     for i in range(a.shape[0]):
         for j in range(a.shape[1]):
             if i < j:
-                if a[i,j] != -a[j,i]:
-                    raise ValueError('Expected skew symmetric, but '+
-                                     'a[%d][%d] = %f, a[%d][%d] = %f' %\
-                                     (i,j,a[i,j],j,i,a[j,i]))
+                if a[i, j] != -a[j, i]:
+                    raise ValueError('Expected skew symmetric, but ' + 
+                                     'a[%d][%d] = %f, a[%d][%d] = %f' % \
+                                     (i, j, a[i, j], j, i, a[j, i]))
     
 def require_orthogonal(R):
     require_square(R)
     Id1 = dot(R.transpose(), R)
     Id2 = dot(R, R.transpose())
     Id = numpy.eye(R.shape[0])
-    assert_almost_equal(Id1,Id)
-    assert_almost_equal(Id2,Id)
+    assert_almost_equal(Id1, Id)
+    assert_almost_equal(Id2, Id)
     
         
     

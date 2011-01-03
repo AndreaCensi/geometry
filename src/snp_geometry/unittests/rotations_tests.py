@@ -1,8 +1,10 @@
-from snp_geometry.unittests.utils import rotations_sequence, axis_angle_sequence, \
-    GeoTestCase
-from snp_geometry.random_geometry import axis_angle_from_rotation, \
-    rotation_from_axis_angle, random_direction, geodesic_distance_on_S2
 import numpy as np 
+
+from snp_geometry import axis_angle_from_rotation, \
+    rotation_from_axis_angle, random_direction, geodesic_distance_on_S2
+
+from .utils import rotations_sequence, axis_angle_sequence, \
+    GeoTestCase
 
 class RotationsTest(GeoTestCase):
 

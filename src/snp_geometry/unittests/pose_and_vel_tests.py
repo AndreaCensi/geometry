@@ -2,7 +2,7 @@ from numpy import pi, array, zeros
 from numpy.random import randn, rand
 from numpy.testing.utils import assert_almost_equal
 
-from .. import Pose, Velocity
+from snp_geometry import Pose, Velocity
 from .pose_tests import CompositionTests
 
 

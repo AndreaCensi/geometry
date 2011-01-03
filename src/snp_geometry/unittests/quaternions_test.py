@@ -1,10 +1,11 @@
-from snp_geometry.unittests.utils import GeoTestCase, rotations_sequence, \
-    quaternions_sequence, axis_angle_sequence
-from snp_geometry.random_geometry import quaternion_from_rotation, \
+from snp_geometry import quaternion_from_rotation, \
     rotation_from_quaternion, axis_angle_from_quaternion, \
     quaternion_from_axis_angle, rotation_from_axis_angle, \
-    rotation_from_axis_angle2, axis_angle_from_rotation
-from numpy.testing.utils import assert_allclose
+    rotation_from_axis_angle2, axis_angle_from_rotation, \
+    assert_allclose
+
+from .utils import GeoTestCase, rotations_sequence, \
+    quaternions_sequence, axis_angle_sequence
 
             
 class TestQuaternions(GeoTestCase):

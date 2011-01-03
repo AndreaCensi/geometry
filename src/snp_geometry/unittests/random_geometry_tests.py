@@ -2,11 +2,12 @@ import unittest
 
 import numpy as np
 
-from snp_geometry import random_rotation, random_quaternion, random_direction
+from snp_geometry import random_rotation, random_quaternion, random_direction, \
+    geodesic_distance_on_S2, \
+     random_directions, assert_allclose
+     
 from contracts import check, fail
-from snp_geometry.random_geometry import geodesic_distance_on_S2, \
-     random_directions
-from snp_geometry.utils import assert_allclose
+
 
 N = 20
 

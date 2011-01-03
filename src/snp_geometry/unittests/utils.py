@@ -1,9 +1,11 @@
 import numpy as np
 import unittest
-from snp_geometry.random_geometry import random_direction, random_quaternion, \
-    random_rotation
+
 from contracts import contracts
-from snp_geometry.utils import assert_allclose
+
+from snp_geometry import random_direction, random_quaternion, \
+    random_rotation, assert_allclose
+
 
 N = 20
 
