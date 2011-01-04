@@ -22,6 +22,15 @@ def unit_length(x):
 new_contract('direction', 'array[3], unit_length')
 new_contract('unit_quaternion', 'array[4], unit_length')
 
+
+@new_contract
+@contracts(x='array')
+def finite(x):
+    # TODO: make into standard thing
+    return np.isfinite(x).all()
+
+
+
 @new_contract
 @contracts(x='array[NxN],N>0')
 def orthogonal(x):
@@ -54,3 +63,12 @@ def skew_symmetric(x):
                 raise ValueError('Expected skew symmetric, but ' + 
                                  'a[%d][%d] = %f, a[%d][%d] = %f' % \
                                  (i, j, x[i, j], j, i, x[j, i]))
+
+@new_contract
+@contracts(X='array[KxN],K>0,N>0')
+def directions(X):
+    ''' Checks that every column has unit length. '''
+    K = X.shape[1]
+    for i in range(K):
+        v = X[:, i]
+        assert_allclose(1, np.linalg.norm(v) , rtol=1e-5)

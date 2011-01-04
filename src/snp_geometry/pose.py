@@ -6,30 +6,27 @@ from math import atan2
 from scipy.linalg import logm, expm
 
 from .utils import rotz, map_hat, hat_map
-from .numpy_checks import require_finite
-from contracts.main import contracts, check
+from contracts import contracts, check
 
 
 class Velocity:
+    @contracts(linear='array[3],finite', angular='array[3],finite')
     def __init__(self, linear, angular):
-        # todo: make conversions
         self.linear = linear
         self.angular = angular
-        require_finite(self.linear)
-        require_finite(self.angular)
         
     @staticmethod
-    @contracts(V='array[4x4]')
+    @contracts(V='array[4x4],finite')
     def from_matrix_representation(V):
         ''' Creates a Velocity object from its Lie algebra matrix representation.
           '''
-        require_finite(V)
         if not (V[3, :] == [0, 0, 0, 0]).all():
             raise ValueError('Malformed velocity %s' % str(V))
         angular = map_hat(V[0:3, 0:3])
         linear = V[0:3, 3]
         return Velocity(linear, angular)
     
+    @contracts(returns='array[4x4]')
     def to_matrix_representation(self):
         M = zeros((4, 4))
         M[0:3, 0:3] = hat_map(self.angular)
@@ -185,7 +182,8 @@ class Pose:
         V[3, :] = 0
         
         return Velocity.from_matrix_representation(V) 
-        
+    
+    # XXX: add some
     def to_matrix_representation(self):
         ''' Returns the matrix representation of this pose as 
             a 4 x 4 matrix. '''
@@ -197,6 +195,7 @@ class Pose:
         return M
     
     @staticmethod
+    # XXX @contracts(A='pose',B='pose')
     def pose_diff(A, B):
         ''' Returns a pose X such that B.oplus(X) = A.
             Mnemonics: X = A - B '''
@@ -204,6 +203,7 @@ class Pose:
         return B.inverse().oplus(A)
 
     @staticmethod
+    # XXX @contracts(xytheta='seq[3](number)')
     def from_xytheta(xytheta):
         ''' Creates a Pose object from an iterable containing x,y,theta '''
         # TODO: write unit tests for this
@@ -211,13 +211,12 @@ class Pose:
         return Pose(position=[x, y], attitude=theta)
 
     @staticmethod
-    @contracts(V='array[4x4]')
+    @contracts(V='array[4x4],finite')
     def from_matrix_representation(V):
         ''' Creates a Pose object from its Lie algebra matrix representation.
               
         '''
-        require_finite(V)
-        if not (V[3, :] == [0, 0, 0, 1]).all():
+        if not (V[3, :] == [0, 0, 0, 1]).all(): # XXX: 
             raise ValueError('Malformed pose matrix %s' % str(V))
         attitude = V[0:3, 0:3]
         check('rotation_matrix', attitude)

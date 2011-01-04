@@ -1,24 +1,30 @@
 import numpy as np
 
-from numpy import cos, sin, sqrt
+from numpy import cos, sin, sqrt, pi
 from numpy.random import uniform
 
 from contracts import contracts 
 from snp_geometry.utils import hat_map
+from snp_geometry.geometry_contracts import assert_allclose
 
 
 # conventions: q=( a + bi + cj + dk), with a>0
 
-@contracts(returns='direction')
-def random_direction():
+@contracts(ndim='2|3', returns='direction')
+def random_direction(ndim=3):
     ''' Generates a random direction in S^2. '''
-    # Generate a random direction
-    z = uniform(-1, +1)
-    t = uniform(0, 2 * np.pi)
-    r = sqrt(1 - z ** 2)
-    x = r * cos(t)
-    y = r * sin(t)
-    return np.array([x, y, z])
+    if ndim == 3:
+        z = uniform(-1, +1)
+        t = uniform(0, 2 * pi)
+        r = sqrt(1 - z ** 2)
+        x = r * cos(t)
+        y = r * sin(t)
+        return np.array([x, y, z])
+    elif ndim == 2:
+        theta = uniform(0, 2 * pi)
+        return np.array([np.cos(theta), np.sin(theta)])
+        
+    else: assert False
 
 
 #def so3_geodesic(r, r0):
@@ -53,8 +59,8 @@ def random_quaternion():
     s = uniform()
     sigma1 = sqrt(1 - s)
     sigma2 = sqrt(s)
-    theta1 = uniform() * 2 * np.pi
-    theta2 = uniform() * 2 * np.pi
+    theta1 = uniform() * 2 * pi
+    theta2 = uniform() * 2 * pi
 
     q = np.array([cos(theta2) * sigma2,
                   sin(theta1) * sigma1,
@@ -146,10 +152,10 @@ def axis_angle_from_quaternion(q):
         axis = default_axis
     else:
         axis = q[1:] / sin(angle / 2)
-    if angle > np.pi:
-        angle -= 2 * np.pi
-    elif angle < -np.pi:
-        angle += 2 * np.pi
+    if angle > pi:
+        angle -= 2 * pi
+    elif angle < -pi:
+        angle += 2 * pi
         
     return axis, angle
          
@@ -193,7 +199,71 @@ def random_orthogonal_transform():
     # TODO: to write
     pass
 
-@contracts(how_many='int,>0,N', returns='array[3xN]')
-def random_directions(how_many):
+@contracts(how_many='int,>0,N', ndim="2|3", returns='array[3xN]')
+def random_directions(how_many, ndim=3):
     ''' Returns a list of random directions. '''
-    return np.vstack([random_direction() for i in range(how_many)]).T #@UnusedVariable
+    return np.vstack([random_direction(ndim) 
+                      for i in range(how_many)]).T #@UnusedVariable
+
+def assert_orthogonal(s, v):
+    assert_allclose((v * s).sum(), 0)
+    
+def any_distant_direction(s):
+    ''' Returns a direction distant from both s and -s. '''
+    z = np.array([0, 0, 1])
+    d = geodesic_distance_on_sphere(s, z)
+    limit = 1.0 / 6.0 * pi
+    if min(d, pi - d) < limit:
+        z = np.array([1, 0, 0])
+    
+    d = geodesic_distance_on_sphere(s, z)
+    assert min(d, pi - d) < limit
+    return z
+    
+def any_orthogonal_direction(s):
+    ''' Returns any axis orthogonal to s. '''
+    # choose a vector far away
+    z = any_distant_direction(s)
+    # z ^ s is orthogonal to s
+    ortho = np.dot(hat_map(z), s)
+    assert_orthogonal(s, ortho)
+    return ortho
+
+def random_orthogonal_direction(s):
+    ''' Returns a random axis orthogonal to s. '''
+    # get any axis orthogonal to s
+    z = any_orthogonal_direction(s)
+    # rotate this axis around s by a random amount
+    angle = uniform(0, 2 * pi)
+    R = rotation_from_axis_angle(s, angle)
+    z2 = np.dot(R, z)
+    assert_orthogonal(s, z2)
+    return z2
+
+
+@contracts(ndim='(2|3),K',
+           radius='number,>0,<=3.15',
+           num_points='int,>0',
+           center='None|(array[K],direction)',
+           returns='array[KxN],directions')
+def random_directions_bounded(ndim, radius, num_points, center=None):
+    ''' Returns a random distribution of points in S^ndim within
+        a certain radius from center. If center is not passed, 
+        it will be random as well. 
+    '''
+    if center is None:
+        center = random_direction(ndim)
+        
+    directions = np.empty((ndim, num_points))
+    for i in range(num_points):
+        # move the center of a random amount
+        # XXX: I'm not sure this is correct, but it is good enough
+        angle = uniform(0, radius)
+        # any axis orthogonal to the center will do
+        axis = random_orthogonal_direction(center)
+        R = rotation_from_axis_angle(axis, angle)
+        direction = np.dot(R, center)
+        directions[:, i] = direction
+        
+    return directions
+

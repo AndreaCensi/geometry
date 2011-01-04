@@ -1,7 +1,5 @@
 from numpy import cos, sin, array, zeros
-from .numpy_checks import require_length, \
-    require_skew_symmetric, require_array_with_shape
-from contracts.main import contracts
+from contracts import contracts
 
 @contracts(theta='number', returns='rotation_matrix')
 def rotz(theta):
@@ -29,12 +27,8 @@ def hat_map(v):
 
 @contracts(H='array[3x3],skew_symmetric', returns='array[3]')
 def map_hat(H):
-    require_array_with_shape(H, (3, 3))
-    require_skew_symmetric(H)
-
     v = zeros(3)
     v[2] = -H[0, 1]
     v[1] = H[0, 2]
     v[0] = -H[1, 2]
-
     return v
