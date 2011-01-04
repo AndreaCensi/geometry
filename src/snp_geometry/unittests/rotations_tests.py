@@ -4,7 +4,9 @@ from snp_geometry import axis_angle_from_rotation, \
     rotation_from_axis_angle, random_direction, geodesic_distance_on_S2
 
 from .utils import rotations_sequence, axis_angle_sequence, \
-    GeoTestCase
+    GeoTestCase, directions_sequence
+from snp_geometry.rotations import hat_map
+from numpy.testing.utils import assert_allclose
 
 class RotationsTest(GeoTestCase):
 
@@ -28,3 +30,16 @@ class RotationsTest(GeoTestCase):
             assert dist <= angle
 
     # TODO: add test with orthogonal rotations
+
+def hat_map_test():
+    for s in directions_sequence():
+        for v in directions_sequence():
+            x1 = np.cross(s, v)
+            x2 = +np.dot(hat_map(s), v)
+            x3 = -np.dot(hat_map(v), s)
+            assert_allclose(x1, x2)
+            assert_allclose(x1, x3)
+            
+            
+        
+    

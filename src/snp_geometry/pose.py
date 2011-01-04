@@ -1,12 +1,7 @@
-import numpy
-from numpy import zeros, eye, dot, array, degrees, arccos, \
-    ndarray, radians, float32, float64
-from numpy.linalg import norm
-from math import atan2
-from scipy.linalg import logm, expm
+from .common_imports import *
 
-from .utils import rotz, map_hat, hat_map
-from contracts import contracts, check
+from .utils import rotz
+from .rotations import  map_hat, hat_map
 
 
 class Velocity:
@@ -97,14 +92,20 @@ class Pose:
         
     def get_2d_position(self):
         """ Get 2-vector corresponding to x,y components """
+        self.assert2d()
         return self.position[0:2]
         
     def get_2d_orientation(self):
         """ Get angle corresponding to orientation """
+        self.assert2d()
         forward = array([[1], [0], [0]])
         rotated = dot(self.attitude, forward)
-        angle = atan2(rotated[1, 0], rotated[0, 0])
+        angle = arctan2(rotated[1, 0], rotated[0, 0])
         return float(angle)
+        
+    def assert2d(self):
+        # TODO: implement this
+        pass
         
     def oplus(self, that):
         """ Composition of two transformations. 
@@ -175,7 +176,7 @@ class Pose:
         V = logm(M)
         # Make sure that the result is real (it might be complex due
         # to numerical noise in M)
-        V = numpy.array(V.real)
+        V = array(V.real)
         # make the top 3,3 exactly skew
         V[0:3, 0:3] = 0.5 * (V[0:3, 0:3] - V[0:3, 0:3].transpose()) 
         # Make the last row exactly 0
@@ -188,7 +189,7 @@ class Pose:
         ''' Returns the matrix representation of this pose as 
             a 4 x 4 matrix. '''
         # matrix representation of this pose
-        M = numpy.zeros((4, 4))
+        M = zeros((4, 4))
         M[0:3, 0:3] = self.attitude[:, :]
         M[0:3, 3] = self.position[:]
         M[3, 3] = 1

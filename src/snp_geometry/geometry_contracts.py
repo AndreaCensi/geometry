@@ -1,8 +1,18 @@
-import numpy as np
-
-from contracts import new_contract, contracts
 import itertools
+import warnings
 
+from .common_imports import *
+
+@contracts(s='array[K],K>=2', v='array[K]')
+def assert_orthogonal(s, v):
+    ''' Checks that two vectors are orthogonal. '''
+    dot = (v * s).sum()
+    if not np.allclose(dot, 0):
+        angle = np.arccos(dot / (norm(v) * norm(s)))
+        msg = ('Angle is %.2f deg between %s and %s.' 
+               % (np.degrees(angle), s, v)) 
+        assert_allclose(dot, 0, err_msg=msg)
+    
 def assert_allclose(actual, desired, rtol=1e-7, atol=0,
                     err_msg='', verbose=True):
     ''' Backporting assert_allclose from 1.5 to 1.4 '''
@@ -17,18 +27,18 @@ def assert_allclose(actual, desired, rtol=1e-7, atol=0,
 @new_contract
 @contracts(x='array[N],N>0')
 def unit_length(x):
+    ''' Checks that the value is a 1D vector with unit length in the 2 norm.'''
     assert_allclose(1, np.linalg.norm(x), rtol=1e-5)
 
 new_contract('direction', 'array[3], unit_length')
 new_contract('unit_quaternion', 'array[4], unit_length')
-
+new_contract('axis_angle', 'tuple(direction, (float,<3.15))') # TODO: pi
 
 @new_contract
 @contracts(x='array')
 def finite(x):
     # TODO: make into standard thing
     return np.isfinite(x).all()
-
 
 
 @new_contract
@@ -44,6 +54,7 @@ def orthogonal(x):
 @new_contract
 @contracts(x='array[3x3], orthogonal')
 def rotation_matrix(x):
+    ''' Checks that the given value is a rotation matrix. '''
     det = np.linalg.det(x)
     assert_allclose(det, 1) 
 
@@ -72,3 +83,17 @@ def directions(X):
     for i in range(K):
         v = X[:, i]
         assert_allclose(1, np.linalg.norm(v) , rtol=1e-5)
+        
+def deprecated(func):
+    """This is a decorator which can be used to mark functions
+    as deprecated. It will result in a warning being emitted
+    when the function is used."""
+    def new_func(*args, **kwargs):
+        # TODO: mofify stack
+        warnings.warn("Call to deprecated function %s." % func.__name__,
+                      category=DeprecationWarning)
+        return func(*args, **kwargs)
+    new_func.__name__ = func.__name__
+    new_func.__doc__ = func.__doc__
+    new_func.__dict__.update(func.__dict__)
+    return new_func

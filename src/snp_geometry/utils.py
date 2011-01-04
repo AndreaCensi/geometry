@@ -1,5 +1,4 @@
-from numpy import cos, sin, array, zeros
-from contracts import contracts
+from .common_imports import *
 
 @contracts(theta='number', returns='rotation_matrix')
 def rotz(theta):
@@ -16,19 +15,3 @@ def rot2d(theta):
             [ cos(theta), -sin(theta)],
             [ sin(theta), cos(theta)]]) 
 
-@contracts(v='array[3]', returns='array[3x3],skew_symmetric')
-def hat_map(v):
-    h = zeros((3, 3))
-    h[0, 1] = -v[2]
-    h[0, 2] = v[1]
-    h[1, 2] = -v[0]
-    h = h - h.transpose();
-    return h
-
-@contracts(H='array[3x3],skew_symmetric', returns='array[3]')
-def map_hat(H):
-    v = zeros(3)
-    v[2] = -H[0, 1]
-    v[1] = H[0, 2]
-    v[0] = -H[1, 2]
-    return v

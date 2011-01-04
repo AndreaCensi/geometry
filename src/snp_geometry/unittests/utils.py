@@ -16,15 +16,16 @@ def rotations_sequence():
         yield random_rotation()
 
 def directions_sequence():
-    yield np.array([1, 0, 0])
-    yield np.array([0, 1, 0])
-    yield np.array([0, 0, 1])
-    yield np.array([-1, 0, 0])
-    yield np.array([0, -1, 0])
-    yield np.array([0, 0, -1])
+    ''' Sequence of directions in S^2. '''
+    yield np.array([1.0, 0.0, 0.0])
+    yield np.array([0.0, 1.0, 0.0])
+    yield np.array([0.0, 0.0, 1.0])
+    yield np.array([-1.0, 0.0, 0.0])
+    yield np.array([0.0, -1.0, 0.0])
+    yield np.array([0.0, 0.0, -1.0])
     # TODO: add special values
     for i in range(N): #@UnusedVariable
-        yield random_direction()
+        yield random_direction(3)
         
 def quaternions_sequence():
     # TODO: add special values
