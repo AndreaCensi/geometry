@@ -11,6 +11,7 @@ from snp_geometry import (random_rotation, random_quaternion, random_direction,
      
 from contracts import check, fail
 from .utils import directions_sequence
+from snp_geometry.distances import distribution_radius
 
 N = 20
 
@@ -59,7 +60,7 @@ class GeometryTests(unittest.TestCase):
             assert_allclose(dist(s, -s), np.pi)
 
 
-def test_random_directions_bounded():
+def random_directions_bounded_test_1():
     # TODO: write actual test
     r = np.pi / 2
     N = 180
@@ -68,8 +69,40 @@ def test_random_directions_bounded():
     random_directions_bounded(ndim=2, radius=r, num_points=N, center=random_direction(2))
     random_directions_bounded(ndim=3, radius=r, num_points=N, center=random_direction(3))
 
+def check_reasonable_radius(r, r2, N):
+    bounds = [0.8, 1.2] # TODO: make it depend on N
+    if not (r * bounds[0] <= r2 <= r * bounds[1]):
+        msg = 'Constructed distribution with radius %f, got %f.' % (r, r2)
+        assert False, msg
 
 
+def random_directions_bounded_check(ndim, radius, N):
+    S = random_directions_bounded(ndim=ndim, radius=radius, num_points=N)
+    r2 = distribution_radius(S)
+    check_reasonable_radius(radius, r2, N)
+            
+def random_directions_bounded_test():
+    radius = [np.pi, np.pi / 2, np.pi / 6]
+    N = 300
+    for ndim in [2, 3]:
+        for r in radius:
+            yield random_directions_bounded_check, ndim, r, N
+            
+def distribution_radius_check(center, radius, N):
+    angles = (np.random.rand(N) - 0.5) * 2 * radius
+    angles += center
+    S = np.vstack((np.cos(angles), np.sin(angles)))
+    r2 = distribution_radius(S)
+    check_reasonable_radius(radius, r2, N) 
+    
+def distribution_radius_test():
+    radius = [np.pi, np.pi / 2, np.pi / 6]
+    N = 300
+    for r in radius:
+        for i in range(5): #@UnusedVariable
+            center = np.random.rand() * 2 * np.pi
+            yield distribution_radius_check, center, r, N
+            
 def any_distant_direction_test():
     for s in directions_sequence():
         z = any_distant_direction(s)

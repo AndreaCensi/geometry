@@ -115,7 +115,7 @@ def random_directions_bounded(ndim, radius, num_points, center=None):
     for i in range(num_points):
         # move the center of a random amount
         # XXX: I'm not sure this is correct, but it is good enough
-        angle = uniform(0, radius)
+        angle = uniform(-radius, radius)
         if ndim == 3:
             # sample axis orthogonal to the center
             axis = random_orthogonal_direction(center)
