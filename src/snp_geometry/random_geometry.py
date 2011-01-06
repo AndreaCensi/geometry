@@ -1,9 +1,11 @@
-from .common_imports import * 
-from .rotations import (rotation_from_quaternion, hat_map,
+from .common_imports import *
+from .rotations import (rotation_from_quaternion,
+                         default_axis_orthogonal, normalize_pi,
                         rotation_from_axis_angle, default_axis)
-from .distances import geodesic_distance_on_sphere
-from .utils import rot2d
-from .rotations import default_axis_orthogonal
+from .distances import geodesic_distance_on_sphere, normalize_length, distances_from
+from .utils import rot2d, sphere_area, spherical_cap_with_area
+from snp_geometry.utils import spherical_cap_area
+
 
 @contracts(ndim='(2|3),K', returns='array[K],unit_length')
 def random_direction(ndim=3):
@@ -41,13 +43,17 @@ def random_quaternion():
     q *= np.sign(q[0])
     return q
 
-@contracts(returns='rotation_matrix')
-def random_rotation():
+@contracts(returns='array[2x2]|rotation_matrix', ndim='2|3')
+def random_rotation(ndim=3):
     ''' Generate a random rotation matrix. 
         Wraps :py:func:`random_quaternion`.
     '''
-    q = random_quaternion()
-    return rotation_from_quaternion(q)
+    if ndim == 3:
+        q = random_quaternion()
+        return rotation_from_quaternion(q)
+    elif ndim == 2:
+        return rot2d(uniform(0, 2 * pi))
+    else: assert False
 
 @contracts(returns='array[3x3], orthogonal')
 def random_orthogonal_transform():
@@ -84,10 +90,8 @@ def any_orthogonal_direction(s):
 def random_orthogonal_direction(s):
     ''' Returns a random axis orthogonal to s. '''
     if s.size == 2:
-        if uniform() < 0.5:
-            return dot(rot2d(pi / 2), s)
-        else: 
-            return dot(rot2d(-pi / 2), s)
+        theta = np.sign(uniform() - 0.5) * pi / 2
+        return dot(rot2d(theta), s)
     elif s.size == 3:
         # get any axis orthogonal to s
         z = any_orthogonal_direction(s)
@@ -105,26 +109,62 @@ def random_orthogonal_direction(s):
            returns='array[KxN],directions')
 def random_directions_bounded(ndim, radius, num_points, center=None):
     ''' Returns a random distribution of points in S^ndim within
-        a certain radius from center. If center is not passed, 
-        it will be random as well. 
+        a certain radius from center. The points will be distributed
+        uniformly in that area of the sphere.
+        If center is not passed, it will be a random direction. 
     '''
     if center is None:
         center = random_direction(ndim)
         
     directions = np.empty((ndim, num_points))
     for i in range(num_points):
-        # move the center of a random amount
-        # XXX: I'm not sure this is correct, but it is good enough
-        angle = uniform(-radius, radius)
+        # move the center of a random amount 
         if ndim == 3:
             # sample axis orthogonal to the center
             axis = random_orthogonal_direction(center)
-            R = rotation_from_axis_angle(axis, angle)
+            z = uniform(0, 1) * spherical_cap_area(radius)
+            distance = spherical_cap_with_area(z)
+            R = rotation_from_axis_angle(axis, distance)
         elif ndim == 2:
+            angle = uniform(-radius, radius)
             R = rot2d(angle)
         else: assert False
         direction = np.dot(R, center)
         directions[:, i] = direction
         
-    return directions
+    return sorted_directions(directions)
 
+@contracts(S='array[KxN],(K=2|K=3),directions', returns='array[KxN], directions')
+def sorted_directions(S, num_around=15):
+    ''' 
+        In 2D, sorts the directions. 
+    
+        In 3D, makes a pleasant elicoidal arrangement.
+    '''
+    if S.shape[0] == 2:
+        # XXX check nonzero
+        center = np.arctan2(S[1, :].sum(), S[0, :].sum()) 
+        angles = np.arctan2(S[1, :], S[0, :])
+        diffs = normalize_pi(angles - center)
+        sorted = np.sort(diffs)
+        final = center + sorted
+        return np.vstack((np.cos(final), np.sin(final)))
+    else:
+        # find center of distribution
+        center = normalize_length(S.sum(axis=1))
+        # compute the distances from the center
+        distance = distances_from(S, center)
+        # compute the phase from an arbitrary axis
+        axis = any_orthogonal_direction(center)
+        phase = distances_from(S, axis)
+        # normalize distances and phase in [0,1]
+        phase = (normalize_pi(phase) + pi) / (2 * pi)
+        distance /= distance.max()
+        
+        score = distance * num_around + phase
+        
+        order = np.argsort(score)
+        
+        ordered = S[:, order]
+        return ordered
+    

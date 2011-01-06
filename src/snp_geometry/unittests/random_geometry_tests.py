@@ -3,15 +3,17 @@ import unittest
 import numpy as np
 
 from snp_geometry import (random_rotation, random_quaternion, random_direction,
-    geodesic_distance_on_S2, random_directions_bounded, \
-    any_distant_direction, any_orthogonal_direction,
+    geodesic_distance_on_S2, random_directions_bounded,
+    any_distant_direction, any_orthogonal_direction, distribution_radius,
     geodesic_distance_on_sphere, assert_orthogonal, rotation_from_axis_angle,
     default_axis, default_axis_orthogonal, random_orthogonal_direction,
      random_directions, assert_allclose)
      
 from contracts import check, fail
+
 from .utils import directions_sequence
-from snp_geometry.distances import distribution_radius
+from nose.plugins.attrib import attr
+
 
 N = 20
 
@@ -60,6 +62,7 @@ class GeometryTests(unittest.TestCase):
             assert_allclose(dist(s, -s), np.pi)
 
 
+@attr('slow')
 def random_directions_bounded_test_1():
     # TODO: write actual test
     r = np.pi / 2
@@ -75,12 +78,12 @@ def check_reasonable_radius(r, r2, N):
         msg = 'Constructed distribution with radius %f, got %f.' % (r, r2)
         assert False, msg
 
-
 def random_directions_bounded_check(ndim, radius, N):
     S = random_directions_bounded(ndim=ndim, radius=radius, num_points=N)
     r2 = distribution_radius(S)
     check_reasonable_radius(radius, r2, N)
             
+@attr('slow')
 def random_directions_bounded_test():
     radius = [np.pi, np.pi / 2, np.pi / 6]
     N = 300
@@ -126,12 +129,14 @@ def default_axis_orthogonal_test():
     z2 = default_axis_orthogonal()
     assert_orthogonal(z1, z2)
     
-def random_orthogonal_direction_density_test():
+    
+def sorted_directions_test():
     # TODO
     pass
 
-# TODO: write tests for ndim=2
 
+
+# TODO: write tests for ndim=2
 def assert_orthogonal_test():
     for s in directions_sequence():
         axis = any_orthogonal_direction(s)

@@ -40,3 +40,18 @@ def distribution_radius(S):
     return distances[center]
 
 
+def normalize_length(s, norm=2):
+    ''' Normalize an array such that it has unit length in the given norm. '''
+    sn = np.linalg.norm(s, norm)
+    if sn == 0: # TODO: add tolerance
+        return s
+    else:
+        return s / sn
+    
+
+@contracts(S='array[3xK],directions', axis='direction',
+           returns='array[K](>=0,<=3.15)')
+def distances_from(S, axis):
+    ''' Returns the distances of S from the given axis. '''
+    return np.arccos(np.clip(np.dot(axis, S), -1, 1))
+    

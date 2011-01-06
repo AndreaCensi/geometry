@@ -21,9 +21,10 @@ def map_hat(H):
     v[0] = -H[1, 2]
     return v
 
-@contracts(a='array[3]', b='array[3]', returns='array[3]')
-def cross(a, b):
-    return dot(hat_map(a), b)
+def normalize_pi(x):
+    ''' Normalizes the entries in x in the interval [-pi,pi]. '''
+    return np.arctan2(np.sin(x), np.cos(x))
+
 
 @contracts(x='unit_quaternion', returns='rotation_matrix')
 def rotation_from_quaternion(x):
@@ -140,8 +141,4 @@ def axis_angle_from_rotation(R):
 def rotation_from_axis_angle2(axis, angle):
     q = quaternion_from_axis_angle(axis, angle)
     return rotation_from_quaternion(q)
-    
-# old aliases to remove
-rotation_matrix_from_axis_angle = rotation_from_axis_angle
-axis_angle_to_rotation_matrix = rotation_matrix_from_axis_angle
-    
+     
