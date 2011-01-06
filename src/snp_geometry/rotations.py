@@ -4,6 +4,14 @@
 '''
 from .common_imports import *
 
+
+def safe_arccos(x):
+    ''' Returns the arcosine of x, clipped between -1 and 1.
+        Use this when you know x is a cosine, but it might be
+        slightly over 1 or below -1 due to numerical errors.
+    '''
+    return np.arccos(np.clip(x, -1.0, 1.0))
+
 @contracts(v='array[3]', returns='array[3x3],skew_symmetric')
 def hat_map(v):
     h = zeros((3, 3))
@@ -15,11 +23,13 @@ def hat_map(v):
 
 @contracts(H='array[3x3],skew_symmetric', returns='array[3]')
 def map_hat(H):
+    ''' The inverse of :py:func:`hat_map`. '''
     v = zeros(3)
     v[2] = -H[0, 1]
     v[1] = H[0, 2]
     v[0] = -H[1, 2]
     return v
+
 
 def normalize_pi(x):
     ''' Normalizes the entries in x in the interval [-pi,pi]. '''
@@ -47,7 +57,7 @@ def rotation_from_quaternion(x):
 
 @contracts(R='rotation_matrix', returns='unit_quaternion')
 def quaternion_from_rotation(R):
-    ''' Robust method mentioned on wikipedia:
+    ''' This is the robust method mentioned on wikipedia:
         http://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation
         
         TODO: add the more robust method with 4x4 matrix and eigenvector
@@ -77,8 +87,6 @@ def quaternion_from_rotation(R):
             Q = -Q
         return Q
 
-# TODO: remove
-quaternion_to_rotation_matrix = rotation_from_quaternion
 
 # TODO add finite
 @contracts(axis='direction', angle='float', returns='unit_quaternion')
@@ -92,9 +100,9 @@ def quaternion_from_axis_angle(axis, angle):
     Q *= np.sign(Q[0])
     return Q
 
-@contracts(q='unit_quaternion', returns='axis_angle')
+@contracts(q='unit_quaternion', returns='axis_angle_canonical')
 def axis_angle_from_quaternion(q):
-    angle = 2 * arccos(q[0])
+    angle = 2 * safe_arccos(q[0])
     if angle == 0: # XXX: use tolerance
         axis = default_axis
     else:
@@ -108,6 +116,7 @@ def axis_angle_from_quaternion(q):
          
 @contracts(returns='direction')
 def default_axis(): 
+    ''' Returns the axis to use when any will do due to ambiguity. '''
     return  array([0.0, 0.0, 1.0])
 
 @contracts(returns='direction')
@@ -117,16 +126,18 @@ def default_axis_orthogonal():
 
 @contracts(axis='direction', angle='float', returns='rotation_matrix')
 def rotation_from_axis_angle(axis, angle):
+    ''' Get the rotation matrix using Rodriguez's formula. '''
     w = axis
     w_hat = hat_map(w)
     w_hat2 = dot(w_hat, w_hat)
-    # Rodriguez' formula
     R = eye(3) + w_hat * sin(angle) + w_hat2 * (1 - cos(angle))
     return R
 
-@contracts(R='rotation_matrix', returns='tuple(direction,(float,<3.15))')
+@contracts(R='rotation_matrix', returns='axis_angle_canonical')
 def axis_angle_from_rotation(R):
-    angle = arccos((R.trace() - 1) / 2)
+    ''' By convention, the angle returned is nonnegative. 
+        If the angle is 0, the default_axis will be returned. '''
+    angle = safe_arccos((R.trace() - 1) / 2)
     
     if angle == 0:
         return default_axis(), 0.0
@@ -139,6 +150,7 @@ def axis_angle_from_rotation(R):
     
 @contracts(axis='direction', angle='float', returns='rotation_matrix')
 def rotation_from_axis_angle2(axis, angle):
+    ''' Get the rotation matrix going through the quaternion.'''
     q = quaternion_from_axis_angle(axis, angle)
     return rotation_from_quaternion(q)
      

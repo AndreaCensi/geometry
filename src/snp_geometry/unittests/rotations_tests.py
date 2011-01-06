@@ -1,12 +1,11 @@
 import numpy as np 
 
-from snp_geometry import axis_angle_from_rotation, \
-    rotation_from_axis_angle, random_direction, geodesic_distance_on_S2
+from snp_geometry import (axis_angle_from_rotation,
+    rotation_from_axis_angle, random_direction, hat_map,
+    geodesic_distance_on_sphere, assert_allclose) 
 
 from .utils import rotations_sequence, axis_angle_sequence, \
     GeoTestCase, directions_sequence
-from snp_geometry.rotations import hat_map
-from numpy.testing.utils import assert_allclose
 
 class RotationsTest(GeoTestCase):
 
@@ -25,7 +24,7 @@ class RotationsTest(GeoTestCase):
             s = random_direction()
             R = rotation_from_axis_angle(axis, angle)
             s2 = np.dot(R, s)
-            dist = geodesic_distance_on_S2(s, s2)
+            dist = geodesic_distance_on_sphere(s, s2)
             # Note: this is == only if axis is orthogonal to s
             assert dist <= angle
 

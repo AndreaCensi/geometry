@@ -32,7 +32,9 @@ def unit_length(x):
 
 new_contract('direction', 'array[3], unit_length')
 new_contract('unit_quaternion', 'array[4], unit_length')
-new_contract('axis_angle', 'tuple(direction, (float,<3.15))') # TODO: pi
+new_contract('axis_angle', 'tuple(direction, float)') # TODO: pi
+# Canonically, we return a positive angle.
+new_contract('axis_angle_canonical', 'tuple(direction, (float,>=0, <3.15))') # TODO: pi
 
 @new_contract
 @contracts(x='array')
@@ -79,10 +81,8 @@ def skew_symmetric(x):
 @contracts(X='array[KxN],K>0,N>0')
 def directions(X):
     ''' Checks that every column has unit length. '''
-    K = X.shape[1]
-    for i in range(K):
-        v = X[:, i]
-        assert_allclose(1, np.linalg.norm(v) , rtol=1e-5)
+    norm = (X * X).sum(axis=0)
+    assert_allclose(1, norm , rtol=1e-5)
         
 def deprecated(func):
     """This is a decorator which can be used to mark functions

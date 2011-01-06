@@ -3,7 +3,7 @@ import unittest
 import numpy as np
 
 from snp_geometry import (random_rotation, random_quaternion, random_direction,
-    geodesic_distance_on_S2, random_directions_bounded,
+     random_directions_bounded,
     any_distant_direction, any_orthogonal_direction, distribution_radius,
     geodesic_distance_on_sphere, assert_orthogonal, rotation_from_axis_angle,
     default_axis, default_axis_orthogonal, random_orthogonal_direction,
@@ -57,7 +57,7 @@ class GeometryTests(unittest.TestCase):
     def test_distances(self):
         for i in range(N): #@UnusedVariable
             s = random_direction()
-            dist = geodesic_distance_on_S2 
+            dist = geodesic_distance_on_sphere 
             assert_allclose(dist(s, s), 0)
             assert_allclose(dist(s, -s), np.pi)
 
