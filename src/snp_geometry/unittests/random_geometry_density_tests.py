@@ -1,57 +1,12 @@
-import numpy as np
-from snp_geometry import random_direction, random_directions_bounded, distances_from
-from snp_geometry.utils import spherical_cap_area, spherical_cap_with_area
 from nose.plugins.attrib import attr
-from scipy.stats.stats import chisqprob
 from nose.tools import nottest
 
-def uniform_dist_pvalue(dist):
-    # http://en.wikipedia.org/wiki/Pearson's_chi-square_test#Discrete_uniform_distribution
-    Ei = dist.sum() / dist.size
-    Oi = dist
-    chi2 = ((Ei - Oi) ** 2 / Ei).sum()
-    pvalue = chisqprob(chi2, dist.size - 1) 
-    return pvalue 
-        
-class TestStatistic(object):
-    def pvalue(self):
-        assert False
+import numpy as np
+from snp_geometry import (random_direction, random_directions_bounded, distances_from,
+                          spherical_cap_area, spherical_cap_with_area)
+from stochastic_testing import DiscreteUniformDistribution, StochasticTestManager, stochastic
 
-class DiscreteUniformDistribution(TestStatistic):
-    def __init__(self, dist, desc='Uniform distribution'):
-        assert dist.dtype == 'int'
-        self.dist = dist
-        self.desc = desc
-
-    def pvalue(self):
-        return uniform_dist_pvalue(self.dist)
-    
-    def __str__(self):
-        pval = self.pvalue()
-        return '%s: %s pvalue %.5f' % (self.desc, self.dist, pval)
-
-@nottest
-def statistical_test(f):
-    ''' The function f should return a TestStatistic object. '''
-    # TODO: add another level of tests
-    def stat_wrapper(*args, **kwargs):
-        result = f(*args, **kwargs)
-        assert isinstance(result, TestStatistic), type(result)
-        # TODO: multiple
-        pvalue = result.pvalue()
-        sig = 0.05
-        msg = ('Test statistic for function %s gave %.5f significance.\n' % 
-               (f.__name__, pvalue))
-        msg += '- statistics: %s' % result
-        if pvalue < sig:
-            raise Exception(msg)
-        else:
-            print msg 
-    return stat_wrapper
-        
-        
-@statistical_test
-def random_directions_bounded_density_check_3d(center, radius, N):
+def random_directions_bounded_density_3d(center, radius, N):
     S = random_directions_bounded(3, radius, N, center=center)
     distances = distances_from(S, center)
     
@@ -77,19 +32,22 @@ def random_directions_bounded_density_check_3d(center, radius, N):
     assert dist.sum() == N
     return DiscreteUniformDistribution(dist, 'Distribution of distances from center')
     
-@attr('density')
+@stochastic
 def random_directions_bounded_density_test():
     radius = [np.pi, np.pi * 3 / 4, np.pi / 2, np.pi / 4, np.pi / 6]
     N = 100
     for r in radius:
         center = random_direction()
-        yield random_directions_bounded_density_check_3d, center, r, N
-    
+        yield random_directions_bounded_density_3d, center, r, N
     
     
 def random_orthogonal_direction_density_test():
     # TODO
     pass
+
+@attr('density')
+def test_stochastic():
+    StochasticTestManager.main.run(time_limit=10) 
 
     
 if __name__ == '__main__':

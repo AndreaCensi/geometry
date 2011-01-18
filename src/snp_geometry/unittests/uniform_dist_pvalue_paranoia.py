@@ -1,6 +1,6 @@
 import numpy as np
-from snp_geometry.unittests.random_geometry_density_tests import uniform_dist_pvalue
 from scipy.stats.distributions import random_integers
+from stochastic_testing import uniform_dist_pvalue
 
 def main():
     
