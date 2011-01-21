@@ -4,7 +4,6 @@
 '''
 from .common_imports import *
 
-
 def safe_arccos(x):
     ''' Returns the arcosine of x, clipped between -1 and 1.
         Use this when you know x is a cosine, but it might be

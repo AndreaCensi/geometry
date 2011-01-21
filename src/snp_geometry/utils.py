@@ -8,7 +8,7 @@ def rotz(theta):
             [ sin(theta), cos(theta), 0],
             [0, 0, 1]]) 
 
-
+@contracts(theta='number')
 def rot2d(theta):
     ''' Returns a 2x2 rotation matrix. '''
     return array([ 

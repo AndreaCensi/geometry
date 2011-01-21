@@ -36,6 +36,16 @@ def normalize_length(s, norm=2):
     ''' Normalize an array such that it has unit length in the given norm. '''
     sn = np.linalg.norm(s, norm)
     if sn == 0: # TODO: add tolerance
+        raise ValueError('Norm is zero')
+    else:
+        return s / sn
+
+@contracts(s='array')
+def normalize_length_or_zero(s, norm=2):
+    ''' Normalize an array such that it has unit length in the given norm; if the
+        norm is close to zero, the zero vector is returned. '''
+    sn = np.linalg.norm(s, norm)
+    if sn == 0: # TODO: add tolerance
         return s
     else:
         return s / sn
