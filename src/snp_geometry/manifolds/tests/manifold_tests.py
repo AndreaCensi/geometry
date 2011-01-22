@@ -3,8 +3,8 @@ import numpy as np
 import itertools
 
 from snp_geometry import assert_allclose
-from snp_geometry.manifolds import Sphere, SO, SO3, SO2, E1, E2, SE2, SE3, S2, S1, Euclidean
-
+from snp_geometry.manifolds import (SO3, SO2, E1, E2, SE2, SE3, S2, S1,
+                                    T1, T2, T3)
 
 
 def check_geodesic_consistency(M, a, b, divisions=5):
@@ -79,6 +79,9 @@ def get_manifolds():
     M += [ SO3 ]
     M += [ SE2 ]
     M += [ SE3 ]
+    M += [T1]
+    M += [T2]
+    M += [T3]
     return M
 
 @attr('manifolds')

@@ -11,6 +11,9 @@ S1 = Sphere(1)
 S2 = Sphere(2)
 
 from .torus import *
+T1 = Torus(1)
+T2 = Torus(2)
+T3 = Torus(3)
 
 from .euclidean import Euclidean
 E1 = Euclidean(1)

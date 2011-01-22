@@ -103,12 +103,11 @@ class RandomManiold(DifferentiableManifold):
     def sample_uniform(self):
         ''' Samples a random point in this manifold according to the Haar
             measure. Raises exception if the measure is improper (e.g., R^n). '''
-        pass
     
     @abstractmethod
     def sample_velocity(self, a):
         ''' Samples a random velocity with length 1 at the base point a'''
-        pass
+        
 
 
 class Group():
