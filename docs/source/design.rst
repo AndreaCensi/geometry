@@ -51,3 +51,6 @@ Fiori
 
 Smith
 
+
+
+.. _PyContracts: http://andreacensi.github.com/contracts/
