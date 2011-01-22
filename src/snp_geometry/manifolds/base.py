@@ -1,5 +1,4 @@
 from contracts import contracts
-import numpy as np
 from abc import ABCMeta, abstractmethod
 from snp_geometry import assert_allclose
 

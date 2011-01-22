@@ -1,22 +1,27 @@
-from . import MatrixLieGroup, np
-from snp_geometry import  assert_allclose
-from contracts import contracts
-from snp_geometry import  rot2d, random_rotation
-from contracts.main import check
-from snp_geometry.rotations import axis_angle_from_rotation
+from contracts import contracts, check
+
+from snp_geometry import  (assert_allclose,
+                           rot2d, random_rotation, axis_angle_from_rotation)
+
+from . import MatrixLieGroup, np, MatrixLieAlgebra, S2
+
+
+class so(MatrixLieAlgebra):
+    def project(self, v):
+        return 0.5 * (v - v.T)
+    
+    def __repr__(self):
+        return 'so(%s)' % (self.n)
 
 class SO(MatrixLieGroup):
     
     @contracts(n='int,(2|3)')
     def __init__(self, n):
-        MatrixLieGroup.__init__(self, n)
+        algebra = so(n)
+        MatrixLieGroup.__init__(self, n, algebra)
 
     def __repr__(self):
         return 'SO(%s)' % (self.n)
-
-    def project_lie_algebra(self, vx):
-        ''' Projects onto the Lie Algebra of SO(n): skew-symmetric matrices. '''
-        return 0.5 * (vx - vx.T)
     
     def _belongs(self, x):
         check('orthogonal', x)
@@ -38,7 +43,8 @@ class SO(MatrixLieGroup):
             return 'Rot(%.1fdeg)' % np.degrees(theta)
         elif self.n == 3:
             axis, angle = axis_angle_from_rotation(x)
-            return 'Rot(%.1fdeg, %s)' % (np.degrees(angle), axis)
+            axisf = S2.friendly(axis)
+            return 'Rot(%.1fdeg, %s)' % (np.degrees(angle), axisf)
         else:
             assert False, 'Not implemented for n>=4.'
         

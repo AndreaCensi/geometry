@@ -1,13 +1,30 @@
 from . import LieGroup, np
 from abc import abstractmethod
 from snp_geometry import logm, expm
+from snp_geometry.geometry_contracts import assert_allclose
+
+class MatrixLieAlgebra(object):
+    def __init__(self, n):
+        self.n = n
+    @abstractmethod        
+    def project(self, v):
+        pass 
+    
+    def belongs(self, v):
+        ''' Checks that a vector belongs to this manifold. '''
+        proj = self.project(v)
+        assert_allclose(proj, v, atol=1e-8)
+        
+    def norm(self, v): # XXX
+        return np.linalg.norm(v, 2)
 
 class MatrixLieGroup(LieGroup):
-    def __init__(self, n):
+    def __init__(self, n, algebra):
         ''' 
             :param n: dimension of the matrix group. 
         '''
         self.n = n
+        self.algebra = algebra
         
     def unity(self):
         return np.eye(self.n)
@@ -21,31 +38,27 @@ class MatrixLieGroup(LieGroup):
     def _project_ts(self, base, x):  
         # get it to the origin
         y = np.dot(self.inverse(base), x)
-        ty = self.project_lie_algebra(y)
+        ty = self.algebra.project(y)
         tty = np.dot(base, ty)
-        return tty
-
-    @abstractmethod
-    def project_lie_algebra(self, vx):
-        ''' Projects vx onto the Lie Algebra. '''
-        pass
-    
-#    @abstractmethod
-#    def liealgebra(self):
-#        ''' Returns a list of matrices representing an orthonormal
-#            base for the Lie Algebra of this group. '''
-#        pass    
+        return tty 
 
     def _distance(self, a, b):
         x = self.multiply(a, self.inverse(b))
         xt = self.logmap(self.unity(), x)
-        return np.linalg.norm(xt, 2)
-         
+        return self.algebra.norm(xt)
+        
     def _logmap(self, base, target):
         ''' Returns the direction from base to target. '''
         diff = self.multiply(self.inverse(base), target)
         X = np.array(logm(diff).real)
+        X = self.algebra.project(X)
         return np.dot(base, X)
 
     def _expmap(self, base, vel):
-        return np.dot(base, expm(vel))
+        tv = np.dot(self.inverse(base), vel)
+        tv = self.algebra.project(tv)
+        x = expm(tv)
+        return np.dot(base, x)
+    
+    
+    

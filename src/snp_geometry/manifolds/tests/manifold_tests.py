@@ -1,9 +1,11 @@
+from nose.plugins.attrib import attr
 import numpy as np
-from snp_geometry import assert_allclose
-
-from snp_geometry.manifolds import Sphere, SO
 import itertools
-from snp_geometry.manifolds.euclidean import Euclidean
+
+from snp_geometry import assert_allclose
+from snp_geometry.manifolds import Sphere, SO, SO3, SO2, E1, E2, SE2, SE3, S2, S1, Euclidean
+
+
 
 def check_geodesic_consistency(M, a, b, divisions=5):
     check_geodesic_consistency.description = (
@@ -69,14 +71,17 @@ def check_manifold_suite(M, num_random=5):
 
 def get_manifolds():
     M = []
-#    M += [Euclidean(1), Euclidean(2)]
-#    M += [Sphere(1)]
-#    M += [Sphere(2)]
-    #M += [ SO(2) ]
-    M += [ SO(3)]
-
+    M += [E1]
+    M += [E2]
+    M += [S1]
+    M += [S2]
+    M += [ SO2 ]
+    M += [ SO3 ]
+    M += [ SE2 ]
+    M += [ SE3 ]
     return M
 
+@attr('manifolds')
 def test_manifolds():
     for M in get_manifolds():
         for x in check_manifold_suite(M): yield x

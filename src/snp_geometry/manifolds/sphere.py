@@ -68,11 +68,11 @@ class Sphere(DifferentiableManifold):
     def friendly(self, x):
         if self.dimension == 2:
             theta = np.arctan2(x[1], x[0])
-            return 'Dir(%.1fdeg)' % np.degrees(theta)
+            return 'Dir(%6.1fdeg)' % np.degrees(theta)
         elif self.dimension == 3:
             theta = np.arctan2(x[1], x[0])
             elevation = np.arcsin(x[2])
-            return 'Dir(%.1fdeg,el:%.1fdeg)' % (np.degrees(theta),
+            return 'Dir(%6.1fdeg,el:%5.1fdeg)' % (np.degrees(theta),
                                                       np.degrees(elevation))
         else: assert False
         

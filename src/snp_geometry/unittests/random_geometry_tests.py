@@ -43,8 +43,7 @@ class GeometryTests(unittest.TestCase):
         R *= 2
         fail('rotation_matrix', R)
 
-    def test_unit_length(self):
-        
+    def test_unit_length(self):     
         check('unit_length', np.array([1]))
         check('unit_length', np.array([0, 1]))
         fail('unit_length', np.array([0, 2]))
@@ -62,7 +61,7 @@ class GeometryTests(unittest.TestCase):
             assert_allclose(dist(s, -s), np.pi)
 
 
-@attr('slow')
+@attr('density')
 def random_directions_bounded_test_1():
     # TODO: write actual test
     r = np.pi / 2
@@ -83,7 +82,7 @@ def random_directions_bounded_check(ndim, radius, N):
     r2 = distribution_radius(S)
     check_reasonable_radius(radius, r2, N)
             
-@attr('slow')
+@attr('density')
 def random_directions_bounded_test():
     radius = [np.pi, np.pi / 2, np.pi / 6]
     N = 300

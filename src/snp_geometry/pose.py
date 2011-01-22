@@ -2,16 +2,52 @@ from .common_imports import *
 
 from .utils import rotz
 from .rotations import  map_hat, hat_map
+from contracts import contract
+from .geometry_contracts import assert_allclose
+
+
+#@contract(x='array[NxN]', returns='tuple(array[MxM],array[M],array[M],number),M=N-1')
+def extract_pieces(x):
+    M = x.shape[0] - 1
+    a = x[0:M, 0:M]
+    b = x[0:M, M]
+    c = x[M, 0:M]
+    d = x[M, M]
+    return a, b, c, d
+
+#@contract(a='array[MxM]', b='array[M]', c='array[M]', d='number', returns='array[NxN],N=M+1') 
+def combine_pieces(a, b, c, d):
+    M = a.shape[0]
+    x = np.zeros((M + 1, M + 1)) 
+    x[0:M, 0:M] = a
+    x[0:M, M] = b
+    x[M, 0:M] = c
+    x[M, M] = d
+    return x
+
+@contract(R='array[NxN],orthogonal', t='array[N]',
+          returns='array[MxM],M=N+1') # todo: sorthogonal
+def pose_from_rotation_translation(R, t):
+    return combine_pieces(R, t, t * 0, 1)
+    
+@contract(pose='array[NxN]', returns='tuple(array[MxM], array[M]),M=N-1')
+def rotation_translation_from_pose(pose):
+    R, t, zero, one = extract_pieces(pose)
+    check('orthogonal', R)
+    assert_allclose(one, 1)
+    assert_allclose(zero, 0)
+    return R, t
+
 
 
 class Velocity:
-    @contracts(linear='array[3],finite', angular='array[3],finite')
+    @contract(linear='array[3],finite', angular='array[3],finite')
     def __init__(self, linear, angular):
         self.linear = linear
         self.angular = angular
         
     @staticmethod
-    @contracts(V='array[4x4],finite')
+    @contract(V='array[4x4],finite')
     def from_matrix_representation(V):
         ''' Creates a Velocity object from its Lie algebra matrix representation.
           '''
@@ -21,7 +57,7 @@ class Velocity:
         linear = V[0:3, 3]
         return Velocity(linear, angular)
     
-    @contracts(returns='array[4x4]')
+    @contract(returns='array[4x4]')
     def to_matrix_representation(self):
         M = zeros((4, 4))
         M[0:3, 0:3] = hat_map(self.angular)
@@ -196,7 +232,7 @@ class Pose:
         return M
     
     @staticmethod
-    # XXX @contracts(A='pose',B='pose')
+    # XXX @contract(A='pose',B='pose')
     def pose_diff(A, B):
         ''' Returns a pose X such that B.oplus(X) = A.
             Mnemonics: X = A - B '''
@@ -204,7 +240,7 @@ class Pose:
         return B.inverse().oplus(A)
 
     @staticmethod
-    # XXX @contracts(xytheta='seq[3](number)')
+    # XXX @contract(xytheta='seq[3](number)')
     def from_xytheta(xytheta):
         ''' Creates a Pose object from an iterable containing x,y,theta '''
         # TODO: write unit tests for this
@@ -212,7 +248,7 @@ class Pose:
         return Pose(position=[x, y], attitude=theta)
 
     @staticmethod
-    @contracts(V='array[4x4],finite')
+    @contract(V='array[4x4],finite')
     def from_matrix_representation(V):
         ''' Creates a Pose object from its Lie algebra matrix representation.
               
