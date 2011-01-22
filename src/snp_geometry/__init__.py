@@ -9,3 +9,4 @@ from .random_geometry import *
 from .pose import *
 
 
+from .manifolds import *

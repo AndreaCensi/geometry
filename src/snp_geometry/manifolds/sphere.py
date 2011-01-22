@@ -1,17 +1,16 @@
-from . import DifferentiableManifold, np, assert_allclose
-from snp_geometry import geodesic_distance_on_sphere
-from contracts import contracts
-from snp_geometry.random_geometry import random_direction
-from snp_geometry.distances import normalize_length, normalize_length_or_zero
 from numpy.core.numeric import outer
-from snp_geometry.rotations import rotation_from_axis_angle
-from snp_geometry.utils import rot2d
-from contracts.main import check
+from snp_geometry import (geodesic_distance_on_sphere,
+                          random_direction, normalize_length, normalize_length_or_zero,
+                          rotation_from_axis_angle, rot2d)
 
+from contracts import contract, check
+
+from . import DifferentiableManifold, np, assert_allclose
+                          
 class Sphere(DifferentiableManifold):
     norm_rtol = 1e-5
     
-    @contracts(order='(1|2)')
+    @contract(order='(1|2)')
     def __init__(self, order):
         self.dimension = order + 1 
         
