@@ -9,7 +9,11 @@ from snp_geometry.utils import spherical_cap_area
 
 @contracts(ndim='(2|3),K', returns='array[K],unit_length')
 def random_direction(ndim=3):
-    ''' Generates a random direction in S^2. '''
+    '''
+        Generates a random direction in :math:`\\sphere^{\\ndim-1}`. 
+    
+        Currently only implemented for 2D and 3D.
+    '''
     if ndim == 3:
         z = uniform(-1, +1)
         t = uniform(0, 2 * pi)
@@ -27,6 +31,7 @@ def random_direction(ndim=3):
 @contracts(returns='unit_quaternion')
 def random_quaternion():
     ''' Generate a random quaternion.
+        
         Uses the algorithm used in Kuffner, ICRA'04.
     '''
     s = uniform()
@@ -46,7 +51,8 @@ def random_quaternion():
 @contracts(returns='array[2x2]|rotation_matrix', ndim='2|3')
 def random_rotation(ndim=3):
     ''' Generate a random rotation matrix. 
-        Wraps :py:func:`random_quaternion`.
+        
+        This is a wrapper around :py:func:`random_quaternion`.
     '''
     if ndim == 3:
         q = random_quaternion()
@@ -58,17 +64,17 @@ def random_rotation(ndim=3):
 @contracts(returns='array[3x3], orthogonal')
 def random_orthogonal_transform():
     # TODO: to write
-    pass
+    assert False, 'Not implemented'
 
-@contracts(how_many='int,>0,N', ndim="2|3", returns='array[3xN]')
-def random_directions(how_many, ndim=3):
-    ''' Returns a list of random directions. '''
-    return np.vstack([random_direction(ndim) 
-                      for i in range(how_many)]).T #@UnusedVariable
+
+@contracts(N='int,>0,N', ndim="2|3", returns='array[3xN]')
+def random_directions(N, ndim=3):
+    ''' Returns a set of random directions. '''
+    return np.vstack([random_direction(ndim) for i in range(N)]).T #@UnusedVariable
 
 @contracts(s='direction', returns='direction')
 def any_distant_direction(s):
-    ''' Returns a direction distant from both s and -s. '''
+    ''' Returns a direction distant from both *s* and *-s*. '''
     z = default_axis()
     d = geodesic_distance_on_sphere(s, z)
     limit = 1.0 / 6.0 * pi
@@ -78,7 +84,7 @@ def any_distant_direction(s):
 
 @contracts(s='direction', returns='direction')
 def any_orthogonal_direction(s):
-    ''' Returns any axis orthogonal to s. '''
+    ''' Returns any axis orthogonal to *s* (not necessarily random). '''
     # choose a vector far away
     z = any_distant_direction(s)
     # z ^ s is orthogonal to s
@@ -88,7 +94,7 @@ def any_orthogonal_direction(s):
 
 @contracts(s='array[K],unit_length', returns='array[K],unit_length')
 def random_orthogonal_direction(s):
-    ''' Returns a random axis orthogonal to s. '''
+    ''' Returns a random axis orthogonal to *s*. '''
     if s.size == 2:
         theta = np.sign(uniform() - 0.5) * pi / 2
         return dot(rot2d(theta), s)
@@ -103,15 +109,17 @@ def random_orthogonal_direction(s):
     else: assert False
 
 @contracts(ndim='(2|3),K',
-           radius='number,>0,<=3.15',
+           radius='number,>0,<=pi',
            num_points='int,>0',
            center='None|(array[K],unit_length)',
            returns='array[KxN],directions')
 def random_directions_bounded(ndim, radius, num_points, center=None):
-    ''' Returns a random distribution of points in S^ndim within
-        a certain radius from center. The points will be distributed
-        uniformly in that area of the sphere.
-        If center is not passed, it will be a random direction. 
+    '''
+        Returns a random distribution of points in :math:`\\sphere^{\\ndim-1}`.
+        within a certain radius from the point *center*. 
+        
+        The points will be distributed uniformly in that area of the sphere.
+        If *center* is not passed, it will be a random direction. 
     '''
     if center is None:
         center = random_direction(ndim)
@@ -137,9 +145,13 @@ def random_directions_bounded(ndim, radius, num_points, center=None):
 @contracts(S='array[KxN],(K=2|K=3),directions', returns='array[KxN], directions')
 def sorted_directions(S, num_around=15):
     ''' 
-        In 2D, sorts the directions. 
+        Rearranges the directions in *S* in a better order for visualization.
     
-        In 3D, makes a pleasant elicoidal arrangement.
+        In 2D, sorts the directions using their angle. 
+        
+        In 3D, it tries to do a pleasant elicoidal arrangement 
+        with **num_around** spires.
+        
     '''
     if S.shape[0] == 2:
         # XXX check nonzero

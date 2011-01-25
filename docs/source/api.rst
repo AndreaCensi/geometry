@@ -4,9 +4,12 @@
 .. py:module:: snp_geometry
 
 
+API Summary
+===========
+
 
 Spheres
-------------------
+-------
 
 .. autofunction:: geodesic_distance_on_sphere
 .. autofunction:: distribution_radius
@@ -94,7 +97,7 @@ Manifolds and Matrix Lie Groups interface
     :members:
     :undoc-members:
 
-Included manifolds
+Included generic manifolds
 ----------------------------
 
 .. autoclass:: Sphere
@@ -109,3 +112,30 @@ Included manifolds
 .. autoclass:: SE
     :members:
     :undoc-members:
+.. autoclass:: Torus
+    :members:
+    :undoc-members:
+.. autoclass:: Moebius
+    :members:
+    :undoc-members:
+
+
+Shortcuts
+----------------------------
+
+.. autodata:: E1
+.. autodata:: E2
+.. autodata:: S1
+.. autodata:: S2
+.. autodata:: SO2 
+.. autodata:: SO3 
+.. autodata:: so2 
+.. autodata:: so3 
+.. autodata:: SE2 
+.. autodata:: SE3 
+.. autodata:: se2 
+.. autodata:: se3 
+.. autodata:: T1
+.. autodata:: T2
+.. autodata:: T3
+

@@ -15,6 +15,8 @@ T1 = Torus(1)
 T2 = Torus(2)
 T3 = Torus(3)
 
+from .moebius import *
+
 from .euclidean import Euclidean
 E1 = Euclidean(1)
 E2 = Euclidean(2)

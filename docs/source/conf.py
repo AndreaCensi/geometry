@@ -29,9 +29,14 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.todo', 'sphinx.ext.coverage',
               'sphinx.ext.pngmath', 'sphinx.ext.ifconfig',
               'sphinx.ext.viewcode', 'sphinx.ext.intersphinx',
+               # 'sphinx.ext.autosummary',
               'sphinxtogithub',
               'numpydoc'
               ]
+
+pngmath_dvipng_args = ['-gamma 1.5', '-D 150', '-bg Transparent'] 
+from snp_geometry.tex import pngmath_latex_preamble
+
 
 intersphinx_mapping = {'http://docs.python.org/': None,
     'http://matplotlib.sourceforge.net/': None,
