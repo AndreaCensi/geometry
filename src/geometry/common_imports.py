@@ -4,5 +4,5 @@ from numpy import (dot, degrees, arccos, #@UnusedImport
 from numpy.random import uniform #@UnusedImport
 import numpy as np #@UnusedImport
 from numpy.linalg import norm #@UnusedImport
-from contracts import contracts, new_contract, check #@UnusedImport
+from contracts import new_contract, check, contract #@UnusedImport
 from scipy.linalg import logm, expm #@UnusedImport

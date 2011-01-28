@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from snp_geometry import (random_rotation, random_quaternion, random_direction,
+from geometry import (random_rotation, random_quaternion, random_direction,
      random_directions_bounded,
     any_distant_direction, any_orthogonal_direction, distribution_radius,
     geodesic_distance_on_sphere, assert_orthogonal, rotation_from_axis_angle,

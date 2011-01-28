@@ -3,7 +3,7 @@ import unittest
 
 from contracts import contracts
 
-from snp_geometry import random_direction, random_quaternion, \
+from geometry import random_direction, random_quaternion, \
     random_rotation, assert_allclose
 
 

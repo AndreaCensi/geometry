@@ -1,6 +1,6 @@
 from contracts import contracts
 from abc import ABCMeta, abstractmethod
-from snp_geometry import assert_allclose
+from geometry import assert_allclose
 
 class DoesNotBelong(Exception):
     def __init__(self, M, point, e, context=None):
@@ -74,7 +74,7 @@ class DifferentiableManifold:
         '''
         return []
     
-    @contracts(t='>=0,<=1')
+    @contract(t='>=0,<=1')
     def geodesic(self, a, b, t):
         ''' Returns the point along the geodesic. '''
         vel = self.logmap(a, b)

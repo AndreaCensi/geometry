@@ -2,8 +2,8 @@ from nose.plugins.attrib import attr
 import numpy as np
 import itertools
 
-from snp_geometry import assert_allclose
-from snp_geometry.manifolds import (SO3, SO2, E1, E2, SE2, SE3, S2, S1,
+from geometry import assert_allclose
+from geometry.manifolds import (SO3, SO2, E1, E2, SE2, SE3, S2, S1,
                                     T1, T2, T3)
 
 

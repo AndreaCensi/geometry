@@ -1,6 +1,6 @@
 import numpy as np 
 
-from snp_geometry import (axis_angle_from_rotation,
+from geometry import (axis_angle_from_rotation,
     rotation_from_axis_angle, random_direction, hat_map,
     geodesic_distance_on_sphere, assert_allclose) 
 

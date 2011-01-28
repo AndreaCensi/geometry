@@ -1,6 +1,6 @@
 import numpy as np
 
-from snp_geometry import assert_allclose
+from geometry import assert_allclose
 
 from .base import *
 from .matrix_lie_group import *

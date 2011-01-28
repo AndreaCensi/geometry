@@ -1,5 +1,5 @@
 from numpy.core.numeric import outer
-from snp_geometry import (geodesic_distance_on_sphere,
+from geometry import (geodesic_distance_on_sphere,
                           random_direction, normalize_length, normalize_length_or_zero,
                           rotation_from_axis_angle, rot2d)
 

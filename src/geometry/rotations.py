@@ -13,7 +13,7 @@ def safe_arccos(x):
     '''
     return np.arccos(np.clip(x, -1.0, 1.0))
 
-@contracts(v='array[3]', returns='array[3x3],skew_symmetric')
+@contract(v='array[3]', returns='array[3x3],skew_symmetric')
 def hat_map(v):
     ''' Maps a vector to a 3x3 skew symmetric matrix. '''
     h = zeros((3, 3))
@@ -23,7 +23,7 @@ def hat_map(v):
     h = h - h.transpose()
     return h
 
-@contracts(H='array[3x3],skew_symmetric', returns='array[3]')
+@contract(H='array[3x3],skew_symmetric', returns='array[3]')
 def map_hat(H):
     ''' The inverse of :py:func:`hat_map`. '''
     v = zeros(3)
@@ -38,7 +38,7 @@ def normalize_pi(x):
     return np.arctan2(np.sin(x), np.cos(x))
 
 
-@contracts(x='unit_quaternion', returns='rotation_matrix')
+@contract(x='unit_quaternion', returns='rotation_matrix')
 def rotation_from_quaternion(x):
     '''
         Converts a quaternion to a rotation matrix.
@@ -59,7 +59,7 @@ def rotation_from_quaternion(x):
     
     return array([r1, r2, r3])
 
-@contracts(R='rotation_matrix', returns='unit_quaternion')
+@contract(R='rotation_matrix', returns='unit_quaternion')
 def quaternion_from_rotation(R):
     ''' 
         Converts a rotation matrix to a quaternion.
@@ -96,7 +96,7 @@ def quaternion_from_rotation(R):
         return Q
 
 
-@contracts(axis='direction', angle='float', returns='unit_quaternion')
+@contract(axis='direction', angle='float', returns='unit_quaternion')
 def quaternion_from_axis_angle(axis, angle):
     ''' 
         Computes a quaternion corresponding to the rotation of *angle* radians
@@ -113,7 +113,7 @@ def quaternion_from_axis_angle(axis, angle):
     Q *= np.sign(Q[0])
     return Q
 
-@contracts(q='unit_quaternion', returns='axis_angle_canonical')
+@contract(q='unit_quaternion', returns='axis_angle_canonical')
 def axis_angle_from_quaternion(q):
     ''' 
         This is the inverse of :py:func:`quaternion_from_axis_angle`.
@@ -130,7 +130,7 @@ def axis_angle_from_quaternion(q):
         
     return axis, angle
          
-@contracts(returns='direction')
+@contract(returns='direction')
 def default_axis(): 
     ''' 
         Returns the axis to use when any will do. 
@@ -142,7 +142,7 @@ def default_axis():
     '''
     return  array([0.0, 0.0, 1.0])
 
-@contracts(returns='direction')
+@contract(returns='direction')
 def default_axis_orthogonal():
     ''' 
         Returns an axis orthogonal to the one returned 
@@ -152,7 +152,7 @@ def default_axis_orthogonal():
     '''  
     return  array([0.0, 1.0, 0.0])
 
-@contracts(axis='direction', angle='float', returns='rotation_matrix')
+@contract(axis='direction', angle='float', returns='rotation_matrix')
 def rotation_from_axis_angle(axis, angle):
     ''' 
         Computes the rotation matrix from the *(axis,angle)* representation
@@ -164,7 +164,7 @@ def rotation_from_axis_angle(axis, angle):
     R = eye(3) + w_hat * sin(angle) + w_hat2 * (1 - cos(angle))
     return R
 
-@contracts(R='rotation_matrix', returns='axis_angle_canonical')
+@contract(R='rotation_matrix', returns='axis_angle_canonical')
 def axis_angle_from_rotation(R):
     ''' 
         Returns the *(axis,angle)* representation of a given rotation.
@@ -188,7 +188,7 @@ def axis_angle_from_rotation(R):
         axis = (1 / (2 * sin(angle))) * v
         return axis, angle
     
-@contracts(axis='direction', angle='float', returns='rotation_matrix')
+@contract(axis='direction', angle='float', returns='rotation_matrix')
 def rotation_from_axis_angle2(axis, angle):
     ''' 
         Get the rotation from the *(axis,angle)* representation.

@@ -3,7 +3,7 @@ import warnings
 
 from .common_imports import *
 
-@contracts(s='array[K],K>=2', v='array[K]')
+@contract(s='array[K],K>=2', v='array[K]')
 def assert_orthogonal(s, v):
     ''' Checks that two vectors are orthogonal. '''
     dot = (v * s).sum()
@@ -25,7 +25,7 @@ def assert_allclose(actual, desired, rtol=1e-7, atol=0,
                          verbose=verbose, header=header)
 
 @new_contract
-@contracts(x='array[N],N>0')
+@contract(x='array[N],N>0')
 def unit_length(x):
     ''' Checks that the value is a 1D vector with unit length in the 2 norm.'''
     assert_allclose(1, np.linalg.norm(x), rtol=1e-5)
@@ -37,14 +37,14 @@ new_contract('axis_angle', 'tuple(direction, float)') # TODO: pi
 new_contract('axis_angle_canonical', 'tuple(direction, (float,>=0, <3.15))') # TODO: pi
 
 @new_contract
-@contracts(x='array')
+@contract(x='array')
 def finite(x):
     # TODO: make into standard thing
     return np.isfinite(x).all()
 
 
 @new_contract
-@contracts(x='array[NxN],N>0')
+@contract(x='array[NxN],N>0')
 def orthogonal(x):
     N = x.shape[0]
     I = np.eye(N) 
@@ -54,14 +54,14 @@ def orthogonal(x):
     assert_allclose(I, np.dot(x.T, x), rtol=rtol, atol=atol)
 
 @new_contract
-@contracts(x='array[3x3], orthogonal')
+@contract(x='array[3x3], orthogonal')
 def rotation_matrix(x):
     ''' Checks that the given value is a rotation matrix. '''
     det = np.linalg.det(x)
     assert_allclose(det, 1) 
 
 @new_contract
-@contracts(x='array[NxN]')
+@contract(x='array[NxN]')
 def skew_symmetric(x):
     n = x.shape[0]
     ok = (np.zeros((n, n)) == x).all()
@@ -78,7 +78,7 @@ def skew_symmetric(x):
                                  (i, j, x[i, j], j, i, x[j, i]))
 
 @new_contract
-@contracts(X='array[KxN],K>0,N>0')
+@contract(X='array[KxN],K>0,N>0')
 def directions(X):
     ''' Checks that every column has unit length. '''
     norm = (X * X).sum(axis=0)

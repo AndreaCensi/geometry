@@ -2,7 +2,6 @@ from .common_imports import *
 
 from .utils import rotz
 from .rotations import  map_hat, hat_map
-from contracts import contract
 from .geometry_contracts import assert_allclose
 
 

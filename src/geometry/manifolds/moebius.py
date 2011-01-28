@@ -1,9 +1,9 @@
 from contracts import check
 from . import DifferentiableManifold, np 
-from snp_geometry import normalize_pi
+from geometry import normalize_pi
 
 class Moebius(DifferentiableManifold):
-
+    ''' Still not implemented. '''
     def __init__(self, n):
         self.n = n
 

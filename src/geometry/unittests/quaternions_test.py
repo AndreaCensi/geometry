@@ -1,4 +1,4 @@
-from snp_geometry import quaternion_from_rotation, \
+from geometry import quaternion_from_rotation, \
     rotation_from_quaternion, axis_angle_from_quaternion, \
     quaternion_from_axis_angle, rotation_from_axis_angle, \
     rotation_from_axis_angle2, axis_angle_from_rotation, \

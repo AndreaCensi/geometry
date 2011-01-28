@@ -1,7 +1,6 @@
 from . import LieGroup, np
 from abc import abstractmethod
-from snp_geometry import logm, expm
-from snp_geometry.geometry_contracts import assert_allclose
+from geometry import logm, expm, assert_allclose
 
 class MatrixLieAlgebra(object):
     def __init__(self, n):

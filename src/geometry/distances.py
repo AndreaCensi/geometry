@@ -1,7 +1,7 @@
 from .common_imports import *
 from .rotations import axis_angle_from_rotation, safe_arccos
 
-@contracts(R1='rotation_matrix', R2='rotation_matrix', returns='float,>=0,<=pi')
+@contract(R1='rotation_matrix', R2='rotation_matrix', returns='float,>=0,<=pi')
 def geodesic_distance_for_rotations(R1, R2):
     ''' 
         Returns the geodesic distance between two rotation matrices.
@@ -14,7 +14,7 @@ def geodesic_distance_for_rotations(R1, R2):
     return angle1 
 
 
-@contracts(s1='array[K],unit_length',
+@contract(s1='array[K],unit_length',
            s2='array[K],unit_length', returns='float,>=0,<=pi')
 def geodesic_distance_on_sphere(s1, s2):
     ''' Returns the geodesic distance between two points on the sphere. '''
@@ -24,7 +24,7 @@ def geodesic_distance_on_sphere(s1, s2):
     return safe_arccos(dot_product)
 
 
-@contracts(S='directions', returns='float,>=0,<=pi')
+@contract(S='directions', returns='float,>=0,<=pi')
 def distribution_radius(S):
     ''' Returns the radius of the given directions distribution.
         
@@ -38,7 +38,7 @@ def distribution_radius(S):
     center = np.argmin(distances) 
     return distances[center]
 
-@contracts(s='array')
+@contract(s='array')
 def normalize_length(s, norm=2):
     ''' Normalize an array such that it has unit length in the given norm. '''
     sn = np.linalg.norm(s, norm)
@@ -47,7 +47,7 @@ def normalize_length(s, norm=2):
     else:
         return s / sn
 
-@contracts(s='array')
+@contract(s='array')
 def normalize_length_or_zero(s, norm=2):
     ''' 
         Normalize an array such that it has unit length in the given norm; if the
@@ -59,7 +59,7 @@ def normalize_length_or_zero(s, norm=2):
     else:
         return s / sn
 
-@contracts(S='array[3xK],directions', s='direction',
+@contract(S='array[3xK],directions', s='direction',
            returns='array[K](>=0,<=pi)')
 def distances_from(S, s):
     ''' 

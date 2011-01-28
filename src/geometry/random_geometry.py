@@ -6,7 +6,7 @@ from .distances import geodesic_distance_on_sphere, normalize_length, distances_
 from .utils import rot2d, spherical_cap_with_area, spherical_cap_area
 
 
-@contracts(ndim='(2|3),K', returns='array[K],unit_length')
+@contract(ndim='(2|3),K', returns='array[K],unit_length')
 def random_direction(ndim=3):
     '''
         Generates a random direction in :math:`\\sphere^{\\ndim-1}`. 
@@ -27,7 +27,7 @@ def random_direction(ndim=3):
     else: assert False, 'Not implemented'
 
 
-@contracts(returns='unit_quaternion')
+@contract(returns='unit_quaternion')
 def random_quaternion():
     ''' Generate a random quaternion.
         
@@ -47,7 +47,7 @@ def random_quaternion():
     q *= np.sign(q[0])
     return q
 
-@contracts(returns='array[2x2]|rotation_matrix', ndim='2|3')
+@contract(returns='array[2x2]|rotation_matrix', ndim='2|3')
 def random_rotation(ndim=3):
     ''' Generate a random rotation matrix. 
         
@@ -60,18 +60,18 @@ def random_rotation(ndim=3):
         return rot2d(uniform(0, 2 * pi))
     else: assert False
 
-@contracts(returns='array[3x3], orthogonal')
+@contract(returns='array[3x3], orthogonal')
 def random_orthogonal_transform():
     # TODO: to write
     assert False, 'Not implemented'
 
 
-@contracts(N='int,>0,N', ndim="2|3", returns='array[3xN]')
+@contract(N='int,>0,N', ndim="2|3", returns='array[3xN]')
 def random_directions(N, ndim=3):
     ''' Returns a set of random directions. '''
     return np.vstack([random_direction(ndim) for i in range(N)]).T #@UnusedVariable
 
-@contracts(s='direction', returns='direction')
+@contract(s='direction', returns='direction')
 def any_distant_direction(s):
     ''' Returns a direction distant from both *s* and *-s*. '''
     z = default_axis()
@@ -81,7 +81,7 @@ def any_distant_direction(s):
         z = default_axis_orthogonal()
     return z
 
-@contracts(s='direction', returns='direction')
+@contract(s='direction', returns='direction')
 def any_orthogonal_direction(s):
     ''' Returns any axis orthogonal to *s* (not necessarily random). '''
     # choose a vector far away
@@ -91,7 +91,7 @@ def any_orthogonal_direction(s):
     v = x / norm(x)
     return v
 
-@contracts(s='array[K],unit_length', returns='array[K],unit_length')
+@contract(s='array[K],unit_length', returns='array[K],unit_length')
 def random_orthogonal_direction(s):
     ''' Returns a random axis orthogonal to *s*. '''
     if s.size == 2:
@@ -107,7 +107,7 @@ def random_orthogonal_direction(s):
         return z2
     else: assert False
 
-@contracts(ndim='(2|3),K',
+@contract(ndim='(2|3),K',
            radius='number,>0,<=pi',
            num_points='int,>0',
            center='None|(array[K],unit_length)',
@@ -141,7 +141,7 @@ def random_directions_bounded(ndim, radius, num_points, center=None):
         
     return sorted_directions(directions)
 
-@contracts(S='array[KxN],(K=2|K=3),directions', returns='array[KxN], directions')
+@contract(S='array[KxN],(K=2|K=3),directions', returns='array[KxN], directions')
 def sorted_directions(S, num_around=15):
     ''' 
         Rearranges the directions in *S* in a better order for visualization.

@@ -2,8 +2,8 @@ from nose.plugins.attrib import attr
 from nose.tools import nottest
 
 import numpy as np
-from snp_geometry import (random_direction, random_directions_bounded, distances_from,
-                          spherical_cap_area, spherical_cap_with_area)
+from geometry import (random_direction, random_directions_bounded, distances_from,
+                         spherical_cap_area, spherical_cap_with_area)
 from stochastic_testing import DiscreteUniformDistribution, StochasticTestManager, stochastic
 
 def random_directions_bounded_density_3d(center, radius, N):

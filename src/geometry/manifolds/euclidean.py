@@ -9,7 +9,7 @@ class Euclidean(DifferentiableManifold):
     def __repr__(self):
         return 'Euclidean(%s)' % (self.dimension)
 
-    @contracts(x='array')
+    @contract(x='array')
     def _belongs(self, x):
         assert_allclose(x.size, self.dimension) 
         assert np.all(np.isreal(x)), "Expected real vector"

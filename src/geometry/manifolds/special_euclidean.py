@@ -1,16 +1,11 @@
-from snp_geometry import  (assert_allclose, rot2d, random_rotation,
+from geometry import  (assert_allclose, rot2d, random_rotation,
                            axis_angle_from_rotation, pose_from_rotation_translation,
                            rotation_translation_from_pose)
 from contracts import contracts, check, contract
 
 from . import MatrixLieGroup, np, MatrixLieAlgebra, SO, so, Euclidean
-from snp_geometry.pose import extract_pieces, combine_pieces
-#
-#@contract(X='array[NxN]',
-#          returns='(N=3,tuple(number,array[2]))|(N=4,tuple(array[3],array[3]))')
-#def avel_lvel_from_posevel(X):
-#    
-#    
+from geometry.pose import extract_pieces, combine_pieces
+
 
 class se(MatrixLieAlgebra):
     def __init__(self, n, alpha):
@@ -33,7 +28,7 @@ class se(MatrixLieAlgebra):
 
 class SE(MatrixLieGroup):
     
-    @contracts(n='int,(2|3)', alpha='>0')
+    @contract(n='int,(2|3)', alpha='>0')
     def __init__(self, n, alpha=1):
         algebra = se(n, alpha)
         MatrixLieGroup.__init__(self, n + 1, algebra)

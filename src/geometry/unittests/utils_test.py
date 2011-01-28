@@ -1,4 +1,4 @@
-from snp_geometry import (sphere_area, spherical_cap_area, assert_allclose, pi,
+from geometry import (sphere_area, spherical_cap_area, assert_allclose, pi,
                           spherical_cap_with_area)
 
 A = sphere_area()

@@ -15,7 +15,7 @@ class so(MatrixLieAlgebra):
 
 class SO(MatrixLieGroup):
     
-    @contracts(n='int,(2|3)')
+    @contract(n='int,(2|3)')
     def __init__(self, n):
         algebra = so(n)
         MatrixLieGroup.__init__(self, n, algebra)

@@ -1,6 +1,6 @@
 from .common_imports import *
 
-@contracts(theta='number', returns='rotation_matrix')
+@contract(theta='number', returns='rotation_matrix')
 def rotz(theta):
     ''' Returns a 3x3 rotation matrix corresponding to rotation around the *z* axis. '''
     return array([ 
@@ -8,7 +8,7 @@ def rotz(theta):
             [ sin(theta), cos(theta), 0],
             [0, 0, 1]]) 
 
-@contracts(theta='number')
+@contract(theta='number')
 def rot2d(theta):
     ''' Returns a 2x2 rotation matrix. '''
     return array([ 
