@@ -5,7 +5,9 @@
 from .common_imports import *
 
 def safe_arccos(x):
-    ''' Returns the arcosine of x, clipped between -1 and 1.
+    ''' 
+        Returns the arcosine of x, clipped between -1 and 1.
+        
         Use this when you know x is a cosine, but it might be
         slightly over 1 or below -1 due to numerical errors.
     '''
@@ -13,6 +15,7 @@ def safe_arccos(x):
 
 @contracts(v='array[3]', returns='array[3x3],skew_symmetric')
 def hat_map(v):
+    ''' Maps a vector to a 3x3 skew symmetric matrix. '''
     h = zeros((3, 3))
     h[0, 1] = -v[2]
     h[0, 2] = v[1]
@@ -31,14 +34,16 @@ def map_hat(H):
 
 
 def normalize_pi(x):
-    ''' Normalizes the entries in x in the interval [-pi,pi]. '''
+    ''' Normalizes the entries in *x* in the interval :math:`[-pi,pi)`. '''
     return np.arctan2(np.sin(x), np.cos(x))
 
 
 @contracts(x='unit_quaternion', returns='rotation_matrix')
 def rotation_from_quaternion(x):
     '''
-        From: <http://en.wikipedia.org/w/index.php?title=Quaternions_and_spatial_rotation&oldid=402924915>
+        Converts a quaternion to a rotation matrix.
+        
+        Documented in <http://en.wikipedia.org/w/index.php?title=Quaternions_and_spatial_rotation&oldid=402924915>
     '''
     a, b, c, d = x
         
@@ -56,8 +61,12 @@ def rotation_from_quaternion(x):
 
 @contracts(R='rotation_matrix', returns='unit_quaternion')
 def quaternion_from_rotation(R):
-    ''' This is the robust method mentioned on wikipedia:
-        http://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation
+    ''' 
+        Converts a rotation matrix to a quaternion.
+    
+        This is the robust method mentioned on wikipedia:
+    
+        <http://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation>
         
         TODO: add the more robust method with 4x4 matrix and eigenvector
     '''
@@ -87,9 +96,14 @@ def quaternion_from_rotation(R):
         return Q
 
 
-# TODO add finite
 @contracts(axis='direction', angle='float', returns='unit_quaternion')
 def quaternion_from_axis_angle(axis, angle):
+    ''' 
+        Computes a quaternion corresponding to the rotation of *angle* radians
+        around the given *axis*.
+        
+        This is the inverse of :py:func:`axis_angle_from_quaternion`.
+    '''
     Q = array([
             cos(angle / 2),
             axis[0] * sin(angle / 2),
@@ -101,6 +115,9 @@ def quaternion_from_axis_angle(axis, angle):
 
 @contracts(q='unit_quaternion', returns='axis_angle_canonical')
 def axis_angle_from_quaternion(q):
+    ''' 
+        This is the inverse of :py:func:`quaternion_from_axis_angle`.
+    '''
     angle = 2 * safe_arccos(q[0])
     if angle == 0: # XXX: use tolerance
         axis = default_axis
@@ -115,17 +132,32 @@ def axis_angle_from_quaternion(q):
          
 @contracts(returns='direction')
 def default_axis(): 
-    ''' Returns the axis to use when any will do due to ambiguity. '''
+    ''' 
+        Returns the axis to use when any will do. 
+        
+        For example, the identity is represented by
+        a rotation of 0 degrees around *any* axis. If an *(axis,angle)*
+        representation is requested, the axis will be given by
+        *default_axis()*. 
+    '''
     return  array([0.0, 0.0, 1.0])
 
 @contracts(returns='direction')
 def default_axis_orthogonal():
-    ''' Returns an axis orthogonal to default_axis() '''  
+    ''' 
+        Returns an axis orthogonal to the one returned 
+        by :py:func:`default_axis`. 
+        
+        Use this when you need a couple of arbitrary orthogonal axes.
+    '''  
     return  array([0.0, 1.0, 0.0])
 
 @contracts(axis='direction', angle='float', returns='rotation_matrix')
 def rotation_from_axis_angle(axis, angle):
-    ''' Get the rotation matrix using Rodriguez's formula. '''
+    ''' 
+        Computes the rotation matrix from the *(axis,angle)* representation
+        using Rodriguez's formula. 
+    '''
     w = axis
     w_hat = hat_map(w)
     w_hat2 = dot(w_hat, w_hat)
@@ -134,8 +166,17 @@ def rotation_from_axis_angle(axis, angle):
 
 @contracts(R='rotation_matrix', returns='axis_angle_canonical')
 def axis_angle_from_rotation(R):
-    ''' By convention, the angle returned is nonnegative. 
-        If the angle is 0, the default_axis will be returned. '''
+    ''' 
+        Returns the *(axis,angle)* representation of a given rotation.
+        
+        There are a couple of symmetries:
+    
+        * By convention, the angle returned is nonnegative.
+         
+        * If the angle is 0, any axis will do. 
+          In that case, :py:func:`default_axis` will be returned. 
+          
+    '''
     angle = safe_arccos((R.trace() - 1) / 2)
     
     if angle == 0:
@@ -149,7 +190,12 @@ def axis_angle_from_rotation(R):
     
 @contracts(axis='direction', angle='float', returns='rotation_matrix')
 def rotation_from_axis_angle2(axis, angle):
-    ''' Get the rotation matrix going through the quaternion.'''
+    ''' 
+        Get the rotation from the *(axis,angle)* representation.
+        
+        This is an alternative to :py:func:`rotation_from_axis_angle` which
+        goes through the quaternion representation.
+    '''
     q = quaternion_from_axis_angle(axis, angle)
     return rotation_from_quaternion(q)
      

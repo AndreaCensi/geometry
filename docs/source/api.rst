@@ -1,13 +1,23 @@
 
-.. py:currentmodule:: snp_geometry
-
-.. py:module:: snp_geometry
 
 
 API Summary
 ===========
 
 
+
+
+.. autosummary::
+
+   snp_geometry.geodesic_distance_on_sphere
+   snp_geometry.distribution_radius
+
+
+.. .. py:currentmodule:: snp_geometry
+
+.. py:module:: snp_geometry
+   
+   
 Spheres
 -------
 

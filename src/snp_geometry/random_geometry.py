@@ -3,8 +3,7 @@ from .rotations import (rotation_from_quaternion,
                          default_axis_orthogonal, normalize_pi,
                         rotation_from_axis_angle, default_axis)
 from .distances import geodesic_distance_on_sphere, normalize_length, distances_from
-from .utils import rot2d, spherical_cap_with_area
-from snp_geometry.utils import spherical_cap_area
+from .utils import rot2d, spherical_cap_with_area, spherical_cap_area
 
 
 @contracts(ndim='(2|3),K', returns='array[K],unit_length')

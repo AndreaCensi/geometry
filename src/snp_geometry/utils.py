@@ -2,7 +2,7 @@ from .common_imports import *
 
 @contracts(theta='number', returns='rotation_matrix')
 def rotz(theta):
-    ''' Returns a 3x3 rotation matrix corresponding to rotation around the z axis. '''
+    ''' Returns a 3x3 rotation matrix corresponding to rotation around the *z* axis. '''
     return array([ 
             [ cos(theta), -sin(theta), 0],
             [ sin(theta), cos(theta), 0],
@@ -20,7 +20,8 @@ def sphere_area(r=1):
     return 4 * pi * (r ** 2)
 
 def spherical_cap_area(cap_radius):
-    ''' Returns the area of a spherical cap on the unit sphere 
+    ''' 
+        Returns the area of a spherical cap on the unit sphere 
         of the given radius. 
     
         See figure at http://mathworld.wolfram.com/SphericalCap.html
@@ -31,8 +32,11 @@ def spherical_cap_area(cap_radius):
     return A
 
 def spherical_cap_with_area(cap_area):
-    ''' Returns the radius of a spherical cap of the given area. '''
-    # http://www.springerlink.com/content/3521h167300g7v62/
+    ''' 
+        Returns the radius of a spherical cap of the given area. 
+    
+        See http://www.springerlink.com/content/3521h167300g7v62/
+    '''
     A = cap_area
     L = np.sqrt(A / pi)
     h = L ** 2 / 2
