@@ -594,6 +594,49 @@ around the given <em>axis</em>.</p>
 <dd></dd></dl>
 
 </div>
+<div class="section" id="procrustes-analysis">
+<h2>Procrustes analysis<a class="headerlink" href="#procrustes-analysis" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.best_orthogonal_transform">
+<tt class="descclassname">geometry.</tt><tt class="descname">best_orthogonal_transform</tt><big>(</big><em>X</em>, <em>Y</em><big>)</big><a class="headerlink" href="#geometry.best_orthogonal_transform" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Finds the best orthogonal transform R  between X and Y,</dt>
+<dd>such that R X ~= Y.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Y</strong> (<tt class="docutils literal"><span class="pre">array[KxN]</span></tt>) &#8211; </li>
+<li><strong>X</strong> (<tt class="docutils literal"><span class="pre">array[KxN],K&gt;=2,K&lt;N</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[KxK],orthogonal</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.closest_orthogonal_matrix">
+<tt class="descclassname">geometry.</tt><tt class="descname">closest_orthogonal_matrix</tt><big>(</big><em>M</em><big>)</big><a class="headerlink" href="#geometry.closest_orthogonal_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the closest orthogonal matrix to M.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>M</strong> (<tt class="docutils literal"><span class="pre">array[NxN]</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[NxN],orthogonal</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
 <div class="section" id="misc-utils">
 <h2>Misc utils<a class="headerlink" href="#misc-utils" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
@@ -1078,6 +1121,7 @@ tangent space.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#se-n-poses">SE(n) - Poses</a></li>
+<li><a class="reference internal" href="#procrustes-analysis">Procrustes analysis</a></li>
 <li><a class="reference internal" href="#misc-utils">Misc utils</a></li>
 <li><a class="reference internal" href="#manifolds-and-matrix-lie-groups-interface">Manifolds and Matrix Lie Groups interface</a></li>
 <li><a class="reference internal" href="#included-generic-manifolds">Included generic manifolds</a></li>

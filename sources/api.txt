@@ -94,6 +94,13 @@ SE(n) - Poses
 
 
 
+Procrustes analysis
+-------------------------------
+.. autofunction:: best_orthogonal_transform
+.. autofunction:: closest_orthogonal_matrix
+
+
+
 Misc utils
 ---------------
 
