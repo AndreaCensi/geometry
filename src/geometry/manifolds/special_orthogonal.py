@@ -1,6 +1,6 @@
-from contracts import contracts, check
+from contracts import contract, check
 
-from snp_geometry import  (assert_allclose,
+from geometry import  (assert_allclose,
                            rot2d, random_rotation, axis_angle_from_rotation)
 
 from . import MatrixLieGroup, np, MatrixLieAlgebra, S2

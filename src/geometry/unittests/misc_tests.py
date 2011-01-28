@@ -1,5 +1,5 @@
  
-from snp_geometry import map_hat, hat_map
+from geometry import map_hat, hat_map
 
 from .utils import GeoTestCase, directions_sequence
 

@@ -1,25 +1,52 @@
+.. include:: definitions.txt
+
+
+.. _api:
+
+PyGeometry API
+==============
+
+
+Usage notes
+-----------
+
+* No fancy OO-overdose here. Geometric objects (rotation matrices, poses, etc.) are represented using vanilla 
+  Numpy array: there's no class Rotation, Pose, etc. If you don't think this is a good
+  idea, your mind has been spoiled by C++ or Java classes taught by clueless professors.
+
+
+* The main procedures are implemented as simple functions accepting and returning numpy arrays.
+  Manifolds are implemented using classes that wrap the simple functions.
+
+* Manifolds objects "know" how to compute distances, interpolate, etc. This makes sense: for example, the interpolation between the identity and a rotation matrix depends on whether you are considering them as elements of *GL(n)* or *SO(n)*.
+  
+* Most functions declare contracts among parameters and return values using the PyContracts_ library. This is slightly paranoid. You can disable all those checks using  ``contracts.disable_all()``.
+    
+* The naming conventions for conversion operations is::
+
+      x = <X>_from_<Y>(y)
+    
+  For example::
+  
+      R = rotation_from_axis_angle(axis, angle)
+      axis, angle = axis_angle_from_rotation(R)
+      R = rotation_from_quaternion(q)
 
 
 
-API Summary
-===========
+.. d .. autosummary
+.. 
+..    geometry.geodesic_distance_on_sphere
+..    geometry.distribution_radius
 
 
+.. .. py:currentmodule:: geometry
 
-
-.. autosummary::
-
-   snp_geometry.geodesic_distance_on_sphere
-   snp_geometry.distribution_radius
-
-
-.. .. py:currentmodule:: snp_geometry
-
-.. py:module:: snp_geometry
+.. py:module:: geometry
    
    
-Spheres
--------
+S(n) - Hyperspheres
+------------
 
 .. autofunction:: geodesic_distance_on_sphere
 .. autofunction:: distribution_radius
@@ -36,8 +63,8 @@ Random sampling
 .. autofunction:: random_directions_bounded
 
 
-Rotations and quaternions
--------------------------
+SO(n) - Rotations and quaternions
+---------------------------------
  
 .. autofunction:: hat_map
 .. autofunction:: map_hat
@@ -57,7 +84,7 @@ Random sampling
 .. autofunction:: random_orthogonal_transform
 
 
-Poses
+SE(n) - Poses
 -------------------------------
 .. autofunction:: pose_from_rotation_translation
 .. autofunction:: rotation_translation_from_pose
@@ -66,8 +93,18 @@ Poses
 .. autofunction:: combine_pieces 
 
 
-Contracts
+
+Misc utils
 ---------------
+
+.. autofunction:: default_axis
+.. autofunction:: default_axis_orthogonal
+.. autofunction:: safe_arccos
+.. autofunction:: normalize_pi
+.. autofunction:: normalize_length
+.. autofunction:: normalize_length_or_zero 
+.. autofunction:: assert_allclose
+
 
 These are some of the contracts defined using PyContracts_.
 
@@ -79,16 +116,6 @@ These are some of the contracts defined using PyContracts_.
 .. autofunction:: skew_symmetric
 .. autofunction:: directions
 
-
-Misc utils
----------------
-.. autofunction:: default_axis
-.. autofunction:: default_axis_orthogonal
-.. autofunction:: safe_arccos
-.. autofunction:: normalize_pi
-.. autofunction:: normalize_length
-.. autofunction:: normalize_length_or_zero 
-.. autofunction:: assert_allclose
 
 
 Manifolds and Matrix Lie Groups interface

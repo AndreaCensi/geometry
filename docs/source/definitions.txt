@@ -1,0 +1,12 @@
+.. |pygeometry| raw:: html
+      
+      <span class="brand">PyGeometry</span>
+
+
+.. |towrite| raw:: html
+
+     <span style="font-weight:bold">This section must still be written.</span>
+	 
+	 
+.. _stochastic_testing: http://github.com/AndreaCensi/stochastic_testing
+.. _PyContracts: http://andreacensi.github.com/contracts/

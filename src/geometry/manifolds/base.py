@@ -1,4 +1,4 @@
-from contracts import contracts
+from contracts import contract
 from abc import ABCMeta, abstractmethod
 from geometry import assert_allclose
 

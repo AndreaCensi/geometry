@@ -35,7 +35,7 @@ extensions = [
               ]
 
 pngmath_dvipng_args = ['-gamma 1.5', '-D 150', '-bg Transparent'] 
-from snp_geometry.tex import pngmath_latex_preamble
+from geometry.tex import pngmath_latex_preamble
 
 
 intersphinx_mapping = {'http://docs.python.org/': None,
@@ -55,7 +55,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Geometry'
+project = u'PyGeometry'
 copyright = u'2011, Andrea Censi'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -65,13 +65,13 @@ copyright = u'2011, Andrea Censi'
 # The short X.Y version.
 
 try: 
-    import snp_geometry
+    import geometry
 
-    version = snp_geometry.__version__
+    version = geometry.__version__
     # The full version, including alpha/beta/rc tags.
-    release = snp_geometry.__version__
+    release = geometry.__version__
 except Exception as e:
-    print('---- Warning: could not get version info; is snp_geometry installed?')
+    print('---- Warning: could not get version info; is PyGeometry installed?')
     print('---- (%s)' % e)
     version = 'unknown'
     release = 'unknown'
