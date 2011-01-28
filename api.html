@@ -1,0 +1,1131 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>PyGeometry API &mdash; PyGeometry v0.9.1 documentation</title>
+    <link rel="stylesheet" href="static/default.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.9.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="PyGeometry v0.9.1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PyGeometry v0.9.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pygeometry-api">
+<span id="api"></span><h1>PyGeometry API<a class="headerlink" href="#pygeometry-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="usage-notes">
+<h2>Usage notes<a class="headerlink" href="#usage-notes" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">No fancy OO-overdose here. Geometric objects (rotation matrices, poses, etc.) are represented using vanilla
+Numpy array: there&#8217;s no class Rotation, Pose, etc. If you don&#8217;t think this is a good
+idea, your mind has been spoiled by C++ or Java classes taught by clueless professors.</p>
+</li>
+<li><p class="first">The main procedures are implemented as simple functions accepting and returning numpy arrays.
+Manifolds are implemented using classes that wrap the simple functions.</p>
+</li>
+<li><p class="first">Manifolds objects &#8220;know&#8221; how to compute distances, interpolate, etc. This makes sense: for example, the interpolation between the identity and a rotation matrix depends on whether you are considering them as elements of <em>GL(n)</em> or <em>SO(n)</em>.</p>
+</li>
+<li><p class="first">Most functions declare contracts among parameters and return values using the <a class="reference external" href="http://andreacensi.github.com/contracts/">PyContracts</a> library. This is slightly paranoid. You can disable all those checks using  <tt class="docutils literal"><span class="pre">contracts.disable_all()</span></tt>.</p>
+</li>
+<li><p class="first">The naming conventions for conversion operations is:</p>
+<div class="highlight-python"><pre>x = &lt;X&gt;_from_&lt;Y&gt;(y)</pre>
+</div>
+<p>For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">R</span> <span class="o">=</span> <span class="n">rotation_from_axis_angle</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+<span class="n">axis</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">axis_angle_from_rotation</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">rotation_from_quaternion</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<span class="target" id="module-geometry"></span></div>
+<div class="section" id="s-n-hyperspheres">
+<h2>S(n) - Hyperspheres<a class="headerlink" href="#s-n-hyperspheres" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.geodesic_distance_on_sphere">
+<tt class="descclassname">geometry.</tt><tt class="descname">geodesic_distance_on_sphere</tt><big>(</big><em>s1</em>, <em>s2</em><big>)</big><a class="headerlink" href="#geometry.geodesic_distance_on_sphere" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the geodesic distance between two points on the sphere.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>s2</strong> (<tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt>) &#8211; </li>
+<li><strong>s1</strong> (<tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.distribution_radius">
+<tt class="descclassname">geometry.</tt><tt class="descname">distribution_radius</tt><big>(</big><em>S</em><big>)</big><a class="headerlink" href="#geometry.distribution_radius" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the radius of the given directions distribution.</p>
+<blockquote>
+<div><p>The radius is defined as the minimum <em>r</em> such that there exists a 
+point <em>s</em> in <em>S</em> such that all distances are within <em>r</em> from <em>s</em>.</p>
+<div class="math">
+<p><img src="images/math/ef2f4630587a8421e15d078bda456e50cc8231f3.png" alt="\textsf{radius} = \min \{ r | \exists s :  \forall x \in S : d(s,x) &lt;= r \}" /></p>
+</div></div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>S</strong> (<tt class="docutils literal"><span class="pre">directions</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.distances_from">
+<tt class="descclassname">geometry.</tt><tt class="descname">distances_from</tt><big>(</big><em>S</em>, <em>s</em><big>)</big><a class="headerlink" href="#geometry.distances_from" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>Returns the geodesic distances on the sphere from a set of
+points <em>S</em> to a given point <em>s</em>.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>s</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </li>
+<li><strong>S</strong> (<tt class="docutils literal"><span class="pre">array[3xK],directions</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[K](&gt;=0,&lt;=pi)</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.sorted_directions">
+<tt class="descclassname">geometry.</tt><tt class="descname">sorted_directions</tt><big>(</big><em>S</em>, <em>num_around=15</em><big>)</big><a class="headerlink" href="#geometry.sorted_directions" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Rearranges the directions in <em>S</em> in a better order for visualization.</p>
+<p>In 2D, sorts the directions using their angle.</p>
+<p>In 3D, it tries to do a pleasant elicoidal arrangement 
+with <strong>num_around</strong> spires.</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>S</strong> (<tt class="docutils literal"><span class="pre">array[KxN],(K=2|K=3),directions</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[KxN],directions</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="random-sampling">
+<h3>Random sampling<a class="headerlink" href="#random-sampling" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="geometry.random_direction">
+<tt class="descclassname">geometry.</tt><tt class="descname">random_direction</tt><big>(</big><em>ndim=3</em><big>)</big><a class="headerlink" href="#geometry.random_direction" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Generates a random direction in <img class="math" src="images/math/ef814444c3bc6df3a657d220975025980b13507e.png" alt="\sphere^{\ndim-1}"/>.</p>
+<p>Currently only implemented for 2D and 3D.</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ndim</strong> (<tt class="docutils literal"><span class="pre">(2|3),K</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.random_directions">
+<tt class="descclassname">geometry.</tt><tt class="descname">random_directions</tt><big>(</big><em>N</em>, <em>ndim=3</em><big>)</big><a class="headerlink" href="#geometry.random_directions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a set of random directions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ndim</strong> (<tt class="docutils literal"><span class="pre">2|3</span></tt>) &#8211; </li>
+<li><strong>N</strong> (<tt class="docutils literal"><span class="pre">int,&gt;0,N</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[3xN]</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.any_distant_direction">
+<tt class="descclassname">geometry.</tt><tt class="descname">any_distant_direction</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#geometry.any_distant_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a direction distant from both <em>s</em> and <em>-s</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">direction</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.any_orthogonal_direction">
+<tt class="descclassname">geometry.</tt><tt class="descname">any_orthogonal_direction</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#geometry.any_orthogonal_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns any axis orthogonal to <em>s</em> (not necessarily random).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">direction</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.random_orthogonal_direction">
+<tt class="descclassname">geometry.</tt><tt class="descname">random_orthogonal_direction</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#geometry.random_orthogonal_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a random axis orthogonal to <em>s</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.random_directions_bounded">
+<tt class="descclassname">geometry.</tt><tt class="descname">random_directions_bounded</tt><big>(</big><em>ndim</em>, <em>radius</em>, <em>num_points</em>, <em>center=None</em><big>)</big><a class="headerlink" href="#geometry.random_directions_bounded" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns a random distribution of points in <img class="math" src="images/math/ef814444c3bc6df3a657d220975025980b13507e.png" alt="\sphere^{\ndim-1}"/>.
+within a certain radius from the point <em>center</em>.</p>
+<p>The points will be distributed uniformly in that area of the sphere.
+If <em>center</em> is not passed, it will be a random direction.</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ndim</strong> (<tt class="docutils literal"><span class="pre">(2|3),K</span></tt>) &#8211; </li>
+<li><strong>num_points</strong> (<tt class="docutils literal"><span class="pre">int,&gt;0</span></tt>) &#8211; </li>
+<li><strong>radius</strong> (<tt class="docutils literal"><span class="pre">number,&gt;0,&lt;=pi</span></tt>) &#8211; </li>
+<li><strong>center</strong> (<tt class="docutils literal"><span class="pre">None|array[K],unit_length</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[KxN],directions</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="so-n-rotations-and-quaternions">
+<h2>SO(n) - Rotations and quaternions<a class="headerlink" href="#so-n-rotations-and-quaternions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.hat_map">
+<tt class="descclassname">geometry.</tt><tt class="descname">hat_map</tt><big>(</big><em>v</em><big>)</big><a class="headerlink" href="#geometry.hat_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maps a vector to a 3x3 skew symmetric matrix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> (<tt class="docutils literal"><span class="pre">array[3]</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[3x3],skew_symmetric</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.map_hat">
+<tt class="descclassname">geometry.</tt><tt class="descname">map_hat</tt><big>(</big><em>H</em><big>)</big><a class="headerlink" href="#geometry.map_hat" title="Permalink to this definition">¶</a></dt>
+<dd><p>The inverse of <a class="reference internal" href="#geometry.hat_map" title="geometry.hat_map"><tt class="xref py py-func docutils literal"><span class="pre">hat_map()</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>H</strong> (<tt class="docutils literal"><span class="pre">array[3x3],skew_symmetric</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[3]</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotation_from_quaternion">
+<tt class="descclassname">geometry.</tt><tt class="descname">rotation_from_quaternion</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.rotation_from_quaternion" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Converts a quaternion to a rotation matrix.</p>
+<p>Documented in &lt;<a class="reference external" href="http://en.wikipedia.org/w/index.php?title=Quaternions_and_spatial_rotation&amp;oldid=402924915">http://en.wikipedia.org/w/index.php?title=Quaternions_and_spatial_rotation&amp;oldid=402924915</a>&gt;</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<tt class="docutils literal"><span class="pre">unit_quaternion</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">rotation_matrix</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotation_from_axis_angle">
+<tt class="descclassname">geometry.</tt><tt class="descname">rotation_from_axis_angle</tt><big>(</big><em>axis</em>, <em>angle</em><big>)</big><a class="headerlink" href="#geometry.rotation_from_axis_angle" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>Computes the rotation matrix from the <em>(axis,angle)</em> representation
+using Rodriguez&#8217;s formula.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>angle</strong> (<tt class="docutils literal"><span class="pre">float</span></tt>) &#8211; </li>
+<li><strong>axis</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">rotation_matrix</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotation_from_axis_angle2">
+<tt class="descclassname">geometry.</tt><tt class="descname">rotation_from_axis_angle2</tt><big>(</big><em>axis</em>, <em>angle</em><big>)</big><a class="headerlink" href="#geometry.rotation_from_axis_angle2" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Get the rotation from the <em>(axis,angle)</em> representation.</p>
+<p>This is an alternative to <a class="reference internal" href="#geometry.rotation_from_axis_angle" title="geometry.rotation_from_axis_angle"><tt class="xref py py-func docutils literal"><span class="pre">rotation_from_axis_angle()</span></tt></a> which
+goes through the quaternion representation.</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>angle</strong> (<tt class="docutils literal"><span class="pre">float</span></tt>) &#8211; </li>
+<li><strong>axis</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">rotation_matrix</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.axis_angle_from_quaternion">
+<tt class="descclassname">geometry.</tt><tt class="descname">axis_angle_from_quaternion</tt><big>(</big><em>q</em><big>)</big><a class="headerlink" href="#geometry.axis_angle_from_quaternion" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>This is the inverse of <a class="reference internal" href="#geometry.quaternion_from_axis_angle" title="geometry.quaternion_from_axis_angle"><tt class="xref py py-func docutils literal"><span class="pre">quaternion_from_axis_angle()</span></tt></a>.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>q</strong> (<tt class="docutils literal"><span class="pre">unit_quaternion</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">axis_angle_canonical</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.axis_angle_from_rotation">
+<tt class="descclassname">geometry.</tt><tt class="descname">axis_angle_from_rotation</tt><big>(</big><em>R</em><big>)</big><a class="headerlink" href="#geometry.axis_angle_from_rotation" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the <em>(axis,angle)</em> representation of a given rotation.</p>
+<p>There are a couple of symmetries:</p>
+<ul class="simple">
+<li>By convention, the angle returned is nonnegative.</li>
+<li>If the angle is 0, any axis will do. 
+In that case, <a class="reference internal" href="#geometry.default_axis" title="geometry.default_axis"><tt class="xref py py-func docutils literal"><span class="pre">default_axis()</span></tt></a> will be returned.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>R</strong> (<tt class="docutils literal"><span class="pre">rotation_matrix</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">axis_angle_canonical</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.quaternion_from_rotation">
+<tt class="descclassname">geometry.</tt><tt class="descname">quaternion_from_rotation</tt><big>(</big><em>R</em><big>)</big><a class="headerlink" href="#geometry.quaternion_from_rotation" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Converts a rotation matrix to a quaternion.</p>
+<p>This is the robust method mentioned on wikipedia:</p>
+<p>&lt;<a class="reference external" href="http://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation">http://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation</a>&gt;</p>
+<p>TODO: add the more robust method with 4x4 matrix and eigenvector</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>R</strong> (<tt class="docutils literal"><span class="pre">rotation_matrix</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">unit_quaternion</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.quaternion_from_axis_angle">
+<tt class="descclassname">geometry.</tt><tt class="descname">quaternion_from_axis_angle</tt><big>(</big><em>axis</em>, <em>angle</em><big>)</big><a class="headerlink" href="#geometry.quaternion_from_axis_angle" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Computes a quaternion corresponding to the rotation of <em>angle</em> radians
+around the given <em>axis</em>.</p>
+<p>This is the inverse of <a class="reference internal" href="#geometry.axis_angle_from_quaternion" title="geometry.axis_angle_from_quaternion"><tt class="xref py py-func docutils literal"><span class="pre">axis_angle_from_quaternion()</span></tt></a>.</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>angle</strong> (<tt class="docutils literal"><span class="pre">float</span></tt>) &#8211; </li>
+<li><strong>axis</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">unit_quaternion</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.geodesic_distance_for_rotations">
+<tt class="descclassname">geometry.</tt><tt class="descname">geodesic_distance_for_rotations</tt><big>(</big><em>R1</em>, <em>R2</em><big>)</big><a class="headerlink" href="#geometry.geodesic_distance_for_rotations" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the geodesic distance between two rotation matrices.</p>
+<p>It is computed as the angle of the rotation <img class="math" src="images/math/b6e663d9324df39f441bc4425dd4897999e47a64.png" alt="R_1^{*} R_2^{-1}`"/>.</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>R1</strong> (<tt class="docutils literal"><span class="pre">rotation_matrix</span></tt>) &#8211; </li>
+<li><strong>R2</strong> (<tt class="docutils literal"><span class="pre">rotation_matrix</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="id1">
+<h3>Random sampling<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="geometry.random_quaternion">
+<tt class="descclassname">geometry.</tt><tt class="descname">random_quaternion</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.random_quaternion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a random quaternion.</p>
+<blockquote>
+<div>Uses the algorithm used in Kuffner, ICRA&#8216;04.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">unit_quaternion</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.random_rotation">
+<tt class="descclassname">geometry.</tt><tt class="descname">random_rotation</tt><big>(</big><em>ndim=3</em><big>)</big><a class="headerlink" href="#geometry.random_rotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a random rotation matrix.</p>
+<blockquote>
+<div>This is a wrapper around <a class="reference internal" href="#geometry.random_quaternion" title="geometry.random_quaternion"><tt class="xref py py-func docutils literal"><span class="pre">random_quaternion()</span></tt></a>.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ndim</strong> (<tt class="docutils literal"><span class="pre">2|3</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[2x2]|rotation_matrix</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.random_orthogonal_transform">
+<tt class="descclassname">geometry.</tt><tt class="descname">random_orthogonal_transform</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.random_orthogonal_transform" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[3x3],orthogonal</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="se-n-poses">
+<h2>SE(n) - Poses<a class="headerlink" href="#se-n-poses" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.pose_from_rotation_translation">
+<tt class="descclassname">geometry.</tt><tt class="descname">pose_from_rotation_translation</tt><big>(</big><em>R</em>, <em>t</em><big>)</big><a class="headerlink" href="#geometry.pose_from_rotation_translation" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>R</strong> (<tt class="docutils literal"><span class="pre">array[NxN],orthogonal</span></tt>) &#8211; </li>
+<li><strong>t</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[MxM],M=N+1</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotation_translation_from_pose">
+<tt class="descclassname">geometry.</tt><tt class="descname">rotation_translation_from_pose</tt><big>(</big><em>pose</em><big>)</big><a class="headerlink" href="#geometry.rotation_translation_from_pose" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">array[NxN]</span></tt>) &#8211; </td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">tuple(array[MxM],array[M]),M=N-1</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.extract_pieces">
+<tt class="descclassname">geometry.</tt><tt class="descname">extract_pieces</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.extract_pieces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.combine_pieces">
+<tt class="descclassname">geometry.</tt><tt class="descname">combine_pieces</tt><big>(</big><em>a</em>, <em>b</em>, <em>c</em>, <em>d</em><big>)</big><a class="headerlink" href="#geometry.combine_pieces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="misc-utils">
+<h2>Misc utils<a class="headerlink" href="#misc-utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.default_axis">
+<tt class="descclassname">geometry.</tt><tt class="descname">default_axis</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.default_axis" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the axis to use when any will do.</p>
+<p>For example, the identity is represented by
+a rotation of 0 degrees around <em>any</em> axis. If an <em>(axis,angle)</em>
+representation is requested, the axis will be given by
+<em>default_axis()</em>.</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">direction</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.default_axis_orthogonal">
+<tt class="descclassname">geometry.</tt><tt class="descname">default_axis_orthogonal</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.default_axis_orthogonal" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns an axis orthogonal to the one returned 
+by <a class="reference internal" href="#geometry.default_axis" title="geometry.default_axis"><tt class="xref py py-func docutils literal"><span class="pre">default_axis()</span></tt></a>.</p>
+<p>Use this when you need a couple of arbitrary orthogonal axes.</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">direction</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.safe_arccos">
+<tt class="descclassname">geometry.</tt><tt class="descname">safe_arccos</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.safe_arccos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the arcosine of x, clipped between -1 and 1.</p>
+<p>Use this when you know x is a cosine, but it might be
+slightly over 1 or below -1 due to numerical errors.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.normalize_pi">
+<tt class="descclassname">geometry.</tt><tt class="descname">normalize_pi</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.normalize_pi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalizes the entries in <em>x</em> in the interval <img class="math" src="images/math/4e8336ab351ab7c19452f1a1204aceabc4d94f2c.png" alt="[-pi,pi)"/>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.normalize_length">
+<tt class="descclassname">geometry.</tt><tt class="descname">normalize_length</tt><big>(</big><em>s</em>, <em>norm=2</em><big>)</big><a class="headerlink" href="#geometry.normalize_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize an array such that it has unit length in the given norm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">array</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.normalize_length_or_zero">
+<tt class="descclassname">geometry.</tt><tt class="descname">normalize_length_or_zero</tt><big>(</big><em>s</em>, <em>norm=2</em><big>)</big><a class="headerlink" href="#geometry.normalize_length_or_zero" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>Normalize an array such that it has unit length in the given norm; if the
+norm is close to zero, the zero vector is returned.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">array</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.assert_allclose">
+<tt class="descclassname">geometry.</tt><tt class="descname">assert_allclose</tt><big>(</big><em>actual</em>, <em>desired</em>, <em>rtol=9.9999999999999995e-08</em>, <em>atol=0</em>, <em>err_msg=''</em>, <em>verbose=True</em><big>)</big><a class="headerlink" href="#geometry.assert_allclose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Backporting assert_allclose from 1.5 to 1.4</p>
+</dd></dl>
+
+<p>These are some of the contracts defined using <a class="reference external" href="http://andreacensi.github.com/contracts/">PyContracts</a>.</p>
+<dl class="function">
+<dt id="geometry.assert_orthogonal">
+<tt class="descclassname">geometry.</tt><tt class="descname">assert_orthogonal</tt><big>(</big><em>s</em>, <em>v</em><big>)</big><a class="headerlink" href="#geometry.assert_orthogonal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that two vectors are orthogonal.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>s</strong> (<tt class="docutils literal"><span class="pre">array[K],K&gt;=2</span></tt>) &#8211; </li>
+<li><strong>v</strong> (<tt class="docutils literal"><span class="pre">array[K]</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.unit_length">
+<tt class="descclassname">geometry.</tt><tt class="descname">unit_length</tt><big>(</big><em>callable</em><big>)</big><a class="headerlink" href="#geometry.unit_length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.finite">
+<tt class="descclassname">geometry.</tt><tt class="descname">finite</tt><big>(</big><em>callable</em><big>)</big><a class="headerlink" href="#geometry.finite" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.orthogonal">
+<tt class="descclassname">geometry.</tt><tt class="descname">orthogonal</tt><big>(</big><em>callable</em><big>)</big><a class="headerlink" href="#geometry.orthogonal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotation_matrix">
+<tt class="descclassname">geometry.</tt><tt class="descname">rotation_matrix</tt><big>(</big><em>callable</em><big>)</big><a class="headerlink" href="#geometry.rotation_matrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.skew_symmetric">
+<tt class="descclassname">geometry.</tt><tt class="descname">skew_symmetric</tt><big>(</big><em>callable</em><big>)</big><a class="headerlink" href="#geometry.skew_symmetric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.directions">
+<tt class="descclassname">geometry.</tt><tt class="descname">directions</tt><big>(</big><em>callable</em><big>)</big><a class="headerlink" href="#geometry.directions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="manifolds-and-matrix-lie-groups-interface">
+<h2>Manifolds and Matrix Lie Groups interface<a class="headerlink" href="#manifolds-and-matrix-lie-groups-interface" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="geometry.DifferentiableManifold">
+<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">DifferentiableManifold</tt><a class="headerlink" href="#geometry.DifferentiableManifold" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.belongs">
+<tt class="descname">belongs</tt><big>(</big><em>x</em>, <em>msg=None</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.belongs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that a point belongs to this manifold.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.belongs_ts">
+<tt class="descname">belongs_ts</tt><big>(</big><em>base</em>, <em>vx</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.belongs_ts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that a vector belongs to this manifold.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.distance">
+<tt class="descname">distance</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the geodesic distance between two points.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.expmap">
+<tt class="descname">expmap</tt><big>(</big><em>base</em>, <em>v</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.expmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse of logmap.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.friendly">
+<tt class="descname">friendly</tt><big>(</big><em>a</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.friendly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a friendly description string for a point on the manifold.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.geodesic">
+<tt class="descname">geodesic</tt><big>(</big><em>a</em>, <em>b</em>, <em>t</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.geodesic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the point along the geodesic.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<tt class="docutils literal"><span class="pre">&gt;=0,&lt;=1</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.interesting_points">
+<tt class="descname">interesting_points</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.interesting_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of &#8220;interesting points&#8221; on this manifold that
+should be used for testing various properties.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.logmap">
+<tt class="descname">logmap</tt><big>(</big><em>base</em>, <em>p</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.logmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the direction from base to target.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.project_ts">
+<tt class="descname">project_ts</tt><big>(</big><em>base</em>, <em>v</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.project_ts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects a vector in the ambient space to a vector on the 
+tangent space.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geometry.Group">
+<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Group</tt><a class="headerlink" href="#geometry.Group" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.Group.inverse">
+<tt class="descname">inverse</tt><big>(</big><em>g</em><big>)</big><a class="headerlink" href="#geometry.Group.inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements the group inversion.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.Group.multiply">
+<tt class="descname">multiply</tt><big>(</big><em>g</em>, <em>h</em><big>)</big><a class="headerlink" href="#geometry.Group.multiply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements the group operation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.Group.unity">
+<tt class="descname">unity</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.Group.unity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the group unity.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geometry.MatrixLieAlgebra">
+<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">MatrixLieAlgebra</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieAlgebra" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.MatrixLieAlgebra.belongs">
+<tt class="descname">belongs</tt><big>(</big><em>v</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieAlgebra.belongs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that a vector belongs to this manifold.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.MatrixLieAlgebra.norm">
+<tt class="descname">norm</tt><big>(</big><em>v</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieAlgebra.norm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.MatrixLieAlgebra.project">
+<tt class="descname">project</tt><big>(</big><em>v</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieAlgebra.project" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geometry.MatrixLieGroup">
+<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">MatrixLieGroup</tt><big>(</big><em>n</em>, <em>algebra</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.MatrixLieGroup.inverse">
+<tt class="descname">inverse</tt><big>(</big><em>g</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieGroup.inverse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.MatrixLieGroup.multiply">
+<tt class="descname">multiply</tt><big>(</big><em>g</em>, <em>h</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieGroup.multiply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.MatrixLieGroup.unity">
+<tt class="descname">unity</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.MatrixLieGroup.unity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="included-generic-manifolds">
+<h2>Included generic manifolds<a class="headerlink" href="#included-generic-manifolds" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="geometry.Sphere">
+<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Sphere</tt><big>(</big><em>order</em><big>)</big><a class="headerlink" href="#geometry.Sphere" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.Sphere.friendly">
+<tt class="descname">friendly</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.Sphere.friendly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Sphere.interesting_points">
+<tt class="descname">interesting_points</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.Sphere.interesting_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Sphere.sample_uniform">
+<tt class="descname">sample_uniform</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.Sphere.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geometry.Euclidean">
+<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Euclidean</tt><big>(</big><em>dimension</em><big>)</big><a class="headerlink" href="#geometry.Euclidean" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.Euclidean.interesting_points">
+<tt class="descname">interesting_points</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.Euclidean.interesting_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Euclidean.sample_uniform">
+<tt class="descname">sample_uniform</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.Euclidean.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geometry.SO">
+<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">SO</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#geometry.SO" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.SO.friendly">
+<tt class="descname">friendly</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.SO.friendly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.SO.sample_uniform">
+<tt class="descname">sample_uniform</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.SO.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geometry.SE">
+<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">SE</tt><big>(</big><em>n</em>, <em>alpha=1</em><big>)</big><a class="headerlink" href="#geometry.SE" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.SE.friendly">
+<tt class="descname">friendly</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.SE.friendly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.SE.sample_uniform">
+<tt class="descname">sample_uniform</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.SE.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geometry.Torus">
+<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Torus</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#geometry.Torus" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.Torus.normalize">
+<tt class="descname">normalize</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.Torus.normalize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Torus.sample_uniform">
+<tt class="descname">sample_uniform</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.Torus.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geometry.Moebius">
+<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Moebius</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#geometry.Moebius" title="Permalink to this definition">¶</a></dt>
+<dd><p>Still not implemented.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.Moebius.normalize">
+<tt class="descname">normalize</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.Moebius.normalize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Moebius.sample_uniform">
+<tt class="descname">sample_uniform</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.Moebius.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="shortcuts">
+<h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="geometry.E1">
+<tt class="descclassname">geometry.</tt><tt class="descname">E1</tt><a class="headerlink" href="#geometry.E1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.E2">
+<tt class="descclassname">geometry.</tt><tt class="descname">E2</tt><a class="headerlink" href="#geometry.E2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.S1">
+<tt class="descclassname">geometry.</tt><tt class="descname">S1</tt><a class="headerlink" href="#geometry.S1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.S2">
+<tt class="descclassname">geometry.</tt><tt class="descname">S2</tt><a class="headerlink" href="#geometry.S2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.SO2">
+<tt class="descclassname">geometry.</tt><tt class="descname">SO2</tt><a class="headerlink" href="#geometry.SO2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.SO3">
+<tt class="descclassname">geometry.</tt><tt class="descname">SO3</tt><a class="headerlink" href="#geometry.SO3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.so2">
+<tt class="descclassname">geometry.</tt><tt class="descname">so2</tt><a class="headerlink" href="#geometry.so2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.so3">
+<tt class="descclassname">geometry.</tt><tt class="descname">so3</tt><a class="headerlink" href="#geometry.so3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.SE2">
+<tt class="descclassname">geometry.</tt><tt class="descname">SE2</tt><a class="headerlink" href="#geometry.SE2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.SE3">
+<tt class="descclassname">geometry.</tt><tt class="descname">SE3</tt><a class="headerlink" href="#geometry.SE3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.se2">
+<tt class="descclassname">geometry.</tt><tt class="descname">se2</tt><a class="headerlink" href="#geometry.se2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.se3">
+<tt class="descclassname">geometry.</tt><tt class="descname">se3</tt><a class="headerlink" href="#geometry.se3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.T1">
+<tt class="descclassname">geometry.</tt><tt class="descname">T1</tt><a class="headerlink" href="#geometry.T1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.T2">
+<tt class="descclassname">geometry.</tt><tt class="descname">T2</tt><a class="headerlink" href="#geometry.T2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="geometry.T3">
+<tt class="descclassname">geometry.</tt><tt class="descname">T3</tt><a class="headerlink" href="#geometry.T3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">PyGeometry API</a><ul>
+<li><a class="reference internal" href="#usage-notes">Usage notes</a></li>
+<li><a class="reference internal" href="#s-n-hyperspheres">S(n) - Hyperspheres</a><ul>
+<li><a class="reference internal" href="#random-sampling">Random sampling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#so-n-rotations-and-quaternions">SO(n) - Rotations and quaternions</a><ul>
+<li><a class="reference internal" href="#id1">Random sampling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#se-n-poses">SE(n) - Poses</a></li>
+<li><a class="reference internal" href="#misc-utils">Misc utils</a></li>
+<li><a class="reference internal" href="#manifolds-and-matrix-lie-groups-interface">Manifolds and Matrix Lie Groups interface</a></li>
+<li><a class="reference internal" href="#included-generic-manifolds">Included generic manifolds</a></li>
+<li><a class="reference internal" href="#shortcuts">Shortcuts</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/api.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">PyGeometry v0.9.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
