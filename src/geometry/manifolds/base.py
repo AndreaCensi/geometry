@@ -3,6 +3,8 @@ from abc import ABCMeta, abstractmethod
 from geometry import assert_allclose
 
 class DoesNotBelong(Exception):
+    ''' Exception thrown when a point does not belong
+        to a certain manifold *M*. '''
     def __init__(self, M, point, e, context=None):
         self.M = M
         self.point = point
@@ -17,66 +19,100 @@ class DoesNotBelong(Exception):
         s += self.e
         return s 
         
-class DifferentiableManifold: 
+class DifferentiableManifold(object):
+    ''' This is the base class for differentiable manifolds. ''' 
     __metaclass__ = ABCMeta
    
     def belongs(self, x, msg=None):
-        ''' Checks that a point belongs to this manifold. '''
+        ''' 
+            Checks that a point belongs to this manifold.  
+        
+            This function wraps some checks around :py:func:`belongs_`, 
+            which is implemented by the subclasses. 
+        '''
         try:
-            self._belongs(x)
+            self.belongs_(x)
         except Exception as e:
             raise DoesNotBelong(self, x, e, msg)
 
     def belongs_ts(self, base, vx):
-        ''' Checks that a vector belongs to this manifold. '''
+        ''' 
+            Checks that a vector *vx* belongs to the tangent space
+            at the given point *base*.
+
+        '''
         proj = self.project_ts(base, vx)
         assert_allclose(proj, vx, atol=1e-8)
     
     def project_ts(self, base, v): # TODO: test
-        ''' Projects a vector in the ambient space to a vector on the 
-            tangent space. '''
+        '''
+            Projects a vector *v_ambient* in the ambient space
+            to the tangent space at point *base*.
+
+            This function wraps some checks around :py:func:`project_ts_`, 
+            which is implemented by the subclasses. 
+        ''' 
         self.belongs(base)
         # check dimensions?
-        v2 = self._project_ts(base, v)
+        v2 = self.project_ts_(base, v)
         return v2
     
     
     def distance(self, a, b):
-        ''' Returns the geodesic distance between two points. '''
+        ''' 
+            Computes the geodesic distance between two points. 
+
+            This function wraps some checks around :py:func:`distance_`, 
+            which is implemented by the subclasses. 
+        '''
         self.belongs(a)
         self.belongs(b)
-        d = self._distance(a, b)
+        d = self.distance_(a, b)
         assert d >= 0
         return d
              
     def logmap(self, base, p):
-        ''' Returns the direction from base to target. '''
+        ''' 
+            Computes the logarithmic map from base point *base* to target *b*. 
+            
+            This function wraps some checks around :py:func:`logmap_`, 
+            which is implemented by the subclasses. 
+
+        '''
         self.belongs(base)
         self.belongs(p)
-        v = self._logmap(base, p)
+        v = self.logmap_(base, p)
         self.belongs_ts(base, v)
         return v
 
     def expmap(self, base, v):
-        ''' Inverse of logmap. '''
+        ''' 
+            Computes the exponential map from *base* for the velocity vector *v*. 
+
+            This function wraps some checks around :py:func:`expmap_`, 
+            which is implemented by the subclasses. 
+            
+        '''
         self.belongs(base, 'Base point passed to expmap().')
         self.belongs_ts(base, v)
-        p = self._expmap(base, v)
+        p = self.expmap_(base, v)
         self.belongs(p, 'Result of %s:_expmap(%s,%s)' % 
                         (self, self.friendly(base), v))
         return p
         
     
-    
     def interesting_points(self):
-        ''' Returns a list of "interesting points" on this manifold that
+        ''' 
+            Returns a list of "interesting points" on this manifold that
             should be used for testing various properties. 
         '''
         return []
     
     @contract(t='>=0,<=1')
     def geodesic(self, a, b, t):
-        ''' Returns the point along the geodesic. '''
+        ''' Returns the point interpolated along the geodesic. '''
+        self.belongs(a)
+        self.belongs(b)
         vel = self.logmap(a, b)
         vel2 = vel * t
         p = self.expmap(a, vel2)
@@ -87,18 +123,33 @@ class DifferentiableManifold:
         return "%s" % a 
     
     @abstractmethod
-    def _belongs(self, a): pass
+    def belongs_(self, a): 
+        ''' Checks that a point belongs to this manifold. '''  
+    
     @abstractmethod
-    def _distance(self, a, b): pass
+    def distance_(self, a, b): 
+        ''' Computes the geodesic distance between two points. '''
+        
     @abstractmethod
-    def _logmap(self, a, b): pass
+    def logmap_(self, a, b): 
+        ''' Computes the logarithmic map from base point *a* to target *b*. '''
+        
     @abstractmethod
-    def _expmap(self, a, b): pass
+    def expmap_(self, a, v):
+        ''' Computes the exponential map from *a* for the velocity vector *v*. '''
+        
     @abstractmethod
-    def _project_ts(self, base, vx): pass
+    def project_ts_(self, base, v_ambient):
+        ''' 
+            Projects a vector *v_ambient* in the ambient space
+            to the tangent space at point *base*. 
+        '''
     
     
-class RandomManiold(DifferentiableManifold):
+class RandomManifold(DifferentiableManifold):
+    ''' This is the base class for manifolds that have the ability 
+        to sample points and vectors. '''
+        
     @abstractmethod
     def sample_uniform(self):
         ''' Samples a random point in this manifold according to the Haar
@@ -110,7 +161,7 @@ class RandomManiold(DifferentiableManifold):
         
 
 
-class Group():
+class Group(object):
     __metaclass__ = ABCMeta
     
     @abstractmethod
@@ -128,9 +179,6 @@ class Group():
         ''' Returns the group unity. '''
         pass
         
-class LieGroup(Group, DifferentiableManifold):
-    # Add operations
-    pass
         
     
     

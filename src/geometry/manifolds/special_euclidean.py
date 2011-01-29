@@ -1,13 +1,20 @@
-from geometry import  (assert_allclose, rot2d, random_rotation,
-                           axis_angle_from_rotation, pose_from_rotation_translation,
-                           rotation_translation_from_pose)
-from contracts import contracts, check, contract
+from contracts import contract
 
 from . import MatrixLieGroup, np, MatrixLieAlgebra, SO, so, Euclidean
-from geometry.pose import extract_pieces, combine_pieces
+
+from geometry import  (assert_allclose,
+                       pose_from_rotation_translation,
+                           rotation_translation_from_pose,
+                           extract_pieces, combine_pieces)
 
 
 class se(MatrixLieAlgebra):
+    ''' This is the Lie algebra se(n) for the Special Euclidean group SE(n). 
+    
+        Note that you have to supply a coefficient *alpha* that
+        weights rotation and translation when defining distances. 
+    '''
+    
     def __init__(self, n, alpha):
         MatrixLieAlgebra.__init__(self, n)
         self.alpha = alpha
@@ -27,6 +34,14 @@ class se(MatrixLieAlgebra):
         
 
 class SE(MatrixLieGroup):
+    ''' 
+        This is the Special Euclidean group SE(n) 
+        describing roto-translations of Euclidean space.
+        Implemented only for n=2,3.
+        
+        Note that you have to supply a coefficient *alpha* that
+        weights rotation and translation when defining distances. 
+    '''
     
     @contract(n='int,(2|3)', alpha='>0')
     def __init__(self, n, alpha=1):
@@ -38,7 +53,7 @@ class SE(MatrixLieGroup):
     def __repr__(self):
         return 'SE(%s)' % (self.n - 1)
     
-    def _belongs(self, x):
+    def belongs_(self, x):
         R, t, zero, one = extract_pieces(x) #@UnusedVariable
         self.SOn.belongs(R)
         assert_allclose(zero, 0, err_msg='I expect the lower row to be 0.') 

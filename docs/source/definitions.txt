@@ -1,3 +1,4 @@
+
 .. |pygeometry| raw:: html
       
       <span class="brand">PyGeometry</span>

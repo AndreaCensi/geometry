@@ -7,13 +7,24 @@ from . import MatrixLieGroup, np, MatrixLieAlgebra, S2
 
 
 class so(MatrixLieAlgebra):
+    ''' 
+        This is the Lie algebra of skew-symmetric matrices so(n),
+        for the Special Orthogonal group SO(n).
+    '''    
+    
     def project(self, v):
+        ''' Projects *v* to the closest skew-symmetric matrix. '''
         return 0.5 * (v - v.T)
     
     def __repr__(self):
         return 'so(%s)' % (self.n)
 
 class SO(MatrixLieGroup):
+    ''' 
+        This is the Special Orthogonal group SO(n) describing rotations
+        of Euclidean space; implemented for n=2,3.
+        
+    '''
     
     @contract(n='int,(2|3)')
     def __init__(self, n):
@@ -23,7 +34,7 @@ class SO(MatrixLieGroup):
     def __repr__(self):
         return 'SO(%s)' % (self.n)
     
-    def _belongs(self, x):
+    def belongs_(self, x):
         check('orthogonal', x)
         det = np.linalg.det(x)
         assert_allclose(det, 1, err_msg='I expect the determinant to be +1.') 

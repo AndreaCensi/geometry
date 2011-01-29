@@ -3,28 +3,29 @@ from . import DifferentiableManifold, np
 from geometry import normalize_pi
 
 class Moebius(DifferentiableManifold):
-    ''' Still not implemented. '''
+    ''' The Moebius strip -- still to be implemented. '''
+    
     def __init__(self, n):
         self.n = n
 
-    def _belongs(self, a):
-        pass
+    def belongs_(self, a):
+        assert False
 
-    def _distance(self, a, b):
-        pass
+    def distance_(self, a, b):
+        assert False
 
-    def _logmap(self, a, b): 
-        pass
+    def logmap_(self, a, b): 
+        assert False
 
-    def _expmap(self, a, vel): 
-        pass
+    def expmap_(self, a, vel): 
+        assert False
 
-    def _project_ts(self, base, vx): 
-        pass
+    def project_ts_(self, base, vx): 
+        assert False
     
     def sample_uniform(self):
-        pass
+        assert False
     
     def normalize(self, x):
-        pass
+        assert False
 

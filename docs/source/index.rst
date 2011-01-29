@@ -3,7 +3,7 @@
 
 .. include:: definitions.txt
 
-.. py:currentmodule:: geometry
+
 
 PyGeometry
 ===========

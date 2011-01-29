@@ -7,22 +7,22 @@ class Torus(DifferentiableManifold):
     def __init__(self, n):
         self.n = n
 
-    def _belongs(self, a):
+    def belongs_(self, a):
         check('array[N](>=-pi,<pi)', a, N=self.n)
 
-    def _distance(self, a, b):
+    def distance_(self, a, b):
         b = self.normalize(b - a)
         return np.linalg.norm(b)
 
-    def _logmap(self, a, b): 
+    def logmap_(self, a, b): 
         vel = self.normalize(b - a)
         return vel
 
-    def _expmap(self, a, vel): 
+    def expmap_(self, a, vel): 
         b = self.normalize(a + vel)
         return b
 
-    def _project_ts(self, base, vx): 
+    def project_ts_(self, base, vx): 
         return vx
     
     def sample_uniform(self):
