@@ -40,17 +40,16 @@ Usage notes
 ..    geometry.distribution_radius
 
 
-.. .. py:currentmodule:: geometry
-
 .. py:module:: geometry
+ 
    
    
 S(n) - Hyperspheres
-------------
+----------------------
 
 .. autofunction:: geodesic_distance_on_sphere
 .. autofunction:: distribution_radius
-.. autofunction:: distances_from
+.. .. autofunction:: distances_from
 .. autofunction:: sorted_directions
 
 Random sampling
@@ -131,12 +130,15 @@ Manifolds and Matrix Lie Groups interface
 .. autoclass:: DifferentiableManifold
     :members:
     :undoc-members:
+
 .. autoclass:: Group
     :members:
     :undoc-members:
+
 .. autoclass:: MatrixLieAlgebra
     :members:
     :undoc-members:
+
 .. autoclass:: MatrixLieGroup
     :members:
     :undoc-members:
@@ -147,39 +149,84 @@ Included generic manifolds
 .. autoclass:: Sphere
     :members:
     :undoc-members:
+
 .. autoclass:: Euclidean
     :members:
     :undoc-members:
+
 .. autoclass:: SO
     :members:
     :undoc-members:
+
 .. autoclass:: SE
     :members:
     :undoc-members:
+
 .. autoclass:: Torus
     :members:
     :undoc-members:
+
 .. autoclass:: Moebius
     :members:
     :undoc-members:
 
 
+
 Shortcuts
 ----------------------------
 
-.. autodata:: E1
-.. autodata:: E2
-.. autodata:: S1
-.. autodata:: S2
-.. autodata:: SO2 
-.. autodata:: SO3 
-.. autodata:: so2 
-.. autodata:: so3 
-.. autodata:: SE2 
-.. autodata:: SE3 
-.. autodata:: se2 
-.. autodata:: se3 
-.. autodata:: T1
-.. autodata:: T2
-.. autodata:: T3
+.. py:data:: S1
 
+   Unit circle as a subset of :math:`R^2`.
+    
+.. py:data:: S2
+
+    Unit sphere.
+
+.. py:data:: SO2 
+    
+    Planar rotations.
+    
+.. py:data:: SO3 
+    
+    Rotations in 3D.
+    
+.. py:data:: so2 
+    
+    Lie algebra for planar rotations.
+
+.. py:data:: so3 
+    
+    Lie algebra for 3D rotations.
+    
+.. py:data:: SE2 
+    
+    Poses in 2D.
+    
+.. py:data:: SE3 
+    
+    Poses in 3D.
+
+.. py:data:: se2 
+    
+    Lie algebra for SE(2).
+    
+.. py:data:: se3 
+    
+    Lie algebra for SE(3).
+    
+.. py:data:: T1
+    
+    One dimensional torus, mapped onto :math:`[-\pi,\pi)`.
+    
+    Note that this is equivalent to the unit circle, but the representation
+    is different: :py:data:`T1` uses "angles" while :py:data:`S2` uses unit vectors in
+    :math:`R^2`.
+    
+.. py:data:: T2
+    
+    2D torus.
+    
+.. py:data:: T3
+    
+    3D torus.

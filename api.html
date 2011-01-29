@@ -3,13 +3,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>PyGeometry API &mdash; PyGeometry v0.9.1 documentation</title>
+    <title>PyGeometry API &mdash; PyGeometry 0.9.1 documentation</title>
+    
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -22,7 +25,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="PyGeometry v0.9.1 documentation" href="index.html" /> 
+    <link rel="top" title="PyGeometry 0.9.1 documentation" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,7 +40,7 @@
         <li class="right" >
           <a href="np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">PyGeometry v0.9.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">PyGeometry 0.9.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -84,13 +87,13 @@ Manifolds are implemented using classes that wrap the simple functions.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>s2</strong> (<tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt>) &#8211; </li>
 <li><strong>s1</strong> (<tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt>) &#8211; </li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></p>
 </td>
 </tr>
 </tbody>
@@ -105,38 +108,15 @@ Manifolds are implemented using classes that wrap the simple functions.</p>
 <div><p>The radius is defined as the minimum <em>r</em> such that there exists a 
 point <em>s</em> in <em>S</em> such that all distances are within <em>r</em> from <em>s</em>.</p>
 <div class="math">
-<p><img src="images/math/ef2f4630587a8421e15d078bda456e50cc8231f3.png" alt="\textsf{radius} = \min \{ r | \exists s :  \forall x \in S : d(s,x) &lt;= r \}" /></p>
+<p><img src="images/math/ef2f4630587a8421e15d078bda456e50cc8231f3.png" alt="\textsf{radius} = \min \{ r | \exists s :  \forall x \in S : d(s,x) &lt;= r \}"/></p>
 </div></div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>S</strong> (<tt class="docutils literal"><span class="pre">directions</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>S</strong> (<tt class="docutils literal"><span class="pre">directions</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="geometry.distances_from">
-<tt class="descclassname">geometry.</tt><tt class="descname">distances_from</tt><big>(</big><em>S</em>, <em>s</em><big>)</big><a class="headerlink" href="#geometry.distances_from" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div>Returns the geodesic distances on the sphere from a set of
-points <em>S</em> to a given point <em>s</em>.</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>s</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </li>
-<li><strong>S</strong> (<tt class="docutils literal"><span class="pre">array[3xK],directions</span></tt>) &#8211; </li>
-</ul>
-</td>
-</tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[K](&gt;=0,&lt;=pi)</span></tt></p>
-</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -145,9 +125,9 @@ points <em>S</em> to a given point <em>s</em>.</div></blockquote>
 <dl class="function">
 <dt id="geometry.sorted_directions">
 <tt class="descclassname">geometry.</tt><tt class="descname">sorted_directions</tt><big>(</big><em>S</em>, <em>num_around=15</em><big>)</big><a class="headerlink" href="#geometry.sorted_directions" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Rearranges the directions in <em>S</em> in a better order for visualization.</p>
-<p>In 2D, sorts the directions using their angle.</p>
+<dd><p>Rearranges the directions in <em>S</em> in a better order for visualization.</p>
+<blockquote>
+<div><p>In 2D, sorts the directions using their angle.</p>
 <p>In 3D, it tries to do a pleasant elicoidal arrangement 
 with <strong>num_around</strong> spires.</p>
 </div></blockquote>
@@ -155,9 +135,9 @@ with <strong>num_around</strong> spires.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>S</strong> (<tt class="docutils literal"><span class="pre">array[KxN],(K=2|K=3),directions</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>S</strong> (<tt class="docutils literal"><span class="pre">array[KxN],(K=2|K=3),directions</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[KxN],directions</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[KxN],directions</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -168,17 +148,16 @@ with <strong>num_around</strong> spires.</p>
 <dl class="function">
 <dt id="geometry.random_direction">
 <tt class="descclassname">geometry.</tt><tt class="descname">random_direction</tt><big>(</big><em>ndim=3</em><big>)</big><a class="headerlink" href="#geometry.random_direction" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Generates a random direction in <img class="math" src="images/math/ef814444c3bc6df3a657d220975025980b13507e.png" alt="\sphere^{\ndim-1}"/>.</p>
-<p>Currently only implemented for 2D and 3D.</p>
-</div></blockquote>
+<dd><p>Generates a random direction in <img class="math" src="images/math/ef814444c3bc6df3a657d220975025980b13507e.png" alt="\sphere^{\ndim-1}"/>.</p>
+<blockquote>
+<div>Currently only implemented for 2D and 3D.</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ndim</strong> (<tt class="docutils literal"><span class="pre">(2|3),K</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ndim</strong> (<tt class="docutils literal"><span class="pre">(2|3),K</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -192,13 +171,13 @@ with <strong>num_around</strong> spires.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>ndim</strong> (<tt class="docutils literal"><span class="pre">2|3</span></tt>) &#8211; </li>
 <li><strong>N</strong> (<tt class="docutils literal"><span class="pre">int,&gt;0,N</span></tt>) &#8211; </li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[3xN]</span></tt></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[3xN]</span></tt></p>
 </td>
 </tr>
 </tbody>
@@ -213,9 +192,9 @@ with <strong>num_around</strong> spires.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">direction</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">direction</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -229,9 +208,9 @@ with <strong>num_around</strong> spires.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">direction</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">direction</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -245,9 +224,9 @@ with <strong>num_around</strong> spires.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -256,17 +235,18 @@ with <strong>num_around</strong> spires.</p>
 <dl class="function">
 <dt id="geometry.random_directions_bounded">
 <tt class="descclassname">geometry.</tt><tt class="descname">random_directions_bounded</tt><big>(</big><em>ndim</em>, <em>radius</em>, <em>num_points</em>, <em>center=None</em><big>)</big><a class="headerlink" href="#geometry.random_directions_bounded" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Returns a random distribution of points in <img class="math" src="images/math/ef814444c3bc6df3a657d220975025980b13507e.png" alt="\sphere^{\ndim-1}"/>.
-within a certain radius from the point <em>center</em>.</p>
-<p>The points will be distributed uniformly in that area of the sphere.
+<dd><dl class="docutils">
+<dt>Returns a random distribution of points in <img class="math" src="images/math/ef814444c3bc6df3a657d220975025980b13507e.png" alt="\sphere^{\ndim-1}"/>.</dt>
+<dd><p class="first">within a certain radius from the point <em>center</em>.</p>
+<p class="last">The points will be distributed uniformly in that area of the sphere.
 If <em>center</em> is not passed, it will be a random direction.</p>
-</div></blockquote>
+</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>ndim</strong> (<tt class="docutils literal"><span class="pre">(2|3),K</span></tt>) &#8211; </li>
 <li><strong>num_points</strong> (<tt class="docutils literal"><span class="pre">int,&gt;0</span></tt>) &#8211; </li>
 <li><strong>radius</strong> (<tt class="docutils literal"><span class="pre">number,&gt;0,&lt;=pi</span></tt>) &#8211; </li>
@@ -274,7 +254,7 @@ If <em>center</em> is not passed, it will be a random direction.</p>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[KxN],directions</span></tt></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[KxN],directions</span></tt></p>
 </td>
 </tr>
 </tbody>
@@ -293,9 +273,9 @@ If <em>center</em> is not passed, it will be a random direction.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> (<tt class="docutils literal"><span class="pre">array[3]</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>v</strong> (<tt class="docutils literal"><span class="pre">array[3]</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[3x3],skew_symmetric</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[3x3],skew_symmetric</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -309,9 +289,9 @@ If <em>center</em> is not passed, it will be a random direction.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>H</strong> (<tt class="docutils literal"><span class="pre">array[3x3],skew_symmetric</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>H</strong> (<tt class="docutils literal"><span class="pre">array[3x3],skew_symmetric</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[3]</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[3]</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -320,17 +300,16 @@ If <em>center</em> is not passed, it will be a random direction.</p>
 <dl class="function">
 <dt id="geometry.rotation_from_quaternion">
 <tt class="descclassname">geometry.</tt><tt class="descname">rotation_from_quaternion</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.rotation_from_quaternion" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Converts a quaternion to a rotation matrix.</p>
-<p>Documented in &lt;<a class="reference external" href="http://en.wikipedia.org/w/index.php?title=Quaternions_and_spatial_rotation&amp;oldid=402924915">http://en.wikipedia.org/w/index.php?title=Quaternions_and_spatial_rotation&amp;oldid=402924915</a>&gt;</p>
-</div></blockquote>
+<dd><p>Converts a quaternion to a rotation matrix.</p>
+<blockquote>
+<div>Documented in &lt;<a class="reference external" href="http://en.wikipedia.org/w/index.php?title=Quaternions_and_spatial_rotation&amp;oldid=402924915">http://en.wikipedia.org/w/index.php?title=Quaternions_and_spatial_rotation&amp;oldid=402924915</a>&gt;</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<tt class="docutils literal"><span class="pre">unit_quaternion</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<tt class="docutils literal"><span class="pre">unit_quaternion</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">rotation_matrix</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">rotation_matrix</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -339,20 +318,21 @@ If <em>center</em> is not passed, it will be a random direction.</p>
 <dl class="function">
 <dt id="geometry.rotation_from_axis_angle">
 <tt class="descclassname">geometry.</tt><tt class="descname">rotation_from_axis_angle</tt><big>(</big><em>axis</em>, <em>angle</em><big>)</big><a class="headerlink" href="#geometry.rotation_from_axis_angle" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div>Computes the rotation matrix from the <em>(axis,angle)</em> representation
-using Rodriguez&#8217;s formula.</div></blockquote>
+<dd><dl class="docutils">
+<dt>Computes the rotation matrix from the <em>(axis,angle)</em> representation</dt>
+<dd>using Rodriguez&#8217;s formula.</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>angle</strong> (<tt class="docutils literal"><span class="pre">float</span></tt>) &#8211; </li>
 <li><strong>axis</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">rotation_matrix</span></tt></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">rotation_matrix</span></tt></p>
 </td>
 </tr>
 </tbody>
@@ -362,22 +342,21 @@ using Rodriguez&#8217;s formula.</div></blockquote>
 <dl class="function">
 <dt id="geometry.rotation_from_axis_angle2">
 <tt class="descclassname">geometry.</tt><tt class="descname">rotation_from_axis_angle2</tt><big>(</big><em>axis</em>, <em>angle</em><big>)</big><a class="headerlink" href="#geometry.rotation_from_axis_angle2" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Get the rotation from the <em>(axis,angle)</em> representation.</p>
-<p>This is an alternative to <a class="reference internal" href="#geometry.rotation_from_axis_angle" title="geometry.rotation_from_axis_angle"><tt class="xref py py-func docutils literal"><span class="pre">rotation_from_axis_angle()</span></tt></a> which
-goes through the quaternion representation.</p>
-</div></blockquote>
+<dd><p>Get the rotation from the <em>(axis,angle)</em> representation.</p>
+<blockquote>
+<div>This is an alternative to <a class="reference internal" href="#geometry.rotation_from_axis_angle" title="geometry.rotation_from_axis_angle"><tt class="xref py py-func docutils literal"><span class="pre">rotation_from_axis_angle()</span></tt></a> which
+goes through the quaternion representation.</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>angle</strong> (<tt class="docutils literal"><span class="pre">float</span></tt>) &#8211; </li>
 <li><strong>axis</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">rotation_matrix</span></tt></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">rotation_matrix</span></tt></p>
 </td>
 </tr>
 </tbody>
@@ -387,15 +366,14 @@ goes through the quaternion representation.</p>
 <dl class="function">
 <dt id="geometry.axis_angle_from_quaternion">
 <tt class="descclassname">geometry.</tt><tt class="descname">axis_angle_from_quaternion</tt><big>(</big><em>q</em><big>)</big><a class="headerlink" href="#geometry.axis_angle_from_quaternion" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div>This is the inverse of <a class="reference internal" href="#geometry.quaternion_from_axis_angle" title="geometry.quaternion_from_axis_angle"><tt class="xref py py-func docutils literal"><span class="pre">quaternion_from_axis_angle()</span></tt></a>.</div></blockquote>
+<dd><p>This is the inverse of <a class="reference internal" href="#geometry.quaternion_from_axis_angle" title="geometry.quaternion_from_axis_angle"><tt class="xref py py-func docutils literal"><span class="pre">quaternion_from_axis_angle()</span></tt></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>q</strong> (<tt class="docutils literal"><span class="pre">unit_quaternion</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>q</strong> (<tt class="docutils literal"><span class="pre">unit_quaternion</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">axis_angle_canonical</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">axis_angle_canonical</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -404,9 +382,9 @@ goes through the quaternion representation.</p>
 <dl class="function">
 <dt id="geometry.axis_angle_from_rotation">
 <tt class="descclassname">geometry.</tt><tt class="descname">axis_angle_from_rotation</tt><big>(</big><em>R</em><big>)</big><a class="headerlink" href="#geometry.axis_angle_from_rotation" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Returns the <em>(axis,angle)</em> representation of a given rotation.</p>
-<p>There are a couple of symmetries:</p>
+<dd><p>Returns the <em>(axis,angle)</em> representation of a given rotation.</p>
+<blockquote>
+<div><p>There are a couple of symmetries:</p>
 <ul class="simple">
 <li>By convention, the angle returned is nonnegative.</li>
 <li>If the angle is 0, any axis will do. 
@@ -417,9 +395,9 @@ In that case, <a class="reference internal" href="#geometry.default_axis" title=
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>R</strong> (<tt class="docutils literal"><span class="pre">rotation_matrix</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>R</strong> (<tt class="docutils literal"><span class="pre">rotation_matrix</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">axis_angle_canonical</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">axis_angle_canonical</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -428,9 +406,9 @@ In that case, <a class="reference internal" href="#geometry.default_axis" title=
 <dl class="function">
 <dt id="geometry.quaternion_from_rotation">
 <tt class="descclassname">geometry.</tt><tt class="descname">quaternion_from_rotation</tt><big>(</big><em>R</em><big>)</big><a class="headerlink" href="#geometry.quaternion_from_rotation" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Converts a rotation matrix to a quaternion.</p>
-<p>This is the robust method mentioned on wikipedia:</p>
+<dd><p>Converts a rotation matrix to a quaternion.</p>
+<blockquote>
+<div><p>This is the robust method mentioned on wikipedia:</p>
 <p>&lt;<a class="reference external" href="http://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation">http://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation</a>&gt;</p>
 <p>TODO: add the more robust method with 4x4 matrix and eigenvector</p>
 </div></blockquote>
@@ -438,9 +416,9 @@ In that case, <a class="reference internal" href="#geometry.default_axis" title=
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>R</strong> (<tt class="docutils literal"><span class="pre">rotation_matrix</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>R</strong> (<tt class="docutils literal"><span class="pre">rotation_matrix</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">unit_quaternion</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">unit_quaternion</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -449,22 +427,23 @@ In that case, <a class="reference internal" href="#geometry.default_axis" title=
 <dl class="function">
 <dt id="geometry.quaternion_from_axis_angle">
 <tt class="descclassname">geometry.</tt><tt class="descname">quaternion_from_axis_angle</tt><big>(</big><em>axis</em>, <em>angle</em><big>)</big><a class="headerlink" href="#geometry.quaternion_from_axis_angle" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Computes a quaternion corresponding to the rotation of <em>angle</em> radians
-around the given <em>axis</em>.</p>
-<p>This is the inverse of <a class="reference internal" href="#geometry.axis_angle_from_quaternion" title="geometry.axis_angle_from_quaternion"><tt class="xref py py-func docutils literal"><span class="pre">axis_angle_from_quaternion()</span></tt></a>.</p>
-</div></blockquote>
+<dd><dl class="docutils">
+<dt>Computes a quaternion corresponding to the rotation of <em>angle</em> radians</dt>
+<dd><p class="first">around the given <em>axis</em>.</p>
+<p class="last">This is the inverse of <a class="reference internal" href="#geometry.axis_angle_from_quaternion" title="geometry.axis_angle_from_quaternion"><tt class="xref py py-func docutils literal"><span class="pre">axis_angle_from_quaternion()</span></tt></a>.</p>
+</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>angle</strong> (<tt class="docutils literal"><span class="pre">float</span></tt>) &#8211; </li>
 <li><strong>axis</strong> (<tt class="docutils literal"><span class="pre">direction</span></tt>) &#8211; </li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">unit_quaternion</span></tt></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">unit_quaternion</span></tt></p>
 </td>
 </tr>
 </tbody>
@@ -474,21 +453,20 @@ around the given <em>axis</em>.</p>
 <dl class="function">
 <dt id="geometry.geodesic_distance_for_rotations">
 <tt class="descclassname">geometry.</tt><tt class="descname">geodesic_distance_for_rotations</tt><big>(</big><em>R1</em>, <em>R2</em><big>)</big><a class="headerlink" href="#geometry.geodesic_distance_for_rotations" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Returns the geodesic distance between two rotation matrices.</p>
-<p>It is computed as the angle of the rotation <img class="math" src="images/math/b6e663d9324df39f441bc4425dd4897999e47a64.png" alt="R_1^{*} R_2^{-1}`"/>.</p>
-</div></blockquote>
+<dd><p>Returns the geodesic distance between two rotation matrices.</p>
+<blockquote>
+<div>It is computed as the angle of the rotation <img class="math" src="images/math/b6e663d9324df39f441bc4425dd4897999e47a64.png" alt="R_1^{*} R_2^{-1}`"/>.</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>R1</strong> (<tt class="docutils literal"><span class="pre">rotation_matrix</span></tt>) &#8211; </li>
 <li><strong>R2</strong> (<tt class="docutils literal"><span class="pre">rotation_matrix</span></tt>) &#8211; </li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></p>
 </td>
 </tr>
 </tbody>
@@ -507,7 +485,7 @@ around the given <em>axis</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">unit_quaternion</span></tt></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">unit_quaternion</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -523,9 +501,9 @@ around the given <em>axis</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ndim</strong> (<tt class="docutils literal"><span class="pre">2|3</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ndim</strong> (<tt class="docutils literal"><span class="pre">2|3</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[2x2]|rotation_matrix</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[2x2]|rotation_matrix</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -538,7 +516,7 @@ around the given <em>axis</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[3x3],orthogonal</span></tt></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[3x3],orthogonal</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -555,13 +533,13 @@ around the given <em>axis</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>R</strong> (<tt class="docutils literal"><span class="pre">array[NxN],orthogonal</span></tt>) &#8211; </li>
 <li><strong>t</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[MxM],M=N+1</span></tt></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[MxM],M=N+1</span></tt></p>
 </td>
 </tr>
 </tbody>
@@ -575,9 +553,9 @@ around the given <em>axis</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">array[NxN]</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">array[NxN]</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">tuple(array[MxM],array[M]),M=N-1</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">tuple(array[MxM],array[M]),M=N-1</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -599,21 +577,19 @@ around the given <em>axis</em>.</p>
 <dl class="function">
 <dt id="geometry.best_orthogonal_transform">
 <tt class="descclassname">geometry.</tt><tt class="descname">best_orthogonal_transform</tt><big>(</big><em>X</em>, <em>Y</em><big>)</big><a class="headerlink" href="#geometry.best_orthogonal_transform" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Finds the best orthogonal transform R  between X and Y,</dt>
-<dd>such that R X ~= Y.</dd>
-</dl>
+<dd><p>Finds the best orthogonal transform R  between X and Y,
+such that R X ~= Y.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>Y</strong> (<tt class="docutils literal"><span class="pre">array[KxN]</span></tt>) &#8211; </li>
 <li><strong>X</strong> (<tt class="docutils literal"><span class="pre">array[KxN],K&gt;=2,K&lt;N</span></tt>) &#8211; </li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[KxK],orthogonal</span></tt></p>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[KxK],orthogonal</span></tt></p>
 </td>
 </tr>
 </tbody>
@@ -628,9 +604,9 @@ around the given <em>axis</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>M</strong> (<tt class="docutils literal"><span class="pre">array[NxN]</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>M</strong> (<tt class="docutils literal"><span class="pre">array[NxN]</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[NxN],orthogonal</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[NxN],orthogonal</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -642,18 +618,17 @@ around the given <em>axis</em>.</p>
 <dl class="function">
 <dt id="geometry.default_axis">
 <tt class="descclassname">geometry.</tt><tt class="descname">default_axis</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.default_axis" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Returns the axis to use when any will do.</p>
-<p>For example, the identity is represented by
+<dd><p>Returns the axis to use when any will do.</p>
+<blockquote>
+<div>For example, the identity is represented by
 a rotation of 0 degrees around <em>any</em> axis. If an <em>(axis,angle)</em>
 representation is requested, the axis will be given by
-<em>default_axis()</em>.</p>
-</div></blockquote>
+<em>default_axis()</em>.</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">direction</span></tt></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">direction</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -662,16 +637,17 @@ representation is requested, the axis will be given by
 <dl class="function">
 <dt id="geometry.default_axis_orthogonal">
 <tt class="descclassname">geometry.</tt><tt class="descname">default_axis_orthogonal</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.default_axis_orthogonal" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Returns an axis orthogonal to the one returned 
-by <a class="reference internal" href="#geometry.default_axis" title="geometry.default_axis"><tt class="xref py py-func docutils literal"><span class="pre">default_axis()</span></tt></a>.</p>
-<p>Use this when you need a couple of arbitrary orthogonal axes.</p>
-</div></blockquote>
+<dd><dl class="docutils">
+<dt>Returns an axis orthogonal to the one returned </dt>
+<dd><p class="first">by <a class="reference internal" href="#geometry.default_axis" title="geometry.default_axis"><tt class="xref py py-func docutils literal"><span class="pre">default_axis()</span></tt></a>.</p>
+<p class="last">Use this when you need a couple of arbitrary orthogonal axes.</p>
+</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">direction</span></tt></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">direction</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -699,7 +675,7 @@ slightly over 1 or below -1 due to numerical errors.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">array</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">array</span></tt>) &#8211; </td>
 </tr>
 </tbody>
 </table>
@@ -708,14 +684,15 @@ slightly over 1 or below -1 due to numerical errors.</p>
 <dl class="function">
 <dt id="geometry.normalize_length_or_zero">
 <tt class="descclassname">geometry.</tt><tt class="descname">normalize_length_or_zero</tt><big>(</big><em>s</em>, <em>norm=2</em><big>)</big><a class="headerlink" href="#geometry.normalize_length_or_zero" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div>Normalize an array such that it has unit length in the given norm; if the
-norm is close to zero, the zero vector is returned.</div></blockquote>
+<dd><dl class="docutils">
+<dt>Normalize an array such that it has unit length in the given norm; if the</dt>
+<dd>norm is close to zero, the zero vector is returned.</dd>
+</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">array</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> (<tt class="docutils literal"><span class="pre">array</span></tt>) &#8211; </td>
 </tr>
 </tbody>
 </table>
@@ -736,7 +713,7 @@ norm is close to zero, the zero vector is returned.</div></blockquote>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>s</strong> (<tt class="docutils literal"><span class="pre">array[K],K&gt;=2</span></tt>) &#8211; </li>
 <li><strong>v</strong> (<tt class="docutils literal"><span class="pre">array[K]</span></tt>) &#8211; </li>
 </ul>
@@ -782,29 +759,55 @@ norm is close to zero, the zero vector is returned.</div></blockquote>
 <dl class="class">
 <dt id="geometry.DifferentiableManifold">
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">DifferentiableManifold</tt><a class="headerlink" href="#geometry.DifferentiableManifold" title="Permalink to this definition">¶</a></dt>
-<dd><p class="rubric">Methods</p>
+<dd><p>This is the base class for differentiable manifolds.</p>
+<p class="rubric">Methods</p>
 <dl class="method">
 <dt id="geometry.DifferentiableManifold.belongs">
 <tt class="descname">belongs</tt><big>(</big><em>x</em>, <em>msg=None</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.belongs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that a point belongs to this manifold.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.DifferentiableManifold.belongs_" title="geometry.DifferentiableManifold.belongs_"><tt class="xref py py-func docutils literal"><span class="pre">belongs_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.belongs_">
+<tt class="descname">belongs_</tt><big>(</big><em>a</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.belongs_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks that a point belongs to this manifold.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.DifferentiableManifold.belongs_ts">
 <tt class="descname">belongs_ts</tt><big>(</big><em>base</em>, <em>vx</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.belongs_ts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks that a vector belongs to this manifold.</p>
+<dd><p>Checks that a vector <em>vx</em> belongs to the tangent space
+at the given point <em>base</em>.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.DifferentiableManifold.distance">
 <tt class="descname">distance</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.distance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the geodesic distance between two points.</p>
+<dd><p>Computes the geodesic distance between two points.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.DifferentiableManifold.distance_" title="geometry.DifferentiableManifold.distance_"><tt class="xref py py-func docutils literal"><span class="pre">distance_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.distance_">
+<tt class="descname">distance_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.distance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the geodesic distance between two points.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.DifferentiableManifold.expmap">
 <tt class="descname">expmap</tt><big>(</big><em>base</em>, <em>v</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.expmap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Inverse of logmap.</p>
+<dd><p>Computes the exponential map from <em>base</em> for the velocity vector <em>v</em>.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.DifferentiableManifold.expmap_" title="geometry.DifferentiableManifold.expmap_"><tt class="xref py py-func docutils literal"><span class="pre">expmap_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.expmap_">
+<tt class="descname">expmap_</tt><big>(</big><em>a</em>, <em>v</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.expmap_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the exponential map from <em>a</em> for the velocity vector <em>v</em>.</p>
 </dd></dl>
 
 <dl class="method">
@@ -816,12 +819,12 @@ norm is close to zero, the zero vector is returned.</div></blockquote>
 <dl class="method">
 <dt id="geometry.DifferentiableManifold.geodesic">
 <tt class="descname">geodesic</tt><big>(</big><em>a</em>, <em>b</em>, <em>t</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.geodesic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the point along the geodesic.</p>
+<dd><p>Returns the point interpolated along the geodesic.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<tt class="docutils literal"><span class="pre">&gt;=0,&lt;=1</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<tt class="docutils literal"><span class="pre">&gt;=0,&lt;=1</span></tt>) &#8211; </td>
 </tr>
 </tbody>
 </table>
@@ -837,14 +840,31 @@ should be used for testing various properties.</p>
 <dl class="method">
 <dt id="geometry.DifferentiableManifold.logmap">
 <tt class="descname">logmap</tt><big>(</big><em>base</em>, <em>p</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.logmap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the direction from base to target.</p>
+<dd><p>Computes the logarithmic map from base point <em>base</em> to target <em>b</em>.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.DifferentiableManifold.logmap_" title="geometry.DifferentiableManifold.logmap_"><tt class="xref py py-func docutils literal"><span class="pre">logmap_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.logmap_">
+<tt class="descname">logmap_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.logmap_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the logarithmic map from base point <em>a</em> to target <em>b</em>.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.DifferentiableManifold.project_ts">
 <tt class="descname">project_ts</tt><big>(</big><em>base</em>, <em>v</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.project_ts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Projects a vector in the ambient space to a vector on the 
-tangent space.</p>
+<dd><p>Projects a vector <em>v_ambient</em> in the ambient space
+to the tangent space at point <em>base</em>.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.DifferentiableManifold.project_ts_" title="geometry.DifferentiableManifold.project_ts_"><tt class="xref py py-func docutils literal"><span class="pre">project_ts_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.DifferentiableManifold.project_ts_">
+<tt class="descname">project_ts_</tt><big>(</big><em>base</em>, <em>v_ambient</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.project_ts_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects a vector <em>v_ambient</em> in the ambient space
+to the tangent space at point <em>base</em>.</p>
 </dd></dl>
 
 </dd></dl>
@@ -876,38 +896,94 @@ tangent space.</p>
 <dl class="class">
 <dt id="geometry.MatrixLieAlgebra">
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">MatrixLieAlgebra</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieAlgebra" title="Permalink to this definition">¶</a></dt>
-<dd><p class="rubric">Methods</p>
+<dd><p>This is the base class for Matrix Lie Algebra.</p>
+<p>It is understood that it is composed by square matrices.</p>
+<p>The only function that <em>has</em> to be implemented is the 
+<a class="reference internal" href="#geometry.MatrixLieAlgebra.project" title="geometry.MatrixLieAlgebra.project"><tt class="xref py py-func docutils literal"><span class="pre">project()</span></tt></a> function that projects a square matrix
+onto the algebra. This function is used both for checking
+that a vector is in the algebra (see <a class="reference internal" href="#geometry.MatrixLieAlgebra.belongs" title="geometry.MatrixLieAlgebra.belongs"><tt class="xref py py-func docutils literal"><span class="pre">belongs()</span></tt></a>)
+and to mitigate the numerical errors.</p>
+<p>You probably also want to implement <a class="reference internal" href="#geometry.MatrixLieAlgebra.norm" title="geometry.MatrixLieAlgebra.norm"><tt class="xref py py-func docutils literal"><span class="pre">norm()</span></tt></a> if
+the default is not what you want.</p>
+<p class="rubric">Methods</p>
 <dl class="method">
 <dt id="geometry.MatrixLieAlgebra.belongs">
 <tt class="descname">belongs</tt><big>(</big><em>v</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieAlgebra.belongs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks that a vector belongs to this manifold.</p>
+<dd><p>Checks that a vector belongs to this algebra.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.MatrixLieAlgebra.norm">
 <tt class="descname">norm</tt><big>(</big><em>v</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieAlgebra.norm" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Return the norm of a vector in the algebra.
+This is used in <a class="reference internal" href="#geometry.MatrixLieGroup" title="geometry.MatrixLieGroup"><tt class="xref py py-class docutils literal"><span class="pre">MatrixLieGroup</span></tt></a> to measure
+distances between points in the Lie group.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="geometry.MatrixLieAlgebra.project">
 <tt class="descname">project</tt><big>(</big><em>v</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieAlgebra.project" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Projects a matrix onto this Lie Algebra.</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="geometry.MatrixLieGroup">
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">MatrixLieGroup</tt><big>(</big><em>n</em>, <em>algebra</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieGroup" title="Permalink to this definition">¶</a></dt>
-<dd><p class="rubric">Methods</p>
+<dd><p>This is the base class for matrix Lie groups.</p>
+<p>Subclasses should provide a MatrixLieAlgebra
+object. Given the Lie algebra, we can compute everything.
+However, subclasses can choose to overload
+some functions if they know a more numerically stable implementation.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.MatrixLieGroup.distance_">
+<tt class="descname">distance_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieGroup.distance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the distance between two points.</p>
+<p>In the case of Lie groups, this is done by 
+translating everything to the origin, computing the
+logmap, and using the norm defined in the Lie Algebra object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.MatrixLieGroup.expmap_">
+<tt class="descname">expmap_</tt><big>(</big><em>base</em>, <em>vel</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieGroup.expmap_" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the inverse of <a class="reference internal" href="#geometry.MatrixLieGroup.logmap_" title="geometry.MatrixLieGroup.logmap_"><tt class="xref py py-func docutils literal"><span class="pre">logmap_()</span></tt></a>.</p>
+<p>In the case of Lie groups, this is implemented using
+the usual matrix exponential.</p>
+<p>Here the <a class="reference internal" href="#geometry.MatrixLieAlgebra.project" title="geometry.MatrixLieAlgebra.project"><tt class="xref py py-func docutils literal"><span class="pre">MatrixLieAlgebra.project()</span></tt></a> function
+is used to mitigate numerical errors.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="geometry.MatrixLieGroup.inverse">
 <tt class="descname">inverse</tt><big>(</big><em>g</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieGroup.inverse" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="geometry.MatrixLieGroup.logmap_">
+<tt class="descname">logmap_</tt><big>(</big><em>base</em>, <em>target</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieGroup.logmap_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the direction from base to target.</p>
+<p>In the case of Lie groups, this is implemented
+by using the usual matrix logarithm at the origin.</p>
+<p>Here the <a class="reference internal" href="#geometry.MatrixLieAlgebra.project" title="geometry.MatrixLieAlgebra.project"><tt class="xref py py-func docutils literal"><span class="pre">MatrixLieAlgebra.project()</span></tt></a> function
+is used to mitigate numerical errors.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="geometry.MatrixLieGroup.multiply">
 <tt class="descname">multiply</tt><big>(</big><em>g</em>, <em>h</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieGroup.multiply" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.MatrixLieGroup.project_ts_">
+<tt class="descname">project_ts_</tt><big>(</big><em>base</em>, <em>x</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieGroup.project_ts_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects the vector <em>x</em> to the tangent space at point <em>base</em>.</p>
+<p>In the case of Lie Groups, we do this by translating the
+vector to the origin, projecting it to the Lie Algebra,
+and then translating it back.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="geometry.MatrixLieGroup.unity">
@@ -922,7 +998,23 @@ tangent space.</p>
 <dl class="class">
 <dt id="geometry.Sphere">
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Sphere</tt><big>(</big><em>order</em><big>)</big><a class="headerlink" href="#geometry.Sphere" title="Permalink to this definition">¶</a></dt>
-<dd><p class="rubric">Methods</p>
+<dd><p>These are hyperspheres of unit radius.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.Sphere.belongs_">
+<tt class="descname">belongs_</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.Sphere.belongs_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Sphere.distance_">
+<tt class="descname">distance_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.Sphere.distance_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Sphere.expmap_">
+<tt class="descname">expmap_</tt><big>(</big><em>base</em>, <em>vel</em><big>)</big><a class="headerlink" href="#geometry.Sphere.expmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="geometry.Sphere.friendly">
 <tt class="descname">friendly</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.Sphere.friendly" title="Permalink to this definition">¶</a></dt>
@@ -931,6 +1023,21 @@ tangent space.</p>
 <dl class="method">
 <dt id="geometry.Sphere.interesting_points">
 <tt class="descname">interesting_points</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.Sphere.interesting_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Sphere.logmap_">
+<tt class="descname">logmap_</tt><big>(</big><em>base</em>, <em>target</em><big>)</big><a class="headerlink" href="#geometry.Sphere.logmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="geometry.Sphere.norm_rtol">
+<tt class="descname">norm_rtol</tt><em class="property"> = 1.0000000000000001e-05</em><a class="headerlink" href="#geometry.Sphere.norm_rtol" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Sphere.project_ts_">
+<tt class="descname">project_ts_</tt><big>(</big><em>base</em>, <em>x</em><big>)</big><a class="headerlink" href="#geometry.Sphere.project_ts_" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -943,10 +1050,48 @@ tangent space.</p>
 <dl class="class">
 <dt id="geometry.Euclidean">
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Euclidean</tt><big>(</big><em>dimension</em><big>)</big><a class="headerlink" href="#geometry.Euclidean" title="Permalink to this definition">¶</a></dt>
-<dd><p class="rubric">Methods</p>
+<dd><p>This is the usual Euclidean space of finite dimension;
+this is mostly used for debugging.</p>
+<p>There is no proper Haar measure; as an arbitrary choice,
+the <a class="reference internal" href="#geometry.Euclidean.sample_uniform" title="geometry.Euclidean.sample_uniform"><tt class="xref py py-func docutils literal"><span class="pre">sample_uniform()</span></tt></a>
+returns a sample from a Gaussian distribution centered at 0.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.Euclidean.belongs_">
+<tt class="descname">belongs_</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.Euclidean.belongs_" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<tt class="docutils literal"><span class="pre">array</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.Euclidean.distance_">
+<tt class="descname">distance_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.Euclidean.distance_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Euclidean.expmap_">
+<tt class="descname">expmap_</tt><big>(</big><em>base</em>, <em>vel</em><big>)</big><a class="headerlink" href="#geometry.Euclidean.expmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="geometry.Euclidean.interesting_points">
 <tt class="descname">interesting_points</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.Euclidean.interesting_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Euclidean.logmap_">
+<tt class="descname">logmap_</tt><big>(</big><em>base</em>, <em>target</em><big>)</big><a class="headerlink" href="#geometry.Euclidean.logmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Euclidean.project_ts_">
+<tt class="descname">project_ts_</tt><big>(</big><em>base</em>, <em>x</em><big>)</big><a class="headerlink" href="#geometry.Euclidean.project_ts_" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -959,7 +1104,14 @@ tangent space.</p>
 <dl class="class">
 <dt id="geometry.SO">
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">SO</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#geometry.SO" title="Permalink to this definition">¶</a></dt>
-<dd><p class="rubric">Methods</p>
+<dd><p>This is the Special Orthogonal group SO(n) describing rotations
+of Euclidean space; implemented for n=2,3.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.SO.belongs_">
+<tt class="descname">belongs_</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.SO.belongs_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="geometry.SO.friendly">
 <tt class="descname">friendly</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.SO.friendly" title="Permalink to this definition">¶</a></dt>
@@ -975,7 +1127,17 @@ tangent space.</p>
 <dl class="class">
 <dt id="geometry.SE">
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">SE</tt><big>(</big><em>n</em>, <em>alpha=1</em><big>)</big><a class="headerlink" href="#geometry.SE" title="Permalink to this definition">¶</a></dt>
-<dd><p class="rubric">Methods</p>
+<dd><p>This is the Special Euclidean group SE(n) 
+describing roto-translations of Euclidean space.
+Implemented only for n=2,3.</p>
+<p>Note that you have to supply a coefficient <em>alpha</em> that
+weights rotation and translation when defining distances.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.SE.belongs_">
+<tt class="descname">belongs_</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.SE.belongs_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="geometry.SE.friendly">
 <tt class="descname">friendly</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.SE.friendly" title="Permalink to this definition">¶</a></dt>
@@ -993,8 +1155,33 @@ tangent space.</p>
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Torus</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#geometry.Torus" title="Permalink to this definition">¶</a></dt>
 <dd><p class="rubric">Methods</p>
 <dl class="method">
+<dt id="geometry.Torus.belongs_">
+<tt class="descname">belongs_</tt><big>(</big><em>a</em><big>)</big><a class="headerlink" href="#geometry.Torus.belongs_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Torus.distance_">
+<tt class="descname">distance_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.Torus.distance_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Torus.expmap_">
+<tt class="descname">expmap_</tt><big>(</big><em>a</em>, <em>vel</em><big>)</big><a class="headerlink" href="#geometry.Torus.expmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Torus.logmap_">
+<tt class="descname">logmap_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.Torus.logmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="geometry.Torus.normalize">
 <tt class="descname">normalize</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.Torus.normalize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Torus.project_ts_">
+<tt class="descname">project_ts_</tt><big>(</big><em>base</em>, <em>vx</em><big>)</big><a class="headerlink" href="#geometry.Torus.project_ts_" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1007,11 +1194,36 @@ tangent space.</p>
 <dl class="class">
 <dt id="geometry.Moebius">
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Moebius</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#geometry.Moebius" title="Permalink to this definition">¶</a></dt>
-<dd><p>Still not implemented.</p>
+<dd><p>The Moebius strip &#8211; still to be implemented.</p>
 <p class="rubric">Methods</p>
+<dl class="method">
+<dt id="geometry.Moebius.belongs_">
+<tt class="descname">belongs_</tt><big>(</big><em>a</em><big>)</big><a class="headerlink" href="#geometry.Moebius.belongs_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Moebius.distance_">
+<tt class="descname">distance_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.Moebius.distance_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Moebius.expmap_">
+<tt class="descname">expmap_</tt><big>(</big><em>a</em>, <em>vel</em><big>)</big><a class="headerlink" href="#geometry.Moebius.expmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Moebius.logmap_">
+<tt class="descname">logmap_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.Moebius.logmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="geometry.Moebius.normalize">
 <tt class="descname">normalize</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.Moebius.normalize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Moebius.project_ts_">
+<tt class="descname">project_ts_</tt><big>(</big><em>base</em>, <em>vx</em><big>)</big><a class="headerlink" href="#geometry.Moebius.project_ts_" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1025,79 +1237,85 @@ tangent space.</p>
 <div class="section" id="shortcuts">
 <h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h2>
 <dl class="data">
-<dt id="geometry.E1">
-<tt class="descclassname">geometry.</tt><tt class="descname">E1</tt><a class="headerlink" href="#geometry.E1" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="data">
-<dt id="geometry.E2">
-<tt class="descclassname">geometry.</tt><tt class="descname">E2</tt><a class="headerlink" href="#geometry.E2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="data">
 <dt id="geometry.S1">
 <tt class="descclassname">geometry.</tt><tt class="descname">S1</tt><a class="headerlink" href="#geometry.S1" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Unit circle as a subset of <img class="math" src="images/math/62623d70eaa11458b42450ab31277cc88f4dbd6b.png" alt="R^2"/>.</p>
+</dd></dl>
 
 <dl class="data">
 <dt id="geometry.S2">
 <tt class="descclassname">geometry.</tt><tt class="descname">S2</tt><a class="headerlink" href="#geometry.S2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Unit sphere.</p>
+</dd></dl>
 
 <dl class="data">
 <dt id="geometry.SO2">
 <tt class="descclassname">geometry.</tt><tt class="descname">SO2</tt><a class="headerlink" href="#geometry.SO2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Planar rotations.</p>
+</dd></dl>
 
 <dl class="data">
 <dt id="geometry.SO3">
 <tt class="descclassname">geometry.</tt><tt class="descname">SO3</tt><a class="headerlink" href="#geometry.SO3" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Rotations in 3D.</p>
+</dd></dl>
 
 <dl class="data">
 <dt id="geometry.so2">
 <tt class="descclassname">geometry.</tt><tt class="descname">so2</tt><a class="headerlink" href="#geometry.so2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Lie algebra for planar rotations.</p>
+</dd></dl>
 
 <dl class="data">
 <dt id="geometry.so3">
 <tt class="descclassname">geometry.</tt><tt class="descname">so3</tt><a class="headerlink" href="#geometry.so3" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Lie algebra for 3D rotations.</p>
+</dd></dl>
 
 <dl class="data">
 <dt id="geometry.SE2">
 <tt class="descclassname">geometry.</tt><tt class="descname">SE2</tt><a class="headerlink" href="#geometry.SE2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Poses in 2D.</p>
+</dd></dl>
 
 <dl class="data">
 <dt id="geometry.SE3">
 <tt class="descclassname">geometry.</tt><tt class="descname">SE3</tt><a class="headerlink" href="#geometry.SE3" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Poses in 3D.</p>
+</dd></dl>
 
 <dl class="data">
 <dt id="geometry.se2">
 <tt class="descclassname">geometry.</tt><tt class="descname">se2</tt><a class="headerlink" href="#geometry.se2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Lie algebra for SE(2).</p>
+</dd></dl>
 
 <dl class="data">
 <dt id="geometry.se3">
 <tt class="descclassname">geometry.</tt><tt class="descname">se3</tt><a class="headerlink" href="#geometry.se3" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Lie algebra for SE(3).</p>
+</dd></dl>
 
 <dl class="data">
 <dt id="geometry.T1">
 <tt class="descclassname">geometry.</tt><tt class="descname">T1</tt><a class="headerlink" href="#geometry.T1" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>One dimensional torus, mapped onto <img class="math" src="images/math/5e4cd0db06ecd19d3f1cd5d50696afd17b6dd827.png" alt="[-\pi,\pi)"/>.</p>
+<p>Note that this is equivalent to the unit circle, but the representation
+is different: <a class="reference internal" href="#geometry.T1" title="geometry.T1"><tt class="xref py py-data docutils literal"><span class="pre">T1</span></tt></a> uses &#8220;angles&#8221; while <a class="reference internal" href="#geometry.S2" title="geometry.S2"><tt class="xref py py-data docutils literal"><span class="pre">S2</span></tt></a> uses unit vectors in
+<img class="math" src="images/math/62623d70eaa11458b42450ab31277cc88f4dbd6b.png" alt="R^2"/>.</p>
+</dd></dl>
 
 <dl class="data">
 <dt id="geometry.T2">
 <tt class="descclassname">geometry.</tt><tt class="descname">T2</tt><a class="headerlink" href="#geometry.T2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>2D torus.</p>
+</dd></dl>
 
 <dl class="data">
 <dt id="geometry.T3">
 <tt class="descclassname">geometry.</tt><tt class="descname">T3</tt><a class="headerlink" href="#geometry.T3" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>3D torus.</p>
+</dd></dl>
 
 </div>
 </div>
@@ -1164,12 +1382,12 @@ tangent space.</p>
         <li class="right" >
           <a href="np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">PyGeometry v0.9.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">PyGeometry 0.9.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2011, Andrea Censi.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1pre/00913921613e.
     </div>
   </body>
 </html>
