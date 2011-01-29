@@ -34,7 +34,7 @@ extensions = [
               # 'sphinx.ext.ifconfig',
               'sphinx.ext.viewcode', 
               # 'sphinx.ext.intersphinx',
-               # 'sphinx.ext.autosummary',
+               'sphinx.ext.autosummary',
               'sphinxtogithub',
               ]
 

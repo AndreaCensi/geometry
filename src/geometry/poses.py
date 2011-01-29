@@ -1,7 +1,4 @@
-from .common_imports import *
-
-from .geometry_contracts import assert_allclose
-
+from . import zeros, contract, assert_allclose, check
 
 #@contract(x='array[NxN]', returns='tuple(array[MxM],array[M],array[M],number),M=N-1')
 def extract_pieces(x):
@@ -15,7 +12,7 @@ def extract_pieces(x):
 #@contract(a='array[MxM]', b='array[M]', c='array[M]', d='number', returns='array[NxN],N=M+1') 
 def combine_pieces(a, b, c, d):
     M = a.shape[0]
-    x = np.zeros((M + 1, M + 1)) 
+    x = zeros((M + 1, M + 1)) 
     x[0:M, 0:M] = a
     x[0:M, M] = b
     x[M, 0:M] = c

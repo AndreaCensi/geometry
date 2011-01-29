@@ -2,16 +2,122 @@
 
      conventions: q=( a + bi + cj + dk), with a>0
 '''
-from .common_imports import *
+import itertools
+from . import (assert_allclose, new_contract, contract, dot, zeros, eye,
+               safe_arccos,
+               pi, sin, cos, array, sign, uniform, argmax, sqrt, check, det,
+               default_axis)
 
-def safe_arccos(x):
-    ''' 
-        Returns the arcosine of x, clipped between -1 and 1.
+
+
+new_contract('unit_quaternion', 'array[4], unit_length')
+new_contract('axis_angle', 'tuple(direction, float)') 
+# Canonically, we return a positive angle.
+new_contract('axis_angle_canonical', 'tuple(direction, (float,>=0, <pi))')
+
+
+@new_contract
+@contract(x='array[NxN],N>0')
+def orthogonal(x):
+    N = x.shape[0]
+    I = eye(N) 
+    rtol = 10E-10 # XXX:
+    atol = 10E-7  # XXX:
+    assert_allclose(I, dot(x, x.T), rtol=rtol, atol=atol)
+    assert_allclose(I, dot(x.T, x), rtol=rtol, atol=atol)
+
+@new_contract
+def rotation_matrix(x):
+    ''' Checks that the given value is a rotation matrix. '''
+    check('array[3x3], orthogonal', x)
+    assert_allclose(det(x), 1) 
+
+@new_contract
+@contract(x='array[NxN]')
+def skew_symmetric(x):
+    n = x.shape[0]
+    ok = (zeros((n, n)) == x).all()
+    if not ok:
+        diag = x.diagonal()
+        if not (diag == 0).all():
+            raise ValueError('Expected skew symmetric, but diagonal is not '
+                             'exactly zero: %s.' % diag)
+        for i, j in itertools.product(range(n), range(n)):
+            if i < j: continue
+            if x[i, j] != -x[j, i]:
+                raise ValueError('Expected skew symmetric, but ' + 
+                                 'a[%d][%d] = %f, a[%d][%d] = %f' % \
+                                 (i, j, x[i, j], j, i, x[j, i]))
+                
+                
+
+@contract(theta='number', returns='rotation_matrix')
+def rotz(theta):
+    ''' Returns a 3x3 rotation matrix corresponding to rotation around the *z* axis. '''
+    return array([ 
+            [ cos(theta), -sin(theta), 0],
+            [ sin(theta), cos(theta), 0],
+            [0, 0, 1]]) 
+
+@contract(theta='number')
+def rot2d(theta):
+    ''' Returns a 2x2 rotation matrix. '''
+    return array([ 
+            [ cos(theta), -sin(theta)],
+            [ sin(theta), cos(theta)]]) 
+
+
+@contract(returns='unit_quaternion')
+def random_quaternion():
+    ''' Generate a random quaternion.
         
-        Use this when you know x is a cosine, but it might be
-        slightly over 1 or below -1 due to numerical errors.
+        Uses the algorithm used in Kuffner, ICRA'04.
     '''
-    return np.arccos(np.clip(x, -1.0, 1.0))
+    s = uniform()
+    sigma1 = sqrt(1 - s)
+    sigma2 = sqrt(s)
+    theta1 = uniform() * 2 * pi
+    theta2 = uniform() * 2 * pi
+
+    q = array([cos(theta2) * sigma2,
+                  sin(theta1) * sigma1,
+                  cos(theta1) * sigma1,
+                  sin(theta2) * sigma2 ])
+    
+    q *= sign(q[0])
+    return q
+
+@contract(returns='array[2x2]|rotation_matrix', ndim='2|3')
+def random_rotation(ndim=3):
+    ''' Generate a random rotation matrix. 
+        
+        This is a wrapper around :py:func:`random_quaternion`.
+    '''
+    if ndim == 3:
+        q = random_quaternion()
+        return rotation_from_quaternion(q)
+    elif ndim == 2:
+        return rot2d(uniform(0, 2 * pi))
+    else: assert False
+
+@contract(returns='array[3x3], orthogonal')
+def random_orthogonal_transform():
+    # TODO: to write
+    assert False, 'Not implemented'
+
+
+@contract(R1='rotation_matrix', R2='rotation_matrix', returns='float,>=0,<=pi')
+def geodesic_distance_for_rotations(R1, R2):
+    ''' 
+        Returns the geodesic distance between two rotation matrices.
+        
+        It is computed as the angle of the rotation :math:`R_1^{*} R_2^{-1}``.
+    
+    '''
+    R = dot(R1, R2.T)
+    axis1, angle1 = axis_angle_from_rotation(R) #@UnusedVariable
+    return angle1 
+
 
 @contract(v='array[3]', returns='array[3x3],skew_symmetric')
 def hat_map(v):
@@ -31,11 +137,6 @@ def map_hat(H):
     v[1] = H[0, 2]
     v[0] = -H[1, 2]
     return v
-
-
-def normalize_pi(x):
-    ''' Normalizes the entries in *x* in the interval :math:`[-pi,pi)`. '''
-    return np.arctan2(np.sin(x), np.cos(x))
 
 
 @contract(x='unit_quaternion', returns='rotation_matrix')
@@ -70,14 +171,14 @@ def quaternion_from_rotation(R):
         
         TODO: add the more robust method with 4x4 matrix and eigenvector
     '''
-    largest = np.argmax(R.diagonal())
+    largest = argmax(R.diagonal())
     permutations = {0: [0, 1, 2],
                     1: [1, 2, 0],
                     2: [2, 0, 1]}
     u, v, w = permutations[largest]
     rr = 1 + R[u, u] - R[v, v] - R[w, w]
     assert rr >= 0
-    r = np.sqrt(rr)
+    r = sqrt(rr)
     if r == 0: # TODO: add tolerance
         return quaternion_from_axis_angle(default_axis(), 0.0)
     else:
@@ -110,7 +211,7 @@ def quaternion_from_axis_angle(axis, angle):
             axis[1] * sin(angle / 2),
             axis[2] * sin(angle / 2)
         ])
-    Q *= np.sign(Q[0])
+    Q *= sign(Q[0])
     return Q
 
 @contract(q='unit_quaternion', returns='axis_angle_canonical')
@@ -120,7 +221,7 @@ def axis_angle_from_quaternion(q):
     '''
     angle = 2 * safe_arccos(q[0])
     if angle == 0: # XXX: use tolerance
-        axis = default_axis
+        axis = default_axis()
     else:
         axis = q[1:] / sin(angle / 2)
     if angle > pi:
@@ -130,27 +231,6 @@ def axis_angle_from_quaternion(q):
         
     return axis, angle
          
-@contract(returns='direction')
-def default_axis(): 
-    ''' 
-        Returns the axis to use when any will do. 
-        
-        For example, the identity is represented by
-        a rotation of 0 degrees around *any* axis. If an *(axis,angle)*
-        representation is requested, the axis will be given by
-        *default_axis()*. 
-    '''
-    return  array([0.0, 0.0, 1.0])
-
-@contract(returns='direction')
-def default_axis_orthogonal():
-    ''' 
-        Returns an axis orthogonal to the one returned 
-        by :py:func:`default_axis`. 
-        
-        Use this when you need a couple of arbitrary orthogonal axes.
-    '''  
-    return  array([0.0, 1.0, 0.0])
 
 @contract(axis='direction', angle='float', returns='rotation_matrix')
 def rotation_from_axis_angle(axis, angle):

@@ -1,44 +1,10 @@
 .. include:: definitions.txt
 
 
-.. _api:
+.. _api_details:
 
-PyGeometry API
-==============
-
-
-Usage notes
------------
-
-* No fancy OO-overdose here. Geometric objects (rotation matrices, poses, etc.) are represented using vanilla 
-  Numpy array: there's no class Rotation, Pose, etc. If you don't think this is a good
-  idea, your mind has been spoiled by C++ or Java classes taught by clueless professors.
-
-
-* The main procedures are implemented as simple functions accepting and returning numpy arrays.
-  Manifolds are implemented using classes that wrap the simple functions.
-
-* Manifolds objects "know" how to compute distances, interpolate, etc. This makes sense: for example, the interpolation between the identity and a rotation matrix depends on whether you are considering them as elements of *GL(n)* or *SO(n)*.
-  
-* Most functions declare contracts among parameters and return values using the PyContracts_ library. This is slightly paranoid. You can disable all those checks using  ``contracts.disable_all()``.
-    
-* The naming conventions for conversion operations is::
-
-      x = <X>_from_<Y>(y)
-    
-  For example::
-  
-      R = rotation_from_axis_angle(axis, angle)
-      axis, angle = axis_angle_from_rotation(R)
-      R = rotation_from_quaternion(q)
-
-
-
-.. d .. autosummary
-.. 
-..    geometry.geodesic_distance_on_sphere
-..    geometry.distribution_radius
-
+PyGeometry API details
+========================
 
 .. py:module:: geometry
  
@@ -47,11 +13,8 @@ Usage notes
 S(n) - Hyperspheres
 ----------------------
 
-.. autofunction:: geodesic_distance_on_sphere
-.. autofunction:: distribution_radius
-.. .. autofunction:: distances_from
-.. autofunction:: sorted_directions
 
+ 
 Random sampling
 +++++++++++++++
 .. autofunction:: random_direction
@@ -61,37 +24,130 @@ Random sampling
 .. autofunction:: random_orthogonal_direction
 .. autofunction:: random_directions_bounded
 
+Misc
++++++++++++++++
+
+.. autofunction:: geodesic_distance_on_sphere
+.. autofunction:: distribution_radius
+.. .. autofunction:: distances_from
+.. autofunction:: sorted_directions
+
+Manifolds objects
++++++++++++++++++++
+
+.. autoclass:: Sphere
+    :members:
+    :undoc-members:
+
+.. py:data:: S1
+
+   Unit circle as a subset of :math:`R^2`.
+    
+.. py:data:: S2
+
+   Unit sphere.
+   
 
 SO(n) - Rotations and quaternions
 ---------------------------------
- 
-.. autofunction:: hat_map
-.. autofunction:: map_hat
-.. autofunction:: rotation_from_quaternion
-.. autofunction:: rotation_from_axis_angle
-.. autofunction:: rotation_from_axis_angle2
-.. autofunction:: axis_angle_from_quaternion
-.. autofunction:: axis_angle_from_rotation
-.. autofunction:: quaternion_from_rotation
-.. autofunction:: quaternion_from_axis_angle
-.. autofunction:: geodesic_distance_for_rotations
+
+    
+    
+Conversions
++++++++++++++++++++
+
+.. autofunction:: geometry.rotations.hat_map
+.. autofunction:: geometry.rotations.map_hat
+.. autofunction:: geometry.rotations.rotation_from_quaternion
+.. autofunction:: geometry.rotations.rotation_from_axis_angle
+.. autofunction:: geometry.rotations.rotation_from_axis_angle2
+.. autofunction:: geometry.rotations.axis_angle_from_quaternion
+.. autofunction:: geometry.rotations.axis_angle_from_rotation
+.. autofunction:: geometry.rotations.quaternion_from_rotation
+.. autofunction:: geometry.rotations.quaternion_from_axis_angle
 
 Random sampling
 +++++++++++++++++++
-.. autofunction:: random_quaternion
-.. autofunction:: random_rotation
-.. autofunction:: random_orthogonal_transform
+.. autofunction:: geometry.random_geometry.random_quaternion
+.. autofunction:: geometry.random_geometry.random_rotation
+.. autofunction:: geometry.random_geometry.random_orthogonal_transform
+
+Misc
++++++++++++++++++++
+.. autofunction:: geodesic_distance_for_rotations
 
 
+
+Manifolds objects
++++++++++++++++++
+
+.. py:data:: SO2 
+    
+    Planar rotations.
+    
+.. py:data:: SO3 
+    
+    Rotations in 3D.
+    
+.. py:data:: so2 
+    
+    Lie algebra for planar rotations.
+
+.. py:data:: so3 
+    
+    Lie algebra for 3D rotations.
+    
+    
 SE(n) - Poses
 -------------------------------
+
+
+
+Conversions
++++++++++++
 .. autofunction:: pose_from_rotation_translation
 .. autofunction:: rotation_translation_from_pose
 
+
+Misc
++++++++++++
 .. autofunction:: extract_pieces
 .. autofunction:: combine_pieces 
 
 
+Manifold objects
+++++++++++++++++
+
+
+.. autoclass:: SE
+    :members:
+    :undoc-members:
+    
+.. autoclass:: se
+    :members:
+    :undoc-members:
+
+:py:class:`SE`
+
+.. py:data:: SE2 
+    
+    Poses in 2D.
+    
+.. py:data:: SE3 
+    
+    Poses in 3D.
+
+:py:class:`se`
+
+.. py:data:: se2 
+    
+    Lie algebra for SE(2).
+    
+.. py:data:: se3 
+    
+    Lie algebra for SE(3).
+    
+    
 
 Procrustes analysis
 -------------------------------
@@ -124,6 +180,30 @@ These are some of the contracts defined using PyContracts_.
 
 
 
+Tori
+----------------------------
+
+Manifold objects
+++++++++++++++++++
+
+.. py:data:: T1
+    
+    One dimensional torus, mapped onto :math:`[-\pi,\pi)`.
+    
+    Note that this is equivalent to the unit circle, but the representation
+    is different: :py:data:`T1` uses "angles" while :py:data:`S2` uses unit vectors in
+    :math:`R^2`.
+    
+.. py:data:: T2
+    
+    2D torus.
+    
+.. py:data:: T3
+    
+    3D torus.
+
+
+
 Manifolds and Matrix Lie Groups interface
 -------------------------------------------------
 
@@ -146,10 +226,6 @@ Manifolds and Matrix Lie Groups interface
 Included generic manifolds
 ----------------------------
 
-.. autoclass:: Sphere
-    :members:
-    :undoc-members:
-
 .. autoclass:: Euclidean
     :members:
     :undoc-members:
@@ -158,9 +234,6 @@ Included generic manifolds
     :members:
     :undoc-members:
 
-.. autoclass:: SE
-    :members:
-    :undoc-members:
 
 .. autoclass:: Torus
     :members:
@@ -171,62 +244,3 @@ Included generic manifolds
     :undoc-members:
 
 
-
-Shortcuts
-----------------------------
-
-.. py:data:: S1
-
-   Unit circle as a subset of :math:`R^2`.
-    
-.. py:data:: S2
-
-    Unit sphere.
-
-.. py:data:: SO2 
-    
-    Planar rotations.
-    
-.. py:data:: SO3 
-    
-    Rotations in 3D.
-    
-.. py:data:: so2 
-    
-    Lie algebra for planar rotations.
-
-.. py:data:: so3 
-    
-    Lie algebra for 3D rotations.
-    
-.. py:data:: SE2 
-    
-    Poses in 2D.
-    
-.. py:data:: SE3 
-    
-    Poses in 3D.
-
-.. py:data:: se2 
-    
-    Lie algebra for SE(2).
-    
-.. py:data:: se3 
-    
-    Lie algebra for SE(3).
-    
-.. py:data:: T1
-    
-    One dimensional torus, mapped onto :math:`[-\pi,\pi)`.
-    
-    Note that this is equivalent to the unit circle, but the representation
-    is different: :py:data:`T1` uses "angles" while :py:data:`S2` uses unit vectors in
-    :math:`R^2`.
-    
-.. py:data:: T2
-    
-    2D torus.
-    
-.. py:data:: T3
-    
-    3D torus.

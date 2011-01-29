@@ -1,12 +1,9 @@
-__version__ = '0.9.1'
+__version__ = '0.9.2'
 
-from .common_imports import *
-from .geometry_contracts import *
+from .basic_utils import *
+from .spheres import * 
 from .rotations import * 
-from .distances import *
-from .utils import *
-from .random_geometry import *
-from .pose import *
+from .poses import *
 from .procrustes import *
 
 from .manifolds import *

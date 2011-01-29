@@ -1,6 +1,4 @@
-from contracts import check
-from . import DifferentiableManifold, np 
-from geometry import normalize_pi
+from . import DifferentiableManifold 
 
 class Moebius(DifferentiableManifold):
     ''' The Moebius strip -- still to be implemented. '''

@@ -1,11 +1,97 @@
-from .common_imports import *
-from .rotations import (rotation_from_quaternion,
-                         default_axis_orthogonal, normalize_pi,
-                        rotation_from_axis_angle, default_axis)
-from .distances import geodesic_distance_on_sphere, normalize_length, distances_from
-from .utils import rot2d, spherical_cap_with_area, spherical_cap_area
+from . import (cos, sin, pi, sqrt, arccos, clip, safe_arccos, normalize_length,
+               contract, new_contract, assert_allclose, np, dot, norm,
+               array, uniform, vstack, argmin)
+
+@new_contract
+@contract(x='array[N],N>0')
+def unit_length(x):
+    ''' Checks that the value is a 1D vector with unit length in the 2 norm.'''
+    assert_allclose(1, norm(x), rtol=1e-5) # XXX:
+
+new_contract('direction', 'array[3], unit_length')
+
+@new_contract
+@contract(X='array[KxN],K>0,N>0')
+def directions(X):
+    ''' Checks that every column has unit length. '''
+    norm = (X * X).sum(axis=0)
+    assert_allclose(1, norm , rtol=1e-5) # XXX:
+        
 
 
+@contract(s='array[K],K>=2', v='array[K]')
+def assert_orthogonal(s, v):
+    ''' Checks that two vectors are orthogonal. '''
+    dot = (v * s).sum()
+    if not np.allclose(dot, 0):
+        angle = np.arccos(dot / (norm(v) * norm(s)))
+        msg = ('Angle is %.2f deg between %s and %s.' 
+               % (np.degrees(angle), s, v)) 
+        assert_allclose(dot, 0, err_msg=msg)
+    
+def normalize_pi(x):
+    ''' Normalizes the entries in *x* in the interval :math:`[-pi,pi)`. '''
+    return np.arctan2(np.sin(x), np.cos(x))
+
+
+@contract(returns='direction')
+def default_axis(): 
+    ''' 
+        Returns the axis to use when any will do. 
+        
+        For example, the identity is represented by
+        a rotation of 0 degrees around *any* axis. If an *(axis,angle)*
+        representation is requested, the axis will be given by
+        *default_axis()*. 
+    '''
+    return  array([0.0, 0.0, 1.0])
+
+@contract(returns='direction')
+def default_axis_orthogonal():
+    ''' 
+        Returns an axis orthogonal to the one returned 
+        by :py:func:`default_axis`. 
+        
+        Use this when you need a couple of arbitrary orthogonal axes.
+    '''  
+    return  array([0.0, 1.0, 0.0])
+
+@contract(s1='array[K],unit_length',
+           s2='array[K],unit_length', returns='float,>=0,<=pi')
+def geodesic_distance_on_sphere(s1, s2):
+    ''' Returns the geodesic distance between two points on the sphere. '''
+    # special case: return a 0 (no precision issues) if the vectors are the same
+    if (s1 == s2).all(): return 0.0
+    dot_product = (s1 * s2).sum()
+    return safe_arccos(dot_product)
+
+
+@contract(S='directions', returns='float,>=0,<=pi')
+def distribution_radius(S):
+    ''' Returns the radius of the given directions distribution.
+        
+        The radius is defined as the minimum *r* such that there exists a 
+        point *s* in *S* such that all distances are within *r* from *s*. 
+        
+        .. math:: \\textsf{radius} = \\min \\{ r | \\exists s :  \\forall x \\in S : d(s,x) <= r \\}
+    '''
+    D = arccos(clip(dot(S.T, S), -1, 1))
+    distances = D.max(axis=0)
+    center = argmin(distances) 
+    return distances[center]
+
+
+@contract(S='array[3xK],directions', s='direction',
+           returns='array[K](>=0,<=pi)')
+def distances_from(S, s):
+    ''' 
+        Returns the geodesic distances on the sphere from a set of
+        points *S* to a given point *s*. 
+        
+    '''
+    return arccos(clip(dot(s, S), -1, 1))
+    
+    
 @contract(ndim='(2|3),K', returns='array[K],unit_length')
 def random_direction(ndim=3):
     '''
@@ -19,57 +105,17 @@ def random_direction(ndim=3):
         r = sqrt(1 - z ** 2)
         x = r * cos(t)
         y = r * sin(t)
-        return np.array([x, y, z])
+        return array([x, y, z])
     elif ndim == 2:
         theta = uniform(0, 2 * pi)
-        return np.array([cos(theta), sin(theta)])
+        return array([cos(theta), sin(theta)])
         
     else: assert False, 'Not implemented'
-
-
-@contract(returns='unit_quaternion')
-def random_quaternion():
-    ''' Generate a random quaternion.
-        
-        Uses the algorithm used in Kuffner, ICRA'04.
-    '''
-    s = uniform()
-    sigma1 = sqrt(1 - s)
-    sigma2 = sqrt(s)
-    theta1 = uniform() * 2 * pi
-    theta2 = uniform() * 2 * pi
-
-    q = np.array([cos(theta2) * sigma2,
-                  sin(theta1) * sigma1,
-                  cos(theta1) * sigma1,
-                  sin(theta2) * sigma2 ])
-    
-    q *= np.sign(q[0])
-    return q
-
-@contract(returns='array[2x2]|rotation_matrix', ndim='2|3')
-def random_rotation(ndim=3):
-    ''' Generate a random rotation matrix. 
-        
-        This is a wrapper around :py:func:`random_quaternion`.
-    '''
-    if ndim == 3:
-        q = random_quaternion()
-        return rotation_from_quaternion(q)
-    elif ndim == 2:
-        return rot2d(uniform(0, 2 * pi))
-    else: assert False
-
-@contract(returns='array[3x3], orthogonal')
-def random_orthogonal_transform():
-    # TODO: to write
-    assert False, 'Not implemented'
-
 
 @contract(N='int,>0,N', ndim="2|3", returns='array[3xN]')
 def random_directions(N, ndim=3):
     ''' Returns a set of random directions. '''
-    return np.vstack([random_direction(ndim) for i in range(N)]).T #@UnusedVariable
+    return vstack([random_direction(ndim) for i in range(N)]).T #@UnusedVariable
 
 @contract(s='direction', returns='direction')
 def any_distant_direction(s):
@@ -94,6 +140,8 @@ def any_orthogonal_direction(s):
 @contract(s='array[K],unit_length', returns='array[K],unit_length')
 def random_orthogonal_direction(s):
     ''' Returns a random axis orthogonal to *s*. '''
+    from .rotations import rot2d, rotation_from_axis_angle
+
     if s.size == 2:
         theta = np.sign(uniform() - 0.5) * pi / 2
         return dot(rot2d(theta), s)
@@ -120,6 +168,8 @@ def random_directions_bounded(ndim, radius, num_points, center=None):
         The points will be distributed uniformly in that area of the sphere.
         If *center* is not passed, it will be a random direction. 
     '''
+    from .rotations import rot2d, rotation_from_axis_angle
+
     if center is None:
         center = random_direction(ndim)
         
@@ -179,3 +229,31 @@ def sorted_directions(S, num_around=15):
         ordered = S[:, order]
         return ordered
     
+def sphere_area(r=1):
+    ''' Returns the area of a sphere of the given radius. ''' 
+    return 4 * pi * (r ** 2)
+
+def spherical_cap_area(cap_radius):
+    ''' 
+        Returns the area of a spherical cap on the unit sphere 
+        of the given radius. 
+    
+        See figure at http://mathworld.wolfram.com/SphericalCap.html
+    '''
+    h = 1 - cos(cap_radius)
+    a = sin(cap_radius)
+    A = pi * (a ** 2 + h ** 2)
+    return A
+
+def spherical_cap_with_area(cap_area):
+    ''' 
+        Returns the radius of a spherical cap of the given area. 
+    
+        See http://www.springerlink.com/content/3521h167300g7v62/
+    '''
+    A = cap_area
+    L = sqrt(A / pi)
+    h = L ** 2 / 2
+    r = arccos(1 - h)
+    return r
+

@@ -1,5 +1,5 @@
-from . import DifferentiableManifold, np, assert_allclose
-from contracts import contract
+from . import DifferentiableManifold, np, assert_allclose, contract
+
 
 class Euclidean(DifferentiableManifold):
     ''' 
