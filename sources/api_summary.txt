@@ -8,7 +8,7 @@ PyGeometry API
 ========================
 
 
-Usage notes
+Design notes
 -----------
 
 * No fancy OO-overdose here. Geometric objects (rotation matrices, poses, etc.) are represented using vanilla 
@@ -24,20 +24,6 @@ Usage notes
 * Most functions declare contracts among parameters and return values using the PyContracts_ library. This is slightly paranoid. You can disable all those checks using  ``contracts.disable_all()``.
 
 
-Naming conventions
-++++++++++++++++++
-    
-The naming conventions for conversion operations is::
-
-  x = <X>_from_<Y>(y)
-
-For example::
-
-  R = rotation_from_axis_angle(axis, angle)
-  axis, angle = axis_angle_from_rotation(R)
-  R = rotation_from_quaternion(q)
-
-
 Namespace
 ++++++++++++++++++
 
@@ -47,9 +33,24 @@ However, in this API documentation, the full path to the module is shown. For ex
 
     from geometry import rotation_from_axis_angle
 
-The following will import all functions and classes: ::
+In fact, this will import all functions and classes: ::
 
     from geometry import *
+
+
+Naming conventions
+++++++++++++++++++
+    
+The naming conventions for conversion operations is::
+
+    x = <X>_from_<Y>(y)
+
+For example: ::
+
+    R = rotation_from_axis_angle(axis, angle)
+    axis, angle = axis_angle_from_rotation(R)
+    R = rotation_from_quaternion(q)
+
 
 
 Manifolds interface 

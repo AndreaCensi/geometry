@@ -50,8 +50,8 @@
             
   <div class="section" id="pygeometry-api">
 <span id="api"></span><h1>PyGeometry API<a class="headerlink" href="#pygeometry-api" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="usage-notes">
-<h2>Usage notes<a class="headerlink" href="#usage-notes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="design-notes">
+<h2>Design notes<a class="headerlink" href="#design-notes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>No fancy OO-overdose here. Geometric objects (rotation matrices, poses, etc.) are represented using vanilla
 Numpy array: there&#8217;s no class Rotation, Pose, etc. If you don&#8217;t think this is a good
@@ -61,6 +61,18 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <li>Manifolds objects &#8220;know&#8221; how to compute distances, interpolate, etc. This makes sense: for example, the interpolation between the identity and a rotation matrix depends on whether you are considering them as elements of <em>GL(n)</em> or <em>SO(n)</em>.</li>
 <li>Most functions declare contracts among parameters and return values using the <a class="reference external" href="http://andreacensi.github.com/contracts/">PyContracts</a> library. This is slightly paranoid. You can disable all those checks using  <tt class="docutils literal"><span class="pre">contracts.disable_all()</span></tt>.</li>
 </ul>
+<div class="section" id="namespace">
+<h3>Namespace<a class="headerlink" href="#namespace" title="Permalink to this headline">¶</a></h3>
+<p>Every symbol is imported in the <tt class="docutils literal"><span class="pre">geometry</span></tt> module.</p>
+<p>However, in this API documentation, the full path to the module is shown. For example, <tt class="docutils literal"><span class="pre">rotation_from_axis_angle</span></tt> is defined in the module <tt class="docutils literal"><span class="pre">geometry.rotations</span></tt>, but you can import it as such:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">rotation_from_axis_angle</span>
+</pre></div>
+</div>
+<p>In fact, this will import all functions and classes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="naming-conventions">
 <h3>Naming conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h3>
 <p>The naming conventions for conversion operations is:</p>
@@ -70,18 +82,6 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">R</span> <span class="o">=</span> <span class="n">rotation_from_axis_angle</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
 <span class="n">axis</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">axis_angle_from_rotation</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
 <span class="n">R</span> <span class="o">=</span> <span class="n">rotation_from_quaternion</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="namespace">
-<h3>Namespace<a class="headerlink" href="#namespace" title="Permalink to this headline">¶</a></h3>
-<p>Every symbol is imported in the <tt class="docutils literal"><span class="pre">geometry</span></tt> module.</p>
-<p>However, in this API documentation, the full path to the module is shown. For example, <tt class="docutils literal"><span class="pre">rotation_from_axis_angle</span></tt> is defined in the module <tt class="docutils literal"><span class="pre">geometry.rotations</span></tt>, but you can import it as such:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">rotation_from_axis_angle</span>
-</pre></div>
-</div>
-<p>The following will import all functions and classes:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 </div>
@@ -489,9 +489,9 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">PyGeometry API</a><ul>
-<li><a class="reference internal" href="#usage-notes">Usage notes</a><ul>
-<li><a class="reference internal" href="#naming-conventions">Naming conventions</a></li>
+<li><a class="reference internal" href="#design-notes">Design notes</a><ul>
 <li><a class="reference internal" href="#namespace">Namespace</a></li>
+<li><a class="reference internal" href="#naming-conventions">Naming conventions</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#manifolds-interface">Manifolds interface</a><ul>
