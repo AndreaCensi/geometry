@@ -22,17 +22,34 @@ Usage notes
 * Manifolds objects "know" how to compute distances, interpolate, etc. This makes sense: for example, the interpolation between the identity and a rotation matrix depends on whether you are considering them as elements of *GL(n)* or *SO(n)*.
   
 * Most functions declare contracts among parameters and return values using the PyContracts_ library. This is slightly paranoid. You can disable all those checks using  ``contracts.disable_all()``.
-    
-* The naming conventions for conversion operations is::
 
-      x = <X>_from_<Y>(y)
-    
-  For example::
-  
-      R = rotation_from_axis_angle(axis, angle)
-      axis, angle = axis_angle_from_rotation(R)
-      R = rotation_from_quaternion(q)
 
+Naming conventions
+++++++++++++++++++
+    
+The naming conventions for conversion operations is::
+
+  x = <X>_from_<Y>(y)
+
+For example::
+
+  R = rotation_from_axis_angle(axis, angle)
+  axis, angle = axis_angle_from_rotation(R)
+  R = rotation_from_quaternion(q)
+
+
+Namespace
+++++++++++++++++++
+
+Every symbol is imported in the ``geometry`` module.
+
+However, in this API documentation, the full path to the module is shown. For example, ``rotation_from_axis_angle`` is defined in the module ``geometry.rotations``, but you can import it as such: ::
+
+    from geometry import rotation_from_axis_angle
+
+The following will import all functions and classes: ::
+
+    from geometry import *
 
 
 Manifolds interface 
@@ -57,21 +74,23 @@ Manifold class:
 
     geometry.manifolds.sphere.Sphere
     
-Instances:
+Instances: 
 
-.. autosummary::
-   :toctree: api
-
-    geometry.manifolds.S1
-    geometry.manifolds.S2
-
+.. py:data:: geometry.manifolds.S1 
+    
+    S1: Unit circle (2D vectors of norm 1).
+    
+.. py:data:: geometry.manifolds.S2 
+    
+    S2: Unit sphere (3D vectors of norm 1)
+    
+ 
 Contracts (PyContracts_) and checks:
 
 .. autosummary::
    :toctree: api
 
     geometry.spheres.assert_orthogonal
-    geometry.spheres.orthogonal
     geometry.spheres.unit_length
     geometry.spheres.directions
 
@@ -113,13 +132,23 @@ Manifold classes:
 
 Instances:
 
-.. autosummary::
-   :toctree: api
-
-    geometry.manifolds.SO2
-    geometry.manifolds.SO3
-    geometry.manifolds.so2
-    geometry.manifolds.so3
+.. py:data:: geometry.manifolds.SO2 
+    
+    SO(2): 2x2 rotation matrices
+    
+.. py:data:: geometry.manifolds.SO3 
+    
+    SO(3): 3x3 rotation matrices
+    
+.. py:data:: geometry.manifolds.so2 
+    
+    Lie algebra for SO(2): 2x2 skew-symmetric matrices
+    
+.. py:data:: geometry.manifolds.so3 
+    
+    Lie algebra for SO(3): 3x3 skew-symmetric matrices
+    
+    
     
 Contracts and checks:
 
@@ -128,6 +157,7 @@ Contracts and checks:
 
     geometry.rotations.rotation_matrix
     geometry.rotations.skew_symmetric
+    geometry.rotations.orthogonal
 
 Conversions functions:
 
@@ -168,13 +198,23 @@ Manifold classes:
 
 Instances:
 
-.. autosummary::
-   :toctree: api
 
-    geometry.manifolds.SE2
-    geometry.manifolds.SE3
-    geometry.manifolds.se2
-    geometry.manifolds.se3
+.. py:data:: geometry.manifolds.SE2 
+    
+    SE(2): 2D poses
+    
+.. py:data:: geometry.manifolds.SE3 
+    
+    SE(3): 3D poses
+    
+.. py:data:: geometry.manifolds.se2 
+    
+    Lie algebra for SE(2).
+    
+.. py:data:: geometry.manifolds.se3 
+    
+    Lie algebra for SE(3).
+    
     
 Conversions:
 
