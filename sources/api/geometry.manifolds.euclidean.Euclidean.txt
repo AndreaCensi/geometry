@@ -1,0 +1,6 @@
+geometry.manifolds.euclidean.Euclidean
+======================================
+
+.. currentmodule:: geometry.manifolds.euclidean
+
+.. autodata:: Euclidean

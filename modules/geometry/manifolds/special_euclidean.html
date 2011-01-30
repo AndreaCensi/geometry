@@ -1,0 +1,159 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>geometry.manifolds.special_euclidean &mdash; PyGeometry v0.9.2 documentation</title>
+    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.9.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="PyGeometry v0.9.2 documentation" href="../../../index.html" />
+    <link rel="up" title="geometry.manifolds" href="../manifolds.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../../index.html">PyGeometry v0.9.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../manifolds.html" accesskey="U">geometry.manifolds</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for geometry.manifolds.special_euclidean</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">contracts</span> <span class="kn">import</span> <span class="n">contract</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">MatrixLieGroup</span><span class="p">,</span> <span class="n">np</span><span class="p">,</span> <span class="n">MatrixLieAlgebra</span><span class="p">,</span> <span class="n">SO</span><span class="p">,</span> <span class="n">so</span><span class="p">,</span> <span class="n">Euclidean</span>
+
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span>  <span class="p">(</span><span class="n">assert_allclose</span><span class="p">,</span>
+                       <span class="n">pose_from_rotation_translation</span><span class="p">,</span>
+                           <span class="n">rotation_translation_from_pose</span><span class="p">,</span>
+                           <span class="n">extract_pieces</span><span class="p">,</span> <span class="n">combine_pieces</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">se</span><span class="p">(</span><span class="n">MatrixLieAlgebra</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; This is the Lie algebra se(n) for the Special Euclidean group SE(n). </span>
+<span class="sd">    </span>
+<span class="sd">        Note that you have to supply a coefficient *alpha* that</span>
+<span class="sd">        weights rotation and translation when defining distances. </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+        <span class="n">MatrixLieAlgebra</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">son</span> <span class="o">=</span> <span class="n">so</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">W</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">zero</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="c">#@UnusedVariable</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">son</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">W</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">zero</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="c">#@UnusedVariable</span>
+        <span class="n">W</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">son</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">combine_pieces</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">v</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;se(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+        
+
+<div class="viewcode-block" id="SE"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_euclidean.SE.html#geometry.manifolds.special_euclidean.SE">[docs]</a><span class="k">class</span> <span class="nc">SE</span><span class="p">(</span><span class="n">MatrixLieGroup</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        This is the Special Euclidean group SE(n) </span>
+<span class="sd">        describing roto-translations of Euclidean space.</span>
+<span class="sd">        Implemented only for n=2,3.</span>
+<span class="sd">        </span>
+<span class="sd">        Note that you have to supply a coefficient *alpha* that</span>
+<span class="sd">        weights rotation and translation when defining distances. </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="s">&#39;int,(2|3)&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="s">&#39;&gt;0&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">algebra</span> <span class="o">=</span> <span class="n">se</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+        <span class="n">MatrixLieGroup</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">algebra</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SOn</span> <span class="o">=</span> <span class="n">SO</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">En</span> <span class="o">=</span> <span class="n">Euclidean</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;SE(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">belongs_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c">#@UnusedVariable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SOn</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+        <span class="n">assert_allclose</span><span class="p">(</span><span class="n">zero</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="s">&#39;I expect the lower row to be 0.&#39;</span><span class="p">)</span> 
+        <span class="n">assert_allclose</span><span class="p">(</span><span class="n">one</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">En</span><span class="o">.</span><span class="n">sample_uniform</span><span class="p">()</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOn</span><span class="o">.</span><span class="n">sample_uniform</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">pose_from_rotation_translation</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+            
+    <span class="k">def</span> <span class="nf">friendly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">R</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">rotation_translation_from_pose</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&#39;Pose(</span><span class="si">%s</span><span class="s">,</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SOn</span><span class="o">.</span><span class="n">friendly</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">En</span><span class="o">.</span><span class="n">friendly</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+        
+                
+    </div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../../index.html">PyGeometry v0.9.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../manifolds.html" >geometry.manifolds</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

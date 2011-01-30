@@ -1,0 +1,103 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>geometry.manifolds.matrix_lie_group.MatrixLieAlgebra &mdash; PyGeometry v0.9.2 documentation</title>
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="PyGeometry v0.9.2 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">PyGeometry v0.9.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="geometry-manifolds-matrix-lie-group-matrixliealgebra">
+<h1>geometry.manifolds.matrix_lie_group.MatrixLieAlgebra<a class="headerlink" href="#geometry-manifolds-matrix-lie-group-matrixliealgebra" title="Permalink to this headline">¶</a></h1>
+<dl class="data">
+<dt id="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra">
+<tt class="descclassname">geometry.manifolds.matrix_lie_group.</tt><tt class="descname">MatrixLieAlgebra</tt><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieAlgebra"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the base class for Matrix Lie Algebra.</p>
+<p>It is understood that it is composed by square matrices.</p>
+<p>The only function that <em>has</em> to be implemented is the 
+<tt class="xref py py-func docutils literal"><span class="pre">project()</span></tt> function that projects a square matrix
+onto the algebra. This function is used both for checking
+that a vector is in the algebra (see <tt class="xref py py-func docutils literal"><span class="pre">belongs()</span></tt>)
+and to mitigate the numerical errors.</p>
+<p>You probably also want to implement <tt class="xref py py-func docutils literal"><span class="pre">norm()</span></tt> if
+the default is not what you want.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/api/geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html">PyGeometry v0.9.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

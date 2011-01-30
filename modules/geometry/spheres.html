@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>geometry.spheres &mdash; PyGeometry v0.9.2 documentation</title>
+    <link rel="stylesheet" href="../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <link rel="top" title="PyGeometry v0.9.2 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../index.html">PyGeometry v0.9.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for geometry.spheres</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="p">(</span><span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">arccos</span><span class="p">,</span> <span class="n">clip</span><span class="p">,</span> <span class="n">safe_arccos</span><span class="p">,</span> <span class="n">normalize_length</span><span class="p">,</span>
+               <span class="n">contract</span><span class="p">,</span> <span class="n">new_contract</span><span class="p">,</span> <span class="n">assert_allclose</span><span class="p">,</span> <span class="n">np</span><span class="p">,</span> <span class="n">dot</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span>
+               <span class="n">array</span><span class="p">,</span> <span class="n">uniform</span><span class="p">,</span> <span class="n">vstack</span><span class="p">,</span> <span class="n">argmin</span><span class="p">)</span>
+
+<span class="nd">@new_contract</span>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;array[N],N&gt;0&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="unit_length"><a class="viewcode-back" href="../../api/geometry.spheres.unit_length.html#geometry.spheres.unit_length">[docs]</a><span class="k">def</span> <span class="nf">unit_length</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Checks that the value is a 1D vector with unit length in the 2 norm.&#39;&#39;&#39;</span>
+    <span class="n">assert_allclose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span> <span class="c"># XXX:</span>
+</div>
+<span class="n">new_contract</span><span class="p">(</span><span class="s">&#39;direction&#39;</span><span class="p">,</span> <span class="s">&#39;array[3], unit_length&#39;</span><span class="p">)</span>
+
+<span class="nd">@new_contract</span>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="s">&#39;array[KxN],K&gt;0,N&gt;0&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="directions"><a class="viewcode-back" href="../../api/geometry.spheres.directions.html#geometry.spheres.directions">[docs]</a><span class="k">def</span> <span class="nf">directions</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Checks that every column has unit length. &#39;&#39;&#39;</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">assert_allclose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">norm</span> <span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span> <span class="c"># XXX:</span>
+        
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="s">&#39;array[K],K&gt;=2&#39;</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="s">&#39;array[K]&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="assert_orthogonal"><a class="viewcode-back" href="../../api/geometry.spheres.assert_orthogonal.html#geometry.spheres.assert_orthogonal">[docs]</a><span class="k">def</span> <span class="nf">assert_orthogonal</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Checks that two vectors are orthogonal. &#39;&#39;&#39;</span>
+    <span class="n">dot</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">dot</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">dot</span> <span class="o">/</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Angle is </span><span class="si">%.2f</span><span class="s"> deg between </span><span class="si">%s</span><span class="s"> and </span><span class="si">%s</span><span class="s">.&#39;</span> 
+               <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span> 
+        <span class="n">assert_allclose</span><span class="p">(</span><span class="n">dot</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
+    </div>
+<span class="k">def</span> <span class="nf">normalize_pi</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Normalizes the entries in *x* in the interval :math:`[-pi,pi)`. &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+
+<span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s">&#39;direction&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">default_axis</span><span class="p">():</span> 
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Returns the axis to use when any will do. </span>
+<span class="sd">        </span>
+<span class="sd">        For example, the identity is represented by</span>
+<span class="sd">        a rotation of 0 degrees around *any* axis. If an *(axis,angle)*</span>
+<span class="sd">        representation is requested, the axis will be given by</span>
+<span class="sd">        *default_axis()*. </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span>  <span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+
+<span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s">&#39;direction&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">default_axis_orthogonal</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Returns an axis orthogonal to the one returned </span>
+<span class="sd">        by :py:func:`default_axis`. </span>
+<span class="sd">        </span>
+<span class="sd">        Use this when you need a couple of arbitrary orthogonal axes.</span>
+<span class="sd">    &#39;&#39;&#39;</span>  
+    <span class="k">return</span>  <span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+
+<span class="nd">@contract</span><span class="p">(</span><span class="n">s1</span><span class="o">=</span><span class="s">&#39;array[K],unit_length&#39;</span><span class="p">,</span>
+           <span class="n">s2</span><span class="o">=</span><span class="s">&#39;array[K],unit_length&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">&#39;float,&gt;=0,&lt;=pi&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="geodesic_distance_on_sphere"><a class="viewcode-back" href="../../api/geometry.spheres.geodesic_distance_on_sphere.html#geometry.spheres.geodesic_distance_on_sphere">[docs]</a><span class="k">def</span> <span class="nf">geodesic_distance_on_sphere</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Returns the geodesic distance between two points on the sphere. &#39;&#39;&#39;</span>
+    <span class="c"># special case: return a 0 (no precision issues) if the vectors are the same</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span> <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="n">dot_product</span> <span class="o">=</span> <span class="p">(</span><span class="n">s1</span> <span class="o">*</span> <span class="n">s2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">safe_arccos</span><span class="p">(</span><span class="n">dot_product</span><span class="p">)</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="s">&#39;directions&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">&#39;float,&gt;=0,&lt;=pi&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="distribution_radius"><a class="viewcode-back" href="../../api/geometry.spheres.distribution_radius.html#geometry.spheres.distribution_radius">[docs]</a><span class="k">def</span> <span class="nf">distribution_radius</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Returns the radius of the given directions distribution.</span>
+<span class="sd">        </span>
+<span class="sd">        The radius is defined as the minimum *r* such that there exists a </span>
+<span class="sd">        point *s* in *S* such that all distances are within *r* from *s*. </span>
+<span class="sd">        </span>
+<span class="sd">        .. math:: \\textsf{radius} = \\min \\{ r | \\exists s :  \\forall x \\in S : d(s,x) &lt;= r \\}</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">arccos</span><span class="p">(</span><span class="n">clip</span><span class="p">(</span><span class="n">dot</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">S</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">argmin</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="n">distances</span><span class="p">[</span><span class="n">center</span><span class="p">]</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="s">&#39;array[3xK],directions&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="s">&#39;direction&#39;</span><span class="p">,</span>
+           <span class="n">returns</span><span class="o">=</span><span class="s">&#39;array[K](&gt;=0,&lt;=pi)&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="distances_from"><a class="viewcode-back" href="../../api/geometry.spheres.distances_from.html#geometry.spheres.distances_from">[docs]</a><span class="k">def</span> <span class="nf">distances_from</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Returns the geodesic distances on the sphere from a set of</span>
+<span class="sd">        points *S* to a given point *s*. </span>
+<span class="sd">        </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">arccos</span><span class="p">(</span><span class="n">clip</span><span class="p">(</span><span class="n">dot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">S</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    
+    </div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">ndim</span><span class="o">=</span><span class="s">&#39;(2|3),K&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">&#39;array[K],unit_length&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="random_direction"><a class="viewcode-back" href="../../api/geometry.spheres.random_direction.html#geometry.spheres.random_direction">[docs]</a><span class="k">def</span> <span class="nf">random_direction</span><span class="p">(</span><span class="n">ndim</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Generates a random direction in :math:`\\sphere^{\\ndim-1}`. </span>
+<span class="sd">    </span>
+<span class="sd">        Currently only implemented for 2D and 3D.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">z</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">array</span><span class="p">([</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)])</span>
+        
+    <span class="k">else</span><span class="p">:</span> <span class="k">assert</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&#39;Not implemented&#39;</span>
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="s">&#39;int,&gt;0,N&#39;</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="s">&quot;2|3&quot;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">&#39;array[3xN]&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="random_directions"><a class="viewcode-back" href="../../api/geometry.spheres.random_directions.html#geometry.spheres.random_directions">[docs]</a><span class="k">def</span> <span class="nf">random_directions</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Returns a set of random directions. &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">vstack</span><span class="p">([</span><span class="n">random_direction</span><span class="p">(</span><span class="n">ndim</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span> <span class="c">#@UnusedVariable</span>
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="s">&#39;direction&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">&#39;direction&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="any_distant_direction"><a class="viewcode-back" href="../../api/geometry.spheres.any_distant_direction.html#geometry.spheres.any_distant_direction">[docs]</a><span class="k">def</span> <span class="nf">any_distant_direction</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Returns a direction distant from both *s* and *-s*. &#39;&#39;&#39;</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">default_axis</span><span class="p">()</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">geodesic_distance_on_sphere</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+    <span class="n">limit</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="n">pi</span>
+    <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">pi</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">limit</span><span class="p">:</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">default_axis_orthogonal</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">z</span>
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="s">&#39;direction&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">&#39;direction&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="any_orthogonal_direction"><a class="viewcode-back" href="../../api/geometry.spheres.any_orthogonal_direction.html#geometry.spheres.any_orthogonal_direction">[docs]</a><span class="k">def</span> <span class="nf">any_orthogonal_direction</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Returns any axis orthogonal to *s* (not necessarily random). &#39;&#39;&#39;</span>
+    <span class="c"># choose a vector far away</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">any_distant_direction</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="c"># z ^ s is orthogonal to s</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">v</span>
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="s">&#39;array[K],unit_length&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">&#39;array[K],unit_length&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="random_orthogonal_direction"><a class="viewcode-back" href="../../api/geometry.spheres.random_orthogonal_direction.html#geometry.spheres.random_orthogonal_direction">[docs]</a><span class="k">def</span> <span class="nf">random_orthogonal_direction</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Returns a random axis orthogonal to *s*. &#39;&#39;&#39;</span>
+    <span class="kn">from</span> <span class="nn">.rotations</span> <span class="kn">import</span> <span class="n">rot2d</span><span class="p">,</span> <span class="n">rotation_from_axis_angle</span>
+
+    <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">uniform</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="n">dot</span><span class="p">(</span><span class="n">rot2d</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">s</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">s</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="c"># get any axis orthogonal to s</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">any_orthogonal_direction</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="c"># rotate this axis around s by a random amount</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">)</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">rotation_from_axis_angle</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+        <span class="n">z2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">z2</span>
+    <span class="k">else</span><span class="p">:</span> <span class="k">assert</span> <span class="bp">False</span>
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">ndim</span><span class="o">=</span><span class="s">&#39;(2|3),K&#39;</span><span class="p">,</span>
+           <span class="n">radius</span><span class="o">=</span><span class="s">&#39;number,&gt;0,&lt;=pi&#39;</span><span class="p">,</span>
+           <span class="n">num_points</span><span class="o">=</span><span class="s">&#39;int,&gt;0&#39;</span><span class="p">,</span>
+           <span class="n">center</span><span class="o">=</span><span class="s">&#39;None|(array[K],unit_length)&#39;</span><span class="p">,</span>
+           <span class="n">returns</span><span class="o">=</span><span class="s">&#39;array[KxN],directions&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="random_directions_bounded"><a class="viewcode-back" href="../../api/geometry.spheres.random_directions_bounded.html#geometry.spheres.random_directions_bounded">[docs]</a><span class="k">def</span> <span class="nf">random_directions_bounded</span><span class="p">(</span><span class="n">ndim</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">num_points</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns a random distribution of points in :math:`\\sphere^{\\ndim-1}`.</span>
+<span class="sd">        within a certain radius from the point *center*. </span>
+<span class="sd">        </span>
+<span class="sd">        The points will be distributed uniformly in that area of the sphere.</span>
+<span class="sd">        If *center* is not passed, it will be a random direction. </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="kn">from</span> <span class="nn">.rotations</span> <span class="kn">import</span> <span class="n">rot2d</span><span class="p">,</span> <span class="n">rotation_from_axis_angle</span>
+
+    <span class="k">if</span> <span class="n">center</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">random_direction</span><span class="p">(</span><span class="n">ndim</span><span class="p">)</span>
+        
+    <span class="n">directions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">ndim</span><span class="p">,</span> <span class="n">num_points</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_points</span><span class="p">):</span>
+        <span class="c"># move the center of a random amount </span>
+        <span class="k">if</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="c"># sample axis orthogonal to the center</span>
+            <span class="n">axis</span> <span class="o">=</span> <span class="n">random_orthogonal_direction</span><span class="p">(</span><span class="n">center</span><span class="p">)</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">spherical_cap_area</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="n">spherical_cap_with_area</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+            <span class="n">R</span> <span class="o">=</span> <span class="n">rotation_from_axis_angle</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+            <span class="n">R</span> <span class="o">=</span> <span class="n">rot2d</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="k">assert</span> <span class="bp">False</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+        <span class="n">directions</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">direction</span>
+        
+    <span class="k">return</span> <span class="n">sorted_directions</span><span class="p">(</span><span class="n">directions</span><span class="p">)</span>
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="s">&#39;array[KxN],(K=2|K=3),directions&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">&#39;array[KxN], directions&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="sorted_directions"><a class="viewcode-back" href="../../api/geometry.spheres.sorted_directions.html#geometry.spheres.sorted_directions">[docs]</a><span class="k">def</span> <span class="nf">sorted_directions</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">num_around</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Rearranges the directions in *S* in a better order for visualization.</span>
+<span class="sd">    </span>
+<span class="sd">        In 2D, sorts the directions using their angle. </span>
+<span class="sd">        </span>
+<span class="sd">        In 3D, it tries to do a pleasant elicoidal arrangement </span>
+<span class="sd">        with **num_around** spires.</span>
+<span class="sd">        </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">S</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c"># XXX check nonzero</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> 
+        <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">diffs</span> <span class="o">=</span> <span class="n">normalize_pi</span><span class="p">(</span><span class="n">angles</span> <span class="o">-</span> <span class="n">center</span><span class="p">)</span>
+        <span class="nb">sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">diffs</span><span class="p">)</span>
+        <span class="n">final</span> <span class="o">=</span> <span class="n">center</span> <span class="o">+</span> <span class="nb">sorted</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">final</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">final</span><span class="p">)))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># find center of distribution</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">normalize_length</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="c"># compute the distances from the center</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="n">distances_from</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+        <span class="c"># compute the phase from an arbitrary axis</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="n">any_orthogonal_direction</span><span class="p">(</span><span class="n">center</span><span class="p">)</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="n">distances_from</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+        <span class="c"># normalize distances and phase in [0,1]</span>
+        <span class="n">phase</span> <span class="o">=</span> <span class="p">(</span><span class="n">normalize_pi</span><span class="p">(</span><span class="n">phase</span><span class="p">)</span> <span class="o">+</span> <span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="p">)</span>
+        <span class="n">distance</span> <span class="o">/=</span> <span class="n">distance</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        
+        <span class="n">score</span> <span class="o">=</span> <span class="n">distance</span> <span class="o">*</span> <span class="n">num_around</span> <span class="o">+</span> <span class="n">phase</span>
+        
+        <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+        
+        <span class="n">ordered</span> <span class="o">=</span> <span class="n">S</span><span class="p">[:,</span> <span class="n">order</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">ordered</span>
+    </div>
+<span class="k">def</span> <span class="nf">sphere_area</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Returns the area of a sphere of the given radius. &#39;&#39;&#39;</span> 
+    <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">spherical_cap_area</span><span class="p">(</span><span class="n">cap_radius</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Returns the area of a spherical cap on the unit sphere </span>
+<span class="sd">        of the given radius. </span>
+<span class="sd">    </span>
+<span class="sd">        See figure at http://mathworld.wolfram.com/SphericalCap.html</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">cos</span><span class="p">(</span><span class="n">cap_radius</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">cap_radius</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">A</span>
+
+<span class="k">def</span> <span class="nf">spherical_cap_with_area</span><span class="p">(</span><span class="n">cap_area</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Returns the radius of a spherical cap of the given area. </span>
+<span class="sd">    </span>
+<span class="sd">        See http://www.springerlink.com/content/3521h167300g7v62/</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">cap_area</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">A</span> <span class="o">/</span> <span class="n">pi</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">L</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">arccos</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">r</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../index.html">PyGeometry v0.9.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

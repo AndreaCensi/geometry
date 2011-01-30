@@ -1,0 +1,6 @@
+geometry.manifolds.special_orthogonal.SO
+========================================
+
+.. currentmodule:: geometry.manifolds.special_orthogonal
+
+.. autodata:: SO

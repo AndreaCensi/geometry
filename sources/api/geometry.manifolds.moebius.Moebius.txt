@@ -1,0 +1,6 @@
+geometry.manifolds.moebius.Moebius
+==================================
+
+.. currentmodule:: geometry.manifolds.moebius
+
+.. autodata:: Moebius

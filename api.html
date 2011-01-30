@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>PyGeometry API &mdash; PyGeometry 0.9.1 documentation</title>
+    <title>PyGeometry API details &mdash; PyGeometry 0.9.2 documentation</title>
     
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.9.1',
+        VERSION:     '0.9.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="PyGeometry 0.9.1 documentation" href="index.html" /> 
+    <link rel="top" title="PyGeometry 0.9.2 documentation" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -40,7 +40,7 @@
         <li class="right" >
           <a href="np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">PyGeometry 0.9.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">PyGeometry 0.9.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -49,100 +49,10 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="pygeometry-api">
-<span id="api"></span><h1>PyGeometry API<a class="headerlink" href="#pygeometry-api" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="usage-notes">
-<h2>Usage notes<a class="headerlink" href="#usage-notes" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p class="first">No fancy OO-overdose here. Geometric objects (rotation matrices, poses, etc.) are represented using vanilla
-Numpy array: there&#8217;s no class Rotation, Pose, etc. If you don&#8217;t think this is a good
-idea, your mind has been spoiled by C++ or Java classes taught by clueless professors.</p>
-</li>
-<li><p class="first">The main procedures are implemented as simple functions accepting and returning numpy arrays.
-Manifolds are implemented using classes that wrap the simple functions.</p>
-</li>
-<li><p class="first">Manifolds objects &#8220;know&#8221; how to compute distances, interpolate, etc. This makes sense: for example, the interpolation between the identity and a rotation matrix depends on whether you are considering them as elements of <em>GL(n)</em> or <em>SO(n)</em>.</p>
-</li>
-<li><p class="first">Most functions declare contracts among parameters and return values using the <a class="reference external" href="http://andreacensi.github.com/contracts/">PyContracts</a> library. This is slightly paranoid. You can disable all those checks using  <tt class="docutils literal"><span class="pre">contracts.disable_all()</span></tt>.</p>
-</li>
-<li><p class="first">The naming conventions for conversion operations is:</p>
-<div class="highlight-python"><pre>x = &lt;X&gt;_from_&lt;Y&gt;(y)</pre>
-</div>
-<p>For example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">R</span> <span class="o">=</span> <span class="n">rotation_from_axis_angle</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
-<span class="n">axis</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">axis_angle_from_rotation</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
-<span class="n">R</span> <span class="o">=</span> <span class="n">rotation_from_quaternion</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-</ul>
-<span class="target" id="module-geometry"></span></div>
+  <div class="section" id="module-geometry">
+<span id="pygeometry-api-details"></span><span id="api-details"></span><h1>PyGeometry API details<a class="headerlink" href="#module-geometry" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="s-n-hyperspheres">
 <h2>S(n) - Hyperspheres<a class="headerlink" href="#s-n-hyperspheres" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="geometry.geodesic_distance_on_sphere">
-<tt class="descclassname">geometry.</tt><tt class="descname">geodesic_distance_on_sphere</tt><big>(</big><em>s1</em>, <em>s2</em><big>)</big><a class="headerlink" href="#geometry.geodesic_distance_on_sphere" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the geodesic distance between two points on the sphere.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>s2</strong> (<tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt>) &#8211; </li>
-<li><strong>s1</strong> (<tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt>) &#8211; </li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="geometry.distribution_radius">
-<tt class="descclassname">geometry.</tt><tt class="descname">distribution_radius</tt><big>(</big><em>S</em><big>)</big><a class="headerlink" href="#geometry.distribution_radius" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the radius of the given directions distribution.</p>
-<blockquote>
-<div><p>The radius is defined as the minimum <em>r</em> such that there exists a 
-point <em>s</em> in <em>S</em> such that all distances are within <em>r</em> from <em>s</em>.</p>
-<div class="math">
-<p><img src="images/math/ef2f4630587a8421e15d078bda456e50cc8231f3.png" alt="\textsf{radius} = \min \{ r | \exists s :  \forall x \in S : d(s,x) &lt;= r \}"/></p>
-</div></div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>S</strong> (<tt class="docutils literal"><span class="pre">directions</span></tt>) &#8211; </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="geometry.sorted_directions">
-<tt class="descclassname">geometry.</tt><tt class="descname">sorted_directions</tt><big>(</big><em>S</em>, <em>num_around=15</em><big>)</big><a class="headerlink" href="#geometry.sorted_directions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rearranges the directions in <em>S</em> in a better order for visualization.</p>
-<blockquote>
-<div><p>In 2D, sorts the directions using their angle.</p>
-<p>In 3D, it tries to do a pleasant elicoidal arrangement 
-with <strong>num_around</strong> spires.</p>
-</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>S</strong> (<tt class="docutils literal"><span class="pre">array[KxN],(K=2|K=3),directions</span></tt>) &#8211; </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[KxN],directions</span></tt></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <div class="section" id="random-sampling">
 <h3>Random sampling<a class="headerlink" href="#random-sampling" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
@@ -262,12 +172,201 @@ If <em>center</em> is not passed, it will be a random direction.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="misc">
+<h3>Misc<a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="geometry.geodesic_distance_on_sphere">
+<tt class="descclassname">geometry.</tt><tt class="descname">geodesic_distance_on_sphere</tt><big>(</big><em>s1</em>, <em>s2</em><big>)</big><a class="headerlink" href="#geometry.geodesic_distance_on_sphere" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the geodesic distance between two points on the sphere.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>s2</strong> (<tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt>) &#8211; </li>
+<li><strong>s1</strong> (<tt class="docutils literal"><span class="pre">array[K],unit_length</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.distribution_radius">
+<tt class="descclassname">geometry.</tt><tt class="descname">distribution_radius</tt><big>(</big><em>S</em><big>)</big><a class="headerlink" href="#geometry.distribution_radius" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the radius of the given directions distribution.</p>
+<blockquote>
+<div><p>The radius is defined as the minimum <em>r</em> such that there exists a 
+point <em>s</em> in <em>S</em> such that all distances are within <em>r</em> from <em>s</em>.</p>
+<div class="math">
+<p><img src="images/math/ef2f4630587a8421e15d078bda456e50cc8231f3.png" alt="\textsf{radius} = \min \{ r | \exists s :  \forall x \in S : d(s,x) &lt;= r \}"/></p>
+</div></div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>S</strong> (<tt class="docutils literal"><span class="pre">directions</span></tt>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.sorted_directions">
+<tt class="descclassname">geometry.</tt><tt class="descname">sorted_directions</tt><big>(</big><em>S</em>, <em>num_around=15</em><big>)</big><a class="headerlink" href="#geometry.sorted_directions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rearranges the directions in <em>S</em> in a better order for visualization.</p>
+<blockquote>
+<div><p>In 2D, sorts the directions using their angle.</p>
+<p>In 3D, it tries to do a pleasant elicoidal arrangement 
+with <strong>num_around</strong> spires.</p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>S</strong> (<tt class="docutils literal"><span class="pre">array[KxN],(K=2|K=3),directions</span></tt>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[KxN],directions</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="manifolds-objects">
+<h3>Manifolds objects<a class="headerlink" href="#manifolds-objects" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="geometry.Sphere">
+<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Sphere</tt><big>(</big><em>order</em><big>)</big><a class="headerlink" href="#geometry.Sphere" title="Permalink to this definition">¶</a></dt>
+<dd><p>These are hyperspheres of unit radius.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Sphere.belongs_" title="geometry.Sphere.belongs_"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">distance</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Sphere.distance_" title="geometry.Sphere.distance_"><tt class="xref py py-obj docutils literal"><span class="pre">distance_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">expmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Sphere.expmap_" title="geometry.Sphere.expmap_"><tt class="xref py py-obj docutils literal"><span class="pre">expmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Sphere.friendly" title="geometry.Sphere.friendly"><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Sphere.interesting_points" title="geometry.Sphere.interesting_points"><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Sphere.logmap_" title="geometry.Sphere.logmap_"><tt class="xref py py-obj docutils literal"><span class="pre">logmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Sphere.project_ts_" title="geometry.Sphere.project_ts_"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Sphere.sample_uniform" title="geometry.Sphere.sample_uniform"><tt class="xref py py-obj docutils literal"><span class="pre">sample_uniform</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geometry.Sphere.belongs_">
+<tt class="descname">belongs_</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.Sphere.belongs_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Sphere.distance_">
+<tt class="descname">distance_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.Sphere.distance_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Sphere.expmap_">
+<tt class="descname">expmap_</tt><big>(</big><em>base</em>, <em>vel</em><big>)</big><a class="headerlink" href="#geometry.Sphere.expmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Sphere.friendly">
+<tt class="descname">friendly</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.Sphere.friendly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Sphere.interesting_points">
+<tt class="descname">interesting_points</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.Sphere.interesting_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Sphere.logmap_">
+<tt class="descname">logmap_</tt><big>(</big><em>base</em>, <em>target</em><big>)</big><a class="headerlink" href="#geometry.Sphere.logmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="geometry.Sphere.norm_rtol">
+<tt class="descname">norm_rtol</tt><em class="property"> = 1.0000000000000001e-05</em><a class="headerlink" href="#geometry.Sphere.norm_rtol" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Sphere.project_ts_">
+<tt class="descname">project_ts_</tt><big>(</big><em>base</em>, <em>x</em><big>)</big><a class="headerlink" href="#geometry.Sphere.project_ts_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.Sphere.sample_uniform">
+<tt class="descname">sample_uniform</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.Sphere.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.S1">
+<tt class="descclassname">geometry.</tt><tt class="descname">S1</tt><a class="headerlink" href="#geometry.S1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unit circle as a subset of <img class="math" src="images/math/62623d70eaa11458b42450ab31277cc88f4dbd6b.png" alt="R^2"/>.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.S2">
+<tt class="descclassname">geometry.</tt><tt class="descname">S2</tt><a class="headerlink" href="#geometry.S2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unit sphere.</p>
+</dd></dl>
+
+</div>
 </div>
 <div class="section" id="so-n-rotations-and-quaternions">
 <h2>SO(n) - Rotations and quaternions<a class="headerlink" href="#so-n-rotations-and-quaternions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="conversions">
+<h3>Conversions<a class="headerlink" href="#conversions" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
-<dt id="geometry.hat_map">
-<tt class="descclassname">geometry.</tt><tt class="descname">hat_map</tt><big>(</big><em>v</em><big>)</big><a class="headerlink" href="#geometry.hat_map" title="Permalink to this definition">¶</a></dt>
+<dt id="geometry.rotations.hat_map">
+<tt class="descclassname">geometry.rotations.</tt><tt class="descname">hat_map</tt><big>(</big><em>v</em><big>)</big><a class="reference internal" href="modules/geometry/rotations.html#hat_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.hat_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Maps a vector to a 3x3 skew symmetric matrix.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -282,9 +381,9 @@ If <em>center</em> is not passed, it will be a random direction.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="geometry.map_hat">
-<tt class="descclassname">geometry.</tt><tt class="descname">map_hat</tt><big>(</big><em>H</em><big>)</big><a class="headerlink" href="#geometry.map_hat" title="Permalink to this definition">¶</a></dt>
-<dd><p>The inverse of <a class="reference internal" href="#geometry.hat_map" title="geometry.hat_map"><tt class="xref py py-func docutils literal"><span class="pre">hat_map()</span></tt></a>.</p>
+<dt id="geometry.rotations.map_hat">
+<tt class="descclassname">geometry.rotations.</tt><tt class="descname">map_hat</tt><big>(</big><em>H</em><big>)</big><a class="reference internal" href="modules/geometry/rotations.html#map_hat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.map_hat" title="Permalink to this definition">¶</a></dt>
+<dd><p>The inverse of <tt class="xref py py-func docutils literal"><span class="pre">hat_map()</span></tt>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -298,8 +397,8 @@ If <em>center</em> is not passed, it will be a random direction.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="geometry.rotation_from_quaternion">
-<tt class="descclassname">geometry.</tt><tt class="descname">rotation_from_quaternion</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.rotation_from_quaternion" title="Permalink to this definition">¶</a></dt>
+<dt id="geometry.rotations.rotation_from_quaternion">
+<tt class="descclassname">geometry.rotations.</tt><tt class="descname">rotation_from_quaternion</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="modules/geometry/rotations.html#rotation_from_quaternion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.rotation_from_quaternion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts a quaternion to a rotation matrix.</p>
 <blockquote>
 <div>Documented in &lt;<a class="reference external" href="http://en.wikipedia.org/w/index.php?title=Quaternions_and_spatial_rotation&amp;oldid=402924915">http://en.wikipedia.org/w/index.php?title=Quaternions_and_spatial_rotation&amp;oldid=402924915</a>&gt;</div></blockquote>
@@ -316,8 +415,8 @@ If <em>center</em> is not passed, it will be a random direction.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="geometry.rotation_from_axis_angle">
-<tt class="descclassname">geometry.</tt><tt class="descname">rotation_from_axis_angle</tt><big>(</big><em>axis</em>, <em>angle</em><big>)</big><a class="headerlink" href="#geometry.rotation_from_axis_angle" title="Permalink to this definition">¶</a></dt>
+<dt id="geometry.rotations.rotation_from_axis_angle">
+<tt class="descclassname">geometry.rotations.</tt><tt class="descname">rotation_from_axis_angle</tt><big>(</big><em>axis</em>, <em>angle</em><big>)</big><a class="reference internal" href="modules/geometry/rotations.html#rotation_from_axis_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.rotation_from_axis_angle" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Computes the rotation matrix from the <em>(axis,angle)</em> representation</dt>
 <dd>using Rodriguez&#8217;s formula.</dd>
@@ -340,11 +439,11 @@ If <em>center</em> is not passed, it will be a random direction.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="geometry.rotation_from_axis_angle2">
-<tt class="descclassname">geometry.</tt><tt class="descname">rotation_from_axis_angle2</tt><big>(</big><em>axis</em>, <em>angle</em><big>)</big><a class="headerlink" href="#geometry.rotation_from_axis_angle2" title="Permalink to this definition">¶</a></dt>
+<dt id="geometry.rotations.rotation_from_axis_angle2">
+<tt class="descclassname">geometry.rotations.</tt><tt class="descname">rotation_from_axis_angle2</tt><big>(</big><em>axis</em>, <em>angle</em><big>)</big><a class="reference internal" href="modules/geometry/rotations.html#rotation_from_axis_angle2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.rotation_from_axis_angle2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the rotation from the <em>(axis,angle)</em> representation.</p>
 <blockquote>
-<div>This is an alternative to <a class="reference internal" href="#geometry.rotation_from_axis_angle" title="geometry.rotation_from_axis_angle"><tt class="xref py py-func docutils literal"><span class="pre">rotation_from_axis_angle()</span></tt></a> which
+<div>This is an alternative to <tt class="xref py py-func docutils literal"><span class="pre">rotation_from_axis_angle()</span></tt> which
 goes through the quaternion representation.</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -364,9 +463,9 @@ goes through the quaternion representation.</div></blockquote>
 </dd></dl>
 
 <dl class="function">
-<dt id="geometry.axis_angle_from_quaternion">
-<tt class="descclassname">geometry.</tt><tt class="descname">axis_angle_from_quaternion</tt><big>(</big><em>q</em><big>)</big><a class="headerlink" href="#geometry.axis_angle_from_quaternion" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is the inverse of <a class="reference internal" href="#geometry.quaternion_from_axis_angle" title="geometry.quaternion_from_axis_angle"><tt class="xref py py-func docutils literal"><span class="pre">quaternion_from_axis_angle()</span></tt></a>.</p>
+<dt id="geometry.rotations.axis_angle_from_quaternion">
+<tt class="descclassname">geometry.rotations.</tt><tt class="descname">axis_angle_from_quaternion</tt><big>(</big><em>q</em><big>)</big><a class="reference internal" href="modules/geometry/rotations.html#axis_angle_from_quaternion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.axis_angle_from_quaternion" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the inverse of <tt class="xref py py-func docutils literal"><span class="pre">quaternion_from_axis_angle()</span></tt>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -380,8 +479,8 @@ goes through the quaternion representation.</div></blockquote>
 </dd></dl>
 
 <dl class="function">
-<dt id="geometry.axis_angle_from_rotation">
-<tt class="descclassname">geometry.</tt><tt class="descname">axis_angle_from_rotation</tt><big>(</big><em>R</em><big>)</big><a class="headerlink" href="#geometry.axis_angle_from_rotation" title="Permalink to this definition">¶</a></dt>
+<dt id="geometry.rotations.axis_angle_from_rotation">
+<tt class="descclassname">geometry.rotations.</tt><tt class="descname">axis_angle_from_rotation</tt><big>(</big><em>R</em><big>)</big><a class="reference internal" href="modules/geometry/rotations.html#axis_angle_from_rotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.axis_angle_from_rotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the <em>(axis,angle)</em> representation of a given rotation.</p>
 <blockquote>
 <div><p>There are a couple of symmetries:</p>
@@ -404,8 +503,8 @@ In that case, <a class="reference internal" href="#geometry.default_axis" title=
 </dd></dl>
 
 <dl class="function">
-<dt id="geometry.quaternion_from_rotation">
-<tt class="descclassname">geometry.</tt><tt class="descname">quaternion_from_rotation</tt><big>(</big><em>R</em><big>)</big><a class="headerlink" href="#geometry.quaternion_from_rotation" title="Permalink to this definition">¶</a></dt>
+<dt id="geometry.rotations.quaternion_from_rotation">
+<tt class="descclassname">geometry.rotations.</tt><tt class="descname">quaternion_from_rotation</tt><big>(</big><em>R</em><big>)</big><a class="reference internal" href="modules/geometry/rotations.html#quaternion_from_rotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.quaternion_from_rotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts a rotation matrix to a quaternion.</p>
 <blockquote>
 <div><p>This is the robust method mentioned on wikipedia:</p>
@@ -425,12 +524,12 @@ In that case, <a class="reference internal" href="#geometry.default_axis" title=
 </dd></dl>
 
 <dl class="function">
-<dt id="geometry.quaternion_from_axis_angle">
-<tt class="descclassname">geometry.</tt><tt class="descname">quaternion_from_axis_angle</tt><big>(</big><em>axis</em>, <em>angle</em><big>)</big><a class="headerlink" href="#geometry.quaternion_from_axis_angle" title="Permalink to this definition">¶</a></dt>
+<dt id="geometry.rotations.quaternion_from_axis_angle">
+<tt class="descclassname">geometry.rotations.</tt><tt class="descname">quaternion_from_axis_angle</tt><big>(</big><em>axis</em>, <em>angle</em><big>)</big><a class="reference internal" href="modules/geometry/rotations.html#quaternion_from_axis_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.quaternion_from_axis_angle" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Computes a quaternion corresponding to the rotation of <em>angle</em> radians</dt>
 <dd><p class="first">around the given <em>axis</em>.</p>
-<p class="last">This is the inverse of <a class="reference internal" href="#geometry.axis_angle_from_quaternion" title="geometry.axis_angle_from_quaternion"><tt class="xref py py-func docutils literal"><span class="pre">axis_angle_from_quaternion()</span></tt></a>.</p>
+<p class="last">This is the inverse of <tt class="xref py py-func docutils literal"><span class="pre">axis_angle_from_quaternion()</span></tt>.</p>
 </dd>
 </dl>
 <table class="docutils field-list" frame="void" rules="none">
@@ -450,6 +549,12 @@ In that case, <a class="reference internal" href="#geometry.default_axis" title=
 </table>
 </dd></dl>
 
+</div>
+<div class="section" id="id1">
+<h3>Random sampling<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id2">
+<h3>Misc<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="geometry.geodesic_distance_for_rotations">
 <tt class="descclassname">geometry.</tt><tt class="descname">geodesic_distance_for_rotations</tt><big>(</big><em>R1</em>, <em>R2</em><big>)</big><a class="headerlink" href="#geometry.geodesic_distance_for_rotations" title="Permalink to this definition">¶</a></dt>
@@ -473,59 +578,39 @@ In that case, <a class="reference internal" href="#geometry.default_axis" title=
 </table>
 </dd></dl>
 
-<div class="section" id="id1">
-<h3>Random sampling<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<dl class="function">
-<dt id="geometry.random_quaternion">
-<tt class="descclassname">geometry.</tt><tt class="descname">random_quaternion</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.random_quaternion" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate a random quaternion.</p>
-<blockquote>
-<div>Uses the algorithm used in Kuffner, ICRA&#8216;04.</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">unit_quaternion</span></tt></td>
-</tr>
-</tbody>
-</table>
+</div>
+<div class="section" id="id3">
+<h3>Manifolds objects<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<dl class="data">
+<dt id="geometry.SO2">
+<tt class="descclassname">geometry.</tt><tt class="descname">SO2</tt><a class="headerlink" href="#geometry.SO2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Planar rotations.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="geometry.random_rotation">
-<tt class="descclassname">geometry.</tt><tt class="descname">random_rotation</tt><big>(</big><em>ndim=3</em><big>)</big><a class="headerlink" href="#geometry.random_rotation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate a random rotation matrix.</p>
-<blockquote>
-<div>This is a wrapper around <a class="reference internal" href="#geometry.random_quaternion" title="geometry.random_quaternion"><tt class="xref py py-func docutils literal"><span class="pre">random_quaternion()</span></tt></a>.</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ndim</strong> (<tt class="docutils literal"><span class="pre">2|3</span></tt>) &#8211; </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[2x2]|rotation_matrix</span></tt></td>
-</tr>
-</tbody>
-</table>
+<dl class="data">
+<dt id="geometry.SO3">
+<tt class="descclassname">geometry.</tt><tt class="descname">SO3</tt><a class="headerlink" href="#geometry.SO3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotations in 3D.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="geometry.random_orthogonal_transform">
-<tt class="descclassname">geometry.</tt><tt class="descname">random_orthogonal_transform</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.random_orthogonal_transform" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[3x3],orthogonal</span></tt></td>
-</tr>
-</tbody>
-</table>
+<dl class="data">
+<dt id="geometry.so2">
+<tt class="descclassname">geometry.</tt><tt class="descname">so2</tt><a class="headerlink" href="#geometry.so2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lie algebra for planar rotations.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.so3">
+<tt class="descclassname">geometry.</tt><tt class="descname">so3</tt><a class="headerlink" href="#geometry.so3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lie algebra for 3D rotations.</p>
 </dd></dl>
 
 </div>
 </div>
 <div class="section" id="se-n-poses">
 <h2>SE(n) - Poses<a class="headerlink" href="#se-n-poses" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h3>Conversions<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="geometry.pose_from_rotation_translation">
 <tt class="descclassname">geometry.</tt><tt class="descname">pose_from_rotation_translation</tt><big>(</big><em>R</em>, <em>t</em><big>)</big><a class="headerlink" href="#geometry.pose_from_rotation_translation" title="Permalink to this definition">¶</a></dt>
@@ -561,6 +646,9 @@ In that case, <a class="reference internal" href="#geometry.default_axis" title=
 </table>
 </dd></dl>
 
+</div>
+<div class="section" id="id5">
+<h3>Misc<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="geometry.extract_pieces">
 <tt class="descclassname">geometry.</tt><tt class="descname">extract_pieces</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.extract_pieces" title="Permalink to this definition">¶</a></dt>
@@ -571,6 +659,160 @@ In that case, <a class="reference internal" href="#geometry.default_axis" title=
 <tt class="descclassname">geometry.</tt><tt class="descname">combine_pieces</tt><big>(</big><em>a</em>, <em>b</em>, <em>c</em>, <em>d</em><big>)</big><a class="headerlink" href="#geometry.combine_pieces" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+</div>
+<div class="section" id="manifold-objects">
+<h3>Manifold objects<a class="headerlink" href="#manifold-objects" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="geometry.SE">
+<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">SE</tt><big>(</big><em>n</em>, <em>alpha=1</em><big>)</big><a class="headerlink" href="#geometry.SE" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the Special Euclidean group SE(n) 
+describing roto-translations of Euclidean space.
+Implemented only for n=2,3.</p>
+<p>Note that you have to supply a coefficient <em>alpha</em> that
+weights rotation and translation when defining distances.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.SE.belongs_" title="geometry.SE.belongs_"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">distance</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">distance_</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">expmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">expmap_</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.SE.friendly" title="geometry.SE.friendly"><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">inverse</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">logmap_</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">multiply</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_ts_</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.SE.sample_uniform" title="geometry.SE.sample_uniform"><tt class="xref py py-obj docutils literal"><span class="pre">sample_uniform</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">unity</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geometry.SE.belongs_">
+<tt class="descname">belongs_</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.SE.belongs_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.SE.friendly">
+<tt class="descname">friendly</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.SE.friendly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.SE.sample_uniform">
+<tt class="descname">sample_uniform</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.SE.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geometry.se">
+<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">se</tt><big>(</big><em>n</em>, <em>alpha</em><big>)</big><a class="headerlink" href="#geometry.se" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the Lie algebra se(n) for the Special Euclidean group SE(n).</p>
+<p>Note that you have to supply a coefficient <em>alpha</em> that
+weights rotation and translation when defining distances.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">norm</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.se.project" title="geometry.se.project"><tt class="xref py py-obj docutils literal"><span class="pre">project</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geometry.se.norm">
+<tt class="descname">norm</tt><big>(</big><em>X</em><big>)</big><a class="headerlink" href="#geometry.se.norm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.se.project">
+<tt class="descname">project</tt><big>(</big><em>X</em><big>)</big><a class="headerlink" href="#geometry.se.project" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p><a class="reference internal" href="#geometry.SE" title="geometry.SE"><tt class="xref py py-class docutils literal"><span class="pre">SE</span></tt></a></p>
+<dl class="data">
+<dt id="geometry.SE2">
+<tt class="descclassname">geometry.</tt><tt class="descname">SE2</tt><a class="headerlink" href="#geometry.SE2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Poses in 2D.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.SE3">
+<tt class="descclassname">geometry.</tt><tt class="descname">SE3</tt><a class="headerlink" href="#geometry.SE3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Poses in 3D.</p>
+</dd></dl>
+
+<p><a class="reference internal" href="#geometry.se" title="geometry.se"><tt class="xref py py-class docutils literal"><span class="pre">se</span></tt></a></p>
+<dl class="data">
+<dt id="geometry.se2">
+<tt class="descclassname">geometry.</tt><tt class="descname">se2</tt><a class="headerlink" href="#geometry.se2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lie algebra for SE(2).</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.se3">
+<tt class="descclassname">geometry.</tt><tt class="descname">se3</tt><a class="headerlink" href="#geometry.se3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lie algebra for SE(3).</p>
+</dd></dl>
+
+</div>
 </div>
 <div class="section" id="procrustes-analysis">
 <h2>Procrustes analysis<a class="headerlink" href="#procrustes-analysis" title="Permalink to this headline">¶</a></h2>
@@ -701,7 +943,7 @@ slightly over 1 or below -1 due to numerical errors.</p>
 <dl class="function">
 <dt id="geometry.assert_allclose">
 <tt class="descclassname">geometry.</tt><tt class="descname">assert_allclose</tt><big>(</big><em>actual</em>, <em>desired</em>, <em>rtol=9.9999999999999995e-08</em>, <em>atol=0</em>, <em>err_msg=''</em>, <em>verbose=True</em><big>)</big><a class="headerlink" href="#geometry.assert_allclose" title="Permalink to this definition">¶</a></dt>
-<dd><p>Backporting assert_allclose from 1.5 to 1.4</p>
+<dd><p>Backporting assert_allclose from Numpy 1.5 to 1.4</p>
 </dd></dl>
 
 <p>These are some of the contracts defined using <a class="reference external" href="http://andreacensi.github.com/contracts/">PyContracts</a>.</p>
@@ -754,6 +996,33 @@ slightly over 1 or below -1 due to numerical errors.</p>
 <dd></dd></dl>
 
 </div>
+<div class="section" id="tori">
+<h2>Tori<a class="headerlink" href="#tori" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h3>Manifold objects<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<dl class="data">
+<dt id="geometry.T1">
+<tt class="descclassname">geometry.</tt><tt class="descname">T1</tt><a class="headerlink" href="#geometry.T1" title="Permalink to this definition">¶</a></dt>
+<dd><p>One dimensional torus, mapped onto <img class="math" src="images/math/5e4cd0db06ecd19d3f1cd5d50696afd17b6dd827.png" alt="[-\pi,\pi)"/>.</p>
+<p>Note that this is equivalent to the unit circle, but the representation
+is different: <a class="reference internal" href="#geometry.T1" title="geometry.T1"><tt class="xref py py-data docutils literal"><span class="pre">T1</span></tt></a> uses &#8220;angles&#8221; while <a class="reference internal" href="#geometry.S2" title="geometry.S2"><tt class="xref py py-data docutils literal"><span class="pre">S2</span></tt></a> uses unit vectors in
+<img class="math" src="images/math/62623d70eaa11458b42450ab31277cc88f4dbd6b.png" alt="R^2"/>.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.T2">
+<tt class="descclassname">geometry.</tt><tt class="descname">T2</tt><a class="headerlink" href="#geometry.T2" title="Permalink to this definition">¶</a></dt>
+<dd><p>2D torus.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.T3">
+<tt class="descclassname">geometry.</tt><tt class="descname">T3</tt><a class="headerlink" href="#geometry.T3" title="Permalink to this definition">¶</a></dt>
+<dd><p>3D torus.</p>
+</dd></dl>
+
+</div>
+</div>
 <div class="section" id="manifolds-and-matrix-lie-groups-interface">
 <h2>Manifolds and Matrix Lie Groups interface<a class="headerlink" href="#manifolds-and-matrix-lie-groups-interface" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -761,6 +1030,56 @@ slightly over 1 or below -1 due to numerical errors.</p>
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">DifferentiableManifold</tt><a class="headerlink" href="#geometry.DifferentiableManifold" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the base class for differentiable manifolds.</p>
 <p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.DifferentiableManifold.belongs" title="geometry.DifferentiableManifold.belongs"><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.DifferentiableManifold.belongs_" title="geometry.DifferentiableManifold.belongs_"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.DifferentiableManifold.belongs_ts" title="geometry.DifferentiableManifold.belongs_ts"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_ts</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.DifferentiableManifold.distance" title="geometry.DifferentiableManifold.distance"><tt class="xref py py-obj docutils literal"><span class="pre">distance</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.DifferentiableManifold.distance_" title="geometry.DifferentiableManifold.distance_"><tt class="xref py py-obj docutils literal"><span class="pre">distance_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.DifferentiableManifold.expmap" title="geometry.DifferentiableManifold.expmap"><tt class="xref py py-obj docutils literal"><span class="pre">expmap</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.DifferentiableManifold.expmap_" title="geometry.DifferentiableManifold.expmap_"><tt class="xref py py-obj docutils literal"><span class="pre">expmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.DifferentiableManifold.friendly" title="geometry.DifferentiableManifold.friendly"><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.DifferentiableManifold.geodesic" title="geometry.DifferentiableManifold.geodesic"><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.DifferentiableManifold.interesting_points" title="geometry.DifferentiableManifold.interesting_points"><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.DifferentiableManifold.logmap" title="geometry.DifferentiableManifold.logmap"><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.DifferentiableManifold.logmap_" title="geometry.DifferentiableManifold.logmap_"><tt class="xref py py-obj docutils literal"><span class="pre">logmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.DifferentiableManifold.project_ts" title="geometry.DifferentiableManifold.project_ts"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.DifferentiableManifold.project_ts_" title="geometry.DifferentiableManifold.project_ts_"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts_</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="geometry.DifferentiableManifold.belongs">
 <tt class="descname">belongs</tt><big>(</big><em>x</em>, <em>msg=None</em><big>)</big><a class="headerlink" href="#geometry.DifferentiableManifold.belongs" title="Permalink to this definition">¶</a></dt>
@@ -873,6 +1192,23 @@ to the tangent space at point <em>base</em>.</p>
 <dt id="geometry.Group">
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Group</tt><a class="headerlink" href="#geometry.Group" title="Permalink to this definition">¶</a></dt>
 <dd><p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Group.inverse" title="geometry.Group.inverse"><tt class="xref py py-obj docutils literal"><span class="pre">inverse</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Group.multiply" title="geometry.Group.multiply"><tt class="xref py py-obj docutils literal"><span class="pre">multiply</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Group.unity" title="geometry.Group.unity"><tt class="xref py py-obj docutils literal"><span class="pre">unity</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="geometry.Group.inverse">
 <tt class="descname">inverse</tt><big>(</big><em>g</em><big>)</big><a class="headerlink" href="#geometry.Group.inverse" title="Permalink to this definition">¶</a></dt>
@@ -906,6 +1242,23 @@ and to mitigate the numerical errors.</p>
 <p>You probably also want to implement <a class="reference internal" href="#geometry.MatrixLieAlgebra.norm" title="geometry.MatrixLieAlgebra.norm"><tt class="xref py py-func docutils literal"><span class="pre">norm()</span></tt></a> if
 the default is not what you want.</p>
 <p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.MatrixLieAlgebra.belongs" title="geometry.MatrixLieAlgebra.belongs"><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">norm</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.MatrixLieAlgebra.project" title="geometry.MatrixLieAlgebra.project"><tt class="xref py py-obj docutils literal"><span class="pre">project</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="geometry.MatrixLieAlgebra.belongs">
 <tt class="descname">belongs</tt><big>(</big><em>v</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieAlgebra.belongs" title="Permalink to this definition">¶</a></dt>
@@ -937,6 +1290,65 @@ object. Given the Lie algebra, we can compute everything.
 However, subclasses can choose to overload
 some functions if they know a more numerically stable implementation.</p>
 <p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs_</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">distance</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.MatrixLieGroup.distance_" title="geometry.MatrixLieGroup.distance_"><tt class="xref py py-obj docutils literal"><span class="pre">distance_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">expmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.MatrixLieGroup.expmap_" title="geometry.MatrixLieGroup.expmap_"><tt class="xref py py-obj docutils literal"><span class="pre">expmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.MatrixLieGroup.inverse" title="geometry.MatrixLieGroup.inverse"><tt class="xref py py-obj docutils literal"><span class="pre">inverse</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.MatrixLieGroup.logmap_" title="geometry.MatrixLieGroup.logmap_"><tt class="xref py py-obj docutils literal"><span class="pre">logmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.MatrixLieGroup.multiply" title="geometry.MatrixLieGroup.multiply"><tt class="xref py py-obj docutils literal"><span class="pre">multiply</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.MatrixLieGroup.project_ts_" title="geometry.MatrixLieGroup.project_ts_"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.MatrixLieGroup.unity" title="geometry.MatrixLieGroup.unity"><tt class="xref py py-obj docutils literal"><span class="pre">unity</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="geometry.MatrixLieGroup.distance_">
 <tt class="descname">distance_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.MatrixLieGroup.distance_" title="Permalink to this definition">¶</a></dt>
@@ -996,58 +1408,6 @@ and then translating it back.</p>
 <div class="section" id="included-generic-manifolds">
 <h2>Included generic manifolds<a class="headerlink" href="#included-generic-manifolds" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="geometry.Sphere">
-<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Sphere</tt><big>(</big><em>order</em><big>)</big><a class="headerlink" href="#geometry.Sphere" title="Permalink to this definition">¶</a></dt>
-<dd><p>These are hyperspheres of unit radius.</p>
-<p class="rubric">Methods</p>
-<dl class="method">
-<dt id="geometry.Sphere.belongs_">
-<tt class="descname">belongs_</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.Sphere.belongs_" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="geometry.Sphere.distance_">
-<tt class="descname">distance_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.Sphere.distance_" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="geometry.Sphere.expmap_">
-<tt class="descname">expmap_</tt><big>(</big><em>base</em>, <em>vel</em><big>)</big><a class="headerlink" href="#geometry.Sphere.expmap_" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="geometry.Sphere.friendly">
-<tt class="descname">friendly</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.Sphere.friendly" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="geometry.Sphere.interesting_points">
-<tt class="descname">interesting_points</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.Sphere.interesting_points" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="geometry.Sphere.logmap_">
-<tt class="descname">logmap_</tt><big>(</big><em>base</em>, <em>target</em><big>)</big><a class="headerlink" href="#geometry.Sphere.logmap_" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="geometry.Sphere.norm_rtol">
-<tt class="descname">norm_rtol</tt><em class="property"> = 1.0000000000000001e-05</em><a class="headerlink" href="#geometry.Sphere.norm_rtol" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="geometry.Sphere.project_ts_">
-<tt class="descname">project_ts_</tt><big>(</big><em>base</em>, <em>x</em><big>)</big><a class="headerlink" href="#geometry.Sphere.project_ts_" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="geometry.Sphere.sample_uniform">
-<tt class="descname">sample_uniform</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.Sphere.sample_uniform" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="geometry.Euclidean">
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Euclidean</tt><big>(</big><em>dimension</em><big>)</big><a class="headerlink" href="#geometry.Euclidean" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the usual Euclidean space of finite dimension;
@@ -1056,6 +1416,59 @@ this is mostly used for debugging.</p>
 the <a class="reference internal" href="#geometry.Euclidean.sample_uniform" title="geometry.Euclidean.sample_uniform"><tt class="xref py py-func docutils literal"><span class="pre">sample_uniform()</span></tt></a>
 returns a sample from a Gaussian distribution centered at 0.</p>
 <p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Euclidean.belongs_" title="geometry.Euclidean.belongs_"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">distance</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Euclidean.distance_" title="geometry.Euclidean.distance_"><tt class="xref py py-obj docutils literal"><span class="pre">distance_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">expmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Euclidean.expmap_" title="geometry.Euclidean.expmap_"><tt class="xref py py-obj docutils literal"><span class="pre">expmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Euclidean.interesting_points" title="geometry.Euclidean.interesting_points"><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Euclidean.logmap_" title="geometry.Euclidean.logmap_"><tt class="xref py py-obj docutils literal"><span class="pre">logmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Euclidean.project_ts_" title="geometry.Euclidean.project_ts_"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Euclidean.sample_uniform" title="geometry.Euclidean.sample_uniform"><tt class="xref py py-obj docutils literal"><span class="pre">sample_uniform</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="geometry.Euclidean.belongs_">
 <tt class="descname">belongs_</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.Euclidean.belongs_" title="Permalink to this definition">¶</a></dt>
@@ -1107,6 +1520,68 @@ returns a sample from a Gaussian distribution centered at 0.</p>
 <dd><p>This is the Special Orthogonal group SO(n) describing rotations
 of Euclidean space; implemented for n=2,3.</p>
 <p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.SO.belongs_" title="geometry.SO.belongs_"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">distance</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">distance_</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">expmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">expmap_</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.SO.friendly" title="geometry.SO.friendly"><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">inverse</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">logmap_</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">multiply</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_ts_</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.SO.sample_uniform" title="geometry.SO.sample_uniform"><tt class="xref py py-obj docutils literal"><span class="pre">sample_uniform</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">unity</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="geometry.SO.belongs_">
 <tt class="descname">belongs_</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.SO.belongs_" title="Permalink to this definition">¶</a></dt>
@@ -1125,35 +1600,65 @@ of Euclidean space; implemented for n=2,3.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="geometry.SE">
-<em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">SE</tt><big>(</big><em>n</em>, <em>alpha=1</em><big>)</big><a class="headerlink" href="#geometry.SE" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is the Special Euclidean group SE(n) 
-describing roto-translations of Euclidean space.
-Implemented only for n=2,3.</p>
-<p>Note that you have to supply a coefficient <em>alpha</em> that
-weights rotation and translation when defining distances.</p>
-<p class="rubric">Methods</p>
-<dl class="method">
-<dt id="geometry.SE.belongs_">
-<tt class="descname">belongs_</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.SE.belongs_" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="geometry.SE.friendly">
-<tt class="descname">friendly</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.SE.friendly" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="geometry.SE.sample_uniform">
-<tt class="descname">sample_uniform</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.SE.sample_uniform" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="geometry.Torus">
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Torus</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#geometry.Torus" title="Permalink to this definition">¶</a></dt>
 <dd><p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Torus.belongs_" title="geometry.Torus.belongs_"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">distance</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Torus.distance_" title="geometry.Torus.distance_"><tt class="xref py py-obj docutils literal"><span class="pre">distance_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">expmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Torus.expmap_" title="geometry.Torus.expmap_"><tt class="xref py py-obj docutils literal"><span class="pre">expmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Torus.logmap_" title="geometry.Torus.logmap_"><tt class="xref py py-obj docutils literal"><span class="pre">logmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Torus.normalize" title="geometry.Torus.normalize"><tt class="xref py py-obj docutils literal"><span class="pre">normalize</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Torus.project_ts_" title="geometry.Torus.project_ts_"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Torus.sample_uniform" title="geometry.Torus.sample_uniform"><tt class="xref py py-obj docutils literal"><span class="pre">sample_uniform</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="geometry.Torus.belongs_">
 <tt class="descname">belongs_</tt><big>(</big><em>a</em><big>)</big><a class="headerlink" href="#geometry.Torus.belongs_" title="Permalink to this definition">¶</a></dt>
@@ -1196,6 +1701,62 @@ weights rotation and translation when defining distances.</p>
 <em class="property">class </em><tt class="descclassname">geometry.</tt><tt class="descname">Moebius</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#geometry.Moebius" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Moebius strip &#8211; still to be implemented.</p>
 <p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Moebius.belongs_" title="geometry.Moebius.belongs_"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">distance</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Moebius.distance_" title="geometry.Moebius.distance_"><tt class="xref py py-obj docutils literal"><span class="pre">distance_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">expmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Moebius.expmap_" title="geometry.Moebius.expmap_"><tt class="xref py py-obj docutils literal"><span class="pre">expmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Moebius.logmap_" title="geometry.Moebius.logmap_"><tt class="xref py py-obj docutils literal"><span class="pre">logmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Moebius.normalize" title="geometry.Moebius.normalize"><tt class="xref py py-obj docutils literal"><span class="pre">normalize</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.Moebius.project_ts_" title="geometry.Moebius.project_ts_"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts_</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.Moebius.sample_uniform" title="geometry.Moebius.sample_uniform"><tt class="xref py py-obj docutils literal"><span class="pre">sample_uniform</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="geometry.Moebius.belongs_">
 <tt class="descname">belongs_</tt><big>(</big><em>a</em><big>)</big><a class="headerlink" href="#geometry.Moebius.belongs_" title="Permalink to this definition">¶</a></dt>
@@ -1234,90 +1795,6 @@ weights rotation and translation when defining distances.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="shortcuts">
-<h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h2>
-<dl class="data">
-<dt id="geometry.S1">
-<tt class="descclassname">geometry.</tt><tt class="descname">S1</tt><a class="headerlink" href="#geometry.S1" title="Permalink to this definition">¶</a></dt>
-<dd><p>Unit circle as a subset of <img class="math" src="images/math/62623d70eaa11458b42450ab31277cc88f4dbd6b.png" alt="R^2"/>.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="geometry.S2">
-<tt class="descclassname">geometry.</tt><tt class="descname">S2</tt><a class="headerlink" href="#geometry.S2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Unit sphere.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="geometry.SO2">
-<tt class="descclassname">geometry.</tt><tt class="descname">SO2</tt><a class="headerlink" href="#geometry.SO2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Planar rotations.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="geometry.SO3">
-<tt class="descclassname">geometry.</tt><tt class="descname">SO3</tt><a class="headerlink" href="#geometry.SO3" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rotations in 3D.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="geometry.so2">
-<tt class="descclassname">geometry.</tt><tt class="descname">so2</tt><a class="headerlink" href="#geometry.so2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lie algebra for planar rotations.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="geometry.so3">
-<tt class="descclassname">geometry.</tt><tt class="descname">so3</tt><a class="headerlink" href="#geometry.so3" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lie algebra for 3D rotations.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="geometry.SE2">
-<tt class="descclassname">geometry.</tt><tt class="descname">SE2</tt><a class="headerlink" href="#geometry.SE2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Poses in 2D.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="geometry.SE3">
-<tt class="descclassname">geometry.</tt><tt class="descname">SE3</tt><a class="headerlink" href="#geometry.SE3" title="Permalink to this definition">¶</a></dt>
-<dd><p>Poses in 3D.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="geometry.se2">
-<tt class="descclassname">geometry.</tt><tt class="descname">se2</tt><a class="headerlink" href="#geometry.se2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lie algebra for SE(2).</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="geometry.se3">
-<tt class="descclassname">geometry.</tt><tt class="descname">se3</tt><a class="headerlink" href="#geometry.se3" title="Permalink to this definition">¶</a></dt>
-<dd><p>Lie algebra for SE(3).</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="geometry.T1">
-<tt class="descclassname">geometry.</tt><tt class="descname">T1</tt><a class="headerlink" href="#geometry.T1" title="Permalink to this definition">¶</a></dt>
-<dd><p>One dimensional torus, mapped onto <img class="math" src="images/math/5e4cd0db06ecd19d3f1cd5d50696afd17b6dd827.png" alt="[-\pi,\pi)"/>.</p>
-<p>Note that this is equivalent to the unit circle, but the representation
-is different: <a class="reference internal" href="#geometry.T1" title="geometry.T1"><tt class="xref py py-data docutils literal"><span class="pre">T1</span></tt></a> uses &#8220;angles&#8221; while <a class="reference internal" href="#geometry.S2" title="geometry.S2"><tt class="xref py py-data docutils literal"><span class="pre">S2</span></tt></a> uses unit vectors in
-<img class="math" src="images/math/62623d70eaa11458b42450ab31277cc88f4dbd6b.png" alt="R^2"/>.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="geometry.T2">
-<tt class="descclassname">geometry.</tt><tt class="descname">T2</tt><a class="headerlink" href="#geometry.T2" title="Permalink to this definition">¶</a></dt>
-<dd><p>2D torus.</p>
-</dd></dl>
-
-<dl class="data">
-<dt id="geometry.T3">
-<tt class="descclassname">geometry.</tt><tt class="descname">T3</tt><a class="headerlink" href="#geometry.T3" title="Permalink to this definition">¶</a></dt>
-<dd><p>3D torus.</p>
-</dd></dl>
-
-</div>
 </div>
 
 
@@ -1328,22 +1805,42 @@ is different: <a class="reference internal" href="#geometry.T1" title="geometry.
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">PyGeometry API</a><ul>
-<li><a class="reference internal" href="#usage-notes">Usage notes</a></li>
+<li><a class="reference internal" href="#">PyGeometry API details</a><ul>
 <li><a class="reference internal" href="#s-n-hyperspheres">S(n) - Hyperspheres</a><ul>
 <li><a class="reference internal" href="#random-sampling">Random sampling</a></li>
+<li><a class="reference internal" href="#misc">Misc</a></li>
+<li><a class="reference internal" href="#manifolds-objects">Manifolds objects</a><ul>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#so-n-rotations-and-quaternions">SO(n) - Rotations and quaternions</a><ul>
+<li><a class="reference internal" href="#conversions">Conversions</a></li>
 <li><a class="reference internal" href="#id1">Random sampling</a></li>
+<li><a class="reference internal" href="#id2">Misc</a></li>
+<li><a class="reference internal" href="#id3">Manifolds objects</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#se-n-poses">SE(n) - Poses</a></li>
+<li><a class="reference internal" href="#se-n-poses">SE(n) - Poses</a><ul>
+<li><a class="reference internal" href="#id4">Conversions</a></li>
+<li><a class="reference internal" href="#id5">Misc</a></li>
+<li><a class="reference internal" href="#manifold-objects">Manifold objects</a><ul>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#procrustes-analysis">Procrustes analysis</a></li>
 <li><a class="reference internal" href="#misc-utils">Misc utils</a></li>
-<li><a class="reference internal" href="#manifolds-and-matrix-lie-groups-interface">Manifolds and Matrix Lie Groups interface</a></li>
-<li><a class="reference internal" href="#included-generic-manifolds">Included generic manifolds</a></li>
-<li><a class="reference internal" href="#shortcuts">Shortcuts</a></li>
+<li><a class="reference internal" href="#tori">Tori</a><ul>
+<li><a class="reference internal" href="#id6">Manifold objects</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#manifolds-and-matrix-lie-groups-interface">Manifolds and Matrix Lie Groups interface</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#included-generic-manifolds">Included generic manifolds</a><ul>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1382,7 +1879,7 @@ is different: <a class="reference internal" href="#geometry.T1" title="geometry.
         <li class="right" >
           <a href="np-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">PyGeometry 0.9.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">PyGeometry 0.9.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

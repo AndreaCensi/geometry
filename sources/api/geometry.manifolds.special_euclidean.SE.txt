@@ -1,0 +1,6 @@
+geometry.manifolds.special_euclidean.SE
+=======================================
+
+.. currentmodule:: geometry.manifolds.special_euclidean
+
+.. autodata:: SE

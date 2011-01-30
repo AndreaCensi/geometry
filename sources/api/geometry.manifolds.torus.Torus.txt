@@ -1,0 +1,6 @@
+geometry.manifolds.torus.Torus
+==============================
+
+.. currentmodule:: geometry.manifolds.torus
+
+.. autodata:: Torus
