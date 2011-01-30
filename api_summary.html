@@ -44,19 +44,18 @@
 <span id="api"></span><h1>PyGeometry API<a class="headerlink" href="#pygeometry-api" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="usage-notes">
 <h2>Usage notes<a class="headerlink" href="#usage-notes" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p class="first">No fancy OO-overdose here. Geometric objects (rotation matrices, poses, etc.) are represented using vanilla
+<ul class="simple">
+<li>No fancy OO-overdose here. Geometric objects (rotation matrices, poses, etc.) are represented using vanilla
 Numpy array: there&#8217;s no class Rotation, Pose, etc. If you don&#8217;t think this is a good
-idea, your mind has been spoiled by C++ or Java classes taught by clueless professors.</p>
-</li>
-<li><p class="first">The main procedures are implemented as simple functions accepting and returning numpy arrays.
-Manifolds are implemented using classes that wrap the simple functions.</p>
-</li>
-<li><p class="first">Manifolds objects &#8220;know&#8221; how to compute distances, interpolate, etc. This makes sense: for example, the interpolation between the identity and a rotation matrix depends on whether you are considering them as elements of <em>GL(n)</em> or <em>SO(n)</em>.</p>
-</li>
-<li><p class="first">Most functions declare contracts among parameters and return values using the <a class="reference external" href="http://andreacensi.github.com/contracts/">PyContracts</a> library. This is slightly paranoid. You can disable all those checks using  <tt class="docutils literal"><span class="pre">contracts.disable_all()</span></tt>.</p>
-</li>
-<li><p class="first">The naming conventions for conversion operations is:</p>
+idea, your mind has been spoiled by C++ or Java classes taught by clueless professors.</li>
+<li>The main procedures are implemented as simple functions accepting and returning numpy arrays.
+Manifolds are implemented using classes that wrap the simple functions.</li>
+<li>Manifolds objects &#8220;know&#8221; how to compute distances, interpolate, etc. This makes sense: for example, the interpolation between the identity and a rotation matrix depends on whether you are considering them as elements of <em>GL(n)</em> or <em>SO(n)</em>.</li>
+<li>Most functions declare contracts among parameters and return values using the <a class="reference external" href="http://andreacensi.github.com/contracts/">PyContracts</a> library. This is slightly paranoid. You can disable all those checks using  <tt class="docutils literal"><span class="pre">contracts.disable_all()</span></tt>.</li>
+</ul>
+<div class="section" id="naming-conventions">
+<h3>Naming conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h3>
+<p>The naming conventions for conversion operations is:</p>
 <div class="highlight-python"><pre>x = &lt;X&gt;_from_&lt;Y&gt;(y)</pre>
 </div>
 <p>For example:</p>
@@ -65,8 +64,19 @@ Manifolds are implemented using classes that wrap the simple functions.</p>
 <span class="n">R</span> <span class="o">=</span> <span class="n">rotation_from_quaternion</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
 </pre></div>
 </div>
-</li>
-</ul>
+</div>
+<div class="section" id="namespace">
+<h3>Namespace<a class="headerlink" href="#namespace" title="Permalink to this headline">¶</a></h3>
+<p>Every symbol is imported in the <tt class="docutils literal"><span class="pre">geometry</span></tt> module.</p>
+<p>However, in this API documentation, the full path to the module is shown. For example, <tt class="docutils literal"><span class="pre">rotation_from_axis_angle</span></tt> is defined in the module <tt class="docutils literal"><span class="pre">geometry.rotations</span></tt>, but you can import it as such:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">rotation_from_axis_angle</span>
+</pre></div>
+</div>
+<p>The following will import all functions and classes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="manifolds-interface">
 <h2>Manifolds interface<a class="headerlink" href="#manifolds-interface" title="Permalink to this headline">¶</a></h2>
@@ -106,20 +116,18 @@ Manifolds are implemented using classes that wrap the simple functions.</p>
 </tbody>
 </table>
 <p>Instances:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr><td><a class="reference internal" href="api/geometry.manifolds.S1.html#geometry.manifolds.S1" title="geometry.manifolds.S1"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.S1</span></tt></a></td>
-<td>These are hyperspheres of unit radius.</td>
-</tr>
-<tr><td><a class="reference internal" href="api/geometry.manifolds.S2.html#geometry.manifolds.S2" title="geometry.manifolds.S2"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.S2</span></tt></a></td>
-<td>These are hyperspheres of unit radius.</td>
-</tr>
-</tbody>
-</table>
+<dl class="data">
+<dt id="geometry.manifolds.S1">
+<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">S1</tt><a class="headerlink" href="#geometry.manifolds.S1" title="Permalink to this definition">¶</a></dt>
+<dd><p>S1: Unit circle (2D vectors of norm 1).</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.manifolds.S2">
+<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">S2</tt><a class="headerlink" href="#geometry.manifolds.S2" title="Permalink to this definition">¶</a></dt>
+<dd><p>S2: Unit sphere (3D vectors of norm 1)</p>
+</dd></dl>
+
 <p>Contracts (<a class="reference external" href="http://andreacensi.github.com/contracts/">PyContracts</a>) and checks:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -199,32 +207,36 @@ Manifolds are implemented using classes that wrap the simple functions.</p>
 <tr><td><a class="reference internal" href="api/geometry.manifolds.special_orthogonal.SO.html#geometry.manifolds.special_orthogonal.SO" title="geometry.manifolds.special_orthogonal.SO"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.special_orthogonal.SO</span></tt></a>(n)</td>
 <td>This is the Special Orthogonal group SO(n) describing rotations</td>
 </tr>
-<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.special_orthogonal.so</span></tt>(n)</td>
+<tr><td><a class="reference internal" href="api/geometry.manifolds.special_orthogonal.SO.html#geometry.manifolds.special_orthogonal.so" title="geometry.manifolds.special_orthogonal.so"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.special_orthogonal.so</span></tt></a>(n)</td>
 <td>This is the Lie algebra of skew-symmetric matrices so(n),</td>
 </tr>
 </tbody>
 </table>
 <p>Instances:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr><td><a class="reference internal" href="api/geometry.manifolds.SO2.html#geometry.manifolds.SO2" title="geometry.manifolds.SO2"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.SO2</span></tt></a></td>
-<td>This is the Special Orthogonal group SO(n) describing rotations</td>
-</tr>
-<tr><td><a class="reference internal" href="api/geometry.manifolds.SO3.html#geometry.manifolds.SO3" title="geometry.manifolds.SO3"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.SO3</span></tt></a></td>
-<td>This is the Special Orthogonal group SO(n) describing rotations</td>
-</tr>
-<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.so2</span></tt></td>
-<td>This is the Lie algebra of skew-symmetric matrices so(n),</td>
-</tr>
-<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.so3</span></tt></td>
-<td>This is the Lie algebra of skew-symmetric matrices so(n),</td>
-</tr>
-</tbody>
-</table>
+<dl class="data">
+<dt id="geometry.manifolds.SO2">
+<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">SO2</tt><a class="headerlink" href="#geometry.manifolds.SO2" title="Permalink to this definition">¶</a></dt>
+<dd><p>SO(2): 2x2 rotation matrices</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.manifolds.SO3">
+<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">SO3</tt><a class="headerlink" href="#geometry.manifolds.SO3" title="Permalink to this definition">¶</a></dt>
+<dd><p>SO(3): 3x3 rotation matrices</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.manifolds.so2">
+<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">so2</tt><a class="headerlink" href="#geometry.manifolds.so2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lie algebra for SO(2): 2x2 skew-symmetric matrices</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.manifolds.so3">
+<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">so3</tt><a class="headerlink" href="#geometry.manifolds.so3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lie algebra for SO(3): 3x3 skew-symmetric matrices</p>
+</dd></dl>
+
 <p>Contracts and checks:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -318,32 +330,36 @@ Manifolds are implemented using classes that wrap the simple functions.</p>
 <tr><td><a class="reference internal" href="api/geometry.manifolds.special_euclidean.SE.html#geometry.manifolds.special_euclidean.SE" title="geometry.manifolds.special_euclidean.SE"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.special_euclidean.SE</span></tt></a>(n[,&nbsp;...])</td>
 <td>This is the Special Euclidean group SE(n)</td>
 </tr>
-<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.special_euclidean.se</span></tt>(n,&nbsp;alpha)</td>
+<tr><td><a class="reference internal" href="api/geometry.manifolds.special_euclidean.SE.html#geometry.manifolds.special_euclidean.se" title="geometry.manifolds.special_euclidean.se"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.special_euclidean.se</span></tt></a>(n,&nbsp;alpha)</td>
 <td>This is the Lie algebra se(n) for the Special Euclidean group SE(n).</td>
 </tr>
 </tbody>
 </table>
 <p>Instances:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr><td><a class="reference internal" href="api/geometry.manifolds.SE2.html#geometry.manifolds.SE2" title="geometry.manifolds.SE2"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.SE2</span></tt></a></td>
-<td>This is the Special Euclidean group SE(n)</td>
-</tr>
-<tr><td><a class="reference internal" href="api/geometry.manifolds.SE3.html#geometry.manifolds.SE3" title="geometry.manifolds.SE3"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.SE3</span></tt></a></td>
-<td>This is the Special Euclidean group SE(n)</td>
-</tr>
-<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.se2</span></tt></td>
-<td>This is the Lie algebra se(n) for the Special Euclidean group SE(n).</td>
-</tr>
-<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.se3</span></tt></td>
-<td>This is the Lie algebra se(n) for the Special Euclidean group SE(n).</td>
-</tr>
-</tbody>
-</table>
+<dl class="data">
+<dt id="geometry.manifolds.SE2">
+<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">SE2</tt><a class="headerlink" href="#geometry.manifolds.SE2" title="Permalink to this definition">¶</a></dt>
+<dd><p>SE(2): 2D poses</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.manifolds.SE3">
+<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">SE3</tt><a class="headerlink" href="#geometry.manifolds.SE3" title="Permalink to this definition">¶</a></dt>
+<dd><p>SE(3): 3D poses</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.manifolds.se2">
+<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">se2</tt><a class="headerlink" href="#geometry.manifolds.se2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lie algebra for SE(2).</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="geometry.manifolds.se3">
+<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">se3</tt><a class="headerlink" href="#geometry.manifolds.se3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lie algebra for SE(3).</p>
+</dd></dl>
+
 <p>Conversions:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -465,7 +481,11 @@ Manifolds are implemented using classes that wrap the simple functions.</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">PyGeometry API</a><ul>
-<li><a class="reference internal" href="#usage-notes">Usage notes</a></li>
+<li><a class="reference internal" href="#usage-notes">Usage notes</a><ul>
+<li><a class="reference internal" href="#naming-conventions">Naming conventions</a></li>
+<li><a class="reference internal" href="#namespace">Namespace</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#manifolds-interface">Manifolds interface</a><ul>
 </ul>
 </li>

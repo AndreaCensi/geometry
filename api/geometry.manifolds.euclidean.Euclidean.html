@@ -42,14 +42,111 @@
             
   <div class="section" id="geometry-manifolds-euclidean-euclidean">
 <h1>geometry.manifolds.euclidean.Euclidean<a class="headerlink" href="#geometry-manifolds-euclidean-euclidean" title="Permalink to this headline">¶</a></h1>
-<dl class="data">
+<dl class="class">
 <dt id="geometry.manifolds.euclidean.Euclidean">
-<tt class="descclassname">geometry.manifolds.euclidean.</tt><tt class="descname">Euclidean</tt><a class="reference internal" href="../modules/geometry/manifolds/euclidean.html#Euclidean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.euclidean.Euclidean" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">geometry.manifolds.euclidean.</tt><tt class="descname">Euclidean</tt><big>(</big><em>dimension</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/euclidean.html#Euclidean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.euclidean.Euclidean" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the usual Euclidean space of finite dimension;
 this is mostly used for debugging.</p>
 <p>There is no proper Haar measure; as an arbitrary choice,
-the <tt class="xref py py-func docutils literal"><span class="pre">sample_uniform()</span></tt>
+the <a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.sample_uniform" title="geometry.manifolds.euclidean.Euclidean.sample_uniform"><tt class="xref py py-func docutils literal"><span class="pre">sample_uniform()</span></tt></a>
 returns a sample from a Gaussian distribution centered at 0.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.belongs_" title="geometry.manifolds.euclidean.Euclidean.belongs_"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs_ts</span></tt></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">distance</span></tt></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.distance_" title="geometry.manifolds.euclidean.Euclidean.distance_"><tt class="xref py py-obj docutils literal"><span class="pre">distance_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">expmap</span></tt></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.expmap_" title="geometry.manifolds.euclidean.Euclidean.expmap_"><tt class="xref py py-obj docutils literal"><span class="pre">expmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.interesting_points" title="geometry.manifolds.euclidean.Euclidean.interesting_points"><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.logmap_" title="geometry.manifolds.euclidean.Euclidean.logmap_"><tt class="xref py py-obj docutils literal"><span class="pre">logmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.project_ts_" title="geometry.manifolds.euclidean.Euclidean.project_ts_"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.sample_uniform" title="geometry.manifolds.euclidean.Euclidean.sample_uniform"><tt class="xref py py-obj docutils literal"><span class="pre">sample_uniform</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geometry.manifolds.euclidean.Euclidean.belongs_">
+<tt class="descname">belongs_</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/euclidean.html#Euclidean.belongs_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.euclidean.Euclidean.belongs_" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<tt class="docutils literal"><span class="pre">array</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.euclidean.Euclidean.distance_">
+<tt class="descname">distance_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/euclidean.html#Euclidean.distance_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.euclidean.Euclidean.distance_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.euclidean.Euclidean.expmap_">
+<tt class="descname">expmap_</tt><big>(</big><em>base</em>, <em>vel</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/euclidean.html#Euclidean.expmap_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.euclidean.Euclidean.expmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.euclidean.Euclidean.interesting_points">
+<tt class="descname">interesting_points</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/euclidean.html#Euclidean.interesting_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.euclidean.Euclidean.interesting_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.euclidean.Euclidean.logmap_">
+<tt class="descname">logmap_</tt><big>(</big><em>base</em>, <em>target</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/euclidean.html#Euclidean.logmap_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.euclidean.Euclidean.logmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.euclidean.Euclidean.project_ts_">
+<tt class="descname">project_ts_</tt><big>(</big><em>base</em>, <em>x</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/euclidean.html#Euclidean.project_ts_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.euclidean.Euclidean.project_ts_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.euclidean.Euclidean.sample_uniform">
+<tt class="descname">sample_uniform</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/euclidean.html#Euclidean.sample_uniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.euclidean.Euclidean.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>

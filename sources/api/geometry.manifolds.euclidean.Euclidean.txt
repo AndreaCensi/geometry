@@ -3,4 +3,6 @@ geometry.manifolds.euclidean.Euclidean
 
 .. currentmodule:: geometry.manifolds.euclidean
 
-.. autodata:: Euclidean
+.. autoclass:: Euclidean
+    :members:
+    :undoc-members:

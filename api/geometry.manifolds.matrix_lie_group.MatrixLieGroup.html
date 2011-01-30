@@ -42,14 +42,127 @@
             
   <div class="section" id="geometry-manifolds-matrix-lie-group-matrixliegroup">
 <h1>geometry.manifolds.matrix_lie_group.MatrixLieGroup<a class="headerlink" href="#geometry-manifolds-matrix-lie-group-matrixliegroup" title="Permalink to this headline">¶</a></h1>
-<dl class="data">
+<dl class="class">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup">
-<tt class="descclassname">geometry.manifolds.matrix_lie_group.</tt><tt class="descname">MatrixLieGroup</tt><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">geometry.manifolds.matrix_lie_group.</tt><tt class="descname">MatrixLieGroup</tt><big>(</big><em>n</em>, <em>algebra</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the base class for matrix Lie groups.</p>
 <p>Subclasses should provide a MatrixLieAlgebra
 object. Given the Lie algebra, we can compute everything.
 However, subclasses can choose to overload
 some functions if they know a more numerically stable implementation.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs_</span></tt></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs_ts</span></tt></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">distance</span></tt></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance_" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance_"><tt class="xref py py-obj docutils literal"><span class="pre">distance_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">expmap</span></tt></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap_" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap_"><tt class="xref py py-obj docutils literal"><span class="pre">expmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse"><tt class="xref py py-obj docutils literal"><span class="pre">inverse</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap_" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap_"><tt class="xref py py-obj docutils literal"><span class="pre">logmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply"><tt class="xref py py-obj docutils literal"><span class="pre">multiply</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts_" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts_"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.unity" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.unity"><tt class="xref py py-obj docutils literal"><span class="pre">unity</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance_">
+<tt class="descname">distance_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.distance_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the distance between two points.</p>
+<p>In the case of Lie groups, this is done by 
+translating everything to the origin, computing the
+logmap, and using the norm defined in the Lie Algebra object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap_">
+<tt class="descname">expmap_</tt><big>(</big><em>base</em>, <em>vel</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.expmap_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap_" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the inverse of <a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap_" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap_"><tt class="xref py py-func docutils literal"><span class="pre">logmap_()</span></tt></a>.</p>
+<p>In the case of Lie groups, this is implemented using
+the usual matrix exponential.</p>
+<p>Here the <a class="reference internal" href="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.html#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.project" title="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.project"><tt class="xref py py-func docutils literal"><span class="pre">MatrixLieAlgebra.project()</span></tt></a> function
+is used to mitigate numerical errors.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse">
+<tt class="descname">inverse</tt><big>(</big><em>g</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.inverse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap_">
+<tt class="descname">logmap_</tt><big>(</big><em>base</em>, <em>target</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.logmap_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the direction from base to target.</p>
+<p>In the case of Lie groups, this is implemented
+by using the usual matrix logarithm at the origin.</p>
+<p>Here the <a class="reference internal" href="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.html#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.project" title="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.project"><tt class="xref py py-func docutils literal"><span class="pre">MatrixLieAlgebra.project()</span></tt></a> function
+is used to mitigate numerical errors.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply">
+<tt class="descname">multiply</tt><big>(</big><em>g</em>, <em>h</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.multiply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts_">
+<tt class="descname">project_ts_</tt><big>(</big><em>base</em>, <em>x</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.project_ts_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects the vector <em>x</em> to the tangent space at point <em>base</em>.</p>
+<p>In the case of Lie Groups, we do this by translating the
+vector to the origin, projecting it to the Lie Algebra,
+and then translating it back.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.unity">
+<tt class="descname">unity</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.unity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.unity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>

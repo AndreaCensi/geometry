@@ -3,4 +3,8 @@ geometry.manifolds.torus.Torus
 
 .. currentmodule:: geometry.manifolds.torus
 
-.. autodata:: Torus
+.. autoclass:: Torus
+    :members:
+    :undoc-members:
+    :inherited-members:
+    

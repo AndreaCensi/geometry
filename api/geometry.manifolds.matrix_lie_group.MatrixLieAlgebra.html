@@ -42,18 +42,56 @@
             
   <div class="section" id="geometry-manifolds-matrix-lie-group-matrixliealgebra">
 <h1>geometry.manifolds.matrix_lie_group.MatrixLieAlgebra<a class="headerlink" href="#geometry-manifolds-matrix-lie-group-matrixliealgebra" title="Permalink to this headline">¶</a></h1>
-<dl class="data">
+<dl class="class">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra">
-<tt class="descclassname">geometry.manifolds.matrix_lie_group.</tt><tt class="descname">MatrixLieAlgebra</tt><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieAlgebra"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">geometry.manifolds.matrix_lie_group.</tt><tt class="descname">MatrixLieAlgebra</tt><big>(</big><em>n</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieAlgebra"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the base class for Matrix Lie Algebra.</p>
 <p>It is understood that it is composed by square matrices.</p>
 <p>The only function that <em>has</em> to be implemented is the 
-<tt class="xref py py-func docutils literal"><span class="pre">project()</span></tt> function that projects a square matrix
+<a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.project" title="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.project"><tt class="xref py py-func docutils literal"><span class="pre">project()</span></tt></a> function that projects a square matrix
 onto the algebra. This function is used both for checking
-that a vector is in the algebra (see <tt class="xref py py-func docutils literal"><span class="pre">belongs()</span></tt>)
+that a vector is in the algebra (see <a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.belongs" title="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.belongs"><tt class="xref py py-func docutils literal"><span class="pre">belongs()</span></tt></a>)
 and to mitigate the numerical errors.</p>
-<p>You probably also want to implement <tt class="xref py py-func docutils literal"><span class="pre">norm()</span></tt> if
+<p>You probably also want to implement <a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.norm" title="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.norm"><tt class="xref py py-func docutils literal"><span class="pre">norm()</span></tt></a> if
 the default is not what you want.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.belongs" title="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.belongs"><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.norm" title="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.norm"><tt class="xref py py-obj docutils literal"><span class="pre">norm</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.project" title="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.project"><tt class="xref py py-obj docutils literal"><span class="pre">project</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.belongs">
+<tt class="descname">belongs</tt><big>(</big><em>v</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieAlgebra.belongs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.belongs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that a vector belongs to this algebra.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.norm">
+<tt class="descname">norm</tt><big>(</big><em>v</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieAlgebra.norm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the norm of a vector in the algebra.
+This is used in <a class="reference internal" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup"><tt class="xref py py-class docutils literal"><span class="pre">MatrixLieGroup</span></tt></a> to measure
+distances between points in the Lie group.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.project">
+<tt class="descname">project</tt><big>(</big><em>v</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieAlgebra.project"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieAlgebra.project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects a matrix onto this Lie Algebra.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>

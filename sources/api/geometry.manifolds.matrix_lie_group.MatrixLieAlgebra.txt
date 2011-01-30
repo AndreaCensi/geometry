@@ -3,4 +3,6 @@ geometry.manifolds.matrix_lie_group.MatrixLieAlgebra
 
 .. currentmodule:: geometry.manifolds.matrix_lie_group
 
-.. autodata:: MatrixLieAlgebra
+.. autoclass:: MatrixLieAlgebra
+    :members:
+    :undoc-members:

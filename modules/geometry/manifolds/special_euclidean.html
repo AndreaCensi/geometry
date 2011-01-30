@@ -54,7 +54,7 @@
                            <span class="n">extract_pieces</span><span class="p">,</span> <span class="n">combine_pieces</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">se</span><span class="p">(</span><span class="n">MatrixLieAlgebra</span><span class="p">):</span>
+<div class="viewcode-block" id="se"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_euclidean.SE.html#geometry.manifolds.special_euclidean.se">[docs]</a><span class="k">class</span> <span class="nc">se</span><span class="p">(</span><span class="n">MatrixLieAlgebra</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39; This is the Lie algebra se(n) for the Special Euclidean group SE(n). </span>
 <span class="sd">    </span>
 <span class="sd">        Note that you have to supply a coefficient *alpha* that</span>
@@ -66,19 +66,19 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">son</span> <span class="o">=</span> <span class="n">so</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<div class="viewcode-block" id="se.norm"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_euclidean.SE.html#geometry.manifolds.special_euclidean.se.norm">[docs]</a>    <span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
         <span class="n">W</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">zero</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="c">#@UnusedVariable</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">son</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="se.project"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_euclidean.SE.html#geometry.manifolds.special_euclidean.se.project">[docs]</a>    <span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
         <span class="n">W</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">zero</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="c">#@UnusedVariable</span>
         <span class="n">W</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">son</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">combine_pieces</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">v</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
+</div>
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&#39;se(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
         
-
+</div>
 <div class="viewcode-block" id="SE"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_euclidean.SE.html#geometry.manifolds.special_euclidean.SE">[docs]</a><span class="k">class</span> <span class="nc">SE</span><span class="p">(</span><span class="n">MatrixLieGroup</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">        This is the Special Euclidean group SE(n) </span>
@@ -99,23 +99,23 @@
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&#39;SE(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="nf">belongs_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="SE.belongs_"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_euclidean.SE.html#geometry.manifolds.special_euclidean.SE.belongs_">[docs]</a>    <span class="k">def</span> <span class="nf">belongs_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c">#@UnusedVariable</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">SOn</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
         <span class="n">assert_allclose</span><span class="p">(</span><span class="n">zero</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="s">&#39;I expect the lower row to be 0.&#39;</span><span class="p">)</span> 
         <span class="n">assert_allclose</span><span class="p">(</span><span class="n">one</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="SE.sample_uniform"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_euclidean.SE.html#geometry.manifolds.special_euclidean.SE.sample_uniform">[docs]</a>    <span class="k">def</span> <span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">En</span><span class="o">.</span><span class="n">sample_uniform</span><span class="p">()</span>
         <span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOn</span><span class="o">.</span><span class="n">sample_uniform</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">pose_from_rotation_translation</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-            
-    <span class="k">def</span> <span class="nf">friendly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+            </div>
+<div class="viewcode-block" id="SE.friendly"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_euclidean.SE.html#geometry.manifolds.special_euclidean.SE.friendly">[docs]</a>    <span class="k">def</span> <span class="nf">friendly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="n">R</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">rotation_translation_from_pose</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="s">&#39;Pose(</span><span class="si">%s</span><span class="s">,</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SOn</span><span class="o">.</span><span class="n">friendly</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">En</span><span class="o">.</span><span class="n">friendly</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
         
                 
-    </div>
+    </div></div>
 </pre></div>
 
           </div>

@@ -42,14 +42,256 @@
             
   <div class="section" id="geometry-manifolds-special-euclidean-se">
 <h1>geometry.manifolds.special_euclidean.SE<a class="headerlink" href="#geometry-manifolds-special-euclidean-se" title="Permalink to this headline">¶</a></h1>
-<dl class="data">
+<dl class="class">
 <dt id="geometry.manifolds.special_euclidean.SE">
-<tt class="descclassname">geometry.manifolds.special_euclidean.</tt><tt class="descname">SE</tt><a class="reference internal" href="../modules/geometry/manifolds/special_euclidean.html#SE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">geometry.manifolds.special_euclidean.</tt><tt class="descname">SE</tt><big>(</big><em>n</em>, <em>alpha=1</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/special_euclidean.html#SE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the Special Euclidean group SE(n) 
 describing roto-translations of Euclidean space.
 Implemented only for n=2,3.</p>
 <p>Note that you have to supply a coefficient <em>alpha</em> that
 weights rotation and translation when defining distances.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.belongs" title="geometry.manifolds.special_euclidean.SE.belongs"><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.belongs_" title="geometry.manifolds.special_euclidean.SE.belongs_"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.belongs_ts" title="geometry.manifolds.special_euclidean.SE.belongs_ts"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_ts</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.distance" title="geometry.manifolds.special_euclidean.SE.distance"><tt class="xref py py-obj docutils literal"><span class="pre">distance</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.distance_" title="geometry.manifolds.special_euclidean.SE.distance_"><tt class="xref py py-obj docutils literal"><span class="pre">distance_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.expmap" title="geometry.manifolds.special_euclidean.SE.expmap"><tt class="xref py py-obj docutils literal"><span class="pre">expmap</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.expmap_" title="geometry.manifolds.special_euclidean.SE.expmap_"><tt class="xref py py-obj docutils literal"><span class="pre">expmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.friendly" title="geometry.manifolds.special_euclidean.SE.friendly"><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.geodesic" title="geometry.manifolds.special_euclidean.SE.geodesic"><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.interesting_points" title="geometry.manifolds.special_euclidean.SE.interesting_points"><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.inverse" title="geometry.manifolds.special_euclidean.SE.inverse"><tt class="xref py py-obj docutils literal"><span class="pre">inverse</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.logmap" title="geometry.manifolds.special_euclidean.SE.logmap"><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.logmap_" title="geometry.manifolds.special_euclidean.SE.logmap_"><tt class="xref py py-obj docutils literal"><span class="pre">logmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.multiply" title="geometry.manifolds.special_euclidean.SE.multiply"><tt class="xref py py-obj docutils literal"><span class="pre">multiply</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.project_ts" title="geometry.manifolds.special_euclidean.SE.project_ts"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.project_ts_" title="geometry.manifolds.special_euclidean.SE.project_ts_"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.sample_uniform" title="geometry.manifolds.special_euclidean.SE.sample_uniform"><tt class="xref py py-obj docutils literal"><span class="pre">sample_uniform</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.unity" title="geometry.manifolds.special_euclidean.SE.unity"><tt class="xref py py-obj docutils literal"><span class="pre">unity</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.belongs">
+<tt class="descname">belongs</tt><big>(</big><em>x</em>, <em>msg=None</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.belongs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that a point belongs to this manifold.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.belongs_" title="geometry.manifolds.special_euclidean.SE.belongs_"><tt class="xref py py-func docutils literal"><span class="pre">belongs_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.belongs_">
+<tt class="descname">belongs_</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/special_euclidean.html#SE.belongs_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.belongs_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.belongs_ts">
+<tt class="descname">belongs_ts</tt><big>(</big><em>base</em>, <em>vx</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.belongs_ts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that a vector <em>vx</em> belongs to the tangent space
+at the given point <em>base</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.distance">
+<tt class="descname">distance</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the geodesic distance between two points.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.distance_" title="geometry.manifolds.special_euclidean.SE.distance_"><tt class="xref py py-func docutils literal"><span class="pre">distance_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.distance_">
+<tt class="descname">distance_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.distance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the distance between two points.</p>
+<p>In the case of Lie groups, this is done by 
+translating everything to the origin, computing the
+logmap, and using the norm defined in the Lie Algebra object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.expmap">
+<tt class="descname">expmap</tt><big>(</big><em>base</em>, <em>v</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.expmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the exponential map from <em>base</em> for the velocity vector <em>v</em>.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.expmap_" title="geometry.manifolds.special_euclidean.SE.expmap_"><tt class="xref py py-func docutils literal"><span class="pre">expmap_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.expmap_">
+<tt class="descname">expmap_</tt><big>(</big><em>base</em>, <em>vel</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.expmap_" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the inverse of <a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.logmap_" title="geometry.manifolds.special_euclidean.SE.logmap_"><tt class="xref py py-func docutils literal"><span class="pre">logmap_()</span></tt></a>.</p>
+<p>In the case of Lie groups, this is implemented using
+the usual matrix exponential.</p>
+<p>Here the <tt class="xref py py-func docutils literal"><span class="pre">MatrixLieAlgebra.project()</span></tt> function
+is used to mitigate numerical errors.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.friendly">
+<tt class="descname">friendly</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/special_euclidean.html#SE.friendly"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.friendly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.geodesic">
+<tt class="descname">geodesic</tt><big>(</big><em>a</em>, <em>b</em>, <em>t</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.geodesic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the point interpolated along the geodesic.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<tt class="docutils literal"><span class="pre">&gt;=0,&lt;=1</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.interesting_points">
+<tt class="descname">interesting_points</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.interesting_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of &#8220;interesting points&#8221; on this manifold that
+should be used for testing various properties.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.inverse">
+<tt class="descname">inverse</tt><big>(</big><em>g</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.inverse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.logmap">
+<tt class="descname">logmap</tt><big>(</big><em>base</em>, <em>p</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.logmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the logarithmic map from base point <em>base</em> to target <em>b</em>.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.logmap_" title="geometry.manifolds.special_euclidean.SE.logmap_"><tt class="xref py py-func docutils literal"><span class="pre">logmap_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.logmap_">
+<tt class="descname">logmap_</tt><big>(</big><em>base</em>, <em>target</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.logmap_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the direction from base to target.</p>
+<p>In the case of Lie groups, this is implemented
+by using the usual matrix logarithm at the origin.</p>
+<p>Here the <tt class="xref py py-func docutils literal"><span class="pre">MatrixLieAlgebra.project()</span></tt> function
+is used to mitigate numerical errors.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.multiply">
+<tt class="descname">multiply</tt><big>(</big><em>g</em>, <em>h</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.multiply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.project_ts">
+<tt class="descname">project_ts</tt><big>(</big><em>base</em>, <em>v</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.project_ts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects a vector <em>v_ambient</em> in the ambient space
+to the tangent space at point <em>base</em>.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.manifolds.special_euclidean.SE.project_ts_" title="geometry.manifolds.special_euclidean.SE.project_ts_"><tt class="xref py py-func docutils literal"><span class="pre">project_ts_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.project_ts_">
+<tt class="descname">project_ts_</tt><big>(</big><em>base</em>, <em>x</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.project_ts_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects the vector <em>x</em> to the tangent space at point <em>base</em>.</p>
+<p>In the case of Lie Groups, we do this by translating the
+vector to the origin, projecting it to the Lie Algebra,
+and then translating it back.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.sample_uniform">
+<tt class="descname">sample_uniform</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/special_euclidean.html#SE.sample_uniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.SE.unity">
+<tt class="descname">unity</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.SE.unity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geometry.manifolds.special_euclidean.se">
+<em class="property">class </em><tt class="descclassname">geometry.manifolds.special_euclidean.</tt><tt class="descname">se</tt><big>(</big><em>n</em>, <em>alpha</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/special_euclidean.html#se"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.special_euclidean.se" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the Lie algebra se(n) for the Special Euclidean group SE(n).</p>
+<p>Note that you have to supply a coefficient <em>alpha</em> that
+weights rotation and translation when defining distances.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.se.belongs" title="geometry.manifolds.special_euclidean.se.belongs"><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.se.norm" title="geometry.manifolds.special_euclidean.se.norm"><tt class="xref py py-obj docutils literal"><span class="pre">norm</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.special_euclidean.se.project" title="geometry.manifolds.special_euclidean.se.project"><tt class="xref py py-obj docutils literal"><span class="pre">project</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.se.belongs">
+<tt class="descname">belongs</tt><big>(</big><em>v</em><big>)</big><a class="headerlink" href="#geometry.manifolds.special_euclidean.se.belongs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that a vector belongs to this algebra.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.se.norm">
+<tt class="descname">norm</tt><big>(</big><em>X</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/special_euclidean.html#se.norm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.special_euclidean.se.norm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.special_euclidean.se.project">
+<tt class="descname">project</tt><big>(</big><em>X</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/special_euclidean.html#se.project"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.special_euclidean.se.project" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>

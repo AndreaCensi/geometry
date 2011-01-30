@@ -52,19 +52,19 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">MatrixLieGroup</span><span class="p">,</span> <span class="n">np</span><span class="p">,</span> <span class="n">MatrixLieAlgebra</span><span class="p">,</span> <span class="n">S2</span>
 
 
-<span class="k">class</span> <span class="nc">so</span><span class="p">(</span><span class="n">MatrixLieAlgebra</span><span class="p">):</span>
+<div class="viewcode-block" id="so"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_orthogonal.SO.html#geometry.manifolds.special_orthogonal.so">[docs]</a><span class="k">class</span> <span class="nc">so</span><span class="p">(</span><span class="n">MatrixLieAlgebra</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">        This is the Lie algebra of skew-symmetric matrices so(n),</span>
 <span class="sd">        for the Special Orthogonal group SO(n).</span>
 <span class="sd">    &#39;&#39;&#39;</span>    
     
-    <span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+<div class="viewcode-block" id="so.project"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_orthogonal.SO.html#geometry.manifolds.special_orthogonal.so.project">[docs]</a>    <span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Projects *v* to the closest skew-symmetric matrix. &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="n">v</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-    
+    </div>
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&#39;so(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
-
+</div>
 <div class="viewcode-block" id="SO"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_orthogonal.SO.html#geometry.manifolds.special_orthogonal.SO">[docs]</a><span class="k">class</span> <span class="nc">SO</span><span class="p">(</span><span class="n">MatrixLieGroup</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">        This is the Special Orthogonal group SO(n) describing rotations</span>
@@ -80,12 +80,12 @@
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&#39;SO(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="nf">belongs_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="SO.belongs_"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_orthogonal.SO.html#geometry.manifolds.special_orthogonal.SO.belongs_">[docs]</a>    <span class="k">def</span> <span class="nf">belongs_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="n">check</span><span class="p">(</span><span class="s">&#39;orthogonal&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="n">det</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">assert_allclose</span><span class="p">(</span><span class="n">det</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="s">&#39;I expect the determinant to be +1.&#39;</span><span class="p">)</span> 
-
-    <span class="k">def</span> <span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="SO.sample_uniform"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_orthogonal.SO.html#geometry.manifolds.special_orthogonal.SO.sample_uniform">[docs]</a>    <span class="k">def</span> <span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
             <span class="k">return</span> <span class="n">rot2d</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
@@ -93,8 +93,8 @@
             <span class="k">return</span> <span class="n">random_rotation</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">assert</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&#39;Not implemented for n&gt;=4.&#39;</span>
-            
-    <span class="k">def</span> <span class="nf">friendly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+            </div>
+<div class="viewcode-block" id="SO.friendly"><a class="viewcode-back" href="../../../api/geometry.manifolds.special_orthogonal.SO.html#geometry.manifolds.special_orthogonal.SO.friendly">[docs]</a>    <span class="k">def</span> <span class="nf">friendly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
             <span class="k">return</span> <span class="s">&#39;Rot(</span><span class="si">%.1f</span><span class="s">deg)&#39;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
@@ -106,7 +106,7 @@
             <span class="k">assert</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&#39;Not implemented for n&gt;=4.&#39;</span>
         
                 
-    </div>
+    </div></div>
 </pre></div>
 
           </div>

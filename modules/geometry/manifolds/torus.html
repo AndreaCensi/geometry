@@ -53,29 +53,29 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
 
-    <span class="k">def</span> <span class="nf">belongs_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<div class="viewcode-block" id="Torus.belongs_"><a class="viewcode-back" href="../../../api/geometry.manifolds.torus.Torus.html#geometry.manifolds.torus.Torus.belongs_">[docs]</a>    <span class="k">def</span> <span class="nf">belongs_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
         <span class="n">check</span><span class="p">(</span><span class="s">&#39;array[N](&gt;=-pi,&lt;pi)&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">distance_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="Torus.distance_"><a class="viewcode-back" href="../../../api/geometry.manifolds.torus.Torus.html#geometry.manifolds.torus.Torus.distance_">[docs]</a>    <span class="k">def</span> <span class="nf">distance_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
         <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">logmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> 
+</div>
+<div class="viewcode-block" id="Torus.logmap_"><a class="viewcode-back" href="../../../api/geometry.manifolds.torus.Torus.html#geometry.manifolds.torus.Torus.logmap_">[docs]</a>    <span class="k">def</span> <span class="nf">logmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> 
         <span class="n">vel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">vel</span>
-
-    <span class="k">def</span> <span class="nf">expmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">vel</span><span class="p">):</span> 
+</div>
+<div class="viewcode-block" id="Torus.expmap_"><a class="viewcode-back" href="../../../api/geometry.manifolds.torus.Torus.html#geometry.manifolds.torus.Torus.expmap_">[docs]</a>    <span class="k">def</span> <span class="nf">expmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">vel</span><span class="p">):</span> 
         <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">vel</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">b</span>
-
-    <span class="k">def</span> <span class="nf">project_ts_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">vx</span><span class="p">):</span> 
+</div>
+<div class="viewcode-block" id="Torus.project_ts_"><a class="viewcode-back" href="../../../api/geometry.manifolds.torus.Torus.html#geometry.manifolds.torus.Torus.project_ts_">[docs]</a>    <span class="k">def</span> <span class="nf">project_ts_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">vx</span><span class="p">):</span> 
         <span class="k">return</span> <span class="n">vx</span>
-    
-    <span class="k">def</span> <span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    </div>
+<div class="viewcode-block" id="Torus.sample_uniform"><a class="viewcode-back" href="../../../api/geometry.manifolds.torus.Torus.html#geometry.manifolds.torus.Torus.sample_uniform">[docs]</a>    <span class="k">def</span> <span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
-    
-    <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">normalize_pi</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+    </div>
+<div class="viewcode-block" id="Torus.normalize"><a class="viewcode-back" href="../../../api/geometry.manifolds.torus.Torus.html#geometry.manifolds.torus.Torus.normalize">[docs]</a>    <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">normalize_pi</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div></div>
 </pre></div>
 
           </div>

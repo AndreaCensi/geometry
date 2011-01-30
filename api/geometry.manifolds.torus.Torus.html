@@ -42,10 +42,177 @@
             
   <div class="section" id="geometry-manifolds-torus-torus">
 <h1>geometry.manifolds.torus.Torus<a class="headerlink" href="#geometry-manifolds-torus-torus" title="Permalink to this headline">¶</a></h1>
-<dl class="data">
+<dl class="class">
 <dt id="geometry.manifolds.torus.Torus">
-<tt class="descclassname">geometry.manifolds.torus.</tt><tt class="descname">Torus</tt><a class="reference internal" href="../modules/geometry/manifolds/torus.html#Torus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.torus.Torus" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">geometry.manifolds.torus.</tt><tt class="descname">Torus</tt><big>(</big><em>n</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/torus.html#Torus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.torus.Torus" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.belongs" title="geometry.manifolds.torus.Torus.belongs"><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.belongs_" title="geometry.manifolds.torus.Torus.belongs_"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.belongs_ts" title="geometry.manifolds.torus.Torus.belongs_ts"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_ts</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.distance" title="geometry.manifolds.torus.Torus.distance"><tt class="xref py py-obj docutils literal"><span class="pre">distance</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.distance_" title="geometry.manifolds.torus.Torus.distance_"><tt class="xref py py-obj docutils literal"><span class="pre">distance_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.expmap" title="geometry.manifolds.torus.Torus.expmap"><tt class="xref py py-obj docutils literal"><span class="pre">expmap</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.expmap_" title="geometry.manifolds.torus.Torus.expmap_"><tt class="xref py py-obj docutils literal"><span class="pre">expmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.friendly" title="geometry.manifolds.torus.Torus.friendly"><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.geodesic" title="geometry.manifolds.torus.Torus.geodesic"><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.interesting_points" title="geometry.manifolds.torus.Torus.interesting_points"><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.logmap" title="geometry.manifolds.torus.Torus.logmap"><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.logmap_" title="geometry.manifolds.torus.Torus.logmap_"><tt class="xref py py-obj docutils literal"><span class="pre">logmap_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.normalize" title="geometry.manifolds.torus.Torus.normalize"><tt class="xref py py-obj docutils literal"><span class="pre">normalize</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.project_ts" title="geometry.manifolds.torus.Torus.project_ts"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.project_ts_" title="geometry.manifolds.torus.Torus.project_ts_"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts_</span></tt></a></td>
+<td></td>
+</tr>
+<tr><td><a class="reference internal" href="#geometry.manifolds.torus.Torus.sample_uniform" title="geometry.manifolds.torus.Torus.sample_uniform"><tt class="xref py py-obj docutils literal"><span class="pre">sample_uniform</span></tt></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.belongs">
+<tt class="descname">belongs</tt><big>(</big><em>x</em>, <em>msg=None</em><big>)</big><a class="headerlink" href="#geometry.manifolds.torus.Torus.belongs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that a point belongs to this manifold.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.manifolds.torus.Torus.belongs_" title="geometry.manifolds.torus.Torus.belongs_"><tt class="xref py py-func docutils literal"><span class="pre">belongs_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.belongs_">
+<tt class="descname">belongs_</tt><big>(</big><em>a</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/torus.html#Torus.belongs_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.torus.Torus.belongs_" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.belongs_ts">
+<tt class="descname">belongs_ts</tt><big>(</big><em>base</em>, <em>vx</em><big>)</big><a class="headerlink" href="#geometry.manifolds.torus.Torus.belongs_ts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that a vector <em>vx</em> belongs to the tangent space
+at the given point <em>base</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.distance">
+<tt class="descname">distance</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="headerlink" href="#geometry.manifolds.torus.Torus.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the geodesic distance between two points.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.manifolds.torus.Torus.distance_" title="geometry.manifolds.torus.Torus.distance_"><tt class="xref py py-func docutils literal"><span class="pre">distance_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.distance_">
+<tt class="descname">distance_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/torus.html#Torus.distance_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.torus.Torus.distance_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.expmap">
+<tt class="descname">expmap</tt><big>(</big><em>base</em>, <em>v</em><big>)</big><a class="headerlink" href="#geometry.manifolds.torus.Torus.expmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the exponential map from <em>base</em> for the velocity vector <em>v</em>.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.manifolds.torus.Torus.expmap_" title="geometry.manifolds.torus.Torus.expmap_"><tt class="xref py py-func docutils literal"><span class="pre">expmap_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.expmap_">
+<tt class="descname">expmap_</tt><big>(</big><em>a</em>, <em>vel</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/torus.html#Torus.expmap_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.torus.Torus.expmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.friendly">
+<tt class="descname">friendly</tt><big>(</big><em>a</em><big>)</big><a class="headerlink" href="#geometry.manifolds.torus.Torus.friendly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a friendly description string for a point on the manifold.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.geodesic">
+<tt class="descname">geodesic</tt><big>(</big><em>a</em>, <em>b</em>, <em>t</em><big>)</big><a class="headerlink" href="#geometry.manifolds.torus.Torus.geodesic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the point interpolated along the geodesic.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> (<tt class="docutils literal"><span class="pre">&gt;=0,&lt;=1</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.interesting_points">
+<tt class="descname">interesting_points</tt><big>(</big><big>)</big><a class="headerlink" href="#geometry.manifolds.torus.Torus.interesting_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of &#8220;interesting points&#8221; on this manifold that
+should be used for testing various properties.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.logmap">
+<tt class="descname">logmap</tt><big>(</big><em>base</em>, <em>p</em><big>)</big><a class="headerlink" href="#geometry.manifolds.torus.Torus.logmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the logarithmic map from base point <em>base</em> to target <em>b</em>.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.manifolds.torus.Torus.logmap_" title="geometry.manifolds.torus.Torus.logmap_"><tt class="xref py py-func docutils literal"><span class="pre">logmap_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.logmap_">
+<tt class="descname">logmap_</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/torus.html#Torus.logmap_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.torus.Torus.logmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.normalize">
+<tt class="descname">normalize</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/torus.html#Torus.normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.torus.Torus.normalize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.project_ts">
+<tt class="descname">project_ts</tt><big>(</big><em>base</em>, <em>v</em><big>)</big><a class="headerlink" href="#geometry.manifolds.torus.Torus.project_ts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects a vector <em>v_ambient</em> in the ambient space
+to the tangent space at point <em>base</em>.</p>
+<p>This function wraps some checks around <a class="reference internal" href="#geometry.manifolds.torus.Torus.project_ts_" title="geometry.manifolds.torus.Torus.project_ts_"><tt class="xref py py-func docutils literal"><span class="pre">project_ts_()</span></tt></a>, 
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.project_ts_">
+<tt class="descname">project_ts_</tt><big>(</big><em>base</em>, <em>vx</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/torus.html#Torus.project_ts_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.torus.Torus.project_ts_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.torus.Torus.sample_uniform">
+<tt class="descname">sample_uniform</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/torus.html#Torus.sample_uniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.torus.Torus.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
 
 </div>
 

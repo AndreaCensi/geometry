@@ -65,28 +65,28 @@
         <span class="k">return</span> <span class="s">&#39;Euclidean(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span>
 
     <span class="nd">@contract</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;array&#39;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">belongs_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="Euclidean.belongs_"><a class="viewcode-back" href="../../../api/geometry.manifolds.euclidean.Euclidean.html#geometry.manifolds.euclidean.Euclidean.belongs_">[docs]</a>    <span class="k">def</span> <span class="nf">belongs_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="n">assert_allclose</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span> 
         <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isreal</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="s">&quot;Expected real vector&quot;</span>
-        
-    <span class="k">def</span> <span class="nf">project_ts_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span> <span class="c"># TODO: test @UnusedVariable</span>
+        </div>
+<div class="viewcode-block" id="Euclidean.project_ts_"><a class="viewcode-back" href="../../../api/geometry.manifolds.euclidean.Euclidean.html#geometry.manifolds.euclidean.Euclidean.project_ts_">[docs]</a>    <span class="k">def</span> <span class="nf">project_ts_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span> <span class="c"># TODO: test @UnusedVariable</span>
         <span class="k">return</span> <span class="n">x</span>
-                    
-    <span class="k">def</span> <span class="nf">distance_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+                    </div>
+<div class="viewcode-block" id="Euclidean.distance_"><a class="viewcode-back" href="../../../api/geometry.manifolds.euclidean.Euclidean.html#geometry.manifolds.euclidean.Euclidean.distance_">[docs]</a>    <span class="k">def</span> <span class="nf">distance_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
-         
-    <span class="k">def</span> <span class="nf">logmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+         </div>
+<div class="viewcode-block" id="Euclidean.logmap_"><a class="viewcode-back" href="../../../api/geometry.manifolds.euclidean.Euclidean.html#geometry.manifolds.euclidean.Euclidean.logmap_">[docs]</a>    <span class="k">def</span> <span class="nf">logmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">target</span> <span class="o">-</span> <span class="n">base</span>
-        
-    <span class="k">def</span> <span class="nf">expmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">vel</span><span class="p">):</span>
+        </div>
+<div class="viewcode-block" id="Euclidean.expmap_"><a class="viewcode-back" href="../../../api/geometry.manifolds.euclidean.Euclidean.html#geometry.manifolds.euclidean.Euclidean.expmap_">[docs]</a>    <span class="k">def</span> <span class="nf">expmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">vel</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">base</span> <span class="o">+</span> <span class="n">vel</span>
-
-    <span class="k">def</span> <span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="Euclidean.sample_uniform"><a class="viewcode-back" href="../../../api/geometry.manifolds.euclidean.Euclidean.html#geometry.manifolds.euclidean.Euclidean.sample_uniform">[docs]</a>    <span class="k">def</span> <span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">interesting_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="Euclidean.interesting_points"><a class="viewcode-back" href="../../../api/geometry.manifolds.euclidean.Euclidean.html#geometry.manifolds.euclidean.Euclidean.interesting_points">[docs]</a>    <span class="k">def</span> <span class="nf">interesting_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">zero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">zero</span><span class="p">]</span> </div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">zero</span><span class="p">]</span> </div></div>
 </pre></div>
 
           </div>

@@ -69,7 +69,7 @@
     <span class="sd">&#39;&#39;&#39; This is the base class for differentiable manifolds. &#39;&#39;&#39;</span> 
     <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ABCMeta</span>
    
-    <span class="k">def</span> <span class="nf">belongs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DifferentiableManifold.belongs"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.belongs">[docs]</a>    <span class="k">def</span> <span class="nf">belongs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">            Checks that a point belongs to this manifold.  </span>
 <span class="sd">        </span>
@@ -80,8 +80,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">belongs_</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">DoesNotBelong</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">belongs_ts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">vx</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="DifferentiableManifold.belongs_ts"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.belongs_ts">[docs]</a>    <span class="k">def</span> <span class="nf">belongs_ts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">vx</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">            Checks that a vector *vx* belongs to the tangent space</span>
 <span class="sd">            at the given point *base*.</span>
@@ -89,8 +89,8 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">proj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_ts</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">vx</span><span class="p">)</span>
         <span class="n">assert_allclose</span><span class="p">(</span><span class="n">proj</span><span class="p">,</span> <span class="n">vx</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">)</span>
-    
-    <span class="k">def</span> <span class="nf">project_ts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span> <span class="c"># TODO: test</span>
+    </div>
+<div class="viewcode-block" id="DifferentiableManifold.project_ts"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.project_ts">[docs]</a>    <span class="k">def</span> <span class="nf">project_ts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span> <span class="c"># TODO: test</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Projects a vector *v_ambient* in the ambient space</span>
 <span class="sd">            to the tangent space at point *base*.</span>
@@ -103,8 +103,8 @@
         <span class="n">v2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_ts_</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v2</span>
     
-    
-    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    </div>
+<div class="viewcode-block" id="DifferentiableManifold.distance"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.distance">[docs]</a>    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">            Computes the geodesic distance between two points. </span>
 
@@ -116,8 +116,8 @@
         <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance_</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
         <span class="k">assert</span> <span class="n">d</span> <span class="o">&gt;=</span> <span class="mi">0</span>
         <span class="k">return</span> <span class="n">d</span>
-             
-    <span class="k">def</span> <span class="nf">logmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+             </div>
+<div class="viewcode-block" id="DifferentiableManifold.logmap"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.logmap">[docs]</a>    <span class="k">def</span> <span class="nf">logmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">            Computes the logarithmic map from base point *base* to target *b*. </span>
 <span class="sd">            </span>
@@ -130,8 +130,8 @@
         <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logmap_</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">belongs_ts</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span>
-
-    <span class="k">def</span> <span class="nf">expmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="DifferentiableManifold.expmap"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.expmap">[docs]</a>    <span class="k">def</span> <span class="nf">expmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">            Computes the exponential map from *base* for the velocity vector *v*. </span>
 
@@ -146,16 +146,16 @@
                         <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">friendly</span><span class="p">(</span><span class="n">base</span><span class="p">),</span> <span class="n">v</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">p</span>
         
-    
-    <span class="k">def</span> <span class="nf">interesting_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    </div>
+<div class="viewcode-block" id="DifferentiableManifold.interesting_points"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.interesting_points">[docs]</a>    <span class="k">def</span> <span class="nf">interesting_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">            Returns a list of &quot;interesting points&quot; on this manifold that</span>
 <span class="sd">            should be used for testing various properties. </span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="p">[]</span>
-    
+    </div>
     <span class="nd">@contract</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="s">&#39;&gt;=0,&lt;=1&#39;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">geodesic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<div class="viewcode-block" id="DifferentiableManifold.geodesic"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.geodesic">[docs]</a>    <span class="k">def</span> <span class="nf">geodesic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Returns the point interpolated along the geodesic. &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
@@ -163,35 +163,35 @@
         <span class="n">vel2</span> <span class="o">=</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">t</span>
         <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expmap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">vel2</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">p</span>
-    
-    <span class="k">def</span> <span class="nf">friendly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    </div>
+<div class="viewcode-block" id="DifferentiableManifold.friendly"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.friendly">[docs]</a>    <span class="k">def</span> <span class="nf">friendly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Returns a friendly description string for a point on the manifold. &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">a</span> 
-    
+    </div>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">belongs_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span> 
+<div class="viewcode-block" id="DifferentiableManifold.belongs_"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.belongs_">[docs]</a>    <span class="k">def</span> <span class="nf">belongs_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span> 
         <span class="sd">&#39;&#39;&#39; Checks that a point belongs to this manifold. &#39;&#39;&#39;</span>  
-    
+    </div>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">distance_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> 
+<div class="viewcode-block" id="DifferentiableManifold.distance_"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.distance_">[docs]</a>    <span class="k">def</span> <span class="nf">distance_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> 
         <span class="sd">&#39;&#39;&#39; Computes the geodesic distance between two points. &#39;&#39;&#39;</span>
-        
+        </div>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">logmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> 
+<div class="viewcode-block" id="DifferentiableManifold.logmap_"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.logmap_">[docs]</a>    <span class="k">def</span> <span class="nf">logmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> 
         <span class="sd">&#39;&#39;&#39; Computes the logarithmic map from base point *a* to target *b*. &#39;&#39;&#39;</span>
-        
+        </div>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">expmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+<div class="viewcode-block" id="DifferentiableManifold.expmap_"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.expmap_">[docs]</a>    <span class="k">def</span> <span class="nf">expmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Computes the exponential map from *a* for the velocity vector *v*. &#39;&#39;&#39;</span>
-        
+        </div>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">project_ts_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">v_ambient</span><span class="p">):</span>
+<div class="viewcode-block" id="DifferentiableManifold.project_ts_"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.DifferentiableManifold.html#geometry.manifolds.base.DifferentiableManifold.project_ts_">[docs]</a>    <span class="k">def</span> <span class="nf">project_ts_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">v_ambient</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">            Projects a vector *v_ambient* in the ambient space</span>
 <span class="sd">            to the tangent space at point *base*. </span>
 <span class="sd">        &#39;&#39;&#39;</span>
     
-    </div>
+    </div></div>
 <span class="k">class</span> <span class="nc">RandomManifold</span><span class="p">(</span><span class="n">DifferentiableManifold</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39; This is the base class for manifolds that have the ability </span>
 <span class="sd">        to sample points and vectors. &#39;&#39;&#39;</span>
@@ -211,24 +211,24 @@
     <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ABCMeta</span>
     
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+<div class="viewcode-block" id="Group.multiply"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.Group.html#geometry.manifolds.base.Group.multiply">[docs]</a>    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Implements the group operation. &#39;&#39;&#39;</span>
         <span class="k">pass</span>
-    
+    </div>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+<div class="viewcode-block" id="Group.inverse"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.Group.html#geometry.manifolds.base.Group.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Implements the group inversion. &#39;&#39;&#39;</span>
         <span class="k">pass</span>
-
+</div>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">unity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Group.unity"><a class="viewcode-back" href="../../../api/geometry.manifolds.base.Group.html#geometry.manifolds.base.Group.unity">[docs]</a>    <span class="k">def</span> <span class="nf">unity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Returns the group unity. &#39;&#39;&#39;</span>
         <span class="k">pass</span>
         
         
     
     
-    </div>
+    </div></div>
 </pre></div>
 
           </div>

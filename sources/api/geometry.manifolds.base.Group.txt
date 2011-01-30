@@ -3,4 +3,6 @@ geometry.manifolds.base.Group
 
 .. currentmodule:: geometry.manifolds.base
 
-.. autodata:: Group
+.. autoclass:: Group
+    :members:
+    :undoc-members:

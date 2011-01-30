@@ -3,4 +3,6 @@ geometry.manifolds.base.DifferentiableManifold
 
 .. currentmodule:: geometry.manifolds.base
 
-.. autodata:: DifferentiableManifold
+.. autoclass:: DifferentiableManifold
+    :members:
+    :undoc-members:

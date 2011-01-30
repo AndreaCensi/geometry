@@ -3,4 +3,7 @@ geometry.manifolds.moebius.Moebius
 
 .. currentmodule:: geometry.manifolds.moebius
 
-.. autodata:: Moebius
+.. autoclass:: Moebius
+    :members:
+    :undoc-members:
+    :inherited-members:

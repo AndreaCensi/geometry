@@ -3,4 +3,9 @@ geometry.manifolds.sphere.Sphere
 
 .. currentmodule:: geometry.manifolds.sphere
 
-.. autodata:: Sphere
+
+
+.. autoclass:: Sphere
+    :members:
+    :undoc-members:
+    :inherited-members:

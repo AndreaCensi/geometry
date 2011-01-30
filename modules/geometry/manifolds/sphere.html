@@ -66,17 +66,17 @@
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&#39;Sphere(</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
                 
-    <span class="k">def</span> <span class="nf">distance_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<div class="viewcode-block" id="Sphere.distance_"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.distance_">[docs]</a>    <span class="k">def</span> <span class="nf">distance_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">geodesic_distance_on_sphere</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-         
-    <span class="k">def</span> <span class="nf">logmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+         </div>
+<div class="viewcode-block" id="Sphere.logmap_"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.logmap_">[docs]</a>    <span class="k">def</span> <span class="nf">logmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">target</span> <span class="o">-</span> <span class="n">base</span> 
         <span class="n">xp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_ts</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="n">xp</span> <span class="o">=</span> <span class="n">normalize_length_or_zero</span><span class="p">(</span><span class="n">xp</span><span class="p">)</span>
         <span class="n">xp</span> <span class="o">*=</span> <span class="n">geodesic_distance_on_sphere</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">xp</span>
-        
-    <span class="k">def</span> <span class="nf">expmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">vel</span><span class="p">):</span>
+        </div>
+<div class="viewcode-block" id="Sphere.expmap_"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.expmap_">[docs]</a>    <span class="k">def</span> <span class="nf">expmap_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">vel</span><span class="p">):</span>
         <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">angle</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># XXX: tolerance</span>
             <span class="k">return</span> <span class="n">base</span>
@@ -93,25 +93,25 @@
         <span class="k">else</span><span class="p">:</span> <span class="k">assert</span> <span class="bp">False</span>
         
         <span class="k">return</span> <span class="n">result</span>
-
-    <span class="k">def</span> <span class="nf">project_ts_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span> <span class="c"># TODO: test</span>
+</div>
+<div class="viewcode-block" id="Sphere.project_ts_"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.project_ts_">[docs]</a>    <span class="k">def</span> <span class="nf">project_ts_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span> <span class="c"># TODO: test</span>
         <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span> <span class="o">-</span> <span class="n">outer</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-        
-    <span class="k">def</span> <span class="nf">belongs_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        </div>
+<div class="viewcode-block" id="Sphere.belongs_"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.belongs_">[docs]</a>    <span class="k">def</span> <span class="nf">belongs_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="n">check</span><span class="p">(</span><span class="s">&#39;array[N]&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s">&#39;Expected a vector.&#39;</span><span class="p">)</span>
         <span class="n">assert_allclose</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">,</span>
                         <span class="n">err_msg</span><span class="o">=</span><span class="s">&#39;I expect a vector of size </span><span class="si">%d</span><span class="s">, got </span><span class="si">%s</span><span class="s">.&#39;</span> <span class="o">%</span> 
                              <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
         <span class="n">assert_allclose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">rtol</span><span class="o">=</span><span class="n">Sphere</span><span class="o">.</span><span class="n">norm_rtol</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="Sphere.sample_uniform"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.sample_uniform">[docs]</a>    <span class="k">def</span> <span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">random_direction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">interesting_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="Sphere.interesting_points"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.interesting_points">[docs]</a>    <span class="k">def</span> <span class="nf">interesting_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">[]</span> 
-
-    <span class="k">def</span> <span class="nf">friendly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="Sphere.friendly"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.friendly">[docs]</a>    <span class="k">def</span> <span class="nf">friendly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="k">return</span> <span class="s">&#39;Dir(</span><span class="si">%6.1f</span><span class="s">deg)&#39;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
@@ -121,7 +121,7 @@
             <span class="k">return</span> <span class="s">&#39;Dir(</span><span class="si">%6.1f</span><span class="s">deg,el:</span><span class="si">%5.1f</span><span class="s">deg)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span>
                                                       <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">elevation</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span> <span class="k">assert</span> <span class="bp">False</span>
-        </div>
+        </div></div>
 </pre></div>
 
           </div>
