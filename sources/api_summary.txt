@@ -9,7 +9,7 @@ PyGeometry API
 
 
 Design notes
------------
+-----------------
 
 * No fancy OO-overdose here. Geometric objects (rotation matrices, poses, etc.) are represented using vanilla 
   Numpy array: there's no class Rotation, Pose, etc. If you don't think this is a good
