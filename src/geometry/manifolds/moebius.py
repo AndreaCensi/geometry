@@ -1,7 +1,7 @@
 from . import DifferentiableManifold 
 
 class Moebius(DifferentiableManifold):
-    ''' The Moebius strip -- still to be implemented. '''
+    ''' INCOMPLETE - The Moebius strip -- still to be implemented. '''
     
     def __init__(self, n):
         self.n = n

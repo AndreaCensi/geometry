@@ -4,16 +4,22 @@
 '''
 import itertools
 from . import (assert_allclose, new_contract, contract, dot, zeros, eye,
-               safe_arccos,
+               safe_arccos, arctan2,
                pi, sin, cos, array, sign, uniform, argmax, sqrt, check, det,
                default_axis)
-
 
 
 new_contract('unit_quaternion', 'array[4], unit_length')
 new_contract('axis_angle', 'tuple(direction, float)') 
 # Canonically, we return a positive angle.
 new_contract('axis_angle_canonical', 'tuple(direction, (float,>=0, <pi))')
+
+
+@new_contract
+def SO(x):
+    ''' Checks that the given value is a rotation matrix of arbitrary size. '''
+    check('orthogonal', x)
+    assert_allclose(det(x), 1) 
 
 
 @new_contract
@@ -26,11 +32,7 @@ def orthogonal(x):
     assert_allclose(I, dot(x, x.T), rtol=rtol, atol=atol)
     assert_allclose(I, dot(x.T, x), rtol=rtol, atol=atol)
 
-@new_contract
-def rotation_matrix(x):
-    ''' Checks that the given value is a rotation matrix. '''
-    check('array[3x3], orthogonal', x)
-    assert_allclose(det(x), 1) 
+
 
 @new_contract
 @contract(x='array[NxN]')
@@ -51,7 +53,17 @@ def skew_symmetric(x):
                 
                 
 
-@contract(theta='number', returns='rotation_matrix')
+new_contract('SO2', 'array[2x2],SO')
+new_contract('SO3', 'array[3x3],SO')
+
+new_contract('so', 'skew_symmetric')
+new_contract('so2', 'array[2x2],skew_symmetric')
+new_contract('so3', 'array[3x3],skew_symmetric')
+
+# deprecated
+new_contract('rotation_matrix', 'SO3')
+
+@contract(theta='number', returns='SO3')
 def rotz(theta):
     ''' Returns a 3x3 rotation matrix corresponding to rotation around the *z* axis. '''
     return array([ 
@@ -59,13 +71,18 @@ def rotz(theta):
             [ sin(theta), cos(theta), 0],
             [0, 0, 1]]) 
 
-@contract(theta='number')
-def rot2d(theta):
+@contract(theta='number', returns='SO2')
+def rot2d_from_angle(theta):
     ''' Returns a 2x2 rotation matrix. '''
     return array([ 
             [ cos(theta), -sin(theta)],
             [ sin(theta), cos(theta)]]) 
 
+@contract(R='SO2', returns='float')
+def angle_from_rot2d(R):
+    return arctan2(R[1, 0], R[0, 0])
+
+rot2d = rot2d_from_angle
 
 @contract(returns='unit_quaternion')
 def random_quaternion():
