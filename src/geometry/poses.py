@@ -26,8 +26,7 @@ new_contract('SE3', 'array[4x4], SE')
 new_contract('se3', 'array[4x4], se')
     
     
-#@contract(x='array[NxN]', returns='tuple(array[MxM],array[M],array[M],number),M=N-1')
-@contract(x='array[NxN],N>=3')
+@contract(x='array[NxN]', returns='tuple(array[MxM],array[M],array[M],number),M=N-1')
 def extract_pieces(x):
     M = x.shape[0] - 1
     a = x[0:M, 0:M]
@@ -36,7 +35,7 @@ def extract_pieces(x):
     d = x[M, M]
     return a, b, c, d
 
-#@contract(a='array[MxM]', b='array[M]', c='array[M]', d='number', returns='array[NxN],N=M+1') 
+@contract(a='array[MxM]', b='array[M]', c='array[M]', d='number', returns='array[NxN],N=M+1') 
 def combine_pieces(a, b, c, d):
     M = a.shape[0]
     x = zeros((M + 1, M + 1)) 
@@ -46,8 +45,7 @@ def combine_pieces(a, b, c, d):
     x[M, M] = d
     return x
 
-@contract(R='array[NxN],SO', t='array[N]',
-          returns='array[MxM],M=N+1,SE') # todo: sorthogonal
+@contract(R='array[NxN],SO', t='array[N]', returns='array[MxM],M=N+1,SE') 
 def pose_from_rotation_translation(R, t):
     return combine_pieces(R, t, t * 0, 1)
     
@@ -65,7 +63,7 @@ def SE2_from_translation_angle(t, theta):
 
 @contract(pose='SE2', returns='tuple(array[2],number)')
 def translation_angle_from_SE2(pose):
-    R, t, zero, one = extract_pieces(pose)
+    R, t, zero, one = extract_pieces(pose) #@UnusedVariable
     return t, angle_from_rot2d(R)
     
 
@@ -78,7 +76,7 @@ def se2_from_linear_angular(linear, angular):
 
 @contract(vel='se2', returns='tuple(array[2],number)')
 def linear_angular_from_se2(vel):
-    M, v, Z, zero = extract_pieces(vel)
+    M, v, Z, zero = extract_pieces(vel) #@UnusedVariable
     omega = M[1, 0]
     return v, omega
 
