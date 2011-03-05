@@ -75,7 +75,7 @@ Manifold class:
 
     geometry.manifolds.sphere.Sphere
     
-Instances: 
+Instances of the manifold class: 
 
 .. py:data:: geometry.manifolds.S1 
     
@@ -184,8 +184,16 @@ Random sampling:
     geometry.rotations.random_rotation
     geometry.rotations.random_orthogonal_transform
     
+Random sampling:
 
+.. autosummary::
+   :toctree: api
 
+   geometry.rotations.geodesic_distance_for_rotations
+   
+   
+   
+   
 SE(n) -- poses
 --------------------
 

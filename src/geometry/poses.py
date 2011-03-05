@@ -55,26 +55,26 @@ def rotation_translation_from_pose(pose):
     return R, t
 
     
-@contract(t='array[2]|list[2](number)', theta='number', returns='SE2')
+@contract(t='array[2]|seq[2](number)', theta='number', returns='SE2')
 def SE2_from_translation_angle(t, theta):
     ''' Returns an element of SE2 from translation and rotation. '''
     t = np.array(t)
     return combine_pieces(rot2d(theta), t, t * 0, 1)
 
-@contract(pose='SE2', returns='tuple(array[2],number)')
+@contract(pose='SE2', returns='tuple(array[2],float)')
 def translation_angle_from_SE2(pose):
     R, t, zero, one = extract_pieces(pose) #@UnusedVariable
     return t, angle_from_rot2d(R)
     
 
-@contract(linear='array[2]|list[2](number)', angular='number', returns='se2')
+@contract(linear='array[2]|seq[2](number)', angular='number', returns='se2')
 def se2_from_linear_angular(linear, angular):
     ''' Returns an element of se2 from linear and angular velocity. ''' 
     linear = np.array(linear)
     M = np.array([[0, -1], [+1, 0]]) * angular
     return combine_pieces(M, linear, linear * 0, 0)
 
-@contract(vel='se2', returns='tuple(array[2],number)')
+@contract(vel='se2', returns='tuple(array[2],float)')
 def linear_angular_from_se2(vel):
     M, v, Z, zero = extract_pieces(vel) #@UnusedVariable
     omega = M[1, 0]

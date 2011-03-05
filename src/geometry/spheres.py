@@ -137,9 +137,12 @@ def any_orthogonal_direction(s):
     v = x / norm(x)
     return v
 
-@contract(s='array[K],unit_length', returns='array[K],unit_length')
+@contract(s='array[K],unit_length,(K=2|K=3)', returns='array[K],unit_length')
 def random_orthogonal_direction(s):
-    ''' Returns a random axis orthogonal to *s*. '''
+    ''' 
+        Returns a random axis orthogonal to *s* 
+        (only implented for circle and sphere). 
+    '''
     from .rotations import rot2d, rotation_from_axis_angle
 
     if s.size == 2:
@@ -153,7 +156,16 @@ def random_orthogonal_direction(s):
         R = rotation_from_axis_angle(s, angle)
         z2 = np.dot(R, z)
         return z2
-    else: assert False
+    else: assert False, 'Not implemented'
+    
+    
+@contract(s1='array[K],unit_length', s2='array[K],unit_length', t='number,>=0,<=1')
+def slerp(s1, s2, t):
+    ''' Spherical interpolation between two points on a hypersphere. '''    
+    omega = arccos(dot(s1 / norm(s1), s2 / norm(s2)))
+    so = sin(omega)
+    return sin((1.0 - t) * omega) / so * s1 + sin(t * omega) / so * s2
+
 
 @contract(ndim='(2|3),K',
            radius='number,>0,<=pi',
