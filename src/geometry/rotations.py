@@ -6,7 +6,7 @@ import itertools
 from . import (assert_allclose, new_contract, contract, dot, zeros, eye,
                safe_arccos, arctan2,
                pi, sin, cos, array, sign, uniform, argmax, sqrt, check, det,
-               default_axis)
+               default_axis, norm)
 
 
 new_contract('unit_quaternion', 'array[4], unit_length')
@@ -21,7 +21,6 @@ def SO(x):
     check('orthogonal', x)
     assert_allclose(det(x), 1) 
 
-
 @new_contract
 @contract(x='array[NxN],N>0')
 def orthogonal(x):
@@ -31,8 +30,6 @@ def orthogonal(x):
     atol = 10E-7  # XXX:
     assert_allclose(I, dot(x, x.T), rtol=rtol, atol=atol)
     assert_allclose(I, dot(x.T, x), rtol=rtol, atol=atol)
-
-
 
 @new_contract
 @contract(x='array[NxN]')
@@ -241,6 +238,7 @@ def axis_angle_from_quaternion(q):
         axis = default_axis()
     else:
         axis = q[1:] / sin(angle / 2)
+	axis = axis / norm(axis)
     if angle > pi:
         angle -= 2 * pi
     elif angle < -pi:
