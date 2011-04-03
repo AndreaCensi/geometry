@@ -130,5 +130,16 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         x = expm(tv)
         return np.dot(base, x)
     
+    # TODO: write tests for this
+    def velocity_from_points(self, a, b, delta=1):
+        ''' 
+            Find the velocity in local frame to go from *a* to *b* in 
+            *delta* time. 
+        '''
+        x = self.multiply(self.inverse(a), b)
+        xt = self.logmap(self.unity(), x)
+        xt = self.algebra.project(xt)
+        return xt / delta
+
     
     

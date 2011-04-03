@@ -232,7 +232,11 @@ Conversions:
 
     geometry.poses.pose_from_rotation_translation
     geometry.poses.rotation_translation_from_pose
-
+    geometry.poses.SE2_from_translation_angle
+    geometry.poses.translation_angle_from_SE2
+    geometry.poses.SE2_from_xytheta
+    geometry.poses.se2_from_linear_angular
+    geometry.poses.linear_angular_from_se2
 
 Misc:
 

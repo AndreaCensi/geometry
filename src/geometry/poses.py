@@ -65,7 +65,13 @@ def SE2_from_translation_angle(t, theta):
 def translation_angle_from_SE2(pose):
     R, t, zero, one = extract_pieces(pose) #@UnusedVariable
     return t, angle_from_rot2d(R)
-    
+
+# TODO: write tests for this, and other function
+@contract(xytheta='array[3]|seq[3](number)', returns='SE2')
+def SE2_from_xytheta(xytheta):
+    ''' Returns an element of SE2 from translation and rotation. '''
+    return SE2_from_translation_angle(xytheta[0:2], xytheta[2])
+
 
 @contract(linear='array[2]|seq[2](number)', angular='number', returns='se2')
 def se2_from_linear_angular(linear, angular):
@@ -79,6 +85,10 @@ def linear_angular_from_se2(vel):
     M, v, Z, zero = extract_pieces(vel) #@UnusedVariable
     omega = M[1, 0]
     return v, omega
+
+
+
+
 
 
 
