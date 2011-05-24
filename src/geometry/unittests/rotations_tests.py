@@ -7,8 +7,8 @@ from geometry import (axis_angle_from_rotation,
 from .utils import rotations_sequence, axis_angle_sequence, \
     GeoTestCase, directions_sequence
 import itertools
-from geometry.rotations import quaternion_from_rotation
-from geometry.spheres import slerp
+from geometry.rotations import quaternion_from_rotation, rotation_from_axes_spec
+from geometry.spheres import slerp, any_distant_direction
 
 class RotationsTest(GeoTestCase):
 
@@ -52,5 +52,13 @@ def hat_map_test():
             assert_allclose(x1, x3)
             
             
+def rotation_from_axes_spec__test():
+    for x in directions_sequence():
+        v = any_distant_direction(x)
+        R = rotation_from_axes_spec(x, v)
+        x_ = np.dot(R, x)
+        assert_allclose(x_, [1, 0, 0], atol=1e-8)
+        v_ = np.dot(R, v)
+        assert_allclose(v_[2], 0, atol=1e-8)
         
-    
+

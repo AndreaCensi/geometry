@@ -4,9 +4,10 @@
 '''
 import itertools
 from . import (assert_allclose, new_contract, contract, dot, zeros, eye,
-               safe_arccos, arctan2,
+               safe_arccos, arctan2, np,
                pi, sin, cos, array, sign, uniform, argmax, sqrt, check, det,
-               default_axis, norm)
+               default_axis, norm, normalize_length)
+
 
 
 new_contract('unit_quaternion', 'array[4], unit_length')
@@ -238,7 +239,7 @@ def axis_angle_from_quaternion(q):
         axis = default_axis()
     else:
         axis = q[1:] / sin(angle / 2)
-	axis = axis / norm(axis)
+    axis = axis / norm(axis)
     if angle > pi:
         angle -= 2 * pi
     elif angle < -pi:
@@ -289,8 +290,30 @@ def rotation_from_axis_angle2(axis, angle):
         Get the rotation from the *(axis,angle)* representation.
         
         This is an alternative to :py:func:`rotation_from_axis_angle` which
-        goes through the quaternion representation.
+        goes through the quaternion representation instead of using Rodrigues'
+        formula.
     '''
     q = quaternion_from_axis_angle(axis, angle)
     return rotation_from_quaternion(q)
+
+@contract(x_axis='direction', vector_on_xy_plane='direction',
+          returns='rotation_matrix')
+def rotation_from_axes_spec(x_axis, vector_on_xy_plane):
+    """ 
+        Creates a rotation matrix from the axes. 
+        ``x_axis`` is the new direction of the (1,0,0) vector
+        after this rotation. ``vector_on_xy_plane`` is a vector
+        that must end up in the (x,y) plane after the rotation. 
+        
+        That is, it holds that: ::
+        
+            R = rotation_from_axes_spec(x, v)
+            dot(R,x) == [1,0,0]
+            dot(R,v) == [?,?,0]
      
+        TODO: add exception if vectors are too close.
+    """
+    z_axis = normalize_length(np.cross(x_axis, vector_on_xy_plane))
+    y_axis = normalize_length(np.cross(z_axis, x_axis))
+    R = np.vstack((x_axis, y_axis, z_axis))
+    return R
