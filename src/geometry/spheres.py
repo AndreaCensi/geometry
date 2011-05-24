@@ -68,7 +68,8 @@ def geodesic_distance_on_sphere(s1, s2):
 
 @contract(S='directions', returns='float,>=0,<=pi')
 def distribution_radius(S):
-    ''' Returns the radius of the given directions distribution.
+    ''' 
+        Returns the radius of the given directions distribution.
         
         The radius is defined as the minimum *r* such that there exists a 
         point *s* in *S* such that all distances are within *r* from *s*. 
@@ -122,7 +123,8 @@ def any_distant_direction(s):
     ''' Returns a direction distant from both *s* and *-s*. '''
     z = default_axis()
     d = geodesic_distance_on_sphere(s, z)
-    limit = 1.0 / 6.0 * pi
+    # TODO: make this a global parameter
+    limit = 1.0 / 6.0 * pi 
     if min(d, pi - d) < limit:
         z = default_axis_orthogonal()
     return z
@@ -141,7 +143,7 @@ def any_orthogonal_direction(s):
 def random_orthogonal_direction(s):
     ''' 
         Returns a random axis orthogonal to *s* 
-        (only implented for circle and sphere). 
+        (only implemented for circle and sphere). 
     '''
     from .rotations import rot2d, rotation_from_axis_angle
 
