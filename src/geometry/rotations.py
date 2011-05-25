@@ -20,7 +20,9 @@ new_contract('axis_angle_canonical', 'tuple(direction, (float,>=0, <pi))')
 def SO(x):
     ''' Checks that the given value is a rotation matrix of arbitrary size. '''
     check('orthogonal', x)
-    assert_allclose(det(x), 1) 
+    determinant = np.linalg.det(x * 1.0) # XXX: voodoo
+    # lapack_lite.LapackError: Parameter a has non-native byte order in lapack_lite.dgetrf
+    assert_allclose(determinant, 1.0) 
 
 @new_contract
 @contract(x='array[NxN],N>0')
@@ -316,4 +318,4 @@ def rotation_from_axes_spec(x_axis, vector_on_xy_plane):
     z_axis = normalize_length(np.cross(x_axis, vector_on_xy_plane))
     y_axis = normalize_length(np.cross(z_axis, x_axis))
     R = np.vstack((x_axis, y_axis, z_axis))
-    return R
+    return R.copy('C')

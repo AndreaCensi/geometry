@@ -7,6 +7,7 @@ from geometry import (axis_angle_from_rotation,
 from .utils import rotations_sequence, axis_angle_sequence, \
     GeoTestCase, directions_sequence
 import itertools
+# XXX:
 from geometry.rotations import quaternion_from_rotation, rotation_from_axes_spec
 from geometry.spheres import slerp, any_distant_direction
 
