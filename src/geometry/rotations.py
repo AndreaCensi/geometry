@@ -5,7 +5,7 @@
 import itertools
 from . import (assert_allclose, new_contract, contract, dot, zeros, eye,
                safe_arccos, arctan2, np,
-               pi, sin, cos, array, sign, uniform, argmax, sqrt, check, det,
+               pi, sin, cos, array, sign, uniform, argmax, sqrt, check,
                default_axis, norm, normalize_length)
 
 

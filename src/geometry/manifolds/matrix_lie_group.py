@@ -24,7 +24,7 @@ class MatrixLieAlgebra(object):
         self.n = n
     
     @abstractmethod        
-    def project(self, v):
+    def project(self, v): #@UnusedVariable
         ''' Projects a matrix onto this Lie Algebra. '''
         assert False
     

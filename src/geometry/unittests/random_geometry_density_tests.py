@@ -1,5 +1,4 @@
 from nose.plugins.attrib import attr
-from nose.tools import nottest
 
 import numpy as np
 from geometry import (random_direction, random_directions_bounded, distances_from,

@@ -51,7 +51,7 @@ def pose_from_rotation_translation(R, t):
     
 @contract(pose='array[NxN],SE', returns='tuple(array[MxM], array[M]),M=N-1')
 def rotation_translation_from_pose(pose):
-    R, t, zero, one = extract_pieces(pose)
+    R, t, zero, one = extract_pieces(pose) #@UnusedVariable
     return R, t
 
     

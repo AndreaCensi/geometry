@@ -71,7 +71,7 @@ def random_directions_bounded_test_1():
     random_directions_bounded(ndim=2, radius=r, num_points=N, center=random_direction(2))
     random_directions_bounded(ndim=3, radius=r, num_points=N, center=random_direction(3))
 
-def check_reasonable_radius(r, r2, N):
+def check_reasonable_radius(r, r2, N): #@UnusedVariable
     bounds = [0.8, 1.2] # TODO: make it depend on N
     if not (r * bounds[0] <= r2 <= r * bounds[1]):
         msg = 'Constructed distribution with radius %f, got %f.' % (r, r2)
