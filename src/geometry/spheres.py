@@ -271,3 +271,15 @@ def spherical_cap_with_area(cap_area):
     r = arccos(1 - h)
     return r
 
+@contract(S='array[KxN],K>=2', returns='array[KxN]')
+def project_vectors_onto_sphere(S, atol=1e-7):
+    K, N = S.shape
+    coords_proj = np.zeros((K, N))
+    for i in range(N):
+        v = S[:, i]
+        nv = np.linalg.norm(v)
+        if np.fabs(nv) < atol:
+            raise ValueError('Vector too small: %s' % v)
+        coords_proj[:, i] = v / nv
+    return coords_proj
+
