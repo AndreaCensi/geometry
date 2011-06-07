@@ -47,24 +47,8 @@ def double_center(P):
     return B2
 
 
-@contract(D='array[MxM](>=0)', ndim='K,int,>=1', returns='array[KxM]')
-def mds(D, ndim):
-    diag = D.diagonal()
-    assert_allclose(diag, 0)
-    # Find centered cosine matrix
-    P = D * D
-    B = double_center(P)
-    return best_embedding(B, ndim)
-
-
-@contract(R='array[NxN]', ndim='int,>0,K', returns='array[KxN],directions')
-def best_embedding_on_sphere(R, ndim):
-    coords = best_embedding(R, ndim)
-    proj = project_vectors_onto_sphere(coords)
-    return proj
-
 @contract(C='array[NxN]', ndim='int,>0,K', returns='array[KxN]')
-def best_embedding_slow(C, ndim):
+def inner_product_embedding_slow(C, ndim):
     U, S, V = np.linalg.svd(C, full_matrices=0)
     check_multiple([ ('array[NxN]', U),
                      ('array[N]', S),
@@ -75,7 +59,7 @@ def best_embedding_slow(C, ndim):
     return coords
 
 @contract(C='array[NxN]', ndim='int,>0,K', returns='array[KxN]')
-def best_embedding(C, ndim): 
+def inner_product_embedding(C, ndim): 
     n = C.shape[0]
     eigvals = (n - ndim, n - 1)
     S, V = scipy.linalg.eigh(C, eigvals=eigvals)
@@ -87,4 +71,52 @@ def best_embedding(C, ndim):
     for i in range(ndim):
         coords[i, :] = coords[i, :]  * np.sqrt(S[i])
     return coords
+
+
+def truncated_svd_randomized(M, k):
+    ''' Truncated SVD based on randomized projections. '''
+    p = k + 5
+    Y = np.dot(M, np.random.normal(size=(M.shape[1], p)))
+    Q, r = np.linalg.qr(Y) #@UnusedVariable
+    B = np.dot(Q.T, M)
+    Uhat, s, v = np.linalg.svd(B, full_matrices=False)
+    U = np.dot(Q, Uhat)
+    return U.T[:k].T, s[:k], v[:k]    
+
+@contract(C='array[NxN]', ndim='int,>0,K', returns='array[KxN]')
+def inner_product_embedding_randomized(C, ndim): 
+    ''' Best embedding of inner product matrix based on randomized projections. '''
+    U, S, V = truncated_svd_randomized(C, ndim) #@UnusedVariable
+    check_multiple([ ('K', ndim),
+                     ('array[KxN]', V),
+                     ('array[K]', S)  ])
+    coords = V
+    for i in range(ndim):
+        coords[i, :] = coords[i, :]  * np.sqrt(S[i])
+    return coords
+
+@contract(D='array[MxM](>=0)', ndim='K,int,>=1', returns='array[KxM]')
+def mds(D, ndim, embed=inner_product_embedding):
+    diag = D.diagonal()
+    assert_allclose(diag, 0)
+    # Find centered cosine matrix
+    P = D * D
+    B = double_center(P)
+    return embed(B, ndim)
  
+@contract(D='array[MxM](>=0)', ndim='K,int,>=1', returns='array[KxM]')
+def mds_randomized(D, ndim):
+    ''' MDS based on randomized projections. '''
+    return mds(D, ndim, embed=inner_product_embedding_randomized)
+    
+@contract(C='array[NxN]', ndim='int,>0,K', returns='array[KxN],directions')
+def spherical_mds(C, ndim, embed=inner_product_embedding):
+    # TODO: check cosines
+    coords = embed(C, ndim)
+    proj = project_vectors_onto_sphere(coords)
+    return proj
+
+# TODO: spherical_mds_randomized
+
+best_embedding_on_sphere = spherical_mds
+

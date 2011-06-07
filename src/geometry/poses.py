@@ -1,6 +1,5 @@
-from . import zeros, contract, assert_allclose, check, np, rot2d
-from contracts.main import new_contract
-from geometry.rotations import angle_from_rot2d
+from . import zeros, contract, assert_allclose, check, np, rot2d, new_contract
+from .rotations import angle_from_rot2d
 
 
 def check_SE(M):

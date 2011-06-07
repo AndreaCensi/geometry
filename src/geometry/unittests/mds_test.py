@@ -3,6 +3,8 @@ import numpy as np
 from geometry import (euclidean_distances, assert_allclose,
  double_center, mds)
 import scipy.linalg
+from geometry.mds import mds_randomized
+import time
  
 
 def euclidean_distances_test():
@@ -44,6 +46,25 @@ def mds_test():
             error = evaluate_error(P, P2)
             assert_allclose(0, error, atol=1e-7)
 #            print('k = %d n = %d  mean_error = %s' % (k, n, error)) 
+
+
+def mds_fast_test():
+    for n in [10, 100]:
+        for k in [2, 3]:
+            P = np.random.rand(k, n)
+            D = euclidean_distances(P)
+    
+            for algo in [mds, mds_randomized]:
+                t0 = time.clock()
+                P2 = algo(D, ndim=k)
+                t1 = time.clock()
+                t_mds = t1 - t0            
+                #            D2 = euclidean_distances(P2)
+                error = evaluate_error(P, P2)
+                assert_allclose(0, error, atol=1e-7)
+                print('k = %d n = %d  %-20s  %7d ms   mean_error = %s' % 
+                      (k, n, algo.__name__, t_mds * 1000, error)) 
             
+
     
     
