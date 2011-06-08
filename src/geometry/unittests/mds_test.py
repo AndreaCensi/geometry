@@ -3,9 +3,8 @@ import numpy as np
 from geometry import (euclidean_distances, assert_allclose,
  double_center, mds)
 import scipy.linalg
-from geometry.mds import mds_randomized
-import time
- 
+from geometry.mds import mds_randomized, place
+import time 
 
 def euclidean_distances_test():
     n = 5
@@ -16,7 +15,7 @@ def euclidean_distances_test():
         d = np.linalg.norm(P[:, i] - P[:, j])
         assert_allclose(d, D[i, j])
         
-        
+
 def rank_test():
     ''' Check that the double-centered matrix has small rank. '''
     for n in range(5, 50, 5):
@@ -64,7 +63,15 @@ def mds_fast_test():
                 assert_allclose(0, error, atol=1e-7)
                 print('k = %d n = %d  %-20s  %7d ms   mean_error = %s' % 
                       (k, n, algo.__name__, t_mds * 1000, error)) 
-            
 
+def place_test():
+    for n in [4, 10]:
+        for k in [3]:
+            S = np.random.rand(k, n)
+            p = np.random.rand(k)
+            ref = lambda x:  np.linalg.norm(p - x)
+            distances = np.array([ ref(S[:, i]) for i in range(n)])
+            p2 = place(S, distances)
+            assert_allclose(p, p2) 
     
     

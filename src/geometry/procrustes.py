@@ -1,4 +1,5 @@
 from . import contract, dot, svd, check
+from geometry.basic_utils import assert_allclose
 
 # TODO: write tests
 @contract(X='array[KxN],K>=2,K<N', Y='array[KxN]', returns='array[KxK],orthogonal')
@@ -18,3 +19,26 @@ def closest_orthogonal_matrix(M):
     U, S, V = svd(M) #@UnusedVariable
     R = dot(U, V)
     return R
+
+
+# TODO: write tests
+@contract(X='array[KxN],K>=2,K<N', Y='array[KxN]',
+          returns='tuple( (array[KxK],orthogonal), array[Kx1])')
+def best_similarity_transform(X, Y):
+    ''' Finds the best transform (R,t)  between X and Y,
+        such that R X + t ~= Y. '''
+    K = X.shape[0]
+    Xm = X.mean(axis=1).reshape(K, 1)
+    Ym = Y.mean(axis=1).reshape(K, 1)
+    X = X - Xm
+    Y = Y - Ym
+#    assert_allclose(X.mean(axis=1), 0, atol=1e-8)
+#    assert_allclose(Y.mean(axis=1), 0, atol=1e-8)
+    YX = dot(Y, X.T)
+    check('array[KxK]', YX)
+    U, S, V = svd(YX) #@UnusedVariable
+    R = dot(U, V)
+    t = Ym - dot(R, Xm) 
+    return R, t
+
+

@@ -4,6 +4,8 @@ from contracts import check_multiple
 
 from .basic_utils import contract, np, assert_allclose
 from .spheres import project_vectors_onto_sphere
+from numpy.ma.testutils import assert_almost_equal
+from geometry.procrustes import best_similarity_transform
 
 
 @contract(S='array[KxN]', returns='array[NxN](>=0)')
@@ -119,4 +121,30 @@ def spherical_mds(C, ndim, embed=inner_product_embedding):
 # TODO: spherical_mds_randomized
 
 best_embedding_on_sphere = spherical_mds
+
+
+
+@contract(references='array[KxN]', distances='array[N](>=0)')
+def place(references, distances):
+    K, N = references.shape
+    
+    # First do MDS on all data
+    D = np.zeros((N + 1, N + 1))
+    D[:N, :N] = euclidean_distances(references)
+    D[N, N] = 0
+    D[N, :N] = distances
+    D[:N, N] = distances
+    Sm = mds(D, K)
+    Dm = euclidean_distances(Sm)
+  
+    # Only if perfect  
+    # assert_almost_equal(D[:N, :N], Dm[:N, :N])
+    # new in other frame 
+    R, t = best_similarity_transform(Sm[:, :N], references)
+    
+    Sm_aligned = np.dot(R, Sm) + t
+    result = Sm_aligned[:, N]
+
+    return result
+
 
