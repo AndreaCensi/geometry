@@ -54,6 +54,9 @@ def check_logmap3(M, a, b):
         d2 = M.distance(a, b2)
         assert_allclose(d * ratio, d2, atol=1e-7)
 
+def check_friendly(M, a):
+    print('Friendly: %s %s ' % (M, a))
+    
 def check_manifold_suite(M, num_random=5): 
 
     points = M.interesting_points()
@@ -63,6 +66,10 @@ def check_manifold_suite(M, num_random=5):
     for p in points:
         M.belongs(p)
     
+    for f in [check_friendly]:
+        for a in points:
+            yield f, M, a
+
     for f in [check_geodesic_consistency,
               check_logmap1, check_logmap3]:
         for a, b in itertools.product(points, points):

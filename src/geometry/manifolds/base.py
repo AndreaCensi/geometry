@@ -23,6 +23,9 @@ class DifferentiableManifold(object):
     ''' This is the base class for differentiable manifolds. ''' 
     __metaclass__ = ABCMeta
    
+#    def __init__(self, simply_connected=True):
+#        self.simply_connected = simply_connected
+   
     def belongs(self, x, msg=None):
         ''' 
             Checks that a point belongs to this manifold.  
@@ -122,6 +125,18 @@ class DifferentiableManifold(object):
         ''' Returns a friendly description string for a point on the manifold. '''
         return "%s" % a 
     
+    def assert_close(self, a, b, atol=1e-8):
+        ''' Asserts that two points on the manifold are close enough. '''
+        distance = self.distance(a, b)
+        if distance > atol:
+            msg = "The two points should be the same:\n"
+            msg += "- a: %s\n" % self.friendly(a)
+            msg += "- b: %s\n" % self.friendly(b)
+            msg += "- a: (full):\n%s\n" % a
+            msg += "- b: (full):\n%s\n" % b
+            assert_allclose(distance, 0, atol=atol, err_msg=msg)
+        return distance
+    
     @abstractmethod
     def belongs_(self, a): 
         ''' Checks that a point belongs to this manifold. '''  
@@ -144,6 +159,7 @@ class DifferentiableManifold(object):
             Projects a vector *v_ambient* in the ambient space
             to the tangent space at point *base*. 
         '''
+    
     
     
 class RandomManifold(DifferentiableManifold):

@@ -6,7 +6,9 @@ from geometry import  (assert_allclose,
                        pose_from_rotation_translation,
                            rotation_translation_from_pose,
                            extract_pieces, combine_pieces)
-
+from geometry.poses import se2_from_SE2, SE2_from_translation_angle, \
+    SE2_from_se2
+from geometry import logm
 
 class se(MatrixLieAlgebra):
     ''' This is the Lie algebra se(n) for the Special Euclidean group SE(n). 
@@ -67,6 +69,52 @@ class SE(MatrixLieGroup):
     def friendly(self, x):
         R, t = rotation_translation_from_pose(x)
         return 'Pose(%s,%s)' % (self.SOn.friendly(R), self.En.friendly(t))
+    
+    # TODO: make explicit inverse
+    # TODO: make specialization for SE(3)
+    def logmap_(self, base, target):
+        ''' Uses special form for logarithmic map. '''
+        if self.n == 3:
+            diff = self.multiply(self.inverse(base), target)
+            X = se2_from_SE2(diff)            
+            X = self.algebra.project(X)
+            return np.dot(base, X)
+        else:
+            return MatrixLieGroup.logmap_(self, base, target)
+    
+    def expmap_(self, base, vel):
+        ''' Uses special form for exponential map. '''
+        if self.n == 3:
+            tv = np.dot(self.inverse(base), vel)
+            tv = self.algebra.project(tv)
+            x = SE2_from_se2(tv)
+            return np.dot(base, x)
+        else: #
+            return MatrixLieGroup.expmap_(self, base, vel)
+
         
                 
+    def interesting_points(self):
+        if self.n == 3:
+            interesting = [
+                SE2_from_translation_angle([0, 0], 0),
+                SE2_from_translation_angle([0, 0], 0.1),
+                SE2_from_translation_angle([0, 0], -0.1),
+                SE2_from_translation_angle([1, 0.1], 0),
+            ]
+        else:
+            # TODO: implement for SE3
+            interesting = []
+        return interesting
+#        if False: #singularity
+#            yield SE2_from_translation_angle([0, 0], -np.pi)
+#            yield SE2_from_translation_angle([0, 0], +np.pi)
+#            yield SE2_from_translation_angle([1, 0.1], -np.pi)
+#            yield SE2_from_translation_angle([1, 0.1], +np.pi)
+##        
+#        for i in range(nrandom): #@UnusedVariable
+#            t = np.random.rand(2)
+#            theta = np.random.uniform(-1, 1) * np.pi
+#            interesting.append(SE2_from_translation_angle(t, theta))
+        
     

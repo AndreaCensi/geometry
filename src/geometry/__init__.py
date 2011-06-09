@@ -1,6 +1,6 @@
-__version__ = '0.9.3'
+__version__ = '0.9.4'
 
-
+from .formatting import *
 from .basic_utils import *
 from .spheres import * 
 from .rotations import * 

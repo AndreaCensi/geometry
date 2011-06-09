@@ -262,6 +262,7 @@ def rotation_from_axis_angle(axis, angle):
     R = eye(3) + w_hat * sin(angle) + w_hat2 * (1 - cos(angle))
     return R
 
+
 @contract(R='rotation_matrix', returns='axis_angle_canonical')
 def axis_angle_from_rotation(R):
     ''' 
@@ -300,7 +301,7 @@ def rotation_from_axis_angle2(axis, angle):
 
 @contract(x_axis='direction', vector_on_xy_plane='direction',
           returns='rotation_matrix')
-def rotation_from_axes_spec(x_axis, vector_on_xy_plane):
+def rotation_from_axes_spec(x_axis, vector_on_xy_plane): # TODO: docs
     """ 
         Creates a rotation matrix from the axes. 
         ``x_axis`` is the new direction of the (1,0,0) vector
