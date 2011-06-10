@@ -1,6 +1,7 @@
 from contracts import contract
 from abc import ABCMeta, abstractmethod
 from geometry import assert_allclose
+import contracts
 
 class DoesNotBelong(Exception):
     ''' Exception thrown when a point does not belong
@@ -45,7 +46,8 @@ class DifferentiableManifold(object):
 
         '''
         proj = self.project_ts(base, vx)
-        assert_allclose(proj, vx, atol=1e-8)
+        assert_allclose(proj, vx, atol=1e-8) #TODO: put somewhere else, class var
+        # TODO: error
     
     def project_ts(self, base, v): # TODO: test
         '''
@@ -55,7 +57,8 @@ class DifferentiableManifold(object):
             This function wraps some checks around :py:func:`project_ts_`, 
             which is implemented by the subclasses. 
         ''' 
-        self.belongs(base)
+        if not contracts.all_disabled():
+            self.belongs(base)
         # check dimensions?
         v2 = self.project_ts_(base, v)
         return v2
@@ -68,10 +71,12 @@ class DifferentiableManifold(object):
             This function wraps some checks around :py:func:`distance_`, 
             which is implemented by the subclasses. 
         '''
-        self.belongs(a)
-        self.belongs(b)
+        if not contracts.all_disabled():
+            self.belongs(a)
+            self.belongs(b)
         d = self.distance_(a, b)
-        assert d >= 0
+        if not contracts.all_disabled():
+            assert d >= 0
         return d
              
     def logmap(self, base, p):
@@ -82,10 +87,12 @@ class DifferentiableManifold(object):
             which is implemented by the subclasses. 
 
         '''
-        self.belongs(base)
-        self.belongs(p)
+        if not contracts.all_disabled():
+            self.belongs(base)
+            self.belongs(p)
         v = self.logmap_(base, p)
-        self.belongs_ts(base, v)
+        if not contracts.all_disabled():
+            self.belongs_ts(base, v)
         return v
 
     def expmap(self, base, v):
@@ -96,10 +103,14 @@ class DifferentiableManifold(object):
             which is implemented by the subclasses. 
             
         '''
-        self.belongs(base, 'Base point passed to expmap().')
-        self.belongs_ts(base, v)
+        if not contracts.all_disabled():
+            self.belongs(base, 'Base point passed to expmap().')
+            self.belongs_ts(base, v)
+        
         p = self.expmap_(base, v)
-        self.belongs(p, 'Result of %s:_expmap(%s,%s)' % 
+        
+        if not contracts.all_disabled():
+            self.belongs(p, 'Result of %s:_expmap(%s,%s)' % 
                         (self, self.friendly(base), v))
         return p
         
@@ -114,8 +125,9 @@ class DifferentiableManifold(object):
     @contract(t='>=0,<=1')
     def geodesic(self, a, b, t):
         ''' Returns the point interpolated along the geodesic. '''
-        self.belongs(a)
-        self.belongs(b)
+        if not contracts.all_disabled():
+            self.belongs(a)
+            self.belongs(b)
         vel = self.logmap(a, b)
         vel2 = vel * t
         p = self.expmap(a, vel2)

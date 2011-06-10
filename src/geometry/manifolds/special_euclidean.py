@@ -5,10 +5,8 @@ from . import MatrixLieGroup, np, MatrixLieAlgebra, SO, so, Euclidean
 from geometry import  (assert_allclose,
                        pose_from_rotation_translation,
                            rotation_translation_from_pose,
-                           extract_pieces, combine_pieces)
-from geometry.poses import se2_from_SE2, SE2_from_translation_angle, \
-    SE2_from_se2
-from geometry import logm
+                           extract_pieces, combine_pieces,
+                        se2_from_SE2, SE2_from_se2, SE2_from_translation_angle)
 
 class se(MatrixLieAlgebra):
     ''' This is the Lie algebra se(n) for the Special Euclidean group SE(n). 
