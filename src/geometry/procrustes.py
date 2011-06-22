@@ -1,5 +1,4 @@
 from . import contract, dot, svd, check
-from geometry.basic_utils import assert_allclose
 
 # TODO: write tests
 @contract(X='array[KxN],K>=2,K<N', Y='array[KxN]', returns='array[KxK],orthogonal')

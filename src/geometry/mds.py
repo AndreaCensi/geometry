@@ -4,8 +4,7 @@ from contracts import check_multiple
 
 from .basic_utils import contract, np, assert_allclose
 from .spheres import project_vectors_onto_sphere
-from numpy.ma.testutils import assert_almost_equal
-from geometry.procrustes import best_similarity_transform
+from .procrustes import best_similarity_transform
 
 
 @contract(S='array[KxN]', returns='array[NxN](>=0)')

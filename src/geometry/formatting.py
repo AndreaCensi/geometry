@@ -1,13 +1,13 @@
 from contracts.main import contract
 import numpy as np
-from string import ljust, rjust
+from string import ljust
 
 
 def printm(*args):
     print(formatm(*args))
     
 def formatm(*args):
-    name_len = 10
+    #name_len = 10
     assert len(args) > 0
     assert len(args) % 2 == 0
     cols = []
