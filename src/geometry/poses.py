@@ -73,7 +73,7 @@ def translation_angle_from_SE2(pose):
 @contract(xytheta='array[3]|seq[3](number)', returns='SE2')
 def SE2_from_xytheta(xytheta):
     ''' Returns an element of SE2 from translation and rotation. '''
-    return SE2_from_translation_angle(xytheta[0:2], xytheta[2])
+    return SE2_from_translation_angle([xytheta[0], xytheta[1]], xytheta[2])
 
 def hat_map_2d(omega):
     return np.array([[0, -1], [+1, 0]]) * omega

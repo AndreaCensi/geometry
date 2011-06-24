@@ -1,6 +1,6 @@
 from setuptools import setup
 
-version='0.9.5'
+version='0.9.6'
 
 setup(name='PyGeometry',
       version=version,
@@ -13,7 +13,7 @@ setup(name='PyGeometry',
       ],
       package_dir={'':'src'},
       packages=['geometry', 'geometry.manifolds'],
-      install_requires=['numpy', 'scipy', 'PyContracts'],
+      install_requires=['PyContracts'],
      download_url='http://github.com/AndreaCensi/geometry/tarball/%s' % version,
 
 )
