@@ -26,11 +26,14 @@ class ProductManifold(DifferentiableManifold):
         
     def logmap_(self, a, b): 
         ''' Computes the logarithmic map from base point *a* to target *b*. '''
-        raise ValueError('Not implemented')
+        raise ValueError('Not implemented') # FIXME: finish this
     
     def expmap_(self, a, v):
-        raise ValueError('Not implemented')
+        raise ValueError('Not implemented') # FIXME: finish this
         
     def project_ts_(self, base, v_ambient):
-        raise ValueError('Not implemented')
+        raise ValueError('Not implemented') # FIXME: finish this
     
+    def __repr__(self):
+        return 'P(%s)' % "x".join([str(x) for x in self.components])
+
