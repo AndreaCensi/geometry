@@ -1,7 +1,6 @@
-from . import np
+from . import np, DifferentiableManifold, Group
 from abc import abstractmethod, ABCMeta
 from geometry import logm, expm, assert_allclose
-from .base import DifferentiableManifold, Group
 
 class MatrixLieAlgebra(object):
     ''' This is the base class for Matrix Lie Algebra.

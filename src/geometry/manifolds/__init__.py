@@ -1,8 +1,15 @@
 import numpy as np
-from contracts import contract, check
+from contracts import contract, check, new_contract
 from geometry import assert_allclose
 
-from .base import *
+from .exceptions import DoesNotBelong
+
+from .differentiable_manifold import DifferentiableManifold
+new_contract('DifferentiableManifold', DifferentiableManifold)
+
+from .product_manifold import ProductManifold
+
+from .group import *
 from .matrix_lie_group import *
 
 from .sphere import Sphere

@@ -1,31 +1,11 @@
-from contracts import contract
+from contracts import contract, all_disabled
 from abc import ABCMeta, abstractmethod
 from geometry import assert_allclose
-import contracts
-
-class DoesNotBelong(Exception):
-    ''' Exception thrown when a point does not belong
-        to a certain manifold *M*. '''
-    def __init__(self, M, point, e, context=None):
-        self.M = M
-        self.point = point
-        self.e = '%s' % e
-        self.context = context
-        
-    def __str__(self):
-        s = ''
-        if self.context is not None:
-            s += '%s\n' % self.context
-        s += '%s: The point does not belong here: %s\n' % (self.M, self.point)
-        s += self.e
-        return s 
+from . import DoesNotBelong
         
 class DifferentiableManifold(object):
     ''' This is the base class for differentiable manifolds. ''' 
     __metaclass__ = ABCMeta
-   
-#    def __init__(self, simply_connected=True):
-#        self.simply_connected = simply_connected
    
     def belongs(self, x, msg=None):
         ''' 
@@ -57,7 +37,7 @@ class DifferentiableManifold(object):
             This function wraps some checks around :py:func:`project_ts_`, 
             which is implemented by the subclasses. 
         ''' 
-        if not contracts.all_disabled():
+        if not all_disabled():
             self.belongs(base)
         # check dimensions?
         v2 = self.project_ts_(base, v)
@@ -71,11 +51,11 @@ class DifferentiableManifold(object):
             This function wraps some checks around :py:func:`distance_`, 
             which is implemented by the subclasses. 
         '''
-        if not contracts.all_disabled():
+        if not all_disabled():
             self.belongs(a)
             self.belongs(b)
         d = self.distance_(a, b)
-        if not contracts.all_disabled():
+        if not all_disabled():
             assert d >= 0
         return d
              
@@ -87,11 +67,11 @@ class DifferentiableManifold(object):
             which is implemented by the subclasses. 
 
         '''
-        if not contracts.all_disabled():
+        if not all_disabled():
             self.belongs(base)
             self.belongs(p)
         v = self.logmap_(base, p)
-        if not contracts.all_disabled():
+        if not all_disabled():
             self.belongs_ts(base, v)
         return v
 
@@ -103,13 +83,13 @@ class DifferentiableManifold(object):
             which is implemented by the subclasses. 
             
         '''
-        if not contracts.all_disabled():
+        if not all_disabled():
             self.belongs(base, 'Base point passed to expmap().')
             self.belongs_ts(base, v)
         
         p = self.expmap_(base, v)
         
-        if not contracts.all_disabled():
+        if not all_disabled():
             self.belongs(p, 'Result of %s:_expmap(%s,%s)' % 
                         (self, self.friendly(base), v))
         return p
@@ -125,7 +105,7 @@ class DifferentiableManifold(object):
     @contract(t='>=0,<=1')
     def geodesic(self, a, b, t):
         ''' Returns the point interpolated along the geodesic. '''
-        if not contracts.all_disabled():
+        if not all_disabled():
             self.belongs(a)
             self.belongs(b)
         vel = self.logmap(a, b)
@@ -137,11 +117,15 @@ class DifferentiableManifold(object):
         ''' Returns a friendly description string for a point on the manifold. '''
         return "%s" % a 
     
-    def assert_close(self, a, b, atol=1e-8):
-        ''' Asserts that two points on the manifold are close enough. '''
+    def assert_close(self, a, b, atol=1e-8, msg=None):
+        ''' 
+            Asserts that two points on the manifold are close to the given
+            tolerance. 
+        '''
         distance = self.distance(a, b)
+        if msg is None: msg = ""
         if distance > atol:
-            msg = "The two points should be the same:\n"
+            msg += "\nThe two points should be the same:\n"
             msg += "- a: %s\n" % self.friendly(a)
             msg += "- b: %s\n" % self.friendly(b)
             msg += "- a: (full):\n%s\n" % a
@@ -188,26 +172,4 @@ class RandomManifold(DifferentiableManifold):
         ''' Samples a random velocity with length 1 at the base point a'''
         
 
-
-class Group(object):
-    __metaclass__ = ABCMeta
-    
-    @abstractmethod
-    def multiply(self, g, h):
-        ''' Implements the group operation. '''
-        pass
-    
-    @abstractmethod
-    def inverse(self, g):
-        ''' Implements the group inversion. '''
-        pass
-
-    @abstractmethod
-    def unity(self):
-        ''' Returns the group unity. '''
-        pass
-        
-        
-    
-    
     
