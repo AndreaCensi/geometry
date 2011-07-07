@@ -7,6 +7,8 @@ from geometry import  (assert_allclose,
                            rotation_translation_from_pose,
                            extract_pieces, combine_pieces,
                         se2_from_SE2, SE2_from_se2, SE2_from_translation_angle)
+from geometry.poses import SE2_from_xytheta
+from contracts.interface import describe_value
 
 class se(MatrixLieAlgebra):
     ''' This is the Lie algebra se(n) for the Special Euclidean group SE(n). 
@@ -91,7 +93,6 @@ class SE(MatrixLieGroup):
             return MatrixLieGroup.expmap_(self, base, vel)
 
         
-                
     def interesting_points(self):
         if self.n == 3:
             interesting = [
@@ -104,15 +105,17 @@ class SE(MatrixLieGroup):
             # TODO: implement for SE3
             interesting = []
         return interesting
-#        if False: #singularity
-#            yield SE2_from_translation_angle([0, 0], -np.pi)
-#            yield SE2_from_translation_angle([0, 0], +np.pi)
-#            yield SE2_from_translation_angle([1, 0.1], -np.pi)
-#            yield SE2_from_translation_angle([1, 0.1], +np.pi)
-##        
-#        for i in range(nrandom): #@UnusedVariable
-#            t = np.random.rand(2)
-#            theta = np.random.uniform(-1, 1) * np.pi
-#            interesting.append(SE2_from_translation_angle(t, theta))
-        
-    
+
+    def from_yaml(self, value):
+        ''' Parses from yaml value. '''
+        if self.n == 3: # SE2
+            x = np.array(value)
+            if x.shape != (3,):
+                msg = 'I expect a 3-array, not %s' % describe_value(value)
+                raise ValueError(msg)
+            return SE2_from_xytheta(x) 
+        else:
+            raise ValueError('Not implemented in %r' % self.__class__.__name__)
+            
+
+
