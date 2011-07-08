@@ -1,5 +1,5 @@
 from . import zeros, contract, assert_allclose, check, np, rot2d, new_contract, logm, expm
-from .rotations import angle_from_rot2d
+from .rotations import angle_from_rot2d, rotz
 
 
 def check_SE(M):
@@ -47,6 +47,8 @@ def combine_pieces(a, b, c, d):
     x[M, 0:M] = c
     x[M, M] = d
     return x
+
+# TODO: specialize for SE2, SE3
 
 @contract(R='array[NxN],SO', t='array[N]', returns='array[MxM],M=N+1,SE') 
 def pose_from_rotation_translation(R, t):
@@ -154,5 +156,15 @@ def SE2_from_se2_slow(vel):
     X = expm(vel)
     X[2, :] = [0, 0, 1]
     return X
+
+@contract(pose='SE2', returns='SE3')
+def SE3_from_SE2(pose):
+    ''' Embeds a pose in SE2 to SE3, setting z=0 and upright. '''
+    t, angle = translation_angle_from_SE2(pose)
+    return pose_from_rotation_translation(rotz(angle), np.array([t[0], t[1], 0]))
+    
+    
+    
+    
 
 
