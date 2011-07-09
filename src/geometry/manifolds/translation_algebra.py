@@ -28,3 +28,13 @@ class tran(MatrixLieAlgebra):
         points = []
         points.append(self.zero())
         return points
+
+    def from_vector(self, v):
+        # XXX: untested
+        assert v.size == self.n - 1
+        return combine_pieces(np.zeros((self.n - 1, self.n - 1)), v, v * 0, 0)
+#        
+#def from_vector(self, t):
+#        # XXX: untested
+#        return combine_pieces(np.eye(self.n - 1), t, t * 0, 0)
+#    

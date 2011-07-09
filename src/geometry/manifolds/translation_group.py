@@ -51,7 +51,3 @@ class Tran(MatrixLieGroup):
             points.append(p)
                   
         return points
-
-    def from_vector(self, t):
-        return combine_pieces(np.eye(self.n - 1), t, t * 0, 0)
-        

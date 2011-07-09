@@ -1,3 +1,4 @@
+from geometry.formatting import formatm
 
 class DoesNotBelong(Exception):
     ''' Exception thrown when a point does not belong
@@ -12,6 +13,7 @@ class DoesNotBelong(Exception):
         s = ''
         if self.context is not None:
             s += '%s\n' % self.context
-        s += '%s: The point does not belong here: %s\n' % (self.M, self.point)
+        s += '%s: The point does not belong here:\n%s' % (self.M,
+                                                          formatm('p', self.point))
         s += self.e
         return s 

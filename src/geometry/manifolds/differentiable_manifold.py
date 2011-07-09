@@ -3,6 +3,7 @@ from abc import ABCMeta, abstractmethod
 from geometry import assert_allclose
 from . import DoesNotBelong
 from collections import namedtuple
+from geometry.formatting import formatm
         
 class DifferentiableManifold(object):
     ''' This is the base class for differentiable manifolds. ''' 
@@ -134,8 +135,7 @@ class DifferentiableManifold(object):
             msg += "\nThe two points should be the same:\n"
             msg += "- a: %s\n" % self.friendly(a)
             msg += "- b: %s\n" % self.friendly(b)
-            msg += "- a: (full):\n%s\n" % a
-            msg += "- b: (full):\n%s\n" % b
+            msg += formatm('a', a, 'b', b)
             assert_allclose(distance, 0, atol=atol, err_msg=msg)
         return distance
     
