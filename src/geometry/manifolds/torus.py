@@ -30,7 +30,7 @@ class Torus(DifferentiableManifold):
         return np.random.rand(self.n) * 2 * np.pi - np.pi
     
     def normalize(self, x):
-        return np.array([ normalize_pi(s) for s in x])
+        return normalize_pi(x)
     
     def friendly(self, a):
         return 'point(%s)' % a

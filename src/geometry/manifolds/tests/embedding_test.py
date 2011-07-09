@@ -1,7 +1,6 @@
-
-
 from geometry.manifolds import (SO3, SO2, R1, R2, R3, SE2, SE3, S2, S1,
-                                    T1, T2, T3, so2, so3, se2, se3)
+                                    T1, T2, T3, so2, so3, se2, se3, Tran3,
+    Tran2, Tran1)
 from nose.plugins.attrib import attr
 
 
@@ -46,6 +45,11 @@ def test_embed_relations():
     yield check_embed_relation, R1, SE3
     yield check_embed_relation, R2, SE3
     yield check_embed_relation, R3, SE3
+    yield check_embed_relation, Tran1, SE2
+    yield check_embed_relation, Tran2, SE2
+    yield check_embed_relation, Tran1, SE3
+    yield check_embed_relation, Tran2, SE3
+    yield check_embed_relation, Tran3, SE3
     
     yield check_embed_relation, T1, T2
     yield check_embed_relation, T2, T3

@@ -32,11 +32,12 @@ def assert_orthogonal(s, v):
                % (np.degrees(angle), s, v)) 
         assert_allclose(dot, 0, err_msg=msg)
     
+@contract(x='array[N]', returns='array')
 def normalize_pi(x):
     ''' Normalizes the entries in *x* in the interval :math:`[-pi,pi)`. '''
+    x = np.array(x)
     angle = np.arctan2(np.sin(x), np.cos(x)) # in [-pi, pi]
-    if angle == np.pi:
-        angle = -np.pi
+    angle[angle == np.pi] = -np.pi
     return angle
 
 

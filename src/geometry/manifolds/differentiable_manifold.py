@@ -71,6 +71,7 @@ class DifferentiableManifold(object):
             This function wraps some checks around :py:func:`logmap_`, 
             which is implemented by the subclasses. 
 
+            # XXX: what should we do in the case there is more than one logmap?
         '''
         if not all_disabled():
             self.belongs(base)
@@ -214,17 +215,18 @@ class DifferentiableManifold(object):
          
     def embed_in(self, M, my_point):
         ''' Embeds a point on this manifold to the target manifold M. '''
+        self.belongs(my_point)
         if not self.embeddable_in(M):
-            msg = ('%s is not embeddable in %s (embeddable in %s)' % 
-                   (self, M, self._contained_in.keys()))
+            msg = ('%s (%s) is not embeddable in %s (%s) (embeddable in %s)' % 
+                   (self, id(self), M, id(M), self._contained_in.keys()))
             raise ValueError(msg)
         return self._contained_in[M].embed_in(my_point)
     
     def project_from(self, M, his_point):
         ''' Projects a point on a bigger manifold to this manifold. '''
         if not self.embeddable_in(M):
-            msg = ('%s is not embeddable in %s (embeddable in %s)' % 
-                   (self, M, self._contained_in.keys()))
+            msg = ('%s (%s) is not embeddable in %s (%s) (embeddable in %s)' % 
+                   (self, id(self), M, id(M), self._contained_in.keys()))
             raise ValueError(msg)
         return self._contained_in[M].project_from(his_point)
         

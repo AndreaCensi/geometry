@@ -1,51 +1,20 @@
-from . import MatrixLieGroup, np, MatrixLieAlgebra, S2
+from . import MatrixLieGroup, np, S2, so
 from contracts import contract, check
 from geometry import (assert_allclose, rot2d, random_rotation,
-    axis_angle_from_rotation, rotation_from_axis_angle, hat_map, hat_map_2d)
+    axis_angle_from_rotation, rotation_from_axis_angle)
 
 
-class so(MatrixLieAlgebra):
-    ''' 
-        This is the Lie algebra of skew-symmetric matrices so(n),
-        for the Special Orthogonal group SO(n).
-    '''    
-    
-    def project(self, v):
-        ''' Projects *v* to the closest skew-symmetric matrix. '''
-        return 0.5 * (v - v.T)
-    
-    def __repr__(self):
-        return 'so(%s)' % (self.n)
-
-    def interesting_points(self):
-        points = []
-        points.append(self.zero())
-        if self.n == 2:
-            points.append(hat_map_2d(np.pi))
-            points.append(hat_map_2d(np.pi / 2))
-            points.append(hat_map_2d(-np.pi))
-        if self.n == 3:
-            points.append(hat_map(np.array([0, 0, 1]) * np.pi / 2))
-            points.append(hat_map(np.array([0, 0, 1]) * np.pi))
-            points.append(hat_map(np.array([0, 1, 0]) * np.pi / 2))
-            points.append(hat_map(np.array([0, 1, 0]) * np.pi))
-            points.append(hat_map(np.array([1, 0, 0]) * np.pi / 2))
-            points.append(hat_map(np.array([1, 0, 0]) * np.pi))
-    
-        return points
-    
-    
-class SO(MatrixLieGroup):
+class SO_group(MatrixLieGroup):
     ''' 
         This is the Special Orthogonal group SO(n) describing rotations
         of Euclidean space; implemented for n=2,3.
         
     '''
     
-    @contract(n='int,(2|3)')
-    def __init__(self, n):
-        algebra = so(n)
-        MatrixLieGroup.__init__(self, n, algebra)
+    @contract(N='int,(2|3)')
+    def __init__(self, N):
+        algebra = so[N]
+        MatrixLieGroup.__init__(self, N, algebra)
 
     def __repr__(self):
         return 'SO(%s)' % (self.n)

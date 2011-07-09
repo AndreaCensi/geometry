@@ -7,11 +7,13 @@ from geometry import (geodesic_distance_on_sphere,
 
 
 from . import DifferentiableManifold, np, assert_allclose, contract, check
+from geometry.spheres import any_orthogonal_direction
                           
 class Sphere(DifferentiableManifold):
     ''' These are hyperspheres of unit radius. '''
     
     norm_rtol = 1e-5
+    atol_geodesic_distance = 1e-8
     
     @contract(order='(1|2)')
     def __init__(self, order):
@@ -25,8 +27,16 @@ class Sphere(DifferentiableManifold):
         return geodesic_distance_on_sphere(a, b)
          
     def logmap_(self, base, target):
-        x = target - base 
-        xp = self.project_ts(base, x)
+        # XXX: what should we do in the case there is more than one logmap?
+        d = geodesic_distance_on_sphere(target, base)
+        if np.allclose(d, np.pi, atol=self.atol_geodesic_distance):
+            if self.dimension == 2:
+                xp = np.array([base[1], -base[0]])
+            elif self.dimension == 3:
+                xp = any_orthogonal_direction(base)
+        else:
+            x = target - base 
+            xp = self.project_ts(base, x)
         xp = normalize_length_or_zero(xp)
         xp *= geodesic_distance_on_sphere(target, base)
         return xp

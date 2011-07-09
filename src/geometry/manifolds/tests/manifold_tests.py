@@ -7,12 +7,23 @@ from geometry.manifolds import all_manifolds
 from geometry.manifolds.differentiable_manifold import RandomManifold
 
 def check_geodesic_consistency(M, a, b, divisions=5):
+    ''' 
+        Check that there is consistency in the geodesics. 
+    
+        This is a test that 
+        
+            x(t) = geodesic( a, b, t) 
+            
+        interpolates between a and b, checking 
+            
+            d(a, x(t)) + d(x(t), b) = d(a,b)
+    
+    '''
     check_geodesic_consistency.description = (
         '%s: Checking geodesic consistency. '
         '(a: %s, b: %s)' 
         % (M, M.friendly(a), M.friendly(b)))
     
-    ''' Check that there is consistency in the geodesics. '''
     d = M.distance(a, b)
     
     ts = np.linspace(0, 1, divisions)
@@ -25,6 +36,11 @@ def check_geodesic_consistency(M, a, b, divisions=5):
         assert_allclose(d1 + d2, d, atol=1e-7)
 
 def check_logmap1(M, a, b):
+    ''' This is a test that:
+    
+            Exp_a( Log_a(b) ) = b
+            
+    '''
     check_logmap1.description = (
         '%s: Checking that logmap/expmap work. '
         '(a: %s, b: %s)' 
@@ -33,11 +49,7 @@ def check_logmap1(M, a, b):
     vel = M.logmap(a, b)
     b2 = M.expmap(a, vel)
     assert_allclose(M.distance(b, b2), 0, atol=1e-7)
-
-def check_logmap2(M, a, b):
-    vel1 = M.logmap(a, b)
-    vel2 = M.logmap(b, a)
-    # TODO: use parallel transport
+ 
 
 def check_logmap3(M, a, b):
     check_logmap3.description = (
@@ -74,7 +86,8 @@ def check_manifold_suite(M, num_random=5):
             yield f, M, a
 
     for f in [check_geodesic_consistency,
-              check_logmap1, check_logmap3]:
+              check_logmap1, check_logmap3
+              ]:
         for a, b in itertools.product(points, points):
             yield f, M, a, b
 

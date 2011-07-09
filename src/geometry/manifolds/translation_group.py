@@ -1,36 +1,12 @@
 from contracts import contract
 
-from . import MatrixLieGroup, np, MatrixLieAlgebra, Euclidean
+from . import MatrixLieGroup, np, MatrixLieAlgebra, Euclidean, tran
 
 from geometry import  (assert_allclose,
                        pose_from_rotation_translation,
                            rotation_translation_from_pose,
                            extract_pieces, combine_pieces)
 
-class tran(MatrixLieAlgebra):
-    ''' 
-        lie algebra for translation
-    '''
-    
-    @contract(n="1|2|3")
-    def __init__(self, n):
-        MatrixLieAlgebra.__init__(self, n + 1)
-        
-    def norm(self, X):
-        W, v, zero, zero = extract_pieces(X) #@UnusedVariable
-        return np.linalg.norm(v)
-
-    def project(self, X):
-        W, v, zero, zero = extract_pieces(X) #@UnusedVariable
-        return combine_pieces(W * 0, v, v * 0, 0)
-
-    def __repr__(self):
-        return 'tran(%s)' % (self.n)
-        
-    def interesting_points(self):
-        points = []
-        points.append(self.zero())
-        return points
 
 class Tran(MatrixLieGroup):
     ''' 
@@ -39,7 +15,7 @@ class Tran(MatrixLieGroup):
     
     @contract(n='1|2|3')
     def __init__(self, n):
-        algebra = tran(n)
+        algebra = tran[n]
         MatrixLieGroup.__init__(self, n + 1, algebra)
         self.En = Euclidean(n)
         

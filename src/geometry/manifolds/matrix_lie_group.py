@@ -78,6 +78,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         DifferentiableManifold.__init__(self)
         self.n = n
         self.algebra = algebra
+        assert self.algebra.n == self.n
         
     def unity(self):
         return np.eye(self.n)
