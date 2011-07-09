@@ -34,7 +34,10 @@ def assert_orthogonal(s, v):
     
 def normalize_pi(x):
     ''' Normalizes the entries in *x* in the interval :math:`[-pi,pi)`. '''
-    return np.arctan2(np.sin(x), np.cos(x))
+    angle = np.arctan2(np.sin(x), np.cos(x)) # in [-pi, pi]
+    if angle == np.pi:
+        angle = -np.pi
+    return angle
 
 
 @contract(returns='direction')

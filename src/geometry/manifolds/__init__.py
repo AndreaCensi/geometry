@@ -29,9 +29,19 @@ from .moebius import *
 from .euclidean import Euclidean
 E1 = Euclidean(1)
 E2 = Euclidean(2)
+E3 = Euclidean(3)
 R1 = E1
 R2 = E2
 R3 = Euclidean(3)
+
+
+from .translation_matrix_group import Tran, tran 
+Tran1 = Tran(1)
+Tran2 = Tran(2)
+Tran3 = Tran(3)
+tran1 = tran(1)
+tran2 = tran(2)
+tran3 = tran(3)
 
 from .special_orthogonal import SO, so
 
@@ -50,3 +60,14 @@ se2 = se(2, alpha=1)
 
 from . import embedding_relations
 
+all_manifolds = [ 
+    SO3, SO2,
+    R1, R2, R3,
+    T1, T2, T3,
+    Tran1, Tran2, Tran3,
+    tran1, tran2, tran3,
+    SE2, SE3,
+    S1, S2,
+    se2, se3,
+    so2, so3,
+]

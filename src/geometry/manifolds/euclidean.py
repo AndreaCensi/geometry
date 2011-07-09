@@ -40,5 +40,8 @@ class Euclidean(DifferentiableManifold):
         return np.random.randn(self.dimension)
 
     def interesting_points(self):
-        zero = np.zeros(self.dimension)
-        return [zero] 
+        points = []
+        points.append(np.zeros(self.dimension))
+        points.append(np.ones(self.dimension))
+        return points
+    

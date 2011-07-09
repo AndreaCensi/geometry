@@ -8,6 +8,10 @@ class DifferentiableManifold(object):
     ''' This is the base class for differentiable manifolds. ''' 
     __metaclass__ = ABCMeta
    
+    def __init__(self):
+        self._contained_in = {}
+        self._contains = {}
+        
     def belongs(self, x, msg=None):
         ''' 
             Checks that a point belongs to this manifold.  
@@ -157,9 +161,6 @@ class DifferentiableManifold(object):
             to the tangent space at point *base*. 
         '''
     
-    def __init__(self):
-        self._contained_in = {}
-        self._contains = {}
         
     ManifoldRelation = namedtuple('ManifoldEmbedding',
                                    'child parent embed_in project_from steps')

@@ -13,7 +13,7 @@ from . import (assert_allclose, new_contract, contract, dot, zeros, eye,
 new_contract('unit_quaternion', 'array[4], unit_length')
 new_contract('axis_angle', 'tuple(direction, float)') 
 # Canonically, we return a positive angle.
-new_contract('axis_angle_canonical', 'tuple(direction, (float,>=0, <pi))')
+new_contract('axis_angle_canonical', 'tuple(direction, (float,>=0, <=pi))')
 
 
 @new_contract

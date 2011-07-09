@@ -3,9 +3,8 @@ import numpy as np
 import itertools
 
 from geometry import assert_allclose
-from geometry.manifolds import (SO3, SO2, E1, E2, SE2, SE3, S2, S1,
-                                    T1, T2, T3)
-
+from geometry.manifolds import all_manifolds
+from geometry.manifolds.differentiable_manifold import RandomManifold
 
 def check_geodesic_consistency(M, a, b, divisions=5):
     check_geodesic_consistency.description = (
@@ -55,16 +54,20 @@ def check_logmap3(M, a, b):
         assert_allclose(d * ratio, d2, atol=1e-7)
 
 def check_friendly(M, a):
-    print('Friendly: %s %s ' % (M, a))
+    M.friendly(a)
     
+
 def check_manifold_suite(M, num_random=5): 
 
     points = M.interesting_points()
-    for i in range(num_random): #@UnusedVariable
-        points.append(M.sample_uniform())
+    
+    if isinstance(M, RandomManifold):
+        for i in range(num_random): #@UnusedVariable
+            points.append(M.sample_uniform())
     
     for p in points:
         M.belongs(p)
+        #print('%s %s' % (M, p))
     
     for f in [check_friendly]:
         for a in points:
@@ -76,24 +79,10 @@ def check_manifold_suite(M, num_random=5):
             yield f, M, a, b
 
 
-def get_manifolds():
-    M = []
-    M += [E1]
-    M += [E2]
-    M += [S1]
-    M += [S2]
-    M += [ SO2 ]
-    M += [ SO3 ]
-    M += [ SE2 ]
-    M += [ SE3 ]
-    M += [T1]
-    M += [T2]
-    M += [T3]
-    return M
 
 @attr('manifolds')
 def test_manifolds():
-    for M in get_manifolds():
+    for M in all_manifolds:
         for x in check_manifold_suite(M): yield x
 
 
