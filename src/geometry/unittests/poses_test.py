@@ -10,7 +10,7 @@ from geometry.poses import SE2_from_se2_slow, se2_from_SE2_slow
 from geometry.manifolds import SE2
 from geometry.basic_utils import assert_allclose
 from nose.plugins.attrib import attr
-from contracts.main import contract
+from contracts import contract
 from string import ljust
 from geometry.formatting import printm
 

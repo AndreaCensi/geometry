@@ -5,7 +5,7 @@ from geometry import normalize_pi
 class Torus(DifferentiableManifold):
 
     def __init__(self, n):
-#        DifferentiableManifold.__init__(self, simply_connected=False)
+        DifferentiableManifold.__init__(self)
         self.n = n
 
     def belongs_(self, a):
@@ -35,7 +35,11 @@ class Torus(DifferentiableManifold):
     def friendly(self, a):
         return 'point(%s)' % a
     
-    def __str__(self):
+    def interesting_points(self):
+        o = np.ones(self.n)
+        return [np.zeros(self.n), o * -np.pi] 
+    
+    def __repr__(self):
         return 'Torus(%s)' % self.n
     
         

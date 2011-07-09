@@ -1,9 +1,7 @@
-from contracts import contract, check
-
-from geometry import  (assert_allclose,
-                           rot2d, random_rotation, axis_angle_from_rotation)
-
 from . import MatrixLieGroup, np, MatrixLieAlgebra, S2
+from contracts import contract, check
+from geometry import (assert_allclose, rot2d, random_rotation,
+    axis_angle_from_rotation, rotation_from_axis_angle, hat_map, hat_map_2d)
 
 
 class so(MatrixLieAlgebra):
@@ -19,6 +17,24 @@ class so(MatrixLieAlgebra):
     def __repr__(self):
         return 'so(%s)' % (self.n)
 
+    def interesting_points(self):
+        points = []
+        points.append(self.zero())
+        if self.n == 2:
+            points.append(hat_map_2d(np.pi))
+            points.append(hat_map_2d(np.pi / 2))
+            points.append(hat_map_2d(-np.pi))
+        if self.n == 3:
+            points.append(hat_map(np.array([0, 0, 1]) * np.pi / 2))
+            points.append(hat_map(np.array([0, 0, 1]) * np.pi))
+            points.append(hat_map(np.array([0, 1, 0]) * np.pi / 2))
+            points.append(hat_map(np.array([0, 1, 0]) * np.pi))
+            points.append(hat_map(np.array([1, 0, 0]) * np.pi / 2))
+            points.append(hat_map(np.array([1, 0, 0]) * np.pi))
+    
+        return points
+    
+    
 class SO(MatrixLieGroup):
     ''' 
         This is the Special Orthogonal group SO(n) describing rotations
@@ -59,5 +75,19 @@ class SO(MatrixLieGroup):
         else:
             assert False, 'Not implemented for n>=4.'
         
-                
+    def interesting_points(self):
+        points = []
+        points.append(self.identity())
+        if self.n == 2:
+            points.append(rot2d(np.pi))            
+            points.append(rot2d(np.pi / 2))
+            points.append(rot2d(-np.pi / 3))
+        if self.n == 3:
+            points.append(rotation_from_axis_angle(np.array([0, 0, 1]), np.pi / 2))
+            points.append(rotation_from_axis_angle(np.array([0, 0, 1]), np.pi))
+            points.append(rotation_from_axis_angle(np.array([0, 1, 0]), np.pi / 2))
+            points.append(rotation_from_axis_angle(np.array([0, 1, 0]), np.pi))
+            points.append(rotation_from_axis_angle(np.array([1, 0, 0]), np.pi / 2))
+            points.append(rotation_from_axis_angle(np.array([1, 0, 0]), np.pi))
     
+        return points

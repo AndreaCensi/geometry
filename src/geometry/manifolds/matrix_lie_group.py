@@ -2,7 +2,7 @@ from . import np, DifferentiableManifold, Group
 from abc import abstractmethod, ABCMeta
 from geometry import logm, expm, assert_allclose
 
-class MatrixLieAlgebra(object):
+class MatrixLieAlgebra(DifferentiableManifold):
     ''' This is the base class for Matrix Lie Algebra.
     
         It is understood that it is composed by square matrices.
@@ -20,6 +20,7 @@ class MatrixLieAlgebra(object):
     
     
     def __init__(self, n):
+        DifferentiableManifold.__init__(self)
         self.n = n
     
     @abstractmethod        
@@ -27,7 +28,7 @@ class MatrixLieAlgebra(object):
         ''' Projects a matrix onto this Lie Algebra. '''
         assert False
     
-    def belongs(self, v):
+    def belongs_(self, v):
         ''' Checks that a vector belongs to this algebra. '''
         proj = self.project(v)
         assert_allclose(proj, v, atol=1e-8) # XXX: tol
@@ -38,6 +39,23 @@ class MatrixLieAlgebra(object):
             distances between points in the Lie group. 
         '''
         return np.linalg.norm(v, 2)
+    
+    def zero(self):
+        ''' Returns the zero element for this algebra. '''
+        return np.zeros((self.n, self.n))
+
+    # Manifolds methods
+    def distance_(self, a, b):
+        return self.norm(a - b)
+    
+    def expmap_(self, base, vel):
+        return base + vel
+        
+    def logmap_(self, base, target):
+        return target - base
+        
+    def project_ts_(self, base, vx):
+        return vx # XXX
 
 class MatrixLieGroup(Group, DifferentiableManifold):
     ''' 
@@ -57,6 +75,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
             :param n: dimension of the matrix group.
             :param algebra: instance of :py:class:MatrixLieAlgebra 
         '''
+        DifferentiableManifold.__init__(self)
         self.n = n
         self.algebra = algebra
         

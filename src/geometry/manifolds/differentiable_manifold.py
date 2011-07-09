@@ -2,6 +2,7 @@ from contracts import contract, all_disabled
 from abc import ABCMeta, abstractmethod
 from geometry import assert_allclose
 from . import DoesNotBelong
+from collections import namedtuple
         
 class DifferentiableManifold(object):
     ''' This is the base class for differentiable manifolds. ''' 
@@ -156,6 +157,88 @@ class DifferentiableManifold(object):
             to the tangent space at point *base*. 
         '''
     
+    def __init__(self):
+        self._contained_in = {}
+        self._contains = {}
+        
+    ManifoldRelation = namedtuple('ManifoldEmbedding',
+                                   'child parent embed_in project_from steps')
+    def embed_relation(self, M, embed_in, project_from, steps=None):
+        ''' Defines an embedding relation to a bigger manifold M. '''
+        if M is self:
+            raise ValueError('%s: Trying to add an embedding relationship to itself.' % 
+                             self) 
+        if steps is None:
+            steps = [self, M]
+        def format_steps(s):
+            return '->'.join([x.__str__() for x in s])
+        relation = self.ManifoldRelation(self, M, embed_in, project_from, steps)
+        if M in self._contained_in:
+            known_steps = self._contained_in[M].steps 
+            if len(known_steps) <= len(steps):
+                return
+                #msg = ('Ignoring %s, I know %s)' % 
+                #      (format_steps(steps), format_steps(known_steps)))
+                # print(msg)
+        self._contained_in[M] = relation
+        M._contains[self] = relation
+        
+        # print('Created new relation: %s' % relation.steps)
+        
+        # Now, all our children can be embedded in M as well
+        for child in self._contains:
+            DifferentiableManifold.connect_via(child, self, M)
+        
+        for parent in M._contained_in:
+            DifferentiableManifold.connect_via(self, M, parent)
+            
+    @staticmethod
+    def connect_via(A, B, C):
+        assert A.embeddable_in(B)  
+        assert B.embeddable_in(C)  
+        
+        AB = A._contained_in[B]
+        BC = B._contained_in[C]
+        
+        def AC_embed_in(a):
+            b = AB.embed_in(a)
+            c = BC.embed_in(b)
+            return c
+        def AC_project_from(c):
+            b = BC.project_from(c)
+            a = AB.project_from(b)
+            return a
+        new_steps = AB.steps + BC.steps[1:]
+        A.embed_relation(C, AC_embed_in, AC_project_from, new_steps) 
+         
+    def embed_in(self, M, my_point):
+        ''' Embeds a point on this manifold to the target manifold M. '''
+        if not self.embeddable_in(M):
+            msg = ('%s is not embeddable in %s (embeddable in %s)' % 
+                   (self, M, self._contained_in.keys()))
+            raise ValueError(msg)
+        return self._contained_in[M].embed_in(my_point)
+    
+    def project_from(self, M, his_point):
+        ''' Projects a point on a bigger manifold to this manifold. '''
+        if not self.embeddable_in(M):
+            msg = ('%s is not embeddable in %s (embeddable in %s)' % 
+                   (self, M, self._contained_in.keys()))
+            raise ValueError(msg)
+        return self._contained_in[M].project_from(his_point)
+        
+    def project_to(self, m, my_point):
+        if not self.can_represent(m):
+            msg = ('%s does not contain %s (contains  %s)' % 
+                   (self, m, self._contains.keys()))
+            raise ValueError(msg)
+        return self._contains[m].project_from(my_point)
+    
+    def can_represent(self, manifold):
+        return manifold in self._contains
+    
+    def embeddable_in(self, manifold):
+        return manifold in self._contained_in
     
     
 class RandomManifold(DifferentiableManifold):

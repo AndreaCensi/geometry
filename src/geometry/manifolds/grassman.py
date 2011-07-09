@@ -11,6 +11,7 @@ def NonCompactStiefel(DifferentiableManifold):
             :param n: dimension of space
             :param p: rank of subspace
         '''
+        DifferentiableManifold.__init__(self)
         self.n = n
         self.p = p
 

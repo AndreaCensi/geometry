@@ -13,6 +13,7 @@ class Euclidean(DifferentiableManifold):
     '''
     
     def __init__(self, dimension):
+        DifferentiableManifold.__init__(self)
         self.dimension = dimension
     
     def __repr__(self):

@@ -10,6 +10,9 @@ def unit_length(x):
 
 new_contract('direction', 'array[3], unit_length')
 
+new_contract('S1', 'array[2],unit_length')
+new_contract('S2', 'array[3],unit_length')
+
 @new_contract
 @contract(X='array[KxN],K>0,N>0')
 def directions(X):

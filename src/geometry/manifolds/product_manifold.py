@@ -5,6 +5,7 @@ class ProductManifold(DifferentiableManifold):
     @contract(components='seq[>=2,N](DifferentiableManifold)',
               weights='None|array[N](>0)')
     def __init__(self, components, weights=None):
+        DifferentiableManifold.__init__(self)
         self.components = components
         if weights is None:
             weights = np.ones(len(components))

@@ -15,6 +15,7 @@ class Sphere(DifferentiableManifold):
     
     @contract(order='(1|2)')
     def __init__(self, order):
+        DifferentiableManifold.__init__(self)
         self.dimension = order + 1 
         
     def __repr__(self):
@@ -63,8 +64,23 @@ class Sphere(DifferentiableManifold):
         return random_direction(self.dimension)
 
     def interesting_points(self):
-        return [] 
-
+        if self.dimension == 2:
+            points = []
+            points.append(np.array([-1, 0]))
+            points.append(np.array([0, 1]))
+            points.append(np.array([0, -1]))
+            points.append(np.array([+1, 0]))
+            points.append(np.array([np.sqrt(2) / 2, np.sqrt(2) / 2]))
+            return points
+        else:
+            points = []
+            points.append(np.array([-1, 0, 0]))
+            points.append(np.array([0, 1, 0]))
+            points.append(np.array([0, 0, 1]))
+            points.append(np.array([0, 0, -1]))
+            points.append(np.array([np.sqrt(2) / 2, np.sqrt(2) / 2, 0]))
+            return points
+            
     def friendly(self, x):
         if self.dimension == 2:
             theta = np.arctan2(x[1], x[0])

@@ -84,6 +84,13 @@ def angle_from_rot2d(R):
 
 rot2d = rot2d_from_angle
 
+
+def hat_map_2d(omega):
+    return np.array([[0, -1], [+1, 0]]) * omega
+
+def map_hat_2d(W):
+    return W[1, 0]
+
 @contract(returns='unit_quaternion')
 def random_quaternion():
     ''' Generate a random quaternion.

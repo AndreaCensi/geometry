@@ -1,4 +1,4 @@
-from contracts.main import contract
+from contracts import contract
 import numpy as np
 from string import ljust
 

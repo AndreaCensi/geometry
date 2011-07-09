@@ -1,20 +1,20 @@
-from . import zeros, contract, assert_allclose, check, np, rot2d, new_contract, logm, expm
-from .rotations import angle_from_rot2d, rotz
+from . import (angle_from_rot2d, rotz, axis_angle_from_rotation, hat_map_2d,
+    zeros, contract, assert_allclose, check, np, rot2d, new_contract, logm, expm)
 
 
 def check_SE(M):
     ''' Checks that the argument is in the special euclidean group. '''
     R, t, zero, one = extract_pieces(M) #@UnusedVariable
     check('SO', R)
-    assert_allclose(one, 1)
-    assert_allclose(zero, 0)
+    assert_allclose(one, 1, err_msg='I expect the lower-right to be 1')
+    assert_allclose(zero, 0, err_msg='I expect the bottom component to be 0.')
 
 def check_se(M):
     ''' Checks that the input is in the special euclidean Lie algebra. '''
     omega, v, Z, zero = extract_pieces(M) #@UnusedVariable
     check('so', omega)
-    assert_allclose(Z, 0)
-    assert_allclose(zero, 0)
+    assert_allclose(Z, 0, err_msg='I expect the lower-right to be 0.')
+    assert_allclose(zero, 0, err_msg='I expect the bottom component to be 0.')
 
 
 new_contract('se', check_se)
@@ -50,14 +50,43 @@ def combine_pieces(a, b, c, d):
 
 # TODO: specialize for SE2, SE3
 
+@contract(returns='SE2')
+def SE2_identity():
+    return np.eye(3)
+
+@contract(returns='SE3')
+def SE3_identity():
+    return np.eye(4)
+
 @contract(R='array[NxN],SO', t='array[N]', returns='array[MxM],M=N+1,SE') 
 def pose_from_rotation_translation(R, t):
     return combine_pieces(R, t, t * 0, 1)
-    
+
+# TODO: make specialized    
+SE2_from_rotation_translation = pose_from_rotation_translation
+SE3_from_rotation_translation = pose_from_rotation_translation
+
+
 @contract(pose='array[NxN],SE', returns='tuple(array[MxM], array[M]),M=N-1')
 def rotation_translation_from_pose(pose):
     R, t, zero, one = extract_pieces(pose) #@UnusedVariable
     return R, t
+
+# TODO: make more efficient
+rotation_translation_from_SE2 = rotation_translation_from_pose
+rotation_translation_from_SE3 = rotation_translation_from_pose
+
+@contract(pose='SE2')
+def translation_from_SE2(pose):
+    # TODO: make it more efficient
+    R, t, zero, one = extract_pieces(pose) #@UnusedVariable
+    return t
+
+@contract(pose='SE3')
+def translation_from_SE3(pose):
+    # TODO: make it more efficient
+    R, t, zero, one = extract_pieces(pose) #@UnusedVariable
+    return t
 
     
 @contract(t='array[2]|seq[2](number)', theta='number', returns='SE2')
@@ -77,8 +106,7 @@ def SE2_from_xytheta(xytheta):
     ''' Returns an element of SE2 from translation and rotation. '''
     return SE2_from_translation_angle([xytheta[0], xytheta[1]], xytheta[2])
 
-def hat_map_2d(omega):
-    return np.array([[0, -1], [+1, 0]]) * omega
+
  
 @contract(linear='array[2]|seq[2](number)', angular='number', returns='se2')
 def se2_from_linear_angular(linear, angular):
@@ -162,7 +190,26 @@ def SE3_from_SE2(pose):
     ''' Embeds a pose in SE2 to SE3, setting z=0 and upright. '''
     t, angle = translation_angle_from_SE2(pose)
     return pose_from_rotation_translation(rotz(angle), np.array([t[0], t[1], 0]))
+        
+@contract(pose='SE3', returns='SE2')
+def SE2_from_SE3(pose, check_exact=True):
+    ''' 
+        Projects a pose in SE3 to SE2.
     
+        If check_exact is True, it will check that z = 0 and axis = [0,0,1].
+    '''
+    rotation, translation = rotation_translation_from_pose(pose)
+    axis, angle = axis_angle_from_rotation(rotation)
+    if check_exact:
+        err_msg = 'I expect that z=0 when projecting to SE2 (check_exact=True).'
+        assert_allclose(translation[2], 0, err_msg=err_msg)
+        # normalize angle z
+        axis *= np.sign(axis[2])
+        err_msg = ('I expect that the rotation is around [0,0,1] '
+                  'when projecting to SE2 (check_exact=True).')
+        assert_allclose(axis, [0, 0, 1], err_msg=err_msg)
+    
+    return SE2_from_translation_angle(translation[0:2], angle)
     
     
     

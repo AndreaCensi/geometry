@@ -15,6 +15,9 @@ import warnings
 class Tolerance:
     zero_norm = 1e-7
 
+new_contract('R1', 'array[1]')
+new_contract('R2', 'array[2]')
+new_contract('R3', 'array[3]')
 
 def assert_allclose(actual, desired, rtol=1e-7, atol=0,
                     err_msg='', verbose=True):

@@ -29,6 +29,9 @@ from .moebius import *
 from .euclidean import Euclidean
 E1 = Euclidean(1)
 E2 = Euclidean(2)
+R1 = E1
+R2 = E2
+R3 = Euclidean(3)
 
 from .special_orthogonal import SO, so
 
@@ -44,4 +47,6 @@ SE3 = SE(3)
 SE2 = SE(2)
 se3 = se(3, alpha=1)
 se2 = se(2, alpha=1)
+
+from . import embedding_relations
 
