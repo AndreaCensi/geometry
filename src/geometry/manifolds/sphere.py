@@ -11,6 +11,7 @@ from geometry.spheres import any_orthogonal_direction
                           
 class Sphere(DifferentiableManifold):
     ''' These are hyperspheres of unit radius. '''
+    # TODO: make special for S1/S2
     
     norm_rtol = 1e-5
     atol_geodesic_distance = 1e-8
@@ -27,6 +28,7 @@ class Sphere(DifferentiableManifold):
         return geodesic_distance_on_sphere(a, b)
          
     def logmap_(self, base, target):
+        # TODO: create S1_logmap(base, target)
         # XXX: what should we do in the case there is more than one logmap?
         d = geodesic_distance_on_sphere(target, base)
         if np.allclose(d, np.pi, atol=self.atol_geodesic_distance):

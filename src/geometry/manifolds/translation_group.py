@@ -1,11 +1,12 @@
 from contracts import contract
 
-from . import MatrixLieGroup, np, MatrixLieAlgebra, Euclidean, tran
+from . import MatrixLieGroup, np, R, tran
 
 from geometry import  (assert_allclose,
                        pose_from_rotation_translation,
                            rotation_translation_from_pose,
-                           extract_pieces, combine_pieces)
+                           extract_pieces)
+from geometry.poses import combine_pieces
 
 
 class Tran(MatrixLieGroup):
@@ -17,7 +18,7 @@ class Tran(MatrixLieGroup):
     def __init__(self, n):
         algebra = tran[n]
         MatrixLieGroup.__init__(self, n + 1, algebra)
-        self.En = Euclidean(n)
+        self.En = R[n]
         
     def __repr__(self):
         return 'Tran(%s)' % (self.n - 1)
@@ -51,4 +52,6 @@ class Tran(MatrixLieGroup):
                   
         return points
 
-   
+    def from_vector(self, t):
+        return combine_pieces(np.eye(self.n - 1), t, t * 0, 0)
+        

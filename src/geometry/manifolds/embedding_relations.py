@@ -8,7 +8,7 @@ from .. import (S1_project_from_S2, S2_from_S1, S1_project_from_R2,
     R3_project_from_SE3, SO2_project_from_SO3, SO3_from_SO2, so2_project_from_so3,
     so3_from_so2, SE2_project_from_SE3, se2_project_from_se3, se3_from_se2,
     SE3_from_SE2)
-from geometry.manifolds import Tran3
+from geometry.manifolds import Tran3, tran1
 
     
 def embed(small, big, embed_in, project_from):
@@ -70,12 +70,29 @@ same(Tran3, R3, lambda x: x[0:3, -1],
                                     [0, 0, 0, 1]]))
 
 
-same(tran2, se2, lambda x: x[0:1, -1],
-                lambda b: np.array([[0, b[0]],
-                                    [0, 0]]))
+embed(tran1, tran2, lambda b: np.array([[0, 0, b[0, -1]],
+                                         [0, 0, 0],
+                                         [0, 0, 0]]),
+                    lambda b: np.array([[0, b[0, -1]],
+                                        [0, 0]]))
+                
+                     
+embed(tran2, tran3, lambda b: np.array([[0, 0, 0, b[0, -1]],
+                                         [0, 0, 0, b[1, -1]],
+                                         [0, 0, 0, 0],
+                                         [0, 0, 0, 0]]),
+                    lambda b: np.array([[0, 0, b[0, -1]],
+                                         [0, 0, b[1, -1]],
+                                         [0, 0, 0]]))
 
-same(tran3, se3, lambda x: x[0:2, -1],
-                lambda b: np.array([[0, 0, b[0]],
-                                    [0, 0, b[1]],
-                                    [0, 0, 0.0]]))
 
+same(tran2, se2, lambda x: x,
+                 lambda b: np.array([[0, 0, b[0, 2]],
+                                     [0, 0, b[1, 2]],
+                                     [0, 0, 0]]))
+                
+same(tran3, se3, lambda x: x,
+                    lambda b: np.array([[0, 0, 0, b[0, -1]],
+                                        [0, 0, 0, b[1, -1]],
+                                        [0, 0, 0, b[2, -1]],
+                                        [0, 0, 0, 0]]))
