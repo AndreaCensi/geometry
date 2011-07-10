@@ -13,11 +13,12 @@ class Euclidean(DifferentiableManifold):
     '''
     
     def __init__(self, dimension):
-        DifferentiableManifold.__init__(self)
+        DifferentiableManifold.__init__(self, dimension=dimension)
         self.dimension = dimension
     
     def __repr__(self):
-        return 'Euclidean(%s)' % (self.dimension)
+        #return 'R(%s)' % (self.dimension)
+        return 'R%s' % (self.dimension)
 
     @contract(x='array')
     def belongs_(self, x):

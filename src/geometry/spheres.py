@@ -173,6 +173,8 @@ def slerp(s1, s2, t):
     ''' Spherical interpolation between two points on a hypersphere. '''    
     omega = arccos(dot(s1 / norm(s1), s2 / norm(s2)))
     so = sin(omega)
+    if np.abs(so) < 1e-18: # XXX thresholds
+        return s1
     return sin((1.0 - t) * omega) / so * s1 + sin(t * omega) / so * s2
 
 

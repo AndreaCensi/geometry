@@ -1,11 +1,11 @@
 from contracts import check
 from . import DifferentiableManifold, np 
-from geometry import normalize_pi
+from .. import normalize_pi
 
 class Torus(DifferentiableManifold):
 
     def __init__(self, n):
-        DifferentiableManifold.__init__(self)
+        DifferentiableManifold.__init__(self, dimension=n)
         self.n = n
 
     def belongs_(self, a):
@@ -40,6 +40,7 @@ class Torus(DifferentiableManifold):
         return [np.zeros(self.n), o * -np.pi] 
     
     def __repr__(self):
-        return 'Torus(%s)' % self.n
+        #return 'Torus(%s)' % self.n
+        return 'T%s' % self.n
     
         

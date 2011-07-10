@@ -1,11 +1,13 @@
 from contracts import contract
 import numpy as np
 from string import ljust
+from contracts.interface import describe_type, describe_value
 
 
 def printm(*args):
     print(formatm(*args))
     
+
 def formatm(*args):
     #name_len = 10
     assert len(args) > 0
@@ -14,14 +16,22 @@ def formatm(*args):
     for i in range(len(args) / 2):
         name = args[i * 2]
         matrix = args[i * 2 + 1]
-        assert isinstance(name, str)
-        assert isinstance(matrix, np.ndarray)
+        if not isinstance(name, str):
+            raise ValueError('I expect a string for label, not %s.' % describe_type(name))
 #        varname = '  %s:' % rjust(name, name_len)
         varname = '  %s:' % name
-        if matrix.ndim > 1:
-            varname = '\n' + varname 
+
+        if  isinstance(matrix, np.ndarray):
+#            raise ValueError('I expect a numpy array for value, not %s.' % 
+#                             describe_type(matrix))
+            value = format_matrix(matrix)
+            if matrix.ndim > 1:
+                varname = '\n' + varname 
+        else:
+            value = describe_value(matrix)
+
         cols.append(varname) 
-        cols.append(format_matrix(matrix))
+        cols.append(value) 
         
     cols = add_spacer(cols)
     return join_columns(cols)

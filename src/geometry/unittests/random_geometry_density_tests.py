@@ -1,20 +1,19 @@
-from nose.plugins.attrib import attr
-
-import numpy as np
 from geometry import (random_direction, random_directions_bounded, distances_from,
-                         spherical_cap_area, spherical_cap_with_area)
+    spherical_cap_area, spherical_cap_with_area)
+from nose.plugins.attrib import attr
+import numpy as np
+
 
 try:
     from stochastic_testing import DiscreteUniformDistribution, StochasticTestManager, stochastic
     skip = False
-except:
+except ImportError:
     print('Warning: skipping stochastic testing, because package "stochastic_testing" not installed.')
-    skip  = True
+    skip = True
     
 if not skip:
     
     def random_directions_bounded_density_3d(center, radius, N):
-        from stochastic_testing import DiscreteUniformDistribution, StochasticTestManager, stochastic
 
         S = random_directions_bounded(3, radius, N, center=center)
         distances = distances_from(S, center)

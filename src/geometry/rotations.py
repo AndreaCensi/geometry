@@ -72,24 +72,31 @@ def rotz(theta):
             [0, 0, 1]]) 
 
 @contract(theta='number', returns='SO2')
-def rot2d_from_angle(theta):
+def SO2_from_angle(theta):
     ''' Returns a 2x2 rotation matrix. '''
     return array([ 
             [ cos(theta), -sin(theta)],
             [ sin(theta), cos(theta)]]) 
 
 @contract(R='SO2', returns='float')
-def angle_from_rot2d(R):
-    return arctan2(R[1, 0], R[0, 0])
-
-rot2d = rot2d_from_angle
-
+def angle_from_SO2(R):
+    angle = arctan2(R[1, 0], R[0, 0])
+    if angle == np.pi:
+        angle = -np.pi
+    return angle
 
 def hat_map_2d(omega):
     return np.array([[0, -1], [+1, 0]]) * omega
 
 def map_hat_2d(W):
     return W[1, 0]
+
+
+
+rot2d = SO2_from_angle # TODO: deprecated 
+rot2d_from_angle = SO2_from_angle# TODO: deprecated 
+angle_from_rot2d = angle_from_SO2
+
 
 @contract(returns='unit_quaternion')
 def random_quaternion():

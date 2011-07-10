@@ -1,7 +1,7 @@
-from . import MatrixLieGroup, np, S2, so
+from . import DifferentiableManifold, MatrixLieGroup, np, S2, so
+from .. import (assert_allclose, rot2d, random_rotation, axis_angle_from_rotation,
+    rotation_from_axis_angle)
 from contracts import contract, check
-from geometry import (assert_allclose, rot2d, random_rotation,
-    axis_angle_from_rotation, rotation_from_axis_angle)
 
 
 class SO_group(MatrixLieGroup):
@@ -14,10 +14,16 @@ class SO_group(MatrixLieGroup):
     @contract(N='int,(2|3)')
     def __init__(self, N):
         algebra = so[N]
-        MatrixLieGroup.__init__(self, N, algebra)
+        dimension = {2:1, 3:2}[N]
+        MatrixLieGroup.__init__(self, n=N, algebra=algebra, dimension=dimension)
+        DifferentiableManifold.embedding(self, algebra,
+                                          self.algebra_from_group,
+                                    self.group_from_algebra,
+                                    type='lie')
 
     def __repr__(self):
-        return 'SO(%s)' % (self.n)
+        #return 'SO(%s)' % (self.n)
+        return 'SO%s' % (self.n)
     
     def belongs_(self, x):
         check('orthogonal', x)

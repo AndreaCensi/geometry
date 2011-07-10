@@ -3,3 +3,5 @@
 src/.noseids
 *.*~
 dist
+.coverage
+src/coverage_information

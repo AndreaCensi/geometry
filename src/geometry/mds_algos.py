@@ -1,10 +1,9 @@
+from . import (best_similarity_transform, contract, np, assert_allclose,
+    project_vectors_onto_sphere)
+from contracts import check_multiple
 import itertools
 import scipy.linalg
-from contracts import check_multiple
 
-from .basic_utils import contract, np, assert_allclose
-from .spheres import project_vectors_onto_sphere
-from .procrustes import best_similarity_transform
 
 
 @contract(S='array[KxN]', returns='array[NxN](>=0)')

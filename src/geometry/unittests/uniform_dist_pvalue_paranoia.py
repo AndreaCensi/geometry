@@ -1,9 +1,9 @@
 import numpy as np
 from scipy.stats.distributions import random_integers
-from stochastic_testing import uniform_dist_pvalue
 
-def main():
-    
+
+def main():    
+    from  stochastic_testing import uniform_dist_pvalue #@UnresolvedImport
     for N in [10, 100, 1000, 10000, 100000]:
         pvalues = np.empty(N)
         for i in range(N):

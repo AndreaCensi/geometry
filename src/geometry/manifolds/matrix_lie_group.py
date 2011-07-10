@@ -1,6 +1,6 @@
 from . import np, DifferentiableManifold, Group
-from abc import abstractmethod, ABCMeta
-from geometry import logm, expm, assert_allclose
+from .. import logm, expm, assert_allclose
+from abc import abstractmethod
 
 class MatrixLieAlgebra(DifferentiableManifold):
     ''' This is the base class for Matrix Lie Algebra.
@@ -15,12 +15,11 @@ class MatrixLieAlgebra(DifferentiableManifold):
         
         You probably also want to implement :py:func:`norm` if
         the default is not what you want.  
-    '''
-    __metaclass__ = ABCMeta
+    ''' 
     
     
-    def __init__(self, n):
-        DifferentiableManifold.__init__(self)
+    def __init__(self, n, dimension):
+        DifferentiableManifold.__init__(self, dimension=dimension)
         self.n = n
     
     @abstractmethod        
@@ -68,14 +67,14 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         
     '''
         
-    def __init__(self, n, algebra):
+    def __init__(self, n, dimension, algebra):
         ''' 
             Initializes the Lie group.
             
             :param n: dimension of the matrix group.
             :param algebra: instance of :py:class:MatrixLieAlgebra 
         '''
-        DifferentiableManifold.__init__(self)
+        DifferentiableManifold.__init__(self, dimension=dimension)
         self.n = n
         self.algebra = algebra
         assert self.algebra.n == self.n
@@ -104,7 +103,9 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         # get it back where it belonged
         tty = np.dot(base, ty)
         return tty 
-
+    
+   
+        
     def distance_(self, a, b):
         ''' 
             Computes the distance between two points.
@@ -115,7 +116,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
 
         '''
         x = self.multiply(a, self.inverse(b))
-        xt = self.logmap(self.unity(), x)
+        xt = self.algebra_from_group(x)
         return self.algebra.norm(xt)
         
     def logmap_(self, base, target):
@@ -129,9 +130,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
             is used to mitigate numerical errors. 
         '''
         diff = self.multiply(self.inverse(base), target)
-        X = np.array(logm(diff).real)
-        # mitigate numerical errors
-        X = self.algebra.project(X)
+        X = self.algebra_from_group(diff)
         return np.dot(base, X)
 
     def expmap_(self, base, vel):
@@ -146,9 +145,27 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         '''
         tv = np.dot(self.inverse(base), vel)
         tv = self.algebra.project(tv)
-        x = expm(tv)
+        x = self.group_from_algebra(tv)
         return np.dot(base, x)
     
+    def algebra_from_group(self, g):
+        ''' 
+            Converts an element of the group to the algebra. 
+            Uses generic matrix logarithm plus projection.
+        ''' 
+        X = np.array(logm(g).real)
+        # mitigate numerical errors
+        X = self.algebra.project(X)
+        return X
+        
+    def group_from_algebra(self, a):
+        ''' 
+            Converts an element of the algebra to the group. 
+        
+            Uses generic matrix exponential.
+        '''
+        return expm(a)
+        
     # TODO: write tests for this
     def velocity_from_points(self, a, b, delta=1):
         ''' 
@@ -156,7 +173,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
             *delta* time. 
         '''
         x = self.multiply(self.inverse(a), b)
-        xt = self.logmap(self.unity(), x)
+        xt = self.logmap(self.unity(), x) # XXX
         xt = self.algebra.project(xt)
         return xt / delta
 

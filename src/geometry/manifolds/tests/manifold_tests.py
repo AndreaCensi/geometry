@@ -67,8 +67,12 @@ def check_logmap3(M, a, b):
 
 def check_friendly(M, a):
     M.friendly(a)
-    
 
+
+def check_interesting_point_in_manifold(M, p):    
+    check_interesting_point_in_manifold.description = '%s: %s' % (M, p)
+    M.belongs(p, msg='Interesting point not in manifold.')
+        
 def check_manifold_suite(M, num_random=5): 
 
     points = M.interesting_points()
@@ -78,8 +82,7 @@ def check_manifold_suite(M, num_random=5):
             points.append(M.sample_uniform())
     
     for p in points:
-        M.belongs(p)
-        #print('%s %s' % (M, p))
+        yield check_interesting_point_in_manifold, M, p
     
     for f in [check_friendly]:
         for a in points:

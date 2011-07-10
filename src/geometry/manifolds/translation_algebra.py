@@ -1,6 +1,6 @@
 from . import np, MatrixLieAlgebra
 from contracts import contract
-from geometry import extract_pieces, combine_pieces
+from .. import extract_pieces, combine_pieces
 
 
 
@@ -11,7 +11,7 @@ class tran(MatrixLieAlgebra):
     
     @contract(n="1|2|3")
     def __init__(self, n):
-        MatrixLieAlgebra.__init__(self, n + 1)
+        MatrixLieAlgebra.__init__(self, n + 1, dimension=n)
         
     def norm(self, X):
         W, v, zero, zero = extract_pieces(X) #@UnusedVariable
@@ -22,7 +22,7 @@ class tran(MatrixLieAlgebra):
         return combine_pieces(W * 0, v, v * 0, 0)
 
     def __repr__(self):
-        return 'tran(%s)' % (self.n - 1)
+        return 'tr%s' % (self.n - 1)
         
     def interesting_points(self):
         points = []

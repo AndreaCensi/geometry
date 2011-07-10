@@ -1,10 +1,11 @@
 import numpy as np
 from contracts import contract, check, new_contract
-from geometry import assert_allclose
+from .. import assert_allclose
 
 from .exceptions import DoesNotBelong
 
 from .differentiable_manifold import DifferentiableManifold
+
 new_contract('DifferentiableManifold', DifferentiableManifold)
 
 from .product_manifold import ProductManifold
@@ -12,8 +13,8 @@ from .product_manifold import ProductManifold
 from .group import *
 from .matrix_lie_group import *
 
-from .sphere import Sphere
-S1 = Sphere(1)
+from .sphere import Sphere, Sphere1
+S1 = Sphere1()
 S2 = Sphere(2)
 S = {1: S1, 2: S2}
 
@@ -23,7 +24,6 @@ T2 = Torus(2)
 T3 = Torus(3)
 T = {1: T1, 2: T2, 3: T3}
 
-from .moebius import *
 from .euclidean import Euclidean
 R1 = Euclidean(1)
 R2 = Euclidean(2)
@@ -62,8 +62,6 @@ SE2 = SE_group(2)
 SE3 = SE_group(3)
 SE = {2:SE2, 3:SE3}
 
-from .embedding_relations import *
-
 all_manifolds = [ 
     SO3, SO2,
     R1, R2, R3,
@@ -74,10 +72,10 @@ all_manifolds = [
     S1, S2,
     se2, se3,
         so2, so3,
-]
-#
-#
-#for x in all_manifolds:
-#    print('%s (%s): in %s' % (x, id(x), x._contained_in.keys()))
-#    
-#    
+] 
+
+from .embedding_relations import *
+from .manifold_embedding_propagation import compute_manifold_relations
+compute_manifold_relations(all_manifolds)
+
+

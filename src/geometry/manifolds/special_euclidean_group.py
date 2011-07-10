@@ -1,16 +1,10 @@
+from . import DifferentiableManifold, MatrixLieGroup, np, SO, se, R
+from .. import (assert_allclose, pose_from_rotation_translation,
+    rotation_translation_from_pose, extract_pieces, se2_from_SE2, SE2_from_se2,
+    SE2_from_translation_angle, SE2_from_xytheta)
 from contracts import contract
-
-from . import MatrixLieGroup, np, SO, se, R
-
-from geometry import  (assert_allclose,
-                       pose_from_rotation_translation,
-                           rotation_translation_from_pose,
-                           extract_pieces,
-                        se2_from_SE2, SE2_from_se2, SE2_from_translation_angle)
-from geometry.poses import SE2_from_xytheta
 from contracts.interface import describe_value
 
-        
 
 class SE_group(MatrixLieGroup):
     ''' 
@@ -28,10 +22,17 @@ class SE_group(MatrixLieGroup):
         algebra = se[N]
         self.SOn = SO[N]
         self.En = R[N]
-        MatrixLieGroup.__init__(self, N + 1, algebra)
+        dimension = {2:3, 3:6}[N]
+        MatrixLieGroup.__init__(self, n=N + 1, algebra=algebra, dimension=dimension)
         
+        DifferentiableManifold.embedding(self, algebra,
+                                          self.algebra_from_group,
+                                    self.group_from_algebra,
+                                    type='lie')
+
     def __repr__(self):
-        return 'SE(%s)' % (self.n - 1)
+        #return 'SE(%s)' % (self.n - 1)
+        return 'SE%s' % (self.n - 1)
     
     def belongs_(self, x):
         R, t, zero, one = extract_pieces(x) #@UnusedVariable

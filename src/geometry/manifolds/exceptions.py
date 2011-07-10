@@ -10,10 +10,13 @@ class DoesNotBelong(Exception):
         self.context = context
         
     def __str__(self):
-        s = ''
-        if self.context is not None:
-            s += '%s\n' % self.context
-        s += '%s: The point does not belong here:\n%s' % (self.M,
-                                                          formatm('p', self.point))
-        s += self.e
-        return s 
+        try:
+            s = ''
+            if self.context is not None:
+                s += '%s\n' % self.context
+            s += '%s: The point does not belong here:\n%s' % (self.M,
+                                                              formatm('p', self.point))
+            s += self.e
+            return s 
+        except Exception as e:
+            return "(%s) %s: %s" % (e, self.M, self.point)

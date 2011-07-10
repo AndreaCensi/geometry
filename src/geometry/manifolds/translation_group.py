@@ -1,13 +1,7 @@
+from . import DifferentiableManifold, MatrixLieGroup, np, R, tran
+from .. import (assert_allclose, pose_from_rotation_translation,
+    rotation_translation_from_pose, extract_pieces)
 from contracts import contract
-
-from . import MatrixLieGroup, np, R, tran
-
-from geometry import  (assert_allclose,
-                       pose_from_rotation_translation,
-                           rotation_translation_from_pose,
-                           extract_pieces)
-from geometry.poses import combine_pieces
-
 
 class Tran(MatrixLieGroup):
     ''' 
@@ -17,11 +11,17 @@ class Tran(MatrixLieGroup):
     @contract(n='1|2|3')
     def __init__(self, n):
         algebra = tran[n]
-        MatrixLieGroup.__init__(self, n + 1, algebra)
+        MatrixLieGroup.__init__(self, n=n + 1, algebra=algebra, dimension=n)
         self.En = R[n]
+        DifferentiableManifold.isomorphism(self, algebra,
+                            self.algebra_from_group,
+                            self.group_from_algebra,
+                            type='lie')
+
         
     def __repr__(self):
-        return 'Tran(%s)' % (self.n - 1)
+        #return 'Tran(%s)' % (self.n - 1)
+        return 'Tr%s' % (self.n - 1)
     
     def belongs_(self, x):
         R, t, zero, one = extract_pieces(x) #@UnusedVariable
@@ -42,6 +42,16 @@ class Tran(MatrixLieGroup):
     
     def expmap_(self, base, vel):
         return base + vel
+
+    def algebra_from_group(self, g):
+        v = np.zeros((self.n, self.n))
+        v[:-1, -1] = g[:-1, -1]
+        return v
+    
+    def group_from_algebra(self, v):
+        g = np.eye(self.n)
+        g[:-1, -1] = v[:-1, -1]
+        return g
 
         
     def interesting_points(self):

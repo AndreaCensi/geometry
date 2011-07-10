@@ -1,10 +1,9 @@
+from geometry import (euclidean_distances, assert_allclose, double_center, mds,
+    mds_randomized, place)
 import itertools
 import numpy as np
-from geometry import (euclidean_distances, assert_allclose,
- double_center, mds)
 import scipy.linalg
-from geometry.mds import mds_randomized, place
-import time 
+import time
 
 def euclidean_distances_test():
     n = 5
@@ -54,15 +53,15 @@ def mds_fast_test():
             D = euclidean_distances(P)
     
             for algo in [mds, mds_randomized]:
-                t0 = time.clock()
+#                t0 = time.clock()
                 P2 = algo(D, ndim=k)
-                t1 = time.clock()
-                t_mds = t1 - t0            
+#                t1 = time.clock()
+                #t_mds = t1 - t0            
                 #            D2 = euclidean_distances(P2)
                 error = evaluate_error(P, P2)
                 assert_allclose(0, error, atol=1e-7)
-                print('k = %d n = %d  %-20s  %7d ms   mean_error = %s' % 
-                      (k, n, algo.__name__, t_mds * 1000, error)) 
+                #print('k = %d n = %d  %-20s  %7d ms   mean_error = %s' % 
+                #      (k, n, algo.__name__, t_mds * 1000, error)) 
 
 def place_test():
     for n in [4, 10]:
