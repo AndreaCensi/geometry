@@ -1,13 +1,7 @@
-from contracts import contract
-
 from . import MatrixLieGroup, np, R, tran
-
-from geometry import  (assert_allclose,
-                       pose_from_rotation_translation,
-                           rotation_translation_from_pose,
-                           extract_pieces)
-from geometry.poses import combine_pieces
-
+from contracts import contract
+from geometry import (assert_allclose, pose_from_rotation_translation,
+    rotation_translation_from_pose, extract_pieces)
 
 class Tran(MatrixLieGroup):
     ''' 
