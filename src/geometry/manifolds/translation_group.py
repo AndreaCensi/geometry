@@ -1,7 +1,7 @@
-from . import DifferentiableManifold, MatrixLieGroup, np, R, tran
-from .. import (assert_allclose, pose_from_rotation_translation,
-    rotation_translation_from_pose, extract_pieces)
+from . import MatrixLieGroup, np, R, tran, DifferentiableManifold
 from contracts import contract
+from geometry import (assert_allclose, pose_from_rotation_translation,
+    rotation_translation_from_pose, extract_pieces)
 
 class Tran(MatrixLieGroup):
     ''' 
