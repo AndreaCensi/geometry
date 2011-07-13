@@ -1,8 +1,8 @@
 from . import (best_similarity_transform, contract, np, assert_allclose,
     project_vectors_onto_sphere)
 from contracts import check_multiple
-import itertools
-import scipy.linalg
+import itertools 
+from . import eigh
 
 
 
@@ -62,7 +62,7 @@ def inner_product_embedding_slow(C, ndim):
 def inner_product_embedding(C, ndim): 
     n = C.shape[0]
     eigvals = (n - ndim, n - 1)
-    S, V = scipy.linalg.eigh(C, eigvals=eigvals)
+    S, V = eigh(C, eigvals=eigvals)
     
     check_multiple([ ('K', ndim),
                      ('array[NxK]', V),

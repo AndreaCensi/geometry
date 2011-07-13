@@ -6,7 +6,6 @@ from numpy.random import uniform #@UnusedImport
 import numpy as np #@UnusedImport
 from numpy.linalg import norm #@UnusedImport
 from contracts import new_contract, check, contract #@UnusedImport
-from scipy.linalg import logm, expm #@UnusedImport
 from numpy.core.numeric import allclose
 from numpy.linalg import  det, svd #@UnusedImport
 

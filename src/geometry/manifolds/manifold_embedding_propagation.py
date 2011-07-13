@@ -9,7 +9,7 @@ def compute_manifold_relations(manifolds):
     create_isomorphisms(isomorphisms)
     create_embeddings(embeddings)
     
-    if True:    
+    if False:    
         for m1 in manifolds:
             for m2 in m1._isomorphisms:
                 print('%5s ~ %5s  via %s' % (m1, m2, m1._isomorphisms[m2].steps))

@@ -1,21 +1,23 @@
 from . import DoesNotBelong
-from .. import assert_allclose, formatm
+from .. import assert_allclose, formatm, development, printm
 from abc import ABCMeta, abstractmethod
 from collections import namedtuple
 from contracts import contract, all_disabled
-from .. import printm
+from contracts import new_contract
         
 class DifferentiableManifold(object):
     ''' This is the base class for differentiable manifolds. ''' 
     __metaclass__ = ABCMeta
-   
+    
     def __init__(self, dimension): 
         self._isomorphisms = {}
         self._embedding = {}
         self._projection = {}
         self.dimension = dimension
         
-        
+        self.atol_distance = 1e-8
+    
+    @new_contract
     def belongs(self, x, msg=None):
         ''' 
             Checks that a point belongs to this manifold.  
@@ -35,8 +37,7 @@ class DifferentiableManifold(object):
 
         '''
         proj = self.project_ts(base, vx)
-        assert_allclose(proj, vx, atol=1e-8) #TODO: put somewhere else, class var
-        # TODO: error
+        assert_allclose(proj, vx, atol=self.atol_distance) 
     
     def project_ts(self, base, v): # TODO: test
         '''
@@ -196,25 +197,26 @@ class DifferentiableManifold(object):
         A._embedding[B] = Embed(A, B, A_to_B, B_to_A, steps, type, desc)
         B._projection[A] = Embed(B, A, B_to_A, A_to_B, steps, type, desc)
   
-        try:
-            for a in A.interesting_points():
-                A.belongs(a)
-                b = A_to_B(a)
-                B.belongs(b)    
-        except:
-            print('Invalid embedding:\n %s -> %s using %s' % (A, B, A_to_B))
-            printm('a', a)
-            raise
-            
-        try:
-            for b in B.interesting_points():
-                B.belongs(b)
-                a = B_to_A(b)
-                A.belongs(a)
-        except:
-            printm('b', b)
-            print('Invalid embedding:\n %s <- %s using %s' % (A, B, B_to_A))
-            raise
+        if development:
+            try:
+                for a in A.interesting_points():
+                    A.belongs(a)
+                    b = A_to_B(a)
+                    B.belongs(b)    
+            except:
+                print('Invalid embedding:\n %s -> %s using %s' % (A, B, A_to_B))
+                printm('a', a)
+                raise
+                
+            try:
+                for b in B.interesting_points():
+                    B.belongs(b)
+                    a = B_to_A(b)
+                    A.belongs(a)
+            except:
+                printm('b', b)
+                print('Invalid embedding:\n %s <- %s using %s' % (A, B, B_to_A))
+                raise
             
   
     def relations_descriptions(self):
@@ -227,45 +229,45 @@ class DifferentiableManifold(object):
     
     def embed_in(self, M, my_point):
         ''' Embeds a point on this manifold to the target manifold M. '''
-        self.belongs(my_point)
+        #self.belongs(my_point)
         if not self.embeddable_in(M):
             msg = ('%s is not embeddable in %s; %s' % 
                    (self, M, self.relations_descriptions()))
             raise ValueError(msg)
         x = self._embedding[M].A_to_B(my_point)
-        M.belongs(x, msg='Error while embedding %s < %s point %s' % 
-                  (self, M, my_point))
+        #M.belongs(x, msg='Error while embedding %s < %s point %s' % 
+        #          (self, M, my_point))
         return x
     
     def project_from(self, M, his_point):
         ''' Projects a point on a bigger manifold to this manifold. '''
-        M.belongs(his_point)
+        #M.belongs(his_point)
         if not self.embeddable_in(M):
             msg = ('Cannot project from %s to %s; %s' % 
                    (self, M, self.relations_descriptions()))
             raise ValueError(msg)
         x = self._embedding[M].B_to_A(his_point)
-        self.belongs(x)
+        #self.belongs(x)
         return x
     
     def project_to(self, m, my_point):
-        self.belongs(my_point)
+        #self.belongs(my_point)
         if not self.can_represent(m):
             msg = ('%s does not contain %s; %s' % 
                    (self, m, self.relations_descriptions()))
             raise ValueError(msg)
         x = self._projection[m].A_to_B(my_point)
-        m.belongs(x)
+        #m.belongs(x)
         return x
 
     def convert_to(self, m, my_point):
-        self.belongs(my_point)
+        #self.belongs(my_point)
         if not  self.can_convert_to(m):
             msg = ('%s cannot be converted to %s; %s' % 
                    (self, m, self.relations_descriptions()))
             raise ValueError(msg)
         x = self._isomorphisms[m].A_to_B(my_point)
-        m.belongs(x)
+        #m.belongs(x)
         return x
 
     def can_convert_to(self, manifold):

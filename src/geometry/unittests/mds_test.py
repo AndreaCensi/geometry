@@ -1,8 +1,7 @@
 from geometry import (euclidean_distances, assert_allclose, double_center, mds,
-    mds_randomized, place)
+    mds_randomized, place, eigh)
 import itertools
 import numpy as np
-import scipy.linalg
 import time
 
 def euclidean_distances_test():
@@ -22,7 +21,7 @@ def rank_test():
             P = np.random.rand(k, n)
             D = euclidean_distances(P)
             B = double_center(D * D)
-            w, v = scipy.linalg.eigh(B) #@UnusedVariable
+            w, v = eigh(B) #@UnusedVariable
             w = w[::-1] # descending
             # normalize
             wn = w / w[0]
