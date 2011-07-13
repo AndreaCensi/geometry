@@ -34,7 +34,8 @@ class SE_group(MatrixLieGroup):
         #return 'SE(%s)' % (self.n - 1)
         return 'SE%s' % (self.n - 1)
     
-    def belongs_(self, x):
+    def belongs(self, x):
+        # TODO: more checks
         R, t, zero, one = extract_pieces(x) #@UnusedVariable
         self.SOn.belongs(R)
         assert_allclose(zero, 0, err_msg='I expect the lower row to be 0.') 
@@ -52,26 +53,37 @@ class SE_group(MatrixLieGroup):
     
     # TODO: make explicit inverse
     # TODO: make specialization for SE(3)
-    def logmap_(self, base, target):
-        ''' Uses special form for logarithmic map. '''
-        if self.n == 3:
-            diff = self.multiply(self.inverse(base), target)
-            X = se2_from_SE2(diff)            
-            X = self.algebra.project(X)
-            return np.dot(base, X)
-        else:
-            return MatrixLieGroup.logmap_(self, base, target)
-    
-    def expmap_(self, base, vel):
-        ''' Uses special form for exponential map. '''
-        if self.n == 3:
-            tv = np.dot(self.inverse(base), vel)
-            tv = self.algebra.project(tv)
-            x = SE2_from_se2(tv)
-            return np.dot(base, x)
-        else: #
-            return MatrixLieGroup.expmap_(self, base, vel)
+#    def logmap_(self, base, target):
+#        ''' Uses special form for logarithmic map. '''
+#        if self.n == 3:
+#            diff = self.multiply(self.inverse(base), target)
+#            X = se2_from_SE2(diff)            
+#            X = self.algebra.project(X)
+#            return np.dot(base, X)
+#        else:
+#            return MatrixLieGroup.logmap_(self, base, target)
+#    
+#    def expmap_(self, base, vel):
+#        ''' Uses special form for exponential map. '''
+#        if self.n == 3:
+#            tv = np.dot(self.inverse(base), vel)
+#            tv = self.algebra.project(tv)
+#            x = SE2_from_se2(tv)
+#            return np.dot(base, x)
+#        else: #
+#            return MatrixLieGroup.expmap_(self, base, vel)
 
+    def group_from_algebra(self, g):
+        if self.n == 3:
+            return SE2_from_se2(g)
+        else:
+            return MatrixLieGroup.group_from_algebra(self, g)
+
+    def algebra_from_group(self, a):
+        if self.n == 3:
+            return se2_from_SE2(a)
+        else:
+            return MatrixLieGroup.algebra_from_group(self, a)
         
     def interesting_points(self):
         if self.n == 3:

@@ -1,6 +1,7 @@
 from contracts import check
 from . import DifferentiableManifold, np 
 from .. import normalize_pi
+from . import contract
 
 class Torus(DifferentiableManifold):
 
@@ -8,24 +9,30 @@ class Torus(DifferentiableManifold):
         DifferentiableManifold.__init__(self, dimension=n)
         self.n = n
 
-    def belongs_(self, a):
+    def belongs(self, a):
         check('array[N](>=-pi,<pi)', a, N=self.n)
 
-    def distance_(self, a, b):
+    @contract(a='belongs', b='belongs', returns='>=0')
+    def distance(self, a, b):
         b = self.normalize(b - a)
         return np.linalg.norm(b)
 
-    def logmap_(self, a, b): 
+    @contract(a='belongs', b='belongs', returns='belongs_ts')
+    def logmap(self, a, b): 
         vel = self.normalize(b - a)
-        return vel
+        return a, vel
 
-    def expmap_(self, a, vel): 
+    @contract(bv='belongs_ts', returns='belongs')
+    def expmap(self, bv):
+        a, vel = bv 
         b = self.normalize(a + vel)
         return b
 
-    def project_ts_(self, base, vx): 
-        return vx
+    @contract(bv='tuple(belongs, *)')
+    def project_ts(self, bv): 
+        return bv # XXX: more checks
     
+    @contract(returns='belongs')
     def sample_uniform(self):
         return np.random.rand(self.n) * 2 * np.pi - np.pi
     
@@ -35,6 +42,7 @@ class Torus(DifferentiableManifold):
     def friendly(self, a):
         return 'point(%s)' % a
     
+    @contract(returns='list(belongs)')
     def interesting_points(self):
         o = np.ones(self.n)
         return [np.zeros(self.n), o * -np.pi] 

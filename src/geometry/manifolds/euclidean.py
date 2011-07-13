@@ -1,7 +1,8 @@
-from . import DifferentiableManifold, np, assert_allclose, contract
+from . import (DifferentiableManifold, np, assert_allclose, contract,
+    MatrixLinearSpace)
 
 
-class Euclidean(DifferentiableManifold):
+class Euclidean(MatrixLinearSpace):
     ''' 
         This is the usual Euclidean space of finite dimension;
         this is mostly used for debugging.
@@ -13,29 +14,16 @@ class Euclidean(DifferentiableManifold):
     '''
     
     def __init__(self, dimension):
-        DifferentiableManifold.__init__(self, dimension=dimension)
-        self.dimension = dimension
+        MatrixLinearSpace.__init__(self, dimension=dimension,
+                                        shape=(dimension,))
     
     def __repr__(self):
-        #return 'R(%s)' % (self.dimension)
         return 'R%s' % (self.dimension)
 
     @contract(x='array')
-    def belongs_(self, x):
+    def belongs(self, x):
         assert_allclose(x.size, self.dimension) 
         assert np.all(np.isreal(x)), "Expected real vector"
-        
-    def project_ts_(self, base, x): # TODO: test @UnusedVariable
-        return x
-                    
-    def distance_(self, a, b):
-        return np.linalg.norm(a - b)
-         
-    def logmap_(self, base, target):
-        return target - base
-        
-    def expmap_(self, base, vel):
-        return base + vel
 
     def sample_uniform(self):
         return np.random.randn(self.dimension)
@@ -45,4 +33,8 @@ class Euclidean(DifferentiableManifold):
         points.append(np.zeros(self.dimension))
         points.append(np.ones(self.dimension))
         return points
+    
+    def project(self, x): 
+        return x
+    
     

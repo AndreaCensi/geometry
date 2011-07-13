@@ -1,8 +1,10 @@
-from . import np, DifferentiableManifold, Group
-from .. import logm, expm, assert_allclose
-from abc import abstractmethod
+from . import np, DifferentiableManifold, Group, contract
+from .. import logm, expm
+from contracts import new_contract
+from . import MatrixLinearSpace
+from geometry.formatting import printm
 
-class MatrixLieAlgebra(DifferentiableManifold):
+class MatrixLieAlgebra(MatrixLinearSpace):
     ''' This is the base class for Matrix Lie Algebra.
     
         It is understood that it is composed by square matrices.
@@ -19,42 +21,13 @@ class MatrixLieAlgebra(DifferentiableManifold):
     
     
     def __init__(self, n, dimension):
-        DifferentiableManifold.__init__(self, dimension=dimension)
+        MatrixLinearSpace.__init__(self, dimension=dimension,
+                                   shape=(n, n))
         self.n = n
     
-    @abstractmethod        
-    def project(self, v): #@UnusedVariable
-        ''' Projects a matrix onto this Lie Algebra. '''
-        assert False
-    
-    def belongs_(self, v):
-        ''' Checks that a vector belongs to this algebra. '''
-        proj = self.project(v)
-        assert_allclose(proj, v, atol=1e-8) # XXX: tol
-        
-    def norm(self, v): # XX
-        ''' Return the norm of a vector in the algebra.
-            This is used in :py:class:`MatrixLieGroup` to measure
-            distances between points in the Lie group. 
-        '''
-        return np.linalg.norm(v, 2)
-    
-    def zero(self):
-        ''' Returns the zero element for this algebra. '''
-        return np.zeros((self.n, self.n))
 
-    # Manifolds methods
-    def distance_(self, a, b):
-        return self.norm(a - b)
-    
-    def expmap_(self, base, vel):
-        return base + vel
-        
-    def logmap_(self, base, target):
-        return target - base
-        
-    def project_ts_(self, base, vx):
-        return vx # XXX
+    # TODO: bracket
+
 
 class MatrixLieGroup(Group, DifferentiableManifold):
     ''' 
@@ -88,7 +61,12 @@ class MatrixLieGroup(Group, DifferentiableManifold):
     def inverse(self, g):
         return np.linalg.inv(g)
 
-    def project_ts_(self, base, x):
+    @new_contract
+    def belongs_algebra(self, x):
+        self.algebra.belongs(x)
+        
+    @contract(bv='tuple(belongs, *)')
+    def project_ts(self, bv):
         ''' 
             Projects the vector *x* to the tangent space at point *base*.
         
@@ -97,16 +75,16 @@ class MatrixLieGroup(Group, DifferentiableManifold):
             and then translating it back. 
         '''
         # get it to the origin
-        y = np.dot(self.inverse(base), x)
+        base, vel = bv
+        y = np.dot(self.inverse(base), vel)
         # project it to the algebra
         ty = self.algebra.project(y)
         # get it back where it belonged
         tty = np.dot(base, ty)
-        return tty 
-    
-   
+        return base, tty 
         
-    def distance_(self, a, b):
+    @contract(a='belongs', b='belongs')
+    def distance(self, a, b):
         ''' 
             Computes the distance between two points.
         
@@ -118,8 +96,9 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         x = self.multiply(a, self.inverse(b))
         xt = self.algebra_from_group(x)
         return self.algebra.norm(xt)
-        
-    def logmap_(self, base, target):
+    
+    @contract(base='belongs', target='belongs', returns='belongs_ts',)    
+    def logmap(self, base, target):
         ''' 
             Returns the direction from base to target. 
         
@@ -131,9 +110,12 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         '''
         diff = self.multiply(self.inverse(base), target)
         X = self.algebra_from_group(diff)
-        return np.dot(base, X)
+        bX = np.dot(base, X)
+        #printm('base', base, 'target', target, 'X', X, 'bX', bX)
+        return (base, bX)
 
-    def expmap_(self, base, vel):
+    @contract(bv='belongs_ts', returns='belongs')
+    def expmap(self, bv):
         ''' 
             This is the inverse of :py:func:`logmap_`. 
         
@@ -143,11 +125,13 @@ class MatrixLieGroup(Group, DifferentiableManifold):
             Here the :py:func:`MatrixLieAlgebra.project` function
             is used to mitigate numerical errors. 
         '''
+        base, vel = bv
         tv = np.dot(self.inverse(base), vel)
         tv = self.algebra.project(tv)
         x = self.group_from_algebra(tv)
         return np.dot(base, x)
     
+    @contract(g='belongs', returns='belongs_algebra')
     def algebra_from_group(self, g):
         ''' 
             Converts an element of the group to the algebra. 
@@ -158,6 +142,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         X = self.algebra.project(X)
         return X
         
+    @contract(a='belongs_algebra', returns='belongs')
     def group_from_algebra(self, a):
         ''' 
             Converts an element of the algebra to the group. 
@@ -167,6 +152,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         return expm(a)
         
     # TODO: write tests for this
+    @contract(a='belongs', b='belongs', returns='belongs_ts')
     def velocity_from_points(self, a, b, delta=1):
         ''' 
             Find the velocity in local frame to go from *a* to *b* in 
@@ -175,7 +161,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         x = self.multiply(self.inverse(a), b)
         xt = self.logmap(self.unity(), x) # XXX
         xt = self.algebra.project(xt)
-        return xt / delta
+        return a, xt / delta
 
     
     

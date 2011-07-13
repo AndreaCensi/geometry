@@ -3,7 +3,8 @@ import numpy as np
 import itertools
 
 from geometry import assert_allclose
-from geometry.manifolds import all_manifolds
+from geometry.manifolds import all_manifolds, tran1, tran2, tran3, so2, so3, se2, \
+    se3, S1, SE2, SE3, S2, Tran1, Tran2, Tran3, T1, T2, T3, R1, R2, SO2, SO3, R3
 from geometry.manifolds.differentiable_manifold import RandomManifold
 
 def check_geodesic_consistency(M, a, b, divisions=5):
@@ -46,8 +47,8 @@ def check_logmap1(M, a, b):
         '(a: %s, b: %s)' 
         % (M, M.friendly(a), M.friendly(b)))
     
-    vel = M.logmap(a, b)
-    b2 = M.expmap(a, vel)
+    bv = M.logmap(a, b)
+    b2 = M.expmap(bv)
     assert_allclose(M.distance(b, b2), 0, atol=1e-7)
  
 
@@ -58,10 +59,10 @@ def check_logmap3(M, a, b):
         % (M, M.friendly(a), M.friendly(b)))
 
     d = M.distance(a, b)
-    vel = M.logmap(a, b)
+    base, vel = M.logmap(a, b)
     ratios = [0.5, 0.3]
     for ratio in ratios:
-        b2 = M.expmap(a, vel * ratio)
+        b2 = M.expmap((base, vel * ratio))
         d2 = M.distance(a, b2)
         assert_allclose(d * ratio, d2, atol=1e-7)
 
@@ -71,7 +72,7 @@ def check_friendly(M, a):
 
 def check_interesting_point_in_manifold(M, p):    
     check_interesting_point_in_manifold.description = '%s: %s' % (M, p)
-    M.belongs(p, msg='Interesting point not in manifold.')
+    M.belongs(p)
         
 def check_manifold_suite(M, num_random=5): 
 
@@ -98,7 +99,22 @@ def check_manifold_suite(M, num_random=5):
 
 @attr('manifolds')
 def test_manifolds():
-    for M in all_manifolds:
+    manifolds = [ 
+        SO3, SO2,
+        R1, R2, R3,
+        T1, T2, T3,
+        Tran1, Tran2, Tran3,
+        SE2, SE3,
+        S1, S2,
+        se2, se3,
+        so2, so3,
+        tran1, tran2, tran3,
+    ] 
+    
+
+    
+    for M in manifolds:
+        #print('Testing %s' % M)
         for x in check_manifold_suite(M): yield x
 
 

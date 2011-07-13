@@ -1,8 +1,8 @@
-from . import DoesNotBelong
+from . import DoesNotBelong # TODO: remove?
 from .. import assert_allclose, formatm, development, printm
 from abc import ABCMeta, abstractmethod
 from collections import namedtuple
-from contracts import contract, all_disabled
+from contracts import contract
 from contracts import new_contract
         
 class DifferentiableManifold(object):
@@ -17,43 +17,44 @@ class DifferentiableManifold(object):
         
         self.atol_distance = 1e-8
     
+    @abstractmethod
     @new_contract
-    def belongs(self, x, msg=None):
+    def belongs(self, x):
         ''' 
-            Checks that a point belongs to this manifold.  
+            Raises an Exception if the point does not belong to this manifold.  
         
             This function wraps some checks around :py:func:`belongs_`, 
             which is implemented by the subclasses. 
         '''
-        try:
-            self.belongs_(x)
-        except Exception as e:
-            raise DoesNotBelong(self, x, e, msg)
-
-    def belongs_ts(self, base, vx):
+        pass 
+    
+    @new_contract
+    @contract(bv='tuple(belongs, *)')
+    def belongs_ts(self, bv):
         ''' 
             Checks that a vector *vx* belongs to the tangent space
             at the given point *base*.
 
         '''
-        proj = self.project_ts(base, vx)
-        assert_allclose(proj, vx, atol=self.atol_distance) 
+        #printm('bv[0]', bv[0], 'bv[1]', bv[1])
+        bvp = self.project_ts(bv)
+        #printm('bv[0]', bv[0], 'bv[1]', bv[1])
+        assert_allclose(bv[1], bvp[1], atol=self.atol_distance) 
     
-    def project_ts(self, base, v): # TODO: test
+    @abstractmethod
+    @contract(bv='tuple(belongs, *)')
+    def project_ts(self, bv): # TODO: test
         '''
             Projects a vector *v_ambient* in the ambient space
             to the tangent space at point *base*.
 
             This function wraps some checks around :py:func:`project_ts_`, 
             which is implemented by the subclasses. 
-        ''' 
-        if not all_disabled():
-            self.belongs(base)
-        # check dimensions?
-        v2 = self.project_ts_(base, v)
-        return v2
+        '''
+        
     
-    
+    @abstractmethod
+    @contract(a='belongs', b='belongs', returns='>=0')
     def distance(self, a, b):
         ''' 
             Computes the geodesic distance between two points. 
@@ -61,14 +62,10 @@ class DifferentiableManifold(object):
             This function wraps some checks around :py:func:`distance_`, 
             which is implemented by the subclasses. 
         '''
-        if not all_disabled():
-            self.belongs(a)
-            self.belongs(b)
-        d = self.distance_(a, b)
-        if not all_disabled():
-            assert d >= 0
-        return d
-             
+
+            
+    @abstractmethod 
+    @contract(base='belongs', p='belongs', returns='belongs_ts')
     def logmap(self, base, p):
         ''' 
             Computes the logarithmic map from base point *base* to target *b*. 
@@ -78,15 +75,11 @@ class DifferentiableManifold(object):
 
             # XXX: what should we do in the case there is more than one logmap?
         '''
-        if not all_disabled():
-            self.belongs(base)
-            self.belongs(p)
-        v = self.logmap_(base, p)
-        if not all_disabled():
-            self.belongs_ts(base, v)
-        return v
+        #return self.logmap_(base, p)
 
-    def expmap(self, base, v):
+    @abstractmethod
+    @contract(bv='belongs_ts', returns='belongs')
+    def expmap(self, bv):
         ''' 
             Computes the exponential map from *base* for the velocity vector *v*. 
 
@@ -94,18 +87,9 @@ class DifferentiableManifold(object):
             which is implemented by the subclasses. 
             
         '''
-        if not all_disabled():
-            self.belongs(base, 'Base point passed to expmap().')
-            self.belongs_ts(base, v)
+        #return self.expmap_(bv)
         
-        p = self.expmap_(base, v)
-        
-        if not all_disabled():
-            self.belongs(p, 'Result of %s:_expmap(%s,%s)' % 
-                        (self, self.friendly(base), v))
-        return p
-        
-    
+    @contract(returns='list(belongs)')
     def interesting_points(self):
         ''' 
             Returns a list of "interesting points" on this manifold that
@@ -113,21 +97,18 @@ class DifferentiableManifold(object):
         '''
         return []
     
-    @contract(t='>=0,<=1')
+    @contract(a='belongs', b='belongs', t='>=0,<=1', returns='belongs')
     def geodesic(self, a, b, t):
         ''' Returns the point interpolated along the geodesic. '''
-        if not all_disabled():
-            self.belongs(a)
-            self.belongs(b)
-        vel = self.logmap(a, b)
-        vel2 = vel * t
-        p = self.expmap(a, vel2)
-        return p
+        bv = self.logmap(a, b)
+        return self.expmap((bv[0], bv[1] * t))
     
+    @contract(a='belongs')
     def friendly(self, a):
         ''' Returns a friendly description string for a point on the manifold. '''
         return "%s" % a 
     
+    @contract(a='belongs', b='belongs')
     def assert_close(self, a, b, atol=1e-8, msg=None):
         ''' 
             Asserts that two points on the manifold are close to the given
@@ -142,30 +123,7 @@ class DifferentiableManifold(object):
             msg += formatm('a', a, 'b', b)
             assert_allclose(distance, 0, atol=atol, err_msg=msg)
         return distance
-    
-    @abstractmethod
-    def belongs_(self, a): 
-        ''' Checks that a point belongs to this manifold. '''  
-    
-    @abstractmethod
-    def distance_(self, a, b): 
-        ''' Computes the geodesic distance between two points. '''
-        
-    @abstractmethod
-    def logmap_(self, a, b): 
-        ''' Computes the logarithmic map from base point *a* to target *b*. '''
-        
-    @abstractmethod
-    def expmap_(self, a, v):
-        ''' Computes the exponential map from *a* for the velocity vector *v*. '''
-        
-    @abstractmethod
-    def project_ts_(self, base, v_ambient):
-        ''' 
-            Projects a vector *v_ambient* in the ambient space
-            to the tangent space at point *base*. 
-        '''
-    
+
     Isomorphism = namedtuple('Isomorphism', 'A B A_to_B B_to_A steps type desc')
     Embedding = namedtuple('Embedding', 'A B A_to_B B_to_A steps type desc')
     
@@ -227,6 +185,7 @@ class DifferentiableManifold(object):
             )
         return s
     
+    @contract(my_point='belongs')
     def embed_in(self, M, my_point):
         ''' Embeds a point on this manifold to the target manifold M. '''
         #self.belongs(my_point)
@@ -239,35 +198,32 @@ class DifferentiableManifold(object):
         #          (self, M, my_point))
         return x
     
+    @contract(returns='belongs')
     def project_from(self, M, his_point):
         ''' Projects a point on a bigger manifold to this manifold. '''
-        #M.belongs(his_point)
         if not self.embeddable_in(M):
             msg = ('Cannot project from %s to %s; %s' % 
                    (self, M, self.relations_descriptions()))
             raise ValueError(msg)
         x = self._embedding[M].B_to_A(his_point)
-        #self.belongs(x)
         return x
     
+    @contract(my_point='belongs')
     def project_to(self, m, my_point):
-        #self.belongs(my_point)
         if not self.can_represent(m):
             msg = ('%s does not contain %s; %s' % 
                    (self, m, self.relations_descriptions()))
             raise ValueError(msg)
         x = self._projection[m].A_to_B(my_point)
-        #m.belongs(x)
         return x
 
+    @contract(my_point='belongs')
     def convert_to(self, m, my_point):
-        #self.belongs(my_point)
         if not  self.can_convert_to(m):
             msg = ('%s cannot be converted to %s; %s' % 
                    (self, m, self.relations_descriptions()))
             raise ValueError(msg)
         x = self._isomorphisms[m].A_to_B(my_point)
-        #m.belongs(x)
         return x
 
     def can_convert_to(self, manifold):

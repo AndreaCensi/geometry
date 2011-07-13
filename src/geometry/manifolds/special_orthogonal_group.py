@@ -22,14 +22,14 @@ class SO_group(MatrixLieGroup):
                                     type='lie')
 
     def __repr__(self):
-        #return 'SO(%s)' % (self.n)
         return 'SO%s' % (self.n)
     
-    def belongs_(self, x):
+    def belongs(self, x):
         check('orthogonal', x)
         det = np.linalg.det(x)
         assert_allclose(det, 1, err_msg='I expect the determinant to be +1.') 
 
+    @contract(returns='belongs')
     def sample_uniform(self):
         if self.n == 2:
             theta = np.random.rand() * np.pi
@@ -39,6 +39,7 @@ class SO_group(MatrixLieGroup):
         else:
             assert False, 'Not implemented for n>=4.'
             
+    @contract(x='belongs')
     def friendly(self, x):
         if self.n == 2:
             theta = np.arctan2(x[1, 0], x[0, 0])
@@ -50,6 +51,7 @@ class SO_group(MatrixLieGroup):
         else:
             assert False, 'Not implemented for n>=4.'
         
+    @contract(returns='list(belongs)')
     def interesting_points(self):
         points = []
         points.append(self.identity())

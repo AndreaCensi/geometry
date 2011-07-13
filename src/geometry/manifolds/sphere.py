@@ -23,10 +23,12 @@ class Sphere(DifferentiableManifold):
     def __repr__(self):
         return 'S%s' % (self.dimension)
                 
-    def distance_(self, a, b):
+    @contract(a='belongs', b='belongs', returns='>=0')
+    def distance(self, a, b):
         return geodesic_distance_on_sphere(a, b)
          
-    def logmap_(self, base, target):
+    @contract(base='belongs', target='belongs', returns='belongs_ts')
+    def logmap(self, base, target):
         # TODO: create S1_logmap(base, target)
         # XXX: what should we do in the case there is more than one logmap?
         d = geodesic_distance_on_sphere(target, base)
@@ -37,12 +39,14 @@ class Sphere(DifferentiableManifold):
                 xp = any_orthogonal_direction(base)
         else:
             x = target - base 
-            xp = self.project_ts(base, x)
+            base, xp = self.project_ts((base, x))
         xp = normalize_length_or_zero(xp)
         xp *= geodesic_distance_on_sphere(target, base)
-        return xp
+        return base, xp
         
-    def expmap_(self, base, vel):
+    @contract(bv='belongs_ts', returns='belongs')
+    def expmap(self, bv):
+        base, vel = bv
         angle = np.linalg.norm(vel)
         if angle == 0: # XXX: tolerance
             return base
@@ -60,21 +64,20 @@ class Sphere(DifferentiableManifold):
         
         return result
 
-    def project_ts_(self, base, x): # TODO: test
+    @contract(bve='tuple(belongs, *)')
+    def project_ts(self, bve): # TODO: test
+        base, vel = bve
         P = np.eye(self.N) - outer(base, base)
-        return np.dot(P, x)
+        return base, np.dot(P, vel)
         
-    def belongs_(self, x):
-        check('array[N]', x, 'Expected a vector.')
-        err_msg = ('I expect a vector of size %d, got %s.' % (self.N, x))
-        err_msg += 'dimension=%s N=%s ' % (self.dimension, self.N)
-        assert_allclose(x.size, self.N,
-                        err_msg=err_msg)
-        assert_allclose(1, np.linalg.norm(x), rtol=Sphere.norm_rtol)
+    def belongs(self, x):
+        check('array[N],unit_length', x)
 
+    @contract(returns='belongs')
     def sample_uniform(self):
         return random_direction(self.N)
 
+    @contract(returns='list(belongs)')
     def interesting_points(self):
         if self.N == 2:
             points = []
@@ -118,10 +121,12 @@ class Sphere1(DifferentiableManifold):
     def __repr__(self):
         return 'S1' 
                 
-    def distance_(self, a, b):
+    @contract(a='S1', b='S1', returns='>=0')
+    def distance(self, a, b):
         return geodesic_distance_on_sphere(a, b)
          
-    def logmap_(self, base, target):
+    @contract(base='S1', target='S1', returns='belongs_ts')
+    def logmap(self, base, target):
         # TODO: create S1_logmap(base, target)
         # XXX: what should we do in the case there is more than one logmap?
         d = geodesic_distance_on_sphere(target, base)
@@ -129,12 +134,14 @@ class Sphere1(DifferentiableManifold):
             xp = np.array([base[1], -base[0]])
         else:
             x = target - base 
-            xp = self.project_ts(base, x)
+            base, xp = self.project_ts((base, x))
         xp = normalize_length_or_zero(xp)
         xp *= geodesic_distance_on_sphere(target, base)
-        return xp
+        return base, xp
         
-    def expmap_(self, base, vel):
+    @contract(bv='belongs_ts', returns='belongs')
+    def expmap(self, bv):
+        base, vel = bv
         angle = np.linalg.norm(vel)
         if angle == 0: # XXX: tolerance
             return base        
@@ -143,12 +150,14 @@ class Sphere1(DifferentiableManifold):
         result = np.dot(R, base)
         return result
 
-    def project_ts_(self, base, x): # TODO: test
+    @contract(bx='tuple(belongs, *)')
+    def project_ts(self, bx): # TODO: test
+        base, x = bx
         P = np.eye(2) - outer(base, base)
-        return np.dot(P, x)
+        return base, np.dot(P, x)
       
     @contract(x='S1')  
-    def belongs_(self, x):
+    def belongs(self, x):
         pass
     
     def sample_uniform(self):
