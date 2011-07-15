@@ -124,6 +124,7 @@ best_embedding_on_sphere = spherical_mds
 
 @contract(references='array[KxN]', distances='array[N](>=0)')
 def place(references, distances):
+    # TODO: docs
     K, N = references.shape
     
     # First do MDS on all data
@@ -133,9 +134,9 @@ def place(references, distances):
     D[N, :N] = distances
     D[:N, N] = distances
     Sm = mds(D, K)
-    Dm = euclidean_distances(Sm)
   
     # Only if perfect  
+    # Dm = euclidean_distances(Sm)
     # assert_almost_equal(D[:N, :N], Dm[:N, :N])
     # new in other frame 
     R, t = best_similarity_transform(Sm[:, :N], references)

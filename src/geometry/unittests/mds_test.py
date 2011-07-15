@@ -1,8 +1,7 @@
 from geometry import (euclidean_distances, assert_allclose, double_center, mds,
     mds_randomized, place, eigh)
 import itertools
-import numpy as np
-import time
+import numpy as np 
 
 def euclidean_distances_test():
     n = 5

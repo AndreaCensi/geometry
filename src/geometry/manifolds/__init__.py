@@ -4,7 +4,7 @@ from .. import assert_allclose
 
 from .exceptions import DoesNotBelong
 
-from .differentiable_manifold import DifferentiableManifold
+from .differentiable_manifold import DifferentiableManifold, RandomManifold
 
 new_contract('DifferentiableManifold', DifferentiableManifold)
 

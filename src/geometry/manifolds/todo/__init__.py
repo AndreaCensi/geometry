@@ -1,1 +1,1 @@
-from .. import *
+from geometry.manifolds import *

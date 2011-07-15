@@ -1,7 +1,5 @@
+from geometry import MatrixLieGroup, all_manifolds
 from nose.plugins.attrib import attr
-from geometry.manifolds import all_manifolds
-from geometry.manifolds.matrix_lie_group import MatrixLieGroup
-from geometry.formatting import printm
 
 def check_matrix_group(M):
     

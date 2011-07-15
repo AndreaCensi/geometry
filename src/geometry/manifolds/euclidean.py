@@ -1,5 +1,4 @@
-from . import (DifferentiableManifold, np, assert_allclose, contract,
-    MatrixLinearSpace)
+from . import (np, assert_allclose, contract, MatrixLinearSpace)
 
 
 class Euclidean(MatrixLinearSpace):

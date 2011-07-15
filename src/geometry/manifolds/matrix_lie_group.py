@@ -1,8 +1,6 @@
-from . import np, DifferentiableManifold, Group, contract
+from . import MatrixLinearSpace, np, DifferentiableManifold, Group, contract
 from .. import logm, expm
 from contracts import new_contract
-from . import MatrixLinearSpace
-from geometry.formatting import printm
 
 class MatrixLieAlgebra(MatrixLinearSpace):
     ''' This is the base class for Matrix Lie Algebra.

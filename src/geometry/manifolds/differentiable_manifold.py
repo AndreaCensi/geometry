@@ -1,4 +1,3 @@
-from . import DoesNotBelong # TODO: remove?
 from .. import assert_allclose, formatm, development, printm
 from abc import ABCMeta, abstractmethod
 from collections import namedtuple

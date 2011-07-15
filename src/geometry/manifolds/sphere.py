@@ -6,7 +6,7 @@ from .. import (geodesic_distance_on_sphere,
                       rotation_from_axis_angle, rot2d)
 
 
-from . import DifferentiableManifold, np, assert_allclose, contract, check
+from . import DifferentiableManifold, np, contract, check
 from ..  import any_orthogonal_direction 
                           
 class Sphere(DifferentiableManifold):

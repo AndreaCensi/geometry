@@ -1,11 +1,10 @@
+from geometry import (tran1, tran2, tran3, so2, so3, se2, se3, S1, SE2, SE3, S2,
+    Tran1, Tran2, Tran3, T1, T2, T3, R1, R2, SO2, SO3, R3, RandomManifold,
+    assert_allclose)
 from nose.plugins.attrib import attr
-import numpy as np
 import itertools
+import numpy as np
 
-from geometry import assert_allclose
-from geometry.manifolds import all_manifolds, tran1, tran2, tran3, so2, so3, se2, \
-    se3, S1, SE2, SE3, S2, Tran1, Tran2, Tran3, T1, T2, T3, R1, R2, SO2, SO3, R3
-from geometry.manifolds.differentiable_manifold import RandomManifold
 
 def check_geodesic_consistency(M, a, b, divisions=5):
     ''' 
