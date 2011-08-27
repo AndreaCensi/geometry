@@ -1,10 +1,7 @@
 from . import (best_similarity_transform, contract, np, assert_allclose,
-    project_vectors_onto_sphere)
+    project_vectors_onto_sphere, eigh)
 from contracts import check_multiple
-import itertools 
-from . import eigh
-
-
+import itertools
 
 @contract(S='array[KxN]', returns='array[NxN](>=0)')
 def euclidean_distances(S):
