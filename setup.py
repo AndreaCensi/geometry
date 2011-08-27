@@ -14,6 +14,5 @@ setup(name='PyGeometry',
       package_dir={'':'src'},
       packages=['geometry', 'geometry.manifolds'],
       install_requires=['PyContracts'],
-     download_url='http://github.com/AndreaCensi/geometry/tarball/%s' % version,
-
+      download_url='http://github.com/AndreaCensi/geometry/tarball/%s' % version,
 )
