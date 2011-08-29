@@ -1,6 +1,6 @@
 from setuptools import setup
 
-version = '0.10.0'
+version = '0.12.0dev'
 
 setup(name='PyGeometry',
       version=version,
