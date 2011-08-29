@@ -1,7 +1,7 @@
 from . import np, DifferentiableManifold, contract
-from contracts import check
+from .. import assert_allclose
 from abc import abstractmethod
-from .. import assert_allclose 
+from contracts import check
 
 class MatrixLinearSpace(DifferentiableManifold):
     

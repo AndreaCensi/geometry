@@ -73,32 +73,38 @@ def check_interesting_point_in_manifold(M, p):
     check_interesting_point_in_manifold.description = '%s: %s' % (M, p)
     M.belongs(p)
         
+def check_enough_points(M):
+    points = list(M.interesting_points())
+    if not points:
+        raise ValueError('No test points for %s.' % M)
+
+
 def check_manifold_suite(M, num_random=5): 
+
+    yield check_enough_points, M
 
     points = M.interesting_points()
     
+
     if isinstance(M, RandomManifold):
         for i in range(num_random): #@UnusedVariable
             points.append(M.sample_uniform())
     
-    for p in points:
-        yield check_interesting_point_in_manifold, M, p
-    
-    for f in [check_friendly]:
+    one_point_functions = [check_friendly, check_interesting_point_in_manifold]
+    two_point_functions = [check_geodesic_consistency, check_logmap1, check_logmap3]
+     
+    for f in one_point_functions:
         for a in points:
             yield f, M, a
 
-    for f in [check_geodesic_consistency,
-              check_logmap1, check_logmap3
-              ]:
+    for f in two_point_functions:
         for a, b in itertools.product(points, points):
             yield f, M, a, b
 
-
-
-@attr('manifolds')
-def test_manifolds():
-    manifolds = [ 
+def manifolds_to_check():  
+# import warnings
+#    warnings.warn('Some checks disabled')
+    return  [ 
         SO3, SO2,
         R1, R2, R3,
         T1, T2, T3,
@@ -108,11 +114,35 @@ def test_manifolds():
         se2, se3,
         so2, so3,
         tran1, tran2, tran3,
-    ] 
+    ]  
     
 
-    
-    for M in manifolds:
+
+def test_dimensions():
+    x = [ 
+        (SO3, 3),
+        (SO2, 1),
+        (R1, 1),
+        (R2, 2),
+        (R3, 3),
+        (T1, 1), (T2, 2), (T3, 3),
+        (Tran1, 1), (Tran2, 2), (Tran3, 3),
+        (SE2, 3), (SE3, 6),
+        (S1, 1), (S2, 2),
+        (se2, 3), (se3, 6),
+        (so2, 1), (so3, 3),
+        (tran1, 1), (tran2, 2), (tran3, 3)
+    ] 
+  
+    for M, dim in x:
+        actual = M.get_dimension()
+        msg = 'Expected %d for %s, got %d ' % (dim, M, actual)
+        assert actual == dim, msg 
+
+
+@attr('manifolds')
+def test_manifolds():
+    for M in manifolds_to_check():
         #print('Testing %s' % M)
         for x in check_manifold_suite(M): yield x
 

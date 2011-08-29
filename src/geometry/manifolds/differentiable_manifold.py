@@ -15,6 +15,9 @@ class DifferentiableManifold(object):
         self.dimension = dimension
         
         self.atol_distance = 1e-8
+        
+        # Save reference, but do not create straight away.
+        self._tangent_bundle = None
     
     @abstractmethod
     @new_contract
@@ -25,8 +28,7 @@ class DifferentiableManifold(object):
             This function wraps some checks around :py:func:`belongs_`, 
             which is implemented by the subclasses. 
         '''
-        pass 
-    
+
     @new_contract
     @contract(bv='tuple(belongs, *)')
     def belongs_ts(self, bv):
@@ -34,10 +36,8 @@ class DifferentiableManifold(object):
             Checks that a vector *vx* belongs to the tangent space
             at the given point *base*.
 
-        '''
-        #printm('bv[0]', bv[0], 'bv[1]', bv[1])
-        bvp = self.project_ts(bv)
-        #printm('bv[0]', bv[0], 'bv[1]', bv[1])
+        ''' 
+        bvp = self.project_ts(bv) 
         assert_allclose(bv[1], bvp[1], atol=self.atol_distance) 
     
     @abstractmethod
@@ -46,35 +46,34 @@ class DifferentiableManifold(object):
         '''
             Projects a vector *v_ambient* in the ambient space
             to the tangent space at point *base*.
-
-            This function wraps some checks around :py:func:`project_ts_`, 
-            which is implemented by the subclasses. 
-        '''
+        ''' 
         
-    
     @abstractmethod
     @contract(a='belongs', b='belongs', returns='>=0')
     def distance(self, a, b):
         ''' 
-            Computes the geodesic distance between two points. 
-
-            This function wraps some checks around :py:func:`distance_`, 
-            which is implemented by the subclasses. 
+            Computes the geodesic distance between two points.  
         '''
 
-            
+    # @contract(returns='DifferentiableManifold') # Circular ref
+    def tangent_bundle(self):
+        ''' Returns the manifold corresponding to the tangent bundle. 
+            The default gives a generic implementation.
+            MatrixLieGroup have a different one. 
+        '''
+        if self._tangent_bundle is None:
+            from . import TangentBundle
+            self._tangent_bundle = TangentBundle(self)
+        return self._tangent_bundle 
+    
     @abstractmethod 
     @contract(base='belongs', p='belongs', returns='belongs_ts')
     def logmap(self, base, p):
         ''' 
-            Computes the logarithmic map from base point *base* to target *b*. 
-            
-            This function wraps some checks around :py:func:`logmap_`, 
-            which is implemented by the subclasses. 
-
+            Computes the logarithmic map from base point *base* to target *b*.  
             # XXX: what should we do in the case there is more than one logmap?
         '''
-        #return self.logmap_(base, p)
+
 
     @abstractmethod
     @contract(bv='belongs_ts', returns='belongs')
@@ -86,7 +85,6 @@ class DifferentiableManifold(object):
             which is implemented by the subclasses. 
             
         '''
-        #return self.expmap_(bv)
         
     @contract(returns='list(belongs)')
     def interesting_points(self):
@@ -105,7 +103,7 @@ class DifferentiableManifold(object):
     @contract(a='belongs')
     def friendly(self, a):
         ''' Returns a friendly description string for a point on the manifold. '''
-        return "%s" % a 
+        return a.__str__() 
     
     @contract(a='belongs', b='belongs')
     def assert_close(self, a, b, atol=1e-8, msg=None):
@@ -127,7 +125,7 @@ class DifferentiableManifold(object):
     Embedding = namedtuple('Embedding', 'A B A_to_B B_to_A steps type desc')
     
     @staticmethod
-    def isomorphism(A, B, A_to_B, B_to_A, type='user', steps=None, desc=None):
+    def isomorphism(A, B, A_to_B, B_to_A, itype='user', steps=None, desc=None):
         if A.dimension != B.dimension:
             msg = ('You are trying to define an isomorphism'
                     ' between manifolds of different dimension:\n'
@@ -137,11 +135,11 @@ class DifferentiableManifold(object):
           
         Iso = DifferentiableManifold.Isomorphism
         if steps is None: steps = [(A, '~', B)]
-        A._isomorphisms[B] = Iso(A, B, A_to_B, B_to_A, steps, type, desc)
-        B._isomorphisms[A] = Iso(B, A, B_to_A, A_to_B, steps, type, desc)
+        A._isomorphisms[B] = Iso(A, B, A_to_B, B_to_A, steps, itype, desc)
+        B._isomorphisms[A] = Iso(B, A, B_to_A, A_to_B, steps, itype, desc)
     
     @staticmethod
-    def embedding(A, B, A_to_B, B_to_A, type='user', steps=None, desc=None):
+    def embedding(A, B, A_to_B, B_to_A, itype='user', steps=None, desc=None):
         if A.dimension > B.dimension:
             msg = ('You are trying to define an embedding'
                     ' from a large to a smaller manifold:\n'
@@ -151,10 +149,12 @@ class DifferentiableManifold(object):
 
         Embed = DifferentiableManifold.Embedding
         if steps is None: steps = [(A, '=', B)]
-        A._embedding[B] = Embed(A, B, A_to_B, B_to_A, steps, type, desc)
-        B._projection[A] = Embed(B, A, B_to_A, A_to_B, steps, type, desc)
+        A._embedding[B] = Embed(A, B, A_to_B, B_to_A, steps, itype, desc)
+        B._projection[A] = Embed(B, A, B_to_A, A_to_B, steps, itype, desc)
   
-        if development:
+        # TODO: move somewhere
+        if False:
+        #if development:
             try:
                 for a in A.interesting_points():
                     A.belongs(a)
@@ -234,10 +234,13 @@ class DifferentiableManifold(object):
     def embeddable_in(self, manifold):
         return manifold in self._embedding
     
+    def get_dimension(self):
+        ''' Returns the intrinsic dimension of this manifold. '''
+        return self.dimension
     
 class RandomManifold(DifferentiableManifold):
     ''' This is the base class for manifolds that have the ability 
-        to sample points and vectors. '''
+        to sample random points. '''
         
     @abstractmethod
     def sample_uniform(self):
@@ -245,6 +248,7 @@ class RandomManifold(DifferentiableManifold):
             measure. Raises exception if the measure is improper (e.g., R^n). '''
     
     @abstractmethod
+    @contract(a='belongs')
     def sample_velocity(self, a):
         ''' Samples a random velocity with length 1 at the base point a'''
         

@@ -12,11 +12,11 @@ from geometry.spheres import normalize_pi
 
     
 def embedding(small, big, embed_in, project_from, desc=None):
-    DifferentiableManifold.embedding(small, big, embed_in, project_from, type='user',
+    DifferentiableManifold.embedding(small, big, embed_in, project_from, itype='user',
                                      desc=desc)
 
 def isomorphism(A, B, a_to_b, b_to_a, desc=None):
-    DifferentiableManifold.isomorphism(A, B, a_to_b, b_to_a, type='user', desc=desc)
+    DifferentiableManifold.isomorphism(A, B, a_to_b, b_to_a, itype='user', desc=desc)
 
 embedding(R1, R2, lambda a: np.array([a[0], 0]),
               lambda b: np.array([b[0]]))
@@ -57,22 +57,7 @@ embedding(T2, T3, lambda a: np.array([a[0], a[1], 0]),
 # TODO: more tori?
 embedding(T1, R1, lambda x: x, lambda x: T1.normalize(x)) 
 embedding(T2, R2, lambda x: x, lambda x: T2.normalize(x))
-embedding(T3, R3, lambda x: x, lambda x: T3.normalize(x))
-    
-#
-#isomorphism(Tran1, R1, lambda x: x[0:1, -1],
-#                lambda b: np.array([[1, b[0]], [0, 1]]))
-#
-#isomorphism(Tran2, R2, lambda x: x[0:2, -1],
-#                lambda b: np.array([[1, 0, b[0]],
-#                                    [0, 1, b[1]],
-#                                    [0, 0, 1.0]]))
-#
-#isomorphism(Tran3, R3, lambda x: x[0:3, -1],
-#                lambda b: np.array([[1, 0, 0, b[0]],
-#                                    [0, 1, 0, b[1]],
-#                                    [0, 0, 1, b[2]],
-#                                    [0, 0, 0, 1]]))
+embedding(T3, R3, lambda x: x, lambda x: T3.normalize(x)) 
 
 embedding(tran1, tran2, lambda b: np.array([[0, 0, b[0, -1]],
                                          [0, 0, 0],

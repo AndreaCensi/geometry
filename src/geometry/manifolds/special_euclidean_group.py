@@ -2,8 +2,8 @@ from . import DifferentiableManifold, MatrixLieGroup, np, SO, se, R
 from .. import (assert_allclose, pose_from_rotation_translation,
     rotation_translation_from_pose, extract_pieces, se2_from_SE2, SE2_from_se2,
     SE2_from_translation_angle, SE2_from_xytheta)
-from contracts import contract
-from contracts.interface import describe_value
+from contracts import contract, describe_value
+from geometry.poses import SE3_from_SE2
 
 
 class SE_group(MatrixLieGroup):
@@ -25,17 +25,19 @@ class SE_group(MatrixLieGroup):
         dimension = {2:3, 3:6}[N]
         MatrixLieGroup.__init__(self, n=N + 1, algebra=algebra, dimension=dimension)
         
-        DifferentiableManifold.embedding(self, algebra,
-                                          self.algebra_from_group,
-                                    self.group_from_algebra,
-                                    type='lie')
+        DifferentiableManifold.embedding(self,
+                                         algebra,
+                                         self.algebra_from_group,
+                                         self.group_from_algebra,
+                                         itype='lie')
 
     def __repr__(self):
-        #return 'SE(%s)' % (self.n - 1)
         return 'SE%s' % (self.n - 1)
     
+    @contract(x='array[NxN]')
     def belongs(self, x):
         # TODO: more checks
+        assert x.shape == (self.n, self.n)
         R, t, zero, one = extract_pieces(x) #@UnusedVariable
         self.SOn.belongs(R)
         assert_allclose(zero, 0, err_msg='I expect the lower row to be 0.') 
@@ -53,26 +55,6 @@ class SE_group(MatrixLieGroup):
     
     # TODO: make explicit inverse
     # TODO: make specialization for SE(3)
-#    def logmap_(self, base, target):
-#        ''' Uses special form for logarithmic map. '''
-#        if self.n == 3:
-#            diff = self.multiply(self.inverse(base), target)
-#            X = se2_from_SE2(diff)            
-#            X = self.algebra.project(X)
-#            return np.dot(base, X)
-#        else:
-#            return MatrixLieGroup.logmap_(self, base, target)
-#    
-#    def expmap_(self, base, vel):
-#        ''' Uses special form for exponential map. '''
-#        if self.n == 3:
-#            tv = np.dot(self.inverse(base), vel)
-#            tv = self.algebra.project(tv)
-#            x = SE2_from_se2(tv)
-#            return np.dot(base, x)
-#        else: #
-#            return MatrixLieGroup.expmap_(self, base, vel)
-
     def group_from_algebra(self, g):
         if self.n == 3:
             return SE2_from_se2(g)
@@ -87,17 +69,24 @@ class SE_group(MatrixLieGroup):
         
     def interesting_points(self):
         if self.n == 3:
-            interesting = [
+            return [
                 SE2_from_translation_angle([0, 0], 0),
                 SE2_from_translation_angle([0, 0], 0.1),
                 SE2_from_translation_angle([0, 0], -0.1),
                 SE2_from_translation_angle([1, 0.1], 0),
             ]
+        elif self.n == 4:
+            # TODO: better implementation
+            return [
+                SE3_from_SE2(SE2_from_translation_angle([0, 0], 0)),
+                SE3_from_SE2(SE2_from_translation_angle([0, 0], 0.1)),
+                SE3_from_SE2(SE2_from_translation_angle([0, 0], -0.1)),
+                SE3_from_SE2(SE2_from_translation_angle([1, 0.1], 0)),
+            ]
         else:
-            # TODO: implement for SE3
-            interesting = []
-        return interesting
+            assert False
 
+    # FIXME: this old interface must be removed
     def from_yaml(self, value):
         ''' Parses from yaml value. '''
         if self.n == 3: # SE2

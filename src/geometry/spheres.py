@@ -32,14 +32,19 @@ def assert_orthogonal(s, v):
                % (np.degrees(angle), s, v)) 
         assert_allclose(dot, 0, err_msg=msg)
     
-@contract(x='array[N]', returns='array')
+@contract(x='array[N]', returns='array[N](>=-pi,<pi)')
 def normalize_pi(x):
     ''' Normalizes the entries in *x* in the interval :math:`[-pi,pi)`. '''
-    x = np.array(x)
     angle = np.arctan2(np.sin(x), np.cos(x)) # in [-pi, pi]
     angle[angle == np.pi] = -np.pi
     return angle
 
+@contract(x='float', returns='>=-pi,<pi')
+def normalize_pi_scalar(x): # TODO: is this the best solution
+    angle = np.arctan2(np.sin(x), np.cos(x)) # in [-pi, pi]
+    if angle == np.pi:
+        return -np.pi
+    return angle
 
 @contract(returns='direction')
 def default_axis(): 
@@ -230,8 +235,8 @@ def sorted_directions(S, num_around=15):
         center = np.arctan2(S[1, :].sum(), S[0, :].sum()) 
         angles = np.arctan2(S[1, :], S[0, :])
         diffs = normalize_pi(angles - center)
-        sorted = np.sort(diffs)
-        final = center + sorted
+        sorted_d = np.sort(diffs)
+        final = center + sorted_d
         return np.vstack((np.cos(final), np.sin(final)))
     else:
         # find center of distribution

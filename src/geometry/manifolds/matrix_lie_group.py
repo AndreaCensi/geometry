@@ -1,30 +1,6 @@
-from . import MatrixLinearSpace, np, DifferentiableManifold, Group, contract
+from . import np, DifferentiableManifold, Group, contract
 from .. import logm, expm
 from contracts import new_contract
-
-class MatrixLieAlgebra(MatrixLinearSpace):
-    ''' This is the base class for Matrix Lie Algebra.
-    
-        It is understood that it is composed by square matrices.
-        
-        The only function that *has* to be implemented is the 
-        :py:func:`project` function that projects a square matrix
-        onto the algebra. This function is used both for checking
-        that a vector is in the algebra (see :py:func:`belongs`)
-        and to mitigate the numerical errors.
-        
-        You probably also want to implement :py:func:`norm` if
-        the default is not what you want.  
-    ''' 
-    
-    
-    def __init__(self, n, dimension):
-        MatrixLinearSpace.__init__(self, dimension=dimension,
-                                   shape=(n, n))
-        self.n = n
-    
-
-    # TODO: bracket
 
 
 class MatrixLieGroup(Group, DifferentiableManifold):
@@ -49,13 +25,25 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         self.n = n
         self.algebra = algebra
         assert self.algebra.n == self.n
+
+        from . import MatrixLieGroupTangent
+        self._tangent_bundle_algebra_rep = MatrixLieGroupTangent(self)
         
+    def tangent_bundle(self):
+        return  self._tangent_bundle_algebra_rep
+    
+    def get_algebra(self):
+        ''' Returns the interface to the corresponding Lie algebra. '''
+        return self.algebra
+    
     def unity(self):
         return np.eye(self.n)
 
     def multiply(self, g, h):
         return np.dot(g, h)
     
+    
+    @contract(g='belongs')
     def inverse(self, g):
         return np.linalg.inv(g)
 
@@ -109,7 +97,6 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         diff = self.multiply(self.inverse(base), target)
         X = self.algebra_from_group(diff)
         bX = np.dot(base, X)
-        #printm('base', base, 'target', target, 'X', X, 'bX', bX)
         return (base, bX)
 
     @contract(bv='belongs_ts', returns='belongs')
@@ -161,5 +148,4 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         xt = self.algebra.project(xt)
         return a, xt / delta
 
-    
     

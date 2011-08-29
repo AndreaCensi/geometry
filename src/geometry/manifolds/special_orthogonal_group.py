@@ -14,18 +14,18 @@ class SO_group(MatrixLieGroup):
     @contract(N='int,(2|3)')
     def __init__(self, N):
         algebra = so[N]
-        dimension = {2:1, 3:2}[N]
+        dimension = {2:1, 3:3}[N]
         MatrixLieGroup.__init__(self, n=N, algebra=algebra, dimension=dimension)
         DifferentiableManifold.embedding(self, algebra,
                                           self.algebra_from_group,
                                     self.group_from_algebra,
-                                    type='lie')
+                                    itype='lie')
 
     def __repr__(self):
         return 'SO%s' % (self.n)
     
     def belongs(self, x):
-        check('orthogonal', x)
+        check('array[NxN],orthogonal', x, N=self.n)
         det = np.linalg.det(x)
         assert_allclose(det, 1, err_msg='I expect the determinant to be +1.') 
 
@@ -68,3 +68,5 @@ class SO_group(MatrixLieGroup):
             points.append(rotation_from_axis_angle(np.array([1, 0, 0]), np.pi))
     
         return points
+    
+            

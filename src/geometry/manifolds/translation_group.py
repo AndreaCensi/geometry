@@ -16,7 +16,7 @@ class Tran(MatrixLieGroup):
         DifferentiableManifold.isomorphism(self, algebra,
                             self.algebra_from_group,
                             self.group_from_algebra,
-                            type='lie')
+                            itype='lie')
 
         
     def __repr__(self):

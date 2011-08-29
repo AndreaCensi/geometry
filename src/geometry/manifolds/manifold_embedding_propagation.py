@@ -80,10 +80,10 @@ def create_isomorphisms(isomorphisms):
             # also create embedding
             if len(steps) == 1:
                 DifferentiableManifold.embedding(
-                   m1, m2, m1_to_m2, m2_to_m1, type='isomorphism', steps=steps, desc=desc)
+                   m1, m2, m1_to_m2, m2_to_m1, itype='isomorphism', steps=steps, desc=desc)
                 continue
             DifferentiableManifold.isomorphism(
-               m1, m2, m1_to_m2, m2_to_m1, type='derived', steps=steps, desc=desc)
+               m1, m2, m1_to_m2, m2_to_m1, itype='derived', steps=steps, desc=desc)
 
 def create_embeddings(embeddings):
     for m1 in embeddings:
@@ -95,7 +95,7 @@ def create_embeddings(embeddings):
             m2_to_m1 = steps2function(reverse_steps(steps))
             desc = str(steps)
             DifferentiableManifold.embedding(
-               m1, m2, m1_to_m2, m2_to_m1, type='derived', steps=steps, desc=desc)
+               m1, m2, m1_to_m2, m2_to_m1, itype='derived', steps=steps, desc=desc)
 
 def reverse_steps(steps):
     def reverse_step(step):

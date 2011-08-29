@@ -29,10 +29,21 @@ class tran(MatrixLieAlgebra):
         points.append(self.zero())
         return points
 
-    def from_vector(self, v):
-        # XXX: untested
+    # def from_vector(self, v):
+       
+    @contract(a='belongs')
+    def vector_from_algebra(self, a):
+        W, v, zero, zero = extract_pieces(a) #@UnusedVariable
+        if v.shape == ():
+            v = v.reshape(1)
+        assert v.size == self.n - 1
+        return v
+
+    @contract(returns='belongs', v='array[K]')
+    def algebra_from_vector(self, v):
         assert v.size == self.n - 1
         return combine_pieces(np.zeros((self.n - 1, self.n - 1)), v, v * 0, 0)
+      
 #        
 #def from_vector(self, t):
 #        # XXX: untested
