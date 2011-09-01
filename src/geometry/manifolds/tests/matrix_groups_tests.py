@@ -1,6 +1,5 @@
-from geometry import MatrixLieGroup, all_manifolds
+from geometry import MatrixLieGroup
 from nose.plugins.attrib import attr
-from contracts.main import check
 from geometry.manifolds.tests.manifold_tests import manifolds_to_check
 
 def check_matrix_group_1(M):

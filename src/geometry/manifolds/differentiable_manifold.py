@@ -1,4 +1,4 @@
-from .. import assert_allclose, formatm, development, printm
+from .. import assert_allclose, formatm, printm
 from abc import ABCMeta, abstractmethod
 from collections import namedtuple
 from contracts import contract
