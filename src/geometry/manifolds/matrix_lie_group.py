@@ -144,8 +144,9 @@ class MatrixLieGroup(Group, DifferentiableManifold):
             *delta* time. 
         '''
         x = self.multiply(self.inverse(a), b)
-        xt = self.logmap(self.unity(), x) # XXX
-        xt = self.algebra.project(xt)
-        return a, xt / delta
+        xt = self.algebra_from_group(x)
+#        xt = self.logmap(self.unity(), x) # XXX
+#        xt = self.algebra.project(xt)
+        return self.identity(), xt / delta
 
     
