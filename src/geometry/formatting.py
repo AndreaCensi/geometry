@@ -8,7 +8,7 @@ def printm(*args):
     print(formatm(*args))
     
 
-def formatm(*args):
+def formatm(*args, **kwargs):
     #name_len = 10
     assert len(args) > 0
     assert len(args) % 2 == 0
@@ -24,7 +24,7 @@ def formatm(*args):
         if  isinstance(matrix, np.ndarray):
 #            raise ValueError('I expect a numpy array for value, not %s.' % 
 #                             describe_type(matrix))
-            value = format_matrix(matrix)
+            value = format_matrix(matrix, **kwargs)
             if matrix.ndim > 1:
                 varname = '\n' + varname 
         else:
@@ -64,13 +64,13 @@ def join_columns(cols):
         s += srow + '\n'
     return s
     
-def format_matrix(matrix, fsize=8):
+def format_matrix(matrix, fsize=8, format_str='%g'):
     if matrix.ndim == 2:
         nrows, ncols = matrix.shape
         cols = [ [] for i in range(ncols) ] #@UnusedVariable
         for j in range(ncols):
             for i in range(nrows):
-                s = ' %g' % matrix[i, j]
+                s = (' ' + format_str) % matrix[i, j]
                 cols[j].append(s)
         cols = [ "\n".join(col) for col in cols]
         borders = "\n".join(["|" for i in range(nrows)])
