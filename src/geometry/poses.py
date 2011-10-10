@@ -204,11 +204,12 @@ def SE2_from_SE3(pose, check_exact=True):
         err_msg = 'I expect that z=0 when projecting to SE2 (check_exact=True).'
         assert_allclose(translation[2], 0, err_msg=err_msg)
         # normalize angle z
-        axis *= np.sign(axis[2])
+        axis2 = axis * np.sign(axis[2])
         err_msg = ('I expect that the rotation is around [0,0,1] '
                   'when projecting to SE2 (check_exact=True).')
-        assert_allclose(axis, [0, 0, 1], err_msg=err_msg)
+        assert_allclose(axis2, [0, 0, 1], err_msg=err_msg)
     
+    angle = angle * np.sign(axis[2])
     return SE2_from_translation_angle(translation[0:2], angle)
     
     
