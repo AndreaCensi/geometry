@@ -1,6 +1,7 @@
-__version__ = '0.12.0dev'
+__version__ = '1.0'
+
 # If True, additional checks are done at runtime
-development = True
+development = False
 
 # If you want to be safe
 # import numpy as np
