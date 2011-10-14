@@ -85,9 +85,11 @@ def angle_from_SO2(R):
         angle = -np.pi
     return angle
 
+@contract(omega='float', returns='so2')
 def hat_map_2d(omega):
     return np.array([[0, -1], [+1, 0]]) * omega
 
+@contract(W='so2', returns='float')
 def map_hat_2d(W):
     return W[1, 0]
 

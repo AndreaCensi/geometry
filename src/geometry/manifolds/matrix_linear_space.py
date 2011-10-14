@@ -36,8 +36,12 @@ class MatrixLinearSpace(DifferentiableManifold):
     def logmap(self, base, target):
         return base, target - base
         
+    @contract(x='array')
     def belongs(self, x):
-        check('shape(x)', x, x=self.shape)
+        if x.shape != self.shape:
+            raise ValueError('Expected shape %r, not %r.' % 
+                             (self.shape, x.shape))
+
         assert np.all(np.isreal(x)), "Expected real vector" # TODO: make contract
         proj = self.project(x)
         assert_allclose(proj, x, atol=1e-8) # XXX: tol

@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '1.0'
+version = '1.1'
 
 setup(name='PyGeometry',
       version=version,
@@ -14,7 +14,7 @@ setup(name='PyGeometry',
       package_dir={'':'src'},
       packages=find_packages('src'),
       install_requires=['PyContracts>=1.2,<2'],
-      extras_require = {
+      extras_require={
         'algorithms':  ["scipy"],
       },
       download_url='http://github.com/AndreaCensi/geometry/tarball/%s' % version,
