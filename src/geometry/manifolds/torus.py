@@ -1,7 +1,6 @@
-from contracts import check
-from . import DifferentiableManifold, np 
+from . import DifferentiableManifold, np, contract
 from .. import normalize_pi
-from . import contract
+from contracts import check
 
 class Torus(DifferentiableManifold):
 

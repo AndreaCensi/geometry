@@ -52,7 +52,7 @@ def inner_product_embedding_slow(C, ndim):
                      ('array[NxN]', V) ])
     coords = V[:ndim, :]
     for i in range(ndim):
-        coords[i, :] = coords[i, :]  * np.sqrt(S[i])
+        coords[i, :] = coords[i, :] * np.sqrt(S[i])
     return coords
 
 @contract(C='array[NxN]', ndim='int,>0,K', returns='array[KxN]')
@@ -66,13 +66,13 @@ def inner_product_embedding(C, ndim):
                      ('array[K]', S)  ])
     coords = V.T
     for i in range(ndim):
-        coords[i, :] = coords[i, :]  * np.sqrt(S[i])
+        coords[i, :] = coords[i, :] * np.sqrt(S[i])
     return coords
 
 
 def truncated_svd_randomized(M, k):
     ''' Truncated SVD based on randomized projections. '''
-    p = k + 5
+    p = k + 5 # TODO: add parameter
     Y = np.dot(M, np.random.normal(size=(M.shape[1], p)))
     Q, r = np.linalg.qr(Y) #@UnusedVariable
     B = np.dot(Q.T, M)
@@ -89,7 +89,7 @@ def inner_product_embedding_randomized(C, ndim):
                      ('array[K]', S)  ])
     coords = V
     for i in range(ndim):
-        coords[i, :] = coords[i, :]  * np.sqrt(S[i])
+        coords[i, :] = coords[i, :] * np.sqrt(S[i])
     return coords
 
 @contract(D='array[MxM](>=0)', ndim='K,int,>=1', returns='array[KxM]')

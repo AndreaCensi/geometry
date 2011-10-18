@@ -1,8 +1,7 @@
 from . import (SE3_from_rotation_translation, combine_pieces, extract_pieces,
     contract, np, SE2_from_rotation_translation, rotation_translation_from_SE2,
-    rotation_translation_from_SE3, hat_map, map_hat_2d)
-from geometry.rotations_embedding import SO2_project_from_SO3, \
-    so2_project_from_so3, so3_from_so2
+    rotation_translation_from_SE3, hat_map, map_hat_2d, SO2_project_from_SO3,
+    so2_project_from_so3, so3_from_so2)
 
 @contract(returns='SE2', a='SO2')
 def SE2_from_SO2(a):

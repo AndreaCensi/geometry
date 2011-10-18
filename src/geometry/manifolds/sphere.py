@@ -1,13 +1,9 @@
+from . import DifferentiableManifold, np, contract, check
+from .. import (any_orthogonal_direction, geodesic_distance_on_sphere,
+    random_direction, normalize_length, normalize_length_or_zero,
+    rotation_from_axis_angle, rot2d)
 from numpy.core.numeric import outer
 
-from .. import (geodesic_distance_on_sphere,
-                      random_direction, normalize_length,
-                      normalize_length_or_zero,
-                      rotation_from_axis_angle, rot2d)
-
-
-from . import DifferentiableManifold, np, contract, check
-from ..  import any_orthogonal_direction 
                           
 class Sphere(DifferentiableManifold):
     ''' These are hyperspheres of unit radius. '''

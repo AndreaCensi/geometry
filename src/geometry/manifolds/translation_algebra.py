@@ -1,7 +1,5 @@
-from . import np, MatrixLieAlgebra
-from contracts import contract
+from . import np, MatrixLieAlgebra, contract
 from .. import extract_pieces, combine_pieces
-
 
 
 class tran(MatrixLieAlgebra):
@@ -28,8 +26,6 @@ class tran(MatrixLieAlgebra):
         points = []
         points.append(self.zero())
         return points
-
-    # def from_vector(self, v):
        
     @contract(a='belongs')
     def vector_from_algebra(self, a):
@@ -43,9 +39,4 @@ class tran(MatrixLieAlgebra):
     def algebra_from_vector(self, v):
         assert v.size == self.n - 1
         return combine_pieces(np.zeros((self.n - 1, self.n - 1)), v, v * 0, 0)
-      
-#        
-#def from_vector(self, t):
-#        # XXX: untested
-#        return combine_pieces(np.eye(self.n - 1), t, t * 0, 0)
-#    
+       

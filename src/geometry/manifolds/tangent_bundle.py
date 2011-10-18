@@ -1,5 +1,4 @@
-from contracts import contract
-from . import DifferentiableManifold
+from . import DifferentiableManifold, contract
         
 class TangentBundle(DifferentiableManifold):
     ''' This class represents the tangent bundle of a generic manifold

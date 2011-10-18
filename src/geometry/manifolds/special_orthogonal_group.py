@@ -1,7 +1,7 @@
-from . import DifferentiableManifold, MatrixLieGroup, np, S2, so
+from . import DifferentiableManifold, MatrixLieGroup, np, S2, so, contract
 from .. import (assert_allclose, rot2d, random_rotation, axis_angle_from_rotation,
     rotation_from_axis_angle)
-from contracts import contract, check
+from contracts import check
 
 
 class SO_group(MatrixLieGroup):
@@ -9,6 +9,7 @@ class SO_group(MatrixLieGroup):
         This is the Special Orthogonal group SO(n) describing rotations
         of Euclidean space; implemented for n=2,3.
         
+        TODO: do SO2 and SO3 separately
     '''
     
     @contract(N='int,(2|3)')
@@ -25,6 +26,7 @@ class SO_group(MatrixLieGroup):
         return 'SO%s' % (self.n)
     
     def belongs(self, x):
+        # TODO: make this much more efficient
         check('array[NxN],orthogonal', x, N=self.n)
         det = np.linalg.det(x)
         assert_allclose(det, 1, err_msg='I expect the determinant to be +1.') 
@@ -49,7 +51,7 @@ class SO_group(MatrixLieGroup):
             axisf = S2.friendly(axis)
             return 'Rot(%.1fdeg, %s)' % (np.degrees(angle), axisf)
         else:
-            assert False, 'Not implemented for n>=4.'
+            raise ValueError('Not implemented for n>=4.')
         
     @contract(returns='list(belongs)')
     def interesting_points(self):

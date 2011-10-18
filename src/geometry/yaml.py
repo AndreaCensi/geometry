@@ -1,5 +1,6 @@
-# TODO:
+
 import numpy as np 
+from geometry.manifolds import DifferentiableManifold
 #
 #def array_to_lists(x):
 #    return x.tolist()
@@ -32,7 +33,15 @@ def register(manifold_name, representation, converter):
     converters[key] = converter
     
 def get_default_representation(manifold):
-    return default_representation[manifold]
+    if isinstance(manifold, DifferentiableManifold):
+        key = str(manifold)
+    else:
+        key = manifold
+            
+    if not key in default_representation:
+        raise Exception('Cannot find representation for %s.' % manifold)
+    
+    return default_representation[key]
 
 def to_yaml(manifold, value, representation=None):
     if representation is None:

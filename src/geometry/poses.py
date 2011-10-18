@@ -212,7 +212,4 @@ def SE2_from_SE3(pose, check_exact=True):
     angle = angle * np.sign(axis[2])
     return SE2_from_translation_angle(translation[0:2], angle)
     
-    
-    
-
 

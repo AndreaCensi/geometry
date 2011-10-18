@@ -1,5 +1,4 @@
-from . import DifferentiableManifold, MatrixLieGroup
-from contracts import contract
+from . import DifferentiableManifold, MatrixLieGroup, contract
         
 class MatrixLieGroupTangent(DifferentiableManifold):
     ''' This class represents the tangent bundle of a matrix Lie group
