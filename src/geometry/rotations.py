@@ -27,6 +27,7 @@ def SO(x):
 @new_contract
 @contract(x='array[NxN],N>0')
 def orthogonal(x):
+    ''' Check that the argument is an orthogonal matrix. '''
     N = x.shape[0]
     I = eye(N) 
     rtol = 10E-10 # XXX:
@@ -37,6 +38,7 @@ def orthogonal(x):
 @new_contract
 @contract(x='array[NxN]')
 def skew_symmetric(x):
+    ''' Check that the argument is a skew-symmetric matrix. '''
     n = x.shape[0]
     ok = (zeros((n, n)) == x).all()
     if not ok:
@@ -85,7 +87,7 @@ def angle_from_SO2(R):
         angle = -np.pi
     return angle
 
-@contract(omega='float', returns='so2')
+@contract(omega='number', returns='so2')
 def hat_map_2d(omega):
     return np.array([[0, -1], [+1, 0]]) * omega
 

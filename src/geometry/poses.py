@@ -85,7 +85,7 @@ def translation_from_SE2(pose):
 @contract(pose='SE3')
 def translation_from_SE3(pose):
     # TODO: make it more efficient
-    R, t, zero, one = extract_pieces(pose) #@UnusedVariable
+    _, t, _, _ = extract_pieces(pose) 
     return t
 
     
@@ -97,8 +97,15 @@ def SE2_from_translation_angle(t, theta):
 
 @contract(pose='SE2', returns='tuple(array[2],float)')
 def translation_angle_from_SE2(pose):
-    R, t, zero, one = extract_pieces(pose) #@UnusedVariable
+    R, t, _, _ = extract_pieces(pose) 
     return t, angle_from_rot2d(R)
+
+@contract(pose='SE2', returns='float')
+def angle_from_SE2(pose):
+    # XXX: untested
+    R, _, _, _ = extract_pieces(pose) 
+    return angle_from_rot2d(R)
+
 
 # TODO: write tests for this, and other function
 @contract(xytheta='array[3]|seq[3](number)', returns='SE2')
