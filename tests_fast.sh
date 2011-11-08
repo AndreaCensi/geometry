@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
 set -x
-nosetests -a '!density' -w src $*
+nosetests --with-id --progressive -a '!density' -w src $*

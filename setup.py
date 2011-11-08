@@ -17,5 +17,7 @@ setup(name='PyGeometry',
       extras_require={
         'algorithms':  ["scipy"],
       },
+      setup_requires=['nose>=1.0'],
+      tests_require=['nose>=1.0', 'rudolf', 'nose-progressive', 'nose-cov'],
       download_url='http://github.com/AndreaCensi/geometry/tarball/%s' % version,
 )
