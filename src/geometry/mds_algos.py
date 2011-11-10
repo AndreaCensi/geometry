@@ -55,11 +55,13 @@ def inner_product_embedding_slow(C, ndim):
         coords[i, :] = coords[i, :] * np.sqrt(S[i])
     return coords
 
-@contract(C='array[NxN]', ndim='int,>0,K', returns='array[KxN]')
+@contract(C='array[NxN]', ndim='int,>1,K', returns='array[KxN]')
 def inner_product_embedding(C, ndim): 
     n = C.shape[0]
     eigvals = (n - ndim, n - 1)
     S, V = eigh(C, eigvals=eigvals)
+    
+    assert S[0] <= S[1] # eigh returns in ascending order 
     
     check_multiple([ ('K', ndim),
                      ('array[NxK]', V),
