@@ -7,3 +7,4 @@ dist
 src/coverage_information
 *.egg
 .noseids
+coverage_information
