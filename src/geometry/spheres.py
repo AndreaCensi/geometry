@@ -2,6 +2,7 @@ from . import (cos, sin, pi, sqrt, arccos, clip, safe_arccos, normalize_length,
                contract, new_contract, assert_allclose, np, dot, norm,
                array, uniform, vstack, argmin)
 
+
 @new_contract
 @contract(x='array[N],N>0')
 def unit_length(x):
@@ -13,13 +14,13 @@ new_contract('direction', 'array[3], unit_length')
 new_contract('S1', 'array[2],unit_length')
 new_contract('S2', 'array[3],unit_length')
 
+
 @new_contract
 @contract(X='array[KxN],K>0,N>0')
 def directions(X):
     ''' Checks that every column has unit length. '''
     norm = (X * X).sum(axis=0)
-    assert_allclose(1, norm , rtol=1e-5) # XXX:
-        
+    assert_allclose(1, norm, rtol=1e-5) # XXX:
 
 
 @contract(s='array[K],K>=2', v='array[K]')
@@ -28,16 +29,18 @@ def assert_orthogonal(s, v):
     dot = (v * s).sum()
     if not np.allclose(dot, 0):
         angle = np.arccos(dot / (norm(v) * norm(s)))
-        msg = ('Angle is %.2f deg between %s and %s.' 
-               % (np.degrees(angle), s, v)) 
+        msg = ('Angle is %.2f deg between %s and %s.'
+               % (np.degrees(angle), s, v))
         assert_allclose(dot, 0, err_msg=msg)
-    
+
+
 @contract(x='array[N]', returns='array[N](>=-pi,<pi)')
 def normalize_pi(x):
     ''' Normalizes the entries in *x* in the interval :math:`[-pi,pi)`. '''
     angle = np.arctan2(np.sin(x), np.cos(x)) # in [-pi, pi]
     angle[angle == np.pi] = -np.pi
     return angle
+
 
 @contract(x='float', returns='>=-pi,<pi')
 def normalize_pi_scalar(x): # TODO: is this the best solution
@@ -46,8 +49,9 @@ def normalize_pi_scalar(x): # TODO: is this the best solution
         return -np.pi
     return angle
 
+
 @contract(returns='direction')
-def default_axis(): 
+def default_axis():
     ''' 
         Returns the axis to use when any will do. 
         
@@ -56,7 +60,8 @@ def default_axis():
         representation is requested, the axis will be given by
         *default_axis()*. 
     '''
-    return  array([0.0, 0.0, 1.0])
+    return array([0.0, 0.0, 1.0])
+
 
 @contract(returns='direction')
 def default_axis_orthogonal():
@@ -65,14 +70,16 @@ def default_axis_orthogonal():
         by :py:func:`default_axis`. 
         
         Use this when you need a couple of arbitrary orthogonal axes.
-    '''  
-    return  array([0.0, 1.0, 0.0])
+    '''
+    return array([0.0, 1.0, 0.0])
+
 
 @contract(s1='array[K],unit_length',
            s2='array[K],unit_length', returns='float,>=0,<=pi')
 def geodesic_distance_on_sphere(s1, s2):
     ''' Returns the geodesic distance between two points on the sphere. '''
-    # special case: return a 0 (no precision issues) if the vectors are the same
+    # special case: return a 0 (no precision issues) 
+    # if the vectors are the same
     if (s1 == s2).all(): return 0.0
     dot_product = (s1 * s2).sum()
     return safe_arccos(dot_product)
@@ -90,7 +97,7 @@ def distribution_radius(S):
     '''
     D = arccos(clip(dot(S.T, S), -1, 1))
     distances = D.max(axis=0)
-    center = argmin(distances) 
+    center = argmin(distances)
     return distances[center]
 
 
@@ -103,8 +110,8 @@ def distances_from(S, s):
         
     '''
     return arccos(clip(dot(s, S), -1, 1))
-    
-    
+
+
 @contract(ndim='(2|3),K', returns='array[K],unit_length')
 def random_direction(ndim=3):
     '''
@@ -122,7 +129,7 @@ def random_direction(ndim=3):
     elif ndim == 2:
         theta = uniform(0, 2 * pi)
         return array([cos(theta), sin(theta)])
-        
+
     else: assert False, 'Not implemented'
 
 @contract(N='int,>0,N', ndim="2|3", returns='array[3xN]')
@@ -136,7 +143,7 @@ def any_distant_direction(s):
     z = default_axis()
     d = geodesic_distance_on_sphere(s, z)
     # TODO: make this a global parameter
-    limit = 1.0 / 6.0 * pi 
+    limit = 1.0 / 6.0 * pi
     if min(d, pi - d) < limit:
         z = default_axis_orthogonal()
     return z
@@ -171,11 +178,11 @@ def random_orthogonal_direction(s):
         z2 = np.dot(R, z)
         return z2
     else: assert False, 'Not implemented'
-    
-    
+
+
 @contract(s1='array[K],unit_length', s2='array[K],unit_length', t='number,>=0,<=1')
 def slerp(s1, s2, t):
-    ''' Spherical interpolation between two points on a hypersphere. '''    
+    ''' Spherical interpolation between two points on a hypersphere. '''
     omega = arccos(dot(s1 / norm(s1), s2 / norm(s2)))
     so = sin(omega)
     if np.abs(so) < 1e-18: # XXX thresholds
@@ -200,7 +207,7 @@ def random_directions_bounded(ndim, radius, num_points, center=None):
 
     if center is None:
         center = random_direction(ndim)
-        
+
     directions = np.empty((ndim, num_points))
     for i in range(num_points):
         # move the center of a random amount 
@@ -216,7 +223,7 @@ def random_directions_bounded(ndim, radius, num_points, center=None):
         else: assert False
         direction = np.dot(R, center)
         directions[:, i] = direction
-        
+
     return sorted_directions(directions)
 
 @contract(S='array[KxN],(K=2|K=3),directions', returns='array[KxN], directions')
@@ -232,7 +239,7 @@ def sorted_directions(S, num_around=15):
     '''
     if S.shape[0] == 2:
         # XXX check nonzero
-        center = np.arctan2(S[1, :].sum(), S[0, :].sum()) 
+        center = np.arctan2(S[1, :].sum(), S[0, :].sum())
         angles = np.arctan2(S[1, :], S[0, :])
         diffs = normalize_pi(angles - center)
         sorted_d = np.sort(diffs)
@@ -249,16 +256,16 @@ def sorted_directions(S, num_around=15):
         # normalize distances and phase in [0,1]
         phase = (normalize_pi(phase) + pi) / (2 * pi)
         distance /= distance.max()
-        
+
         score = distance * num_around + phase
-        
+
         order = np.argsort(score)
-        
+
         ordered = S[:, order]
         return ordered
-    
+
 def sphere_area(r=1):
-    ''' Returns the area of a sphere of the given radius. ''' 
+    ''' Returns the area of a sphere of the given radius. '''
     return 4 * pi * (r ** 2)
 
 def spherical_cap_area(cap_radius):

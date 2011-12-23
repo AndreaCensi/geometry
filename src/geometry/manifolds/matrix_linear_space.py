@@ -3,8 +3,9 @@ from .. import assert_allclose
 from abc import abstractmethod
 from contracts import check
 
+
 class MatrixLinearSpace(DifferentiableManifold):
-    
+
     @contract(dimension='int,>0')
     def __init__(self, dimension, shape):
         ''' Note dimension is the intrinsic dimension. '''
@@ -22,42 +23,42 @@ class MatrixLinearSpace(DifferentiableManifold):
             distances between points in the Lie group. 
         '''
         return np.linalg.norm(v, 2)
-    
+
     # Manifolds methods
     def distance(self, a, b):
         return self.norm(a - b)
-    
+
     @contract(bv='belongs_ts')
     def expmap(self, bv):
         base, vel = bv
         return base + vel
-        
+
     @contract(base='belongs', target='belongs', returns='belongs_ts')
     def logmap(self, base, target):
         return base, target - base
-        
+
     @contract(x='array')
     def belongs(self, x):
         if x.shape != self.shape:
-            raise ValueError('Expected shape %r, not %r.' % 
+            raise ValueError('Expected shape %r, not %r.' %
                              (self.shape, x.shape))
 
-        assert np.all(np.isreal(x)), "Expected real vector" # TODO: make contract
+        # TODO: make contract
+        assert np.all(np.isreal(x)), "Expected real vector"
         proj = self.project(x)
         assert_allclose(proj, x, atol=1e-8) # XXX: tol
-        
+
     def belongs_ts(self, bv):
 #        formatm('bv', bv)
         check('tuple(shape(x),shape(x))', bv, x=self.shape)
         base, vel = bv
         self.belongs(base)
         self.belongs(vel)
-     
-    @abstractmethod        
+
+    @abstractmethod
     def project(self, v): #@UnusedVariable
         ''' Projects a vector onto this Lie Algebra. '''
-        
-        
+
     def project_ts(self, bv):
         base, vel = bv
         return base, self.project(vel)

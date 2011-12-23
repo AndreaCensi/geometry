@@ -32,12 +32,12 @@ R1 = Euclidean(1)
 R2 = Euclidean(2)
 R3 = Euclidean(3)
 R = {1: R1, 2: R2, 3: R3}
- 
+
 from .translation_algebra import tran
 tran1 = tran(1)
 tran2 = tran(2)
 tran3 = tran(3)
-tran = {1:tran1, 2:tran2, 3:tran3}
+tran = {1: tran1, 2: tran2, 3: tran3}
 
 from .translation_group import Tran
 Tran1 = Tran(1)
@@ -48,24 +48,24 @@ Tran = {1: Tran1, 2: Tran2, 3: Tran3}
 from .special_orthogonal_algebra import so_algebra
 so2 = so_algebra(2)
 so3 = so_algebra(3)
-so = {2:so2, 3:so3}
-    
+so = {2: so2, 3: so3}
+
 from .special_orthogonal_group import SO_group
 SO2 = SO_group(2)
 SO3 = SO_group(3)
-SO = {2:SO2, 3:SO3}
-    
+SO = {2: SO2, 3: SO3}
+
 from .special_euclidean_algebra import se_algebra
 se2 = se_algebra(2, alpha=1)
 se3 = se_algebra(3, alpha=1)
-se = {2:se2, 3:se3}
+se = {2: se2, 3: se3}
 
 from .special_euclidean_group import SE_group
 SE2 = SE_group(2)
 SE3 = SE_group(3)
-SE = {2:SE2, 3:SE3}
+SE = {2: SE2, 3: SE3}
 
-all_manifolds = [ 
+all_manifolds = [
     SO3, SO2,
     R1, R2, R3,
     T1, T2, T3,
@@ -75,7 +75,7 @@ all_manifolds = [
     se2, se3,
     so2, so3,
     tran1, tran2, tran3,
-] 
+]
 
 from .embedding_relations import *
 from .manifold_embedding_propagation import compute_manifold_relations

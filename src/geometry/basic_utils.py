@@ -7,7 +7,8 @@ import numpy as np #@UnusedImport
 from numpy.linalg import norm #@UnusedImport
 from contracts import new_contract, check, contract #@UnusedImport
 from numpy.core.numeric import allclose
-from numpy.linalg import  det, svd #@UnusedImport
+
+from numpy.linalg import  det, svd  # @UnusedImport
 
 import warnings
 
@@ -65,7 +66,7 @@ def deprecated(func):
     def new_func(*args, **kwargs):
         # TODO: mofify stack
         warnings.warn("Call to deprecated function %s." % func.__name__,
-                      category=DeprecationWarning)
+                      category=DeprecationWarning, stacklevel=2)
         return func(*args, **kwargs)
     new_func.__name__ = func.__name__
     new_func.__doc__ = func.__doc__

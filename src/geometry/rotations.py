@@ -9,9 +9,8 @@ from . import (assert_allclose, new_contract, contract, dot, zeros, eye,
                default_axis, norm, normalize_length)
 
 
-
 new_contract('unit_quaternion', 'array[4], unit_length')
-new_contract('axis_angle', 'tuple(direction, float)') 
+new_contract('axis_angle', 'tuple(direction, float)')
 # Canonically, we return a positive angle.
 new_contract('axis_angle_canonical', 'tuple(direction, (float,>=0, <=pi))')
 
@@ -21,19 +20,22 @@ def SO(x):
     ''' Checks that the given value is a rotation matrix of arbitrary size. '''
     check('orthogonal', x)
     determinant = np.linalg.det(x * 1.0) # XXX: voodoo
-    # lapack_lite.LapackError: Parameter a has non-native byte order in lapack_lite.dgetrf
-    assert_allclose(determinant, 1.0) 
+    # lapack_lite.LapackError: 
+    # Parameter a has non-native byte order in lapack_lite.dgetrf
+    assert_allclose(determinant, 1.0)
+
 
 @new_contract
 @contract(x='array[NxN],N>0')
 def orthogonal(x):
     ''' Check that the argument is an orthogonal matrix. '''
     N = x.shape[0]
-    I = eye(N) 
+    I = eye(N)
     rtol = 10E-10 # XXX:
     atol = 10E-7  # XXX:
     assert_allclose(I, dot(x, x.T), rtol=rtol, atol=atol)
     assert_allclose(I, dot(x.T, x), rtol=rtol, atol=atol)
+
 
 @new_contract
 @contract(x='array[NxN]')
@@ -49,11 +51,11 @@ def skew_symmetric(x):
         for i, j in itertools.product(range(n), range(n)):
             if i < j: continue
             if x[i, j] != -x[j, i]:
-                raise ValueError('Expected skew symmetric, but ' + 
+                raise ValueError('Expected skew symmetric, but ' +
                                  'a[%d][%d] = %f, a[%d][%d] = %f' % \
                                  (i, j, x[i, j], j, i, x[j, i]))
-                
-                
+
+
 
 new_contract('SO2', 'array[2x2],SO')
 new_contract('SO3', 'array[3x3],SO')
@@ -68,17 +70,17 @@ new_contract('rotation_matrix', 'SO3')
 @contract(theta='number', returns='SO3')
 def rotz(theta):
     ''' Returns a 3x3 rotation matrix corresponding to rotation around the *z* axis. '''
-    return array([ 
+    return array([
             [ cos(theta), -sin(theta), 0],
             [ sin(theta), cos(theta), 0],
-            [0, 0, 1]]) 
+            [0, 0, 1]])
 
 @contract(theta='number', returns='SO2')
 def SO2_from_angle(theta):
     ''' Returns a 2x2 rotation matrix. '''
-    return array([ 
+    return array([
             [ cos(theta), -sin(theta)],
-            [ sin(theta), cos(theta)]]) 
+            [ sin(theta), cos(theta)]])
 
 @contract(R='SO2', returns='float')
 def angle_from_SO2(R):
@@ -118,7 +120,7 @@ def random_quaternion():
                   sin(theta1) * sigma1,
                   cos(theta1) * sigma1,
                   sin(theta2) * sigma2 ])
-    
+
     q *= sign(q[0])
     return q
 
@@ -151,7 +153,7 @@ def geodesic_distance_for_rotations(R1, R2):
     '''
     R = dot(R1, R2.T)
     axis1, angle1 = axis_angle_from_rotation(R) #@UnusedVariable
-    return angle1 
+    return angle1
 
 
 @contract(v='array[3]', returns='array[3x3],skew_symmetric')
@@ -182,7 +184,7 @@ def rotation_from_quaternion(x):
         Documented in <http://en.wikipedia.org/w/index.php?title=Quaternions_and_spatial_rotation&oldid=402924915>
     '''
     a, b, c, d = x
-        
+
     r1 = [a ** 2 + b ** 2 - c ** 2 - d ** 2,
           2 * b * c - 2 * a * d,
           2 * b * d + 2 * a * c ]
@@ -192,7 +194,7 @@ def rotation_from_quaternion(x):
     r3 = [2 * b * d - 2 * a * c,
           2 * c * d + 2 * a * b,
           a ** 2 - b ** 2 - c ** 2 + d ** 2]
-    
+
     return array([r1, r2, r3])
 
 @contract(R='rotation_matrix', returns='unit_quaternion')
@@ -221,7 +223,7 @@ def quaternion_from_rotation(R):
         qu = (r / 2)
         qv = (R[u, v] + R[v, u]) / (2 * r)
         qw = (R[w, u] + R[u, w]) / (2 * r)
-        
+
         Q = zeros(4)
         Q[0] = q0
         Q[u + 1] = qu
@@ -264,9 +266,9 @@ def axis_angle_from_quaternion(q):
         angle -= 2 * pi
     elif angle < -pi:
         angle += 2 * pi
-        
+
     return axis, angle
-         
+
 
 @contract(axis='direction', angle='float', returns='rotation_matrix')
 def rotation_from_axis_angle(axis, angle):
@@ -295,7 +297,7 @@ def axis_angle_from_rotation(R):
           
     '''
     angle = safe_arccos((R.trace() - 1) / 2)
-    
+
     if angle == 0:
         return default_axis(), 0.0
     else:
@@ -304,7 +306,7 @@ def axis_angle_from_rotation(R):
                    R[1, 0] - R[0, 1]])
         axis = (1 / (2 * sin(angle))) * v
         return axis, angle
-    
+
 @contract(axis='direction', angle='float', returns='rotation_matrix')
 def rotation_from_axis_angle2(axis, angle):
     ''' 

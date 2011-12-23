@@ -1,7 +1,9 @@
 from . import contract, dot, svd, check
 
+
 # TODO: write tests
-@contract(X='array[KxN],K>=2,K<N', Y='array[KxN]', returns='array[KxK],orthogonal')
+@contract(X='array[KxN],K>=2,K<N', Y='array[KxN]',
+          returns='array[KxK],orthogonal')
 def best_orthogonal_transform(X, Y):
     ''' Finds the best orthogonal transform R  between X and Y,
         such that R X ~= Y. '''
@@ -37,7 +39,7 @@ def best_similarity_transform(X, Y):
     check('array[KxK]', YX)
     U, S, V = svd(YX) #@UnusedVariable
     R = dot(U, V)
-    t = Ym - dot(R, Xm) 
+    t = Ym - dot(R, Xm)
     return R, t
 
 

@@ -1,6 +1,7 @@
 from . import MatrixLinearSpace, contract
 from abc import abstractmethod
 
+
 class MatrixLieAlgebra(MatrixLinearSpace):
     ''' This is the base class for Matrix Lie Algebra.
     
@@ -14,28 +15,27 @@ class MatrixLieAlgebra(MatrixLinearSpace):
         
         You probably also want to implement :py:func:`norm` if
         the default is not what you want.  
-    ''' 
-    
-    
+    '''
+
     def __init__(self, n, dimension):
         MatrixLinearSpace.__init__(self, dimension=dimension,
                                    shape=(n, n))
         self.n = n
-    
+
     @abstractmethod
     @contract(a='belongs', returns='array[K]')
-    def vector_from_algebra(self, a): 
+    def vector_from_algebra(self, a):
         ''' Isomorphism from elements of the algebra to vectors.
         (For example, so(3) <==> R^3).
          '''
         #raise ValueError('Not implemented for %s.' % self)
-    
+
     @abstractmethod
     @contract(returns='belongs', v='array[K]')
-    def algebra_from_vector(self, v): 
+    def algebra_from_vector(self, v):
         ''' Isomorphism from elements of the algebra to vectors.
         (For example, so(3) <==> R^3).
          '''
         #raise ValueError('Not implemented for %s.' % self)
-    
+
     # TODO: bracket

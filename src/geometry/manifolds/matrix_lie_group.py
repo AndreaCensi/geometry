@@ -13,7 +13,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         some functions if they know a more numerically stable implementation. 
         
     '''
-        
+
     def __init__(self, n, dimension, algebra):
         ''' 
             Initializes the Lie group.
@@ -28,21 +28,20 @@ class MatrixLieGroup(Group, DifferentiableManifold):
 
         from . import MatrixLieGroupTangent
         self._tangent_bundle_algebra_rep = MatrixLieGroupTangent(self)
-        
+
     def tangent_bundle(self):
         return  self._tangent_bundle_algebra_rep
-    
+
     def get_algebra(self):
         ''' Returns the interface to the corresponding Lie algebra. '''
         return self.algebra
-    
+
     def unity(self):
         return np.eye(self.n)
 
     def multiply(self, g, h):
         return np.dot(g, h)
-    
-    
+
     @contract(g='belongs')
     def inverse(self, g):
         return np.linalg.inv(g)
@@ -50,7 +49,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
     @new_contract
     def belongs_algebra(self, x):
         self.algebra.belongs(x)
-        
+
     @contract(bv='tuple(belongs, *)')
     def project_ts(self, bv):
         ''' 
@@ -67,8 +66,8 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         ty = self.algebra.project(y)
         # get it back where it belonged
         tty = np.dot(base, ty)
-        return base, tty 
-        
+        return base, tty
+
     @contract(a='belongs', b='belongs')
     def distance(self, a, b):
         ''' 
@@ -82,8 +81,8 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         x = self.multiply(a, self.inverse(b))
         xt = self.algebra_from_group(x)
         return self.algebra.norm(xt)
-    
-    @contract(base='belongs', target='belongs', returns='belongs_ts',)    
+
+    @contract(base='belongs', target='belongs', returns='belongs_ts',)
     def logmap(self, base, target):
         ''' 
             Returns the direction from base to target. 
@@ -115,18 +114,18 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         tv = self.algebra.project(tv)
         x = self.group_from_algebra(tv)
         return np.dot(base, x)
-    
+
     @contract(g='belongs', returns='belongs_algebra')
     def algebra_from_group(self, g):
         ''' 
             Converts an element of the group to the algebra. 
             Uses generic matrix logarithm plus projection.
-        ''' 
+        '''
         X = np.array(logm(g).real)
         # mitigate numerical errors
         X = self.algebra.project(X)
         return X
-        
+
     @contract(a='belongs_algebra', returns='belongs')
     def group_from_algebra(self, a):
         ''' 
@@ -135,7 +134,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
             Uses generic matrix exponential.
         '''
         return expm(a)
-        
+
     # TODO: write tests for this
     @contract(a='belongs', b='belongs', returns='belongs_ts')
     def velocity_from_points(self, a, b, delta=1):
@@ -149,4 +148,4 @@ class MatrixLieGroup(Group, DifferentiableManifold):
 #        xt = self.algebra.project(xt)
         return self.identity(), xt / delta
 
-    
+
