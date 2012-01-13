@@ -1,17 +1,18 @@
 from geometry import (euclidean_distances, assert_allclose, double_center, mds,
     mds_randomized, place, eigh)
 import itertools
-import numpy as np 
+import numpy as np
+
 
 def euclidean_distances_test():
     n = 5
-    P = np.random.rand(3, n)    
+    P = np.random.rand(3, n)
     D = euclidean_distances(P)
     assert D.shape == (n, n)
     for i, j in itertools.product(range(n), range(n)):
         d = np.linalg.norm(P[:, i] - P[:, j])
         assert_allclose(d, D[i, j])
-        
+
 
 def rank_test():
     ''' Check that the double-centered matrix has small rank. '''
@@ -28,11 +29,13 @@ def rank_test():
             assert_allclose(0, small, atol=1e-7)
 #            print('k = %d n = %d  small = %s' % (k, n, small))
 
+
 def evaluate_error(P1, P2):
     D1 = euclidean_distances(P1)
     D2 = euclidean_distances(P2)
     return np.abs(D1 - D2).mean()
-    
+
+
 def mds_test():
     for n in [10, 100]:
         for k in [3, 4, 5]:
@@ -49,7 +52,7 @@ def mds_fast_test():
         for k in [2, 3]:
             P = np.random.rand(k, n)
             D = euclidean_distances(P)
-    
+
             for algo in [mds, mds_randomized]:
 #                t0 = time.clock()
                 P2 = algo(D, ndim=k)
@@ -61,14 +64,15 @@ def mds_fast_test():
                 #print('k = %d n = %d  %-20s  %7d ms   mean_error = %s' % 
                 #      (k, n, algo.__name__, t_mds * 1000, error)) 
 
+
 def place_test():
     for n in [4, 10]:
         for k in [3]:
             S = np.random.rand(k, n)
             p = np.random.rand(k)
-            ref = lambda x:  np.linalg.norm(p - x)
-            distances = np.array([ ref(S[:, i]) for i in range(n)])
+            ref = lambda x: np.linalg.norm(p - x)
+            distances = np.array([ref(S[:, i]) for i in range(n)])
             p2 = place(S, distances)
-            assert_allclose(p, p2) 
-    
-    
+            assert_allclose(p, p2)
+
+

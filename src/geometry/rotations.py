@@ -49,12 +49,12 @@ def skew_symmetric(x):
             raise ValueError('Expected skew symmetric, but diagonal is not '
                              'exactly zero: %s.' % diag)
         for i, j in itertools.product(range(n), range(n)):
-            if i < j: continue
+            if i < j:
+                continue
             if x[i, j] != -x[j, i]:
                 raise ValueError('Expected skew symmetric, but ' +
                                  'a[%d][%d] = %f, a[%d][%d] = %f' % \
                                  (i, j, x[i, j], j, i, x[j, i]))
-
 
 
 new_contract('SO2', 'array[2x2],SO')
@@ -67,20 +67,24 @@ new_contract('so3', 'array[3x3],skew_symmetric')
 # deprecated
 new_contract('rotation_matrix', 'SO3')
 
+
 @contract(theta='number', returns='SO3')
 def rotz(theta):
-    ''' Returns a 3x3 rotation matrix corresponding to rotation around the *z* axis. '''
+    ''' Returns a 3x3 rotation matrix corresponding 
+        to rotation around the *z* axis. '''
     return array([
-            [ cos(theta), -sin(theta), 0],
-            [ sin(theta), cos(theta), 0],
+            [cos(theta), -sin(theta), 0],
+            [sin(theta), cos(theta), 0],
             [0, 0, 1]])
+
 
 @contract(theta='number', returns='SO2')
 def SO2_from_angle(theta):
     ''' Returns a 2x2 rotation matrix. '''
     return array([
-            [ cos(theta), -sin(theta)],
-            [ sin(theta), cos(theta)]])
+            [cos(theta), -sin(theta)],
+            [sin(theta), cos(theta)]])
+
 
 @contract(R='SO2', returns='float')
 def angle_from_SO2(R):
@@ -89,15 +93,15 @@ def angle_from_SO2(R):
         angle = -np.pi
     return angle
 
+
 @contract(omega='number', returns='so2')
 def hat_map_2d(omega):
     return np.array([[0, -1], [+1, 0]]) * omega
 
+
 @contract(W='so2', returns='float')
 def map_hat_2d(W):
     return W[1, 0]
-
-
 
 rot2d = SO2_from_angle # TODO: deprecated 
 rot2d_from_angle = SO2_from_angle# TODO: deprecated 
@@ -119,10 +123,11 @@ def random_quaternion():
     q = array([cos(theta2) * sigma2,
                   sin(theta1) * sigma1,
                   cos(theta1) * sigma1,
-                  sin(theta2) * sigma2 ])
+                  sin(theta2) * sigma2])
 
     q *= sign(q[0])
     return q
+
 
 @contract(returns='array[2x2]|rotation_matrix', ndim='2|3')
 def random_rotation(ndim=3):
@@ -135,7 +140,9 @@ def random_rotation(ndim=3):
         return rotation_from_quaternion(q)
     elif ndim == 2:
         return rot2d(uniform(0, 2 * pi))
-    else: assert False
+    else:
+        assert False
+
 
 @contract(returns='array[3x3], orthogonal')
 def random_orthogonal_transform():
@@ -166,6 +173,7 @@ def hat_map(v):
     h = h - h.transpose()
     return h
 
+
 @contract(H='array[3x3],skew_symmetric', returns='array[3]')
 def map_hat(H):
     ''' The inverse of :py:func:`hat_map`. '''
@@ -181,13 +189,14 @@ def rotation_from_quaternion(x):
     '''
         Converts a quaternion to a rotation matrix.
         
-        Documented in <http://en.wikipedia.org/w/index.php?title=Quaternions_and_spatial_rotation&oldid=402924915>
     '''
+    # Documented in <http://en.wikipedia.org/w/index.php?title=
+    # Quaternions_and_spatial_rotation&oldid=402924915>
     a, b, c, d = x
 
     r1 = [a ** 2 + b ** 2 - c ** 2 - d ** 2,
           2 * b * c - 2 * a * d,
-          2 * b * d + 2 * a * c ]
+          2 * b * d + 2 * a * c]
     r2 = [2 * b * c + 2 * a * d,
           a ** 2 - b ** 2 + c ** 2 - d ** 2,
           2 * c * d - 2 * a * b]
@@ -196,6 +205,7 @@ def rotation_from_quaternion(x):
           a ** 2 - b ** 2 - c ** 2 + d ** 2]
 
     return array([r1, r2, r3])
+
 
 @contract(R='rotation_matrix', returns='unit_quaternion')
 def quaternion_from_rotation(R):
@@ -250,6 +260,7 @@ def quaternion_from_axis_angle(axis, angle):
         ])
     Q *= sign(Q[0])
     return Q
+
 
 @contract(q='unit_quaternion', returns='axis_angle_canonical')
 def axis_angle_from_quaternion(q):
@@ -307,6 +318,7 @@ def axis_angle_from_rotation(R):
         axis = (1 / (2 * sin(angle))) * v
         return axis, angle
 
+
 @contract(axis='direction', angle='float', returns='rotation_matrix')
 def rotation_from_axis_angle2(axis, angle):
     ''' 
@@ -318,6 +330,7 @@ def rotation_from_axis_angle2(axis, angle):
     '''
     q = quaternion_from_axis_angle(axis, angle)
     return rotation_from_quaternion(q)
+
 
 @contract(x_axis='direction', vector_on_xy_plane='direction',
           returns='rotation_matrix')

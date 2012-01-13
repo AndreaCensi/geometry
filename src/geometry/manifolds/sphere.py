@@ -56,7 +56,8 @@ class Sphere(DifferentiableManifold):
             axis = normalize_length(axis)
             R = rotation_from_axis_angle(axis, angle)
             result = np.dot(R, base)
-        else: assert False
+        else:
+            assert False
 
         return result
 
@@ -91,7 +92,8 @@ class Sphere(DifferentiableManifold):
             points.append(np.array([0, 0, -1]))
             points.append(np.array([np.sqrt(2) / 2, np.sqrt(2) / 2, 0]))
             return points
-        else: assert False
+        else:
+            assert False
 
     def friendly(self, x):
         if self.N == 2:
@@ -102,8 +104,8 @@ class Sphere(DifferentiableManifold):
             elevation = np.arcsin(x[2])
             return 'Dir(%6.1fdeg,el:%5.1fdeg)' % (np.degrees(theta),
                                                       np.degrees(elevation))
-        else: assert False
-
+        else:
+            assert False
 
 
 class Sphere1(DifferentiableManifold):
