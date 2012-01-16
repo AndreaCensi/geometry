@@ -79,7 +79,7 @@ SE3_from_rotation_translation = pose_from_rotation_translation
 @contract(pose='array[NxN],SE', returns='tuple(array[MxM], array[M]),M=N-1')
 def rotation_translation_from_pose(pose):
     R, t, zero, one = extract_pieces(pose) #@UnusedVariable
-    return R, t
+    return R.copy(), t.copy()
 
 # TODO: make more efficient
 rotation_translation_from_SE2 = rotation_translation_from_pose
@@ -90,14 +90,14 @@ rotation_translation_from_SE3 = rotation_translation_from_pose
 def translation_from_SE2(pose):
     # TODO: make it more efficient
     R, t, zero, one = extract_pieces(pose) #@UnusedVariable
-    return t
+    return t.copy()
 
 
 @contract(pose='SE3')
 def translation_from_SE3(pose):
     # TODO: make it more efficient
     _, t, _, _ = extract_pieces(pose)
-    return t
+    return t.copy()
 
 
 @contract(t='array[2]|seq[2](number)', theta='number', returns='SE2')
