@@ -113,7 +113,8 @@ class DifferentiableManifold(object):
             tolerance. 
         '''
         distance = self.distance(a, b)
-        if msg is None: msg = ""
+        if msg is None:
+            msg = ""
         if distance > atol:
             msg += "\nThe two points should be the same:\n"
             msg += "- a: %s\n" % self.friendly(a)
@@ -122,8 +123,10 @@ class DifferentiableManifold(object):
             assert_allclose(distance, 0, atol=atol, err_msg=msg)
         return distance
 
-    Isomorphism = namedtuple('Isomorphism', 'A B A_to_B B_to_A steps type desc')
-    Embedding = namedtuple('Embedding', 'A B A_to_B B_to_A steps type desc')
+    Isomorphism = namedtuple('Isomorphism',
+                             'A B A_to_B B_to_A steps type desc')
+    Embedding = namedtuple('Embedding',
+                           'A B A_to_B B_to_A steps type desc')
 
     @staticmethod
     def isomorphism(A, B, A_to_B, B_to_A, itype='user', steps=None, desc=None):
@@ -131,11 +134,13 @@ class DifferentiableManifold(object):
             msg = ('You are trying to define an isomorphism'
                     ' between manifolds of different dimension:\n'
                     '- %s has dimension %d;\n'
-                    '- %s has dimension %d.\n' % (A, A.dimension, B, B.dimension))
+                    '- %s has dimension %d.\n' % (A, A.dimension,
+                                                  B, B.dimension))
             raise ValueError(msg)
 
         Iso = DifferentiableManifold.Isomorphism
-        if steps is None: steps = [(A, '~', B)]
+        if steps is None:
+            steps = [(A, '~', B)]
         A._isomorphisms[B] = Iso(A, B, A_to_B, B_to_A, steps, itype, desc)
         B._isomorphisms[A] = Iso(B, A, B_to_A, A_to_B, steps, itype, desc)
 
@@ -145,11 +150,13 @@ class DifferentiableManifold(object):
             msg = ('You are trying to define an embedding'
                     ' from a large to a smaller manifold:\n'
                     '- %s has dimension %d;\n'
-                    '- %s has dimension %d.\n' % (A, A.dimension, B, B.dimension))
+                    '- %s has dimension %d.\n' % (A, A.dimension,
+                                                  B, B.dimension))
             raise ValueError(msg)
 
         Embed = DifferentiableManifold.Embedding
-        if steps is None: steps = [(A, '=', B)]
+        if steps is None:
+            steps = [(A, '=', B)]
         A._embedding[B] = Embed(A, B, A_to_B, B_to_A, steps, itype, desc)
         B._projection[A] = Embed(B, A, B_to_A, A_to_B, steps, itype, desc)
 
@@ -162,7 +169,8 @@ class DifferentiableManifold(object):
                     b = A_to_B(a)
                     B.belongs(b)
             except:
-                print('Invalid embedding:\n %s -> %s using %s' % (A, B, A_to_B))
+                print('Invalid embedding:\n %s -> %s using %s' % (A, B,
+                                                                  A_to_B))
                 printm('a', a)
                 raise
 
@@ -173,9 +181,9 @@ class DifferentiableManifold(object):
                     A.belongs(a)
             except:
                 printm('b', b)
-                print('Invalid embedding:\n %s <- %s using %s' % (A, B, B_to_A))
+                print('Invalid embedding:\n %s <- %s using %s' %
+                      (A, B, B_to_A))
                 raise
-
 
     def relations_descriptions(self):
         s = ('[= %s  >= %s  <= %s]' %
@@ -239,14 +247,17 @@ class DifferentiableManifold(object):
         ''' Returns the intrinsic dimension of this manifold. '''
         return self.dimension
 
+
 class RandomManifold(DifferentiableManifold):
     ''' This is the base class for manifolds that have the ability 
         to sample random points. '''
 
     @abstractmethod
     def sample_uniform(self):
-        ''' Samples a random point in this manifold according to the Haar
-            measure. Raises exception if the measure is improper (e.g., R^n). '''
+        ''' 
+            Samples a random point in this manifold according to the Haar
+            measure. Raises exception if the measure is improper (e.g., R^n). 
+        '''
 
     @abstractmethod
     @contract(a='belongs')

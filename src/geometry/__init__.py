@@ -15,10 +15,13 @@ except ImportError:
     msg += 'if those functions are used.'
     import warnings
     warnings.warn(msg)
+
     def make_warning(s):
         def f(*args, **kwargs):
-            raise Exception('Scipy not installed --- function %r not found.' % s)
+            raise Exception('Scipy not installed --- function %r not found.'
+                            % s)
         return f
+
     logm = make_warning('logm')
     expm = make_warning('expm')
     eigh = make_warning('eigh')
@@ -30,9 +33,9 @@ if not scipy_found:
 from .formatting import *
 from .basic_utils import *
 from .spheres import *
-from .spheres_embedding import * 
+from .spheres_embedding import *
 from .rotations import *
-from .rotations_embedding import *  
+from .rotations_embedding import *
 from .poses import *
 from .poses_embedding import *
 from .procrustes import *

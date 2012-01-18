@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
 set -x
-nosetests -a 'manifolds' -w src $*
+nosetests -a 'manifolds'  $*

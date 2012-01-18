@@ -1,6 +1,6 @@
-from . import np, MatrixLieAlgebra, so
+from . import np, MatrixLieAlgebra, so, contract
 from .. import extract_pieces, combine_pieces, hat_map_2d, hat_map
-from contracts import contract
+
 
 class se_algebra(MatrixLieAlgebra):
     ''' This is the Lie algebra se(n) for the Special Euclidean group SE(n). 
@@ -8,13 +8,13 @@ class se_algebra(MatrixLieAlgebra):
         Note that you have to supply a coefficient *alpha* that
         weights rotation and translation when defining distances. 
     '''
-    
+
     def __init__(self, N, alpha):
-        dimension = {2:3, 3:6}[N]
+        dimension = {2: 3, 3: 6}[N]
         MatrixLieAlgebra.__init__(self, n=N + 1, dimension=dimension)
         self.alpha = alpha
         self.son = so[N]
-        
+
     def norm(self, X):
         W, v, zero, zero = extract_pieces(X) #@UnusedVariable
         return np.linalg.norm(v) + self.alpha * self.son.norm(W)
@@ -31,7 +31,7 @@ class se_algebra(MatrixLieAlgebra):
     @contract(a='belongs')
     def vector_from_algebra(self, a):
         W, v, zero, zero = extract_pieces(a) #@UnusedVariable
- 
+
         if self.n == 3:
             assert v.size == 2
             V = np.zeros(3)
@@ -47,7 +47,7 @@ class se_algebra(MatrixLieAlgebra):
             return V
         else:
             assert False, 'Not implemented for n>=4.'
-            
+
     @contract(v='array[N]', returns='belongs')
     def algebra_from_vector(self, v):
         if self.n == 3:
@@ -56,7 +56,7 @@ class se_algebra(MatrixLieAlgebra):
             vel = v[1:3]
             W = hat_map_2d(omega)
             return combine_pieces(W, vel, vel * 0, 0)
-            
+
         elif self.n == 4:
             assert v.size == 6
             omega = v[0:3]
@@ -65,17 +65,17 @@ class se_algebra(MatrixLieAlgebra):
             return combine_pieces(W, vel, vel * 0, 0)
         else:
             assert False, 'Not implemented for n=%d.' % self.n
-            
+
     def interesting_points(self):
         points = []
         points.append(self.zero())
         if self.n == 3:
             from . import SE2
-            points.extend([SE2.algebra_from_group(p) 
+            points.extend([SE2.algebra_from_group(p)
                            for p in SE2.interesting_points()])
         elif self.n == 4:
             from . import SE3
-            points.extend([SE3.algebra_from_group(p) 
+            points.extend([SE3.algebra_from_group(p)
                            for p in SE3.interesting_points()])
         else:
             assert False, 'Not implemented for n=%s' % self.n

@@ -80,7 +80,8 @@ def geodesic_distance_on_sphere(s1, s2):
     ''' Returns the geodesic distance between two points on the sphere. '''
     # special case: return a 0 (no precision issues) 
     # if the vectors are the same
-    if (s1 == s2).all(): return 0.0
+    if (s1 == s2).all():
+        return 0.0
     dot_product = (s1 * s2).sum()
     return safe_arccos(dot_product)
 
@@ -93,7 +94,8 @@ def distribution_radius(S):
         The radius is defined as the minimum *r* such that there exists a 
         point *s* in *S* such that all distances are within *r* from *s*. 
         
-        .. math:: \\textsf{radius} = \\min \\{ r | \\exists s :  \\forall x \\in S : d(s,x) <= r \\}
+        .. math:: \\textsf{radius} = \\min \\{ r | \\exists s : 
+                  \\forall x \\in S : d(s,x) <= r \\}
     '''
     D = arccos(clip(dot(S.T, S), -1, 1))
     distances = D.max(axis=0)
@@ -129,13 +131,15 @@ def random_direction(ndim=3):
     elif ndim == 2:
         theta = uniform(0, 2 * pi)
         return array([cos(theta), sin(theta)])
+    else:
+        assert False, 'Not implemented'
 
-    else: assert False, 'Not implemented'
 
 @contract(N='int,>0,N', ndim="2|3", returns='array[3xN]')
 def random_directions(N, ndim=3):
     ''' Returns a set of random directions. '''
-    return vstack([random_direction(ndim) for i in range(N)]).T #@UnusedVariable
+    return vstack([random_direction(ndim) for _ in range(N)]).T
+
 
 @contract(s='direction', returns='direction')
 def any_distant_direction(s):
@@ -148,6 +152,7 @@ def any_distant_direction(s):
         z = default_axis_orthogonal()
     return z
 
+
 @contract(s='direction', returns='direction')
 def any_orthogonal_direction(s):
     ''' Returns any axis orthogonal to *s* (not necessarily random). '''
@@ -157,6 +162,7 @@ def any_orthogonal_direction(s):
     x = np.cross(z, s)
     v = x / norm(x)
     return v
+
 
 @contract(s='array[K],unit_length,(K=2|K=3)', returns='array[K],unit_length')
 def random_orthogonal_direction(s):
@@ -177,10 +183,12 @@ def random_orthogonal_direction(s):
         R = rotation_from_axis_angle(s, angle)
         z2 = np.dot(R, z)
         return z2
-    else: assert False, 'Not implemented'
+    else:
+        assert False, 'Not implemented'
 
 
-@contract(s1='array[K],unit_length', s2='array[K],unit_length', t='number,>=0,<=1')
+@contract(s1='array[K],unit_length', s2='array[K],unit_length',
+          t='number,>=0,<=1')
 def slerp(s1, s2, t):
     ''' Spherical interpolation between two points on a hypersphere. '''
     omega = arccos(dot(s1 / norm(s1), s2 / norm(s2)))
@@ -220,13 +228,16 @@ def random_directions_bounded(ndim, radius, num_points, center=None):
         elif ndim == 2:
             angle = uniform(-radius, radius)
             R = rot2d(angle)
-        else: assert False
+        else:
+            assert False
         direction = np.dot(R, center)
         directions[:, i] = direction
 
     return sorted_directions(directions)
 
-@contract(S='array[KxN],(K=2|K=3),directions', returns='array[KxN], directions')
+
+@contract(S='array[KxN],(K=2|K=3),directions',
+          returns='array[KxN], directions')
 def sorted_directions(S, num_around=15):
     ''' 
         Rearranges the directions in *S* in a better order for visualization.
@@ -264,9 +275,11 @@ def sorted_directions(S, num_around=15):
         ordered = S[:, order]
         return ordered
 
+
 def sphere_area(r=1):
     ''' Returns the area of a sphere of the given radius. '''
     return 4 * pi * (r ** 2)
+
 
 def spherical_cap_area(cap_radius):
     ''' 
@@ -280,6 +293,7 @@ def spherical_cap_area(cap_radius):
     A = pi * (a ** 2 + h ** 2)
     return A
 
+
 def spherical_cap_with_area(cap_area):
     ''' 
         Returns the radius of a spherical cap of the given area. 
@@ -291,6 +305,7 @@ def spherical_cap_with_area(cap_area):
     h = L ** 2 / 2
     r = arccos(1 - h)
     return r
+
 
 @contract(S='array[KxN],K>=2', returns='array[KxN]')
 def project_vectors_onto_sphere(S, atol=1e-7):

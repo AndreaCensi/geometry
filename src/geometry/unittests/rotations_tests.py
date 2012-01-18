@@ -1,15 +1,15 @@
-import numpy as np 
-
-from geometry import (axis_angle_from_rotation,
-    rotation_from_axis_angle, random_direction, hat_map,
-    geodesic_distance_on_sphere, assert_allclose) 
-
-from .utils import rotations_sequence, axis_angle_sequence, \
-    GeoTestCase, directions_sequence
-import itertools
-# XXX:
-from geometry.rotations import quaternion_from_rotation, rotation_from_axes_spec
+from .utils import (rotations_sequence, axis_angle_sequence, GeoTestCase,
+    directions_sequence)
+from geometry import (axis_angle_from_rotation, rotation_from_axis_angle,
+    random_direction, hat_map, geodesic_distance_on_sphere, assert_allclose)
+from geometry.rotations import (quaternion_from_rotation,
+    rotation_from_axes_spec)
 from geometry.spheres import slerp, any_distant_direction
+import itertools
+import numpy as np
+
+
+# XXX:
 
 class RotationsTest(GeoTestCase):
 
@@ -33,7 +33,8 @@ class RotationsTest(GeoTestCase):
             assert dist <= angle
 
     def test_slerp(self):
-        for r1, r2 in itertools.product(rotations_sequence(), rotations_sequence()):
+        for r1, r2 in itertools.product(rotations_sequence(),
+                                        rotations_sequence()):
             q1 = quaternion_from_rotation(r1)
             q2 = quaternion_from_rotation(r2)
             for t in [0, 0.1, 0.5, 0.75, 1]:
@@ -43,6 +44,7 @@ class RotationsTest(GeoTestCase):
 
     # TODO: add test with orthogonal rotations
 
+
 def hat_map_test():
     for s in directions_sequence():
         for v in directions_sequence():
@@ -51,8 +53,8 @@ def hat_map_test():
             x3 = -np.dot(hat_map(v), s)
             assert_allclose(x1, x2)
             assert_allclose(x1, x3)
-            
-            
+
+
 def rotation_from_axes_spec__test():
     for x in directions_sequence():
         v = any_distant_direction(x)
@@ -61,5 +63,5 @@ def rotation_from_axes_spec__test():
         assert_allclose(x_, [1, 0, 0], atol=1e-8)
         v_ = np.dot(R, v)
         assert_allclose(v_[2], 0, atol=1e-8)
-        
+
 

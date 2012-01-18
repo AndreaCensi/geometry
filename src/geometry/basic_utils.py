@@ -12,6 +12,7 @@ from numpy.linalg import  det, svd  # @UnusedImport
 
 import warnings
 
+
 class Tolerance:
     zero_norm = 1e-7
 
@@ -19,16 +20,23 @@ new_contract('R1', 'array[1]')
 new_contract('R2', 'array[2]')
 new_contract('R3', 'array[3]')
 
-def assert_allclose(actual, desired, rtol=1e-7, atol=0,
-                    err_msg='', verbose=True):
-    ''' Backporting assert_allclose from Numpy 1.5 to 1.4 '''
-    from numpy.testing.utils import assert_array_compare
-    def compare(x, y):
-        return np.allclose(x, y, rtol=rtol, atol=atol)
-    actual, desired = np.asanyarray(actual), np.asanyarray(desired)
-    header = 'Not equal to tolerance rtol=%g, atol=%g' % (rtol, atol)
-    assert_array_compare(compare, actual, desired, err_msg=str(err_msg),
-                         verbose=verbose, header=header)
+
+try:
+    from numpy.testing.utils import assert_allclose #@UnusedImport
+except ImportError:
+    def assert_allclose(actual, desired, rtol=1e-7, atol=0,
+                        err_msg='', verbose=True):
+        ''' Backporting assert_allclose from Numpy 1.5 to 1.4 '''
+        from numpy.testing.utils import assert_array_compare #@UnresolvedImport
+
+        def compare(x, y):
+            return np.allclose(x, y, rtol=rtol, atol=atol)
+
+        actual, desired = np.asanyarray(actual), np.asanyarray(desired)
+        header = 'Not equal to tolerance rtol=%g, atol=%g' % (rtol, atol)
+        assert_array_compare(compare, actual, desired, err_msg=str(err_msg),
+                             verbose=verbose, header=header)
+
 
 @contract(s='array')
 def normalize_length(s, norm=2):
@@ -39,11 +47,12 @@ def normalize_length(s, norm=2):
     else:
         return s / sn
 
+
 @contract(s='array')
 def normalize_length_or_zero(s, norm=2):
     ''' 
-        Normalize an array such that it has unit length in the given norm; if the
-        norm is close to zero, the zero vector is returned.     
+        Normalize an array such that it has unit length in the given norm; 
+        if the norm is close to zero, the zero vector is returned.     
     '''
     sn = np.linalg.norm(s, norm)
     if allclose(sn, 0, atol=Tolerance.zero_norm):
@@ -52,12 +61,12 @@ def normalize_length_or_zero(s, norm=2):
         return s / sn
 
 
-
 @new_contract
 @contract(x='array')
 def finite(x):
     # TODO: make into standard thing
     return np.isfinite(x).all()
+
 
 def deprecated(func):
     """This is a decorator which can be used to mark functions
@@ -72,6 +81,7 @@ def deprecated(func):
     new_func.__doc__ = func.__doc__
     new_func.__dict__.update(func.__dict__)
     return new_func
+
 
 def safe_arccos(x):
     ''' 
