@@ -1,6 +1,5 @@
 from . import (DifferentiableManifold, SO3, SO2, R1, R2, R3, SE2, SE3, S2, S1,
-               T1,
-    T2, T3, so2, so3, se2, se3, np, Tran2, tran2, tran3, Tran3, tran1)
+    T1, T2, T3, so2, so3, se2, se3, np, Tran2, tran2, tran3, Tran3, tran1)
 from .. import (S1_project_from_S2, S2_from_S1, S1_project_from_R2,
     S2_project_from_R3, se2_from_so2, so2_project_from_se2, se3_from_so3,
     so3_project_from_se3, SE3_from_SO3, SE2_from_SO2, SO2_project_from_SE2,
