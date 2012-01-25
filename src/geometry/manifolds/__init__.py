@@ -65,6 +65,10 @@ SE2 = SE_group(2)
 SE3 = SE_group(3)
 SE = {2: SE2, 3: SE3}
 
+TSE2 = SE2.tangent_bundle()
+TSE3 = SE3.tangent_bundle()
+TSE = {2: TSE2, 3: TSE3}
+
 all_manifolds = [
     SO3, SO2,
     R1, R2, R3,
@@ -75,6 +79,7 @@ all_manifolds = [
     se2, se3,
     so2, so3,
     tran1, tran2, tran3,
+    TSE2, TSE3
 ]
 
 from .embedding_relations import *

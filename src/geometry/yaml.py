@@ -1,6 +1,8 @@
 
-import numpy as np
+from . import contract, np
+from contracts.interface import describe_value, describe_type
 from geometry.manifolds import DifferentiableManifold
+
 #
 #def array_to_lists(x):
 #    return x.tolist()
@@ -59,10 +61,16 @@ def to_yaml(manifold, value, representation=None):
     return ['%s:%s' % (manifold, representation), x]
 
 
+
+@contract(x='list')
 def from_yaml(x):
     if not isinstance(x, list):
         raise ValueError('I expect a list with two elements.')
     form = x[0]
+    if not isinstance(form, str):
+        raise ValueError('I expect a string describing the format,'
+                         ' not %s, while decoding %s' %
+                         (describe_type(form), describe_value(x)))
     value = x[1]
     space, representation = form.split(':')
 
@@ -110,7 +118,8 @@ class TSE3_bt(Representation):
 
     @staticmethod
     def from_yaml(y):
-        return (from_yaml(y[0]), from_yaml(y[1]))
+        return (SE3_m44.from_yaml(y[0]),
+                se3_m44.from_yaml(y[1]))
 
 register('SE3', 'm44', SE3_m44)
 register('TSE3', 'bt', TSE3_bt)
