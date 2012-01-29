@@ -1,6 +1,6 @@
 from . import np
 from geometry.manifolds import S1
-from geometry.basic_utils import assert_allclose
+from geometry.utils import assert_allclose
 from geometry.formatting import printm
 
 

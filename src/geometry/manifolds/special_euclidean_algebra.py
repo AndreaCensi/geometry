@@ -41,7 +41,6 @@ class se_algebra(MatrixLieAlgebra):
         elif self.n == 4:
             assert v.size == 3
             V = np.zeros(6)
-            print(v)
             V[0:3] = self.son.vector_from_algebra(W)
             V[3:6] = v
             return V

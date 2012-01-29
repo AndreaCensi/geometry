@@ -1,12 +1,12 @@
 from . import (angle_from_rot2d, rotz, axis_angle_from_rotation, hat_map_2d,
-    zeros, contract, assert_allclose, check, np, rot2d, new_contract, logm,
-    expm)
+     contract, assert_allclose, np, rot2d, new_contract,
+    check_SO, check_skew_symmetric, expm, logm)
 
 
 def check_SE(M):
     ''' Checks that the argument is in the special euclidean group. '''
     R, t, zero, one = extract_pieces(M) #@UnusedVariable
-    check('SO', R)
+    check_SO(R)
     assert_allclose(one, 1, err_msg='I expect the lower-right to be 1')
     assert_allclose(zero, 0, err_msg='I expect the bottom component to be 0.')
 
@@ -14,7 +14,7 @@ def check_SE(M):
 def check_se(M):
     ''' Checks that the input is in the special euclidean Lie algebra. '''
     omega, v, Z, zero = extract_pieces(M) #@UnusedVariable
-    check('so', omega)
+    check_skew_symmetric(omega)
     assert_allclose(Z, 0, err_msg='I expect the lower-right to be 0.')
     assert_allclose(zero, 0, err_msg='I expect the bottom component to be 0.')
 
@@ -47,7 +47,7 @@ def extract_pieces(x):
           returns='array[NxN],N=M+1')
 def combine_pieces(a, b, c, d):
     M = a.shape[0]
-    x = zeros((M + 1, M + 1))
+    x = np.zeros((M + 1, M + 1))
     x[0:M, 0:M] = a
     x[0:M, M] = b
     x[M, 0:M] = c

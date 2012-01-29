@@ -1,4 +1,7 @@
-from . import contract, dot, svd, check
+from . import contract, np
+
+from contracts import check
+
 
 
 # TODO: write tests
@@ -7,18 +10,18 @@ from . import contract, dot, svd, check
 def best_orthogonal_transform(X, Y):
     ''' Finds the best orthogonal transform R  between X and Y,
         such that R X ~= Y. '''
-    YX = dot(Y, X.T)
+    YX = np.dot(Y, X.T)
     check('array[KxK]', YX)
-    U, S, V = svd(YX) #@UnusedVariable
-    best = dot(U, V)
+    U, _, V = np.linalg.svd(YX)
+    best = np.dot(U, V)
     return best
 
 
 @contract(M='array[NxN]', returns='array[NxN],orthogonal')
 def closest_orthogonal_matrix(M):
     ''' Finds the closest orthogonal matrix to M. '''
-    U, S, V = svd(M) #@UnusedVariable
-    R = dot(U, V)
+    U, _, V = np.linalg.svd(M)
+    R = np.dot(U, V)
     return R
 
 
@@ -35,11 +38,11 @@ def best_similarity_transform(X, Y):
     Y = Y - Ym
 #    assert_allclose(X.mean(axis=1), 0, atol=1e-8)
 #    assert_allclose(Y.mean(axis=1), 0, atol=1e-8)
-    YX = dot(Y, X.T)
+    YX = np.dot(Y, X.T)
     check('array[KxK]', YX)
-    U, S, V = svd(YX) #@UnusedVariable
-    R = dot(U, V)
-    t = Ym - dot(R, Xm)
+    U, _, V = np.linalg.svd(YX)
+    R = np.dot(U, V)
+    t = Ym - np.dot(R, Xm)
     return R, t
 
 

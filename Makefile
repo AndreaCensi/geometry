@@ -1,3 +1,5 @@
+package=geometry
+
 all: develop
 	
 develop:
@@ -6,14 +8,26 @@ develop:
 install:
 	python setup.py install
 	
-test: test-fast
-	
-test-fast:
-	nosetests  --with-id -a '!density'  geometry
-	
-test-manifold:
-	nosetests  --with-id -a 'manifolds'  geometry
-	
+docs: 
+	make -C docs
+
+nose=nosetests --with-id
+nose_parallel=--processes=16 --process-timeout=30 --process-restartworker
+nose_coverage=--with-coverage --cover-html --cover-html-dir coverage_information --cover-package=$(package) $(package)
+
+test:
+	@echo - Use NOSE_PARAMS to pass extra arguments.
+	@echo - Use "make test-parallel" to enable parallel testing
+	@echo - Use "make test-coverage" to do coverage testing
+	@echo
+	$(nose) $(package)  -a '!density'  $(NOSE_PARAMS)
+
+test-parallel:
+	@echo - Use NOSE_PARAMS to pass extra arguments.
+	$(nose) $(package) $(nose_parallel) $(NOSE_PARAMS)
+
 test-coverage:
-	nosetests --with-doctest --with-coverage --cover-html --cover-html-dir coverage_information --cover-package=geometry geometry
+	@echo - Use NOSE_PARAMS to pass extra arguments.
+	$(nose) $(package) $(nose_coverage) $(NOSE_PARAMS)
+
 	

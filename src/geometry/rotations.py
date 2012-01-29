@@ -2,11 +2,9 @@
 
      conventions: q=( a + bi + cj + dk), with a>0
 '''
+from . import (assert_allclose, new_contract, contract, safe_arccos, np,
+    default_axis, normalize_length)
 import itertools
-from . import (assert_allclose, new_contract, contract, dot, zeros, eye,
-               safe_arccos, arctan2, np,
-               pi, sin, cos, array, sign, uniform, argmax, sqrt, check,
-               default_axis, norm, normalize_length)
 
 
 new_contract('unit_quaternion', 'array[4], unit_length')
@@ -15,34 +13,33 @@ new_contract('axis_angle', 'tuple(direction, float)')
 new_contract('axis_angle_canonical', 'tuple(direction, (float,>=0, <=pi))')
 
 
-@new_contract
-def SO(x):
+@contract(x='array[NxN],N>0')
+def check_SO(x):
     ''' Checks that the given value is a rotation matrix of arbitrary size. '''
-    check('orthogonal', x)
+    check_orthogonal(x)
     determinant = np.linalg.det(x * 1.0) # XXX: voodoo
     # lapack_lite.LapackError: 
     # Parameter a has non-native byte order in lapack_lite.dgetrf
     assert_allclose(determinant, 1.0)
 
 
-@new_contract
 @contract(x='array[NxN],N>0')
-def orthogonal(x):
+def check_orthogonal(x):
     ''' Check that the argument is an orthogonal matrix. '''
     N = x.shape[0]
-    I = eye(N)
+    I = np.eye(N)
     rtol = 10E-10 # XXX:
     atol = 10E-7  # XXX:
-    assert_allclose(I, dot(x, x.T), rtol=rtol, atol=atol)
-    assert_allclose(I, dot(x.T, x), rtol=rtol, atol=atol)
+    assert_allclose(I, np.dot(x, x.T), rtol=rtol, atol=atol)
+    assert_allclose(I, np.dot(x.T, x), rtol=rtol, atol=atol)
 
 
-@new_contract
+
 @contract(x='array[NxN]')
-def skew_symmetric(x):
+def check_skew_symmetric(x):
     ''' Check that the argument is a skew-symmetric matrix. '''
     n = x.shape[0]
-    ok = (zeros((n, n)) == x).all()
+    ok = (np.zeros((n, n)) == x).all()
     if not ok:
         diag = x.diagonal()
         if not (diag == 0).all():
@@ -56,6 +53,10 @@ def skew_symmetric(x):
                                  'a[%d][%d] = %f, a[%d][%d] = %f' % \
                                  (i, j, x[i, j], j, i, x[j, i]))
 
+
+new_contract('orthogonal', check_orthogonal)
+new_contract('SO', check_SO)
+new_contract('skew_symmetric', check_skew_symmetric)
 
 new_contract('SO2', 'array[2x2],SO')
 new_contract('SO3', 'array[3x3],SO')
@@ -72,23 +73,23 @@ new_contract('rotation_matrix', 'SO3')
 def rotz(theta):
     ''' Returns a 3x3 rotation matrix corresponding 
         to rotation around the *z* axis. '''
-    return array([
-            [cos(theta), -sin(theta), 0],
-            [sin(theta), cos(theta), 0],
+    return np.array([
+            [np.cos(theta), -np.sin(theta), 0],
+            [np.sin(theta), +np.cos(theta), 0],
             [0, 0, 1]])
 
 
 @contract(theta='number', returns='SO2')
 def SO2_from_angle(theta):
     ''' Returns a 2x2 rotation matrix. '''
-    return array([
-            [cos(theta), -sin(theta)],
-            [sin(theta), cos(theta)]])
+    return np.array([
+            [+np.cos(theta), -np.sin(theta)],
+            [+np.sin(theta), +np.cos(theta)]])
 
 
 @contract(R='SO2', returns='float')
 def angle_from_SO2(R):
-    angle = arctan2(R[1, 0], R[0, 0])
+    angle = np.arctan2(R[1, 0], R[0, 0])
     if angle == np.pi:
         angle = -np.pi
     return angle
@@ -114,18 +115,18 @@ def random_quaternion():
         
         Uses the algorithm used in Kuffner, ICRA'04.
     '''
-    s = uniform()
-    sigma1 = sqrt(1 - s)
-    sigma2 = sqrt(s)
-    theta1 = uniform() * 2 * pi
-    theta2 = uniform() * 2 * pi
+    s = np.random.uniform()
+    sigma1 = np.sqrt(1 - s)
+    sigma2 = np.sqrt(s)
+    theta1 = np.random.uniform() * 2 * np.pi
+    theta2 = np.random.uniform() * 2 * np.pi
 
-    q = array([cos(theta2) * sigma2,
-                  sin(theta1) * sigma1,
-                  cos(theta1) * sigma1,
-                  sin(theta2) * sigma2])
+    q = np.array([np.cos(theta2) * sigma2,
+                  np.sin(theta1) * sigma1,
+                  np.cos(theta1) * sigma1,
+                  np.sin(theta2) * sigma2])
 
-    q *= sign(q[0])
+    q *= np.sign(q[0])
     return q
 
 
@@ -139,7 +140,7 @@ def random_rotation(ndim=3):
         q = random_quaternion()
         return rotation_from_quaternion(q)
     elif ndim == 2:
-        return rot2d(uniform(0, 2 * pi))
+        return rot2d(np.random.uniform(0, 2 * np.pi))
     else:
         assert False
 
@@ -158,7 +159,7 @@ def geodesic_distance_for_rotations(R1, R2):
         It is computed as the angle of the rotation :math:`R_1^{*} R_2^{-1}``.
     
     '''
-    R = dot(R1, R2.T)
+    R = np.dot(R1, R2.T)
     axis1, angle1 = axis_angle_from_rotation(R) #@UnusedVariable
     return angle1
 
@@ -166,7 +167,7 @@ def geodesic_distance_for_rotations(R1, R2):
 @contract(v='array[3]', returns='array[3x3],skew_symmetric')
 def hat_map(v):
     ''' Maps a vector to a 3x3 skew symmetric matrix. '''
-    h = zeros((3, 3))
+    h = np.zeros((3, 3))
     h[0, 1] = -v[2]
     h[0, 2] = v[1]
     h[1, 2] = -v[0]
@@ -177,7 +178,7 @@ def hat_map(v):
 @contract(H='array[3x3],skew_symmetric', returns='array[3]')
 def map_hat(H):
     ''' The inverse of :py:func:`hat_map`. '''
-    v = zeros(3)
+    v = np.zeros(3)
     v[2] = -H[0, 1]
     v[1] = H[0, 2]
     v[0] = -H[1, 2]
@@ -204,7 +205,7 @@ def rotation_from_quaternion(x):
           2 * c * d + 2 * a * b,
           a ** 2 - b ** 2 - c ** 2 + d ** 2]
 
-    return array([r1, r2, r3])
+    return np.array([r1, r2, r3])
 
 
 @contract(R='rotation_matrix', returns='unit_quaternion')
@@ -218,14 +219,14 @@ def quaternion_from_rotation(R):
         
         TODO: add the more robust method with 4x4 matrix and eigenvector
     '''
-    largest = argmax(R.diagonal())
+    largest = np.argmax(R.diagonal())
     permutations = {0: [0, 1, 2],
                     1: [1, 2, 0],
                     2: [2, 0, 1]}
     u, v, w = permutations[largest]
     rr = 1 + R[u, u] - R[v, v] - R[w, w]
     assert rr >= 0
-    r = sqrt(rr)
+    r = np.sqrt(rr)
     if r == 0: # TODO: add tolerance
         return quaternion_from_axis_angle(default_axis(), 0.0)
     else:
@@ -234,7 +235,7 @@ def quaternion_from_rotation(R):
         qv = (R[u, v] + R[v, u]) / (2 * r)
         qw = (R[w, u] + R[u, w]) / (2 * r)
 
-        Q = zeros(4)
+        Q = np.zeros(4)
         Q[0] = q0
         Q[u + 1] = qu
         Q[v + 1] = qv
@@ -252,13 +253,13 @@ def quaternion_from_axis_angle(axis, angle):
         
         This is the inverse of :py:func:`axis_angle_from_quaternion`.
     '''
-    Q = array([
-            cos(angle / 2),
-            axis[0] * sin(angle / 2),
-            axis[1] * sin(angle / 2),
-            axis[2] * sin(angle / 2)
+    Q = np.array([
+            np.cos(angle / 2),
+            axis[0] * np.sin(angle / 2),
+            axis[1] * np.sin(angle / 2),
+            axis[2] * np.sin(angle / 2)
         ])
-    Q *= sign(Q[0])
+    Q *= np.sign(Q[0])
     return Q
 
 
@@ -271,12 +272,12 @@ def axis_angle_from_quaternion(q):
     if angle == 0: # XXX: use tolerance
         axis = default_axis()
     else:
-        axis = q[1:] / sin(angle / 2)
-    axis = axis / norm(axis)
-    if angle > pi:
-        angle -= 2 * pi
-    elif angle < -pi:
-        angle += 2 * pi
+        axis = q[1:] / np.sin(angle / 2)
+    axis = axis / np.linalg.norm(axis)
+    if angle > np.pi:
+        angle -= 2 * np.pi
+    elif angle < -np.pi:
+        angle += 2 * np.pi
 
     return axis, angle
 
@@ -289,8 +290,8 @@ def rotation_from_axis_angle(axis, angle):
     '''
     w = axis
     w_hat = hat_map(w)
-    w_hat2 = dot(w_hat, w_hat)
-    R = eye(3) + w_hat * sin(angle) + w_hat2 * (1 - cos(angle))
+    w_hat2 = np.dot(w_hat, w_hat)
+    R = np.eye(3) + w_hat * np.sin(angle) + w_hat2 * (1 - np.cos(angle))
     return R
 
 
@@ -312,10 +313,10 @@ def axis_angle_from_rotation(R):
     if angle == 0:
         return default_axis(), 0.0
     else:
-        v = array([R[2, 1] - R[1, 2],
+        v = np.array([R[2, 1] - R[1, 2],
                    R[0, 2] - R[2, 0],
                    R[1, 0] - R[0, 1]])
-        axis = (1 / (2 * sin(angle))) * v
+        axis = (1 / (2 * np.sin(angle))) * v
         return axis, angle
 
 

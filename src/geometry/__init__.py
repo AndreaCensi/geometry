@@ -27,8 +27,16 @@ except ImportError:
     eigh = make_warning('eigh')
     scipy_found = False
 
+
+import numpy as np
+from contracts import new_contract, contract
+
+
+
 if not scipy_found:
     development = False
+
+from .constants import *
 
 from .formatting import *
 from .basic_utils import *

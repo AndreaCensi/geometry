@@ -1,7 +1,7 @@
 from contracts import contract
 import numpy as np
 from string import ljust
-from contracts.interface import describe_type, describe_value
+from contracts import describe_type, describe_value
 
 
 def printm(*args):

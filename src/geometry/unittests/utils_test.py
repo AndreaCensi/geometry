@@ -1,9 +1,9 @@
-from geometry import (sphere_area, spherical_cap_area, assert_allclose, pi,
+from geometry import (sphere_area, spherical_cap_area, assert_allclose, np,
                           spherical_cap_with_area)
 
 A = sphere_area()
 
-couples = [(0, 0), (pi / 2, A / 2), (pi, A)]
+couples = [(0, 0), (np.pi / 2, A / 2), (np.pi, A)]
 
 
 def spherical_cap_area_test():
