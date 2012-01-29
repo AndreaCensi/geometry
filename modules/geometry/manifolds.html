@@ -3,17 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>geometry.manifolds &mdash; PyGeometry v0.9.2 documentation</title>
+    <title>geometry.manifolds &mdash; PyGeometry 1.1 documentation</title>
+    
     <link rel="stylesheet" href="../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.9.2',
+        VERSION:     '1.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +25,7 @@
     <script type="text/javascript" src="../../static/jquery.js"></script>
     <script type="text/javascript" src="../../static/underscore.js"></script>
     <script type="text/javascript" src="../../static/doctools.js"></script>
-    <link rel="top" title="PyGeometry v0.9.2 documentation" href="../../index.html" />
+    <link rel="top" title="PyGeometry 1.1 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" />
 	 
 
@@ -41,7 +44,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../../index.html">PyGeometry v0.9.2 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">PyGeometry 1.1 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -53,44 +56,92 @@
             
   <h1>Source code for geometry.manifolds</h1><div class="highlight"><pre>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">contracts</span> <span class="kn">import</span> <span class="n">contract</span><span class="p">,</span> <span class="n">check</span>
-<span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">assert_allclose</span>
+<span class="kn">from</span> <span class="nn">contracts</span> <span class="kn">import</span> <span class="n">contract</span><span class="p">,</span> <span class="n">check</span><span class="p">,</span> <span class="n">new_contract</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">assert_allclose</span>
 
-<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="n">DoesNotBelong</span>
+
+<span class="kn">from</span> <span class="nn">.differentiable_manifold</span> <span class="kn">import</span> <span class="n">DifferentiableManifold</span><span class="p">,</span> <span class="n">RandomManifold</span>
+<span class="kn">from</span> <span class="nn">.tangent_bundle</span> <span class="kn">import</span> <span class="n">TangentBundle</span>
+<span class="n">new_contract</span><span class="p">(</span><span class="s">&#39;DifferentiableManifold&#39;</span><span class="p">,</span> <span class="n">DifferentiableManifold</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">.product_manifold</span> <span class="kn">import</span> <span class="n">ProductManifold</span>
+
+<span class="kn">from</span> <span class="nn">.group</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.matrix_linear_space</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.matrix_lie_algebra</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">.matrix_lie_group</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.matrix_lie_group_tangent</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="kn">from</span> <span class="nn">.sphere</span> <span class="kn">import</span> <span class="n">Sphere</span>
-
-<span class="n">S1</span> <span class="o">=</span> <span class="n">Sphere</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.sphere</span> <span class="kn">import</span> <span class="n">Sphere</span><span class="p">,</span> <span class="n">Sphere1</span>
+<span class="n">S1</span> <span class="o">=</span> <span class="n">Sphere1</span><span class="p">()</span>
 <span class="n">S2</span> <span class="o">=</span> <span class="n">Sphere</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">S1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="n">S2</span><span class="p">}</span>
 
 <span class="kn">from</span> <span class="nn">.torus</span> <span class="kn">import</span> <span class="o">*</span>
-
-
 <span class="n">T1</span> <span class="o">=</span> <span class="n">Torus</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">T2</span> <span class="o">=</span> <span class="n">Torus</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">T3</span> <span class="o">=</span> <span class="n">Torus</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="kn">from</span> <span class="nn">.moebius</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">T</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">T1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="n">T2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">T3</span><span class="p">}</span>
 
 <span class="kn">from</span> <span class="nn">.euclidean</span> <span class="kn">import</span> <span class="n">Euclidean</span>
-<span class="n">E1</span> <span class="o">=</span> <span class="n">Euclidean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">E2</span> <span class="o">=</span> <span class="n">Euclidean</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">R1</span> <span class="o">=</span> <span class="n">Euclidean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">R2</span> <span class="o">=</span> <span class="n">Euclidean</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">R3</span> <span class="o">=</span> <span class="n">Euclidean</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">R1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="n">R2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">R3</span><span class="p">}</span>
 
-<span class="kn">from</span> <span class="nn">.special_orthogonal</span> <span class="kn">import</span> <span class="n">SO</span><span class="p">,</span> <span class="n">so</span>
+<span class="kn">from</span> <span class="nn">.translation_algebra</span> <span class="kn">import</span> <span class="n">tran</span>
+<span class="n">tran1</span> <span class="o">=</span> <span class="n">tran</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">tran2</span> <span class="o">=</span> <span class="n">tran</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">tran3</span> <span class="o">=</span> <span class="n">tran</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">tran</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">tran1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="n">tran2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">tran3</span><span class="p">}</span>
 
-<span class="c">#: 3D rotations</span>
-<span class="n">SO3</span> <span class="o">=</span> <span class="n">SO</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="c">#: 2D rotations</span>
-<span class="n">SO2</span> <span class="o">=</span> <span class="n">SO</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">so3</span> <span class="o">=</span> <span class="n">so</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">so2</span> <span class="o">=</span> <span class="n">so</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.translation_group</span> <span class="kn">import</span> <span class="n">Tran</span>
+<span class="n">Tran1</span> <span class="o">=</span> <span class="n">Tran</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Tran2</span> <span class="o">=</span> <span class="n">Tran</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Tran3</span> <span class="o">=</span> <span class="n">Tran</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">Tran</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">Tran1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="n">Tran2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">Tran3</span><span class="p">}</span>
 
-<span class="kn">from</span> <span class="nn">.special_euclidean</span> <span class="kn">import</span> <span class="n">SE</span><span class="p">,</span> <span class="n">se</span>
-<span class="n">SE3</span> <span class="o">=</span> <span class="n">SE</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">SE2</span> <span class="o">=</span> <span class="n">SE</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">se3</span> <span class="o">=</span> <span class="n">se</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">se2</span> <span class="o">=</span> <span class="n">se</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.special_orthogonal_algebra</span> <span class="kn">import</span> <span class="n">so_algebra</span>
+<span class="n">so2</span> <span class="o">=</span> <span class="n">so_algebra</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">so3</span> <span class="o">=</span> <span class="n">so_algebra</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">so</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="n">so2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">so3</span><span class="p">}</span>
+
+<span class="kn">from</span> <span class="nn">.special_orthogonal_group</span> <span class="kn">import</span> <span class="n">SO_group</span>
+<span class="n">SO2</span> <span class="o">=</span> <span class="n">SO_group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">SO3</span> <span class="o">=</span> <span class="n">SO_group</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">SO</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="n">SO2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">SO3</span><span class="p">}</span>
+
+<span class="kn">from</span> <span class="nn">.special_euclidean_algebra</span> <span class="kn">import</span> <span class="n">se_algebra</span>
+<span class="n">se2</span> <span class="o">=</span> <span class="n">se_algebra</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">se3</span> <span class="o">=</span> <span class="n">se_algebra</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">se</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="n">se2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">se3</span><span class="p">}</span>
+
+<span class="kn">from</span> <span class="nn">.special_euclidean_group</span> <span class="kn">import</span> <span class="n">SE_group</span>
+<span class="n">SE2</span> <span class="o">=</span> <span class="n">SE_group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">SE3</span> <span class="o">=</span> <span class="n">SE_group</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">SE</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="n">SE2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">SE3</span><span class="p">}</span>
+
+<span class="n">TSE2</span> <span class="o">=</span> <span class="n">SE2</span><span class="o">.</span><span class="n">tangent_bundle</span><span class="p">()</span>
+<span class="n">TSE3</span> <span class="o">=</span> <span class="n">SE3</span><span class="o">.</span><span class="n">tangent_bundle</span><span class="p">()</span>
+<span class="n">TSE</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="n">TSE2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">TSE3</span><span class="p">}</span>
+
+<span class="n">all_manifolds</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">SO3</span><span class="p">,</span> <span class="n">SO2</span><span class="p">,</span>
+    <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R3</span><span class="p">,</span>
+    <span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">,</span>
+    <span class="n">Tran1</span><span class="p">,</span> <span class="n">Tran2</span><span class="p">,</span> <span class="n">Tran3</span><span class="p">,</span>
+    <span class="n">SE2</span><span class="p">,</span> <span class="n">SE3</span><span class="p">,</span>
+    <span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span>
+    <span class="n">se2</span><span class="p">,</span> <span class="n">se3</span><span class="p">,</span>
+    <span class="n">so2</span><span class="p">,</span> <span class="n">so3</span><span class="p">,</span>
+    <span class="n">tran1</span><span class="p">,</span> <span class="n">tran2</span><span class="p">,</span> <span class="n">tran3</span><span class="p">,</span>
+    <span class="n">TSE2</span><span class="p">,</span> <span class="n">TSE3</span>
+<span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">.embedding_relations</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.manifold_embedding_propagation</span> <span class="kn">import</span> <span class="n">compute_manifold_relations</span>
+<span class="n">compute_manifold_relations</span><span class="p">(</span><span class="n">all_manifolds</span><span class="p">)</span>
 </pre></div>
 
           </div>
@@ -101,7 +152,7 @@
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -121,14 +172,14 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../../index.html">PyGeometry v0.9.2 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">PyGeometry 1.1 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
 	
     <div class="footer">
         &copy; Copyright 2011, Andrea Censi.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
 	
   <script type="text/javascript">

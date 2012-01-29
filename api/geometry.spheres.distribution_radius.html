@@ -3,17 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>geometry.spheres.distribution_radius &mdash; PyGeometry v0.9.2 documentation</title>
+    <title>geometry.spheres.distribution_radius &mdash; PyGeometry 1.1 documentation</title>
+    
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.9.2',
+        VERSION:     '1.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="PyGeometry v0.9.2 documentation" href="../index.html" />
+    <link rel="top" title="PyGeometry 1.1 documentation" href="../index.html" />
 	 
 
    <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
@@ -40,7 +43,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../index.html">PyGeometry v0.9.2 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">PyGeometry 1.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -53,21 +56,22 @@
 <h1>geometry.spheres.distribution_radius<a class="headerlink" href="#geometry-spheres-distribution-radius" title="Permalink to this headline">¶</a></h1>
 <dl class="data">
 <dt id="geometry.spheres.distribution_radius">
-<tt class="descclassname">geometry.spheres.</tt><tt class="descname">distribution_radius</tt><a class="reference internal" href="../modules/geometry/spheres.html#distribution_radius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.distribution_radius" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the radius of the given directions distribution.</p>
-<blockquote>
-<div><p>The radius is defined as the minimum <em>r</em> such that there exists a 
+<tt class="descclassname">geometry.spheres.</tt><tt class="descname">distribution_radius</tt><em class="property"> = &lt;function distribution_radius at 0x103279230&gt;</em><a class="reference internal" href="../modules/geometry/spheres.html#distribution_radius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.distribution_radius" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the radius of the given directions distribution.</p>
+<p>The radius is defined as the minimum <em>r</em> such that there exists a 
 point <em>s</em> in <em>S</em> such that all distances are within <em>r</em> from <em>s</em>.</p>
 <div class="math">
-<p><img src="../images/math/ef2f4630587a8421e15d078bda456e50cc8231f3.png" alt="\textsf{radius} = \min \{ r | \exists s :  \forall x \in S : d(s,x) &lt;= r \}" /></p>
+<p><img src="../images/math/d586e2ff54342c3e50ebef211b3c96ecdd450460.png" alt="\textsf{radius} = \min \{ r | \exists s : 
+\forall x \in S : d(s,x) &lt;= r \}"/></p>
 </div></div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>S</strong> (<tt class="docutils literal"><span class="pre">directions</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>S</strong> (<tt class="docutils literal"><span class="pre">directions</span></tt>) &#8211; </td>
 </tr>
-<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">float,&gt;=0,&lt;=pi</span></tt></td>
 </tr>
 </tbody>
 </table>
@@ -89,7 +93,7 @@ point <em>s</em> in <em>S</em> such that all distances are within <em>r</em> fro
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -109,13 +113,13 @@ point <em>s</em> in <em>S</em> such that all distances are within <em>r</em> fro
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../index.html">PyGeometry v0.9.2 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">PyGeometry 1.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
 	
     <div class="footer">
         &copy; Copyright 2011, Andrea Censi.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
 	
   <script type="text/javascript">
