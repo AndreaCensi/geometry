@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>geometry.yaml</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="geometry-module.html">Package&nbsp;geometry</a> ::
+        Module&nbsp;yaml
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="geometry.yaml-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="geometry.yaml-module.html">Module geometry.yaml</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-name">contract</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">contracts</tt><tt class="py-op">.</tt><tt class="py-name">interface</tt> <tt class="py-keyword">import</tt> <tt class="py-name">describe_value</tt><tt class="py-op">,</tt> <tt class="py-name">describe_type</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package geometry=geometry-module.html"><a title="geometry" class="py-name" href="#" onclick="return doclink('link-0', 'geometry', 'link-0');">geometry</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package geometry.manifolds=geometry.manifolds-module.html"><a title="geometry.manifolds" class="py-name" href="#" onclick="return doclink('link-1', 'manifolds', 'link-1');">manifolds</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class geometry.manifolds.differentiable_manifold.DifferentiableManifold=geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold" class="py-name" href="#" onclick="return doclink('link-2', 'DifferentiableManifold', 'link-2');">DifferentiableManifold</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment">#def array_to_lists(x):</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#    return x.tolist()</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment">#def packet(space, rep, value):</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment">#    return {'space': space, 'repr': rep, 'value': value}</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment">#@contract(x='SE3')</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment">#def yaml_from_SE3(x):</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment">#    return packet('SE3', 'matrix', array_to_lists(x))</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment">#@contract(x='se3')</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment">#def yaml_from_se3(x):</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment">#    return packet('se3', 'matrix', array_to_lists(x))</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment">#    </tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-comment">## what about user-centered?</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-comment">#def yaml_from_TSE3(x):</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-comment">#    pose, vel = x    </tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-comment">#    return packet('TSE3', 'base-tangent',</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-comment">#                  [yaml_from_SE3(pose), yaml_from_se3(vel)])</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable geometry.yaml.converters=geometry.yaml-module.html#converters"><a title="geometry.yaml.converters" class="py-name" href="#" onclick="return doclink('link-3', 'converters', 'link-3');">converters</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable geometry.yaml.default_representation=geometry.yaml-module.html#default_representation"><a title="geometry.yaml.default_representation" class="py-name" href="#" onclick="return doclink('link-4', 'default_representation', 'link-4');">default_representation</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="register"></a><div id="register-def"><a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt> <a class="py-toggle" href="#" id="register-toggle" onclick="return toggle('register');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.yaml-module.html#register">register</a><tt class="py-op">(</tt><tt class="py-param">manifold_name</tt><tt class="py-op">,</tt> <tt class="py-param">representation</tt><tt class="py-op">,</tt> <tt class="py-param">converter</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="register-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="register-expanded"><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">manifold_name</tt> <tt class="py-keyword">in</tt> <tt id="link-5" class="py-name"><a title="geometry.yaml.default_representation" class="py-name" href="#" onclick="return doclink('link-5', 'default_representation', 'link-4');">default_representation</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt id="link-6" class="py-name"><a title="geometry.yaml.default_representation" class="py-name" href="#" onclick="return doclink('link-6', 'default_representation', 'link-4');">default_representation</a></tt><tt class="py-op">[</tt><tt class="py-name">manifold_name</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">representation</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-name">key</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">manifold_name</tt><tt class="py-op">,</tt> <tt class="py-name">representation</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-keyword">assert</tt> <tt class="py-keyword">not</tt> <tt class="py-name">key</tt> <tt class="py-keyword">in</tt> <tt id="link-7" class="py-name"><a title="geometry.yaml.converters" class="py-name" href="#" onclick="return doclink('link-7', 'converters', 'link-3');">converters</a></tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">    <tt id="link-8" class="py-name"><a title="geometry.yaml.converters" class="py-name" href="#" onclick="return doclink('link-8', 'converters', 'link-3');">converters</a></tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">converter</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="get_default_representation"></a><div id="get_default_representation-def"><a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt> <a class="py-toggle" href="#" id="get_default_representation-toggle" onclick="return toggle('get_default_representation');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.yaml-module.html#get_default_representation">get_default_representation</a><tt class="py-op">(</tt><tt class="py-param">manifold</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="get_default_representation-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="get_default_representation-expanded"><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">manifold</tt><tt class="py-op">,</tt> <tt id="link-9" class="py-name"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold" class="py-name" href="#" onclick="return doclink('link-9', 'DifferentiableManifold', 'link-2');">DifferentiableManifold</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-name">key</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">manifold</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-name">key</tt> <tt class="py-op">=</tt> <tt class="py-name">manifold</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">key</tt> <tt class="py-keyword">in</tt> <tt id="link-10" class="py-name"><a title="geometry.yaml.default_representation" class="py-name" href="#" onclick="return doclink('link-10', 'default_representation', 'link-4');">default_representation</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">'Cannot find representation for %s.'</tt> <tt class="py-op">%</tt> <tt class="py-name">manifold</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-11" class="py-name"><a title="geometry.yaml.default_representation" class="py-name" href="#" onclick="return doclink('link-11', 'default_representation', 'link-4');">default_representation</a></tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="to_yaml"></a><div id="to_yaml-def"><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="to_yaml-toggle" onclick="return toggle('to_yaml');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.yaml-module.html#to_yaml">to_yaml</a><tt class="py-op">(</tt><tt class="py-param">manifold</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">,</tt> <tt class="py-param">representation</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="to_yaml-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="to_yaml-expanded"><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">representation</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-name">representation</tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name" targets="Function geometry.yaml.get_default_representation()=geometry.yaml-module.html#get_default_representation"><a title="geometry.yaml.get_default_representation" class="py-name" href="#" onclick="return doclink('link-12', 'get_default_representation', 'link-12');">get_default_representation</a></tt><tt class="py-op">(</tt><tt class="py-name">manifold</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-name">key</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">manifold</tt><tt class="py-op">,</tt> <tt class="py-name">representation</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">key</tt> <tt class="py-keyword">in</tt> <tt id="link-13" class="py-name"><a title="geometry.yaml.converters" class="py-name" href="#" onclick="return doclink('link-13', 'converters', 'link-3');">converters</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'Unknown format %s; I know %s.'</tt> <tt class="py-op">%</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                         <tt class="py-op">(</tt><tt class="py-name">key</tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name"><a title="geometry.yaml.converters" class="py-name" href="#" onclick="return doclink('link-14', 'converters', 'link-3');">converters</a></tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-name">conv</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="geometry.yaml.converters" class="py-name" href="#" onclick="return doclink('link-15', 'converters', 'link-3');">converters</a></tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">]</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">conv</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method geometry.yaml.Representation.to_yaml()=geometry.yaml.Representation-class.html#to_yaml,Static Method geometry.yaml.SE3_m44.to_yaml()=geometry.yaml.SE3_m44-class.html#to_yaml,Static Method geometry.yaml.TSE3_bt.to_yaml()=geometry.yaml.TSE3_bt-class.html#to_yaml,Static Method geometry.yaml.se3_m44.to_yaml()=geometry.yaml.se3_m44-class.html#to_yaml,Function geometry.yaml.to_yaml()=geometry.yaml-module.html#to_yaml"><a title="geometry.yaml.Representation.to_yaml
+geometry.yaml.SE3_m44.to_yaml
+geometry.yaml.TSE3_bt.to_yaml
+geometry.yaml.se3_m44.to_yaml
+geometry.yaml.to_yaml" class="py-name" href="#" onclick="return doclink('link-16', 'to_yaml', 'link-16');">to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-string">'%s:%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">manifold</tt><tt class="py-op">,</tt> <tt class="py-name">representation</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">x</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="from_yaml"></a><div id="from_yaml-def"><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">=</tt><tt class="py-string">'list'</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt> <a class="py-toggle" href="#" id="from_yaml-toggle" onclick="return toggle('from_yaml');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.yaml-module.html#from_yaml">from_yaml</a><tt class="py-op">(</tt><tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="from_yaml-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="from_yaml-expanded"><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">list</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'I expect a list with two elements.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-name">form</tt> <tt class="py-op">=</tt> <tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">form</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'I expect a string describing the format,'</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                         <tt class="py-string">' not %s, while decoding %s'</tt> <tt class="py-op">%</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                         <tt class="py-op">(</tt><tt class="py-name">describe_type</tt><tt class="py-op">(</tt><tt class="py-name">form</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">describe_value</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-name">space</tt><tt class="py-op">,</tt> <tt class="py-name">representation</tt> <tt class="py-op">=</tt> <tt class="py-name">form</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">':'</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-name">key</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">space</tt><tt class="py-op">,</tt> <tt class="py-name">representation</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">key</tt> <tt class="py-keyword">in</tt> <tt id="link-17" class="py-name"><a title="geometry.yaml.converters" class="py-name" href="#" onclick="return doclink('link-17', 'converters', 'link-3');">converters</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'Unknown format %s; I know %s.'</tt> <tt class="py-op">%</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                         <tt class="py-op">(</tt><tt class="py-name">key</tt><tt class="py-op">,</tt> <tt id="link-18" class="py-name"><a title="geometry.yaml.converters" class="py-name" href="#" onclick="return doclink('link-18', 'converters', 'link-3');">converters</a></tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-name">conv</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="geometry.yaml.converters" class="py-name" href="#" onclick="return doclink('link-19', 'converters', 'link-3');">converters</a></tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">]</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">conv</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method geometry.manifolds.special_euclidean_group.SE_group.from_yaml()=geometry.manifolds.special_euclidean_group.SE_group-class.html#from_yaml,Method geometry.yaml.Representation.from_yaml()=geometry.yaml.Representation-class.html#from_yaml,Static Method geometry.yaml.SE3_m44.from_yaml()=geometry.yaml.SE3_m44-class.html#from_yaml,Static Method geometry.yaml.TSE3_bt.from_yaml()=geometry.yaml.TSE3_bt-class.html#from_yaml,Function geometry.yaml.from_yaml()=geometry.yaml-module.html#from_yaml,Static Method geometry.yaml.se3_m44.from_yaml()=geometry.yaml.se3_m44-class.html#from_yaml"><a title="geometry.manifolds.special_euclidean_group.SE_group.from_yaml
+geometry.yaml.Representation.from_yaml
+geometry.yaml.SE3_m44.from_yaml
+geometry.yaml.TSE3_bt.from_yaml
+geometry.yaml.from_yaml
+geometry.yaml.se3_m44.from_yaml" class="py-name" href="#" onclick="return doclink('link-20', 'from_yaml', 'link-20');">from_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
+<a name="Representation"></a><div id="Representation-def"><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt> <a class="py-toggle" href="#" id="Representation-toggle" onclick="return toggle('Representation');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="geometry.yaml.Representation-class.html">Representation</a><tt class="py-op">:</tt> </tt>
+</div><div id="Representation-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Representation-expanded"><a name="Representation.to_yaml"></a><div id="Representation.to_yaml-def"><a name="L86"></a><tt class="py-lineno"> 86</tt> <a class="py-toggle" href="#" id="Representation.to_yaml-toggle" onclick="return toggle('Representation.to_yaml');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.yaml.Representation-class.html#to_yaml">to_yaml</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Representation.to_yaml-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Representation.to_yaml-expanded"><a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"> </tt>
+<a name="Representation.from_yaml"></a><div id="Representation.from_yaml-def"><a name="L89"></a><tt class="py-lineno"> 89</tt> <a class="py-toggle" href="#" id="Representation.from_yaml-toggle" onclick="return toggle('Representation.from_yaml');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.yaml.Representation-class.html#from_yaml">from_yaml</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">y</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Representation.from_yaml-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Representation.from_yaml-expanded"><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div></div><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"> </tt>
+<a name="SE3_m44"></a><div id="SE3_m44-def"><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt> <a class="py-toggle" href="#" id="SE3_m44-toggle" onclick="return toggle('SE3_m44');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="geometry.yaml.SE3_m44-class.html">SE3_m44</a><tt class="py-op">(</tt><tt class="py-base-class">Representation</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SE3_m44-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SE3_m44-expanded"><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="SE3_m44.to_yaml"></a><div id="SE3_m44.to_yaml-def"><a name="L95"></a><tt class="py-lineno"> 95</tt> <a class="py-toggle" href="#" id="SE3_m44.to_yaml-toggle" onclick="return toggle('SE3_m44.to_yaml');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.yaml.SE3_m44-class.html#to_yaml">to_yaml</a><tt class="py-op">(</tt><tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SE3_m44.to_yaml-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SE3_m44.to_yaml-expanded"><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">x</tt><tt class="py-op">.</tt><tt class="py-name">tolist</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="SE3_m44.from_yaml"></a><div id="SE3_m44.from_yaml-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="SE3_m44.from_yaml-toggle" onclick="return toggle('SE3_m44.from_yaml');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.yaml.SE3_m44-class.html#from_yaml">from_yaml</a><tt class="py-op">(</tt><tt class="py-param">y</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SE3_m44.from_yaml-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SE3_m44.from_yaml-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">y</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="se3_m44"></a><div id="se3_m44-def"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="se3_m44-toggle" onclick="return toggle('se3_m44');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="geometry.yaml.se3_m44-class.html">se3_m44</a><tt class="py-op">(</tt><tt class="py-base-class">Representation</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se3_m44-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="se3_m44-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="se3_m44.to_yaml"></a><div id="se3_m44.to_yaml-def"><a name="L105"></a><tt class="py-lineno">105</tt> <a class="py-toggle" href="#" id="se3_m44.to_yaml-toggle" onclick="return toggle('se3_m44.to_yaml');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.yaml.se3_m44-class.html#to_yaml">to_yaml</a><tt class="py-op">(</tt><tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se3_m44.to_yaml-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="se3_m44.to_yaml-expanded"><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">x</tt><tt class="py-op">.</tt><tt class="py-name">tolist</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="se3_m44.from_yaml"></a><div id="se3_m44.from_yaml-def"><a name="L109"></a><tt class="py-lineno">109</tt> <a class="py-toggle" href="#" id="se3_m44.from_yaml-toggle" onclick="return toggle('se3_m44.from_yaml');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.yaml.se3_m44-class.html#from_yaml">from_yaml</a><tt class="py-op">(</tt><tt class="py-param">y</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se3_m44.from_yaml-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="se3_m44.from_yaml-expanded"><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">y</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt>
+<a name="TSE3_bt"></a><div id="TSE3_bt-def"><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt> <a class="py-toggle" href="#" id="TSE3_bt-toggle" onclick="return toggle('TSE3_bt');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="geometry.yaml.TSE3_bt-class.html">TSE3_bt</a><tt class="py-op">(</tt><tt class="py-base-class">Representation</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TSE3_bt-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="TSE3_bt-expanded"><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="TSE3_bt.to_yaml"></a><div id="TSE3_bt.to_yaml-def"><a name="L115"></a><tt class="py-lineno">115</tt> <a class="py-toggle" href="#" id="TSE3_bt.to_yaml-toggle" onclick="return toggle('TSE3_bt.to_yaml');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.yaml.TSE3_bt-class.html#to_yaml">to_yaml</a><tt class="py-op">(</tt><tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TSE3_bt.to_yaml-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TSE3_bt.to_yaml-expanded"><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt> <tt class="py-op">=</tt> <tt class="py-name">x</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt id="link-21" class="py-name" targets="Class geometry.yaml.SE3_m44=geometry.yaml.SE3_m44-class.html"><a title="geometry.yaml.SE3_m44" class="py-name" href="#" onclick="return doclink('link-21', 'SE3_m44', 'link-21');">SE3_m44</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="geometry.yaml.Representation.to_yaml
+geometry.yaml.SE3_m44.to_yaml
+geometry.yaml.TSE3_bt.to_yaml
+geometry.yaml.se3_m44.to_yaml
+geometry.yaml.to_yaml" class="py-name" href="#" onclick="return doclink('link-22', 'to_yaml', 'link-16');">to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-23" class="py-name" targets="Class geometry.yaml.se3_m44=geometry.yaml.se3_m44-class.html"><a title="geometry.yaml.se3_m44" class="py-name" href="#" onclick="return doclink('link-23', 'se3_m44', 'link-23');">se3_m44</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="geometry.yaml.Representation.to_yaml
+geometry.yaml.SE3_m44.to_yaml
+geometry.yaml.TSE3_bt.to_yaml
+geometry.yaml.se3_m44.to_yaml
+geometry.yaml.to_yaml" class="py-name" href="#" onclick="return doclink('link-24', 'to_yaml', 'link-16');">to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="TSE3_bt.from_yaml"></a><div id="TSE3_bt.from_yaml-def"><a name="L120"></a><tt class="py-lineno">120</tt> <a class="py-toggle" href="#" id="TSE3_bt.from_yaml-toggle" onclick="return toggle('TSE3_bt.from_yaml');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.yaml.TSE3_bt-class.html#from_yaml">from_yaml</a><tt class="py-op">(</tt><tt class="py-param">y</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TSE3_bt.from_yaml-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TSE3_bt.from_yaml-expanded"><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="geometry.yaml.SE3_m44" class="py-name" href="#" onclick="return doclink('link-25', 'SE3_m44', 'link-21');">SE3_m44</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="geometry.manifolds.special_euclidean_group.SE_group.from_yaml
+geometry.yaml.Representation.from_yaml
+geometry.yaml.SE3_m44.from_yaml
+geometry.yaml.TSE3_bt.from_yaml
+geometry.yaml.from_yaml
+geometry.yaml.se3_m44.from_yaml" class="py-name" href="#" onclick="return doclink('link-26', 'from_yaml', 'link-20');">from_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">y</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">                <tt id="link-27" class="py-name"><a title="geometry.yaml.se3_m44" class="py-name" href="#" onclick="return doclink('link-27', 'se3_m44', 'link-23');">se3_m44</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="geometry.manifolds.special_euclidean_group.SE_group.from_yaml
+geometry.yaml.Representation.from_yaml
+geometry.yaml.SE3_m44.from_yaml
+geometry.yaml.TSE3_bt.from_yaml
+geometry.yaml.from_yaml
+geometry.yaml.se3_m44.from_yaml" class="py-name" href="#" onclick="return doclink('link-28', 'from_yaml', 'link-20');">from_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">y</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt id="link-29" class="py-name" targets="Function geometry.yaml.register()=geometry.yaml-module.html#register"><a title="geometry.yaml.register" class="py-name" href="#" onclick="return doclink('link-29', 'register', 'link-29');">register</a></tt><tt class="py-op">(</tt><tt class="py-string">'SE3'</tt><tt class="py-op">,</tt> <tt class="py-string">'m44'</tt><tt class="py-op">,</tt> <tt id="link-30" class="py-name"><a title="geometry.yaml.SE3_m44" class="py-name" href="#" onclick="return doclink('link-30', 'SE3_m44', 'link-21');">SE3_m44</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt id="link-31" class="py-name"><a title="geometry.yaml.register" class="py-name" href="#" onclick="return doclink('link-31', 'register', 'link-29');">register</a></tt><tt class="py-op">(</tt><tt class="py-string">'TSE3'</tt><tt class="py-op">,</tt> <tt class="py-string">'bt'</tt><tt class="py-op">,</tt> <tt id="link-32" class="py-name" targets="Class geometry.yaml.TSE3_bt=geometry.yaml.TSE3_bt-class.html"><a title="geometry.yaml.TSE3_bt" class="py-name" href="#" onclick="return doclink('link-32', 'TSE3_bt', 'link-32');">TSE3_bt</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:46 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

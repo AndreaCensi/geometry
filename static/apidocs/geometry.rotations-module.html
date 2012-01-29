@@ -1,0 +1,1274 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>geometry.rotations</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="geometry-module.html">Package&nbsp;geometry</a> ::
+        Module&nbsp;rotations
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="geometry.rotations-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module rotations</h1><p class="nomargin-top"><span class="codelink"><a href="geometry.rotations-pysrc.html">source&nbsp;code</a></span></p>
+<p>Contains all about rotation matrices, quaternions, and various 
+  conversions.</p>
+  <p>conventions: q=( a + bi + cj + dk), with a&gt;0</p>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#SO2_from_angle" class="summary-sig-name">SO2_from_angle</a>(<span class="summary-sig-arg">theta</span>)</span><br />
+      Returns a 2x2 rotation matrix.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#SO2_from_angle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#angle_from_SO2" class="summary-sig-name">angle_from_SO2</a>(<span class="summary-sig-arg">R</span>)</span><br />
+      :param R: :type R:  ``SO2``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#angle_from_SO2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#angle_from_rot2d" class="summary-sig-name">angle_from_rot2d</a>(<span class="summary-sig-arg">R</span>)</span><br />
+      :param R: :type R:  ``SO2``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#angle_from_SO2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#axis_angle_from_quaternion" class="summary-sig-name">axis_angle_from_quaternion</a>(<span class="summary-sig-arg">q</span>)</span><br />
+      This is the inverse of :py:func:`quaternion_from_axis_angle`.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#axis_angle_from_quaternion">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#axis_angle_from_rotation" class="summary-sig-name">axis_angle_from_rotation</a>(<span class="summary-sig-arg">R</span>)</span><br />
+      Returns the *(axis,angle)* representation of a given rotation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#axis_angle_from_rotation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#check_SO" class="summary-sig-name">check_SO</a>(<span class="summary-sig-arg">x</span>)</span><br />
+      Checks that the given value is a rotation matrix of arbitrary size.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#check_SO">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#check_orthogonal" class="summary-sig-name">check_orthogonal</a>(<span class="summary-sig-arg">x</span>)</span><br />
+      Check that the argument is an orthogonal matrix.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#check_orthogonal">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#check_skew_symmetric" class="summary-sig-name">check_skew_symmetric</a>(<span class="summary-sig-arg">x</span>)</span><br />
+      Check that the argument is a skew-symmetric matrix.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#check_skew_symmetric">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#geodesic_distance_for_rotations" class="summary-sig-name">geodesic_distance_for_rotations</a>(<span class="summary-sig-arg">R1</span>,
+        <span class="summary-sig-arg">R2</span>)</span><br />
+      Returns the geodesic distance between two rotation matrices.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#geodesic_distance_for_rotations">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#hat_map" class="summary-sig-name">hat_map</a>(<span class="summary-sig-arg">v</span>)</span><br />
+      Maps a vector to a 3x3 skew symmetric matrix.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#hat_map">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#hat_map_2d" class="summary-sig-name">hat_map_2d</a>(<span class="summary-sig-arg">omega</span>)</span><br />
+      :param omega: :type omega:  ``number``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#hat_map_2d">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#map_hat" class="summary-sig-name">map_hat</a>(<span class="summary-sig-arg">H</span>)</span><br />
+      The inverse of :py:func:`hat_map`.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#map_hat">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#map_hat_2d" class="summary-sig-name">map_hat_2d</a>(<span class="summary-sig-arg">W</span>)</span><br />
+      :param W: :type W:  ``so2``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#map_hat_2d">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#quaternion_from_axis_angle" class="summary-sig-name">quaternion_from_axis_angle</a>(<span class="summary-sig-arg">axis</span>,
+        <span class="summary-sig-arg">angle</span>)</span><br />
+      Computes a quaternion corresponding to the rotation of *angle* radians
+       around the given *axis*.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#quaternion_from_axis_angle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#quaternion_from_rotation" class="summary-sig-name">quaternion_from_rotation</a>(<span class="summary-sig-arg">R</span>)</span><br />
+      Converts a rotation matrix to a quaternion.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#quaternion_from_rotation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="random_orthogonal_transform"></a><span class="summary-sig-name">random_orthogonal_transform</span>()</span><br />
+      :rtype:  ``array[3x3],orthogonal``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#random_orthogonal_transform">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#random_quaternion" class="summary-sig-name">random_quaternion</a>()</span><br />
+      Generate a random quaternion.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#random_quaternion">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#random_rotation" class="summary-sig-name">random_rotation</a>(<span class="summary-sig-arg">ndim</span>=<span class="summary-sig-default">3</span>)</span><br />
+      Generate a random rotation matrix.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#random_rotation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#rot2d" class="summary-sig-name">rot2d</a>(<span class="summary-sig-arg">theta</span>)</span><br />
+      Returns a 2x2 rotation matrix.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#SO2_from_angle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#rot2d_from_angle" class="summary-sig-name">rot2d_from_angle</a>(<span class="summary-sig-arg">theta</span>)</span><br />
+      Returns a 2x2 rotation matrix.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#SO2_from_angle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#rotation_from_axes_spec" class="summary-sig-name">rotation_from_axes_spec</a>(<span class="summary-sig-arg">x_axis</span>,
+        <span class="summary-sig-arg">vector_on_xy_plane</span>)</span><br />
+      Creates a rotation matrix from the axes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#rotation_from_axes_spec">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#rotation_from_axis_angle" class="summary-sig-name">rotation_from_axis_angle</a>(<span class="summary-sig-arg">axis</span>,
+        <span class="summary-sig-arg">angle</span>)</span><br />
+      Computes the rotation matrix from the *(axis,angle)* representation
+       using Rodriguez's formula.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#rotation_from_axis_angle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#rotation_from_axis_angle2" class="summary-sig-name">rotation_from_axis_angle2</a>(<span class="summary-sig-arg">axis</span>,
+        <span class="summary-sig-arg">angle</span>)</span><br />
+      Get the rotation from the *(axis,angle)* representation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#rotation_from_axis_angle2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#rotation_from_quaternion" class="summary-sig-name">rotation_from_quaternion</a>(<span class="summary-sig-arg">x</span>)</span><br />
+      Converts a quaternion to a rotation matrix.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#rotation_from_quaternion">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.rotations-module.html#rotz" class="summary-sig-name">rotz</a>(<span class="summary-sig-arg">theta</span>)</span><br />
+      Returns a 3x3 rotation matrix corresponding 
+       to rotation around the *z* axis.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.rotations-pysrc.html#rotz">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'geometry'"><code class="variable-quote">'</code><code class="variable-string">geometry</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="SO2_from_angle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SO2_from_angle</span>(<span class="sig-arg">theta</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#SO2_from_angle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns a 2x2 rotation matrix.</p>
+  <p>:param theta: :type theta:  ``number``</p>
+  <p>:rtype:  ``SO2``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="angle_from_SO2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">angle_from_SO2</span>(<span class="sig-arg">R</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#angle_from_SO2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param R: :type R:  ``SO2``</p>
+  <p>:rtype:  ``float``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="angle_from_rot2d"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">angle_from_rot2d</span>(<span class="sig-arg">R</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#angle_from_SO2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param R: :type R:  ``SO2``</p>
+  <p>:rtype:  ``float``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="axis_angle_from_quaternion"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">axis_angle_from_quaternion</span>(<span class="sig-arg">q</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#axis_angle_from_quaternion">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+       This is the inverse of :py:func:`quaternion_from_axis_angle`.
+   
+
+
+:param q: 
+:type q:  ``unit_quaternion``
+
+:rtype:  ``axis_angle_canonical``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="axis_angle_from_rotation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">axis_angle_from_rotation</span>(<span class="sig-arg">R</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#axis_angle_from_rotation">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+       Returns the *(axis,angle)* representation of a given rotation.
+       
+       There are a couple of symmetries:
+   
+       * By convention, the angle returned is nonnegative.
+        
+       * If the angle is 0, any axis will do. 
+         In that case, :py:func:`default_axis` will be returned. 
+         
+   
+
+
+:param R: 
+:type R:  ``rotation_matrix``
+
+:rtype:  ``axis_angle_canonical``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="check_SO"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">check_SO</span>(<span class="sig-arg">x</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#check_SO">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Checks that the given value is a rotation matrix of arbitrary 
+  size.</p>
+  <p>:param x: :type x:  ``array[NxN],N&gt;0``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="check_orthogonal"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">check_orthogonal</span>(<span class="sig-arg">x</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#check_orthogonal">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Check that the argument is an orthogonal matrix.</p>
+  <p>:param x: :type x:  ``array[NxN],N&gt;0``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="check_skew_symmetric"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">check_skew_symmetric</span>(<span class="sig-arg">x</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#check_skew_symmetric">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Check that the argument is a skew-symmetric matrix.</p>
+  <p>:param x: :type x:  ``array[NxN]``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="geodesic_distance_for_rotations"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">geodesic_distance_for_rotations</span>(<span class="sig-arg">R1</span>,
+        <span class="sig-arg">R2</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#geodesic_distance_for_rotations">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+       Returns the geodesic distance between two rotation matrices.
+       
+       It is computed as the angle of the rotation :math:`R_1^{*} R_2^{-1}``.
+   
+   
+
+
+:param R1: 
+:type R1:  ``rotation_matrix``
+
+:param R2: 
+:type R2:  ``rotation_matrix``
+
+:rtype:  ``float,&gt;=0,&lt;=pi``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="hat_map"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">hat_map</span>(<span class="sig-arg">v</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#hat_map">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Maps a vector to a 3x3 skew symmetric matrix.</p>
+  <p>:param v: :type v:  ``array[3]``</p>
+  <p>:rtype:  ``array[3x3],skew_symmetric``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="hat_map_2d"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">hat_map_2d</span>(<span class="sig-arg">omega</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#hat_map_2d">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param omega: :type omega:  ``number``</p>
+  <p>:rtype:  ``so2``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="map_hat"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">map_hat</span>(<span class="sig-arg">H</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#map_hat">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>The inverse of :py:func:`hat_map`.</p>
+  <p>:param H: :type H:  ``array[3x3],skew_symmetric``</p>
+  <p>:rtype:  ``array[3]``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="map_hat_2d"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">map_hat_2d</span>(<span class="sig-arg">W</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#map_hat_2d">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param W: :type W:  ``so2``</p>
+  <p>:rtype:  ``float``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="quaternion_from_axis_angle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">quaternion_from_axis_angle</span>(<span class="sig-arg">axis</span>,
+        <span class="sig-arg">angle</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#quaternion_from_axis_angle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+       Computes a quaternion corresponding to the rotation of *angle* radians
+       around the given *axis*.
+       
+       This is the inverse of :py:func:`axis_angle_from_quaternion`.
+   
+
+
+:param angle: 
+:type angle:  ``float``
+
+:param axis: 
+:type axis:  ``direction``
+
+:rtype:  ``unit_quaternion``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="quaternion_from_rotation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">quaternion_from_rotation</span>(<span class="sig-arg">R</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#quaternion_from_rotation">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+       Converts a rotation matrix to a quaternion.
+   
+       This is the robust method mentioned on wikipedia:
+   
+       &lt;http://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation&gt;
+       
+       TODO: add the more robust method with 4x4 matrix and eigenvector
+   
+
+
+:param R: 
+:type R:  ``rotation_matrix``
+
+:rtype:  ``unit_quaternion``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="random_quaternion"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">random_quaternion</span>()</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#random_quaternion">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Generate a random quaternion.
+       
+       Uses the algorithm used in Kuffner, ICRA'04.
+   
+
+
+:rtype:  ``unit_quaternion``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="random_rotation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">random_rotation</span>(<span class="sig-arg">ndim</span>=<span class="sig-default">3</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#random_rotation">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Generate a random rotation matrix. 
+       
+       This is a wrapper around :py:func:`random_quaternion`.
+   
+
+
+:param ndim: 
+:type ndim:  ``2|3``
+
+:rtype:  ``array[2x2]|rotation_matrix``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="rot2d"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rot2d</span>(<span class="sig-arg">theta</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#SO2_from_angle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns a 2x2 rotation matrix.</p>
+  <p>:param theta: :type theta:  ``number``</p>
+  <p>:rtype:  ``SO2``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="rot2d_from_angle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rot2d_from_angle</span>(<span class="sig-arg">theta</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#SO2_from_angle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns a 2x2 rotation matrix.</p>
+  <p>:param theta: :type theta:  ``number``</p>
+  <p>:rtype:  ``SO2``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="rotation_from_axes_spec"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rotation_from_axes_spec</span>(<span class="sig-arg">x_axis</span>,
+        <span class="sig-arg">vector_on_xy_plane</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#rotation_from_axes_spec">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+       Creates a rotation matrix from the axes. 
+       ``x_axis`` is the new direction of the (1,0,0) vector
+       after this rotation. ``vector_on_xy_plane`` is a vector
+       that must end up in the (x,y) plane after the rotation. 
+       
+       That is, it holds that: ::
+       
+           R = rotation_from_axes_spec(x, v)
+           dot(R,x) == [1,0,0]
+           dot(R,v) == [?,?,0]
+    
+       TODO: add exception if vectors are too close.
+   
+
+
+:param vector_on_xy_plane: 
+:type vector_on_xy_plane:  ``direction``
+
+:param x_axis: 
+:type x_axis:  ``direction``
+
+:rtype:  ``rotation_matrix``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="rotation_from_axis_angle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rotation_from_axis_angle</span>(<span class="sig-arg">axis</span>,
+        <span class="sig-arg">angle</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#rotation_from_axis_angle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+       Computes the rotation matrix from the *(axis,angle)* representation
+       using Rodriguez's formula. 
+   
+
+
+:param angle: 
+:type angle:  ``float``
+
+:param axis: 
+:type axis:  ``direction``
+
+:rtype:  ``rotation_matrix``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="rotation_from_axis_angle2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rotation_from_axis_angle2</span>(<span class="sig-arg">axis</span>,
+        <span class="sig-arg">angle</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#rotation_from_axis_angle2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+       Get the rotation from the *(axis,angle)* representation.
+       
+       This is an alternative to :py:func:`rotation_from_axis_angle` which
+       goes through the quaternion representation instead of using Rodrigues'
+       formula.
+   
+
+
+:param angle: 
+:type angle:  ``float``
+
+:param axis: 
+:type axis:  ``direction``
+
+:rtype:  ``rotation_matrix``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="rotation_from_quaternion"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rotation_from_quaternion</span>(<span class="sig-arg">x</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#rotation_from_quaternion">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+       Converts a quaternion to a rotation matrix.
+       
+   
+
+
+:param x: 
+:type x:  ``unit_quaternion``
+
+:rtype:  ``rotation_matrix``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="rotz"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rotz</span>(<span class="sig-arg">theta</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.rotations-pysrc.html#rotz">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Returns a 3x3 rotation matrix corresponding 
+       to rotation around the *z* axis. 
+
+
+:param theta: 
+:type theta:  ``number``
+
+:rtype:  ``SO3``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:37 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

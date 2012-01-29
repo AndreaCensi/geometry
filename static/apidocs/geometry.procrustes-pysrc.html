@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>geometry.procrustes</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="geometry-module.html">Package&nbsp;geometry</a> ::
+        Module&nbsp;procrustes
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="geometry.procrustes-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="geometry.procrustes-module.html">Module geometry.procrustes</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-name">contract</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">contracts</tt> <tt class="py-keyword">import</tt> <tt class="py-name">check</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment"># TODO: write tests</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">X</tt><tt class="py-op">=</tt><tt class="py-string">'array[KxN],K&gt;=2,K&lt;N'</tt><tt class="py-op">,</tt> <tt class="py-name">Y</tt><tt class="py-op">=</tt><tt class="py-string">'array[KxN]'</tt><tt class="py-op">,</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">          <tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'array[KxK],orthogonal'</tt><tt class="py-op">)</tt> </tt>
+<a name="best_orthogonal_transform"></a><div id="best_orthogonal_transform-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="best_orthogonal_transform-toggle" onclick="return toggle('best_orthogonal_transform');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.procrustes-module.html#best_orthogonal_transform">best_orthogonal_transform</a><tt class="py-op">(</tt><tt class="py-param">X</tt><tt class="py-op">,</tt> <tt class="py-param">Y</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="best_orthogonal_transform-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="best_orthogonal_transform-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt class="py-docstring">''' Finds the best orthogonal transform R  between X and Y,</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">        such that R X ~= Y. '''</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">    <tt class="py-name">YX</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">Y</tt><tt class="py-op">,</tt> <tt class="py-name">X</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Variable geometry.T=geometry-module.html#T,Variable geometry.manifolds.T=geometry.manifolds-module.html#T,Variable geometry.manifolds.todo.T=geometry.manifolds.todo-module.html#T"><a title="geometry.T
+geometry.manifolds.T
+geometry.manifolds.todo.T" class="py-name" href="#" onclick="return doclink('link-0', 'T', 'link-0');">T</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-name">check</tt><tt class="py-op">(</tt><tt class="py-string">'array[KxK]'</tt><tt class="py-op">,</tt> <tt class="py-name">YX</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">    <tt class="py-name">U</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt><tt class="py-op">,</tt> <tt class="py-name">V</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linalg</tt><tt class="py-op">.</tt><tt class="py-name">svd</tt><tt class="py-op">(</tt><tt class="py-name">YX</tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt class="py-name">best</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">U</tt><tt class="py-op">,</tt> <tt class="py-name">V</tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">best</tt> </tt>
+</div><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="closest_orthogonal_matrix"></a><div id="closest_orthogonal_matrix-def"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">M</tt><tt class="py-op">=</tt><tt class="py-string">'array[NxN]'</tt><tt class="py-op">,</tt> <tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'array[NxN],orthogonal'</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt> <a class="py-toggle" href="#" id="closest_orthogonal_matrix-toggle" onclick="return toggle('closest_orthogonal_matrix');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.procrustes-module.html#closest_orthogonal_matrix">closest_orthogonal_matrix</a><tt class="py-op">(</tt><tt class="py-param">M</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="closest_orthogonal_matrix-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="closest_orthogonal_matrix-expanded"><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">    <tt class="py-docstring">''' Finds the closest orthogonal matrix to M. '''</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt class="py-name">U</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt><tt class="py-op">,</tt> <tt class="py-name">V</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linalg</tt><tt class="py-op">.</tt><tt class="py-name">svd</tt><tt class="py-op">(</tt><tt class="py-name">M</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">    <tt id="link-1" class="py-name" targets="Variable geometry.R=geometry-module.html#R,Variable geometry.manifolds.R=geometry.manifolds-module.html#R,Variable geometry.manifolds.special_euclidean_group.R=geometry.manifolds.special_euclidean_group-module.html#R,Variable geometry.manifolds.todo.R=geometry.manifolds.todo-module.html#R,Variable geometry.manifolds.translation_group.R=geometry.manifolds.translation_group-module.html#R"><a title="geometry.R
+geometry.manifolds.R
+geometry.manifolds.special_euclidean_group.R
+geometry.manifolds.todo.R
+geometry.manifolds.translation_group.R" class="py-name" href="#" onclick="return doclink('link-1', 'R', 'link-1');">R</a></tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">U</tt><tt class="py-op">,</tt> <tt class="py-name">V</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-2" class="py-name"><a title="geometry.R
+geometry.manifolds.R
+geometry.manifolds.special_euclidean_group.R
+geometry.manifolds.todo.R
+geometry.manifolds.translation_group.R" class="py-name" href="#" onclick="return doclink('link-2', 'R', 'link-1');">R</a></tt> </tt>
+</div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-comment"># TODO: write tests</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">X</tt><tt class="py-op">=</tt><tt class="py-string">'array[KxN],K&gt;=2,K&lt;N'</tt><tt class="py-op">,</tt> <tt class="py-name">Y</tt><tt class="py-op">=</tt><tt class="py-string">'array[KxN]'</tt><tt class="py-op">,</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">          <tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'tuple( (array[KxK],orthogonal), array[Kx1])'</tt><tt class="py-op">)</tt> </tt>
+<a name="best_similarity_transform"></a><div id="best_similarity_transform-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="best_similarity_transform-toggle" onclick="return toggle('best_similarity_transform');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.procrustes-module.html#best_similarity_transform">best_similarity_transform</a><tt class="py-op">(</tt><tt class="py-param">X</tt><tt class="py-op">,</tt> <tt class="py-param">Y</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="best_similarity_transform-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="best_similarity_transform-expanded"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt class="py-docstring">''' Finds the best transform (R,t)  between X and Y,</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-docstring">        such that R X + t ~= Y. '''</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">    <tt class="py-name">K</tt> <tt class="py-op">=</tt> <tt class="py-name">X</tt><tt class="py-op">.</tt><tt class="py-name">shape</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">    <tt class="py-name">Xm</tt> <tt class="py-op">=</tt> <tt class="py-name">X</tt><tt class="py-op">.</tt><tt class="py-name">mean</tt><tt class="py-op">(</tt><tt class="py-name">axis</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">reshape</tt><tt class="py-op">(</tt><tt class="py-name">K</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-name">Ym</tt> <tt class="py-op">=</tt> <tt class="py-name">Y</tt><tt class="py-op">.</tt><tt class="py-name">mean</tt><tt class="py-op">(</tt><tt class="py-name">axis</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">reshape</tt><tt class="py-op">(</tt><tt class="py-name">K</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt class="py-name">X</tt> <tt class="py-op">=</tt> <tt class="py-name">X</tt> <tt class="py-op">-</tt> <tt class="py-name">Xm</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">    <tt class="py-name">Y</tt> <tt class="py-op">=</tt> <tt class="py-name">Y</tt> <tt class="py-op">-</tt> <tt class="py-name">Ym</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt class="py-comment">#    assert_allclose(X.mean(axis=1), 0, atol=1e-8)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt class="py-comment">#    assert_allclose(Y.mean(axis=1), 0, atol=1e-8)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">    <tt class="py-name">YX</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">Y</tt><tt class="py-op">,</tt> <tt class="py-name">X</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="geometry.T
+geometry.manifolds.T
+geometry.manifolds.todo.T" class="py-name" href="#" onclick="return doclink('link-3', 'T', 'link-0');">T</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">    <tt class="py-name">check</tt><tt class="py-op">(</tt><tt class="py-string">'array[KxK]'</tt><tt class="py-op">,</tt> <tt class="py-name">YX</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">    <tt class="py-name">U</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt><tt class="py-op">,</tt> <tt class="py-name">V</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linalg</tt><tt class="py-op">.</tt><tt class="py-name">svd</tt><tt class="py-op">(</tt><tt class="py-name">YX</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">    <tt id="link-4" class="py-name"><a title="geometry.R
+geometry.manifolds.R
+geometry.manifolds.special_euclidean_group.R
+geometry.manifolds.todo.R
+geometry.manifolds.translation_group.R" class="py-name" href="#" onclick="return doclink('link-4', 'R', 'link-1');">R</a></tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">U</tt><tt class="py-op">,</tt> <tt class="py-name">V</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">    <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt class="py-name">Ym</tt> <tt class="py-op">-</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt id="link-5" class="py-name"><a title="geometry.R
+geometry.manifolds.R
+geometry.manifolds.special_euclidean_group.R
+geometry.manifolds.todo.R
+geometry.manifolds.translation_group.R" class="py-name" href="#" onclick="return doclink('link-5', 'R', 'link-1');">R</a></tt><tt class="py-op">,</tt> <tt class="py-name">Xm</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-6" class="py-name"><a title="geometry.R
+geometry.manifolds.R
+geometry.manifolds.special_euclidean_group.R
+geometry.manifolds.todo.R
+geometry.manifolds.translation_group.R" class="py-name" href="#" onclick="return doclink('link-6', 'R', 'link-1');">R</a></tt><tt class="py-op">,</tt> <tt class="py-name">t</tt> </tt>
+</div><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:46 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

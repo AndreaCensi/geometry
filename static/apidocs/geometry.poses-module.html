@@ -1,0 +1,1084 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>geometry.poses</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="geometry-module.html">Package&nbsp;geometry</a> ::
+        Module&nbsp;poses
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="geometry.poses-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module poses</h1><p class="nomargin-top"><span class="codelink"><a href="geometry.poses-pysrc.html">source&nbsp;code</a></span></p>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#SE2_from_SE3" class="summary-sig-name">SE2_from_SE3</a>(<span class="summary-sig-arg">pose</span>,
+        <span class="summary-sig-arg">check_exact</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Projects a pose in SE3 to SE2.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#SE2_from_SE3">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#SE2_from_rotation_translation" class="summary-sig-name">SE2_from_rotation_translation</a>(<span class="summary-sig-arg">R</span>,
+        <span class="summary-sig-arg">t</span>)</span><br />
+      :param R: :type R:  ``array[NxN],SO``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#pose_from_rotation_translation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#SE2_from_se2" class="summary-sig-name">SE2_from_se2</a>(<span class="summary-sig-arg">vel</span>)</span><br />
+      Converts from Lie algebra representation to pose.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#SE2_from_se2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#SE2_from_se2_slow" class="summary-sig-name">SE2_from_se2_slow</a>(<span class="summary-sig-arg">vel</span>)</span><br />
+      :param vel: :type vel:  ``se2``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#SE2_from_se2_slow">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#SE2_from_translation_angle" class="summary-sig-name">SE2_from_translation_angle</a>(<span class="summary-sig-arg">t</span>,
+        <span class="summary-sig-arg">theta</span>)</span><br />
+      Returns an element of SE2 from translation and rotation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#SE2_from_translation_angle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#SE2_from_xytheta" class="summary-sig-name">SE2_from_xytheta</a>(<span class="summary-sig-arg">xytheta</span>)</span><br />
+      Returns an element of SE2 from translation and rotation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#SE2_from_xytheta">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="SE2_identity"></a><span class="summary-sig-name">SE2_identity</span>()</span><br />
+      :rtype:  ``SE2``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#SE2_identity">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#SE3_from_SE2" class="summary-sig-name">SE3_from_SE2</a>(<span class="summary-sig-arg">pose</span>)</span><br />
+      Embeds a pose in SE2 to SE3, setting z=0 and upright.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#SE3_from_SE2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#SE3_from_rotation_translation" class="summary-sig-name">SE3_from_rotation_translation</a>(<span class="summary-sig-arg">R</span>,
+        <span class="summary-sig-arg">t</span>)</span><br />
+      :param R: :type R:  ``array[NxN],SO``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#pose_from_rotation_translation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="SE3_identity"></a><span class="summary-sig-name">SE3_identity</span>()</span><br />
+      :rtype:  ``SE3``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#SE3_identity">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#angle_from_SE2" class="summary-sig-name">angle_from_SE2</a>(<span class="summary-sig-arg">pose</span>)</span><br />
+      :param pose: :type pose:  ``SE2``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#angle_from_SE2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="check_SE"></a><span class="summary-sig-name">check_SE</span>(<span class="summary-sig-arg">M</span>)</span><br />
+      Checks that the argument is in the special euclidean group.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#check_SE">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="check_se"></a><span class="summary-sig-name">check_se</span>(<span class="summary-sig-arg">M</span>)</span><br />
+      Checks that the input is in the special euclidean Lie algebra.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#check_se">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#combine_pieces" class="summary-sig-name">combine_pieces</a>(<span class="summary-sig-arg">a</span>,
+        <span class="summary-sig-arg">b</span>,
+        <span class="summary-sig-arg">c</span>,
+        <span class="summary-sig-arg">d</span>)</span><br />
+      :param a: :type a:  ``array[MxM]``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#combine_pieces">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#extract_pieces" class="summary-sig-name">extract_pieces</a>(<span class="summary-sig-arg">x</span>)</span><br />
+      :param x: :type x:  ``array[NxN]``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#extract_pieces">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#linear_angular_from_se2" class="summary-sig-name">linear_angular_from_se2</a>(<span class="summary-sig-arg">vel</span>)</span><br />
+      :param vel: :type vel:  ``se2``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#linear_angular_from_se2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#pose_from_rotation_translation" class="summary-sig-name">pose_from_rotation_translation</a>(<span class="summary-sig-arg">R</span>,
+        <span class="summary-sig-arg">t</span>)</span><br />
+      :param R: :type R:  ``array[NxN],SO``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#pose_from_rotation_translation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#rotation_translation_from_SE2" class="summary-sig-name">rotation_translation_from_SE2</a>(<span class="summary-sig-arg">pose</span>)</span><br />
+      :param pose: :type pose:  ``array[NxN],SE``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#rotation_translation_from_pose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#rotation_translation_from_SE3" class="summary-sig-name">rotation_translation_from_SE3</a>(<span class="summary-sig-arg">pose</span>)</span><br />
+      :param pose: :type pose:  ``array[NxN],SE``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#rotation_translation_from_pose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#rotation_translation_from_pose" class="summary-sig-name">rotation_translation_from_pose</a>(<span class="summary-sig-arg">pose</span>)</span><br />
+      :param pose: :type pose:  ``array[NxN],SE``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#rotation_translation_from_pose">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#se2_from_SE2" class="summary-sig-name">se2_from_SE2</a>(<span class="summary-sig-arg">pose</span>)</span><br />
+      Converts a pose to its Lie algebra representation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#se2_from_SE2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#se2_from_SE2_slow" class="summary-sig-name">se2_from_SE2_slow</a>(<span class="summary-sig-arg">pose</span>)</span><br />
+      Converts a pose to its Lie algebra representation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#se2_from_SE2_slow">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#se2_from_linear_angular" class="summary-sig-name">se2_from_linear_angular</a>(<span class="summary-sig-arg">linear</span>,
+        <span class="summary-sig-arg">angular</span>)</span><br />
+      Returns an element of se2 from linear and angular velocity.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#se2_from_linear_angular">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.poses-module.html#translation_angle_from_SE2" class="summary-sig-name">translation_angle_from_SE2</a>(<span class="summary-sig-arg">pose</span>)</span><br />
+      :param pose: :type pose:  ``SE2``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#translation_angle_from_SE2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="translation_from_SE2"></a><span class="summary-sig-name">translation_from_SE2</span>(<span class="summary-sig-arg">pose</span>)</span><br />
+      :param pose: :type pose:  ``SE2``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#translation_from_SE2">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="translation_from_SE3"></a><span class="summary-sig-name">translation_from_SE3</span>(<span class="summary-sig-arg">pose</span>)</span><br />
+      :param pose: :type pose:  ``SE3``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.poses-pysrc.html#translation_from_SE3">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'geometry'"><code class="variable-quote">'</code><code class="variable-string">geometry</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="SE2_from_SE3"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SE2_from_SE3</span>(<span class="sig-arg">pose</span>,
+        <span class="sig-arg">check_exact</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#SE2_from_SE3">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+       Projects a pose in SE3 to SE2.
+   
+       If check_exact is True, it will check that z = 0 and axis = [0,0,1].
+   
+
+
+:param pose: 
+:type pose:  ``SE3``
+
+:rtype:  ``SE2``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SE2_from_rotation_translation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SE2_from_rotation_translation</span>(<span class="sig-arg">R</span>,
+        <span class="sig-arg">t</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#pose_from_rotation_translation">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param R: :type R:  ``array[NxN],SO``</p>
+  <p>:param t: :type t:  ``array[N]``</p>
+  <p>:rtype:  ``array[MxM],M=N+1,SE``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SE2_from_se2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SE2_from_se2</span>(<span class="sig-arg">vel</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#SE2_from_se2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Converts from Lie algebra representation to pose. 
+           
+       See Bullo, Murray &quot;PD control on the euclidean group&quot; for proofs.
+   
+
+
+:param vel: 
+:type vel:  ``se2``
+
+:rtype:  ``SE2``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SE2_from_se2_slow"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SE2_from_se2_slow</span>(<span class="sig-arg">vel</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#SE2_from_se2_slow">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param vel: :type vel:  ``se2``</p>
+  <p>:rtype:  ``SE2``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SE2_from_translation_angle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SE2_from_translation_angle</span>(<span class="sig-arg">t</span>,
+        <span class="sig-arg">theta</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#SE2_from_translation_angle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns an element of SE2 from translation and rotation.</p>
+  <p>:param theta: :type theta:  ``number``</p>
+  <p>:param t: :type t:  ``array[2]|seq[2](number)``</p>
+  <p>:rtype:  ``SE2``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SE2_from_xytheta"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SE2_from_xytheta</span>(<span class="sig-arg">xytheta</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#SE2_from_xytheta">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns an element of SE2 from translation and rotation.</p>
+  <p>:param xytheta: :type xytheta:  ``array[3]|seq[3](number)``</p>
+  <p>:rtype:  ``SE2``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SE3_from_SE2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SE3_from_SE2</span>(<span class="sig-arg">pose</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#SE3_from_SE2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Embeds a pose in SE2 to SE3, setting z=0 and upright.</p>
+  <p>:param pose: :type pose:  ``SE2``</p>
+  <p>:rtype:  ``SE3``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SE3_from_rotation_translation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SE3_from_rotation_translation</span>(<span class="sig-arg">R</span>,
+        <span class="sig-arg">t</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#pose_from_rotation_translation">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param R: :type R:  ``array[NxN],SO``</p>
+  <p>:param t: :type t:  ``array[N]``</p>
+  <p>:rtype:  ``array[MxM],M=N+1,SE``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="angle_from_SE2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">angle_from_SE2</span>(<span class="sig-arg">pose</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#angle_from_SE2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param pose: :type pose:  ``SE2``</p>
+  <p>:rtype:  ``float``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="combine_pieces"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">combine_pieces</span>(<span class="sig-arg">a</span>,
+        <span class="sig-arg">b</span>,
+        <span class="sig-arg">c</span>,
+        <span class="sig-arg">d</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#combine_pieces">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param a: :type a:  ``array[MxM]``</p>
+  <p>:param c: :type c:  ``array[M]``</p>
+  <p>:param b: :type b:  ``array[M]``</p>
+  <p>:param d: :type d:  ``number``</p>
+  <p>:rtype:  ``array[NxN],N=M+1``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="extract_pieces"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">extract_pieces</span>(<span class="sig-arg">x</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#extract_pieces">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param x: :type x:  ``array[NxN]``</p>
+  <p>:rtype:  ``tuple(array[MxM],array[M],array[M],number),M=N-1``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="linear_angular_from_se2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">linear_angular_from_se2</span>(<span class="sig-arg">vel</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#linear_angular_from_se2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param vel: :type vel:  ``se2``</p>
+  <p>:rtype:  ``tuple(array[2],float)``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="pose_from_rotation_translation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">pose_from_rotation_translation</span>(<span class="sig-arg">R</span>,
+        <span class="sig-arg">t</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#pose_from_rotation_translation">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param R: :type R:  ``array[NxN],SO``</p>
+  <p>:param t: :type t:  ``array[N]``</p>
+  <p>:rtype:  ``array[MxM],M=N+1,SE``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="rotation_translation_from_SE2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rotation_translation_from_SE2</span>(<span class="sig-arg">pose</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#rotation_translation_from_pose">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param pose: :type pose:  ``array[NxN],SE``</p>
+  <p>:rtype:  ``tuple(array[MxM],array[M]),M=N-1``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="rotation_translation_from_SE3"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rotation_translation_from_SE3</span>(<span class="sig-arg">pose</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#rotation_translation_from_pose">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param pose: :type pose:  ``array[NxN],SE``</p>
+  <p>:rtype:  ``tuple(array[MxM],array[M]),M=N-1``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="rotation_translation_from_pose"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rotation_translation_from_pose</span>(<span class="sig-arg">pose</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#rotation_translation_from_pose">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param pose: :type pose:  ``array[NxN],SE``</p>
+  <p>:rtype:  ``tuple(array[MxM],array[M]),M=N-1``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="se2_from_SE2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">se2_from_SE2</span>(<span class="sig-arg">pose</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#se2_from_SE2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+       Converts a pose to its Lie algebra representation.
+       
+       See Bullo, Murray &quot;PD control on the euclidean group&quot; for proofs.
+   
+
+
+:param pose: 
+:type pose:  ``SE2``
+
+:rtype:  ``se2``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="se2_from_SE2_slow"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">se2_from_SE2_slow</span>(<span class="sig-arg">pose</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#se2_from_SE2_slow">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Converts a pose to its Lie algebra representation.</p>
+  <p>:param pose: :type pose:  ``SE2``</p>
+  <p>:rtype:  ``se2``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="se2_from_linear_angular"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">se2_from_linear_angular</span>(<span class="sig-arg">linear</span>,
+        <span class="sig-arg">angular</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#se2_from_linear_angular">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns an element of se2 from linear and angular velocity.</p>
+  <p>:param linear: :type linear:  ``array[2]|seq[2](number)``</p>
+  <p>:param angular: :type angular:  ``number``</p>
+  <p>:rtype:  ``se2``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="translation_angle_from_SE2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">translation_angle_from_SE2</span>(<span class="sig-arg">pose</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.poses-pysrc.html#translation_angle_from_SE2">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param pose: :type pose:  ``SE2``</p>
+  <p>:rtype:  ``tuple(array[2],float)``</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:37 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

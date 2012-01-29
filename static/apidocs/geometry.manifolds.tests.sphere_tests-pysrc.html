@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>geometry.manifolds.tests.sphere_tests</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="geometry-module.html">Package&nbsp;geometry</a> ::
+        <a href="geometry.manifolds-module.html">Package&nbsp;manifolds</a> ::
+        <a href="geometry.manifolds.tests-module.html">Package&nbsp;tests</a> ::
+        Module&nbsp;sphere_tests
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="geometry.manifolds.tests.sphere_tests-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="geometry.manifolds.tests.sphere_tests-module.html">Module geometry.manifolds.tests.sphere_tests</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-name">np</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package geometry=geometry-module.html"><a title="geometry" class="py-name" href="#" onclick="return doclink('link-0', 'geometry', 'link-0');">geometry</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package geometry.manifolds=geometry.manifolds-module.html"><a title="geometry.manifolds" class="py-name" href="#" onclick="return doclink('link-1', 'manifolds', 'link-1');">manifolds</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Variable geometry.S1=geometry-module.html#S1,Variable geometry.manifolds.S1=geometry.manifolds-module.html#S1,Variable geometry.manifolds.embedding_relations.S1=geometry.manifolds.embedding_relations-module.html#S1,Variable geometry.manifolds.tests.embedding_test.S1=geometry.manifolds.tests.embedding_test-module.html#S1,Variable geometry.manifolds.tests.manifold_tests.S1=geometry.manifolds.tests.manifold_tests-module.html#S1,Variable geometry.manifolds.tests.sphere_tests.S1=geometry.manifolds.tests.sphere_tests-module.html#S1,Variable geometry.manifolds.todo.S1=geometry.manifolds.todo-module.html#S1"><a title="geometry.S1
+geometry.manifolds.S1
+geometry.manifolds.embedding_relations.S1
+geometry.manifolds.tests.embedding_test.S1
+geometry.manifolds.tests.manifold_tests.S1
+geometry.manifolds.tests.sphere_tests.S1
+geometry.manifolds.todo.S1" class="py-name" href="#" onclick="return doclink('link-2', 'S1', 'link-2');">S1</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name"><a title="geometry" class="py-name" href="#" onclick="return doclink('link-3', 'geometry', 'link-0');">geometry</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Package geometry.utils=geometry.utils-module.html"><a title="geometry.utils" class="py-name" href="#" onclick="return doclink('link-4', 'utils', 'link-4');">utils</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">assert_allclose</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="geometry" class="py-name" href="#" onclick="return doclink('link-5', 'geometry', 'link-0');">geometry</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module geometry.formatting=geometry.formatting-module.html"><a title="geometry.formatting" class="py-name" href="#" onclick="return doclink('link-6', 'formatting', 'link-6');">formatting</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Function geometry.formatting.printm()=geometry.formatting-module.html#printm"><a title="geometry.formatting.printm" class="py-name" href="#" onclick="return doclink('link-7', 'printm', 'link-7');">printm</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="test_wrap_around"></a><div id="test_wrap_around-def"><a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="test_wrap_around-toggle" onclick="return toggle('test_wrap_around');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.tests.sphere_tests-module.html#test_wrap_around">test_wrap_around</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="test_wrap_around-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="test_wrap_around-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-name">a</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">+</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">    <tt class="py-name">b</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt class="py-name">bv</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="geometry.S1
+geometry.manifolds.S1
+geometry.manifolds.embedding_relations.S1
+geometry.manifolds.tests.embedding_test.S1
+geometry.manifolds.tests.manifold_tests.S1
+geometry.manifolds.tests.sphere_tests.S1
+geometry.manifolds.todo.S1" class="py-name" href="#" onclick="return doclink('link-8', 'S1', 'link-2');">S1</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method geometry.manifolds.differentiable_manifold.DifferentiableManifold.logmap()=geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#logmap,Method geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap()=geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#logmap,Method geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.logmap()=geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent-class.html#logmap,Method geometry.manifolds.matrix_linear_space.MatrixLinearSpace.logmap()=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html#logmap,Method geometry.manifolds.product_manifold.ProductManifold.logmap()=geometry.manifolds.product_manifold.ProductManifold-class.html#logmap,Method geometry.manifolds.sphere.Sphere.logmap()=geometry.manifolds.sphere.Sphere-class.html#logmap,Method geometry.manifolds.sphere.Sphere1.logmap()=geometry.manifolds.sphere.Sphere1-class.html#logmap,Method geometry.manifolds.tangent_bundle.TangentBundle.logmap()=geometry.manifolds.tangent_bundle.TangentBundle-class.html#logmap,Method geometry.manifolds.torus.Torus.logmap()=geometry.manifolds.torus.Torus-class.html#logmap,Method geometry.manifolds.translation_group.Tran.logmap()=geometry.manifolds.translation_group.Tran-class.html#logmap"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.logmap
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap
+geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.logmap
+geometry.manifolds.matrix_linear_space.MatrixLinearSpace.logmap
+geometry.manifolds.product_manifold.ProductManifold.logmap
+geometry.manifolds.sphere.Sphere.logmap
+geometry.manifolds.sphere.Sphere1.logmap
+geometry.manifolds.tangent_bundle.TangentBundle.logmap
+geometry.manifolds.torus.Torus.logmap
+geometry.manifolds.translation_group.Tran.logmap" class="py-name" href="#" onclick="return doclink('link-9', 'logmap', 'link-9');">logmap</a></tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt><tt class="py-op">)</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt class="py-name">b2</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="geometry.S1
+geometry.manifolds.S1
+geometry.manifolds.embedding_relations.S1
+geometry.manifolds.tests.embedding_test.S1
+geometry.manifolds.tests.manifold_tests.S1
+geometry.manifolds.tests.sphere_tests.S1
+geometry.manifolds.todo.S1" class="py-name" href="#" onclick="return doclink('link-10', 'S1', 'link-2');">S1</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method geometry.manifolds.differentiable_manifold.DifferentiableManifold.expmap()=geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#expmap,Method geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap()=geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#expmap,Method geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.expmap()=geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent-class.html#expmap,Method geometry.manifolds.matrix_linear_space.MatrixLinearSpace.expmap()=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html#expmap,Method geometry.manifolds.product_manifold.ProductManifold.expmap()=geometry.manifolds.product_manifold.ProductManifold-class.html#expmap,Method geometry.manifolds.sphere.Sphere.expmap()=geometry.manifolds.sphere.Sphere-class.html#expmap,Method geometry.manifolds.sphere.Sphere1.expmap()=geometry.manifolds.sphere.Sphere1-class.html#expmap,Method geometry.manifolds.tangent_bundle.TangentBundle.expmap()=geometry.manifolds.tangent_bundle.TangentBundle-class.html#expmap,Method geometry.manifolds.torus.Torus.expmap()=geometry.manifolds.torus.Torus-class.html#expmap,Method geometry.manifolds.translation_group.Tran.expmap()=geometry.manifolds.translation_group.Tran-class.html#expmap"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.expmap
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap
+geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.expmap
+geometry.manifolds.matrix_linear_space.MatrixLinearSpace.expmap
+geometry.manifolds.product_manifold.ProductManifold.expmap
+geometry.manifolds.sphere.Sphere.expmap
+geometry.manifolds.sphere.Sphere1.expmap
+geometry.manifolds.tangent_bundle.TangentBundle.expmap
+geometry.manifolds.torus.Torus.expmap
+geometry.manifolds.translation_group.Tran.expmap" class="py-name" href="#" onclick="return doclink('link-11', 'expmap', 'link-11');">expmap</a></tt><tt class="py-op">(</tt><tt class="py-name">bv</tt><tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">    <tt class="py-name">d</tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="geometry.S1
+geometry.manifolds.S1
+geometry.manifolds.embedding_relations.S1
+geometry.manifolds.tests.embedding_test.S1
+geometry.manifolds.tests.manifold_tests.S1
+geometry.manifolds.tests.sphere_tests.S1
+geometry.manifolds.todo.S1" class="py-name" href="#" onclick="return doclink('link-12', 'S1', 'link-2');">S1</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method geometry.manifolds.differentiable_manifold.DifferentiableManifold.distance()=geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#distance,Method geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance()=geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#distance,Method geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.distance()=geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent-class.html#distance,Method geometry.manifolds.matrix_linear_space.MatrixLinearSpace.distance()=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html#distance,Method geometry.manifolds.product_manifold.ProductManifold.distance()=geometry.manifolds.product_manifold.ProductManifold-class.html#distance,Method geometry.manifolds.sphere.Sphere.distance()=geometry.manifolds.sphere.Sphere-class.html#distance,Method geometry.manifolds.sphere.Sphere1.distance()=geometry.manifolds.sphere.Sphere1-class.html#distance,Method geometry.manifolds.tangent_bundle.TangentBundle.distance()=geometry.manifolds.tangent_bundle.TangentBundle-class.html#distance,Method geometry.manifolds.torus.Torus.distance()=geometry.manifolds.torus.Torus-class.html#distance"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.distance
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance
+geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.distance
+geometry.manifolds.matrix_linear_space.MatrixLinearSpace.distance
+geometry.manifolds.product_manifold.ProductManifold.distance
+geometry.manifolds.sphere.Sphere.distance
+geometry.manifolds.sphere.Sphere1.distance
+geometry.manifolds.tangent_bundle.TangentBundle.distance
+geometry.manifolds.torus.Torus.distance" class="py-name" href="#" onclick="return doclink('link-13', 'distance', 'link-13');">distance</a></tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">,</tt> <tt class="py-name">b2</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">    <tt id="link-14" class="py-name"><a title="geometry.formatting.printm" class="py-name" href="#" onclick="return doclink('link-14', 'printm', 'link-7');">printm</a></tt><tt class="py-op">(</tt><tt class="py-string">'a'</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-string">'b'</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt><tt class="py-op">,</tt> <tt class="py-string">'vel'</tt><tt class="py-op">,</tt> <tt class="py-name">bv</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-string">'d'</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">d</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt class="py-name">assert_allclose</tt><tt class="py-op">(</tt><tt class="py-name">d</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">atol</tt><tt class="py-op">=</tt><tt class="py-number">1e-7</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:46 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

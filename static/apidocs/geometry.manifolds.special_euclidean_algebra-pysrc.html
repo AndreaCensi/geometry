@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>geometry.manifolds.special_euclidean_algebra</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="geometry-module.html">Package&nbsp;geometry</a> ::
+        <a href="geometry.manifolds-module.html">Package&nbsp;manifolds</a> ::
+        Module&nbsp;special_euclidean_algebra
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="geometry.manifolds.special_euclidean_algebra-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="geometry.manifolds.special_euclidean_algebra-module.html">Module geometry.manifolds.special_euclidean_algebra</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-name">np</tt><tt class="py-op">,</tt> <tt id="link-0" class="py-name" targets="Class geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra=geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra-class.html"><a title="geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra" class="py-name" href="#" onclick="return doclink('link-0', 'MatrixLieAlgebra', 'link-0');">MatrixLieAlgebra</a></tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Variable geometry.manifolds.so=geometry.manifolds-module.html#so,Variable geometry.manifolds.special_euclidean_algebra.so=geometry.manifolds.special_euclidean_algebra-module.html#so,Variable geometry.manifolds.special_orthogonal_group.so=geometry.manifolds.special_orthogonal_group-module.html#so,Variable geometry.manifolds.todo.so=geometry.manifolds.todo-module.html#so,Variable geometry.so=geometry-module.html#so"><a title="geometry.manifolds.so
+geometry.manifolds.special_euclidean_algebra.so
+geometry.manifolds.special_orthogonal_group.so
+geometry.manifolds.todo.so
+geometry.so" class="py-name" href="#" onclick="return doclink('link-1', 'so', 'link-1');">so</a></tt><tt class="py-op">,</tt> <tt class="py-name">contract</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Function geometry.poses.extract_pieces()=geometry.poses-module.html#extract_pieces"><a title="geometry.poses.extract_pieces" class="py-name" href="#" onclick="return doclink('link-2', 'extract_pieces', 'link-2');">extract_pieces</a></tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Function geometry.poses.combine_pieces()=geometry.poses-module.html#combine_pieces"><a title="geometry.poses.combine_pieces" class="py-name" href="#" onclick="return doclink('link-3', 'combine_pieces', 'link-3');">combine_pieces</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Function geometry.rotations.hat_map_2d()=geometry.rotations-module.html#hat_map_2d"><a title="geometry.rotations.hat_map_2d" class="py-name" href="#" onclick="return doclink('link-4', 'hat_map_2d', 'link-4');">hat_map_2d</a></tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Function geometry.rotations.hat_map()=geometry.rotations-module.html#hat_map"><a title="geometry.rotations.hat_map" class="py-name" href="#" onclick="return doclink('link-5', 'hat_map', 'link-5');">hat_map</a></tt> </tt>
+<a name="se_algebra"></a><div id="se_algebra-def"><a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt> <a class="py-toggle" href="#" id="se_algebra-toggle" onclick="return toggle('se_algebra');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="geometry.manifolds.special_euclidean_algebra.se_algebra-class.html">se_algebra</a><tt class="py-op">(</tt><tt class="py-base-class">MatrixLieAlgebra</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se_algebra-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="se_algebra-expanded"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">    <tt class="py-docstring">''' This is the Lie algebra se(n) for the Special Euclidean group SE(n). </tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">        Note that you have to supply a coefficient *alpha* that</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">        weights rotation and translation when defining distances. </tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="se_algebra.__init__"></a><div id="se_algebra.__init__-def"><a name="L12"></a><tt class="py-lineno">12</tt> <a class="py-toggle" href="#" id="se_algebra.__init__-toggle" onclick="return toggle('se_algebra.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">N</tt><tt class="py-op">,</tt> <tt class="py-param">alpha</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se_algebra.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="se_algebra.__init__-expanded"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-name">dimension</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-number">2</tt><tt class="py-op">:</tt> <tt class="py-number">3</tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> <tt class="py-number">6</tt><tt class="py-op">}</tt><tt class="py-op">[</tt><tt class="py-name">N</tt><tt class="py-op">]</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt id="link-6" class="py-name"><a title="geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra" class="py-name" href="#" onclick="return doclink('link-6', 'MatrixLieAlgebra', 'link-0');">MatrixLieAlgebra</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method geometry.manifolds.differentiable_manifold.DifferentiableManifold.__init__()=geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#__init__,Method geometry.manifolds.euclidean.Euclidean.__init__()=geometry.manifolds.euclidean.Euclidean-class.html#__init__,Method geometry.manifolds.exceptions.DoesNotBelong.__init__()=geometry.manifolds.exceptions.DoesNotBelong-class.html#__init__,Method geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra.__init__()=geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra-class.html#__init__,Method geometry.manifolds.matrix_lie_group.MatrixLieGroup.__init__()=geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#__init__,Method geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.__init__()=geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent-class.html#__init__,Method geometry.manifolds.matrix_linear_space.MatrixLinearSpace.__init__()=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html#__init__,Method geometry.manifolds.product_manifold.ProductManifold.__init__()=geometry.manifolds.product_manifold.ProductManifold-class.html#__init__,Method geometry.manifolds.special_euclidean_algebra.se_algebra.__init__()=geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#__init__,Method geometry.manifolds.special_euclidean_group.SE_group.__init__()=geometry.manifolds.special_euclidean_group.SE_group-class.html#__init__,Method geometry.manifolds.special_orthogonal_algebra.so_algebra.__init__()=geometry.manifolds.special_orthogonal_algebra.so_algebra-class.html#__init__,Method geometry.manifolds.special_orthogonal_group.SO_group.__init__()=geometry.manifolds.special_orthogonal_group.SO_group-class.html#__init__,Method geometry.manifolds.sphere.Sphere.__init__()=geometry.manifolds.sphere.Sphere-class.html#__init__,Method geometry.manifolds.sphere.Sphere1.__init__()=geometry.manifolds.sphere.Sphere1-class.html#__init__,Method geometry.manifolds.tangent_bundle.TangentBundle.__init__()=geometry.manifolds.tangent_bundle.TangentBundle-class.html#__init__,Method geometry.manifolds.todo.moebius.Moebius.__init__()=geometry.manifolds.todo.moebius.Moebius-class.html#__init__,Method geometry.manifolds.torus.Torus.__init__()=geometry.manifolds.torus.Torus-class.html#__init__,Method geometry.manifolds.translation_algebra.tran.__init__()=geometry.manifolds.translation_algebra.tran-class.html#__init__,Method geometry.manifolds.translation_group.Tran.__init__()=geometry.manifolds.translation_group.Tran-class.html#__init__"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.__init__
+geometry.manifolds.euclidean.Euclidean.__init__
+geometry.manifolds.exceptions.DoesNotBelong.__init__
+geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra.__init__
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.__init__
+geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.__init__
+geometry.manifolds.matrix_linear_space.MatrixLinearSpace.__init__
+geometry.manifolds.product_manifold.ProductManifold.__init__
+geometry.manifolds.special_euclidean_algebra.se_algebra.__init__
+geometry.manifolds.special_euclidean_group.SE_group.__init__
+geometry.manifolds.special_orthogonal_algebra.so_algebra.__init__
+geometry.manifolds.special_orthogonal_group.SO_group.__init__
+geometry.manifolds.sphere.Sphere.__init__
+geometry.manifolds.sphere.Sphere1.__init__
+geometry.manifolds.tangent_bundle.TangentBundle.__init__
+geometry.manifolds.todo.moebius.Moebius.__init__
+geometry.manifolds.torus.Torus.__init__
+geometry.manifolds.translation_algebra.tran.__init__
+geometry.manifolds.translation_group.Tran.__init__" class="py-name" href="#" onclick="return doclink('link-7', '__init__', 'link-7');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">n</tt><tt class="py-op">=</tt><tt class="py-name">N</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">dimension</tt><tt class="py-op">=</tt><tt class="py-name">dimension</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">alpha</tt> <tt class="py-op">=</tt> <tt class="py-name">alpha</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">son</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="geometry.manifolds.so
+geometry.manifolds.special_euclidean_algebra.so
+geometry.manifolds.special_orthogonal_group.so
+geometry.manifolds.todo.so
+geometry.so" class="py-name" href="#" onclick="return doclink('link-8', 'so', 'link-1');">so</a></tt><tt class="py-op">[</tt><tt class="py-name">N</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"> </tt>
+<a name="se_algebra.norm"></a><div id="se_algebra.norm-def"><a name="L18"></a><tt class="py-lineno">18</tt> <a class="py-toggle" href="#" id="se_algebra.norm-toggle" onclick="return toggle('se_algebra.norm');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#norm">norm</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">X</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se_algebra.norm-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="se_algebra.norm-expanded"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">W</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">,</tt> <tt id="link-9" class="py-name" targets="Method geometry.manifolds.matrix_linear_space.MatrixLinearSpace.zero()=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html#zero"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace.zero" class="py-name" href="#" onclick="return doclink('link-9', 'zero', 'link-9');">zero</a></tt><tt class="py-op">,</tt> <tt id="link-10" class="py-name"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace.zero" class="py-name" href="#" onclick="return doclink('link-10', 'zero', 'link-9');">zero</a></tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="geometry.poses.extract_pieces" class="py-name" href="#" onclick="return doclink('link-11', 'extract_pieces', 'link-2');">extract_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">X</tt><tt class="py-op">)</tt> <tt class="py-comment">#@UnusedVariable</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linalg</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method geometry.manifolds.matrix_linear_space.MatrixLinearSpace.norm()=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html#norm,Method geometry.manifolds.special_euclidean_algebra.se_algebra.norm()=geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#norm,Method geometry.manifolds.translation_algebra.tran.norm()=geometry.manifolds.translation_algebra.tran-class.html#norm"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace.norm
+geometry.manifolds.special_euclidean_algebra.se_algebra.norm
+geometry.manifolds.translation_algebra.tran.norm" class="py-name" href="#" onclick="return doclink('link-12', 'norm', 'link-12');">norm</a></tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">alpha</tt> <tt class="py-op">*</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">son</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace.norm
+geometry.manifolds.special_euclidean_algebra.se_algebra.norm
+geometry.manifolds.translation_algebra.tran.norm" class="py-name" href="#" onclick="return doclink('link-13', 'norm', 'link-12');">norm</a></tt><tt class="py-op">(</tt><tt class="py-name">W</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="se_algebra.project"></a><div id="se_algebra.project-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="se_algebra.project-toggle" onclick="return toggle('se_algebra.project');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#project">project</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">X</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se_algebra.project-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="se_algebra.project-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-name">W</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace.zero" class="py-name" href="#" onclick="return doclink('link-14', 'zero', 'link-9');">zero</a></tt><tt class="py-op">,</tt> <tt id="link-15" class="py-name"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace.zero" class="py-name" href="#" onclick="return doclink('link-15', 'zero', 'link-9');">zero</a></tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="geometry.poses.extract_pieces" class="py-name" href="#" onclick="return doclink('link-16', 'extract_pieces', 'link-2');">extract_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">X</tt><tt class="py-op">)</tt> <tt class="py-comment">#@UnusedVariable</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-name">W</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">son</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method geometry.manifolds.euclidean.Euclidean.project()=geometry.manifolds.euclidean.Euclidean-class.html#project,Method geometry.manifolds.matrix_linear_space.MatrixLinearSpace.project()=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html#project,Method geometry.manifolds.special_euclidean_algebra.se_algebra.project()=geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#project,Method geometry.manifolds.special_orthogonal_algebra.so_algebra.project()=geometry.manifolds.special_orthogonal_algebra.so_algebra-class.html#project,Method geometry.manifolds.translation_algebra.tran.project()=geometry.manifolds.translation_algebra.tran-class.html#project"><a title="geometry.manifolds.euclidean.Euclidean.project
+geometry.manifolds.matrix_linear_space.MatrixLinearSpace.project
+geometry.manifolds.special_euclidean_algebra.se_algebra.project
+geometry.manifolds.special_orthogonal_algebra.so_algebra.project
+geometry.manifolds.translation_algebra.tran.project" class="py-name" href="#" onclick="return doclink('link-17', 'project', 'link-17');">project</a></tt><tt class="py-op">(</tt><tt class="py-name">W</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-18" class="py-name"><a title="geometry.poses.combine_pieces" class="py-name" href="#" onclick="return doclink('link-18', 'combine_pieces', 'link-3');">combine_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">W</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-op">*</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="se_algebra.__repr__"></a><div id="se_algebra.__repr__-def"><a name="L27"></a><tt class="py-lineno">27</tt> <a class="py-toggle" href="#" id="se_algebra.__repr__-toggle" onclick="return toggle('se_algebra.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se_algebra.__repr__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="se_algebra.__repr__-expanded"><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-comment">#return 'se(%s)' % (self.n - 1)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'se%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">=</tt><tt class="py-string">'belongs'</tt><tt class="py-op">)</tt> </tt>
+<a name="se_algebra.vector_from_algebra"></a><div id="se_algebra.vector_from_algebra-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="se_algebra.vector_from_algebra-toggle" onclick="return toggle('se_algebra.vector_from_algebra');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#vector_from_algebra">vector_from_algebra</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">a</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se_algebra.vector_from_algebra-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="se_algebra.vector_from_algebra-expanded"><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-name">W</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">,</tt> <tt id="link-19" class="py-name"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace.zero" class="py-name" href="#" onclick="return doclink('link-19', 'zero', 'link-9');">zero</a></tt><tt class="py-op">,</tt> <tt id="link-20" class="py-name"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace.zero" class="py-name" href="#" onclick="return doclink('link-20', 'zero', 'link-9');">zero</a></tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="geometry.poses.extract_pieces" class="py-name" href="#" onclick="return doclink('link-21', 'extract_pieces', 'link-2');">extract_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">)</tt> <tt class="py-comment">#@UnusedVariable</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> <tt class="py-op">==</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt class="py-name">v</tt><tt class="py-op">.</tt><tt class="py-name">size</tt> <tt class="py-op">==</tt> <tt class="py-number">2</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">            <tt class="py-name">V</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">zeros</tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">            <tt class="py-name">V</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">son</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra.vector_from_algebra()=geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra-class.html#vector_from_algebra,Method geometry.manifolds.special_euclidean_algebra.se_algebra.vector_from_algebra()=geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#vector_from_algebra,Method geometry.manifolds.special_orthogonal_algebra.so_algebra.vector_from_algebra()=geometry.manifolds.special_orthogonal_algebra.so_algebra-class.html#vector_from_algebra,Method geometry.manifolds.translation_algebra.tran.vector_from_algebra()=geometry.manifolds.translation_algebra.tran-class.html#vector_from_algebra"><a title="geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra.vector_from_algebra
+geometry.manifolds.special_euclidean_algebra.se_algebra.vector_from_algebra
+geometry.manifolds.special_orthogonal_algebra.so_algebra.vector_from_algebra
+geometry.manifolds.translation_algebra.tran.vector_from_algebra" class="py-name" href="#" onclick="return doclink('link-22', 'vector_from_algebra', 'link-22');">vector_from_algebra</a></tt><tt class="py-op">(</tt><tt class="py-name">W</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">            <tt class="py-name">V</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-number">3</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">v</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">V</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> <tt class="py-op">==</tt> <tt class="py-number">4</tt><tt class="py-op">:</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt class="py-name">v</tt><tt class="py-op">.</tt><tt class="py-name">size</tt> <tt class="py-op">==</tt> <tt class="py-number">3</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">            <tt class="py-name">V</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">zeros</tt><tt class="py-op">(</tt><tt class="py-number">6</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">            <tt class="py-name">V</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">:</tt><tt class="py-number">3</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">son</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra.vector_from_algebra
+geometry.manifolds.special_euclidean_algebra.se_algebra.vector_from_algebra
+geometry.manifolds.special_orthogonal_algebra.so_algebra.vector_from_algebra
+geometry.manifolds.translation_algebra.tran.vector_from_algebra" class="py-name" href="#" onclick="return doclink('link-23', 'vector_from_algebra', 'link-22');">vector_from_algebra</a></tt><tt class="py-op">(</tt><tt class="py-name">W</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">            <tt class="py-name">V</tt><tt class="py-op">[</tt><tt class="py-number">3</tt><tt class="py-op">:</tt><tt class="py-number">6</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">v</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">V</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-string">'Not implemented for n&gt;=4.'</tt> </tt>
+</div><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">=</tt><tt class="py-string">'array[N]'</tt><tt class="py-op">,</tt> <tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'belongs'</tt><tt class="py-op">)</tt> </tt>
+<a name="se_algebra.algebra_from_vector"></a><div id="se_algebra.algebra_from_vector-def"><a name="L51"></a><tt class="py-lineno">51</tt> <a class="py-toggle" href="#" id="se_algebra.algebra_from_vector-toggle" onclick="return toggle('se_algebra.algebra_from_vector');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#algebra_from_vector">algebra_from_vector</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">v</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se_algebra.algebra_from_vector-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="se_algebra.algebra_from_vector-expanded"><a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> <tt class="py-op">==</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt class="py-name">v</tt><tt class="py-op">.</tt><tt class="py-name">size</tt> <tt class="py-op">==</tt> <tt class="py-number">3</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">            <tt class="py-name">omega</tt> <tt class="py-op">=</tt> <tt class="py-name">v</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">            <tt class="py-name">vel</tt> <tt class="py-op">=</tt> <tt class="py-name">v</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-number">3</tt><tt class="py-op">]</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">            <tt class="py-name">W</tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="geometry.rotations.hat_map_2d" class="py-name" href="#" onclick="return doclink('link-24', 'hat_map_2d', 'link-4');">hat_map_2d</a></tt><tt class="py-op">(</tt><tt class="py-name">omega</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt id="link-25" class="py-name"><a title="geometry.poses.combine_pieces" class="py-name" href="#" onclick="return doclink('link-25', 'combine_pieces', 'link-3');">combine_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">W</tt><tt class="py-op">,</tt> <tt class="py-name">vel</tt><tt class="py-op">,</tt> <tt class="py-name">vel</tt> <tt class="py-op">*</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> <tt class="py-op">==</tt> <tt class="py-number">4</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt class="py-name">v</tt><tt class="py-op">.</tt><tt class="py-name">size</tt> <tt class="py-op">==</tt> <tt class="py-number">6</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">            <tt class="py-name">omega</tt> <tt class="py-op">=</tt> <tt class="py-name">v</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">:</tt><tt class="py-number">3</tt><tt class="py-op">]</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">            <tt class="py-name">vel</tt> <tt class="py-op">=</tt> <tt class="py-name">v</tt><tt class="py-op">[</tt><tt class="py-number">3</tt><tt class="py-op">:</tt><tt class="py-number">6</tt><tt class="py-op">]</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">            <tt class="py-name">W</tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name"><a title="geometry.rotations.hat_map" class="py-name" href="#" onclick="return doclink('link-26', 'hat_map', 'link-5');">hat_map</a></tt><tt class="py-op">(</tt><tt class="py-name">omega</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt id="link-27" class="py-name"><a title="geometry.poses.combine_pieces" class="py-name" href="#" onclick="return doclink('link-27', 'combine_pieces', 'link-3');">combine_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">W</tt><tt class="py-op">,</tt> <tt class="py-name">vel</tt><tt class="py-op">,</tt> <tt class="py-name">vel</tt> <tt class="py-op">*</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-string">'Not implemented for n=%d.'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt>
+<a name="se_algebra.interesting_points"></a><div id="se_algebra.interesting_points-def"><a name="L68"></a><tt class="py-lineno">68</tt> <a class="py-toggle" href="#" id="se_algebra.interesting_points-toggle" onclick="return toggle('se_algebra.interesting_points');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#interesting_points">interesting_points</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se_algebra.interesting_points-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="se_algebra.interesting_points-expanded"><a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">        <tt class="py-name">points</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">        <tt class="py-name">points</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace.zero" class="py-name" href="#" onclick="return doclink('link-28', 'zero', 'link-9');">zero</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> <tt class="py-op">==</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">            <tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-29" class="py-name" targets="Variable geometry.SE2=geometry-module.html#SE2,Variable geometry.manifolds.SE2=geometry.manifolds-module.html#SE2,Variable geometry.manifolds.embedding_relations.SE2=geometry.manifolds.embedding_relations-module.html#SE2,Variable geometry.manifolds.tests.embedding_test.SE2=geometry.manifolds.tests.embedding_test-module.html#SE2,Variable geometry.manifolds.tests.manifold_tests.SE2=geometry.manifolds.tests.manifold_tests-module.html#SE2,Variable geometry.manifolds.todo.SE2=geometry.manifolds.todo-module.html#SE2"><a title="geometry.SE2
+geometry.manifolds.SE2
+geometry.manifolds.embedding_relations.SE2
+geometry.manifolds.tests.embedding_test.SE2
+geometry.manifolds.tests.manifold_tests.SE2
+geometry.manifolds.todo.SE2" class="py-name" href="#" onclick="return doclink('link-29', 'SE2', 'link-29');">SE2</a></tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">            <tt class="py-name">points</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt id="link-30" class="py-name"><a title="geometry.SE2
+geometry.manifolds.SE2
+geometry.manifolds.embedding_relations.SE2
+geometry.manifolds.tests.embedding_test.SE2
+geometry.manifolds.tests.manifold_tests.SE2
+geometry.manifolds.todo.SE2" class="py-name" href="#" onclick="return doclink('link-30', 'SE2', 'link-29');">SE2</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Method geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group()=geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#algebra_from_group,Method geometry.manifolds.special_euclidean_group.SE_group.algebra_from_group()=geometry.manifolds.special_euclidean_group.SE_group-class.html#algebra_from_group,Method geometry.manifolds.translation_group.Tran.algebra_from_group()=geometry.manifolds.translation_group.Tran-class.html#algebra_from_group"><a title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group
+geometry.manifolds.special_euclidean_group.SE_group.algebra_from_group
+geometry.manifolds.translation_group.Tran.algebra_from_group" class="py-name" href="#" onclick="return doclink('link-31', 'algebra_from_group', 'link-31');">algebra_from_group</a></tt><tt class="py-op">(</tt><tt class="py-name">p</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">                           <tt class="py-keyword">for</tt> <tt class="py-name">p</tt> <tt class="py-keyword">in</tt> <tt id="link-32" class="py-name"><a title="geometry.SE2
+geometry.manifolds.SE2
+geometry.manifolds.embedding_relations.SE2
+geometry.manifolds.tests.embedding_test.SE2
+geometry.manifolds.tests.manifold_tests.SE2
+geometry.manifolds.todo.SE2" class="py-name" href="#" onclick="return doclink('link-32', 'SE2', 'link-29');">SE2</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Method geometry.manifolds.differentiable_manifold.DifferentiableManifold.interesting_points()=geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#interesting_points,Method geometry.manifolds.euclidean.Euclidean.interesting_points()=geometry.manifolds.euclidean.Euclidean-class.html#interesting_points,Method geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.interesting_points()=geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent-class.html#interesting_points,Method geometry.manifolds.special_euclidean_algebra.se_algebra.interesting_points()=geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#interesting_points,Method geometry.manifolds.special_euclidean_group.SE_group.interesting_points()=geometry.manifolds.special_euclidean_group.SE_group-class.html#interesting_points,Method geometry.manifolds.special_orthogonal_algebra.so_algebra.interesting_points()=geometry.manifolds.special_orthogonal_algebra.so_algebra-class.html#interesting_points,Method geometry.manifolds.special_orthogonal_group.SO_group.interesting_points()=geometry.manifolds.special_orthogonal_group.SO_group-class.html#interesting_points,Method geometry.manifolds.sphere.Sphere.interesting_points()=geometry.manifolds.sphere.Sphere-class.html#interesting_points,Method geometry.manifolds.sphere.Sphere1.interesting_points()=geometry.manifolds.sphere.Sphere1-class.html#interesting_points,Method geometry.manifolds.tangent_bundle.TangentBundle.interesting_points()=geometry.manifolds.tangent_bundle.TangentBundle-class.html#interesting_points,Method geometry.manifolds.torus.Torus.interesting_points()=geometry.manifolds.torus.Torus-class.html#interesting_points,Method geometry.manifolds.translation_algebra.tran.interesting_points()=geometry.manifolds.translation_algebra.tran-class.html#interesting_points,Method geometry.manifolds.translation_group.Tran.interesting_points()=geometry.manifolds.translation_group.Tran-class.html#interesting_points"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.interesting_points
+geometry.manifolds.euclidean.Euclidean.interesting_points
+geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.interesting_points
+geometry.manifolds.special_euclidean_algebra.se_algebra.interesting_points
+geometry.manifolds.special_euclidean_group.SE_group.interesting_points
+geometry.manifolds.special_orthogonal_algebra.so_algebra.interesting_points
+geometry.manifolds.special_orthogonal_group.SO_group.interesting_points
+geometry.manifolds.sphere.Sphere.interesting_points
+geometry.manifolds.sphere.Sphere1.interesting_points
+geometry.manifolds.tangent_bundle.TangentBundle.interesting_points
+geometry.manifolds.torus.Torus.interesting_points
+geometry.manifolds.translation_algebra.tran.interesting_points
+geometry.manifolds.translation_group.Tran.interesting_points" class="py-name" href="#" onclick="return doclink('link-33', 'interesting_points', 'link-33');">interesting_points</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> <tt class="py-op">==</tt> <tt class="py-number">4</tt><tt class="py-op">:</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">            <tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-34" class="py-name" targets="Variable geometry.SE3=geometry-module.html#SE3,Variable geometry.manifolds.SE3=geometry.manifolds-module.html#SE3,Variable geometry.manifolds.embedding_relations.SE3=geometry.manifolds.embedding_relations-module.html#SE3,Variable geometry.manifolds.tests.embedding_test.SE3=geometry.manifolds.tests.embedding_test-module.html#SE3,Variable geometry.manifolds.tests.manifold_tests.SE3=geometry.manifolds.tests.manifold_tests-module.html#SE3,Variable geometry.manifolds.todo.SE3=geometry.manifolds.todo-module.html#SE3"><a title="geometry.SE3
+geometry.manifolds.SE3
+geometry.manifolds.embedding_relations.SE3
+geometry.manifolds.tests.embedding_test.SE3
+geometry.manifolds.tests.manifold_tests.SE3
+geometry.manifolds.todo.SE3" class="py-name" href="#" onclick="return doclink('link-34', 'SE3', 'link-34');">SE3</a></tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">            <tt class="py-name">points</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt id="link-35" class="py-name"><a title="geometry.SE3
+geometry.manifolds.SE3
+geometry.manifolds.embedding_relations.SE3
+geometry.manifolds.tests.embedding_test.SE3
+geometry.manifolds.tests.manifold_tests.SE3
+geometry.manifolds.todo.SE3" class="py-name" href="#" onclick="return doclink('link-35', 'SE3', 'link-34');">SE3</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group
+geometry.manifolds.special_euclidean_group.SE_group.algebra_from_group
+geometry.manifolds.translation_group.Tran.algebra_from_group" class="py-name" href="#" onclick="return doclink('link-36', 'algebra_from_group', 'link-31');">algebra_from_group</a></tt><tt class="py-op">(</tt><tt class="py-name">p</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">                           <tt class="py-keyword">for</tt> <tt class="py-name">p</tt> <tt class="py-keyword">in</tt> <tt id="link-37" class="py-name"><a title="geometry.SE3
+geometry.manifolds.SE3
+geometry.manifolds.embedding_relations.SE3
+geometry.manifolds.tests.embedding_test.SE3
+geometry.manifolds.tests.manifold_tests.SE3
+geometry.manifolds.todo.SE3" class="py-name" href="#" onclick="return doclink('link-37', 'SE3', 'link-34');">SE3</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.interesting_points
+geometry.manifolds.euclidean.Euclidean.interesting_points
+geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.interesting_points
+geometry.manifolds.special_euclidean_algebra.se_algebra.interesting_points
+geometry.manifolds.special_euclidean_group.SE_group.interesting_points
+geometry.manifolds.special_orthogonal_algebra.so_algebra.interesting_points
+geometry.manifolds.special_orthogonal_group.SO_group.interesting_points
+geometry.manifolds.sphere.Sphere.interesting_points
+geometry.manifolds.sphere.Sphere1.interesting_points
+geometry.manifolds.tangent_bundle.TangentBundle.interesting_points
+geometry.manifolds.torus.Torus.interesting_points
+geometry.manifolds.translation_algebra.tran.interesting_points
+geometry.manifolds.translation_group.Tran.interesting_points" class="py-name" href="#" onclick="return doclink('link-38', 'interesting_points', 'link-33');">interesting_points</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-string">'Not implemented for n=%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">points</tt> </tt>
+</div></div><a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:46 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

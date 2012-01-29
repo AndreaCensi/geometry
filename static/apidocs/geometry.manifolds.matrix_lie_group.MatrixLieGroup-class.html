@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>geometry.manifolds.matrix_lie_group.MatrixLieGroup</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="geometry-module.html">Package&nbsp;geometry</a> ::
+        <a href="geometry.manifolds-module.html">Package&nbsp;manifolds</a> ::
+        <a href="geometry.manifolds.matrix_lie_group-module.html">Module&nbsp;matrix_lie_group</a> ::
+        Class&nbsp;MatrixLieGroup
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class MatrixLieGroup</h1><p class="nomargin-top"><span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_geometry_9" name="uml_class_diagram_for_geometry_9">
+<area shape="rect" id="node1_33" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#__abstractmethods__" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.__abstractmethods__" alt="" coords="288,401,540,420"/>
+<area shape="rect" id="node1_34" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#__init__" title="Initializes the Lie group." alt="" coords="288,423,540,441"/>
+<area shape="rect" id="node1_35" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#algebra_from_group" title="Converts an element of the group to the algebra." alt="" coords="288,441,540,460"/>
+<area shape="rect" id="node1_36" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#belongs_algebra" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.belongs_algebra" alt="" coords="288,460,540,479"/>
+<area shape="rect" id="node1_37" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#distance" title="Computes the distance between two points." alt="" coords="288,479,540,497"/>
+<area shape="rect" id="node1_38" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#expmap" title="This is the inverse of :py:func:`logmap_`." alt="" coords="288,497,540,516"/>
+<area shape="rect" id="node1_39" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#get_algebra" title="Returns the interface to the corresponding Lie algebra." alt="" coords="288,516,540,535"/>
+<area shape="rect" id="node1_40" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#group_from_algebra" title="Converts an element of the algebra to the group." alt="" coords="288,535,540,553"/>
+<area shape="rect" id="node1_41" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#inverse" title=":param g: :type g: &#160;``belongs``" alt="" coords="288,553,540,572"/>
+<area shape="rect" id="node1_42" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#logmap" title="Returns the direction from base to target." alt="" coords="288,572,540,591"/>
+<area shape="rect" id="node1_43" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#multiply" title="Implements the group operation." alt="" coords="288,591,540,609"/>
+<area shape="rect" id="node1_44" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#project_ts" title="Projects the vector *x* to the tangent space at point *base*." alt="" coords="288,609,540,628"/>
+<area shape="rect" id="node1_45" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#tangent_bundle" title="Returns the manifold corresponding to the tangent bundle." alt="" coords="288,628,540,647"/>
+<area shape="rect" id="node1_46" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#unity" title="Returns the group unity." alt="" coords="288,647,540,665"/>
+<area shape="rect" id="node1_47" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#velocity_from_points" title="Find the velocity in local frame to go from *a* to *b* in &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;*delta* time." alt="" coords="288,665,540,684"/>
+<area shape="rect" id="node1" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html" title="This is the base class for matrix Lie groups." alt="" coords="275,377,551,690"/>
+<area shape="rect" id="node2" href="geometry.manifolds.special_orthogonal_group.SO_group-class.html" title="This is the Special Orthogonal group SO(n) describing rotations of Euclidean space; implemented for n=2,3." alt="" coords="37,710,299,749"/>
+<area shape="rect" id="node3" href="geometry.manifolds.translation_group.Tran-class.html" title="The translation subgroup of SE(n)." alt="" coords="329,710,501,749"/>
+<area shape="rect" id="node6" href="geometry.manifolds.special_euclidean_group.SE_group-class.html" title="This is the Special Euclidean group SE(n) describing roto&#45;translations of Euclidean space." alt="" coords="530,710,782,749"/>
+<area shape="rect" id="node4_48" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold.Embedding-class.html" title="Embedding(A, B, A_to_B, B_to_A, steps, type, desc)" alt="" coords="17,31,479,49"/>
+<area shape="rect" id="node4_49" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold.Isomorphism-class.html" title="Isomorphism(A, B, A_to_B, B_to_A, steps, type, desc)" alt="" coords="17,49,479,68"/>
+<area shape="rect" id="node4_50" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#assert_close" title="Asserts that two points on the manifold are close to the given &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;tolerance." alt="" coords="17,71,479,89"/>
+<area shape="rect" id="node4_51" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#belongs" title="Raises an Exception if the point does not belong to this manifold." alt="" coords="17,89,479,108"/>
+<area shape="rect" id="node4_52" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#belongs_ts" title="Checks that a vector *vx* belongs to the tangent space &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;at the given point *base*." alt="" coords="17,108,479,127"/>
+<area shape="rect" id="node4_53" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#can_convert_to" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.can_convert_to" alt="" coords="17,127,479,145"/>
+<area shape="rect" id="node4_54" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#can_represent" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.can_represent" alt="" coords="17,145,479,164"/>
+<area shape="rect" id="node4_55" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#convert_to" title=":param my_point: :type my_point: &#160;``belongs``" alt="" coords="17,164,479,183"/>
+<area shape="rect" id="node4_56" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embed_in" title="Embeds a point on this manifold to the target manifold M." alt="" coords="17,183,479,201"/>
+<area shape="rect" id="node4_57" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embeddable_in" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.embeddable_in" alt="" coords="17,201,479,220"/>
+<area shape="rect" id="node4_58" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embedding" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.embedding" alt="" coords="17,220,479,239"/>
+<area shape="rect" id="node4_59" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#friendly" title="Returns a friendly description string for a point on the manifold." alt="" coords="17,239,479,257"/>
+<area shape="rect" id="node4_60" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#geodesic" title="Returns the point interpolated along the geodesic." alt="" coords="17,257,479,276"/>
+<area shape="rect" id="node4_61" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#get_dimension" title="Returns the intrinsic dimension of this manifold." alt="" coords="17,276,479,295"/>
+<area shape="rect" id="node4_62" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#interesting_points" title="Returns a list of &quot;interesting points&quot; on this manifold that &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;should be used for testing various properties." alt="" coords="17,295,479,313"/>
+<area shape="rect" id="node4_63" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#relations_descriptions" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.relations_descriptions" alt="" coords="17,332,479,351"/>
+<area shape="rect" id="node4" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html" title="This is the base class for differentiable manifolds." alt="" coords="5,6,491,357"/>
+<area shape="rect" id="node5_64" href="abc.ABCMeta-class.html" title="Metaclass for defining Abstract Base Classes (ABCs)." alt="" coords="533,171,631,189"/>
+<area shape="rect" id="node5_65" href="geometry.manifolds.group.Group-class.html#identity" title="geometry.manifolds.group.Group.identity" alt="" coords="533,192,631,211"/>
+<area shape="rect" id="node5" href="geometry.manifolds.group.Group-class.html" title="geometry.manifolds.group.Group" alt="" coords="521,146,642,217"/>
+</map>
+  <img src="uml_class_diagram_for_geometry_9.gif" alt='' usemap="#uml_class_diagram_for_geometry_9" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>This is the base class for matrix Lie groups.</p>
+  <p>Subclasses should provide a MatrixLieAlgebra object. Given the Lie 
+  algebra, we can compute everything. However, subclasses can choose to 
+  overload some functions if they know a more numerically stable 
+  implementation.</p>
+
+<!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Nested Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-NestedClasses"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="geometry.manifolds.group.Group-class.html">group.Group</a></code></b>:
+      <code><a href="abc.ABCMeta-class.html">__metaclass__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html">differentiable_manifold.DifferentiableManifold</a></code></b>:
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold.Embedding-class.html">Embedding</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold.Isomorphism-class.html">Isomorphism</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">n</span>,
+        <span class="summary-sig-arg">dimension</span>,
+        <span class="summary-sig-arg">algebra</span>)</span><br />
+      Initializes the Lie group.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#algebra_from_group" class="summary-sig-name">algebra_from_group</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">g</span>)</span><br />
+      Converts an element of the group to the algebra.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.algebra_from_group">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="belongs_algebra"></a><span class="summary-sig-name">belongs_algebra</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.belongs_algebra">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#distance" class="summary-sig-name">distance</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">a</span>,
+        <span class="summary-sig-arg">b</span>)</span><br />
+      Computes the distance between two points.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.distance">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#expmap" class="summary-sig-name">expmap</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">bv</span>)</span><br />
+      This is the inverse of :py:func:`logmap_`.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.expmap">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_algebra"></a><span class="summary-sig-name">get_algebra</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the interface to the corresponding Lie algebra.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.get_algebra">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#group_from_algebra" class="summary-sig-name">group_from_algebra</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">a</span>)</span><br />
+      Converts an element of the algebra to the group.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.group_from_algebra">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#inverse" class="summary-sig-name">inverse</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">g</span>)</span><br />
+      :param g: :type g:  ``belongs``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.inverse">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#logmap" class="summary-sig-name">logmap</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">base</span>,
+        <span class="summary-sig-arg">target</span>)</span><br />
+      Returns the direction from base to target.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.logmap">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#multiply" class="summary-sig-name">multiply</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">g</span>,
+        <span class="summary-sig-arg">h</span>)</span><br />
+      Implements the group operation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.multiply">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#project_ts" class="summary-sig-name">project_ts</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">bv</span>)</span><br />
+      Projects the vector *x* to the tangent space at point *base*.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.project_ts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#tangent_bundle" class="summary-sig-name">tangent_bundle</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the manifold corresponding to the tangent bundle.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.tangent_bundle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#unity" class="summary-sig-name">unity</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the group unity.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.unity">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#velocity_from_points" class="summary-sig-name">velocity_from_points</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">a</span>,
+        <span class="summary-sig-arg">b</span>,
+        <span class="summary-sig-arg">delta</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Find the velocity in local frame to go from *a* to *b* in 
+           *delta* time.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.velocity_from_points">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="geometry.manifolds.group.Group-class.html">group.Group</a></code></b>:
+      <code><a href="geometry.manifolds.group.Group-class.html#identity">identity</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html">differentiable_manifold.DifferentiableManifold</a></code></b>:
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#assert_close">assert_close</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#belongs">belongs</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#belongs_ts">belongs_ts</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#can_convert_to">can_convert_to</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#can_represent">can_represent</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#convert_to">convert_to</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embed_in">embed_in</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embeddable_in">embeddable_in</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#friendly">friendly</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#geodesic">geodesic</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#get_dimension">get_dimension</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#interesting_points">interesting_points</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#project_from">project_from</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#project_to">project_to</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#relations_descriptions">relations_descriptions</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html">differentiable_manifold.DifferentiableManifold</a></code></b>:
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embedding">embedding</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#isomorphism">isomorphism</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__abstractmethods__"></a><span class="summary-name">__abstractmethods__</span> = <code title="frozenset(['belongs'])"><code class="variable-group">frozenset([</code><code class="variable-quote">'</code><code class="variable-string">belongs</code><code class="variable-quote">'</code><code class="variable-group">])</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#_abc_cache" class="summary-name" onclick="show_private();">_abc_cache</a> = <code title="set([&lt;class 'geometry.manifolds.translation_group.Tran'&gt;,
+     &lt;class 'geometry.manifolds.special_orthogonal_group.SO_group'&gt;,
+     &lt;class 'geometry.manifolds.special_euclidean_group.SE_group'&gt;])"><code class="variable-group">set([</code>&lt;class 'geometry.manifolds.translation_group<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="geometry.manifolds.group.Group-class.html">group.Group</a></code></b> (private):
+      <code><a href="geometry.manifolds.group.Group-class.html#_abc_negative_cache" onclick="show_private();">_abc_negative_cache</a></code>,
+      <code><a href="geometry.manifolds.group.Group-class.html#_abc_negative_cache_version" onclick="show_private();">_abc_negative_cache_version</a></code>,
+      <code><a href="geometry.manifolds.group.Group-class.html#_abc_registry" onclick="show_private();">_abc_registry</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">n</span>,
+        <span class="sig-arg">dimension</span>,
+        <span class="sig-arg">algebra</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Initializes the Lie group.</p>
+  <p>:param n: dimension of the matrix group. :param algebra: instance of 
+  :py:class:MatrixLieAlgebra</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="algebra_from_group"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">algebra_from_group</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">g</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.algebra_from_group">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+           Converts an element of the group to the algebra. 
+           Uses generic matrix logarithm plus projection.
+       
+
+
+:param g: 
+:type g:  ``belongs``
+
+:rtype:  ``belongs_algebra``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="distance"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">distance</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">a</span>,
+        <span class="sig-arg">b</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.distance">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+           Computes the distance between two points.
+       
+           In the case of Lie groups, this is done by 
+           translating everything to the origin, computing the
+           logmap, and using the norm defined in the Lie Algebra object.
+
+       
+
+
+:param a: 
+:type a:  ``belongs``
+
+:param b: 
+:type b:  ``belongs``
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#distance">differentiable_manifold.DifferentiableManifold.distance</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="expmap"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">expmap</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">bv</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.expmap">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+           This is the inverse of :py:func:`logmap_`. 
+       
+           In the case of Lie groups, this is implemented using
+           the usual matrix exponential.
+
+           Here the :py:func:`MatrixLieAlgebra.project` function
+           is used to mitigate numerical errors. 
+       
+
+
+:param bv: 
+:type bv:  ``belongs_ts``
+
+:rtype:  ``belongs``
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#expmap">differentiable_manifold.DifferentiableManifold.expmap</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="group_from_algebra"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">group_from_algebra</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">a</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.group_from_algebra">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+           Converts an element of the algebra to the group. 
+       
+           Uses generic matrix exponential.
+       
+
+
+:param a: 
+:type a:  ``belongs_algebra``
+
+:rtype:  ``belongs``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="inverse"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">inverse</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">g</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.inverse">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param g: :type g:  ``belongs``</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.group.Group-class.html#inverse">group.Group.inverse</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="logmap"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">logmap</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">base</span>,
+        <span class="sig-arg">target</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.logmap">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+           Returns the direction from base to target. 
+       
+           In the case of Lie groups, this is implemented
+           by using the usual matrix logarithm at the origin.
+           
+           Here the :py:func:`MatrixLieAlgebra.project` function
+           is used to mitigate numerical errors. 
+       
+
+
+:param base: 
+:type base:  ``belongs``
+
+:param target: 
+:type target:  ``belongs``
+
+:rtype:  ``belongs_ts``
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#logmap">differentiable_manifold.DifferentiableManifold.logmap</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="multiply"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">multiply</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">g</span>,
+        <span class="sig-arg">h</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.multiply">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Implements the group operation.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.group.Group-class.html#multiply">group.Group.multiply</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="project_ts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">project_ts</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">bv</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.project_ts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+           Projects the vector *x* to the tangent space at point *base*.
+       
+           In the case of Lie Groups, we do this by translating the
+           vector to the origin, projecting it to the Lie Algebra,
+           and then translating it back. 
+       
+
+
+:param bv: 
+:type bv:  ``tuple(belongs,*)``
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#project_ts">differentiable_manifold.DifferentiableManifold.project_ts</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="tangent_bundle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">tangent_bundle</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.tangent_bundle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the manifold corresponding to the tangent bundle. The default 
+  gives a generic implementation. MatrixLieGroup have a different one.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#tangent_bundle">differentiable_manifold.DifferentiableManifold.tangent_bundle</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="unity"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">unity</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.unity">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the group unity.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.group.Group-class.html#unity">group.Group.unity</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="velocity_from_points"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">velocity_from_points</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">a</span>,
+        <span class="sig-arg">b</span>,
+        <span class="sig-arg">delta</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.matrix_lie_group-pysrc.html#MatrixLieGroup.velocity_from_points">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+           Find the velocity in local frame to go from *a* to *b* in 
+           *delta* time. 
+       
+
+
+:param a: 
+:type a:  ``belongs``
+
+:param b: 
+:type b:  ``belongs``
+
+:rtype:  ``belongs_ts``
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="_abc_cache"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_abc_cache</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">set([</code>&lt;class 'geometry.manifolds.translation_group.Tran'&gt;<code class="variable-op">,</code>
+     &lt;class 'geometry.manifolds.special_orthogonal_group.SO_group'&gt;<code class="variable-op">,</code>
+     &lt;class 'geometry.manifolds.special_euclidean_group.SE_group'&gt;<code class="variable-group">])</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:43 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

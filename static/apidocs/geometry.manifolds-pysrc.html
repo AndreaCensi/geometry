@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>geometry.manifolds</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="geometry-module.html">Package&nbsp;geometry</a> ::
+        Package&nbsp;manifolds
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="geometry.manifolds-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="geometry.manifolds-module.html">Package geometry.manifolds</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> <tt class="py-keyword">as</tt> <tt class="py-name">np</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">contracts</tt> <tt class="py-keyword">import</tt> <tt class="py-name">contract</tt><tt class="py-op">,</tt> <tt class="py-name">check</tt><tt class="py-op">,</tt> <tt class="py-name">new_contract</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-name">assert_allclose</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module geometry.manifolds.exceptions=geometry.manifolds.exceptions-module.html"><a title="geometry.manifolds.exceptions" class="py-name" href="#" onclick="return doclink('link-0', 'exceptions', 'link-0');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class geometry.manifolds.exceptions.DoesNotBelong=geometry.manifolds.exceptions.DoesNotBelong-class.html"><a title="geometry.manifolds.exceptions.DoesNotBelong" class="py-name" href="#" onclick="return doclink('link-1', 'DoesNotBelong', 'link-1');">DoesNotBelong</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module geometry.manifolds.differentiable_manifold=geometry.manifolds.differentiable_manifold-module.html"><a title="geometry.manifolds.differentiable_manifold" class="py-name" href="#" onclick="return doclink('link-2', 'differentiable_manifold', 'link-2');">differentiable_manifold</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class geometry.manifolds.differentiable_manifold.DifferentiableManifold=geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold" class="py-name" href="#" onclick="return doclink('link-3', 'DifferentiableManifold', 'link-3');">DifferentiableManifold</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Class geometry.manifolds.differentiable_manifold.RandomManifold=geometry.manifolds.differentiable_manifold.RandomManifold-class.html"><a title="geometry.manifolds.differentiable_manifold.RandomManifold" class="py-name" href="#" onclick="return doclink('link-4', 'RandomManifold', 'link-4');">RandomManifold</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method geometry.manifolds.differentiable_manifold.DifferentiableManifold.tangent_bundle()=geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#tangent_bundle,Method geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle()=geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#tangent_bundle,Module geometry.manifolds.tangent_bundle=geometry.manifolds.tangent_bundle-module.html"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.tangent_bundle
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle
+geometry.manifolds.tangent_bundle" class="py-name" href="#" onclick="return doclink('link-5', 'tangent_bundle', 'link-5');">tangent_bundle</a></tt> <tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Class geometry.manifolds.tangent_bundle.TangentBundle=geometry.manifolds.tangent_bundle.TangentBundle-class.html"><a title="geometry.manifolds.tangent_bundle.TangentBundle" class="py-name" href="#" onclick="return doclink('link-6', 'TangentBundle', 'link-6');">TangentBundle</a></tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-name">new_contract</tt><tt class="py-op">(</tt><tt class="py-string">'DifferentiableManifold'</tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold" class="py-name" href="#" onclick="return doclink('link-7', 'DifferentiableManifold', 'link-3');">DifferentiableManifold</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module geometry.manifolds.product_manifold=geometry.manifolds.product_manifold-module.html"><a title="geometry.manifolds.product_manifold" class="py-name" href="#" onclick="return doclink('link-8', 'product_manifold', 'link-8');">product_manifold</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Class geometry.manifolds.product_manifold.ProductManifold=geometry.manifolds.product_manifold.ProductManifold-class.html"><a title="geometry.manifolds.product_manifold.ProductManifold" class="py-name" href="#" onclick="return doclink('link-9', 'ProductManifold', 'link-9');">ProductManifold</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Module geometry.manifolds.group=geometry.manifolds.group-module.html"><a title="geometry.manifolds.group" class="py-name" href="#" onclick="return doclink('link-10', 'group', 'link-10');">group</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Module geometry.manifolds.matrix_linear_space=geometry.manifolds.matrix_linear_space-module.html"><a title="geometry.manifolds.matrix_linear_space" class="py-name" href="#" onclick="return doclink('link-11', 'matrix_linear_space', 'link-11');">matrix_linear_space</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Module geometry.manifolds.matrix_lie_algebra=geometry.manifolds.matrix_lie_algebra-module.html"><a title="geometry.manifolds.matrix_lie_algebra" class="py-name" href="#" onclick="return doclink('link-12', 'matrix_lie_algebra', 'link-12');">matrix_lie_algebra</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Module geometry.manifolds.matrix_lie_group=geometry.manifolds.matrix_lie_group-module.html"><a title="geometry.manifolds.matrix_lie_group" class="py-name" href="#" onclick="return doclink('link-13', 'matrix_lie_group', 'link-13');">matrix_lie_group</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Module geometry.manifolds.matrix_lie_group_tangent=geometry.manifolds.matrix_lie_group_tangent-module.html"><a title="geometry.manifolds.matrix_lie_group_tangent" class="py-name" href="#" onclick="return doclink('link-14', 'matrix_lie_group_tangent', 'link-14');">matrix_lie_group_tangent</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Module geometry.manifolds.sphere=geometry.manifolds.sphere-module.html"><a title="geometry.manifolds.sphere" class="py-name" href="#" onclick="return doclink('link-15', 'sphere', 'link-15');">sphere</a></tt> <tt class="py-keyword">import</tt> <tt id="link-16" class="py-name" targets="Class geometry.manifolds.sphere.Sphere=geometry.manifolds.sphere.Sphere-class.html"><a title="geometry.manifolds.sphere.Sphere" class="py-name" href="#" onclick="return doclink('link-16', 'Sphere', 'link-16');">Sphere</a></tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name" targets="Class geometry.manifolds.sphere.Sphere1=geometry.manifolds.sphere.Sphere1-class.html"><a title="geometry.manifolds.sphere.Sphere1" class="py-name" href="#" onclick="return doclink('link-17', 'Sphere1', 'link-17');">Sphere1</a></tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt id="link-18" class="py-name" targets="Variable geometry.S1=geometry-module.html#S1,Variable geometry.manifolds.S1=geometry.manifolds-module.html#S1,Variable geometry.manifolds.embedding_relations.S1=geometry.manifolds.embedding_relations-module.html#S1,Variable geometry.manifolds.tests.embedding_test.S1=geometry.manifolds.tests.embedding_test-module.html#S1,Variable geometry.manifolds.tests.manifold_tests.S1=geometry.manifolds.tests.manifold_tests-module.html#S1,Variable geometry.manifolds.tests.sphere_tests.S1=geometry.manifolds.tests.sphere_tests-module.html#S1,Variable geometry.manifolds.todo.S1=geometry.manifolds.todo-module.html#S1"><a title="geometry.S1
+geometry.manifolds.S1
+geometry.manifolds.embedding_relations.S1
+geometry.manifolds.tests.embedding_test.S1
+geometry.manifolds.tests.manifold_tests.S1
+geometry.manifolds.tests.sphere_tests.S1
+geometry.manifolds.todo.S1" class="py-name" href="#" onclick="return doclink('link-18', 'S1', 'link-18');">S1</a></tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="geometry.manifolds.sphere.Sphere1" class="py-name" href="#" onclick="return doclink('link-19', 'Sphere1', 'link-17');">Sphere1</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt id="link-20" class="py-name" targets="Variable geometry.S2=geometry-module.html#S2,Variable geometry.manifolds.S2=geometry.manifolds-module.html#S2,Variable geometry.manifolds.embedding_relations.S2=geometry.manifolds.embedding_relations-module.html#S2,Variable geometry.manifolds.special_orthogonal_group.S2=geometry.manifolds.special_orthogonal_group-module.html#S2,Variable geometry.manifolds.tests.embedding_test.S2=geometry.manifolds.tests.embedding_test-module.html#S2,Variable geometry.manifolds.tests.manifold_tests.S2=geometry.manifolds.tests.manifold_tests-module.html#S2,Variable geometry.manifolds.todo.S2=geometry.manifolds.todo-module.html#S2"><a title="geometry.S2
+geometry.manifolds.S2
+geometry.manifolds.embedding_relations.S2
+geometry.manifolds.special_orthogonal_group.S2
+geometry.manifolds.tests.embedding_test.S2
+geometry.manifolds.tests.manifold_tests.S2
+geometry.manifolds.todo.S2" class="py-name" href="#" onclick="return doclink('link-20', 'S2', 'link-20');">S2</a></tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="geometry.manifolds.sphere.Sphere" class="py-name" href="#" onclick="return doclink('link-21', 'Sphere', 'link-16');">Sphere</a></tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt id="link-22" class="py-name" targets="Variable geometry.S=geometry-module.html#S,Variable geometry.manifolds.S=geometry.manifolds-module.html#S,Variable geometry.manifolds.todo.S=geometry.manifolds.todo-module.html#S"><a title="geometry.S
+geometry.manifolds.S
+geometry.manifolds.todo.S" class="py-name" href="#" onclick="return doclink('link-22', 'S', 'link-22');">S</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> <tt id="link-23" class="py-name"><a title="geometry.S1
+geometry.manifolds.S1
+geometry.manifolds.embedding_relations.S1
+geometry.manifolds.tests.embedding_test.S1
+geometry.manifolds.tests.manifold_tests.S1
+geometry.manifolds.tests.sphere_tests.S1
+geometry.manifolds.todo.S1" class="py-name" href="#" onclick="return doclink('link-23', 'S1', 'link-18');">S1</a></tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">:</tt> <tt id="link-24" class="py-name"><a title="geometry.S2
+geometry.manifolds.S2
+geometry.manifolds.embedding_relations.S2
+geometry.manifolds.special_orthogonal_group.S2
+geometry.manifolds.tests.embedding_test.S2
+geometry.manifolds.tests.manifold_tests.S2
+geometry.manifolds.todo.S2" class="py-name" href="#" onclick="return doclink('link-24', 'S2', 'link-20');">S2</a></tt><tt class="py-op">}</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Module geometry.manifolds.torus=geometry.manifolds.torus-module.html"><a title="geometry.manifolds.torus" class="py-name" href="#" onclick="return doclink('link-25', 'torus', 'link-25');">torus</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt id="link-26" class="py-name" targets="Variable geometry.T1=geometry-module.html#T1,Variable geometry.manifolds.T1=geometry.manifolds-module.html#T1,Variable geometry.manifolds.embedding_relations.T1=geometry.manifolds.embedding_relations-module.html#T1,Variable geometry.manifolds.tests.embedding_test.T1=geometry.manifolds.tests.embedding_test-module.html#T1,Variable geometry.manifolds.tests.manifold_tests.T1=geometry.manifolds.tests.manifold_tests-module.html#T1,Variable geometry.manifolds.todo.T1=geometry.manifolds.todo-module.html#T1"><a title="geometry.T1
+geometry.manifolds.T1
+geometry.manifolds.embedding_relations.T1
+geometry.manifolds.tests.embedding_test.T1
+geometry.manifolds.tests.manifold_tests.T1
+geometry.manifolds.todo.T1" class="py-name" href="#" onclick="return doclink('link-26', 'T1', 'link-26');">T1</a></tt> <tt class="py-op">=</tt> <tt id="link-27" class="py-name" targets="Class geometry.manifolds.torus.Torus=geometry.manifolds.torus.Torus-class.html"><a title="geometry.manifolds.torus.Torus" class="py-name" href="#" onclick="return doclink('link-27', 'Torus', 'link-27');">Torus</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt id="link-28" class="py-name" targets="Variable geometry.T2=geometry-module.html#T2,Variable geometry.manifolds.T2=geometry.manifolds-module.html#T2,Variable geometry.manifolds.embedding_relations.T2=geometry.manifolds.embedding_relations-module.html#T2,Variable geometry.manifolds.tests.embedding_test.T2=geometry.manifolds.tests.embedding_test-module.html#T2,Variable geometry.manifolds.tests.manifold_tests.T2=geometry.manifolds.tests.manifold_tests-module.html#T2,Variable geometry.manifolds.todo.T2=geometry.manifolds.todo-module.html#T2"><a title="geometry.T2
+geometry.manifolds.T2
+geometry.manifolds.embedding_relations.T2
+geometry.manifolds.tests.embedding_test.T2
+geometry.manifolds.tests.manifold_tests.T2
+geometry.manifolds.todo.T2" class="py-name" href="#" onclick="return doclink('link-28', 'T2', 'link-28');">T2</a></tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name"><a title="geometry.manifolds.torus.Torus" class="py-name" href="#" onclick="return doclink('link-29', 'Torus', 'link-27');">Torus</a></tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt id="link-30" class="py-name" targets="Variable geometry.T3=geometry-module.html#T3,Variable geometry.manifolds.T3=geometry.manifolds-module.html#T3,Variable geometry.manifolds.embedding_relations.T3=geometry.manifolds.embedding_relations-module.html#T3,Variable geometry.manifolds.tests.embedding_test.T3=geometry.manifolds.tests.embedding_test-module.html#T3,Variable geometry.manifolds.tests.manifold_tests.T3=geometry.manifolds.tests.manifold_tests-module.html#T3,Variable geometry.manifolds.todo.T3=geometry.manifolds.todo-module.html#T3"><a title="geometry.T3
+geometry.manifolds.T3
+geometry.manifolds.embedding_relations.T3
+geometry.manifolds.tests.embedding_test.T3
+geometry.manifolds.tests.manifold_tests.T3
+geometry.manifolds.todo.T3" class="py-name" href="#" onclick="return doclink('link-30', 'T3', 'link-30');">T3</a></tt> <tt class="py-op">=</tt> <tt id="link-31" class="py-name"><a title="geometry.manifolds.torus.Torus" class="py-name" href="#" onclick="return doclink('link-31', 'Torus', 'link-27');">Torus</a></tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt id="link-32" class="py-name" targets="Variable geometry.T=geometry-module.html#T,Variable geometry.manifolds.T=geometry.manifolds-module.html#T,Variable geometry.manifolds.todo.T=geometry.manifolds.todo-module.html#T"><a title="geometry.T
+geometry.manifolds.T
+geometry.manifolds.todo.T" class="py-name" href="#" onclick="return doclink('link-32', 'T', 'link-32');">T</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> <tt id="link-33" class="py-name"><a title="geometry.T1
+geometry.manifolds.T1
+geometry.manifolds.embedding_relations.T1
+geometry.manifolds.tests.embedding_test.T1
+geometry.manifolds.tests.manifold_tests.T1
+geometry.manifolds.todo.T1" class="py-name" href="#" onclick="return doclink('link-33', 'T1', 'link-26');">T1</a></tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">:</tt> <tt id="link-34" class="py-name"><a title="geometry.T2
+geometry.manifolds.T2
+geometry.manifolds.embedding_relations.T2
+geometry.manifolds.tests.embedding_test.T2
+geometry.manifolds.tests.manifold_tests.T2
+geometry.manifolds.todo.T2" class="py-name" href="#" onclick="return doclink('link-34', 'T2', 'link-28');">T2</a></tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> <tt id="link-35" class="py-name"><a title="geometry.T3
+geometry.manifolds.T3
+geometry.manifolds.embedding_relations.T3
+geometry.manifolds.tests.embedding_test.T3
+geometry.manifolds.tests.manifold_tests.T3
+geometry.manifolds.todo.T3" class="py-name" href="#" onclick="return doclink('link-35', 'T3', 'link-30');">T3</a></tt><tt class="py-op">}</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Module geometry.manifolds.euclidean=geometry.manifolds.euclidean-module.html"><a title="geometry.manifolds.euclidean" class="py-name" href="#" onclick="return doclink('link-36', 'euclidean', 'link-36');">euclidean</a></tt> <tt class="py-keyword">import</tt> <tt id="link-37" class="py-name" targets="Class geometry.manifolds.euclidean.Euclidean=geometry.manifolds.euclidean.Euclidean-class.html"><a title="geometry.manifolds.euclidean.Euclidean" class="py-name" href="#" onclick="return doclink('link-37', 'Euclidean', 'link-37');">Euclidean</a></tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt id="link-38" class="py-name" targets="Variable geometry.R1=geometry-module.html#R1,Variable geometry.manifolds.R1=geometry.manifolds-module.html#R1,Variable geometry.manifolds.embedding_relations.R1=geometry.manifolds.embedding_relations-module.html#R1,Variable geometry.manifolds.tests.embedding_test.R1=geometry.manifolds.tests.embedding_test-module.html#R1,Variable geometry.manifolds.tests.manifold_tests.R1=geometry.manifolds.tests.manifold_tests-module.html#R1,Variable geometry.manifolds.todo.R1=geometry.manifolds.todo-module.html#R1"><a title="geometry.R1
+geometry.manifolds.R1
+geometry.manifolds.embedding_relations.R1
+geometry.manifolds.tests.embedding_test.R1
+geometry.manifolds.tests.manifold_tests.R1
+geometry.manifolds.todo.R1" class="py-name" href="#" onclick="return doclink('link-38', 'R1', 'link-38');">R1</a></tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name"><a title="geometry.manifolds.euclidean.Euclidean" class="py-name" href="#" onclick="return doclink('link-39', 'Euclidean', 'link-37');">Euclidean</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt id="link-40" class="py-name" targets="Variable geometry.R2=geometry-module.html#R2,Variable geometry.manifolds.R2=geometry.manifolds-module.html#R2,Variable geometry.manifolds.embedding_relations.R2=geometry.manifolds.embedding_relations-module.html#R2,Variable geometry.manifolds.tests.embedding_test.R2=geometry.manifolds.tests.embedding_test-module.html#R2,Variable geometry.manifolds.tests.manifold_tests.R2=geometry.manifolds.tests.manifold_tests-module.html#R2,Variable geometry.manifolds.todo.R2=geometry.manifolds.todo-module.html#R2"><a title="geometry.R2
+geometry.manifolds.R2
+geometry.manifolds.embedding_relations.R2
+geometry.manifolds.tests.embedding_test.R2
+geometry.manifolds.tests.manifold_tests.R2
+geometry.manifolds.todo.R2" class="py-name" href="#" onclick="return doclink('link-40', 'R2', 'link-40');">R2</a></tt> <tt class="py-op">=</tt> <tt id="link-41" class="py-name"><a title="geometry.manifolds.euclidean.Euclidean" class="py-name" href="#" onclick="return doclink('link-41', 'Euclidean', 'link-37');">Euclidean</a></tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt id="link-42" class="py-name" targets="Variable geometry.R3=geometry-module.html#R3,Variable geometry.manifolds.R3=geometry.manifolds-module.html#R3,Variable geometry.manifolds.embedding_relations.R3=geometry.manifolds.embedding_relations-module.html#R3,Variable geometry.manifolds.tests.embedding_test.R3=geometry.manifolds.tests.embedding_test-module.html#R3,Variable geometry.manifolds.tests.manifold_tests.R3=geometry.manifolds.tests.manifold_tests-module.html#R3,Variable geometry.manifolds.todo.R3=geometry.manifolds.todo-module.html#R3"><a title="geometry.R3
+geometry.manifolds.R3
+geometry.manifolds.embedding_relations.R3
+geometry.manifolds.tests.embedding_test.R3
+geometry.manifolds.tests.manifold_tests.R3
+geometry.manifolds.todo.R3" class="py-name" href="#" onclick="return doclink('link-42', 'R3', 'link-42');">R3</a></tt> <tt class="py-op">=</tt> <tt id="link-43" class="py-name"><a title="geometry.manifolds.euclidean.Euclidean" class="py-name" href="#" onclick="return doclink('link-43', 'Euclidean', 'link-37');">Euclidean</a></tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt id="link-44" class="py-name" targets="Variable geometry.R=geometry-module.html#R,Variable geometry.manifolds.R=geometry.manifolds-module.html#R,Variable geometry.manifolds.special_euclidean_group.R=geometry.manifolds.special_euclidean_group-module.html#R,Variable geometry.manifolds.todo.R=geometry.manifolds.todo-module.html#R,Variable geometry.manifolds.translation_group.R=geometry.manifolds.translation_group-module.html#R"><a title="geometry.R
+geometry.manifolds.R
+geometry.manifolds.special_euclidean_group.R
+geometry.manifolds.todo.R
+geometry.manifolds.translation_group.R" class="py-name" href="#" onclick="return doclink('link-44', 'R', 'link-44');">R</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> <tt id="link-45" class="py-name"><a title="geometry.R1
+geometry.manifolds.R1
+geometry.manifolds.embedding_relations.R1
+geometry.manifolds.tests.embedding_test.R1
+geometry.manifolds.tests.manifold_tests.R1
+geometry.manifolds.todo.R1" class="py-name" href="#" onclick="return doclink('link-45', 'R1', 'link-38');">R1</a></tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">:</tt> <tt id="link-46" class="py-name"><a title="geometry.R2
+geometry.manifolds.R2
+geometry.manifolds.embedding_relations.R2
+geometry.manifolds.tests.embedding_test.R2
+geometry.manifolds.tests.manifold_tests.R2
+geometry.manifolds.todo.R2" class="py-name" href="#" onclick="return doclink('link-46', 'R2', 'link-40');">R2</a></tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> <tt id="link-47" class="py-name"><a title="geometry.R3
+geometry.manifolds.R3
+geometry.manifolds.embedding_relations.R3
+geometry.manifolds.tests.embedding_test.R3
+geometry.manifolds.tests.manifold_tests.R3
+geometry.manifolds.todo.R3" class="py-name" href="#" onclick="return doclink('link-47', 'R3', 'link-42');">R3</a></tt><tt class="py-op">}</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-48" class="py-name" targets="Module geometry.manifolds.translation_algebra=geometry.manifolds.translation_algebra-module.html"><a title="geometry.manifolds.translation_algebra" class="py-name" href="#" onclick="return doclink('link-48', 'translation_algebra', 'link-48');">translation_algebra</a></tt> <tt class="py-keyword">import</tt> <tt id="link-49" class="py-name" targets="Variable geometry.manifolds.todo.tran=geometry.manifolds.todo-module.html#tran,Variable geometry.manifolds.tran=geometry.manifolds-module.html#tran,Class geometry.manifolds.translation_algebra.tran=geometry.manifolds.translation_algebra.tran-class.html,Variable geometry.manifolds.translation_group.tran=geometry.manifolds.translation_group-module.html#tran,Variable geometry.tran=geometry-module.html#tran"><a title="geometry.manifolds.todo.tran
+geometry.manifolds.tran
+geometry.manifolds.translation_algebra.tran
+geometry.manifolds.translation_group.tran
+geometry.tran" class="py-name" href="#" onclick="return doclink('link-49', 'tran', 'link-49');">tran</a></tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt id="link-50" class="py-name" targets="Variable geometry.manifolds.embedding_relations.tran1=geometry.manifolds.embedding_relations-module.html#tran1,Variable geometry.manifolds.tests.embedding_test.tran1=geometry.manifolds.tests.embedding_test-module.html#tran1,Variable geometry.manifolds.tests.manifold_tests.tran1=geometry.manifolds.tests.manifold_tests-module.html#tran1,Variable geometry.manifolds.todo.tran1=geometry.manifolds.todo-module.html#tran1,Variable geometry.manifolds.tran1=geometry.manifolds-module.html#tran1,Variable geometry.tran1=geometry-module.html#tran1"><a title="geometry.manifolds.embedding_relations.tran1
+geometry.manifolds.tests.embedding_test.tran1
+geometry.manifolds.tests.manifold_tests.tran1
+geometry.manifolds.todo.tran1
+geometry.manifolds.tran1
+geometry.tran1" class="py-name" href="#" onclick="return doclink('link-50', 'tran1', 'link-50');">tran1</a></tt> <tt class="py-op">=</tt> <tt id="link-51" class="py-name"><a title="geometry.manifolds.todo.tran
+geometry.manifolds.tran
+geometry.manifolds.translation_algebra.tran
+geometry.manifolds.translation_group.tran
+geometry.tran" class="py-name" href="#" onclick="return doclink('link-51', 'tran', 'link-49');">tran</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt id="link-52" class="py-name" targets="Variable geometry.manifolds.embedding_relations.tran2=geometry.manifolds.embedding_relations-module.html#tran2,Variable geometry.manifolds.tests.embedding_test.tran2=geometry.manifolds.tests.embedding_test-module.html#tran2,Variable geometry.manifolds.tests.manifold_tests.tran2=geometry.manifolds.tests.manifold_tests-module.html#tran2,Variable geometry.manifolds.todo.tran2=geometry.manifolds.todo-module.html#tran2,Variable geometry.manifolds.tran2=geometry.manifolds-module.html#tran2,Variable geometry.tran2=geometry-module.html#tran2"><a title="geometry.manifolds.embedding_relations.tran2
+geometry.manifolds.tests.embedding_test.tran2
+geometry.manifolds.tests.manifold_tests.tran2
+geometry.manifolds.todo.tran2
+geometry.manifolds.tran2
+geometry.tran2" class="py-name" href="#" onclick="return doclink('link-52', 'tran2', 'link-52');">tran2</a></tt> <tt class="py-op">=</tt> <tt id="link-53" class="py-name"><a title="geometry.manifolds.todo.tran
+geometry.manifolds.tran
+geometry.manifolds.translation_algebra.tran
+geometry.manifolds.translation_group.tran
+geometry.tran" class="py-name" href="#" onclick="return doclink('link-53', 'tran', 'link-49');">tran</a></tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt id="link-54" class="py-name" targets="Variable geometry.manifolds.embedding_relations.tran3=geometry.manifolds.embedding_relations-module.html#tran3,Variable geometry.manifolds.tests.embedding_test.tran3=geometry.manifolds.tests.embedding_test-module.html#tran3,Variable geometry.manifolds.tests.manifold_tests.tran3=geometry.manifolds.tests.manifold_tests-module.html#tran3,Variable geometry.manifolds.todo.tran3=geometry.manifolds.todo-module.html#tran3,Variable geometry.manifolds.tran3=geometry.manifolds-module.html#tran3,Variable geometry.tran3=geometry-module.html#tran3"><a title="geometry.manifolds.embedding_relations.tran3
+geometry.manifolds.tests.embedding_test.tran3
+geometry.manifolds.tests.manifold_tests.tran3
+geometry.manifolds.todo.tran3
+geometry.manifolds.tran3
+geometry.tran3" class="py-name" href="#" onclick="return doclink('link-54', 'tran3', 'link-54');">tran3</a></tt> <tt class="py-op">=</tt> <tt id="link-55" class="py-name"><a title="geometry.manifolds.todo.tran
+geometry.manifolds.tran
+geometry.manifolds.translation_algebra.tran
+geometry.manifolds.translation_group.tran
+geometry.tran" class="py-name" href="#" onclick="return doclink('link-55', 'tran', 'link-49');">tran</a></tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt id="link-56" class="py-name"><a title="geometry.manifolds.todo.tran
+geometry.manifolds.tran
+geometry.manifolds.translation_algebra.tran
+geometry.manifolds.translation_group.tran
+geometry.tran" class="py-name" href="#" onclick="return doclink('link-56', 'tran', 'link-49');">tran</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> <tt id="link-57" class="py-name"><a title="geometry.manifolds.embedding_relations.tran1
+geometry.manifolds.tests.embedding_test.tran1
+geometry.manifolds.tests.manifold_tests.tran1
+geometry.manifolds.todo.tran1
+geometry.manifolds.tran1
+geometry.tran1" class="py-name" href="#" onclick="return doclink('link-57', 'tran1', 'link-50');">tran1</a></tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">:</tt> <tt id="link-58" class="py-name"><a title="geometry.manifolds.embedding_relations.tran2
+geometry.manifolds.tests.embedding_test.tran2
+geometry.manifolds.tests.manifold_tests.tran2
+geometry.manifolds.todo.tran2
+geometry.manifolds.tran2
+geometry.tran2" class="py-name" href="#" onclick="return doclink('link-58', 'tran2', 'link-52');">tran2</a></tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> <tt id="link-59" class="py-name"><a title="geometry.manifolds.embedding_relations.tran3
+geometry.manifolds.tests.embedding_test.tran3
+geometry.manifolds.tests.manifold_tests.tran3
+geometry.manifolds.todo.tran3
+geometry.manifolds.tran3
+geometry.tran3" class="py-name" href="#" onclick="return doclink('link-59', 'tran3', 'link-54');">tran3</a></tt><tt class="py-op">}</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-60" class="py-name" targets="Module geometry.manifolds.translation_group=geometry.manifolds.translation_group-module.html"><a title="geometry.manifolds.translation_group" class="py-name" href="#" onclick="return doclink('link-60', 'translation_group', 'link-60');">translation_group</a></tt> <tt class="py-keyword">import</tt> <tt id="link-61" class="py-name" targets="Variable geometry.Tran=geometry-module.html#Tran,Variable geometry.manifolds.Tran=geometry.manifolds-module.html#Tran,Variable geometry.manifolds.todo.Tran=geometry.manifolds.todo-module.html#Tran,Class geometry.manifolds.translation_group.Tran=geometry.manifolds.translation_group.Tran-class.html"><a title="geometry.Tran
+geometry.manifolds.Tran
+geometry.manifolds.todo.Tran
+geometry.manifolds.translation_group.Tran" class="py-name" href="#" onclick="return doclink('link-61', 'Tran', 'link-61');">Tran</a></tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt id="link-62" class="py-name" targets="Variable geometry.Tran1=geometry-module.html#Tran1,Variable geometry.manifolds.Tran1=geometry.manifolds-module.html#Tran1,Variable geometry.manifolds.tests.embedding_test.Tran1=geometry.manifolds.tests.embedding_test-module.html#Tran1,Variable geometry.manifolds.tests.manifold_tests.Tran1=geometry.manifolds.tests.manifold_tests-module.html#Tran1,Variable geometry.manifolds.todo.Tran1=geometry.manifolds.todo-module.html#Tran1"><a title="geometry.Tran1
+geometry.manifolds.Tran1
+geometry.manifolds.tests.embedding_test.Tran1
+geometry.manifolds.tests.manifold_tests.Tran1
+geometry.manifolds.todo.Tran1" class="py-name" href="#" onclick="return doclink('link-62', 'Tran1', 'link-62');">Tran1</a></tt> <tt class="py-op">=</tt> <tt id="link-63" class="py-name"><a title="geometry.Tran
+geometry.manifolds.Tran
+geometry.manifolds.todo.Tran
+geometry.manifolds.translation_group.Tran" class="py-name" href="#" onclick="return doclink('link-63', 'Tran', 'link-61');">Tran</a></tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt id="link-64" class="py-name" targets="Variable geometry.Tran2=geometry-module.html#Tran2,Variable geometry.manifolds.Tran2=geometry.manifolds-module.html#Tran2,Variable geometry.manifolds.embedding_relations.Tran2=geometry.manifolds.embedding_relations-module.html#Tran2,Variable geometry.manifolds.tests.embedding_test.Tran2=geometry.manifolds.tests.embedding_test-module.html#Tran2,Variable geometry.manifolds.tests.manifold_tests.Tran2=geometry.manifolds.tests.manifold_tests-module.html#Tran2,Variable geometry.manifolds.todo.Tran2=geometry.manifolds.todo-module.html#Tran2"><a title="geometry.Tran2
+geometry.manifolds.Tran2
+geometry.manifolds.embedding_relations.Tran2
+geometry.manifolds.tests.embedding_test.Tran2
+geometry.manifolds.tests.manifold_tests.Tran2
+geometry.manifolds.todo.Tran2" class="py-name" href="#" onclick="return doclink('link-64', 'Tran2', 'link-64');">Tran2</a></tt> <tt class="py-op">=</tt> <tt id="link-65" class="py-name"><a title="geometry.Tran
+geometry.manifolds.Tran
+geometry.manifolds.todo.Tran
+geometry.manifolds.translation_group.Tran" class="py-name" href="#" onclick="return doclink('link-65', 'Tran', 'link-61');">Tran</a></tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"><tt id="link-66" class="py-name" targets="Variable geometry.Tran3=geometry-module.html#Tran3,Variable geometry.manifolds.Tran3=geometry.manifolds-module.html#Tran3,Variable geometry.manifolds.embedding_relations.Tran3=geometry.manifolds.embedding_relations-module.html#Tran3,Variable geometry.manifolds.tests.embedding_test.Tran3=geometry.manifolds.tests.embedding_test-module.html#Tran3,Variable geometry.manifolds.tests.manifold_tests.Tran3=geometry.manifolds.tests.manifold_tests-module.html#Tran3,Variable geometry.manifolds.todo.Tran3=geometry.manifolds.todo-module.html#Tran3"><a title="geometry.Tran3
+geometry.manifolds.Tran3
+geometry.manifolds.embedding_relations.Tran3
+geometry.manifolds.tests.embedding_test.Tran3
+geometry.manifolds.tests.manifold_tests.Tran3
+geometry.manifolds.todo.Tran3" class="py-name" href="#" onclick="return doclink('link-66', 'Tran3', 'link-66');">Tran3</a></tt> <tt class="py-op">=</tt> <tt id="link-67" class="py-name"><a title="geometry.Tran
+geometry.manifolds.Tran
+geometry.manifolds.todo.Tran
+geometry.manifolds.translation_group.Tran" class="py-name" href="#" onclick="return doclink('link-67', 'Tran', 'link-61');">Tran</a></tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"><tt id="link-68" class="py-name"><a title="geometry.Tran
+geometry.manifolds.Tran
+geometry.manifolds.todo.Tran
+geometry.manifolds.translation_group.Tran" class="py-name" href="#" onclick="return doclink('link-68', 'Tran', 'link-61');">Tran</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> <tt id="link-69" class="py-name"><a title="geometry.Tran1
+geometry.manifolds.Tran1
+geometry.manifolds.tests.embedding_test.Tran1
+geometry.manifolds.tests.manifold_tests.Tran1
+geometry.manifolds.todo.Tran1" class="py-name" href="#" onclick="return doclink('link-69', 'Tran1', 'link-62');">Tran1</a></tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">:</tt> <tt id="link-70" class="py-name"><a title="geometry.Tran2
+geometry.manifolds.Tran2
+geometry.manifolds.embedding_relations.Tran2
+geometry.manifolds.tests.embedding_test.Tran2
+geometry.manifolds.tests.manifold_tests.Tran2
+geometry.manifolds.todo.Tran2" class="py-name" href="#" onclick="return doclink('link-70', 'Tran2', 'link-64');">Tran2</a></tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> <tt id="link-71" class="py-name"><a title="geometry.Tran3
+geometry.manifolds.Tran3
+geometry.manifolds.embedding_relations.Tran3
+geometry.manifolds.tests.embedding_test.Tran3
+geometry.manifolds.tests.manifold_tests.Tran3
+geometry.manifolds.todo.Tran3" class="py-name" href="#" onclick="return doclink('link-71', 'Tran3', 'link-66');">Tran3</a></tt><tt class="py-op">}</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-72" class="py-name" targets="Module geometry.manifolds.special_orthogonal_algebra=geometry.manifolds.special_orthogonal_algebra-module.html"><a title="geometry.manifolds.special_orthogonal_algebra" class="py-name" href="#" onclick="return doclink('link-72', 'special_orthogonal_algebra', 'link-72');">special_orthogonal_algebra</a></tt> <tt class="py-keyword">import</tt> <tt id="link-73" class="py-name" targets="Class geometry.manifolds.special_orthogonal_algebra.so_algebra=geometry.manifolds.special_orthogonal_algebra.so_algebra-class.html"><a title="geometry.manifolds.special_orthogonal_algebra.so_algebra" class="py-name" href="#" onclick="return doclink('link-73', 'so_algebra', 'link-73');">so_algebra</a></tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt id="link-74" class="py-name" targets="Variable geometry.manifolds.embedding_relations.so2=geometry.manifolds.embedding_relations-module.html#so2,Variable geometry.manifolds.so2=geometry.manifolds-module.html#so2,Variable geometry.manifolds.tests.embedding_test.so2=geometry.manifolds.tests.embedding_test-module.html#so2,Variable geometry.manifolds.tests.manifold_tests.so2=geometry.manifolds.tests.manifold_tests-module.html#so2,Variable geometry.manifolds.todo.so2=geometry.manifolds.todo-module.html#so2,Variable geometry.so2=geometry-module.html#so2"><a title="geometry.manifolds.embedding_relations.so2
+geometry.manifolds.so2
+geometry.manifolds.tests.embedding_test.so2
+geometry.manifolds.tests.manifold_tests.so2
+geometry.manifolds.todo.so2
+geometry.so2" class="py-name" href="#" onclick="return doclink('link-74', 'so2', 'link-74');">so2</a></tt> <tt class="py-op">=</tt> <tt id="link-75" class="py-name"><a title="geometry.manifolds.special_orthogonal_algebra.so_algebra" class="py-name" href="#" onclick="return doclink('link-75', 'so_algebra', 'link-73');">so_algebra</a></tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"><tt id="link-76" class="py-name" targets="Variable geometry.manifolds.embedding_relations.so3=geometry.manifolds.embedding_relations-module.html#so3,Variable geometry.manifolds.so3=geometry.manifolds-module.html#so3,Variable geometry.manifolds.tests.embedding_test.so3=geometry.manifolds.tests.embedding_test-module.html#so3,Variable geometry.manifolds.tests.manifold_tests.so3=geometry.manifolds.tests.manifold_tests-module.html#so3,Variable geometry.manifolds.todo.so3=geometry.manifolds.todo-module.html#so3,Variable geometry.so3=geometry-module.html#so3"><a title="geometry.manifolds.embedding_relations.so3
+geometry.manifolds.so3
+geometry.manifolds.tests.embedding_test.so3
+geometry.manifolds.tests.manifold_tests.so3
+geometry.manifolds.todo.so3
+geometry.so3" class="py-name" href="#" onclick="return doclink('link-76', 'so3', 'link-76');">so3</a></tt> <tt class="py-op">=</tt> <tt id="link-77" class="py-name"><a title="geometry.manifolds.special_orthogonal_algebra.so_algebra" class="py-name" href="#" onclick="return doclink('link-77', 'so_algebra', 'link-73');">so_algebra</a></tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt id="link-78" class="py-name" targets="Variable geometry.manifolds.so=geometry.manifolds-module.html#so,Variable geometry.manifolds.special_euclidean_algebra.so=geometry.manifolds.special_euclidean_algebra-module.html#so,Variable geometry.manifolds.special_orthogonal_group.so=geometry.manifolds.special_orthogonal_group-module.html#so,Variable geometry.manifolds.todo.so=geometry.manifolds.todo-module.html#so,Variable geometry.so=geometry-module.html#so"><a title="geometry.manifolds.so
+geometry.manifolds.special_euclidean_algebra.so
+geometry.manifolds.special_orthogonal_group.so
+geometry.manifolds.todo.so
+geometry.so" class="py-name" href="#" onclick="return doclink('link-78', 'so', 'link-78');">so</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-number">2</tt><tt class="py-op">:</tt> <tt id="link-79" class="py-name"><a title="geometry.manifolds.embedding_relations.so2
+geometry.manifolds.so2
+geometry.manifolds.tests.embedding_test.so2
+geometry.manifolds.tests.manifold_tests.so2
+geometry.manifolds.todo.so2
+geometry.so2" class="py-name" href="#" onclick="return doclink('link-79', 'so2', 'link-74');">so2</a></tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> <tt id="link-80" class="py-name"><a title="geometry.manifolds.embedding_relations.so3
+geometry.manifolds.so3
+geometry.manifolds.tests.embedding_test.so3
+geometry.manifolds.tests.manifold_tests.so3
+geometry.manifolds.todo.so3
+geometry.so3" class="py-name" href="#" onclick="return doclink('link-80', 'so3', 'link-76');">so3</a></tt><tt class="py-op">}</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-81" class="py-name" targets="Module geometry.manifolds.special_orthogonal_group=geometry.manifolds.special_orthogonal_group-module.html"><a title="geometry.manifolds.special_orthogonal_group" class="py-name" href="#" onclick="return doclink('link-81', 'special_orthogonal_group', 'link-81');">special_orthogonal_group</a></tt> <tt class="py-keyword">import</tt> <tt id="link-82" class="py-name" targets="Class geometry.manifolds.special_orthogonal_group.SO_group=geometry.manifolds.special_orthogonal_group.SO_group-class.html"><a title="geometry.manifolds.special_orthogonal_group.SO_group" class="py-name" href="#" onclick="return doclink('link-82', 'SO_group', 'link-82');">SO_group</a></tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"><tt id="link-83" class="py-name" targets="Variable geometry.SO2=geometry-module.html#SO2,Variable geometry.manifolds.SO2=geometry.manifolds-module.html#SO2,Variable geometry.manifolds.embedding_relations.SO2=geometry.manifolds.embedding_relations-module.html#SO2,Variable geometry.manifolds.tests.embedding_test.SO2=geometry.manifolds.tests.embedding_test-module.html#SO2,Variable geometry.manifolds.tests.manifold_tests.SO2=geometry.manifolds.tests.manifold_tests-module.html#SO2,Variable geometry.manifolds.todo.SO2=geometry.manifolds.todo-module.html#SO2"><a title="geometry.SO2
+geometry.manifolds.SO2
+geometry.manifolds.embedding_relations.SO2
+geometry.manifolds.tests.embedding_test.SO2
+geometry.manifolds.tests.manifold_tests.SO2
+geometry.manifolds.todo.SO2" class="py-name" href="#" onclick="return doclink('link-83', 'SO2', 'link-83');">SO2</a></tt> <tt class="py-op">=</tt> <tt id="link-84" class="py-name"><a title="geometry.manifolds.special_orthogonal_group.SO_group" class="py-name" href="#" onclick="return doclink('link-84', 'SO_group', 'link-82');">SO_group</a></tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"><tt id="link-85" class="py-name" targets="Variable geometry.SO3=geometry-module.html#SO3,Variable geometry.manifolds.SO3=geometry.manifolds-module.html#SO3,Variable geometry.manifolds.embedding_relations.SO3=geometry.manifolds.embedding_relations-module.html#SO3,Variable geometry.manifolds.tests.embedding_test.SO3=geometry.manifolds.tests.embedding_test-module.html#SO3,Variable geometry.manifolds.tests.manifold_tests.SO3=geometry.manifolds.tests.manifold_tests-module.html#SO3,Variable geometry.manifolds.todo.SO3=geometry.manifolds.todo-module.html#SO3"><a title="geometry.SO3
+geometry.manifolds.SO3
+geometry.manifolds.embedding_relations.SO3
+geometry.manifolds.tests.embedding_test.SO3
+geometry.manifolds.tests.manifold_tests.SO3
+geometry.manifolds.todo.SO3" class="py-name" href="#" onclick="return doclink('link-85', 'SO3', 'link-85');">SO3</a></tt> <tt class="py-op">=</tt> <tt id="link-86" class="py-name"><a title="geometry.manifolds.special_orthogonal_group.SO_group" class="py-name" href="#" onclick="return doclink('link-86', 'SO_group', 'link-82');">SO_group</a></tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"><tt id="link-87" class="py-name" targets="Variable geometry.SO=geometry-module.html#SO,Variable geometry.manifolds.SO=geometry.manifolds-module.html#SO,Variable geometry.manifolds.special_euclidean_group.SO=geometry.manifolds.special_euclidean_group-module.html#SO,Variable geometry.manifolds.todo.SO=geometry.manifolds.todo-module.html#SO"><a title="geometry.SO
+geometry.manifolds.SO
+geometry.manifolds.special_euclidean_group.SO
+geometry.manifolds.todo.SO" class="py-name" href="#" onclick="return doclink('link-87', 'SO', 'link-87');">SO</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-number">2</tt><tt class="py-op">:</tt> <tt id="link-88" class="py-name"><a title="geometry.SO2
+geometry.manifolds.SO2
+geometry.manifolds.embedding_relations.SO2
+geometry.manifolds.tests.embedding_test.SO2
+geometry.manifolds.tests.manifold_tests.SO2
+geometry.manifolds.todo.SO2" class="py-name" href="#" onclick="return doclink('link-88', 'SO2', 'link-83');">SO2</a></tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> <tt id="link-89" class="py-name"><a title="geometry.SO3
+geometry.manifolds.SO3
+geometry.manifolds.embedding_relations.SO3
+geometry.manifolds.tests.embedding_test.SO3
+geometry.manifolds.tests.manifold_tests.SO3
+geometry.manifolds.todo.SO3" class="py-name" href="#" onclick="return doclink('link-89', 'SO3', 'link-85');">SO3</a></tt><tt class="py-op">}</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-90" class="py-name" targets="Module geometry.manifolds.special_euclidean_algebra=geometry.manifolds.special_euclidean_algebra-module.html"><a title="geometry.manifolds.special_euclidean_algebra" class="py-name" href="#" onclick="return doclink('link-90', 'special_euclidean_algebra', 'link-90');">special_euclidean_algebra</a></tt> <tt class="py-keyword">import</tt> <tt id="link-91" class="py-name" targets="Class geometry.manifolds.special_euclidean_algebra.se_algebra=geometry.manifolds.special_euclidean_algebra.se_algebra-class.html"><a title="geometry.manifolds.special_euclidean_algebra.se_algebra" class="py-name" href="#" onclick="return doclink('link-91', 'se_algebra', 'link-91');">se_algebra</a></tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"><tt id="link-92" class="py-name" targets="Variable geometry.manifolds.embedding_relations.se2=geometry.manifolds.embedding_relations-module.html#se2,Variable geometry.manifolds.se2=geometry.manifolds-module.html#se2,Variable geometry.manifolds.tests.embedding_test.se2=geometry.manifolds.tests.embedding_test-module.html#se2,Variable geometry.manifolds.tests.manifold_tests.se2=geometry.manifolds.tests.manifold_tests-module.html#se2,Variable geometry.manifolds.todo.se2=geometry.manifolds.todo-module.html#se2,Variable geometry.se2=geometry-module.html#se2"><a title="geometry.manifolds.embedding_relations.se2
+geometry.manifolds.se2
+geometry.manifolds.tests.embedding_test.se2
+geometry.manifolds.tests.manifold_tests.se2
+geometry.manifolds.todo.se2
+geometry.se2" class="py-name" href="#" onclick="return doclink('link-92', 'se2', 'link-92');">se2</a></tt> <tt class="py-op">=</tt> <tt id="link-93" class="py-name"><a title="geometry.manifolds.special_euclidean_algebra.se_algebra" class="py-name" href="#" onclick="return doclink('link-93', 'se_algebra', 'link-91');">se_algebra</a></tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-name">alpha</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"><tt id="link-94" class="py-name" targets="Variable geometry.manifolds.embedding_relations.se3=geometry.manifolds.embedding_relations-module.html#se3,Variable geometry.manifolds.se3=geometry.manifolds-module.html#se3,Variable geometry.manifolds.tests.embedding_test.se3=geometry.manifolds.tests.embedding_test-module.html#se3,Variable geometry.manifolds.tests.manifold_tests.se3=geometry.manifolds.tests.manifold_tests-module.html#se3,Variable geometry.manifolds.todo.se3=geometry.manifolds.todo-module.html#se3,Variable geometry.se3=geometry-module.html#se3"><a title="geometry.manifolds.embedding_relations.se3
+geometry.manifolds.se3
+geometry.manifolds.tests.embedding_test.se3
+geometry.manifolds.tests.manifold_tests.se3
+geometry.manifolds.todo.se3
+geometry.se3" class="py-name" href="#" onclick="return doclink('link-94', 'se3', 'link-94');">se3</a></tt> <tt class="py-op">=</tt> <tt id="link-95" class="py-name"><a title="geometry.manifolds.special_euclidean_algebra.se_algebra" class="py-name" href="#" onclick="return doclink('link-95', 'se_algebra', 'link-91');">se_algebra</a></tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">,</tt> <tt class="py-name">alpha</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"><tt id="link-96" class="py-name" targets="Variable geometry.manifolds.se=geometry.manifolds-module.html#se,Variable geometry.manifolds.special_euclidean_group.se=geometry.manifolds.special_euclidean_group-module.html#se,Variable geometry.manifolds.todo.se=geometry.manifolds.todo-module.html#se,Variable geometry.se=geometry-module.html#se"><a title="geometry.manifolds.se
+geometry.manifolds.special_euclidean_group.se
+geometry.manifolds.todo.se
+geometry.se" class="py-name" href="#" onclick="return doclink('link-96', 'se', 'link-96');">se</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-number">2</tt><tt class="py-op">:</tt> <tt id="link-97" class="py-name"><a title="geometry.manifolds.embedding_relations.se2
+geometry.manifolds.se2
+geometry.manifolds.tests.embedding_test.se2
+geometry.manifolds.tests.manifold_tests.se2
+geometry.manifolds.todo.se2
+geometry.se2" class="py-name" href="#" onclick="return doclink('link-97', 'se2', 'link-92');">se2</a></tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> <tt id="link-98" class="py-name"><a title="geometry.manifolds.embedding_relations.se3
+geometry.manifolds.se3
+geometry.manifolds.tests.embedding_test.se3
+geometry.manifolds.tests.manifold_tests.se3
+geometry.manifolds.todo.se3
+geometry.se3" class="py-name" href="#" onclick="return doclink('link-98', 'se3', 'link-94');">se3</a></tt><tt class="py-op">}</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-99" class="py-name" targets="Module geometry.manifolds.special_euclidean_group=geometry.manifolds.special_euclidean_group-module.html"><a title="geometry.manifolds.special_euclidean_group" class="py-name" href="#" onclick="return doclink('link-99', 'special_euclidean_group', 'link-99');">special_euclidean_group</a></tt> <tt class="py-keyword">import</tt> <tt id="link-100" class="py-name" targets="Class geometry.manifolds.special_euclidean_group.SE_group=geometry.manifolds.special_euclidean_group.SE_group-class.html"><a title="geometry.manifolds.special_euclidean_group.SE_group" class="py-name" href="#" onclick="return doclink('link-100', 'SE_group', 'link-100');">SE_group</a></tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"><tt id="link-101" class="py-name" targets="Variable geometry.SE2=geometry-module.html#SE2,Variable geometry.manifolds.SE2=geometry.manifolds-module.html#SE2,Variable geometry.manifolds.embedding_relations.SE2=geometry.manifolds.embedding_relations-module.html#SE2,Variable geometry.manifolds.tests.embedding_test.SE2=geometry.manifolds.tests.embedding_test-module.html#SE2,Variable geometry.manifolds.tests.manifold_tests.SE2=geometry.manifolds.tests.manifold_tests-module.html#SE2,Variable geometry.manifolds.todo.SE2=geometry.manifolds.todo-module.html#SE2"><a title="geometry.SE2
+geometry.manifolds.SE2
+geometry.manifolds.embedding_relations.SE2
+geometry.manifolds.tests.embedding_test.SE2
+geometry.manifolds.tests.manifold_tests.SE2
+geometry.manifolds.todo.SE2" class="py-name" href="#" onclick="return doclink('link-101', 'SE2', 'link-101');">SE2</a></tt> <tt class="py-op">=</tt> <tt id="link-102" class="py-name"><a title="geometry.manifolds.special_euclidean_group.SE_group" class="py-name" href="#" onclick="return doclink('link-102', 'SE_group', 'link-100');">SE_group</a></tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"><tt id="link-103" class="py-name" targets="Variable geometry.SE3=geometry-module.html#SE3,Variable geometry.manifolds.SE3=geometry.manifolds-module.html#SE3,Variable geometry.manifolds.embedding_relations.SE3=geometry.manifolds.embedding_relations-module.html#SE3,Variable geometry.manifolds.tests.embedding_test.SE3=geometry.manifolds.tests.embedding_test-module.html#SE3,Variable geometry.manifolds.tests.manifold_tests.SE3=geometry.manifolds.tests.manifold_tests-module.html#SE3,Variable geometry.manifolds.todo.SE3=geometry.manifolds.todo-module.html#SE3"><a title="geometry.SE3
+geometry.manifolds.SE3
+geometry.manifolds.embedding_relations.SE3
+geometry.manifolds.tests.embedding_test.SE3
+geometry.manifolds.tests.manifold_tests.SE3
+geometry.manifolds.todo.SE3" class="py-name" href="#" onclick="return doclink('link-103', 'SE3', 'link-103');">SE3</a></tt> <tt class="py-op">=</tt> <tt id="link-104" class="py-name"><a title="geometry.manifolds.special_euclidean_group.SE_group" class="py-name" href="#" onclick="return doclink('link-104', 'SE_group', 'link-100');">SE_group</a></tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"><tt id="link-105" class="py-name" targets="Variable geometry.SE=geometry-module.html#SE,Variable geometry.manifolds.SE=geometry.manifolds-module.html#SE,Variable geometry.manifolds.todo.SE=geometry.manifolds.todo-module.html#SE"><a title="geometry.SE
+geometry.manifolds.SE
+geometry.manifolds.todo.SE" class="py-name" href="#" onclick="return doclink('link-105', 'SE', 'link-105');">SE</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-number">2</tt><tt class="py-op">:</tt> <tt id="link-106" class="py-name"><a title="geometry.SE2
+geometry.manifolds.SE2
+geometry.manifolds.embedding_relations.SE2
+geometry.manifolds.tests.embedding_test.SE2
+geometry.manifolds.tests.manifold_tests.SE2
+geometry.manifolds.todo.SE2" class="py-name" href="#" onclick="return doclink('link-106', 'SE2', 'link-101');">SE2</a></tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> <tt id="link-107" class="py-name"><a title="geometry.SE3
+geometry.manifolds.SE3
+geometry.manifolds.embedding_relations.SE3
+geometry.manifolds.tests.embedding_test.SE3
+geometry.manifolds.tests.manifold_tests.SE3
+geometry.manifolds.todo.SE3" class="py-name" href="#" onclick="return doclink('link-107', 'SE3', 'link-103');">SE3</a></tt><tt class="py-op">}</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"><tt id="link-108" class="py-name" targets="Variable geometry.TSE2=geometry-module.html#TSE2,Variable geometry.manifolds.TSE2=geometry.manifolds-module.html#TSE2,Variable geometry.manifolds.todo.TSE2=geometry.manifolds.todo-module.html#TSE2"><a title="geometry.TSE2
+geometry.manifolds.TSE2
+geometry.manifolds.todo.TSE2" class="py-name" href="#" onclick="return doclink('link-108', 'TSE2', 'link-108');">TSE2</a></tt> <tt class="py-op">=</tt> <tt id="link-109" class="py-name"><a title="geometry.SE2
+geometry.manifolds.SE2
+geometry.manifolds.embedding_relations.SE2
+geometry.manifolds.tests.embedding_test.SE2
+geometry.manifolds.tests.manifold_tests.SE2
+geometry.manifolds.todo.SE2" class="py-name" href="#" onclick="return doclink('link-109', 'SE2', 'link-101');">SE2</a></tt><tt class="py-op">.</tt><tt id="link-110" class="py-name"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.tangent_bundle
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle
+geometry.manifolds.tangent_bundle" class="py-name" href="#" onclick="return doclink('link-110', 'tangent_bundle', 'link-5');">tangent_bundle</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"><tt id="link-111" class="py-name" targets="Variable geometry.TSE3=geometry-module.html#TSE3,Variable geometry.manifolds.TSE3=geometry.manifolds-module.html#TSE3,Variable geometry.manifolds.todo.TSE3=geometry.manifolds.todo-module.html#TSE3"><a title="geometry.TSE3
+geometry.manifolds.TSE3
+geometry.manifolds.todo.TSE3" class="py-name" href="#" onclick="return doclink('link-111', 'TSE3', 'link-111');">TSE3</a></tt> <tt class="py-op">=</tt> <tt id="link-112" class="py-name"><a title="geometry.SE3
+geometry.manifolds.SE3
+geometry.manifolds.embedding_relations.SE3
+geometry.manifolds.tests.embedding_test.SE3
+geometry.manifolds.tests.manifold_tests.SE3
+geometry.manifolds.todo.SE3" class="py-name" href="#" onclick="return doclink('link-112', 'SE3', 'link-103');">SE3</a></tt><tt class="py-op">.</tt><tt id="link-113" class="py-name"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.tangent_bundle
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle
+geometry.manifolds.tangent_bundle" class="py-name" href="#" onclick="return doclink('link-113', 'tangent_bundle', 'link-5');">tangent_bundle</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"><tt id="link-114" class="py-name" targets="Variable geometry.TSE=geometry-module.html#TSE,Variable geometry.manifolds.TSE=geometry.manifolds-module.html#TSE,Variable geometry.manifolds.todo.TSE=geometry.manifolds.todo-module.html#TSE"><a title="geometry.TSE
+geometry.manifolds.TSE
+geometry.manifolds.todo.TSE" class="py-name" href="#" onclick="return doclink('link-114', 'TSE', 'link-114');">TSE</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-number">2</tt><tt class="py-op">:</tt> <tt id="link-115" class="py-name"><a title="geometry.TSE2
+geometry.manifolds.TSE2
+geometry.manifolds.todo.TSE2" class="py-name" href="#" onclick="return doclink('link-115', 'TSE2', 'link-108');">TSE2</a></tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> <tt id="link-116" class="py-name"><a title="geometry.TSE3
+geometry.manifolds.TSE3
+geometry.manifolds.todo.TSE3" class="py-name" href="#" onclick="return doclink('link-116', 'TSE3', 'link-111');">TSE3</a></tt><tt class="py-op">}</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"><tt id="link-117" class="py-name" targets="Variable geometry.all_manifolds=geometry-module.html#all_manifolds,Variable geometry.manifolds.all_manifolds=geometry.manifolds-module.html#all_manifolds,Variable geometry.manifolds.todo.all_manifolds=geometry.manifolds.todo-module.html#all_manifolds"><a title="geometry.all_manifolds
+geometry.manifolds.all_manifolds
+geometry.manifolds.todo.all_manifolds" class="py-name" href="#" onclick="return doclink('link-117', 'all_manifolds', 'link-117');">all_manifolds</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">    <tt id="link-118" class="py-name"><a title="geometry.SO3
+geometry.manifolds.SO3
+geometry.manifolds.embedding_relations.SO3
+geometry.manifolds.tests.embedding_test.SO3
+geometry.manifolds.tests.manifold_tests.SO3
+geometry.manifolds.todo.SO3" class="py-name" href="#" onclick="return doclink('link-118', 'SO3', 'link-85');">SO3</a></tt><tt class="py-op">,</tt> <tt id="link-119" class="py-name"><a title="geometry.SO2
+geometry.manifolds.SO2
+geometry.manifolds.embedding_relations.SO2
+geometry.manifolds.tests.embedding_test.SO2
+geometry.manifolds.tests.manifold_tests.SO2
+geometry.manifolds.todo.SO2" class="py-name" href="#" onclick="return doclink('link-119', 'SO2', 'link-83');">SO2</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">    <tt id="link-120" class="py-name"><a title="geometry.R1
+geometry.manifolds.R1
+geometry.manifolds.embedding_relations.R1
+geometry.manifolds.tests.embedding_test.R1
+geometry.manifolds.tests.manifold_tests.R1
+geometry.manifolds.todo.R1" class="py-name" href="#" onclick="return doclink('link-120', 'R1', 'link-38');">R1</a></tt><tt class="py-op">,</tt> <tt id="link-121" class="py-name"><a title="geometry.R2
+geometry.manifolds.R2
+geometry.manifolds.embedding_relations.R2
+geometry.manifolds.tests.embedding_test.R2
+geometry.manifolds.tests.manifold_tests.R2
+geometry.manifolds.todo.R2" class="py-name" href="#" onclick="return doclink('link-121', 'R2', 'link-40');">R2</a></tt><tt class="py-op">,</tt> <tt id="link-122" class="py-name"><a title="geometry.R3
+geometry.manifolds.R3
+geometry.manifolds.embedding_relations.R3
+geometry.manifolds.tests.embedding_test.R3
+geometry.manifolds.tests.manifold_tests.R3
+geometry.manifolds.todo.R3" class="py-name" href="#" onclick="return doclink('link-122', 'R3', 'link-42');">R3</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">    <tt id="link-123" class="py-name"><a title="geometry.T1
+geometry.manifolds.T1
+geometry.manifolds.embedding_relations.T1
+geometry.manifolds.tests.embedding_test.T1
+geometry.manifolds.tests.manifold_tests.T1
+geometry.manifolds.todo.T1" class="py-name" href="#" onclick="return doclink('link-123', 'T1', 'link-26');">T1</a></tt><tt class="py-op">,</tt> <tt id="link-124" class="py-name"><a title="geometry.T2
+geometry.manifolds.T2
+geometry.manifolds.embedding_relations.T2
+geometry.manifolds.tests.embedding_test.T2
+geometry.manifolds.tests.manifold_tests.T2
+geometry.manifolds.todo.T2" class="py-name" href="#" onclick="return doclink('link-124', 'T2', 'link-28');">T2</a></tt><tt class="py-op">,</tt> <tt id="link-125" class="py-name"><a title="geometry.T3
+geometry.manifolds.T3
+geometry.manifolds.embedding_relations.T3
+geometry.manifolds.tests.embedding_test.T3
+geometry.manifolds.tests.manifold_tests.T3
+geometry.manifolds.todo.T3" class="py-name" href="#" onclick="return doclink('link-125', 'T3', 'link-30');">T3</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">    <tt id="link-126" class="py-name"><a title="geometry.Tran1
+geometry.manifolds.Tran1
+geometry.manifolds.tests.embedding_test.Tran1
+geometry.manifolds.tests.manifold_tests.Tran1
+geometry.manifolds.todo.Tran1" class="py-name" href="#" onclick="return doclink('link-126', 'Tran1', 'link-62');">Tran1</a></tt><tt class="py-op">,</tt> <tt id="link-127" class="py-name"><a title="geometry.Tran2
+geometry.manifolds.Tran2
+geometry.manifolds.embedding_relations.Tran2
+geometry.manifolds.tests.embedding_test.Tran2
+geometry.manifolds.tests.manifold_tests.Tran2
+geometry.manifolds.todo.Tran2" class="py-name" href="#" onclick="return doclink('link-127', 'Tran2', 'link-64');">Tran2</a></tt><tt class="py-op">,</tt> <tt id="link-128" class="py-name"><a title="geometry.Tran3
+geometry.manifolds.Tran3
+geometry.manifolds.embedding_relations.Tran3
+geometry.manifolds.tests.embedding_test.Tran3
+geometry.manifolds.tests.manifold_tests.Tran3
+geometry.manifolds.todo.Tran3" class="py-name" href="#" onclick="return doclink('link-128', 'Tran3', 'link-66');">Tran3</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">    <tt id="link-129" class="py-name"><a title="geometry.SE2
+geometry.manifolds.SE2
+geometry.manifolds.embedding_relations.SE2
+geometry.manifolds.tests.embedding_test.SE2
+geometry.manifolds.tests.manifold_tests.SE2
+geometry.manifolds.todo.SE2" class="py-name" href="#" onclick="return doclink('link-129', 'SE2', 'link-101');">SE2</a></tt><tt class="py-op">,</tt> <tt id="link-130" class="py-name"><a title="geometry.SE3
+geometry.manifolds.SE3
+geometry.manifolds.embedding_relations.SE3
+geometry.manifolds.tests.embedding_test.SE3
+geometry.manifolds.tests.manifold_tests.SE3
+geometry.manifolds.todo.SE3" class="py-name" href="#" onclick="return doclink('link-130', 'SE3', 'link-103');">SE3</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">    <tt id="link-131" class="py-name"><a title="geometry.S1
+geometry.manifolds.S1
+geometry.manifolds.embedding_relations.S1
+geometry.manifolds.tests.embedding_test.S1
+geometry.manifolds.tests.manifold_tests.S1
+geometry.manifolds.tests.sphere_tests.S1
+geometry.manifolds.todo.S1" class="py-name" href="#" onclick="return doclink('link-131', 'S1', 'link-18');">S1</a></tt><tt class="py-op">,</tt> <tt id="link-132" class="py-name"><a title="geometry.S2
+geometry.manifolds.S2
+geometry.manifolds.embedding_relations.S2
+geometry.manifolds.special_orthogonal_group.S2
+geometry.manifolds.tests.embedding_test.S2
+geometry.manifolds.tests.manifold_tests.S2
+geometry.manifolds.todo.S2" class="py-name" href="#" onclick="return doclink('link-132', 'S2', 'link-20');">S2</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">    <tt id="link-133" class="py-name"><a title="geometry.manifolds.embedding_relations.se2
+geometry.manifolds.se2
+geometry.manifolds.tests.embedding_test.se2
+geometry.manifolds.tests.manifold_tests.se2
+geometry.manifolds.todo.se2
+geometry.se2" class="py-name" href="#" onclick="return doclink('link-133', 'se2', 'link-92');">se2</a></tt><tt class="py-op">,</tt> <tt id="link-134" class="py-name"><a title="geometry.manifolds.embedding_relations.se3
+geometry.manifolds.se3
+geometry.manifolds.tests.embedding_test.se3
+geometry.manifolds.tests.manifold_tests.se3
+geometry.manifolds.todo.se3
+geometry.se3" class="py-name" href="#" onclick="return doclink('link-134', 'se3', 'link-94');">se3</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">    <tt id="link-135" class="py-name"><a title="geometry.manifolds.embedding_relations.so2
+geometry.manifolds.so2
+geometry.manifolds.tests.embedding_test.so2
+geometry.manifolds.tests.manifold_tests.so2
+geometry.manifolds.todo.so2
+geometry.so2" class="py-name" href="#" onclick="return doclink('link-135', 'so2', 'link-74');">so2</a></tt><tt class="py-op">,</tt> <tt id="link-136" class="py-name"><a title="geometry.manifolds.embedding_relations.so3
+geometry.manifolds.so3
+geometry.manifolds.tests.embedding_test.so3
+geometry.manifolds.tests.manifold_tests.so3
+geometry.manifolds.todo.so3
+geometry.so3" class="py-name" href="#" onclick="return doclink('link-136', 'so3', 'link-76');">so3</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">    <tt id="link-137" class="py-name"><a title="geometry.manifolds.embedding_relations.tran1
+geometry.manifolds.tests.embedding_test.tran1
+geometry.manifolds.tests.manifold_tests.tran1
+geometry.manifolds.todo.tran1
+geometry.manifolds.tran1
+geometry.tran1" class="py-name" href="#" onclick="return doclink('link-137', 'tran1', 'link-50');">tran1</a></tt><tt class="py-op">,</tt> <tt id="link-138" class="py-name"><a title="geometry.manifolds.embedding_relations.tran2
+geometry.manifolds.tests.embedding_test.tran2
+geometry.manifolds.tests.manifold_tests.tran2
+geometry.manifolds.todo.tran2
+geometry.manifolds.tran2
+geometry.tran2" class="py-name" href="#" onclick="return doclink('link-138', 'tran2', 'link-52');">tran2</a></tt><tt class="py-op">,</tt> <tt id="link-139" class="py-name"><a title="geometry.manifolds.embedding_relations.tran3
+geometry.manifolds.tests.embedding_test.tran3
+geometry.manifolds.tests.manifold_tests.tran3
+geometry.manifolds.todo.tran3
+geometry.manifolds.tran3
+geometry.tran3" class="py-name" href="#" onclick="return doclink('link-139', 'tran3', 'link-54');">tran3</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">    <tt id="link-140" class="py-name"><a title="geometry.TSE2
+geometry.manifolds.TSE2
+geometry.manifolds.todo.TSE2" class="py-name" href="#" onclick="return doclink('link-140', 'TSE2', 'link-108');">TSE2</a></tt><tt class="py-op">,</tt> <tt id="link-141" class="py-name"><a title="geometry.TSE3
+geometry.manifolds.TSE3
+geometry.manifolds.todo.TSE3" class="py-name" href="#" onclick="return doclink('link-141', 'TSE3', 'link-111');">TSE3</a></tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line"><tt class="py-op">]</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line"> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-142" class="py-name" targets="Module geometry.manifolds.embedding_relations=geometry.manifolds.embedding_relations-module.html"><a title="geometry.manifolds.embedding_relations" class="py-name" href="#" onclick="return doclink('link-142', 'embedding_relations', 'link-142');">embedding_relations</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-143" class="py-name" targets="Module geometry.manifolds.manifold_embedding_propagation=geometry.manifolds.manifold_embedding_propagation-module.html"><a title="geometry.manifolds.manifold_embedding_propagation" class="py-name" href="#" onclick="return doclink('link-143', 'manifold_embedding_propagation', 'link-143');">manifold_embedding_propagation</a></tt> <tt class="py-keyword">import</tt> <tt id="link-144" class="py-name" targets="Function geometry.manifolds.manifold_embedding_propagation.compute_manifold_relations()=geometry.manifolds.manifold_embedding_propagation-module.html#compute_manifold_relations"><a title="geometry.manifolds.manifold_embedding_propagation.compute_manifold_relations" class="py-name" href="#" onclick="return doclink('link-144', 'compute_manifold_relations', 'link-144');">compute_manifold_relations</a></tt> </tt>
+<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line"><tt id="link-145" class="py-name"><a title="geometry.manifolds.manifold_embedding_propagation.compute_manifold_relations" class="py-name" href="#" onclick="return doclink('link-145', 'compute_manifold_relations', 'link-144');">compute_manifold_relations</a></tt><tt class="py-op">(</tt><tt id="link-146" class="py-name"><a title="geometry.all_manifolds
+geometry.manifolds.all_manifolds
+geometry.manifolds.todo.all_manifolds" class="py-name" href="#" onclick="return doclink('link-146', 'all_manifolds', 'link-117');">all_manifolds</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:45 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

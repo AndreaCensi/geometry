@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>geometry.manifolds.matrix_lie_group</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="geometry-module.html">Package&nbsp;geometry</a> ::
+        <a href="geometry.manifolds-module.html">Package&nbsp;manifolds</a> ::
+        Module&nbsp;matrix_lie_group
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="geometry.manifolds.matrix_lie_group-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="geometry.manifolds.matrix_lie_group-module.html">Module geometry.manifolds.matrix_lie_group</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-name">np</tt><tt class="py-op">,</tt> <tt id="link-0" class="py-name" targets="Class geometry.manifolds.differentiable_manifold.DifferentiableManifold=geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold" class="py-name" href="#" onclick="return doclink('link-0', 'DifferentiableManifold', 'link-0');">DifferentiableManifold</a></tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Class geometry.manifolds.group.Group=geometry.manifolds.group.Group-class.html"><a title="geometry.manifolds.group.Group" class="py-name" href="#" onclick="return doclink('link-1', 'Group', 'link-1');">Group</a></tt><tt class="py-op">,</tt> <tt class="py-name">contract</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-name">logm</tt><tt class="py-op">,</tt> <tt class="py-name">expm</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">contracts</tt> <tt class="py-keyword">import</tt> <tt class="py-name">new_contract</tt> </tt>
+<a name="MatrixLieGroup"></a><div id="MatrixLieGroup-def"><a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt> <a class="py-toggle" href="#" id="MatrixLieGroup-toggle" onclick="return toggle('MatrixLieGroup');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html">MatrixLieGroup</a><tt class="py-op">(</tt><tt class="py-base-class">Group</tt><tt class="py-op">,</tt> <tt class="py-base-class">DifferentiableManifold</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="MatrixLieGroup-expanded"><a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line">    <tt class="py-docstring">''' </tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">        This is the base class for matrix Lie groups.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">        Subclasses should provide a MatrixLieAlgebra</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">        object. Given the Lie algebra, we can compute everything.</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">        However, subclasses can choose to overload</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">        some functions if they know a more numerically stable implementation. </tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="MatrixLieGroup.__init__"></a><div id="MatrixLieGroup.__init__-def"><a name="L17"></a><tt class="py-lineno"> 17</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.__init__-toggle" onclick="return toggle('MatrixLieGroup.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">n</tt><tt class="py-op">,</tt> <tt class="py-param">dimension</tt><tt class="py-op">,</tt> <tt class="py-param">algebra</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.__init__-expanded"><a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">            Initializes the Lie group.</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">            :param n: dimension of the matrix group.</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">            :param algebra: instance of :py:class:MatrixLieAlgebra </tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">        <tt id="link-2" class="py-name"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold" class="py-name" href="#" onclick="return doclink('link-2', 'DifferentiableManifold', 'link-0');">DifferentiableManifold</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method geometry.manifolds.differentiable_manifold.DifferentiableManifold.__init__()=geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#__init__,Method geometry.manifolds.euclidean.Euclidean.__init__()=geometry.manifolds.euclidean.Euclidean-class.html#__init__,Method geometry.manifolds.exceptions.DoesNotBelong.__init__()=geometry.manifolds.exceptions.DoesNotBelong-class.html#__init__,Method geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra.__init__()=geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra-class.html#__init__,Method geometry.manifolds.matrix_lie_group.MatrixLieGroup.__init__()=geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#__init__,Method geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.__init__()=geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent-class.html#__init__,Method geometry.manifolds.matrix_linear_space.MatrixLinearSpace.__init__()=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html#__init__,Method geometry.manifolds.product_manifold.ProductManifold.__init__()=geometry.manifolds.product_manifold.ProductManifold-class.html#__init__,Method geometry.manifolds.special_euclidean_algebra.se_algebra.__init__()=geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#__init__,Method geometry.manifolds.special_euclidean_group.SE_group.__init__()=geometry.manifolds.special_euclidean_group.SE_group-class.html#__init__,Method geometry.manifolds.special_orthogonal_algebra.so_algebra.__init__()=geometry.manifolds.special_orthogonal_algebra.so_algebra-class.html#__init__,Method geometry.manifolds.special_orthogonal_group.SO_group.__init__()=geometry.manifolds.special_orthogonal_group.SO_group-class.html#__init__,Method geometry.manifolds.sphere.Sphere.__init__()=geometry.manifolds.sphere.Sphere-class.html#__init__,Method geometry.manifolds.sphere.Sphere1.__init__()=geometry.manifolds.sphere.Sphere1-class.html#__init__,Method geometry.manifolds.tangent_bundle.TangentBundle.__init__()=geometry.manifolds.tangent_bundle.TangentBundle-class.html#__init__,Method geometry.manifolds.todo.moebius.Moebius.__init__()=geometry.manifolds.todo.moebius.Moebius-class.html#__init__,Method geometry.manifolds.torus.Torus.__init__()=geometry.manifolds.torus.Torus-class.html#__init__,Method geometry.manifolds.translation_algebra.tran.__init__()=geometry.manifolds.translation_algebra.tran-class.html#__init__,Method geometry.manifolds.translation_group.Tran.__init__()=geometry.manifolds.translation_group.Tran-class.html#__init__"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.__init__
+geometry.manifolds.euclidean.Euclidean.__init__
+geometry.manifolds.exceptions.DoesNotBelong.__init__
+geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra.__init__
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.__init__
+geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.__init__
+geometry.manifolds.matrix_linear_space.MatrixLinearSpace.__init__
+geometry.manifolds.product_manifold.ProductManifold.__init__
+geometry.manifolds.special_euclidean_algebra.se_algebra.__init__
+geometry.manifolds.special_euclidean_group.SE_group.__init__
+geometry.manifolds.special_orthogonal_algebra.so_algebra.__init__
+geometry.manifolds.special_orthogonal_group.SO_group.__init__
+geometry.manifolds.sphere.Sphere.__init__
+geometry.manifolds.sphere.Sphere1.__init__
+geometry.manifolds.tangent_bundle.TangentBundle.__init__
+geometry.manifolds.todo.moebius.Moebius.__init__
+geometry.manifolds.torus.Torus.__init__
+geometry.manifolds.translation_algebra.tran.__init__
+geometry.manifolds.translation_group.Tran.__init__" class="py-name" href="#" onclick="return doclink('link-3', '__init__', 'link-3');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">dimension</tt><tt class="py-op">=</tt><tt class="py-name">dimension</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> <tt class="py-op">=</tt> <tt class="py-name">n</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">algebra</tt> <tt class="py-op">=</tt> <tt class="py-name">algebra</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">algebra</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent=geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent-class.html"><a title="geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent" class="py-name" href="#" onclick="return doclink('link-4', 'MatrixLieGroupTangent', 'link-4');">MatrixLieGroupTangent</a></tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_tangent_bundle_algebra_rep</tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent" class="py-name" href="#" onclick="return doclink('link-5', 'MatrixLieGroupTangent', 'link-4');">MatrixLieGroupTangent</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"> </tt>
+<a name="MatrixLieGroup.tangent_bundle"></a><div id="MatrixLieGroup.tangent_bundle-def"><a name="L32"></a><tt class="py-lineno"> 32</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.tangent_bundle-toggle" onclick="return toggle('MatrixLieGroup.tangent_bundle');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#tangent_bundle">tangent_bundle</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.tangent_bundle-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.tangent_bundle-expanded"><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt>  <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_tangent_bundle_algebra_rep</tt> </tt>
+</div><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="MatrixLieGroup.get_algebra"></a><div id="MatrixLieGroup.get_algebra-def"><a name="L35"></a><tt class="py-lineno"> 35</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.get_algebra-toggle" onclick="return toggle('MatrixLieGroup.get_algebra');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#get_algebra">get_algebra</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.get_algebra-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.get_algebra-expanded"><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-docstring">''' Returns the interface to the corresponding Lie algebra. '''</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">algebra</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="MatrixLieGroup.unity"></a><div id="MatrixLieGroup.unity-def"><a name="L39"></a><tt class="py-lineno"> 39</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.unity-toggle" onclick="return toggle('MatrixLieGroup.unity');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#unity">unity</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.unity-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.unity-expanded"><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">eye</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="MatrixLieGroup.multiply"></a><div id="MatrixLieGroup.multiply-def"><a name="L42"></a><tt class="py-lineno"> 42</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.multiply-toggle" onclick="return toggle('MatrixLieGroup.multiply');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#multiply">multiply</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">g</tt><tt class="py-op">,</tt> <tt class="py-param">h</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.multiply-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.multiply-expanded"><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">g</tt><tt class="py-op">,</tt> <tt class="py-name">h</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">g</tt><tt class="py-op">=</tt><tt class="py-string">'belongs'</tt><tt class="py-op">)</tt> </tt>
+<a name="MatrixLieGroup.inverse"></a><div id="MatrixLieGroup.inverse-def"><a name="L46"></a><tt class="py-lineno"> 46</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.inverse-toggle" onclick="return toggle('MatrixLieGroup.inverse');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#inverse">inverse</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">g</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.inverse-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.inverse-expanded"><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linalg</tt><tt class="py-op">.</tt><tt class="py-name">inv</tt><tt class="py-op">(</tt><tt class="py-name">g</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">new_contract</tt> </tt>
+<a name="MatrixLieGroup.belongs_algebra"></a><div id="MatrixLieGroup.belongs_algebra-def"><a name="L50"></a><tt class="py-lineno"> 50</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.belongs_algebra-toggle" onclick="return toggle('MatrixLieGroup.belongs_algebra');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#belongs_algebra">belongs_algebra</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.belongs_algebra-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.belongs_algebra-expanded"><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">algebra</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method geometry.manifolds.differentiable_manifold.DifferentiableManifold.belongs()=geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#belongs,Method geometry.manifolds.euclidean.Euclidean.belongs()=geometry.manifolds.euclidean.Euclidean-class.html#belongs,Method geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.belongs()=geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent-class.html#belongs,Method geometry.manifolds.matrix_linear_space.MatrixLinearSpace.belongs()=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html#belongs,Method geometry.manifolds.product_manifold.ProductManifold.belongs()=geometry.manifolds.product_manifold.ProductManifold-class.html#belongs,Method geometry.manifolds.special_euclidean_group.SE_group.belongs()=geometry.manifolds.special_euclidean_group.SE_group-class.html#belongs,Method geometry.manifolds.special_orthogonal_group.SO_group.belongs()=geometry.manifolds.special_orthogonal_group.SO_group-class.html#belongs,Method geometry.manifolds.sphere.Sphere.belongs()=geometry.manifolds.sphere.Sphere-class.html#belongs,Method geometry.manifolds.sphere.Sphere1.belongs()=geometry.manifolds.sphere.Sphere1-class.html#belongs,Method geometry.manifolds.tangent_bundle.TangentBundle.belongs()=geometry.manifolds.tangent_bundle.TangentBundle-class.html#belongs,Method geometry.manifolds.torus.Torus.belongs()=geometry.manifolds.torus.Torus-class.html#belongs,Method geometry.manifolds.translation_group.Tran.belongs()=geometry.manifolds.translation_group.Tran-class.html#belongs"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.belongs
+geometry.manifolds.euclidean.Euclidean.belongs
+geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.belongs
+geometry.manifolds.matrix_linear_space.MatrixLinearSpace.belongs
+geometry.manifolds.product_manifold.ProductManifold.belongs
+geometry.manifolds.special_euclidean_group.SE_group.belongs
+geometry.manifolds.special_orthogonal_group.SO_group.belongs
+geometry.manifolds.sphere.Sphere.belongs
+geometry.manifolds.sphere.Sphere1.belongs
+geometry.manifolds.tangent_bundle.TangentBundle.belongs
+geometry.manifolds.torus.Torus.belongs
+geometry.manifolds.translation_group.Tran.belongs" class="py-name" href="#" onclick="return doclink('link-6', 'belongs', 'link-6');">belongs</a></tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">bv</tt><tt class="py-op">=</tt><tt class="py-string">'tuple(belongs, *)'</tt><tt class="py-op">)</tt> </tt>
+<a name="MatrixLieGroup.project_ts"></a><div id="MatrixLieGroup.project_ts-def"><a name="L54"></a><tt class="py-lineno"> 54</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.project_ts-toggle" onclick="return toggle('MatrixLieGroup.project_ts');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#project_ts">project_ts</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">bv</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.project_ts-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.project_ts-expanded"><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">            Projects the vector *x* to the tangent space at point *base*.</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">            In the case of Lie Groups, we do this by translating the</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">            vector to the origin, projecting it to the Lie Algebra,</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">            and then translating it back. </tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-comment"># get it to the origin</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">base</tt><tt class="py-op">,</tt> <tt class="py-name">vel</tt> <tt class="py-op">=</tt> <tt class="py-name">bv</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">y</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method geometry.manifolds.group.Group.inverse()=geometry.manifolds.group.Group-class.html#inverse,Method geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse()=geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#inverse"><a title="geometry.manifolds.group.Group.inverse
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse" class="py-name" href="#" onclick="return doclink('link-7', 'inverse', 'link-7');">inverse</a></tt><tt class="py-op">(</tt><tt class="py-name">base</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">vel</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-comment"># project it to the algebra</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-name">ty</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">algebra</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method geometry.manifolds.euclidean.Euclidean.project()=geometry.manifolds.euclidean.Euclidean-class.html#project,Method geometry.manifolds.matrix_linear_space.MatrixLinearSpace.project()=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html#project,Method geometry.manifolds.special_euclidean_algebra.se_algebra.project()=geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#project,Method geometry.manifolds.special_orthogonal_algebra.so_algebra.project()=geometry.manifolds.special_orthogonal_algebra.so_algebra-class.html#project,Method geometry.manifolds.translation_algebra.tran.project()=geometry.manifolds.translation_algebra.tran-class.html#project"><a title="geometry.manifolds.euclidean.Euclidean.project
+geometry.manifolds.matrix_linear_space.MatrixLinearSpace.project
+geometry.manifolds.special_euclidean_algebra.se_algebra.project
+geometry.manifolds.special_orthogonal_algebra.so_algebra.project
+geometry.manifolds.translation_algebra.tran.project" class="py-name" href="#" onclick="return doclink('link-8', 'project', 'link-8');">project</a></tt><tt class="py-op">(</tt><tt class="py-name">y</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-comment"># get it back where it belonged</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-name">tty</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">base</tt><tt class="py-op">,</tt> <tt class="py-name">ty</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">base</tt><tt class="py-op">,</tt> <tt class="py-name">tty</tt> </tt>
+</div><a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">=</tt><tt class="py-string">'belongs'</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt><tt class="py-op">=</tt><tt class="py-string">'belongs'</tt><tt class="py-op">)</tt> </tt>
+<a name="MatrixLieGroup.distance"></a><div id="MatrixLieGroup.distance-def"><a name="L72"></a><tt class="py-lineno"> 72</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.distance-toggle" onclick="return toggle('MatrixLieGroup.distance');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#distance">distance</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">a</tt><tt class="py-op">,</tt> <tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.distance-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.distance-expanded"><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">            Computes the distance between two points.</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">            In the case of Lie groups, this is done by </tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">            translating everything to the origin, computing the</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">            logmap, and using the norm defined in the Lie Algebra object.</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method geometry.manifolds.group.Group.multiply()=geometry.manifolds.group.Group-class.html#multiply,Method geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply()=geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#multiply"><a title="geometry.manifolds.group.Group.multiply
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply" class="py-name" href="#" onclick="return doclink('link-9', 'multiply', 'link-9');">multiply</a></tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="geometry.manifolds.group.Group.inverse
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse" class="py-name" href="#" onclick="return doclink('link-10', 'inverse', 'link-7');">inverse</a></tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-name">xt</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group()=geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#algebra_from_group,Method geometry.manifolds.special_euclidean_group.SE_group.algebra_from_group()=geometry.manifolds.special_euclidean_group.SE_group-class.html#algebra_from_group,Method geometry.manifolds.translation_group.Tran.algebra_from_group()=geometry.manifolds.translation_group.Tran-class.html#algebra_from_group"><a title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group
+geometry.manifolds.special_euclidean_group.SE_group.algebra_from_group
+geometry.manifolds.translation_group.Tran.algebra_from_group" class="py-name" href="#" onclick="return doclink('link-11', 'algebra_from_group', 'link-11');">algebra_from_group</a></tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">algebra</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method geometry.manifolds.matrix_linear_space.MatrixLinearSpace.norm()=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html#norm,Method geometry.manifolds.special_euclidean_algebra.se_algebra.norm()=geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#norm,Method geometry.manifolds.translation_algebra.tran.norm()=geometry.manifolds.translation_algebra.tran-class.html#norm"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace.norm
+geometry.manifolds.special_euclidean_algebra.se_algebra.norm
+geometry.manifolds.translation_algebra.tran.norm" class="py-name" href="#" onclick="return doclink('link-12', 'norm', 'link-12');">norm</a></tt><tt class="py-op">(</tt><tt class="py-name">xt</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">base</tt><tt class="py-op">=</tt><tt class="py-string">'belongs'</tt><tt class="py-op">,</tt> <tt class="py-name">target</tt><tt class="py-op">=</tt><tt class="py-string">'belongs'</tt><tt class="py-op">,</tt> <tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'belongs_ts'</tt><tt class="py-op">,</tt><tt class="py-op">)</tt> </tt>
+<a name="MatrixLieGroup.logmap"></a><div id="MatrixLieGroup.logmap-def"><a name="L86"></a><tt class="py-lineno"> 86</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.logmap-toggle" onclick="return toggle('MatrixLieGroup.logmap');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#logmap">logmap</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">base</tt><tt class="py-op">,</tt> <tt class="py-param">target</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.logmap-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.logmap-expanded"><a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">            Returns the direction from base to target. </tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">            In the case of Lie groups, this is implemented</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">            by using the usual matrix logarithm at the origin.</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">            Here the :py:func:`MatrixLieAlgebra.project` function</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">            is used to mitigate numerical errors. </tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">diff</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="geometry.manifolds.group.Group.multiply
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply" class="py-name" href="#" onclick="return doclink('link-13', 'multiply', 'link-9');">multiply</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="geometry.manifolds.group.Group.inverse
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse" class="py-name" href="#" onclick="return doclink('link-14', 'inverse', 'link-7');">inverse</a></tt><tt class="py-op">(</tt><tt class="py-name">base</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">target</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-name">X</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group
+geometry.manifolds.special_euclidean_group.SE_group.algebra_from_group
+geometry.manifolds.translation_group.Tran.algebra_from_group" class="py-name" href="#" onclick="return doclink('link-15', 'algebra_from_group', 'link-11');">algebra_from_group</a></tt><tt class="py-op">(</tt><tt class="py-name">diff</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-name">bX</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">base</tt><tt class="py-op">,</tt> <tt class="py-name">X</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">base</tt><tt class="py-op">,</tt> <tt class="py-name">bX</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">bv</tt><tt class="py-op">=</tt><tt class="py-string">'belongs_ts'</tt><tt class="py-op">,</tt> <tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'belongs'</tt><tt class="py-op">)</tt> </tt>
+<a name="MatrixLieGroup.expmap"></a><div id="MatrixLieGroup.expmap-def"><a name="L102"></a><tt class="py-lineno">102</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.expmap-toggle" onclick="return toggle('MatrixLieGroup.expmap');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#expmap">expmap</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">bv</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.expmap-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.expmap-expanded"><a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">            This is the inverse of :py:func:`logmap_`. </tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">            In the case of Lie groups, this is implemented using</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">            the usual matrix exponential.</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">            Here the :py:func:`MatrixLieAlgebra.project` function</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">            is used to mitigate numerical errors. </tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-name">base</tt><tt class="py-op">,</tt> <tt class="py-name">vel</tt> <tt class="py-op">=</tt> <tt class="py-name">bv</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-name">tv</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="geometry.manifolds.group.Group.inverse
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse" class="py-name" href="#" onclick="return doclink('link-16', 'inverse', 'link-7');">inverse</a></tt><tt class="py-op">(</tt><tt class="py-name">base</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">vel</tt><tt class="py-op">)</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-name">tv</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">algebra</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="geometry.manifolds.euclidean.Euclidean.project
+geometry.manifolds.matrix_linear_space.MatrixLinearSpace.project
+geometry.manifolds.special_euclidean_algebra.se_algebra.project
+geometry.manifolds.special_orthogonal_algebra.so_algebra.project
+geometry.manifolds.translation_algebra.tran.project" class="py-name" href="#" onclick="return doclink('link-17', 'project', 'link-8');">project</a></tt><tt class="py-op">(</tt><tt class="py-name">tv</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra()=geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#group_from_algebra,Method geometry.manifolds.special_euclidean_group.SE_group.group_from_algebra()=geometry.manifolds.special_euclidean_group.SE_group-class.html#group_from_algebra,Method geometry.manifolds.translation_group.Tran.group_from_algebra()=geometry.manifolds.translation_group.Tran-class.html#group_from_algebra"><a title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra
+geometry.manifolds.special_euclidean_group.SE_group.group_from_algebra
+geometry.manifolds.translation_group.Tran.group_from_algebra" class="py-name" href="#" onclick="return doclink('link-18', 'group_from_algebra', 'link-18');">group_from_algebra</a></tt><tt class="py-op">(</tt><tt class="py-name">tv</tt><tt class="py-op">)</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">base</tt><tt class="py-op">,</tt> <tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">g</tt><tt class="py-op">=</tt><tt class="py-string">'belongs'</tt><tt class="py-op">,</tt> <tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'belongs_algebra'</tt><tt class="py-op">)</tt> </tt>
+<a name="MatrixLieGroup.algebra_from_group"></a><div id="MatrixLieGroup.algebra_from_group-def"><a name="L119"></a><tt class="py-lineno">119</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.algebra_from_group-toggle" onclick="return toggle('MatrixLieGroup.algebra_from_group');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#algebra_from_group">algebra_from_group</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">g</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.algebra_from_group-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.algebra_from_group-expanded"><a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">            Converts an element of the group to the algebra. </tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring">            Uses generic matrix logarithm plus projection.</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">X</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">logm</tt><tt class="py-op">(</tt><tt class="py-name">g</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">real</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-comment"># mitigate numerical errors</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-name">X</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">algebra</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="geometry.manifolds.euclidean.Euclidean.project
+geometry.manifolds.matrix_linear_space.MatrixLinearSpace.project
+geometry.manifolds.special_euclidean_algebra.se_algebra.project
+geometry.manifolds.special_orthogonal_algebra.so_algebra.project
+geometry.manifolds.translation_algebra.tran.project" class="py-name" href="#" onclick="return doclink('link-19', 'project', 'link-8');">project</a></tt><tt class="py-op">(</tt><tt class="py-name">X</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">X</tt> </tt>
+</div><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">=</tt><tt class="py-string">'belongs_algebra'</tt><tt class="py-op">,</tt> <tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'belongs'</tt><tt class="py-op">)</tt> </tt>
+<a name="MatrixLieGroup.group_from_algebra"></a><div id="MatrixLieGroup.group_from_algebra-def"><a name="L130"></a><tt class="py-lineno">130</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.group_from_algebra-toggle" onclick="return toggle('MatrixLieGroup.group_from_algebra');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#group_from_algebra">group_from_algebra</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">a</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.group_from_algebra-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.group_from_algebra-expanded"><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring">            Converts an element of the algebra to the group. </tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">            Uses generic matrix exponential.</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">expm</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">    <tt class="py-comment"># TODO: write tests for this</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">=</tt><tt class="py-string">'belongs'</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt><tt class="py-op">=</tt><tt class="py-string">'belongs'</tt><tt class="py-op">,</tt> <tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'belongs_ts'</tt><tt class="py-op">)</tt> </tt>
+<a name="MatrixLieGroup.velocity_from_points"></a><div id="MatrixLieGroup.velocity_from_points-def"><a name="L140"></a><tt class="py-lineno">140</tt> <a class="py-toggle" href="#" id="MatrixLieGroup.velocity_from_points-toggle" onclick="return toggle('MatrixLieGroup.velocity_from_points');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#velocity_from_points">velocity_from_points</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">a</tt><tt class="py-op">,</tt> <tt class="py-param">b</tt><tt class="py-op">,</tt> <tt class="py-param">delta</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MatrixLieGroup.velocity_from_points-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="MatrixLieGroup.velocity_from_points-expanded"><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">            Find the velocity in local frame to go from *a* to *b* in </tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring">            *delta* time. </tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="geometry.manifolds.group.Group.multiply
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply" class="py-name" href="#" onclick="return doclink('link-20', 'multiply', 'link-9');">multiply</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="geometry.manifolds.group.Group.inverse
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse" class="py-name" href="#" onclick="return doclink('link-21', 'inverse', 'link-7');">inverse</a></tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-name">xt</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group
+geometry.manifolds.special_euclidean_group.SE_group.algebra_from_group
+geometry.manifolds.translation_group.Tran.algebra_from_group" class="py-name" href="#" onclick="return doclink('link-22', 'algebra_from_group', 'link-11');">algebra_from_group</a></tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-comment">#        xt = self.logmap(self.unity(), x) # XXX</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-comment">#        xt = self.algebra.project(xt)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method geometry.manifolds.group.Group.identity()=geometry.manifolds.group.Group-class.html#identity"><a title="geometry.manifolds.group.Group.identity" class="py-name" href="#" onclick="return doclink('link-23', 'identity', 'link-23');">identity</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">xt</tt> <tt class="py-op">/</tt> <tt class="py-name">delta</tt> </tt>
+</div></div><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:46 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

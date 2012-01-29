@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>geometry.poses_embedding</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="geometry-module.html">Package&nbsp;geometry</a> ::
+        Module&nbsp;poses_embedding
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="geometry.poses_embedding-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="geometry.poses_embedding-module.html">Module geometry.poses_embedding</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-op">(</tt><tt class="py-name">SE3_from_rotation_translation</tt><tt class="py-op">,</tt> <tt id="link-0" class="py-name" targets="Function geometry.poses.combine_pieces()=geometry.poses-module.html#combine_pieces"><a title="geometry.poses.combine_pieces" class="py-name" href="#" onclick="return doclink('link-0', 'combine_pieces', 'link-0');">combine_pieces</a></tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Function geometry.poses.extract_pieces()=geometry.poses-module.html#extract_pieces"><a title="geometry.poses.extract_pieces" class="py-name" href="#" onclick="return doclink('link-1', 'extract_pieces', 'link-1');">extract_pieces</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line">    <tt class="py-name">contract</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">,</tt> <tt class="py-name">SE2_from_rotation_translation</tt><tt class="py-op">,</tt> <tt class="py-name">rotation_translation_from_SE2</tt><tt class="py-op">,</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line">    <tt class="py-name">rotation_translation_from_SE3</tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Function geometry.rotations.hat_map()=geometry.rotations-module.html#hat_map"><a title="geometry.rotations.hat_map" class="py-name" href="#" onclick="return doclink('link-2', 'hat_map', 'link-2');">hat_map</a></tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Function geometry.rotations.map_hat_2d()=geometry.rotations-module.html#map_hat_2d"><a title="geometry.rotations.map_hat_2d" class="py-name" href="#" onclick="return doclink('link-3', 'map_hat_2d', 'link-3');">map_hat_2d</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Function geometry.rotations_embedding.SO2_project_from_SO3()=geometry.rotations_embedding-module.html#SO2_project_from_SO3"><a title="geometry.rotations_embedding.SO2_project_from_SO3" class="py-name" href="#" onclick="return doclink('link-4', 'SO2_project_from_SO3', 'link-4');">SO2_project_from_SO3</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line">    <tt id="link-5" class="py-name" targets="Function geometry.rotations_embedding.so2_project_from_so3()=geometry.rotations_embedding-module.html#so2_project_from_so3"><a title="geometry.rotations_embedding.so2_project_from_so3" class="py-name" href="#" onclick="return doclink('link-5', 'so2_project_from_so3', 'link-5');">so2_project_from_so3</a></tt><tt class="py-op">,</tt> <tt id="link-6" class="py-name" targets="Function geometry.rotations_embedding.so3_from_so2()=geometry.rotations_embedding-module.html#so3_from_so2"><a title="geometry.rotations_embedding.so3_from_so2" class="py-name" href="#" onclick="return doclink('link-6', 'so3_from_so2', 'link-6');">so3_from_so2</a></tt><tt class="py-op">)</tt> </tt>
+<a name="SE2_from_SO2"></a><div id="SE2_from_SO2-def"><a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'SE2'</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">=</tt><tt class="py-string">'SO2'</tt><tt class="py-op">)</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt> <a class="py-toggle" href="#" id="SE2_from_SO2-toggle" onclick="return toggle('SE2_from_SO2');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#SE2_from_SO2">SE2_from_SO2</a><tt class="py-op">(</tt><tt class="py-param">a</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SE2_from_SO2-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="SE2_from_SO2-expanded"><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">SE2_from_rotation_translation</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="SO2_project_from_SE2"></a><div id="SO2_project_from_SE2-def"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'SO2'</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt><tt class="py-op">=</tt><tt class="py-string">'SE2'</tt><tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="SO2_project_from_SE2-toggle" onclick="return toggle('SO2_project_from_SE2');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#SO2_project_from_SE2">SO2_project_from_SE2</a><tt class="py-op">(</tt><tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SO2_project_from_SE2-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="SO2_project_from_SE2-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">rotation_translation_from_SE2</tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="se2_from_so2"></a><div id="se2_from_so2-def"><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'se2'</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">=</tt><tt class="py-string">'so2'</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt> <a class="py-toggle" href="#" id="se2_from_so2-toggle" onclick="return toggle('se2_from_so2');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#se2_from_so2">se2_from_so2</a><tt class="py-op">(</tt><tt class="py-param">a</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se2_from_so2-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="se2_from_so2-expanded"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">    <tt class="py-name">omega</tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name"><a title="geometry.rotations.map_hat_2d" class="py-name" href="#" onclick="return doclink('link-7', 'map_hat_2d', 'link-3');">map_hat_2d</a></tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-8" class="py-name"><a title="geometry.rotations.hat_map" class="py-name" href="#" onclick="return doclink('link-8', 'hat_map', 'link-2');">hat_map</a></tt><tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">omega</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="so2_project_from_se2"></a><div id="so2_project_from_se2-def"><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'so2'</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt><tt class="py-op">=</tt><tt class="py-string">'se2'</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt> <a class="py-toggle" href="#" id="so2_project_from_se2-toggle" onclick="return toggle('so2_project_from_se2');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#so2_project_from_se2">so2_project_from_se2</a><tt class="py-op">(</tt><tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="so2_project_from_se2-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="so2_project_from_se2-expanded"><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-9" class="py-name"><a title="geometry.poses.extract_pieces" class="py-name" href="#" onclick="return doclink('link-9', 'extract_pieces', 'link-1');">extract_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="SE3_from_SO3"></a><div id="SE3_from_SO3-def"><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'SE3'</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">=</tt><tt class="py-string">'SO3'</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt> <a class="py-toggle" href="#" id="SE3_from_SO3-toggle" onclick="return toggle('SE3_from_SO3');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#SE3_from_SO3">SE3_from_SO3</a><tt class="py-op">(</tt><tt class="py-param">a</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SE3_from_SO3-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="SE3_from_SO3-expanded"><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">SE3_from_rotation_translation</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="SO3_project_from_SE3"></a><div id="SO3_project_from_SE3-def"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'SO3'</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt><tt class="py-op">=</tt><tt class="py-string">'SE3'</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt> <a class="py-toggle" href="#" id="SO3_project_from_SE3-toggle" onclick="return toggle('SO3_project_from_SE3');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#SO3_project_from_SE3">SO3_project_from_SE3</a><tt class="py-op">(</tt><tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SO3_project_from_SE3-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="SO3_project_from_SE3-expanded"><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">rotation_translation_from_SE3</tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="se3_from_so3"></a><div id="se3_from_so3-def"><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'se3'</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">=</tt><tt class="py-string">'so3'</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt> <a class="py-toggle" href="#" id="se3_from_so3-toggle" onclick="return toggle('se3_from_so3');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#se3_from_so3">se3_from_so3</a><tt class="py-op">(</tt><tt class="py-param">a</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se3_from_so3-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="se3_from_so3-expanded"><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-10" class="py-name"><a title="geometry.poses.combine_pieces" class="py-name" href="#" onclick="return doclink('link-10', 'combine_pieces', 'link-0');">combine_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="so3_project_from_se3"></a><div id="so3_project_from_se3-def"><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'so3'</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt><tt class="py-op">=</tt><tt class="py-string">'se3'</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt> <a class="py-toggle" href="#" id="so3_project_from_se3-toggle" onclick="return toggle('so3_project_from_se3');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#so3_project_from_se3">so3_project_from_se3</a><tt class="py-op">(</tt><tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="so3_project_from_se3-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="so3_project_from_se3-expanded"><a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-11" class="py-name"><a title="geometry.poses.extract_pieces" class="py-name" href="#" onclick="return doclink('link-11', 'extract_pieces', 'link-1');">extract_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"> </tt>
+<a name="SE2_from_R2"></a><div id="SE2_from_R2-def"><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'SE2'</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">=</tt><tt class="py-string">'R2'</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt> <a class="py-toggle" href="#" id="SE2_from_R2-toggle" onclick="return toggle('SE2_from_R2');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#SE2_from_R2">SE2_from_R2</a><tt class="py-op">(</tt><tt class="py-param">a</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SE2_from_R2-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="SE2_from_R2-expanded"><a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">SE2_from_rotation_translation</tt><tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">eye</tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"> </tt>
+<a name="SE3_from_R3"></a><div id="SE3_from_R3-def"><a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'SE3'</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">=</tt><tt class="py-string">'R3'</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt> <a class="py-toggle" href="#" id="SE3_from_R3-toggle" onclick="return toggle('SE3_from_R3');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#SE3_from_R3">SE3_from_R3</a><tt class="py-op">(</tt><tt class="py-param">a</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SE3_from_R3-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="SE3_from_R3-expanded"><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">SE3_from_rotation_translation</tt><tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">eye</tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"> </tt>
+<a name="R2_project_from_SE2"></a><div id="R2_project_from_SE2-def"><a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'R2'</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt><tt class="py-op">=</tt><tt class="py-string">'SE2'</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt> <a class="py-toggle" href="#" id="R2_project_from_SE2-toggle" onclick="return toggle('R2_project_from_SE2');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#R2_project_from_SE2">R2_project_from_SE2</a><tt class="py-op">(</tt><tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="R2_project_from_SE2-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="R2_project_from_SE2-expanded"><a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">rotation_translation_from_SE2</tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"> </tt>
+<a name="R3_project_from_SE3"></a><div id="R3_project_from_SE3-def"><a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'R3'</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt><tt class="py-op">=</tt><tt class="py-string">'SE3'</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt> <a class="py-toggle" href="#" id="R3_project_from_SE3-toggle" onclick="return toggle('R3_project_from_SE3');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#R3_project_from_SE3">R3_project_from_SE3</a><tt class="py-op">(</tt><tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="R3_project_from_SE3-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="R3_project_from_SE3-expanded"><a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">rotation_translation_from_SE3</tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"> </tt>
+<a name="se3_from_se2"></a><div id="se3_from_se2-def"><a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'se3'</tt><tt class="py-op">,</tt> <tt class="py-name">a</tt><tt class="py-op">=</tt><tt class="py-string">'se2'</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt> <a class="py-toggle" href="#" id="se3_from_se2-toggle" onclick="return toggle('se3_from_se2');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#se3_from_se2">se3_from_se2</a><tt class="py-op">(</tt><tt class="py-param">a</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se3_from_se2-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="se3_from_se2-expanded"><a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">    <tt class="py-name">W</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">,</tt> <tt id="link-12" class="py-name" targets="Method geometry.manifolds.matrix_linear_space.MatrixLinearSpace.zero()=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html#zero"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace.zero" class="py-name" href="#" onclick="return doclink('link-12', 'zero', 'link-12');">zero</a></tt><tt class="py-op">,</tt> <tt class="py-name">one</tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="geometry.poses.extract_pieces" class="py-name" href="#" onclick="return doclink('link-13', 'extract_pieces', 'link-1');">extract_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">)</tt> <tt class="py-comment">#@UnusedVariable</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">    <tt class="py-name">W</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="geometry.rotations_embedding.so3_from_so2" class="py-name" href="#" onclick="return doclink('link-14', 'so3_from_so2', 'link-6');">so3_from_so2</a></tt><tt class="py-op">(</tt><tt class="py-name">W</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">    <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">v</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-15" class="py-name"><a title="geometry.poses.combine_pieces" class="py-name" href="#" onclick="return doclink('link-15', 'combine_pieces', 'link-0');">combine_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">W</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-op">*</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line"> </tt>
+<a name="SE2_project_from_SE3"></a><div id="SE2_project_from_SE3-def"><a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'SE2'</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt><tt class="py-op">=</tt><tt class="py-string">'SE3'</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt> <a class="py-toggle" href="#" id="SE2_project_from_SE3-toggle" onclick="return toggle('SE2_project_from_SE3');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#SE2_project_from_SE3">SE2_project_from_SE3</a><tt class="py-op">(</tt><tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SE2_project_from_SE3-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="SE2_project_from_SE3-expanded"><a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">    <tt id="link-16" class="py-name" targets="Variable geometry.R=geometry-module.html#R,Variable geometry.manifolds.R=geometry.manifolds-module.html#R,Variable geometry.manifolds.special_euclidean_group.R=geometry.manifolds.special_euclidean_group-module.html#R,Variable geometry.manifolds.todo.R=geometry.manifolds.todo-module.html#R,Variable geometry.manifolds.translation_group.R=geometry.manifolds.translation_group-module.html#R"><a title="geometry.R
+geometry.manifolds.R
+geometry.manifolds.special_euclidean_group.R
+geometry.manifolds.todo.R
+geometry.manifolds.translation_group.R" class="py-name" href="#" onclick="return doclink('link-16', 'R', 'link-16');">R</a></tt><tt class="py-op">,</tt> <tt class="py-name">t</tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace.zero" class="py-name" href="#" onclick="return doclink('link-17', 'zero', 'link-12');">zero</a></tt><tt class="py-op">,</tt> <tt class="py-name">one</tt> <tt class="py-op">=</tt> <tt id="link-18" class="py-name"><a title="geometry.poses.extract_pieces" class="py-name" href="#" onclick="return doclink('link-18', 'extract_pieces', 'link-1');">extract_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">)</tt> <tt class="py-comment">#@UnusedVariable</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">    <tt id="link-19" class="py-name"><a title="geometry.R
+geometry.manifolds.R
+geometry.manifolds.special_euclidean_group.R
+geometry.manifolds.todo.R
+geometry.manifolds.translation_group.R" class="py-name" href="#" onclick="return doclink('link-19', 'R', 'link-16');">R</a></tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name"><a title="geometry.rotations_embedding.SO2_project_from_SO3" class="py-name" href="#" onclick="return doclink('link-20', 'SO2_project_from_SO3', 'link-4');">SO2_project_from_SO3</a></tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="geometry.R
+geometry.manifolds.R
+geometry.manifolds.special_euclidean_group.R
+geometry.manifolds.todo.R
+geometry.manifolds.translation_group.R" class="py-name" href="#" onclick="return doclink('link-21', 'R', 'link-16');">R</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">    <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">:</tt><tt class="py-number">2</tt><tt class="py-op">]</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-22" class="py-name"><a title="geometry.poses.combine_pieces" class="py-name" href="#" onclick="return doclink('link-22', 'combine_pieces', 'link-0');">combine_pieces</a></tt><tt class="py-op">(</tt><tt id="link-23" class="py-name"><a title="geometry.R
+geometry.manifolds.R
+geometry.manifolds.special_euclidean_group.R
+geometry.manifolds.todo.R
+geometry.manifolds.translation_group.R" class="py-name" href="#" onclick="return doclink('link-23', 'R', 'link-16');">R</a></tt><tt class="py-op">,</tt> <tt class="py-name">t</tt><tt class="py-op">,</tt> <tt class="py-name">t</tt> <tt class="py-op">*</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line"> </tt>
+<a name="se2_project_from_se3"></a><div id="se2_project_from_se3-def"><a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line"> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'se2'</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt><tt class="py-op">=</tt><tt class="py-string">'se3'</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt> <a class="py-toggle" href="#" id="se2_project_from_se3-toggle" onclick="return toggle('se2_project_from_se3');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.poses_embedding-module.html#se2_project_from_se3">se2_project_from_se3</a><tt class="py-op">(</tt><tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="se2_project_from_se3-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="se2_project_from_se3-expanded"><a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line">    <tt class="py-name">W</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">,</tt> <tt id="link-24" class="py-name"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace.zero" class="py-name" href="#" onclick="return doclink('link-24', 'zero', 'link-12');">zero</a></tt><tt class="py-op">,</tt> <tt class="py-name">one</tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name"><a title="geometry.poses.extract_pieces" class="py-name" href="#" onclick="return doclink('link-25', 'extract_pieces', 'link-1');">extract_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">b</tt><tt class="py-op">)</tt> <tt class="py-comment">#@UnusedVariable</tt> </tt>
+<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line">    <tt class="py-name">W</tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name"><a title="geometry.rotations_embedding.so2_project_from_so3" class="py-name" href="#" onclick="return doclink('link-26', 'so2_project_from_so3', 'link-5');">so2_project_from_so3</a></tt><tt class="py-op">(</tt><tt class="py-name">W</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line">    <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">v</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">:</tt><tt class="py-number">2</tt><tt class="py-op">]</tt> </tt>
+<a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-27" class="py-name"><a title="geometry.poses.combine_pieces" class="py-name" href="#" onclick="return doclink('link-27', 'combine_pieces', 'link-0');">combine_pieces</a></tt><tt class="py-op">(</tt><tt class="py-name">W</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-op">*</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:45 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

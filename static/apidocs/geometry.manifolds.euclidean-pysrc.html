@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>geometry.manifolds.euclidean</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="geometry-module.html">Package&nbsp;geometry</a> ::
+        <a href="geometry.manifolds-module.html">Package&nbsp;manifolds</a> ::
+        Module&nbsp;euclidean
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="geometry.manifolds.euclidean-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="geometry.manifolds.euclidean-module.html">Module geometry.manifolds.euclidean</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">,</tt> <tt class="py-name">assert_allclose</tt><tt class="py-op">,</tt> <tt class="py-name">contract</tt><tt class="py-op">,</tt> <tt id="link-0" class="py-name" targets="Class geometry.manifolds.matrix_linear_space.MatrixLinearSpace=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace" class="py-name" href="#" onclick="return doclink('link-0', 'MatrixLinearSpace', 'link-0');">MatrixLinearSpace</a></tt><tt class="py-op">)</tt> </tt>
+<a name="Euclidean"></a><div id="Euclidean-def"><a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt> <a class="py-toggle" href="#" id="Euclidean-toggle" onclick="return toggle('Euclidean');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="geometry.manifolds.euclidean.Euclidean-class.html">Euclidean</a><tt class="py-op">(</tt><tt class="py-base-class">MatrixLinearSpace</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Euclidean-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Euclidean-expanded"><a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line">    <tt class="py-docstring">''' </tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">        This is the usual Euclidean space of finite dimension;</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">        this is mostly used for debugging.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">        There is no proper Haar measure; as an arbitrary choice,</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">        the :py:func:`sample_uniform`</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">        returns a sample from a Gaussian distribution centered at 0.</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">     </tt>
+<a name="Euclidean.__init__"></a><div id="Euclidean.__init__-def"><a name="L15"></a><tt class="py-lineno">15</tt> <a class="py-toggle" href="#" id="Euclidean.__init__-toggle" onclick="return toggle('Euclidean.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.euclidean.Euclidean-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dimension</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Euclidean.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Euclidean.__init__-expanded"><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt id="link-1" class="py-name"><a title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace" class="py-name" href="#" onclick="return doclink('link-1', 'MatrixLinearSpace', 'link-0');">MatrixLinearSpace</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method geometry.manifolds.differentiable_manifold.DifferentiableManifold.__init__()=geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#__init__,Method geometry.manifolds.euclidean.Euclidean.__init__()=geometry.manifolds.euclidean.Euclidean-class.html#__init__,Method geometry.manifolds.exceptions.DoesNotBelong.__init__()=geometry.manifolds.exceptions.DoesNotBelong-class.html#__init__,Method geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra.__init__()=geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra-class.html#__init__,Method geometry.manifolds.matrix_lie_group.MatrixLieGroup.__init__()=geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html#__init__,Method geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.__init__()=geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent-class.html#__init__,Method geometry.manifolds.matrix_linear_space.MatrixLinearSpace.__init__()=geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html#__init__,Method geometry.manifolds.product_manifold.ProductManifold.__init__()=geometry.manifolds.product_manifold.ProductManifold-class.html#__init__,Method geometry.manifolds.special_euclidean_algebra.se_algebra.__init__()=geometry.manifolds.special_euclidean_algebra.se_algebra-class.html#__init__,Method geometry.manifolds.special_euclidean_group.SE_group.__init__()=geometry.manifolds.special_euclidean_group.SE_group-class.html#__init__,Method geometry.manifolds.special_orthogonal_algebra.so_algebra.__init__()=geometry.manifolds.special_orthogonal_algebra.so_algebra-class.html#__init__,Method geometry.manifolds.special_orthogonal_group.SO_group.__init__()=geometry.manifolds.special_orthogonal_group.SO_group-class.html#__init__,Method geometry.manifolds.sphere.Sphere.__init__()=geometry.manifolds.sphere.Sphere-class.html#__init__,Method geometry.manifolds.sphere.Sphere1.__init__()=geometry.manifolds.sphere.Sphere1-class.html#__init__,Method geometry.manifolds.tangent_bundle.TangentBundle.__init__()=geometry.manifolds.tangent_bundle.TangentBundle-class.html#__init__,Method geometry.manifolds.todo.moebius.Moebius.__init__()=geometry.manifolds.todo.moebius.Moebius-class.html#__init__,Method geometry.manifolds.torus.Torus.__init__()=geometry.manifolds.torus.Torus-class.html#__init__,Method geometry.manifolds.translation_algebra.tran.__init__()=geometry.manifolds.translation_algebra.tran-class.html#__init__,Method geometry.manifolds.translation_group.Tran.__init__()=geometry.manifolds.translation_group.Tran-class.html#__init__"><a title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.__init__
+geometry.manifolds.euclidean.Euclidean.__init__
+geometry.manifolds.exceptions.DoesNotBelong.__init__
+geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra.__init__
+geometry.manifolds.matrix_lie_group.MatrixLieGroup.__init__
+geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.__init__
+geometry.manifolds.matrix_linear_space.MatrixLinearSpace.__init__
+geometry.manifolds.product_manifold.ProductManifold.__init__
+geometry.manifolds.special_euclidean_algebra.se_algebra.__init__
+geometry.manifolds.special_euclidean_group.SE_group.__init__
+geometry.manifolds.special_orthogonal_algebra.so_algebra.__init__
+geometry.manifolds.special_orthogonal_group.SO_group.__init__
+geometry.manifolds.sphere.Sphere.__init__
+geometry.manifolds.sphere.Sphere1.__init__
+geometry.manifolds.tangent_bundle.TangentBundle.__init__
+geometry.manifolds.todo.moebius.Moebius.__init__
+geometry.manifolds.torus.Torus.__init__
+geometry.manifolds.translation_algebra.tran.__init__
+geometry.manifolds.translation_group.Tran.__init__" class="py-name" href="#" onclick="return doclink('link-2', '__init__', 'link-2');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">dimension</tt><tt class="py-op">=</tt><tt class="py-name">dimension</tt><tt class="py-op">,</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">                                        <tt class="py-name">shape</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-name">dimension</tt><tt class="py-op">,</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">     </tt>
+<a name="Euclidean.__repr__"></a><div id="Euclidean.__repr__-def"><a name="L19"></a><tt class="py-lineno">19</tt> <a class="py-toggle" href="#" id="Euclidean.__repr__-toggle" onclick="return toggle('Euclidean.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.euclidean.Euclidean-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Euclidean.__repr__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Euclidean.__repr__-expanded"><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'R%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimension</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">=</tt><tt class="py-string">'array'</tt><tt class="py-op">)</tt> </tt>
+<a name="Euclidean.belongs"></a><div id="Euclidean.belongs-def"><a name="L23"></a><tt class="py-lineno">23</tt> <a class="py-toggle" href="#" id="Euclidean.belongs-toggle" onclick="return toggle('Euclidean.belongs');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.euclidean.Euclidean-class.html#belongs">belongs</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Euclidean.belongs-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Euclidean.belongs-expanded"><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-name">assert_allclose</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">.</tt><tt class="py-name">size</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimension</tt><tt class="py-op">)</tt>  </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">isreal</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"Expected real vector"</tt> </tt>
+</div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="Euclidean.sample_uniform"></a><div id="Euclidean.sample_uniform-def"><a name="L27"></a><tt class="py-lineno">27</tt> <a class="py-toggle" href="#" id="Euclidean.sample_uniform-toggle" onclick="return toggle('Euclidean.sample_uniform');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.euclidean.Euclidean-class.html#sample_uniform">sample_uniform</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Euclidean.sample_uniform-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Euclidean.sample_uniform-expanded"><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">randn</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimension</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="Euclidean.interesting_points"></a><div id="Euclidean.interesting_points-def"><a name="L30"></a><tt class="py-lineno">30</tt> <a class="py-toggle" href="#" id="Euclidean.interesting_points-toggle" onclick="return toggle('Euclidean.interesting_points');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.euclidean.Euclidean-class.html#interesting_points">interesting_points</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Euclidean.interesting_points-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Euclidean.interesting_points-expanded"><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-name">points</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-name">points</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">zeros</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimension</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-name">points</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">ones</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimension</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">points</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">     </tt>
+<a name="Euclidean.project"></a><div id="Euclidean.project-def"><a name="L36"></a><tt class="py-lineno">36</tt> <a class="py-toggle" href="#" id="Euclidean.project-toggle" onclick="return toggle('Euclidean.project');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.euclidean.Euclidean-class.html#project">project</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>  </tt>
+</div><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">x</tt> </tt>
+</div></div><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:46 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

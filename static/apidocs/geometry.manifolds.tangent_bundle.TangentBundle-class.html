@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>geometry.manifolds.tangent_bundle.TangentBundle</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="geometry-module.html">Package&nbsp;geometry</a> ::
+        <a href="geometry.manifolds-module.html">Package&nbsp;manifolds</a> ::
+        <a href="geometry.manifolds.tangent_bundle-module.html">Module&nbsp;tangent_bundle</a> ::
+        Class&nbsp;TangentBundle
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="geometry.manifolds.tangent_bundle.TangentBundle-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class TangentBundle</h1><p class="nomargin-top"><span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_geometry_19" name="uml_class_diagram_for_geometry_19">
+<area shape="rect" id="node1_28" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#__abstractmethods__" title="geometry.manifolds.tangent_bundle.TangentBundle.__abstractmethods__" alt="" coords="161,401,343,420"/>
+<area shape="rect" id="node1_29" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#__init__" title="x.__init__(...) initializes x; see x.__class__.__doc__ for signature" alt="" coords="161,423,343,441"/>
+<area shape="rect" id="node1_30" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#__str__" title="str(x)" alt="" coords="161,441,343,460"/>
+<area shape="rect" id="node1_31" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#belongs" title="Raises an Exception if the point does not belong to this manifold." alt="" coords="161,460,343,479"/>
+<area shape="rect" id="node1_32" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#belongs_ts" title="Checks that a vector *vx* belongs to the tangent space &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;at the given point *base*." alt="" coords="161,479,343,497"/>
+<area shape="rect" id="node1_33" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#distance" title=":param a: :type a: &#160;``belongs``" alt="" coords="161,497,343,516"/>
+<area shape="rect" id="node1_34" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#expmap" title=":param bv: :type bv: &#160;``belongs_ts``" alt="" coords="161,516,343,535"/>
+<area shape="rect" id="node1_35" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#friendly" title="Returns a friendly description string for a point on the manifold." alt="" coords="161,535,343,553"/>
+<area shape="rect" id="node1_36" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#interesting_points" title=":rtype: &#160;``list(belongs)``" alt="" coords="161,553,343,572"/>
+<area shape="rect" id="node1_37" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#logmap" title=":param p: :type p: &#160;``belongs``" alt="" coords="161,572,343,591"/>
+<area shape="rect" id="node1_38" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#project_ts" title="Projects a vector *v_ambient* in the ambient space &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;to the tangent space at point *base*." alt="" coords="161,591,343,609"/>
+<area shape="rect" id="node1" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html" title="This class represents the tangent bundle of a generic manifold using a tuple (base, vel) where vel is tangent at base." alt="" coords="149,377,355,615"/>
+<area shape="rect" id="node2_39" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold.Embedding-class.html" title="Embedding(A, B, A_to_B, B_to_A, steps, type, desc)" alt="" coords="17,31,487,49"/>
+<area shape="rect" id="node2_40" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold.Isomorphism-class.html" title="Isomorphism(A, B, A_to_B, B_to_A, steps, type, desc)" alt="" coords="17,49,487,68"/>
+<area shape="rect" id="node2_41" href="abc.ABCMeta-class.html" title="Metaclass for defining Abstract Base Classes (ABCs)." alt="" coords="17,68,487,87"/>
+<area shape="rect" id="node2_42" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#assert_close" title="Asserts that two points on the manifold are close to the given &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;tolerance." alt="" coords="17,89,487,108"/>
+<area shape="rect" id="node2_43" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#can_convert_to" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.can_convert_to" alt="" coords="17,108,487,127"/>
+<area shape="rect" id="node2_44" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#can_represent" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.can_represent" alt="" coords="17,127,487,145"/>
+<area shape="rect" id="node2_45" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#convert_to" title=":param my_point: :type my_point: &#160;``belongs``" alt="" coords="17,145,487,164"/>
+<area shape="rect" id="node2_46" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embed_in" title="Embeds a point on this manifold to the target manifold M." alt="" coords="17,164,487,183"/>
+<area shape="rect" id="node2_47" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embeddable_in" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.embeddable_in" alt="" coords="17,183,487,201"/>
+<area shape="rect" id="node2_48" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embedding" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.embedding" alt="" coords="17,201,487,220"/>
+<area shape="rect" id="node2_49" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#geodesic" title="Returns the point interpolated along the geodesic." alt="" coords="17,220,487,239"/>
+<area shape="rect" id="node2_50" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#get_dimension" title="Returns the intrinsic dimension of this manifold." alt="" coords="17,239,487,257"/>
+<area shape="rect" id="node2_51" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#isomorphism" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.isomorphism" alt="" coords="17,257,487,276"/>
+<area shape="rect" id="node2_52" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#project_from" title="Projects a point on a bigger manifold to this manifold." alt="" coords="17,276,487,295"/>
+<area shape="rect" id="node2_53" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#project_to" title=":param my_point: :type my_point: &#160;``belongs``" alt="" coords="17,295,487,313"/>
+<area shape="rect" id="node2_54" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#relations_descriptions" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.relations_descriptions" alt="" coords="17,313,487,332"/>
+<area shape="rect" id="node2_55" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#tangent_bundle" title="Returns the manifold corresponding to the tangent bundle." alt="" coords="17,332,487,351"/>
+<area shape="rect" id="node2" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html" title="This is the base class for differentiable manifolds." alt="" coords="5,6,499,357"/>
+</map>
+  <img src="uml_class_diagram_for_geometry_19.gif" alt='' usemap="#uml_class_diagram_for_geometry_19" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>This class represents the tangent bundle of a generic manifold using a
+  tuple (base, vel) where vel is tangent at base.</p>
+  <p>(MatrixLieGroup has different representation)</p>
+
+<!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Nested Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-NestedClasses"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html">differentiable_manifold.DifferentiableManifold</a></code></b>:
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold.Embedding-class.html">Embedding</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold.Isomorphism-class.html">Isomorphism</a></code>,
+      <code><a href="abc.ABCMeta-class.html">__metaclass__</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">base_manifold</span>)</span><br />
+      x.__init__(...) initializes x; see x.__class__.__doc__ for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#belongs" class="summary-sig-name">belongs</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>)</span><br />
+      Raises an Exception if the point does not belong to this manifold.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.belongs">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#belongs_ts" class="summary-sig-name">belongs_ts</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">bv</span>)</span><br />
+      Checks that a vector *vx* belongs to the tangent space
+           at the given point *base*.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.belongs_ts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#distance" class="summary-sig-name">distance</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">a</span>,
+        <span class="summary-sig-arg">b</span>)</span><br />
+      :param a: :type a:  ``belongs``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.distance">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#expmap" class="summary-sig-name">expmap</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">bv</span>)</span><br />
+      :param bv: :type bv:  ``belongs_ts``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.expmap">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#friendly" class="summary-sig-name">friendly</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">a</span>)</span><br />
+      Returns a friendly description string for a point on the manifold.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.friendly">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#interesting_points" class="summary-sig-name">interesting_points</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      :rtype:  ``list(belongs)``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.interesting_points">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#logmap" class="summary-sig-name">logmap</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">base</span>,
+        <span class="summary-sig-arg">p</span>)</span><br />
+      :param p: :type p:  ``belongs``</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.logmap">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="geometry.manifolds.tangent_bundle.TangentBundle-class.html#project_ts" class="summary-sig-name">project_ts</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">bv</span>)</span><br />
+      Projects a vector *v_ambient* in the ambient space
+           to the tangent space at point *base*.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.project_ts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html">differentiable_manifold.DifferentiableManifold</a></code></b>:
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#assert_close">assert_close</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#can_convert_to">can_convert_to</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#can_represent">can_represent</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#convert_to">convert_to</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embed_in">embed_in</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embeddable_in">embeddable_in</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#geodesic">geodesic</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#get_dimension">get_dimension</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#project_from">project_from</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#project_to">project_to</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#relations_descriptions">relations_descriptions</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#tangent_bundle">tangent_bundle</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html">differentiable_manifold.DifferentiableManifold</a></code></b>:
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embedding">embedding</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#isomorphism">isomorphism</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__abstractmethods__"></a><span class="summary-name">__abstractmethods__</span> = <code title="frozenset([])"><code class="variable-group">frozenset([</code><code class="variable-group">])</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_abc_cache"></a><span class="summary-name">_abc_cache</span> = <code title="set([])"><code class="variable-group">set([</code><code class="variable-group">])</code></code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html">differentiable_manifold.DifferentiableManifold</a></code></b> (private):
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#_abc_negative_cache" onclick="show_private();">_abc_negative_cache</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#_abc_negative_cache_version" onclick="show_private();">_abc_negative_cache_version</a></code>,
+      <code><a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#_abc_registry" onclick="show_private();">_abc_registry</a></code>
+      </p></div>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">base_manifold</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see x.__class__.__doc__ for 
+  signature</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="belongs"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">belongs</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">x</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.belongs">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Raises an Exception if the point does not belong to this manifold.</p>
+  <p>This function wraps some checks around :py:func:`belongs_`, which is 
+  implemented by the subclasses.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#belongs">differentiable_manifold.DifferentiableManifold.belongs</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="belongs_ts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">belongs_ts</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">bv</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.belongs_ts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+           Checks that a vector *vx* belongs to the tangent space
+           at the given point *base*.
+
+       
+
+
+:param bv: 
+:type bv:  ``tuple(belongs,*)``
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#belongs_ts">differentiable_manifold.DifferentiableManifold.belongs_ts</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="distance"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">distance</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">a</span>,
+        <span class="sig-arg">b</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.distance">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param a: :type a:  ``belongs``</p>
+  <p>:param b: :type b:  ``belongs``</p>
+  <p>:rtype:  ``&gt;=0``</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#distance">differentiable_manifold.DifferentiableManifold.distance</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="expmap"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">expmap</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">bv</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.expmap">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param bv: :type bv:  ``belongs_ts``</p>
+  <p>:rtype:  ``belongs``</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#expmap">differentiable_manifold.DifferentiableManifold.expmap</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="friendly"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">friendly</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">a</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.friendly">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+           Returns a friendly description string for a point on the manifold. 
+       
+
+
+:param a: 
+:type a:  ``belongs``
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#friendly">differentiable_manifold.DifferentiableManifold.friendly</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="interesting_points"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">interesting_points</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.interesting_points">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:rtype:  ``list(belongs)``</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#interesting_points">differentiable_manifold.DifferentiableManifold.interesting_points</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="logmap"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">logmap</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">base</span>,
+        <span class="sig-arg">p</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.logmap">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>:param p: :type p:  ``belongs``</p>
+  <p>:param base: :type base:  ``belongs``</p>
+  <p>:rtype:  ``belongs_ts``</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#logmap">differentiable_manifold.DifferentiableManifold.logmap</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="project_ts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">project_ts</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">bv</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="geometry.manifolds.tangent_bundle-pysrc.html#TangentBundle.project_ts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+
+           Projects a vector *v_ambient* in the ambient space
+           to the tangent space at point *base*.
+       
+
+
+:param bv: 
+:type bv:  ``tuple(belongs,*)``
+
+</pre>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#project_ts">differentiable_manifold.DifferentiableManifold.project_ts</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="geometry-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/geometry">PyGeometry</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:44 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
