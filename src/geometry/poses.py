@@ -1,6 +1,7 @@
 from . import (angle_from_rot2d, rotz, axis_angle_from_rotation, hat_map_2d,
      contract, assert_allclose, np, rot2d, new_contract,
     check_SO, check_skew_symmetric, expm, logm)
+from geometry.constants import GeometryConstants
 
 
 def check_SE(M):
@@ -30,11 +31,6 @@ new_contract('se3', 'array[4x4], se')
 @contract(x='array[NxN]',
           returns='tuple(array[MxM],array[M],array[M],number),M=N-1')
 def extract_pieces(x):
-#    print x.__class__
-#    x = np.array(x) 
-# otherwise it could get fooled by <class 'numpy.matrixlib.defmatrix.matrix'>
-    # the shape would be (2,1) instead of (2,)
-    # TODO: change logm
     M = x.shape[0] - 1
     a = x[0:M, 0:M]
     b = x[0:M, M]
@@ -151,7 +147,7 @@ def se2_from_SE2_slow(pose):
     W = np.array(logm(pose).real)
     M, v, Z, zero = extract_pieces(W) #@UnusedVariable
     M = 0.5 * (M - M.T)
-    if np.abs(R[0, 0] - (-1)) < 1e-10:
+    if np.abs(R[0, 0] - (-1)) < 1e-10: # XXX: threshold
         # cannot use logarithm for log(-I), it gives imaginary solution
         M = hat_map_2d(np.pi)
 
@@ -170,7 +166,7 @@ def se2_from_SE2(pose):
 
     w_abs = np.abs(w)
     # FIXME: singularity
-    if w_abs < 1e-8:
+    if w_abs < 1e-8: # XXX: threshold
         a = 1
     else:
         a = (w_abs / 2) / np.tan(w_abs / 2)
@@ -190,7 +186,7 @@ def SE2_from_se2(vel):
     w = vel[1, 0]
     R = rot2d(w)
     v = vel[0:2, 2]
-    if np.abs(w) < 1e-8:
+    if np.abs(w) < 1e-8: # XXX threshold
         R = np.eye(2)
         t = v
     else:
@@ -222,7 +218,7 @@ def SE2_from_SE3(pose, check_exact=True):
     ''' 
         Projects a pose in SE3 to SE2.
     
-        If check_exact is True, it will check that z = 0 and axis = [0,0,1].
+        If check_exact is True, it will check that z = 0 and axis ~= [0,0,1].
     '''
     rotation, translation = rotation_translation_from_pose(pose)
     axis, angle = axis_angle_from_rotation(rotation)
@@ -234,7 +230,10 @@ def SE2_from_SE3(pose, check_exact=True):
         axis2 = axis * np.sign(axis[2])
         err_msg = ('I expect that the rotation is around [0,0,1] '
                   'when projecting to SE2 (check_exact=True).')
-        assert_allclose(axis2, [0, 0, 1], err_msg=err_msg)
+        assert_allclose(axis2, [0, 0, 1],
+                        rtol=GeometryConstants.rtol_SE2_from_SE3,
+                        atol=GeometryConstants.rtol_SE2_from_SE3, # XXX
+                        err_msg=err_msg)
 
     angle = angle * np.sign(axis[2])
     return SE2_from_translation_angle(translation[0:2], angle)

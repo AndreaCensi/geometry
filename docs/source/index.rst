@@ -27,9 +27,16 @@ Download
 Documentation
 -------------
 
-* :ref:`API description <api>`
+* :ref:`Manually written API description <api>`
+
+* `Automatically generated API docs (epydoc)`__.
+
+.. __: static/apidocs/index.html
 
 
+Manifolds known by PyGeometry with embedding relations:
+
+.. image:: static/manifolds.png
 
 News
 --------
