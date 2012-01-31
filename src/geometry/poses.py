@@ -82,14 +82,14 @@ rotation_translation_from_SE2 = rotation_translation_from_pose
 rotation_translation_from_SE3 = rotation_translation_from_pose
 
 
-@contract(pose='SE2')
+@contract(pose='SE2', returns='array[2]')
 def translation_from_SE2(pose):
     # TODO: make it more efficient
     R, t, zero, one = extract_pieces(pose) #@UnusedVariable
     return t.copy()
 
 
-@contract(pose='SE3')
+@contract(pose='SE3', returns='array[3]')
 def translation_from_SE3(pose):
     # TODO: make it more efficient
     _, t, _, _ = extract_pieces(pose)
