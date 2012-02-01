@@ -247,6 +247,20 @@ class DifferentiableManifold(object):
         ''' Returns the intrinsic dimension of this manifold. '''
         return self.dimension
 
+    @contract(returns='belongs', yaml_structure='list|dict')
+    def from_yaml(self, yaml_structure):
+        ''' Recovers a value from a Yaml structure. '''
+        # TODO: explicit check
+        # TODO: add testing
+        from geometry.yaml import from_yaml
+        return from_yaml(yaml_structure)
+
+    @contract(x='belongs')
+    def to_yaml(self, x):
+        # TODO: add testing
+        from geometry.yaml import to_yaml
+        return to_yaml('%s' % self, x)
+
 
 class RandomManifold(DifferentiableManifold):
     ''' This is the base class for manifolds that have the ability 

@@ -1,9 +1,7 @@
-from . import DifferentiableManifold, MatrixLieGroup, np, SO, se, R
-from .. import (assert_allclose, pose_from_rotation_translation,
+from . import DifferentiableManifold, MatrixLieGroup, SO, se, R, contract
+from .. import (SE3_from_SE2, assert_allclose, pose_from_rotation_translation,
     rotation_translation_from_pose, extract_pieces, se2_from_SE2, SE2_from_se2,
-    SE2_from_translation_angle, SE2_from_xytheta)
-from contracts import contract, describe_value
-from geometry.poses import SE3_from_SE2
+    SE2_from_translation_angle)
 
 
 class SE_group(MatrixLieGroup):
@@ -18,7 +16,6 @@ class SE_group(MatrixLieGroup):
 
     @contract(N='int,(2|3)')
     def __init__(self, N):
-#        print('Instantiating SE%s' % N)
         algebra = se[N]
         self.SOn = SO[N]
         self.En = R[N]
@@ -86,18 +83,5 @@ class SE_group(MatrixLieGroup):
             ]
         else:
             assert False
-
-    # FIXME: this old interface must be removed
-    def from_yaml(self, value):
-        ''' Parses from yaml value. '''
-        if self.n == 3: # SE2
-            x = np.array(value)
-            if x.shape != (3,):
-                msg = 'I expect a 3-array, not %s' % describe_value(value)
-                raise ValueError(msg)
-            return SE2_from_xytheta(x)
-        else:
-            raise ValueError('Not implemented in %r' % self.__class__.__name__)
-
 
 

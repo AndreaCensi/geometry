@@ -1,11 +1,12 @@
-__version__ = '1.1'
+__version__ = '1.2'
 
 # If True, additional checks are done at runtime
 development = False
 
-# If you want to be safe
-# import numpy as np
-# np.seterr(all='err')
+# If you want to be safe, use in your code:
+#   import numpy as np
+#   np.seterr(all='err')
+
 try:
     from scipy.linalg import logm, expm, eigh
     scipy_found = True
@@ -30,6 +31,9 @@ except ImportError:
 
 import numpy as np
 from contracts import new_contract, contract
+
+from logging import getLogger
+logger = getLogger(__name__)
 
 
 

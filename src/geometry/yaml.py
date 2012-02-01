@@ -1,7 +1,7 @@
 
-from . import contract, np
-from contracts.interface import describe_value, describe_type
-from geometry.manifolds import DifferentiableManifold
+from . import contract, np, logger
+from .manifolds import DifferentiableManifold
+from contracts import describe_value, describe_type
 
 #
 #def array_to_lists(x):
@@ -29,7 +29,7 @@ converters = {}
 default_representation = {}
 
 
-def register(manifold_name, representation, converter):
+def register_yaml_converter(manifold_name, representation, converter):
     if not manifold_name in default_representation:
         default_representation[manifold_name] = representation
     key = (manifold_name, representation)
@@ -48,7 +48,7 @@ def get_default_representation(manifold):
 
     return default_representation[key]
 
-
+@contract(returns='list[2]')
 def to_yaml(manifold, value, representation=None):
     if representation is None:
         representation = get_default_representation(manifold)
@@ -57,12 +57,17 @@ def to_yaml(manifold, value, representation=None):
         raise ValueError('Unknown format %s; I know %s.' %
                          (key, converters.keys()))
     conv = converters[key]
-    x = conv.to_yaml(value)
+    try:
+        x = conv.to_yaml(value)
+    except:
+        msg = 'Error while trying to convert %s' % describe_value(value)
+        logger.error(msg)
+        raise
     return ['%s:%s' % (manifold, representation), x]
 
 
 
-@contract(x='list')
+@contract(x='list[2]')
 def from_yaml(x):
     if not isinstance(x, list):
         raise ValueError('I expect a list with two elements.')
@@ -92,12 +97,16 @@ class Representation:
 
 class SE3_m44(Representation):
     @staticmethod
+    @contract(x='SE3', returns='list[4](list[4](float))')
     def to_yaml(x):
         return x.tolist()
 
     @staticmethod
+    @contract(y='list[4](list[4](float))', returns='SE3')
     def from_yaml(y):
         return np.array(y)
+
+register_yaml_converter('SE3', 'm44', SE3_m44)
 
 
 class se3_m44(Representation):
@@ -121,5 +130,5 @@ class TSE3_bt(Representation):
         return (SE3_m44.from_yaml(y[0]),
                 se3_m44.from_yaml(y[1]))
 
-register('SE3', 'm44', SE3_m44)
-register('TSE3', 'bt', TSE3_bt)
+
+register_yaml_converter('TSE3', 'bt', TSE3_bt)
