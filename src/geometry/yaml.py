@@ -48,6 +48,7 @@ def get_default_representation(manifold):
 
     return default_representation[key]
 
+
 @contract(returns='list[2]')
 def to_yaml(manifold, value, representation=None):
     if representation is None:
@@ -64,7 +65,6 @@ def to_yaml(manifold, value, representation=None):
         logger.error(msg)
         raise
     return ['%s:%s' % (manifold, representation), x]
-
 
 
 @contract(x='list[2]')

@@ -1,20 +1,17 @@
-#from numpy import (cos, sin, sqrt, pi, zeros, array, eye, empty, clip) #@UnusedImport
-#from numpy import (dot, degrees, arccos, argmax, #@UnusedImport
-#                   vstack, hstack, sign, #@UnusedImport
-#                   ndarray, radians, float32, float64, arctan2, argmin)#@UnusedImport
-#from numpy.random import uniform #@UnusedImport
-#import numpy as np #@UnusedImport
-#from numpy.linalg import norm #@UnusedImport
-#
-#from numpy.core.numeric import allclose
-#
-#from numpy.linalg import  det, svd  # @UnusedImport
 from . import GeometryConstants, contract, np, new_contract
 import warnings
 
 new_contract('R1', 'array[1]')
 new_contract('R2', 'array[2]')
 new_contract('R3', 'array[3]')
+
+
+@new_contract
+@contract(x='array')
+def finite(x):
+    # TODO: make into standard thing
+    return np.isfinite(x).all()
+
 
 @contract(s='array')
 def normalize_length(s, norm=2):
@@ -39,19 +36,11 @@ def normalize_length_or_zero(s, norm=2):
         return s / sn
 
 
-@new_contract
-@contract(x='array')
-def finite(x):
-    # TODO: make into standard thing
-    return np.isfinite(x).all()
-
-
 def deprecated(func):
     """This is a decorator which can be used to mark functions
     as deprecated. It will result in a warning being emitted
     when the function is used."""
     def new_func(*args, **kwargs):
-        # TODO: mofify stack
         warnings.warn("Call to deprecated function %s." % func.__name__,
                       category=DeprecationWarning, stacklevel=2)
         return func(*args, **kwargs)

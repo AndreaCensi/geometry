@@ -1,5 +1,6 @@
 from . import contract
 
+
 def Grassman(DifferentiableManifold):
     ''' 
         INCOMPLETE -- The Grassman manifold Grass(n,p) is the set of rank-p 
@@ -27,18 +28,18 @@ def Grassman(DifferentiableManifold):
     def distance(self, a, b):
         assert False
 
-    def logmap(self, a, b): 
+    def logmap(self, a, b):
         assert False
 
-    def expmap(self, a, vel): 
+    def expmap(self, a, vel):
         assert False
 
-    def project_ts(self, base, vx): 
+    def project_ts(self, base, vx):
         assert False
-    
+
     def sample_uniform(self):
         assert False
-    
+
     def normalize(self, x):
         assert False
 

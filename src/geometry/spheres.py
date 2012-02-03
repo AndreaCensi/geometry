@@ -3,6 +3,7 @@ from . import (safe_arccos, normalize_length, contract, new_contract,
 
 from .utils import assert_allclose
 
+
 @new_contract
 @contract(x='array[N],N>0')
 def unit_length(x):

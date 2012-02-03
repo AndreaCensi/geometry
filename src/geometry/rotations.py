@@ -34,7 +34,6 @@ def check_orthogonal(x):
     assert_allclose(I, np.dot(x.T, x), rtol=rtol, atol=atol)
 
 
-
 @contract(x='array[NxN]')
 def check_skew_symmetric(x):
     ''' Check that the argument is a skew-symmetric matrix. '''

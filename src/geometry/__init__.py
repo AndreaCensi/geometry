@@ -27,6 +27,7 @@ except ImportError:
     expm = make_warning('expm')
     eigh = make_warning('eigh')
     scipy_found = False
+    development = False
 
 
 import numpy as np
@@ -35,10 +36,6 @@ from contracts import new_contract, contract
 from logging import getLogger
 logger = getLogger(__name__)
 
-
-
-if not scipy_found:
-    development = False
 
 from .constants import *
 
