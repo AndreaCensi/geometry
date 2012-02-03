@@ -315,7 +315,16 @@ def axis_angle_from_rotation(R):
         v = np.array([R[2, 1] - R[1, 2],
                    R[0, 2] - R[2, 0],
                    R[1, 0] - R[0, 1]])
-        axis = (1 / (2 * np.sin(angle))) * v
+
+        computer_with_infinite_precision = False
+        if computer_with_infinite_precision:
+            axis = (1 / (2 * np.sin(angle))) * v
+        else:
+            # OK, the formula above gives (theoretically) the correct answer
+            # but it is imprecise if angle is small (dividing by a very small
+            # quantity). This is way better...
+            axis = (v * np.sign(angle)) / np.linalg.norm(v)
+
         return axis, angle
 
 

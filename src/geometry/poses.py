@@ -214,7 +214,7 @@ def SE3_from_SE2(pose):
 
 
 @contract(pose='SE3', returns='SE2')
-def SE2_from_SE3(pose, check_exact=True):
+def SE2_from_SE3(pose, check_exact=True, z_atol=1e-6):
     ''' 
         Projects a pose in SE3 to SE2.
     
@@ -223,13 +223,21 @@ def SE2_from_SE3(pose, check_exact=True):
     rotation, translation = rotation_translation_from_pose(pose)
     axis, angle = axis_angle_from_rotation(rotation)
     if check_exact:
+        sit = '\n pose %s' % pose
+        sit += '\n axis: %s' % axis
+        sit += '\n angle: %s' % angle
+
         err_msg = ('I expect that z=0 when projecting to SE2 '
                    '(check_exact=True).')
-        assert_allclose(translation[2], 0, err_msg=err_msg)
+        err_msg += sit
+
+        assert_allclose(translation[2], 0, atol=z_atol, err_msg=err_msg)
         # normalize angle z
         axis2 = axis * np.sign(axis[2])
         err_msg = ('I expect that the rotation is around [0,0,1] '
                   'when projecting to SE2 (check_exact=True).')
+        err_msg += sit
+
         assert_allclose(axis2, [0, 0, 1],
                         rtol=GeometryConstants.rtol_SE2_from_SE3,
                         atol=GeometryConstants.rtol_SE2_from_SE3, # XXX
