@@ -39,10 +39,11 @@ class MatrixLieGroup(Group, DifferentiableManifold):
     def unity(self):
         return np.eye(self.n)
 
+    @contract(g='belongs', h='belongs')
     def multiply(self, g, h):
         return np.dot(g, h)
 
-    @contract(g='belongs')
+    @contract(g='belongs', returns='belongs')
     def inverse(self, g):
         return np.linalg.inv(g)
 
