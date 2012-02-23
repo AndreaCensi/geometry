@@ -131,7 +131,7 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a name="from_yaml"></a><span class="summary-sig-name">from_yaml</span>(<span class="summary-sig-arg">x</span>)</span><br />
-      :param x: :type x:  ``list``</td>
+      :param x: :type x:  ``list[2]``</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="geometry.yaml-pysrc.html#from_yaml">source&nbsp;code</a></span>
             
@@ -163,11 +163,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="register"></a><span class="summary-sig-name">register</span>(<span class="summary-sig-arg">manifold_name</span>,
+          <td><span class="summary-sig"><a name="register_yaml_converter"></a><span class="summary-sig-name">register_yaml_converter</span>(<span class="summary-sig-arg">manifold_name</span>,
         <span class="summary-sig-arg">representation</span>,
         <span class="summary-sig-arg">converter</span>)</span></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="geometry.yaml-pysrc.html#register">source&nbsp;code</a></span>
+            <span class="codelink"><a href="geometry.yaml-pysrc.html#register_yaml_converter">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -183,7 +183,8 @@
         <tr>
           <td><span class="summary-sig"><a name="to_yaml"></a><span class="summary-sig-name">to_yaml</span>(<span class="summary-sig-arg">manifold</span>,
         <span class="summary-sig-arg">value</span>,
-        <span class="summary-sig-arg">representation</span>=<span class="summary-sig-default">None</span>)</span></td>
+        <span class="summary-sig-arg">representation</span>=<span class="summary-sig-default">None</span>)</span><br />
+      :rtype:  ``list[2]``</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="geometry.yaml-pysrc.html#to_yaml">source&nbsp;code</a></span>
             
@@ -222,8 +223,8 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="geometry.yaml-module.html#converters" class="summary-name">converters</a> = <code title="{('SE3', 'm44'): &lt;class geometry.yaml.SE3_m44 at 0x102e3ee30&gt;,
- ('TSE3', 'bt'): &lt;class geometry.yaml.TSE3_bt at 0x102e3ef50&gt;}"><code class="variable-group">{</code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">SE3</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">m44</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">: </code>&lt;class geometry.yaml.SE3_m44 at <code class="variable-ellipsis">...</code></code>
+        <a href="geometry.yaml-module.html#converters" class="summary-name">converters</a> = <code title="{('SE3', 'm44'): &lt;class geometry.yaml.SE3_m44 at 0x1cc00b8&gt;,
+ ('TSE3', 'bt'): &lt;class geometry.yaml.TSE3_bt at 0x1cc0188&gt;}"><code class="variable-group">{</code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">SE3</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">m44</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">: </code>&lt;class geometry.yaml.SE3_m44 at <code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
@@ -231,6 +232,13 @@
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a name="default_representation"></a><span class="summary-name">default_representation</span> = <code title="{'SE3': 'm44', 'TSE3': 'bt'}"><code class="variable-group">{</code><code class="variable-quote">'</code><code class="variable-string">SE3</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">m44</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">TSE3</code><code class="variable-quote">'</code><code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">bt</code><code class="variable-quote">'</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="logger"></a><span class="summary-name">logger</span> = <code title="&lt;logging.Logger object at 0x196ebd0&gt;">&lt;logging.Logger object at 0x196ebd0&gt;</code>
     </td>
   </tr>
 </table>
@@ -264,8 +272,8 @@
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-<code class="variable-group">{</code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">SE3</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">m44</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">: </code>&lt;class geometry.yaml.SE3_m44 at 0x102e3ee30&gt;<code class="variable-op">,</code>
- <code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">TSE3</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">bt</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">: </code>&lt;class geometry.yaml.TSE3_bt at 0x102e3ef50&gt;<code class="variable-group">}</code>
+<code class="variable-group">{</code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">SE3</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">m44</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">: </code>&lt;class geometry.yaml.SE3_m44 at 0x1cc00b8&gt;<code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">TSE3</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">bt</code><code class="variable-quote">'</code><code class="variable-group">)</code><code class="variable-op">: </code>&lt;class geometry.yaml.TSE3_bt at 0x1cc0188&gt;<code class="variable-group">}</code>
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -303,7 +311,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:37 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:31:24 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>geometry.manifolds.euclidean.Euclidean &mdash; PyGeometry 1.1 documentation</title>
+    <title>geometry.manifolds.euclidean.Euclidean &mdash; PyGeometry 1.2 documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '1.1',
+        VERSION:     '1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="PyGeometry 1.1 documentation" href="../index.html" />
+    <link rel="top" title="PyGeometry 1.2 documentation" href="../index.html" />
 	 
 
    <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
@@ -43,7 +43,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../index.html">PyGeometry 1.1 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">PyGeometry 1.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -135,19 +135,22 @@ returns a sample from a Gaussian distribution centered at 0.</p>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt>(a)</td>
 <td>Returns a friendly description string for a point on the manifold.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt>(a,&nbsp;b,&nbsp;t)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">from_yaml</span></tt>(yaml_structure)</td>
+<td>Recovers a value from a Yaml structure.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt>(a,&nbsp;b,&nbsp;t)</td>
 <td>Returns the point interpolated along the geodesic.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_dimension</span></tt>()</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_dimension</span></tt>()</td>
 <td>Returns the intrinsic dimension of this manifold.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.interesting_points" title="geometry.manifolds.euclidean.Euclidean.interesting_points"><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.interesting_points" title="geometry.manifolds.euclidean.Euclidean.interesting_points"><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></a>()</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">isomorphism</span></tt>(A,&nbsp;B,&nbsp;A_to_B,&nbsp;B_to_A[,&nbsp;itype,&nbsp;...])</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">isomorphism</span></tt>(A,&nbsp;B,&nbsp;A_to_B,&nbsp;B_to_A[,&nbsp;itype,&nbsp;...])</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt>(base,&nbsp;target)</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt>(base,&nbsp;target)</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -158,16 +161,16 @@ returns a sample from a Gaussian distribution centered at 0.</p>
 </table>
 </td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">norm</span></tt>(v)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">norm</span></tt>(v)</td>
 <td>Return the norm of a vector in the algebra.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.project" title="geometry.manifolds.euclidean.Euclidean.project"><tt class="xref py py-obj docutils literal"><span class="pre">project</span></tt></a>(x)</td>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.project" title="geometry.manifolds.euclidean.Euclidean.project"><tt class="xref py py-obj docutils literal"><span class="pre">project</span></tt></a>(x)</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_from</span></tt>(M,&nbsp;his_point)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_from</span></tt>(M,&nbsp;his_point)</td>
 <td>Projects a point on a bigger manifold to this manifold.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_to</span></tt>(m,&nbsp;my_point)</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_to</span></tt>(m,&nbsp;my_point)</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -178,17 +181,28 @@ returns a sample from a Gaussian distribution centered at 0.</p>
 </table>
 </td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt>(bv)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt>(bv)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">relations_descriptions</span></tt>()</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">relations_descriptions</span></tt>()</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.sample_uniform" title="geometry.manifolds.euclidean.Euclidean.sample_uniform"><tt class="xref py py-obj docutils literal"><span class="pre">sample_uniform</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.euclidean.Euclidean.sample_uniform" title="geometry.manifolds.euclidean.Euclidean.sample_uniform"><tt class="xref py py-obj docutils literal"><span class="pre">sample_uniform</span></tt></a>()</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">tangent_bundle</span></tt>()</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">tangent_bundle</span></tt>()</td>
 <td>Returns the manifold corresponding to the tangent bundle.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">to_yaml</span></tt>(x)</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param x:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</td>
 </tr>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">zero</span></tt>()</td>
 <td>Returns the zero element for this algebra.</td>
@@ -261,7 +275,7 @@ returns a sample from a Gaussian distribution centered at 0.</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../index.html">PyGeometry 1.1 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">PyGeometry 1.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
 	

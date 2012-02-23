@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>geometry.poses &mdash; PyGeometry 1.1 documentation</title>
+    <title>geometry.poses &mdash; PyGeometry 1.2 documentation</title>
     
     <link rel="stylesheet" href="../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '1.1',
+        VERSION:     '1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../static/jquery.js"></script>
     <script type="text/javascript" src="../../static/underscore.js"></script>
     <script type="text/javascript" src="../../static/doctools.js"></script>
-    <link rel="top" title="PyGeometry 1.1 documentation" href="../../index.html" />
+    <link rel="top" title="PyGeometry 1.2 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" />
 	 
 
@@ -44,7 +44,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../../index.html">PyGeometry 1.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">PyGeometry 1.2 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -58,6 +58,7 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="p">(</span><span class="n">angle_from_rot2d</span><span class="p">,</span> <span class="n">rotz</span><span class="p">,</span> <span class="n">axis_angle_from_rotation</span><span class="p">,</span> <span class="n">hat_map_2d</span><span class="p">,</span>
      <span class="n">contract</span><span class="p">,</span> <span class="n">assert_allclose</span><span class="p">,</span> <span class="n">np</span><span class="p">,</span> <span class="n">rot2d</span><span class="p">,</span> <span class="n">new_contract</span><span class="p">,</span>
     <span class="n">check_SO</span><span class="p">,</span> <span class="n">check_skew_symmetric</span><span class="p">,</span> <span class="n">expm</span><span class="p">,</span> <span class="n">logm</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">geometry.constants</span> <span class="kn">import</span> <span class="n">GeometryConstants</span>
 
 
 <span class="k">def</span> <span class="nf">check_SE</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
@@ -87,11 +88,6 @@
 <span class="nd">@contract</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;array[NxN]&#39;</span><span class="p">,</span>
           <span class="n">returns</span><span class="o">=</span><span class="s">&#39;tuple(array[MxM],array[M],array[M],number),M=N-1&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="extract_pieces"><a class="viewcode-back" href="../../api/geometry.poses.extract_pieces.html#geometry.poses.extract_pieces">[docs]</a><span class="k">def</span> <span class="nf">extract_pieces</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="c">#    print x.__class__</span>
-<span class="c">#    x = np.array(x) </span>
-<span class="c"># otherwise it could get fooled by &lt;class &#39;numpy.matrixlib.defmatrix.matrix&#39;&gt;</span>
-    <span class="c"># the shape would be (2,1) instead of (2,)</span>
-    <span class="c"># TODO: change logm</span>
     <span class="n">M</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">M</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">M</span><span class="p">]</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">]</span>
@@ -143,14 +139,14 @@
 <span class="n">rotation_translation_from_SE3</span> <span class="o">=</span> <span class="n">rotation_translation_from_pose</span>
 
 
-<span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE2&#39;</span><span class="p">)</span>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE2&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">&#39;array[2]&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">translation_from_SE2</span><span class="p">(</span><span class="n">pose</span><span class="p">):</span>
     <span class="c"># TODO: make it more efficient</span>
     <span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span> <span class="c">#@UnusedVariable</span>
     <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 
-<span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE3&#39;</span><span class="p">)</span>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE3&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">&#39;array[3]&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">translation_from_SE3</span><span class="p">(</span><span class="n">pose</span><span class="p">):</span>
     <span class="c"># TODO: make it more efficient</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
@@ -208,7 +204,7 @@
     <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">logm</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
     <span class="n">M</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">zero</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">W</span><span class="p">)</span> <span class="c">#@UnusedVariable</span>
     <span class="n">M</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="n">M</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">:</span> <span class="c"># XXX: threshold</span>
         <span class="c"># cannot use logarithm for log(-I), it gives imaginary solution</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">hat_map_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
 
@@ -227,7 +223,7 @@
 
     <span class="n">w_abs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
     <span class="c"># FIXME: singularity</span>
-    <span class="k">if</span> <span class="n">w_abs</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">w_abs</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">:</span> <span class="c"># XXX: threshold</span>
         <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">w_abs</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">w_abs</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
@@ -247,7 +243,7 @@
     <span class="n">w</span> <span class="o">=</span> <span class="n">vel</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
     <span class="n">R</span> <span class="o">=</span> <span class="n">rot2d</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">vel</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">:</span> <span class="c"># XXX threshold</span>
         <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">v</span>
     <span class="k">else</span><span class="p">:</span>
@@ -275,23 +271,34 @@
 
 
 <span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE3&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">&#39;SE2&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">SE2_from_SE3</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">check_exact</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">SE2_from_SE3</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">check_exact</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">z_atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">        Projects a pose in SE3 to SE2.</span>
 <span class="sd">    </span>
-<span class="sd">        If check_exact is True, it will check that z = 0 and axis = [0,0,1].</span>
+<span class="sd">        If check_exact is True, it will check that z = 0 and axis ~= [0,0,1].</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">rotation</span><span class="p">,</span> <span class="n">translation</span> <span class="o">=</span> <span class="n">rotation_translation_from_pose</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
     <span class="n">axis</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">axis_angle_from_rotation</span><span class="p">(</span><span class="n">rotation</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">check_exact</span><span class="p">:</span>
+        <span class="n">sit</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s"> pose </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">pose</span>
+        <span class="n">sit</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s"> axis: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">axis</span>
+        <span class="n">sit</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s"> angle: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">angle</span>
+
         <span class="n">err_msg</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;I expect that z=0 when projecting to SE2 &#39;</span>
                    <span class="s">&#39;(check_exact=True).&#39;</span><span class="p">)</span>
-        <span class="n">assert_allclose</span><span class="p">(</span><span class="n">translation</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="n">err_msg</span><span class="p">)</span>
+        <span class="n">err_msg</span> <span class="o">+=</span> <span class="n">sit</span>
+
+        <span class="n">assert_allclose</span><span class="p">(</span><span class="n">translation</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">z_atol</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="n">err_msg</span><span class="p">)</span>
         <span class="c"># normalize angle z</span>
         <span class="n">axis2</span> <span class="o">=</span> <span class="n">axis</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">axis</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
         <span class="n">err_msg</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;I expect that the rotation is around [0,0,1] &#39;</span>
                   <span class="s">&#39;when projecting to SE2 (check_exact=True).&#39;</span><span class="p">)</span>
-        <span class="n">assert_allclose</span><span class="p">(</span><span class="n">axis2</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">err_msg</span><span class="o">=</span><span class="n">err_msg</span><span class="p">)</span>
+        <span class="n">err_msg</span> <span class="o">+=</span> <span class="n">sit</span>
+
+        <span class="n">assert_allclose</span><span class="p">(</span><span class="n">axis2</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                        <span class="n">rtol</span><span class="o">=</span><span class="n">GeometryConstants</span><span class="o">.</span><span class="n">rtol_SE2_from_SE3</span><span class="p">,</span>
+                        <span class="n">atol</span><span class="o">=</span><span class="n">GeometryConstants</span><span class="o">.</span><span class="n">rtol_SE2_from_SE3</span><span class="p">,</span> <span class="c"># XXX</span>
+                        <span class="n">err_msg</span><span class="o">=</span><span class="n">err_msg</span><span class="p">)</span>
 
     <span class="n">angle</span> <span class="o">=</span> <span class="n">angle</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">axis</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">SE2_from_translation_angle</span><span class="p">(</span><span class="n">translation</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">angle</span><span class="p">)</span>
@@ -325,7 +332,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../../index.html">PyGeometry 1.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">PyGeometry 1.2 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

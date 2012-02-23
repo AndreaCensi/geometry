@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>geometry.manifolds.sphere.Sphere &mdash; PyGeometry 1.1 documentation</title>
+    <title>geometry.manifolds.sphere.Sphere &mdash; PyGeometry 1.2 documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '1.1',
+        VERSION:     '1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="PyGeometry 1.1 documentation" href="../index.html" />
+    <link rel="top" title="PyGeometry 1.2 documentation" href="../index.html" />
 	 
 
    <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
@@ -43,7 +43,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../index.html">PyGeometry 1.1 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">PyGeometry 1.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -131,13 +131,16 @@
 <tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.friendly" title="geometry.manifolds.sphere.Sphere.friendly"><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt></a>(x)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.geodesic" title="geometry.manifolds.sphere.Sphere.geodesic"><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></a>(a,&nbsp;b,&nbsp;t)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.from_yaml" title="geometry.manifolds.sphere.Sphere.from_yaml"><tt class="xref py py-obj docutils literal"><span class="pre">from_yaml</span></tt></a>(yaml_structure)</td>
+<td>Recovers a value from a Yaml structure.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.geodesic" title="geometry.manifolds.sphere.Sphere.geodesic"><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt></a>(a,&nbsp;b,&nbsp;t)</td>
 <td>Returns the point interpolated along the geodesic.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.get_dimension" title="geometry.manifolds.sphere.Sphere.get_dimension"><tt class="xref py py-obj docutils literal"><span class="pre">get_dimension</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.get_dimension" title="geometry.manifolds.sphere.Sphere.get_dimension"><tt class="xref py py-obj docutils literal"><span class="pre">get_dimension</span></tt></a>()</td>
 <td>Returns the intrinsic dimension of this manifold.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.interesting_points" title="geometry.manifolds.sphere.Sphere.interesting_points"><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.interesting_points" title="geometry.manifolds.sphere.Sphere.interesting_points"><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt></a>()</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -148,10 +151,10 @@
 </table>
 </td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.isomorphism" title="geometry.manifolds.sphere.Sphere.isomorphism"><tt class="xref py py-obj docutils literal"><span class="pre">isomorphism</span></tt></a>(A,&nbsp;B,&nbsp;A_to_B,&nbsp;B_to_A[,&nbsp;itype,&nbsp;...])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.isomorphism" title="geometry.manifolds.sphere.Sphere.isomorphism"><tt class="xref py py-obj docutils literal"><span class="pre">isomorphism</span></tt></a>(A,&nbsp;B,&nbsp;A_to_B,&nbsp;B_to_A[,&nbsp;itype,&nbsp;...])</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.logmap" title="geometry.manifolds.sphere.Sphere.logmap"><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></a>(base,&nbsp;target)</td>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.logmap" title="geometry.manifolds.sphere.Sphere.logmap"><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></a>(base,&nbsp;target)</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -162,10 +165,10 @@
 </table>
 </td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.project_from" title="geometry.manifolds.sphere.Sphere.project_from"><tt class="xref py py-obj docutils literal"><span class="pre">project_from</span></tt></a>(M,&nbsp;his_point)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.project_from" title="geometry.manifolds.sphere.Sphere.project_from"><tt class="xref py py-obj docutils literal"><span class="pre">project_from</span></tt></a>(M,&nbsp;his_point)</td>
 <td>Projects a point on a bigger manifold to this manifold.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.project_to" title="geometry.manifolds.sphere.Sphere.project_to"><tt class="xref py py-obj docutils literal"><span class="pre">project_to</span></tt></a>(m,&nbsp;my_point)</td>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.project_to" title="geometry.manifolds.sphere.Sphere.project_to"><tt class="xref py py-obj docutils literal"><span class="pre">project_to</span></tt></a>(m,&nbsp;my_point)</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -176,7 +179,7 @@
 </table>
 </td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.project_ts" title="geometry.manifolds.sphere.Sphere.project_ts"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></a>(bve)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.project_ts" title="geometry.manifolds.sphere.Sphere.project_ts"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></a>(bve)</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -187,10 +190,10 @@
 </table>
 </td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.relations_descriptions" title="geometry.manifolds.sphere.Sphere.relations_descriptions"><tt class="xref py py-obj docutils literal"><span class="pre">relations_descriptions</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.relations_descriptions" title="geometry.manifolds.sphere.Sphere.relations_descriptions"><tt class="xref py py-obj docutils literal"><span class="pre">relations_descriptions</span></tt></a>()</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.sample_uniform" title="geometry.manifolds.sphere.Sphere.sample_uniform"><tt class="xref py py-obj docutils literal"><span class="pre">sample_uniform</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.sample_uniform" title="geometry.manifolds.sphere.Sphere.sample_uniform"><tt class="xref py py-obj docutils literal"><span class="pre">sample_uniform</span></tt></a>()</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -201,8 +204,19 @@
 </table>
 </td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.tangent_bundle" title="geometry.manifolds.sphere.Sphere.tangent_bundle"><tt class="xref py py-obj docutils literal"><span class="pre">tangent_bundle</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.tangent_bundle" title="geometry.manifolds.sphere.Sphere.tangent_bundle"><tt class="xref py py-obj docutils literal"><span class="pre">tangent_bundle</span></tt></a>()</td>
 <td>Returns the manifold corresponding to the tangent bundle.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.sphere.Sphere.to_yaml" title="geometry.manifolds.sphere.Sphere.to_yaml"><tt class="xref py py-obj docutils literal"><span class="pre">to_yaml</span></tt></a>(x)</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param x:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</td>
 </tr>
 </tbody>
 </table>
@@ -227,37 +241,25 @@
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Embedding.A">
 <tt class="descname">A</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Embedding.A" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 0</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Embedding.A_to_B">
 <tt class="descname">A_to_B</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Embedding.A_to_B" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 2</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Embedding.B">
 <tt class="descname">B</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Embedding.B" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 1</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Embedding.B_to_A">
 <tt class="descname">B_to_A</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Embedding.B_to_A" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 3</p>
 </dd></dl>
 
 <dl class="method">
@@ -268,10 +270,7 @@ After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Embedding.desc">
 <tt class="descname">desc</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Embedding.desc" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 6</p>
 </dd></dl>
 
 <dl class="method">
@@ -283,19 +282,13 @@ After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Embedding.steps">
 <tt class="descname">steps</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Embedding.steps" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 4</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Embedding.type">
 <tt class="descname">type</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Embedding.type" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 5</p>
 </dd></dl>
 
 </dd></dl>
@@ -321,37 +314,25 @@ After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Isomorphism.A">
 <tt class="descname">A</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Isomorphism.A" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 0</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Isomorphism.A_to_B">
 <tt class="descname">A_to_B</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Isomorphism.A_to_B" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 2</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Isomorphism.B">
 <tt class="descname">B</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Isomorphism.B" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 1</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Isomorphism.B_to_A">
 <tt class="descname">B_to_A</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Isomorphism.B_to_A" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 3</p>
 </dd></dl>
 
 <dl class="method">
@@ -362,10 +343,7 @@ After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Isomorphism.desc">
 <tt class="descname">desc</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Isomorphism.desc" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 6</p>
 </dd></dl>
 
 <dl class="method">
@@ -377,19 +355,13 @@ After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Isomorphism.steps">
 <tt class="descname">steps</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Isomorphism.steps" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 4</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.Isomorphism.type">
 <tt class="descname">type</tt><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.Isomorphism.type" title="Permalink to this definition">¶</a></dt>
-<dd><p>itemgetter(item, ...) &#8211;&gt; itemgetter object</p>
-<p>Return a callable object that fetches the given item(s) from its operand.
-After, f=itemgetter(2), the call f(r) returns r[2].
-After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
+<dd><p>Alias for field number 5</p>
 </dd></dl>
 
 </dd></dl>
@@ -530,6 +502,22 @@ After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="geometry.manifolds.sphere.Sphere.from_yaml">
+<tt class="descclassname">Sphere.</tt><tt class="descname">from_yaml</tt><big>(</big><em>yaml_structure</em><big>)</big><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recovers a value from a Yaml structure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>yaml_structure</strong> (<tt class="docutils literal"><span class="pre">list|dict</span></tt>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">belongs</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="geometry.manifolds.sphere.Sphere.geodesic">
 <tt class="descclassname">Sphere.</tt><tt class="descname">geodesic</tt><big>(</big><em>a</em>, <em>b</em>, <em>t</em><big>)</big><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.geodesic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the point interpolated along the geodesic.</p>
@@ -597,7 +585,7 @@ After, g=itemgetter(2,5,3), the call g(r) returns (r[2], r[5], r[3])</p>
 
 <dl class="attribute">
 <dt id="geometry.manifolds.sphere.Sphere.norm_rtol">
-<tt class="descclassname">Sphere.</tt><tt class="descname">norm_rtol</tt><em class="property"> = 1.0000000000000001e-05</em><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.norm_rtol" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">Sphere.</tt><tt class="descname">norm_rtol</tt><em class="property"> = 1e-05</em><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.norm_rtol" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -666,6 +654,19 @@ The default gives a generic implementation.
 MatrixLieGroup have a different one.</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="geometry.manifolds.sphere.Sphere.to_yaml">
+<tt class="descclassname">Sphere.</tt><tt class="descname">to_yaml</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#geometry.manifolds.sphere.Sphere.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -704,7 +705,7 @@ MatrixLieGroup have a different one.</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../index.html">PyGeometry 1.1 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">PyGeometry 1.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
 	

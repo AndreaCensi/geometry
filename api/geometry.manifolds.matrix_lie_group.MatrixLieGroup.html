@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>geometry.manifolds.matrix_lie_group.MatrixLieGroup &mdash; PyGeometry 1.1 documentation</title>
+    <title>geometry.manifolds.matrix_lie_group.MatrixLieGroup &mdash; PyGeometry 1.2 documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '1.1',
+        VERSION:     '1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="PyGeometry 1.1 documentation" href="../index.html" />
+    <link rel="top" title="PyGeometry 1.2 documentation" href="../index.html" />
 	 
 
    <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
@@ -43,7 +43,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../index.html">PyGeometry 1.1 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">PyGeometry 1.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -125,25 +125,28 @@ some functions if they know a more numerically stable implementation.</p>
 <tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt>(a)</td>
 <td>Returns a friendly description string for a point on the manifold.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt>(a,&nbsp;b,&nbsp;t)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">from_yaml</span></tt>(yaml_structure)</td>
+<td>Recovers a value from a Yaml structure.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt>(a,&nbsp;b,&nbsp;t)</td>
 <td>Returns the point interpolated along the geodesic.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.get_algebra" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.get_algebra"><tt class="xref py py-obj docutils literal"><span class="pre">get_algebra</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.get_algebra" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.get_algebra"><tt class="xref py py-obj docutils literal"><span class="pre">get_algebra</span></tt></a>()</td>
 <td>Returns the interface to the corresponding Lie algebra.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_dimension</span></tt>()</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_dimension</span></tt>()</td>
 <td>Returns the intrinsic dimension of this manifold.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra"><tt class="xref py py-obj docutils literal"><span class="pre">group_from_algebra</span></tt></a>(a)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra"><tt class="xref py py-obj docutils literal"><span class="pre">group_from_algebra</span></tt></a>(a)</td>
 <td>Converts an element of the algebra to the group.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">identity</span></tt>()</td>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">identity</span></tt>()</td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt>()</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt>()</td>
 <td>Returns a list of &#8220;interesting points&#8221; on this manifold that            should be used for testing various properties.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse"><tt class="xref py py-obj docutils literal"><span class="pre">inverse</span></tt></a>(g)</td>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse"><tt class="xref py py-obj docutils literal"><span class="pre">inverse</span></tt></a>(g)</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -154,19 +157,27 @@ some functions if they know a more numerically stable implementation.</p>
 </table>
 </td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">isomorphism</span></tt>(A,&nbsp;B,&nbsp;A_to_B,&nbsp;B_to_A[,&nbsp;itype,&nbsp;...])</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">isomorphism</span></tt>(A,&nbsp;B,&nbsp;A_to_B,&nbsp;B_to_A[,&nbsp;itype,&nbsp;...])</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap"><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></a>(base,&nbsp;target)</td>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap"><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></a>(base,&nbsp;target)</td>
 <td>Returns the direction from base to target.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply"><tt class="xref py py-obj docutils literal"><span class="pre">multiply</span></tt></a>(g,&nbsp;h)</td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply"><tt class="xref py py-obj docutils literal"><span class="pre">multiply</span></tt></a>(g,&nbsp;h)</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param h:</th><td class="field-body"></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_from</span></tt>(M,&nbsp;his_point)</td>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_from</span></tt>(M,&nbsp;his_point)</td>
 <td>Projects a point on a bigger manifold to this manifold.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_to</span></tt>(m,&nbsp;my_point)</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_to</span></tt>(m,&nbsp;my_point)</td>
 <td><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -177,14 +188,25 @@ some functions if they know a more numerically stable implementation.</p>
 </table>
 </td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></a>(bv)</td>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></a>(bv)</td>
 <td>Projects the vector <em>x</em> to the tangent space at point <em>base</em>.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">relations_descriptions</span></tt>()</td>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">relations_descriptions</span></tt>()</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle"><tt class="xref py py-obj docutils literal"><span class="pre">tangent_bundle</span></tt></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle"><tt class="xref py py-obj docutils literal"><span class="pre">tangent_bundle</span></tt></a>()</td>
 <td></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">to_yaml</span></tt>(x)</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param x:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.unity" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.unity"><tt class="xref py py-obj docutils literal"><span class="pre">unity</span></tt></a>()</td>
 <td></td>
@@ -295,6 +317,8 @@ is used to mitigate numerical errors.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>g</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </td>
 </tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">belongs</span></tt></td>
+</tr>
 </tbody>
 </table>
 </dd></dl>
@@ -329,7 +353,19 @@ is used to mitigate numerical errors.</p>
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply">
 <tt class="descname">multiply</tt><big>(</big><em>g</em>, <em>h</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.multiply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>h</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </li>
+<li><strong>g</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts">
@@ -421,7 +457,7 @@ and then translating it back.</div></blockquote>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../index.html">PyGeometry 1.1 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">PyGeometry 1.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
 	

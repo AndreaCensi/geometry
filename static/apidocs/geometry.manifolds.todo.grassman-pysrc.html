@@ -65,48 +65,49 @@
 <pre class="py-src">
 <a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-name">contract</tt> </tt>
 <a name="Grassman"></a><div id="Grassman-def"><a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
-<a name="L3"></a><tt class="py-lineno"> 3</tt> <a class="py-toggle" href="#" id="Grassman-toggle" onclick="return toggle('Grassman');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.todo.grassman-module.html#Grassman">Grassman</a><tt class="py-op">(</tt><tt class="py-param">DifferentiableManifold</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="Grassman-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Grassman-expanded"><a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line">    <tt class="py-docstring">''' </tt> </tt>
-<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">        INCOMPLETE -- The Grassman manifold Grass(n,p) is the set of rank-p </tt> </tt>
-<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">        subspaces in R^n. It is seen here as Grass(n,p) = ST(n,p)/GL_p.</tt> </tt>
-<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
-<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">        For a reference, see the paper by Absil, Mahony, and Sepulchre (2004)</tt> </tt>
-<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">        where all these operations are explained. Also their book should</tt> </tt>
-<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">        contain essentially the same info, but with more background.</tt> </tt>
-<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
-<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
-<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">n</tt><tt class="py-op">=</tt><tt class="py-string">'N,N&gt;0'</tt><tt class="py-op">,</tt> <tt class="py-name">p</tt><tt class="py-op">=</tt><tt class="py-string">'P,P&gt;0,P&lt;=N'</tt><tt class="py-op">)</tt> </tt>
-<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">__init__</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">p</tt><tt class="py-op">,</tt> <tt class="py-param">n</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
-<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">            Initializes the manifold structure. </tt> </tt>
-<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
-<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">            :param n: dimension of space</tt> </tt>
-<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">            :param p: rank of subspace</tt> </tt>
-<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
-<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> <tt class="py-op">=</tt> <tt class="py-name">n</tt> </tt>
-<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt class="py-name">p</tt> </tt>
-</div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
-<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">belongs</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">a</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
-</div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
-<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">distance</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">a</tt><tt class="py-op">,</tt> <tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
-</div><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
-<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">logmap</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">a</tt><tt class="py-op">,</tt> <tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>  </tt>
-<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
-</div><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt>
-<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">expmap</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">a</tt><tt class="py-op">,</tt> <tt class="py-param">vel</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>  </tt>
-<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
-</div><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
-<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">project_ts</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">base</tt><tt class="py-op">,</tt> <tt class="py-param">vx</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>  </tt>
-<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
-</div><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">     </tt>
-<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">sample_uniform</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
-</div><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">     </tt>
-<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">normalize</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
-</div></div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt> <a class="py-toggle" href="#" id="Grassman-toggle" onclick="return toggle('Grassman');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="geometry.manifolds.todo.grassman-module.html#Grassman">Grassman</a><tt class="py-op">(</tt><tt class="py-param">DifferentiableManifold</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Grassman-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Grassman-expanded"><a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line">    <tt class="py-docstring">''' </tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">        INCOMPLETE -- The Grassman manifold Grass(n,p) is the set of rank-p </tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">        subspaces in R^n. It is seen here as Grass(n,p) = ST(n,p)/GL_p.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">        For a reference, see the paper by Absil, Mahony, and Sepulchre (2004)</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">        where all these operations are explained. Also their book should</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">        contain essentially the same info, but with more background.</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">n</tt><tt class="py-op">=</tt><tt class="py-string">'N,N&gt;0'</tt><tt class="py-op">,</tt> <tt class="py-name">p</tt><tt class="py-op">=</tt><tt class="py-string">'P,P&gt;0,P&lt;=N'</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">__init__</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">p</tt><tt class="py-op">,</tt> <tt class="py-param">n</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">            Initializes the manifold structure. </tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">            :param n: dimension of space</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">            :param p: rank of subspace</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">n</tt> <tt class="py-op">=</tt> <tt class="py-name">n</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt class="py-name">p</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">belongs</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">a</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">distance</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">a</tt><tt class="py-op">,</tt> <tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">logmap</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">a</tt><tt class="py-op">,</tt> <tt class="py-param">b</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">expmap</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">a</tt><tt class="py-op">,</tt> <tt class="py-param">vel</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">project_ts</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">base</tt><tt class="py-op">,</tt> <tt class="py-param">vx</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">sample_uniform</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">normalize</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">False</tt> </tt>
+</div></div><a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -144,7 +145,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Jan 28 17:34:46 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:31:28 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>geometry.rotations &mdash; PyGeometry 1.1 documentation</title>
+    <title>geometry.rotations &mdash; PyGeometry 1.2 documentation</title>
     
     <link rel="stylesheet" href="../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '1.1',
+        VERSION:     '1.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../static/jquery.js"></script>
     <script type="text/javascript" src="../../static/underscore.js"></script>
     <script type="text/javascript" src="../../static/doctools.js"></script>
-    <link rel="top" title="PyGeometry 1.1 documentation" href="../../index.html" />
+    <link rel="top" title="PyGeometry 1.2 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" />
 	 
 
@@ -44,7 +44,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../../index.html">PyGeometry 1.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">PyGeometry 1.2 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -89,7 +89,6 @@
     <span class="n">atol</span> <span class="o">=</span> <span class="mf">10E-7</span>  <span class="c"># XXX:</span>
     <span class="n">assert_allclose</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">)</span>
     <span class="n">assert_allclose</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">)</span>
-
 
 
 <span class="nd">@contract</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;array[NxN]&#39;</span><span class="p">)</span>
@@ -373,7 +372,16 @@
         <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">R</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
                    <span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">R</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
                    <span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
-        <span class="n">axis</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)))</span> <span class="o">*</span> <span class="n">v</span>
+
+        <span class="n">computer_with_infinite_precision</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="n">computer_with_infinite_precision</span><span class="p">:</span>
+            <span class="n">axis</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)))</span> <span class="o">*</span> <span class="n">v</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># OK, the formula above gives (theoretically) the correct answer</span>
+            <span class="c"># but it is imprecise if angle is small (dividing by a very small</span>
+            <span class="c"># quantity). This is way better...</span>
+            <span class="n">axis</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">axis</span><span class="p">,</span> <span class="n">angle</span>
 
 </div>
@@ -441,7 +449,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../../index.html">PyGeometry 1.1 documentation</a> &raquo;</li>
+        <li><a href="../../index.html">PyGeometry 1.2 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
