@@ -65,43 +65,43 @@
 <h1 class="epydoc">Class DifferentiableManifold</h1><p class="nomargin-top"><span class="codelink"><a href="geometry.manifolds.differentiable_manifold-pysrc.html#DifferentiableManifold">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_geometry" name="uml_class_diagram_for_geometry">
-<area shape="rect" href="geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html" title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace" alt="" coords="252,416,495,443"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold.Embedding-class.html" title="Embedding(A, B, A_to_B, B_to_A, steps, type, desc)" alt="" coords="1007,28,1436,47"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold.Isomorphism-class.html" title="Isomorphism(A, B, A_to_B, B_to_A, steps, type, desc)" alt="" coords="1007,47,1436,65"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#__abstractmethods__" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.__abstractmethods__" alt="" coords="1007,65,1436,84"/>
+<area shape="rect" href="abc.ABCMeta-class.html" title="Metaclass for defining Abstract Base Classes (ABCs)." alt="" coords="1007,84,1436,103"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="1007,105,1436,124"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#assert_close" title="Asserts that two points on the manifold are close to the given &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;tolerance." alt="" coords="1007,124,1436,143"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#belongs" title="Raises an Exception if the point does not belong to this manifold." alt="" coords="1007,143,1436,161"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#belongs_ts" title="Checks that a vector *vx* belongs to the tangent space &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;at the given point *base*." alt="" coords="1007,161,1436,180"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#can_convert_to" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.can_convert_to" alt="" coords="1007,180,1436,199"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#can_represent" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.can_represent" alt="" coords="1007,199,1436,217"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#convert_to" title=":param my_point: :type my_point: &#160;``belongs``" alt="" coords="1007,217,1436,236"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#distance" title="Computes the geodesic distance between two points." alt="" coords="1007,236,1436,255"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embed_in" title="Embeds a point on this manifold to the target manifold M." alt="" coords="1007,255,1436,273"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embeddable_in" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.embeddable_in" alt="" coords="1007,273,1436,292"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embedding" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.embedding" alt="" coords="1007,292,1436,311"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#expmap" title="Computes the exponential map from *base* for the velocity &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;vector *v*." alt="" coords="1007,311,1436,329"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#friendly" title="Returns a friendly description string for a point on the manifold." alt="" coords="1007,329,1436,348"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#to_yaml" title=":param x: :type x: &#160;``belongs``" alt="" coords="1007,367,1436,385"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html" title="This is the base class for differentiable manifolds." alt="" coords="1005,11,1437,387"/>
+<area shape="rect" href="geometry.manifolds.matrix_linear_space.MatrixLinearSpace-class.html" title="geometry.manifolds.matrix_linear_space.MatrixLinearSpace" alt="" coords="228,416,471,443"/>
+<area shape="rect" href="geometry.manifolds.differentiable_manifold.RandomManifold-class.html" title="This is the base class for manifolds that have the ability to sample random points." alt="" coords="521,416,631,443"/>
+<area shape="rect" href="geometry.manifolds.sphere.Sphere1-class.html" title="geometry.manifolds.sphere.Sphere1" alt="" coords="681,416,785,443"/>
+<area shape="rect" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html" title="This is the base class for matrix Lie groups." alt="" coords="836,416,1036,443"/>
+<area shape="rect" href="geometry.manifolds.sphere.Sphere-class.html" title="These are hyperspheres of unit radius." alt="" coords="1087,416,1185,443"/>
+<area shape="rect" href="geometry.manifolds.todo.moebius.Moebius-class.html" title="INCOMPLETE &#45; The Moebius strip &#45;&#45; still to be implemented." alt="" coords="1236,416,1380,443"/>
+<area shape="rect" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html" title="This class represents the tangent bundle of a generic manifold using a tuple (base, vel) where vel is tangent at base." alt="" coords="1431,416,1623,443"/>
+<area shape="rect" href="geometry.manifolds.torus.Torus-class.html" title="geometry.manifolds.torus.Torus" alt="" coords="1673,416,1751,443"/>
+<area shape="rect" href="geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent-class.html" title="This class represents the tangent bundle of a matrix Lie group using a tuble (base, v0), where v0 is in the algebra." alt="" coords="1801,416,2097,443"/>
+<area shape="rect" href="geometry.manifolds.product_manifold.ProductManifold-class.html" title="geometry.manifolds.product_manifold.ProductManifold" alt="" coords="2148,416,2356,443"/>
 <area shape="rect" href="geometry.manifolds.euclidean.Euclidean-class.html" title="This is the usual Euclidean space of finite dimension; this is mostly used for debugging." alt="" coords="81,472,212,499"/>
 <area shape="rect" href="geometry.manifolds.matrix_lie_algebra.MatrixLieAlgebra-class.html" title="This is the base class for Matrix Lie Algebra." alt="" coords="263,472,484,499"/>
-<area shape="rect" href="geometry.manifolds.matrix_lie_group.MatrixLieGroup-class.html" title="This is the base class for matrix Lie groups." alt="" coords="681,416,881,443"/>
-<area shape="rect" href="geometry.manifolds.special_orthogonal_group.SO_group-class.html" title="This is the Special Orthogonal group SO(n) describing rotations of Euclidean space; implemented for n=2,3." alt="" coords="535,472,759,499"/>
-<area shape="rect" href="geometry.manifolds.special_euclidean_group.SE_group-class.html" title="This is the Special Euclidean group SE(n) describing roto&#45;translations of Euclidean space." alt="" coords="809,472,1025,499"/>
-<area shape="rect" href="geometry.manifolds.translation_group.Tran-class.html" title="The translation subgroup of SE(n)." alt="" coords="1076,472,1217,499"/>
 <area shape="rect" href="geometry.manifolds.special_euclidean_algebra.se_algebra-class.html" title="This is the Lie algebra se(n) for the Special Euclidean group SE(n)." alt="" coords="16,528,248,555"/>
+<area shape="rect" href="geometry.manifolds.special_euclidean_group.SE_group-class.html" title="This is the Special Euclidean group SE(n) describing roto&#45;translations of Euclidean space." alt="" coords="557,472,773,499"/>
+<area shape="rect" href="geometry.manifolds.special_orthogonal_group.SO_group-class.html" title="This is the Special Orthogonal group SO(n) describing rotations of Euclidean space; implemented for n=2,3." alt="" coords="824,472,1048,499"/>
+<area shape="rect" href="geometry.manifolds.translation_group.Tran-class.html" title="The translation subgroup of SE(n)." alt="" coords="1099,472,1240,499"/>
 <area shape="rect" href="geometry.manifolds.translation_algebra.tran-class.html" title="lie algebra for translation" alt="" coords="299,528,448,555"/>
 <area shape="rect" href="geometry.manifolds.special_orthogonal_algebra.so_algebra-class.html" title="This is the Lie algebra of skew&#45;symmetric matrices so(n), for the Special Orthogonal group SO(n)." alt="" coords="499,528,736,555"/>
-<area shape="rect" href="geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent-class.html" title="This class represents the tangent bundle of a matrix Lie group using a tuble (base, v0), where v0 is in the algebra." alt="" coords="932,416,1228,443"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold.Embedding-class.html" title="Embedding(A, B, A_to_B, B_to_A, steps, type, desc)" alt="" coords="1383,28,1812,47"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold.Isomorphism-class.html" title="Isomorphism(A, B, A_to_B, B_to_A, steps, type, desc)" alt="" coords="1383,47,1812,65"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#__abstractmethods__" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.__abstractmethods__" alt="" coords="1383,65,1812,84"/>
-<area shape="rect" href="abc.ABCMeta-class.html" title="Metaclass for defining Abstract Base Classes (ABCs)." alt="" coords="1383,84,1812,103"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="1383,105,1812,124"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#assert_close" title="Asserts that two points on the manifold are close to the given &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;tolerance." alt="" coords="1383,124,1812,143"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#belongs" title="Raises an Exception if the point does not belong to this manifold." alt="" coords="1383,143,1812,161"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#belongs_ts" title="Checks that a vector *vx* belongs to the tangent space &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;at the given point *base*." alt="" coords="1383,161,1812,180"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#can_convert_to" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.can_convert_to" alt="" coords="1383,180,1812,199"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#can_represent" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.can_represent" alt="" coords="1383,199,1812,217"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#convert_to" title=":param my_point: :type my_point: &#160;``belongs``" alt="" coords="1383,217,1812,236"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#distance" title="Computes the geodesic distance between two points." alt="" coords="1383,236,1812,255"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embed_in" title="Embeds a point on this manifold to the target manifold M." alt="" coords="1383,255,1812,273"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embeddable_in" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.embeddable_in" alt="" coords="1383,273,1812,292"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#embedding" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold.embedding" alt="" coords="1383,292,1812,311"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#expmap" title="Computes the exponential map from *base* for the velocity &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;vector *v*." alt="" coords="1383,311,1812,329"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#friendly" title="Returns a friendly description string for a point on the manifold." alt="" coords="1383,329,1812,348"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html#to_yaml" title=":param x: :type x: &#160;``belongs``" alt="" coords="1383,367,1812,385"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.DifferentiableManifold-class.html" title="This is the base class for differentiable manifolds." alt="" coords="1381,11,1813,387"/>
-<area shape="rect" href="geometry.manifolds.differentiable_manifold.RandomManifold-class.html" title="This is the base class for manifolds that have the ability to sample random points." alt="" coords="1279,416,1388,443"/>
-<area shape="rect" href="geometry.manifolds.todo.moebius.Moebius-class.html" title="INCOMPLETE &#45; The Moebius strip &#45;&#45; still to be implemented." alt="" coords="1439,416,1583,443"/>
-<area shape="rect" href="geometry.manifolds.sphere.Sphere1-class.html" title="geometry.manifolds.sphere.Sphere1" alt="" coords="1633,416,1737,443"/>
-<area shape="rect" href="geometry.manifolds.tangent_bundle.TangentBundle-class.html" title="This class represents the tangent bundle of a generic manifold using a tuple (base, vel) where vel is tangent at base." alt="" coords="1788,416,1980,443"/>
-<area shape="rect" href="geometry.manifolds.torus.Torus-class.html" title="geometry.manifolds.torus.Torus" alt="" coords="2031,416,2108,443"/>
-<area shape="rect" href="geometry.manifolds.sphere.Sphere-class.html" title="These are hyperspheres of unit radius." alt="" coords="2159,416,2257,443"/>
-<area shape="rect" href="geometry.manifolds.product_manifold.ProductManifold-class.html" title="geometry.manifolds.product_manifold.ProductManifold" alt="" coords="2308,416,2516,443"/>
 </map>
   <img src="uml_class_diagram_for_geometry.gif" alt='' usemap="#uml_class_diagram_for_geometry" ismap="ismap" class="graph-without-title" />
 </center>
@@ -699,14 +699,14 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="_abc_cache"></a><span class="summary-name">_abc_cache</span> = <code title="&lt;_weakrefset.WeakSet object at 0x1b58910&gt;">&lt;_weakrefset.WeakSet object at 0x1b58910&gt;</code>
+        <a name="_abc_cache"></a><span class="summary-name">_abc_cache</span> = <code title="&lt;_weakrefset.WeakSet object at 0x23aa510&gt;">&lt;_weakrefset.WeakSet object at 0x23aa510&gt;</code>
     </td>
   </tr>
 <tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="_abc_negative_cache"></a><span class="summary-name">_abc_negative_cache</span> = <code title="&lt;_weakrefset.WeakSet object at 0x1b58bd0&gt;">&lt;_weakrefset.WeakSet object at 0x1b58bd0&gt;</code>
+        <a name="_abc_negative_cache"></a><span class="summary-name">_abc_negative_cache</span> = <code title="&lt;_weakrefset.WeakSet object at 0x23aa9d0&gt;">&lt;_weakrefset.WeakSet object at 0x23aa9d0&gt;</code>
     </td>
   </tr>
 <tr class="private">
@@ -720,7 +720,7 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="_abc_registry"></a><span class="summary-name">_abc_registry</span> = <code title="&lt;_weakrefset.WeakSet object at 0x1b58810&gt;">&lt;_weakrefset.WeakSet object at 0x1b58810&gt;</code>
+        <a name="_abc_registry"></a><span class="summary-name">_abc_registry</span> = <code title="&lt;_weakrefset.WeakSet object at 0x23aa410&gt;">&lt;_weakrefset.WeakSet object at 0x23aa410&gt;</code>
     </td>
   </tr>
 </table>
@@ -1256,7 +1256,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Feb 22 20:31:24 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:39:22 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
