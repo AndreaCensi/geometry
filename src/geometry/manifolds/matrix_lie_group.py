@@ -1,6 +1,8 @@
 from . import np, DifferentiableManifold, Group, contract
 from .. import logm, expm
 from contracts import new_contract
+from geometry import logger
+from contracts.interface import describe_value
 
 
 class MatrixLieGroup(Group, DifferentiableManifold):
@@ -30,7 +32,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         self._tangent_bundle_algebra_rep = MatrixLieGroupTangent(self)
 
     def tangent_bundle(self):
-        return  self._tangent_bundle_algebra_rep
+        return self._tangent_bundle_algebra_rep
 
     def get_algebra(self):
         ''' Returns the interface to the corresponding Lie algebra. '''
@@ -45,7 +47,12 @@ class MatrixLieGroup(Group, DifferentiableManifold):
 
     @contract(g='belongs', returns='belongs')
     def inverse(self, g):
-        return np.linalg.inv(g)
+        try:
+            self.belongs(g)
+            return np.linalg.inv(g)
+        except:
+            logger.error('Tried to invert %s' % describe_value(g))
+            raise
 
     @new_contract
     def belongs_algebra(self, x):

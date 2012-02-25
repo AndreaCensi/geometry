@@ -7,7 +7,7 @@ github_repo=git@github.com:AndreaCensi/geometry.git
 webdir=website
 webgit=git --git-dir $(webdir)/.git --work-tree=$(webdir)/ 
 
-all: compile-website 
+all: upload
 	
 compile-website: website epydoc
 	PYTHONPATH=`pwd`:$(PYTHONPATH) sphinx-build -E -n -a -b html source $(webdir)
@@ -21,8 +21,8 @@ website: distclean
 	$(webgit) checkout origin/gh-pages -b gh-pages
 	$(webgit) branch -D master
 
-upload:
-	$(webgit) commit -m "updated website" -a 
+upload: compile-website
+	./gitadd.zsh
 	$(webgit) push
 
 distclean:
