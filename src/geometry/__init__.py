@@ -50,4 +50,4 @@ from .poses_embedding import *
 from .procrustes import *
 from .manifolds import *
 from .mds_algos import *
-
+from .distances import *

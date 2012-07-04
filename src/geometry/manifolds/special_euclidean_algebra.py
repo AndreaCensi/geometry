@@ -30,6 +30,7 @@ class se_algebra(MatrixLieAlgebra):
 
     @contract(a='belongs')
     def vector_from_algebra(self, a):
+        """ Note that it returns (omega, vx, vy) or (w1,w2,w3,vx,vy,vz) """
         W, v, zero, zero = extract_pieces(a) #@UnusedVariable
 
         if self.n == 3:
@@ -49,6 +50,9 @@ class se_algebra(MatrixLieAlgebra):
 
     @contract(v='array[N]', returns='belongs')
     def algebra_from_vector(self, v):
+        """ Note that the first element is (omega, vx, vy) or 
+            (w1,w2,w3,vx,vy,vz) """
+
         if self.n == 3:
             assert v.size == 3
             omega = v[0]

@@ -123,6 +123,13 @@ def SE2_from_xytheta(xytheta):
     return SE2_from_translation_angle([xytheta[0], xytheta[1]], xytheta[2])
 
 
+@contract(returns='array[3]|seq[3](number)', pose='SE2')
+def xytheta_from_SE2(pose):
+    ''' Returns an element of SE2 from translation and rotation. '''
+    t, alpha = translation_angle_from_SE2(pose)
+    return np.array([t[0], t[1], alpha])
+
+
 @contract(linear='array[2]|seq[2](number)', angular='number', returns='se2')
 def se2_from_linear_angular(linear, angular):
     ''' Returns an element of se2 from linear and angular velocity. '''
