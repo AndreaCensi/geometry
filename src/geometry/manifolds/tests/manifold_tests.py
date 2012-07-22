@@ -79,6 +79,18 @@ def check_logmap3(M, a, b):
 @for_all_manifold_point
 def check_friendly(M, a):
     M.friendly(a)
+    
+    
+@for_all_manifold_point
+def check_normalize(M, a):
+    """ normalize() must be idempotent. """
+    a2 = M.normalize(a)
+    M.assert_close(a, a2)
+    a3 = M.normalize(a2)
+    # Not only it must be close intrinsically
+    M.assert_close(a2, a3)
+    # but it must be the same coordinates
+    check_allclose(a2, a3)
 
 
 @for_all_manifold_point

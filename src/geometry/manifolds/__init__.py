@@ -28,9 +28,9 @@ T3 = Torus(3)
 T = {1: T1, 2: T2, 3: T3}
 
 from .torus01 import *
-Ts1 = Torus01(1)
-Ts2 = Torus01(2)
-Ts3 = Torus01(3)
+Ts1 = TorusW([2], [-1])
+Ts2 = TorusW([2, 2], [-1, -1])
+Ts3 = TorusW([2, 2, 2], [-1, -1, -1])
 Ts = {1: Ts1, 2: Ts2, 3: Ts1}
 
 

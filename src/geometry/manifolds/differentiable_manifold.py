@@ -1,6 +1,7 @@
 from .. import assert_allclose, formatm, printm, contract, new_contract, logger
 from abc import ABCMeta, abstractmethod
 from collections import namedtuple
+from geometry.utils.numpy_backport import check_allclose
 
 Isomorphism = namedtuple('Isomorphism',
                          'A B A_to_B B_to_A steps type desc')
@@ -104,6 +105,12 @@ class DifferentiableManifold(object):
         bv = self.logmap(a, b)
         return self.expmap((bv[0], bv[1] * t))
 
+    @contract(a='belongs', returns='belongs')
+    def normalize(self, a):
+        """ Normalizes the coordinates to the canonical representation
+            for this manifold. See TorusW. """
+        return a
+
     @contract(a='belongs')
     def friendly(self, a):
         ''' 
@@ -125,7 +132,7 @@ class DifferentiableManifold(object):
             msg += "- a: %s\n" % self.friendly(a)
             msg += "- b: %s\n" % self.friendly(b)
             msg += formatm('a', a, 'b', b)
-            assert_allclose(distance, 0, atol=atol, err_msg=msg)
+            check_allclose(distance, 0, atol=atol, err_msg=msg)
         return distance
 
     @staticmethod

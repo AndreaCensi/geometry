@@ -1,22 +1,29 @@
 from . import DifferentiableManifold, np, contract
 from geometry.manifolds.differentiable_manifold import RandomManifold
+from geometry.formatting import printm
 
 
-class Torus01(RandomManifold):
-    """ This is a torus whose coordinates wrap around in [0, 1).
+class TorusW(RandomManifold):
+    """ This is a torus whose coordinates wrap around in [0, W).
         All points in R^n belong to the torus.  """ 
     
-    def __init__(self, n):
-        DifferentiableManifold.__init__(self, dimension=n)
-        self.n = n
+    @contract(widths='seq[N](>0)', normalize_bias='None|seq[N](number)')
+    def __init__(self, widths, normalize_bias=None):
+        """
+            :param bias: Only relevant for normalize(). If None, the normalization
+            will be in [0,W[0]], [0,W[1]], etc. If given a bias, the normalization
+            will be in [b[0],W[0]+b[0]], etc.
+        """
+        self.widths = np.array(widths, dtype='float')
+        self.n = self.widths.size
+        if normalize_bias is None:
+            normalize_bias = np.zeros(self.n)
+        self.normalize_bias = normalize_bias
+        DifferentiableManifold.__init__(self, dimension=self.n)
 
     @contract(a='array[N]')
     def belongs(self, a):
         pass
-#        
-#        ok = np.logical_and(a >= 0, a < 1)
-#        if not np.all(ok):
-#            raise ValueError("Not all are ok in %s" % a)
         
     @contract(a='belongs', b='belongs', returns='>=0')#returns='>=0,<0.8')
     def distance(self, a, b):
@@ -27,7 +34,9 @@ class Torus01(RandomManifold):
     def logmap(self, a, b):
         a1 = self.normalize(a)
         b1 = self.normalize(b)
-        vel = b1 - a1 # between -1 and +1
+        printm('a1', a1)
+        printm('b1', b1)
+        vel = b1 - a1 # between -self.widths[i] and +self.widths[i]
         # if any component v is |v| > 0.5, then we can reach the same
         # point in the other direction more efficiently
         # by using v' = 1-v
@@ -42,10 +51,11 @@ class Torus01(RandomManifold):
         #     vel' = vel - 1 = -.25
         
         for i in range(self.n):
-            if vel[i] > 0.5:
-                vel[i] = vel[i] - 1
-            elif vel[i] < -0.5:
-                vel[i] = vel[i] + 1
+            wi = self.widths[i]
+            if vel[i] > +wi / 2.0:
+                vel[i] = vel[i] - wi
+            elif vel[i] < -wi / 2.0:
+                vel[i] = vel[i] + wi
         return a, vel
 
     @contract(bv='belongs_ts', returns='belongs')
@@ -61,7 +71,7 @@ class Torus01(RandomManifold):
 
     @contract(returns='belongs')
     def sample_uniform(self):
-        return (np.random.rand(self.n) - 0.5) * 10
+        return (np.random.rand(self.n) - 0.5) * 10 * self.widths
 
     @contract(returns='belongs_ts')
     def sample_velocity(self, a): #@UnusedVariable
@@ -71,8 +81,9 @@ class Torus01(RandomManifold):
 
     @contract(x='array[N]', returns='array[N], belongs')
     def normalize(self, x):
-        y = x - np.floor(x)
-        return y 
+        q = (x - self.normalize_bias) / self.widths
+        y = q - np.floor(q)
+        return y * self.widths + self.normalize_bias
 
     def friendly(self, a):
         return 'point(%s)' % a

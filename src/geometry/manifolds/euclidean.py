@@ -37,3 +37,7 @@ class Euclidean(MatrixLinearSpace):
         return x
     
     
+    def normalize(self, x): # Used in diffeoplan
+        return x
+    
+    
