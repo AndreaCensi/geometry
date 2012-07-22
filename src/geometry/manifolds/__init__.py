@@ -27,6 +27,13 @@ T2 = Torus(2)
 T3 = Torus(3)
 T = {1: T1, 2: T2, 3: T3}
 
+from .torus01 import *
+Ts1 = Torus01(1)
+Ts2 = Torus01(2)
+Ts3 = Torus01(3)
+Ts = {1: Ts1, 2: Ts2, 3: Ts1}
+
+
 from .euclidean import Euclidean
 R1 = Euclidean(1)
 R2 = Euclidean(2)
@@ -69,6 +76,13 @@ TSE2 = SE2.tangent_bundle()
 TSE3 = SE3.tangent_bundle()
 TSE = {2: TSE2, 3: TSE3}
 
+from .square import Square
+
+Sq1 = Square(1)
+Sq2 = Square(2)
+Sq3 = Square(3)
+Sq = {1: Sq1, 2: Sq2, 3: Sq3}
+
 all_manifolds = [
     SO3, SO2,
     R1, R2, R3,
@@ -79,7 +93,9 @@ all_manifolds = [
     se2, se3,
     so2, so3,
     tran1, tran2, tran3,
-    TSE2, TSE3
+    TSE2, TSE3,
+    Ts1, Ts2, Ts3,
+    Sq1, Sq2, Sq3
 ]
 
 from .embedding_relations import *

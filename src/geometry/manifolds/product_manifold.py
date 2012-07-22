@@ -22,8 +22,7 @@ class ProductManifold(DifferentiableManifold):
     
     def distance(self, a, b): 
         ''' Computes the geodesic distance between two points. '''
-        raise ValueError('Not implemented') # FIXME: finish this
-        distances = [m.distance_(x) for x, m in zip(a, self.components)]
+        distances = [m.distance(x, y) for x, y, m in zip(a, b, self.components)]
         distances = np.array(distances)
         return (distances * self.weights).sum()
         

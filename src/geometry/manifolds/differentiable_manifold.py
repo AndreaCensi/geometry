@@ -1,6 +1,11 @@
-from .. import assert_allclose, formatm, printm, contract, new_contract
+from .. import assert_allclose, formatm, printm, contract, new_contract, logger
 from abc import ABCMeta, abstractmethod
 from collections import namedtuple
+
+Isomorphism = namedtuple('Isomorphism',
+                         'A B A_to_B B_to_A steps type desc')
+Embedding = namedtuple('Embedding',
+                       'A B A_to_B B_to_A steps type desc')
 
 
 class DifferentiableManifold(object):
@@ -123,11 +128,6 @@ class DifferentiableManifold(object):
             assert_allclose(distance, 0, atol=atol, err_msg=msg)
         return distance
 
-    Isomorphism = namedtuple('Isomorphism',
-                             'A B A_to_B B_to_A steps type desc')
-    Embedding = namedtuple('Embedding',
-                           'A B A_to_B B_to_A steps type desc')
-
     @staticmethod
     def isomorphism(A, B, A_to_B, B_to_A, itype='user', steps=None, desc=None):
         if A.dimension != B.dimension:
@@ -138,11 +138,10 @@ class DifferentiableManifold(object):
                                                   B, B.dimension))
             raise ValueError(msg)
 
-        Iso = DifferentiableManifold.Isomorphism
         if steps is None:
             steps = [(A, '~', B)]
-        A._isomorphisms[B] = Iso(A, B, A_to_B, B_to_A, steps, itype, desc)
-        B._isomorphisms[A] = Iso(B, A, B_to_A, A_to_B, steps, itype, desc)
+        A._isomorphisms[B] = Isomorphism(A, B, A_to_B, B_to_A, steps, itype, desc)
+        B._isomorphisms[A] = Isomorphism(B, A, B_to_A, A_to_B, steps, itype, desc)
 
     @staticmethod
     def embedding(A, B, A_to_B, B_to_A, itype='user', steps=None, desc=None):
@@ -154,11 +153,10 @@ class DifferentiableManifold(object):
                                                   B, B.dimension))
             raise ValueError(msg)
 
-        Embed = DifferentiableManifold.Embedding
         if steps is None:
             steps = [(A, '=', B)]
-        A._embedding[B] = Embed(A, B, A_to_B, B_to_A, steps, itype, desc)
-        B._projection[A] = Embed(B, A, B_to_A, A_to_B, steps, itype, desc)
+        A._embedding[B] = Embedding(A, B, A_to_B, B_to_A, steps, itype, desc)
+        B._projection[A] = Embedding(B, A, B_to_A, A_to_B, steps, itype, desc)
 
         # TODO: move somewhere
         if False:
@@ -181,12 +179,12 @@ class DifferentiableManifold(object):
                     A.belongs(a)
             except:
                 printm('b', b)
-                print('Invalid embedding:\n %s <- %s using %s' %
+                print('Invalid embedding:\n %s <- %s using %s' % 
                       (A, B, B_to_A))
                 raise
 
     def relations_descriptions(self):
-        s = ('[= %s  >= %s  <= %s]' %
+        s = ('[= %s  >= %s  <= %s]' % 
                 (" ".join([str(a) for a in self._isomorphisms]),
                     " ".join([str(a) for a in self._projection]),
                     " ".join([str(a) for a in self._embedding]))
@@ -198,19 +196,25 @@ class DifferentiableManifold(object):
         ''' Embeds a point on this manifold to the target manifold M. '''
         #self.belongs(my_point)
         if not self.embeddable_in(M):
-            msg = ('%s is not embeddable in %s; %s' %
+            msg = ('%s is not embeddable in %s; %s' % 
                    (self, M, self.relations_descriptions()))
             raise ValueError(msg)
-        x = self._embedding[M].A_to_B(my_point)
-        #M.belongs(x, msg='Error while embedding %s < %s point %s' % 
-        #          (self, M, my_point))
+        
+        try:
+            x = self._embedding[M].A_to_B(my_point)
+            M.belongs(x)
+        except:
+            msg = ('Error while embedding %s < %s point %s' % (self, M, my_point))
+            logger.error(msg)
+            raise
+        
         return x
 
     @contract(returns='belongs')
     def project_from(self, M, his_point):
         ''' Projects a point on a bigger manifold to this manifold. '''
         if not self.embeddable_in(M):
-            msg = ('Cannot project from %s to %s; %s' %
+            msg = ('Cannot project from %s to %s; %s' % 
                    (self, M, self.relations_descriptions()))
             raise ValueError(msg)
         x = self._embedding[M].B_to_A(his_point)
@@ -219,7 +223,7 @@ class DifferentiableManifold(object):
     @contract(my_point='belongs')
     def project_to(self, m, my_point):
         if not self.can_represent(m):
-            msg = ('%s does not contain %s; %s' %
+            msg = ('%s does not contain %s; %s' % 
                    (self, m, self.relations_descriptions()))
             raise ValueError(msg)
         x = self._projection[m].A_to_B(my_point)
@@ -228,7 +232,7 @@ class DifferentiableManifold(object):
     @contract(my_point='belongs')
     def convert_to(self, m, my_point):
         if not  self.can_convert_to(m):
-            msg = ('%s cannot be converted to %s; %s' %
+            msg = ('%s cannot be converted to %s; %s' % 
                    (self, m, self.relations_descriptions()))
             raise ValueError(msg)
         x = self._isomorphisms[m].A_to_B(my_point)

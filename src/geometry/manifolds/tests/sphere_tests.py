@@ -1,6 +1,6 @@
 from . import np
 from geometry.manifolds import S1
-from geometry.utils import assert_allclose
+from geometry.utils import check_allclose
 from geometry.formatting import printm
 
 
@@ -13,4 +13,4 @@ def test_wrap_around():
     d = S1.distance(b, b2)
 
     printm('a', a, 'b', b, 'vel', bv[1], 'd', np.array(d))
-    assert_allclose(d, 0, atol=1e-7)
+    check_allclose(d, 0, atol=1e-7)
