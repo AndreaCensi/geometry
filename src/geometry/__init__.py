@@ -29,6 +29,10 @@ except ImportError:
     scipy_found = False
     development = False
 
+# Does extra checks to make sure things are ok.
+# These are now redundant, but it was useful while debugging.
+# Reactivate if some strange bug is suspected.
+GEOMETRY_DO_EXTRA_CHECKS = False
 
 import numpy as np
 from contracts import new_contract, contract

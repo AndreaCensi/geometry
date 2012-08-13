@@ -2,6 +2,7 @@ from .. import assert_allclose, formatm, printm, contract, new_contract, logger
 from abc import ABCMeta, abstractmethod
 from collections import namedtuple
 from geometry.utils.numpy_backport import check_allclose
+from geometry import GEOMETRY_DO_EXTRA_CHECKS
 
 Isomorphism = namedtuple('Isomorphism',
                          'A B A_to_B B_to_A steps type desc')
@@ -209,7 +210,8 @@ class DifferentiableManifold(object):
         
         try:
             x = self._embedding[M].A_to_B(my_point)
-            M.belongs(x)
+            if GEOMETRY_DO_EXTRA_CHECKS:
+                M.belongs(x)
         except:
             msg = ('Error while embedding %s < %s point %s' % (self, M, my_point))
             logger.error(msg)
