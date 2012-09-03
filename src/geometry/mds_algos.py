@@ -2,6 +2,8 @@ from . import (best_similarity_transform, contract, np, assert_allclose,
     project_vectors_onto_sphere, eigh)
 from contracts import check_multiple
 import itertools
+from geometry.formatting import formatm
+from geometry import logger
 
 
 @contract(S='array[KxN]', returns='array[NxN](>=0)')
@@ -60,16 +62,32 @@ def inner_product_embedding_slow(C, ndim):
 @contract(C='array[NxN]', ndim='int,>1,K', returns='array[KxN]')
 def inner_product_embedding(C, ndim):
     n = C.shape[0]
+    if ndim > n:
+        msg = 'Number of points: %s  Dimensions: %s' % (n, ndim) 
+        raise ValueError(msg)
+
     eigvals = (n - ndim, n - 1)
+    print n, eigvals
     S, V = eigh(C, eigvals=eigvals)
 
     assert S[0] <= S[1] # eigh returns in ascending order 
 
-    check_multiple([('K', ndim),
-                    ('array[NxK]', V),
-                    ('array[K]', S)])
+    if np.any(S < 0):
+        msg = 'The cosine matrix singular values are not all positive: \n'
+        msg += formatm('S', S) 
+        msg += 'I assume it is rounding error and approximate with:\n'
+        S[S < 0] = 0
+        msg += formatm('S\'', S)
+        logger.warning(msg)
+
+    assert V.shape == (n, ndim)
+    assert S.shape == (ndim,)
+    #    check_multiple([('K', ndim),
+    #                    ('array[NxK]', V),
+    #                    ('array[K]', S)])
     coords = V.T
     for i in range(ndim):
+        assert S[i] >= 0
         coords[i, :] = coords[i, :] * np.sqrt(S[i])
     return coords
 
@@ -103,6 +121,8 @@ def inner_product_embedding_randomized(C, ndim):
 
 @contract(D='array[MxM](>=0)', ndim='K,int,>=1', returns='array[KxM]')
 def mds(D, ndim, embed=inner_product_embedding):
+#    if D.dtype != np.float64:
+#        D = D.astype(np.float64)
     diag = D.diagonal()
     assert_allclose(diag, 0)
     # Find centered cosine matrix
