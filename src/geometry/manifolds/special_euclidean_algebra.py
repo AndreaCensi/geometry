@@ -25,7 +25,6 @@ class se_algebra(MatrixLieAlgebra):
         return combine_pieces(W, v, v * 0, 0)
 
     def __repr__(self):
-        #return 'se(%s)' % (self.n - 1)
         return 'se%s' % (self.n - 1)
 
     @contract(a='belongs')
@@ -48,6 +47,9 @@ class se_algebra(MatrixLieAlgebra):
         else:
             assert False, 'Not implemented for n>=4.'
 
+
+
+        
     @contract(v='array[N]', returns='belongs')
     def algebra_from_vector(self, v):
         """ Note that the first element is (omega, vx, vy) or 
@@ -57,9 +59,7 @@ class se_algebra(MatrixLieAlgebra):
             assert v.size == 3
             omega = v[0]
             vel = v[1:3]
-            W = hat_map_2d(omega)
-            return combine_pieces(W, vel, vel * 0, 0)
-
+            return self.algebra_from_velocities_2d(avel=omega, lvel=vel)
         elif self.n == 4:
             assert v.size == 6
             omega = v[0:3]
@@ -69,6 +69,24 @@ class se_algebra(MatrixLieAlgebra):
         else:
             assert False, 'Not implemented for n=%d.' % self.n
 
+    @contract(returns='belongs')
+    def algebra_from_velocities(self, avel, lvel):
+        """ 
+            A convenience function that builds an element 
+            of the algebra from linear/angular velocities. 
+        """
+        # TODO: test this
+        
+        if self.n == 3:
+            return self.algebra_from_velocities_2d(avel=avel, lvel=lvel)
+        else:
+            raise NotImplemented
+        
+    @contract(avel='number', lvel='seq[2](number)')
+    def algebra_from_velocities_2d(self, avel, lvel):
+        W = hat_map_2d(avel)
+        return combine_pieces(W, lvel, lvel * 0, 0)
+    
     def interesting_points(self):
         points = []
         points.append(self.zero())
