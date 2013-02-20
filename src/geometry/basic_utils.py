@@ -6,11 +6,14 @@ new_contract('R2', 'array[2]')
 new_contract('R3', 'array[3]')
 
 
-@new_contract
-@contract(x='array')
-def finite(x):
-    # TODO: make into standard thing
-    return np.isfinite(x).all()
+try:
+    @new_contract
+    @contract(x='array')
+    def finite(x):
+        # TODO: make into standard thing
+        return np.isfinite(x).all()
+except:
+    pass
 
 
 @contract(s='array')
