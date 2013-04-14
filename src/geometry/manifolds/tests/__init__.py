@@ -16,7 +16,7 @@ def list_manifolds():
 def get_test_points(M, num_random=2):
     interesting = M.interesting_points()
     if isinstance(M, RandomManifold):
-        for i in range(num_random): #@UnusedVariable
+        for i in range(num_random):  # @UnusedVariable
             interesting.append(M.sample_uniform())
             
     if len(interesting) == 0:
@@ -39,7 +39,6 @@ def list_mgroup():
         if not isinstance(M, MatrixLieGroup):
             continue
         yield M
-        
 
 def list_mgroup_point():
     """ Yields all possible (M, point, i, num) tests we have """
@@ -49,7 +48,6 @@ def list_mgroup_point():
         for i in range(num_examples):
             yield M, interesting[i], i, num_examples
             
-
 def list_manifold_points():
     """ Yields all possible (M, point1, point2, i, num) tests we have """
     for M in list_manifolds():
@@ -66,14 +64,14 @@ for_all_manifolds = fancy_test_decorator(lister=lambda: all_manifolds,
 
 
 for_all_manifold_point = fancy_test_decorator(lister=list_manifold_point,
-            arguments=lambda (M, p, i, n): (M, p), #@UnusedVariable
-            attributes=lambda (M, p, i, n): dict(manifolds=1, #@UnusedVariable
-                                               manifold=M, point=p)) #@UnusedVariable
+            arguments=lambda (M, p, i, n): (M, p),  # @UnusedVariable
+            attributes=lambda (M, p, i, n): dict(manifolds=1,  # @UnusedVariable
+                                               manifold=M, point=p))  # @UnusedVariable
 
 
 for_all_mgroup_point = fancy_test_decorator(lister=list_mgroup_point,
-            arguments=lambda (M, p, i, n): (M, p), #@UnusedVariable
-            attributes=lambda (M, p, i, n): dict(manifolds=1, #@UnusedVariable
+            arguments=lambda (M, p, i, n): (M, p),  # @UnusedVariable
+            attributes=lambda (M, p, i, n): dict(manifolds=1,  # @UnusedVariable
                                                  matrixgroups=1,
                                                  manifold=M, point=p)) 
 
@@ -82,7 +80,6 @@ for_all_mgroup = fancy_test_decorator(lister=list_mgroup,
             attributes=lambda M: dict(manifolds=1, matrixgroups=1,
                                                  manifold=M)) 
 
-
 for_all_manifold_pairs = fancy_test_decorator(lister=list_manifold_points,
-            arguments=lambda (M, p1, p2, k, n): (M, p1, p2), #@UnusedVariable
-            attributes=lambda (M, p1, p2, k, n): dict(type='manifolds', manifold=M, point1=p1, point2=p2)) #@UnusedVariable
+            arguments=lambda (M, p1, p2, k, n): (M, p1, p2),  # @UnusedVariable
+            attributes=lambda (M, p1, p2, k, n): dict(type='manifolds', manifold=M, point1=p1, point2=p2))  # @UnusedVariable

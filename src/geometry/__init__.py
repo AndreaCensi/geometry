@@ -1,4 +1,4 @@
-__version__ = '1.2'
+__version__ = '1.3'
 
 # If True, additional checks are done at runtime
 development = False
@@ -37,8 +37,8 @@ GEOMETRY_DO_EXTRA_CHECKS = False
 import numpy as np
 from contracts import new_contract, contract
 
-from logging import getLogger
-logger = getLogger(__name__)
+import logging
+logger = logging.getLogger(__name__)
 
 
 from .constants import *

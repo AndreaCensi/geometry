@@ -3,21 +3,101 @@ from abc import ABCMeta, abstractmethod
 from collections import namedtuple
 from geometry.utils.numpy_backport import check_allclose
 from geometry import GEOMETRY_DO_EXTRA_CHECKS
+from collections import defaultdict
 
 Isomorphism = namedtuple('Isomorphism',
                          'A B A_to_B B_to_A steps type desc')
 Embedding = namedtuple('Embedding',
                        'A B A_to_B B_to_A steps type desc')
 
+# Before: we used A._embedding[B]; now we use an external variable
+# so that we use _IsomorphismRels[A][B]
+class ManifoldRelations:
+    _isomorphism_rels = defaultdict(dict)
+    _embedding_rels = defaultdict(dict)
+    _projection_rels = defaultdict(dict)
+
+    @staticmethod
+    def set_isomorphism(A, B, iso):
+        assert iso.A == A
+        assert iso.B == B
+        ManifoldRelations._isomorphism_rels[A][B] = iso
+
+    @staticmethod
+    def get_isomorphism(A, B):
+        return ManifoldRelations._isomorphism_rels[A][B] 
+
+    @staticmethod
+    def exists_isomorphism(A, B):
+        return B in ManifoldRelations._isomorphism_rels[A]
+
+    @staticmethod
+    def all_isomorphisms(A):
+        return list(ManifoldRelations._isomorphism_rels[A].keys())
+    
+    # emabedding
+    @staticmethod
+    def set_embedding(A, B, em):
+        assert em.A == A
+        assert em.B == B
+        ManifoldRelations._embedding_rels[A][B] = em
+        
+    @staticmethod
+    def get_embedding(A, B):
+        return ManifoldRelations._embedding_rels[A][B] 
+
+    @staticmethod
+    def exists_embedding(A, B):
+        return B in ManifoldRelations._embedding_rels[A]
+
+    @staticmethod
+    def all_embeddings(A):
+        return list(ManifoldRelations._embedding_rels[A].keys())
+    
+    
+    # projections
+    @staticmethod
+    def set_projection(A, B, proj):
+        assert proj.A == A
+        assert proj.B == B
+        ManifoldRelations._projection_rels[A][B] = proj
+    
+    @staticmethod
+    def get_projection(A, B):
+        return  ManifoldRelations._projection_rels[A][B] 
+  
+    @staticmethod
+    def exists_projection(A, B):
+        return B in ManifoldRelations._projection_rels[A]
+    
+    @staticmethod
+    def all_projections(A):
+        return list(ManifoldRelations._projection_rels[A].keys())
+    
+    
+    @staticmethod
+    def relations_descriptions(M):
+        _embedding = ManifoldRelations._embedding_rels[M]
+        _isomorphism = ManifoldRelations._isomorphism_rels[M]
+        _projection = ManifoldRelations._projection_rels[M]
+        s = ('[= %s  >= %s  <= %s]' % 
+                (" ".join([str(a) for a in _isomorphism]),
+                    " ".join([str(a) for a in _projection]),
+                    " ".join([str(a) for a in _embedding])))
+        return s
+
+    @staticmethod
+    def project(A, B, a_point):
+        projection = ManifoldRelations.get_projection(A, B)
+        x = projection.A_to_B(a_point)
+        return x
+            
 
 class DifferentiableManifold(object):
     ''' This is the base class for differentiable manifolds. '''
     __metaclass__ = ABCMeta
 
     def __init__(self, dimension):
-        self._isomorphisms = {}
-        self._embedding = {}
-        self._projection = {}
         self.dimension = dimension
 
         self.atol_distance = 1e-8
@@ -48,7 +128,7 @@ class DifferentiableManifold(object):
 
     @abstractmethod
     @contract(bv='tuple(belongs, *)')
-    def project_ts(self, bv): # TODO: test
+    def project_ts(self, bv):  # TODO: test
         '''
             Projects a vector *v_ambient* in the ambient space
             to the tangent space at point *base*.
@@ -148,8 +228,9 @@ class DifferentiableManifold(object):
 
         if steps is None:
             steps = [(A, '~', B)]
-        A._isomorphisms[B] = Isomorphism(A, B, A_to_B, B_to_A, steps, itype, desc)
-        B._isomorphisms[A] = Isomorphism(B, A, B_to_A, A_to_B, steps, itype, desc)
+            
+        ManifoldRelations.set_isomorphism(A, B, Isomorphism(A, B, A_to_B, B_to_A, steps, itype, desc))
+        ManifoldRelations.set_isomorphism(B, A, Isomorphism(B, A, B_to_A, A_to_B, steps, itype, desc))
 
     @staticmethod
     def embedding(A, B, A_to_B, B_to_A, itype='user', steps=None, desc=None):
@@ -163,12 +244,12 @@ class DifferentiableManifold(object):
 
         if steps is None:
             steps = [(A, '=', B)]
-        A._embedding[B] = Embedding(A, B, A_to_B, B_to_A, steps, itype, desc)
-        B._projection[A] = Embedding(B, A, B_to_A, A_to_B, steps, itype, desc)
+        ManifoldRelations.set_embedding(A, B, Embedding(A, B, A_to_B, B_to_A, steps, itype, desc))
+        ManifoldRelations.set_projection(B, A, Embedding(B, A, B_to_A, A_to_B, steps, itype, desc))
 
         # TODO: move somewhere
         if False:
-        #if development:
+        # if development:
             try:
                 for a in A.interesting_points():
                     A.belongs(a)
@@ -192,24 +273,21 @@ class DifferentiableManifold(object):
                 raise
 
     def relations_descriptions(self):
-        s = ('[= %s  >= %s  <= %s]' % 
-                (" ".join([str(a) for a in self._isomorphisms]),
-                    " ".join([str(a) for a in self._projection]),
-                    " ".join([str(a) for a in self._embedding]))
-            )
-        return s
+        return ManifoldRelations.relations_descriptions(self)
+    
 
     @contract(my_point='belongs')
     def embed_in(self, M, my_point):
         ''' Embeds a point on this manifold to the target manifold M. '''
-        #self.belongs(my_point)
+        # self.belongs(my_point)
         if not self.embeddable_in(M):
             msg = ('%s is not embeddable in %s; %s' % 
                    (self, M, self.relations_descriptions()))
             raise ValueError(msg)
         
         try:
-            x = self._embedding[M].A_to_B(my_point)
+            embedding = ManifoldRelations.get_embedding(self, M)
+            x = embedding.A_to_B(my_point)
             if GEOMETRY_DO_EXTRA_CHECKS:
                 M.belongs(x)
         except:
@@ -226,7 +304,9 @@ class DifferentiableManifold(object):
             msg = ('Cannot project from %s to %s; %s' % 
                    (self, M, self.relations_descriptions()))
             raise ValueError(msg)
-        x = self._embedding[M].B_to_A(his_point)
+        embedding = ManifoldRelations.get_embedding(self, M)
+        # I found it like this; why didn't I use projection?
+        x = embedding.B_to_A(his_point)
         return x
 
     @contract(my_point='belongs')
@@ -235,8 +315,9 @@ class DifferentiableManifold(object):
             msg = ('%s does not contain %s; %s' % 
                    (self, m, self.relations_descriptions()))
             raise ValueError(msg)
-        x = self._projection[m].A_to_B(my_point)
-        return x
+        
+        return ManifoldRelations.project(self, m, my_point)
+        
 
     @contract(my_point='belongs')
     def convert_to(self, m, my_point):
@@ -244,17 +325,19 @@ class DifferentiableManifold(object):
             msg = ('%s cannot be converted to %s; %s' % 
                    (self, m, self.relations_descriptions()))
             raise ValueError(msg)
-        x = self._isomorphisms[m].A_to_B(my_point)
+        isomorphism = ManifoldRelations.get_isomorphism(self, m) 
+        x = isomorphism.A_to_B(my_point)
         return x
 
     def can_convert_to(self, manifold):
-        return manifold in self._isomorphisms
-
-    def can_represent(self, manifold): # XXX: change name
-        return manifold in self._projection
+        return ManifoldRelations.exists_isomorphism(self, manifold)
+    
+    def can_represent(self, manifold):  # XXX: change name
+        return ManifoldRelations.exists_projection(self, manifold)
 
     def embeddable_in(self, manifold):
-        return manifold in self._embedding
+        return ManifoldRelations.exists_embedding(self, manifold)
+        
 
     def get_dimension(self):
         ''' Returns the intrinsic dimension of this manifold. '''
