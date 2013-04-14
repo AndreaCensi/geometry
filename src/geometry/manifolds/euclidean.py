@@ -33,11 +33,16 @@ class Euclidean(MatrixLinearSpace):
         points.append(np.ones(self.dimension))
         return points
     
+    
+    @contract(returns='belongs')
+    def riemannian_mean(self, points):
+        return np.mean(points, axis=0)
+    
     def project(self, x): 
         return x
     
     
-    def normalize(self, x): # Used in diffeoplan
+    def normalize(self, x):  # Used in diffeoplan
         return x
     
     

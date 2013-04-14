@@ -102,4 +102,5 @@ from .embedding_relations import *
 from .manifold_embedding_propagation import compute_manifold_relations
 compute_manifold_relations(all_manifolds)
 
+from .point_set import *
 

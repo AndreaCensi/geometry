@@ -192,6 +192,12 @@ class DifferentiableManifold(object):
             for this manifold. See TorusW. """
         return a
 
+    @contract(returns='belongs', points='list[>=1](belongs)')
+    def riemannian_mean(self, points):
+        """ TODO: work out exceptions """
+        raise NotImplementedError
+        # return np.mean(self.points, axis=0)
+        
     @contract(a='belongs')
     def friendly(self, a):
         ''' 
