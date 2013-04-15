@@ -45,9 +45,13 @@ class PointSet:
         dists = self.distances_to_point(p)
         return np.argmin(dists)
     
-    def centroid(self):
-        """ REturns the point which is closest to the average """
+    def centroid_index(self):
         avg = self.average()
         closest = self.closest_index_to(avg)
-        return self.points[closest]
+        return closest
+    
+    def centroid(self):
+        """ REturns the point which is closest to the average """
+        i = self.centroid_index()
+        return self.points[i]
         
