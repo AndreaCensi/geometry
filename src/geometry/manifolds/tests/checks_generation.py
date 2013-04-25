@@ -51,7 +51,7 @@ def add_to_module(function, module_name):
 
     module.__dict__[name] = function
 
-    #logger.debug('Added test %s:%s' % (module.__name__, name))
+    # logger.debug('Added test %s:%s' % (module.__name__, name))
 
 
 def add_checker_f(f, x, arguments, attributes, naming):

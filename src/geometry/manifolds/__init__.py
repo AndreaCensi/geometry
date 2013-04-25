@@ -1,6 +1,6 @@
 import numpy as np
 from contracts import contract, check, new_contract
-from .. import assert_allclose
+from .. import assert_allclose, logger
 
 from .exceptions import DoesNotBelong
 
