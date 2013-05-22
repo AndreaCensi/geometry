@@ -13,32 +13,28 @@ class Torus(DifferentiableManifold):
         if not np.all(ok):
             raise ValueError("Not all are ok in %s" % a)
         
-    @contract(a='belongs', b='belongs', returns='>=0')
     def distance(self, a, b):
         b = self.normalize(b - a)
         return np.linalg.norm(b)
 
-    @contract(a='belongs', b='belongs', returns='belongs_ts')
-    def logmap(self, a, b):
-        vel = self.normalize(b - a)
-        return a, vel
+    def logmap(self, base, p):
+        vel = self.normalize(p - base)
+        return base, vel
 
-    @contract(bv='belongs_ts', returns='belongs')
     def expmap(self, bv):
         a, vel = bv
         b = self.normalize(a + vel)
         return b
 
-    @contract(bv='tuple(belongs, *)')
     def project_ts(self, bv):
-        return bv # XXX: more checks
+        return bv  # XXX: more checks
 
     @contract(returns='belongs')
     def sample_uniform(self):
         return np.random.rand(self.n) * 2 * np.pi - np.pi
 
-    def normalize(self, x):
-        return normalize_pi(x)
+    def normalize(self, a):
+        return normalize_pi(a)
 
     def friendly(self, a):
         return 'point(%s)' % a

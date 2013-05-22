@@ -1,8 +1,9 @@
-from . import np, DifferentiableManifold, Group, contract
-from .. import logm, expm
-from contracts import new_contract
-from geometry import logger
-from contracts.interface import describe_value
+from contracts import contract, describe_value, new_contract
+from geometry import logger, logm, expm
+from geometry.manifolds import DifferentiableManifold, Group
+import numpy as np
+
+__all__ = ['MatrixLieGroup']
 
 
 class MatrixLieGroup(Group, DifferentiableManifold):
@@ -90,8 +91,8 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         xt = self.algebra_from_group(x)
         return self.algebra.norm(xt)
 
-    @contract(base='belongs', target='belongs', returns='belongs_ts',)
-    def logmap(self, base, target):
+    @contract(base='belongs', p='belongs', returns='belongs_ts')
+    def logmap(self, base, p):
         ''' 
             Returns the direction from base to target. 
         
@@ -101,7 +102,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
             Here the :py:func:`MatrixLieAlgebra.project` function
             is used to mitigate numerical errors. 
         '''
-        diff = self.multiply(self.inverse(base), target)
+        diff = self.multiply(self.inverse(base), p)
         X = self.algebra_from_group(diff)
         bX = np.dot(base, X)
         return (base, bX)

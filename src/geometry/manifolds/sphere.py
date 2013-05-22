@@ -23,28 +23,28 @@ class Sphere(DifferentiableManifold):
     def distance(self, a, b):
         return geodesic_distance_on_sphere(a, b)
 
-    @contract(base='belongs', target='belongs', returns='belongs_ts')
-    def logmap(self, base, target):
+    @contract(base='belongs', p='belongs', returns='belongs_ts')
+    def logmap(self, base, p):
         # TODO: create S1_logmap(base, target)
         # XXX: what should we do in the case there is more than one logmap?
-        d = geodesic_distance_on_sphere(target, base)
+        d = geodesic_distance_on_sphere(p, base)
         if np.allclose(d, np.pi, atol=self.atol_geodesic_distance):
             if self.N == 2:
                 xp = np.array([base[1], -base[0]])
             elif self.N == 3:
                 xp = any_orthogonal_direction(base)
         else:
-            x = target - base
+            x = p - base
             base, xp = self.project_ts((base, x))
         xp = normalize_length_or_zero(xp)
-        xp *= geodesic_distance_on_sphere(target, base)
+        xp *= geodesic_distance_on_sphere(p, base)
         return base, xp
 
     @contract(bv='belongs_ts', returns='belongs')
     def expmap(self, bv):
         base, vel = bv
         angle = np.linalg.norm(vel)
-        if angle == 0: # XXX: tolerance
+        if angle == 0:  # XXX: tolerance
             return base
 
         if self.N == 2:
@@ -61,9 +61,9 @@ class Sphere(DifferentiableManifold):
 
         return result
 
-    @contract(bve='tuple(belongs, *)')
-    def project_ts(self, bve): # TODO: test
-        base, vel = bve
+    @contract(bv='tuple(belongs, *)')
+    def project_ts(self, bv):  # TODO: test
+        base, vel = bv
         P = np.eye(self.N) - outer(base, base)
         return base, np.dot(P, vel)
 
@@ -95,13 +95,13 @@ class Sphere(DifferentiableManifold):
         else:
             assert False
 
-    def friendly(self, x):
+    def friendly(self, a):
         if self.N == 2:
-            theta = np.arctan2(x[1], x[0])
+            theta = np.arctan2(a[1], a[0])
             return 'Dir(%6.1fdeg)' % np.degrees(theta)
         elif self.N == 3:
-            theta = np.arctan2(x[1], x[0])
-            elevation = np.arcsin(x[2])
+            theta = np.arctan2(a[1], a[0])
+            elevation = np.arcsin(a[2])
             return 'Dir(%6.1fdeg,el:%5.1fdeg)' % (np.degrees(theta),
                                                       np.degrees(elevation))
         else:
@@ -123,34 +123,34 @@ class Sphere1(DifferentiableManifold):
     def distance(self, a, b):
         return geodesic_distance_on_sphere(a, b)
 
-    @contract(base='S1', target='S1', returns='belongs_ts')
-    def logmap(self, base, target):
+    @contract(base='S1', p='S1', returns='belongs_ts')
+    def logmap(self, base, p):
         # TODO: create S1_logmap(base, target)
         # XXX: what should we do in the case there is more than one logmap?
-        d = geodesic_distance_on_sphere(target, base)
+        d = geodesic_distance_on_sphere(p, base)
         if np.allclose(d, np.pi, atol=self.atol_geodesic_distance):
             xp = np.array([base[1], -base[0]])
         else:
-            x = target - base
+            x = p - base
             base, xp = self.project_ts((base, x))
         xp = normalize_length_or_zero(xp)
-        xp *= geodesic_distance_on_sphere(target, base)
+        xp *= geodesic_distance_on_sphere(p, base)
         return base, xp
 
     @contract(bv='belongs_ts', returns='belongs')
     def expmap(self, bv):
         base, vel = bv
         angle = np.linalg.norm(vel)
-        if angle == 0: # XXX: tolerance
+        if angle == 0:  # XXX: tolerance
             return base
         direction = -np.sign(vel[0] * base[1] - base[0] * vel[1])
         R = rot2d(angle * direction)
         result = np.dot(R, base)
         return result
 
-    @contract(bx='tuple(belongs, *)')
-    def project_ts(self, bx): # TODO: test
-        base, x = bx
+    @contract(bv='tuple(belongs, *)')
+    def project_ts(self, bv):  # TODO: test
+        base, x = bv
         P = np.eye(2) - outer(base, base)
         return base, np.dot(P, x)
 
@@ -170,6 +170,6 @@ class Sphere1(DifferentiableManifold):
         points.append(np.array([np.sqrt(2) / 2, np.sqrt(2) / 2]))
         return points
 
-    def friendly(self, x):
-        theta = np.arctan2(x[1], x[0])
+    def friendly(self, a):
+        theta = np.arctan2(a[1], a[0])
         return 'Dir(%6.1fdeg)' % np.degrees(theta)

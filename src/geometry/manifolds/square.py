@@ -1,5 +1,8 @@
-from . import DifferentiableManifold, np, contract
-from geometry.manifolds.differentiable_manifold import RandomManifold
+from contracts import contract
+from geometry.manifolds import DifferentiableManifold, RandomManifold
+import numpy as np
+
+__all__ = ['Square']
 
 
 class Square(RandomManifold):
@@ -16,32 +19,27 @@ class Square(RandomManifold):
         if not np.all(ok):
             raise ValueError("Not all are ok in %s" % a)
         
-    @contract(a='belongs', b='belongs', returns='>=0')#returns='>=0,<0.8')
     def distance(self, a, b):
         _, vel = self.logmap(a, b)
         return np.linalg.norm(vel)
 
-    @contract(a='belongs', b='belongs', returns='belongs_ts')
-    def logmap(self, a, b): 
-        vel = b - a 
-        return a, vel
+    def logmap(self, base, p): 
+        vel = p - base 
+        return base, vel
 
-    @contract(bv='belongs_ts', returns='belongs')
     def expmap(self, bv):
         a, vel = bv
         b = a + vel
         return b
 
-    @contract(bv='tuple(belongs, *)')
     def project_ts(self, bv):
-        return bv # XXX: more checks
+        return bv  # XXX: more checks
 
-    @contract(returns='belongs')
     def sample_uniform(self):
         return np.random.rand(self.n)
  
     @contract(returns='belongs_ts')
-    def sample_velocity(self, a): #@UnusedVariable
+    def sample_velocity(self, a):  # @UnusedVariable
         b = self.sample_uniform(a)
         _, vel = self.logmap(a, b)
         return vel

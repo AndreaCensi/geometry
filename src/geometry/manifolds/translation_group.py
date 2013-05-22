@@ -1,6 +1,11 @@
-from . import MatrixLieGroup, np, R, tran, DifferentiableManifold, contract
+from . import MatrixLieGroup, R, tran, DifferentiableManifold
 from .. import (assert_allclose, pose_from_rotation_translation,
     rotation_translation_from_pose, extract_pieces)
+
+import numpy as np
+from contracts import contract
+
+__all__ = ['Tran']
 
 
 class Tran(MatrixLieGroup):
@@ -19,12 +24,12 @@ class Tran(MatrixLieGroup):
                             itype='lie')
 
     def __repr__(self):
-        #return 'Tran(%s)' % (self.n - 1)
+        # return 'Tran(%s)' % (self.n - 1)
         return 'Tr%s' % (self.n - 1)
 
     def belongs(self, x):
         # TODO: explicit
-        R, t, zero, one = extract_pieces(x) #@UnusedVariable
+        R, t, zero, one = extract_pieces(x)  # @UnusedVariable
         assert_allclose(R, np.eye(self.n - 1))
         assert_allclose(zero, 0, err_msg='I expect the lower row to be 0.')
         assert_allclose(one, 1, err_msg='Bottom-right must be 1.')
@@ -34,33 +39,27 @@ class Tran(MatrixLieGroup):
         t = self.En.sample_uniform()
         return pose_from_rotation_translation(np.eye(self.n - 1), t)
 
-    @contract(x='belongs')
-    def friendly(self, x):
-        t = rotation_translation_from_pose(x)[1]
+    def friendly(self, a):
+        t = rotation_translation_from_pose(a)[1]
         return 'Tran(%s)' % (self.En.friendly(t))
 
-    @contract(base='belongs', target='belongs', returns='belongs_ts')
-    def logmap(self, base, target):
-        return base, target - base
+    def logmap(self, base, p):
+        return base, p - base
 
-    @contract(bv='belongs_ts', returns='belongs')
     def expmap(self, bv):
         base, vel = bv
         return base + vel
 
-    @contract(g='belongs', returns='belongs_algebra')
     def algebra_from_group(self, g):
         a = np.zeros((self.n, self.n))
         a[:-1, -1] = g[:-1, -1]
         return a
 
-    @contract(a='belongs_algebra', returns='belongs')
     def group_from_algebra(self, a):
         g = np.eye(self.n)
         g[:-1, -1] = a[:-1, -1]
         return g
 
-    @contract(returns='list(belongs)')
     def interesting_points(self):
         points = []
         for t in self.En.interesting_points():

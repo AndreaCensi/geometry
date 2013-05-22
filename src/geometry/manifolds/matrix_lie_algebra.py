@@ -1,5 +1,10 @@
-from . import MatrixLinearSpace, contract
 from abc import abstractmethod
+
+from geometry.manifolds import MatrixLinearSpace
+from contracts import contract
+
+
+__all__ = ['MatrixLieAlgebra']
 
 
 class MatrixLieAlgebra(MatrixLinearSpace):
@@ -28,7 +33,7 @@ class MatrixLieAlgebra(MatrixLinearSpace):
         ''' Isomorphism from elements of the algebra to vectors.
         (For example, so(3) <==> R^3).
          '''
-        #raise ValueError('Not implemented for %s.' % self)
+        # raise ValueError('Not implemented for %s.' % self)
 
     @abstractmethod
     @contract(returns='belongs', v='array[K]')
@@ -36,6 +41,6 @@ class MatrixLieAlgebra(MatrixLinearSpace):
         ''' Isomorphism from elements of the algebra to vectors.
         (For example, so(3) <==> R^3).
          '''
-        #raise ValueError('Not implemented for %s.' % self)
+        # raise ValueError('Not implemented for %s.' % self)
 
     # TODO: bracket

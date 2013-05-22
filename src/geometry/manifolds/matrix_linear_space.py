@@ -1,7 +1,10 @@
-from . import np, DifferentiableManifold, contract
+from . import DifferentiableManifold
 from .. import assert_allclose
 from abc import abstractmethod
-from contracts import check
+from contracts import check, contract
+import numpy as np
+
+__all__ = ['MatrixLinearSpace']
 
 
 class MatrixLinearSpace(DifferentiableManifold):
@@ -33,20 +36,20 @@ class MatrixLinearSpace(DifferentiableManifold):
         base, vel = bv
         return base + vel
 
-    @contract(base='belongs', target='belongs', returns='belongs_ts')
-    def logmap(self, base, target):
-        return base, target - base
+    @contract(base='belongs', p='belongs', returns='belongs_ts')
+    def logmap(self, base, p):
+        return base, p - base
 
     @contract(x='array')
     def belongs(self, x):
         if x.shape != self.shape:
-            raise ValueError('Expected shape %r, not %r.' %
+            raise ValueError('Expected shape %r, not %r.' % 
                              (self.shape, x.shape))
 
         # TODO: make contract
         assert np.all(np.isreal(x)), "Expected real vector"
         proj = self.project(x)
-        assert_allclose(proj, x, atol=1e-8) # XXX: tol
+        assert_allclose(proj, x, atol=1e-8)  # XXX: tol
 
     def belongs_ts(self, bv):
 #        formatm('bv', bv)
@@ -56,7 +59,7 @@ class MatrixLinearSpace(DifferentiableManifold):
         self.belongs(vel)
 
     @abstractmethod
-    def project(self, v): #@UnusedVariable
+    def project(self, v):  # @UnusedVariable
         ''' Projects a vector onto this Lie Algebra. '''
 
     def project_ts(self, bv):

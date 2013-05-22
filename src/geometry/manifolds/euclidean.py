@@ -1,4 +1,10 @@
-from . import (np, assert_allclose, contract, MatrixLinearSpace)
+from geometry.manifolds import MatrixLinearSpace
+from contracts import contract
+import numpy as np
+
+from . import (assert_allclose)
+
+__all__ = ['Euclidean']
 
 
 class Euclidean(MatrixLinearSpace):
@@ -42,7 +48,7 @@ class Euclidean(MatrixLinearSpace):
         return x
     
     
-    def normalize(self, x):  # Used in diffeoplan
-        return x
+    def normalize(self, a):  # Used in diffeoplan
+        return a
     
     

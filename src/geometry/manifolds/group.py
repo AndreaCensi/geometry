@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
+__all__ = ['Group']
 
 class Group(object):
     __metaclass__ = ABCMeta

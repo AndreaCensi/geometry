@@ -4,6 +4,8 @@ from .. import (SE3_from_SE2, assert_allclose, pose_from_rotation_translation,
     SE2_from_translation_angle)
 from contracts import describe_type
 
+__all__ = ['SE_group']
+
 
 class SE_group(MatrixLieGroup):
     ''' 
@@ -40,10 +42,10 @@ class SE_group(MatrixLieGroup):
             msg = 'Expected a numpy array (%s)' % describe_type(x)
             raise ValueError(msg)
         if not x.shape == (self.n, self.n):
-            msg = ('Expected shape %dx%d instead of (%s)' %
+            msg = ('Expected shape %dx%d instead of (%s)' % 
                     (self.n, self.n, x.shape))
             raise ValueError(msg)
-        R, t, zero, one = extract_pieces(x) #@UnusedVariable
+        R, t, zero, one = extract_pieces(x)  # @UnusedVariable
         self.SOn.belongs(R)
         assert_allclose(zero, 0, err_msg='I expect the lower row to be 0.')
         assert_allclose(one, 1)
@@ -54,23 +56,23 @@ class SE_group(MatrixLieGroup):
         assert t.size == R.shape[0]
         return pose_from_rotation_translation(R, t)
 
-    def friendly(self, x):
-        R, t = rotation_translation_from_pose(x)
+    def friendly(self, a):
+        R, t = rotation_translation_from_pose(a)
         return 'Pose(%s,%s)' % (self.SOn.friendly(R), self.En.friendly(t))
 
     # TODO: make explicit inverse
     # TODO: make specialization for SE(3)
-    def group_from_algebra(self, g):
+    def group_from_algebra(self, a):
         if self.n == 3:
-            return SE2_from_se2(g)
+            return SE2_from_se2(a)
         else:
-            return MatrixLieGroup.group_from_algebra(self, g)
+            return MatrixLieGroup.group_from_algebra(self, a)
 
-    def algebra_from_group(self, a):
+    def algebra_from_group(self, g):
         if self.n == 3:
-            return se2_from_SE2(a)
+            return se2_from_SE2(g)
         else:
-            return MatrixLieGroup.algebra_from_group(self, a)
+            return MatrixLieGroup.algebra_from_group(self, g)
 
     def interesting_points(self):
         if self.n == 3:

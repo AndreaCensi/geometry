@@ -42,13 +42,12 @@ class SO_group(MatrixLieGroup):
         else:
             assert False, 'Not implemented for n>=4.'
 
-    @contract(x='belongs')
-    def friendly(self, x):
+    def friendly(self, a):
         if self.n == 2:
-            theta = np.arctan2(x[1, 0], x[0, 0])
+            theta = np.arctan2(a[1, 0], a[0, 0])
             return 'Rot(%.1fdeg)' % np.degrees(theta)
         elif self.n == 3:
-            axis, angle = axis_angle_from_rotation(x)
+            axis, angle = axis_angle_from_rotation(a)
             axisf = S2.friendly(axis)
             return 'Rot(%.1fdeg, %s)' % (np.degrees(angle), axisf)
         else:

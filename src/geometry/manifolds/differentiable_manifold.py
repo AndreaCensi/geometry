@@ -4,6 +4,7 @@ from collections import namedtuple
 from geometry.utils.numpy_backport import check_allclose
 from geometry import GEOMETRY_DO_EXTRA_CHECKS
 from collections import defaultdict
+from contracts.metaclass import ContractsMeta
 
 Isomorphism = namedtuple('Isomorphism',
                          'A B A_to_B B_to_A steps type desc')
@@ -95,7 +96,7 @@ class ManifoldRelations:
 
 class DifferentiableManifold(object):
     ''' This is the base class for differentiable manifolds. '''
-    __metaclass__ = ABCMeta
+    __metaclass__ = ContractsMeta
 
     def __init__(self, dimension):
         self.dimension = dimension
@@ -130,7 +131,7 @@ class DifferentiableManifold(object):
     @contract(bv='tuple(belongs, *)')
     def project_ts(self, bv):  # TODO: test
         '''
-            Projects a vector *v_ambient* in the ambient space
+            Projects a vector *bv* in the ambient space
             to the tangent space at point *base*.
         '''
 

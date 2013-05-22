@@ -1,6 +1,7 @@
 from . import np, MatrixLieAlgebra, so, contract
 from .. import extract_pieces, combine_pieces, hat_map_2d, hat_map
 
+__all__ = ['se_algebra']
 
 class se_algebra(MatrixLieAlgebra):
     ''' This is the Lie algebra se(n) for the Special Euclidean group SE(n). 
@@ -16,11 +17,11 @@ class se_algebra(MatrixLieAlgebra):
         self.son = so[N]
 
     def norm(self, X):
-        W, v, zero, zero = extract_pieces(X) #@UnusedVariable
+        W, v, zero, zero = extract_pieces(X)  # @UnusedVariable
         return np.linalg.norm(v) + self.alpha * self.son.norm(W)
 
     def project(self, X):
-        W, v, zero, zero = extract_pieces(X) #@UnusedVariable
+        W, v, zero, zero = extract_pieces(X)  # @UnusedVariable
         W = self.son.project(W)
         return combine_pieces(W, v, v * 0, 0)
 
@@ -30,7 +31,7 @@ class se_algebra(MatrixLieAlgebra):
     @contract(a='belongs')
     def vector_from_algebra(self, a):
         """ Note that it returns (omega, vx, vy) or (w1,w2,w3,vx,vy,vz) """
-        W, v, zero, zero = extract_pieces(a) #@UnusedVariable
+        W, v, zero, zero = extract_pieces(a)  # @UnusedVariable
 
         if self.n == 3:
             assert v.size == 2

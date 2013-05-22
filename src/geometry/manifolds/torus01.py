@@ -1,7 +1,10 @@
-from . import DifferentiableManifold, np, contract
-from geometry.manifolds.differentiable_manifold import RandomManifold
+from . import DifferentiableManifold
+from contracts import contract
 from geometry.formatting import printm
+from geometry.manifolds.differentiable_manifold import RandomManifold
+import numpy as np
 
+__all__ = ['TorusW']
 
 class TorusW(RandomManifold):
     """ This is a torus whose coordinates wrap around in [0, W).
@@ -25,18 +28,17 @@ class TorusW(RandomManifold):
     def belongs(self, a):
         pass
         
-    @contract(a='belongs', b='belongs', returns='>=0')#returns='>=0,<0.8')
+    @contract(a='belongs', b='belongs', returns='>=0')  # returns='>=0,<0.8')
     def distance(self, a, b):
         _, vel = self.logmap(a, b)
         return np.linalg.norm(vel)
 
-    @contract(a='belongs', b='belongs', returns='belongs_ts')
-    def logmap(self, a, b):
-        a1 = self.normalize(a)
-        b1 = self.normalize(b)
+    def logmap(self, base, p):
+        a1 = self.normalize(base)
+        b1 = self.normalize(p)
         printm('a1', a1)
         printm('b1', b1)
-        vel = b1 - a1 # between -self.widths[i] and +self.widths[i]
+        vel = b1 - a1  # between -self.widths[i] and +self.widths[i]
         # if any component v is |v| > 0.5, then we can reach the same
         # point in the other direction more efficiently
         # by using v' = 1-v
@@ -56,32 +58,31 @@ class TorusW(RandomManifold):
                 vel[i] = vel[i] - wi
             elif vel[i] < -wi / 2.0:
                 vel[i] = vel[i] + wi
-        return a, vel
+        return base, vel
 
     @contract(bv='belongs_ts', returns='belongs')
     def expmap(self, bv):
         a, vel = bv
-        #b = self.normalize(a + vel)
+        # b = self.normalize(a + vel)
         b = a + vel
         return b
 
     @contract(bv='tuple(belongs, *)')
     def project_ts(self, bv):
-        return bv # XXX: more checks
+        return bv  # XXX: more checks
 
     @contract(returns='belongs')
     def sample_uniform(self):
         return (np.random.rand(self.n) - 0.5) * 10 * self.widths
 
     @contract(returns='belongs_ts')
-    def sample_velocity(self, a): #@UnusedVariable
+    def sample_velocity(self, a):  # @UnusedVariable
         vel = np.random.randn(self.n)
-        vel = vel / np.linalg.norm(vel) # XXX
+        vel = vel / np.linalg.norm(vel)  # XXX
         return vel
 
-    @contract(x='array[N]', returns='array[N], belongs')
-    def normalize(self, x):
-        q = (x - self.normalize_bias) / self.widths
+    def normalize(self, a):
+        q = (a - self.normalize_bias) / self.widths
         y = q - np.floor(q)
         return y * self.widths + self.normalize_bias
 

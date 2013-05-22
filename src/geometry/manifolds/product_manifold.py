@@ -1,7 +1,10 @@
 from . import DifferentiableManifold, contract, np
 
+__all__ = ['ProductManifold']
+
 
 class ProductManifold(DifferentiableManifold):
+    
     @contract(components='seq[>=2,N](DifferentiableManifold)',
               weights='None|array[N](>0)')
     def __init__(self, components, weights=None):
@@ -14,7 +17,7 @@ class ProductManifold(DifferentiableManifold):
 
     @contract(a='seq')
     def belongs(self, a):
-        if not len(a) == len(self.components): # XXX: what should I throw?
+        if not len(a) == len(self.components):  # XXX: what should I throw?
             raise ValueError('I expect a sequence of length %d, not %d.' % 
                              (len(a), len(self.components)))
         for x, m in zip(a, self.components):
@@ -26,15 +29,15 @@ class ProductManifold(DifferentiableManifold):
         distances = np.array(distances)
         return (distances * self.weights).sum()
         
-    def logmap(self, a, b): 
+    def logmap(self, base, p): 
         ''' Computes the logarithmic map from base point *a* to target *b*. '''
-        raise ValueError('Not implemented') # FIXME: finish this
+        raise ValueError('Not implemented')  # FIXME: finish this
     
-    def expmap(self, a, v):
-        raise ValueError('Not implemented') # FIXME: finish this
+    def expmap(self, bv):
+        raise ValueError('Not implemented')  # FIXME: finish this
         
-    def project_ts(self, base, v_ambient):
-        raise ValueError('Not implemented') # FIXME: finish this
+    def project_ts(self, bv):
+        raise ValueError('Not implemented')  # FIXME: finish this
     
     def __repr__(self):
         return 'P(%s)' % "x".join([str(x) for x in self.components])

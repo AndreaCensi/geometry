@@ -1,4 +1,7 @@
-from . import DifferentiableManifold, MatrixLieGroup, contract
+from geometry.manifolds import DifferentiableManifold, MatrixLieGroup
+from contracts import contract
+
+__all__ = ['MatrixLieGroupTangent']
 
 
 class MatrixLieGroupTangent(DifferentiableManifold):
@@ -32,7 +35,7 @@ class MatrixLieGroupTangent(DifferentiableManifold):
         # TODO: implement
         raise ValueError('Not supported')
 
-    def project_ts(self, bv): # TODO: test
+    def project_ts(self, bv):  # TODO: test
         # TODO: implement
         raise ValueError('Not supported')
 
