@@ -70,7 +70,7 @@ def inner_product_embedding(C, ndim):
     print n, eigvals
     S, V = eigh(C, eigvals=eigvals)
 
-    assert S[0] <= S[1] # eigh returns in ascending order 
+    assert S[0] <= S[1]  # eigh returns in ascending order 
 
     if np.any(S < 0):
         msg = 'The cosine matrix singular values are not all positive: \n'
@@ -94,9 +94,9 @@ def inner_product_embedding(C, ndim):
 
 def truncated_svd_randomized(M, k):
     ''' Truncated SVD based on randomized projections. '''
-    p = k + 5 # TODO: add parameter
+    p = k + 5  # TODO: add parameter
     Y = np.dot(M, np.random.normal(size=(M.shape[1], p)))
-    Q, r = np.linalg.qr(Y) #@UnusedVariable
+    Q, r = np.linalg.qr(Y)  # @UnusedVariable
     B = np.dot(Q.T, M)
     Uhat, s, v = np.linalg.svd(B, full_matrices=False)
     U = np.dot(Q, Uhat)
@@ -109,7 +109,7 @@ def inner_product_embedding_randomized(C, ndim):
         Best embedding of inner product matrix based on 
         randomized projections. 
     '''
-    U, S, V = truncated_svd_randomized(C, ndim) #@UnusedVariable.
+    U, S, V = truncated_svd_randomized(C, ndim)  # @UnusedVariable.
     check_multiple([('K', ndim),
                     ('array[KxN]', V),
                     ('array[K]', S)])
@@ -119,19 +119,24 @@ def inner_product_embedding_randomized(C, ndim):
     return coords
 
 
-@contract(D='array[MxM](>=0)', ndim='K,int,>=1', returns='array[KxM]')
+@contract(D='distance_matrix,array[MxM](>=0)', ndim='K,int,>=1', returns='array[KxM]')
 def mds(D, ndim, embed=inner_product_embedding):
 #    if D.dtype != np.float64:
 #        D = D.astype(np.float64)
     diag = D.diagonal()
-    assert_allclose(diag, 0)
+    # the diagonal should be zero
+    if not np.allclose(diag, 0):
+        msg = 'The diagonal of the distance matrix should be zero.'
+        msg += 'Here are all the entries: %s' % diag.tolist()
+        raise ValueError(diag)
+    # assert_allclose(diag, 0, atol=1e-09)
     # Find centered cosine matrix
     P = D * D
     B = double_center(P)
     return embed(B, ndim)
 
 
-@contract(D='array[MxM](>=0)', ndim='K,int,>=1', returns='array[KxM]')
+@contract(D='distance_matrix,array[MxM](>=0)', ndim='K,int,>=1', returns='array[KxM]')
 def mds_randomized(D, ndim):
     ''' MDS based on randomized projections. '''
     return mds(D, ndim, embed=inner_product_embedding_randomized)

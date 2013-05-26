@@ -6,6 +6,7 @@ new_contract('angles', 'array[N](>=-pi,<=pi)')
 new_contract('distances', 'array[NxN](>=0,<=pi)')
 
 
+
 @contract(theta='array[N]', returns='array[2xN], directions')
 def directions_from_angles(theta):
     """ Creates directions (elements of S1) from angles. """ 
@@ -14,7 +15,7 @@ def directions_from_angles(theta):
 
 @contract(S='array[KxN], directions', returns='array[N], angles')
 def angles_from_directions(S):
-    if S.shape[0] > 2: # TODO: make contract
+    if S.shape[0] > 2:  # TODO: make contract
         assert (S[2, :] == 0).all()
     return np.arctan2(S[1, :], S[0, :])
 
