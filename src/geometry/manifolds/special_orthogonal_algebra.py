@@ -1,6 +1,8 @@
-from . import np, MatrixLieAlgebra, contract
+from . import MatrixLieAlgebra
 from .. import hat_map, hat_map_2d, map_hat_2d, map_hat
 
+from contracts import contract
+import numpy as np
 
 class so_algebra(MatrixLieAlgebra):
     ''' 

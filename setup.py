@@ -13,7 +13,7 @@ setup(name='PyGeometry',
       ],
       package_dir={'':'src'},
       packages=find_packages('src'),
-      install_requires=['PyContracts>=1.6,<2'],
+      install_requires=['PyContracts>=1.5,<2'],
       extras_require={
         'algorithms':  ["scipy"],
       },

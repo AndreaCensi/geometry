@@ -1,5 +1,6 @@
-from . import contract
 
+from contracts import contract
+import numpy as np
 
 def NonCompactStiefel(DifferentiableManifold):
     ''' INCOMPLETE -- Matrices of fixed rank. '''

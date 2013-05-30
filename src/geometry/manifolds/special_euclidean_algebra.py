@@ -1,5 +1,8 @@
-from . import np, MatrixLieAlgebra, so, contract
+from . import MatrixLieAlgebra, so
 from .. import extract_pieces, combine_pieces, hat_map_2d, hat_map
+
+from contracts import contract
+import numpy as np
 
 __all__ = ['se_algebra']
 

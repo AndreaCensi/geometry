@@ -1,4 +1,6 @@
-from . import contract
+
+from contracts import contract
+import numpy as np
 
 
 def Grassman(DifferentiableManifold):

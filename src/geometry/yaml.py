@@ -1,25 +1,27 @@
 
-from . import contract, np, logger
 from .manifolds import DifferentiableManifold
-from contracts import describe_value, describe_type
+from contracts import contract, describe_value, describe_type
+from geometry import logger
+import numpy as np
+
 
 #
-#def array_to_lists(x):
+# def array_to_lists(x):
 #    return x.tolist()
 #
-#def packet(space, rep, value):
+# def packet(space, rep, value):
 #    return {'space': space, 'repr': rep, 'value': value}
 #
-#@contract(x='SE3')
-#def yaml_from_SE3(x):
+# @contract(x='SE3')
+# def yaml_from_SE3(x):
 #    return packet('SE3', 'matrix', array_to_lists(x))
 #
-#@contract(x='se3')
-#def yaml_from_se3(x):
+# @contract(x='se3')
+# def yaml_from_se3(x):
 #    return packet('se3', 'matrix', array_to_lists(x))
 #    
-## what about user-centered?
-#def yaml_from_TSE3(x):
+# # what about user-centered?
+# def yaml_from_TSE3(x):
 #    pose, vel = x    
 #    return packet('TSE3', 'base-tangent',
 #                  [yaml_from_SE3(pose), yaml_from_se3(vel)])
@@ -55,7 +57,7 @@ def to_yaml(manifold, value, representation=None):
         representation = get_default_representation(manifold)
     key = (manifold, representation)
     if not key in converters:
-        raise ValueError('Unknown format %s; I know %s.' %
+        raise ValueError('Unknown format %s; I know %s.' % 
                          (key, converters.keys()))
     conv = converters[key]
     try:
@@ -74,20 +76,20 @@ def from_yaml(x):
     form = x[0]
     if not isinstance(form, str):
         raise ValueError('I expect a string describing the format,'
-                         ' not %s, while decoding %s' %
+                         ' not %s, while decoding %s' % 
                          (describe_type(form), describe_value(x)))
     value = x[1]
     space, representation = form.split(':')
 
     key = (space, representation)
     if not key in converters:
-        raise ValueError('Unknown format %s; I know %s.' %
+        raise ValueError('Unknown format %s; I know %s.' % 
                          (key, converters.keys()))
     conv = converters[key]
     return conv.from_yaml(value)
 
 
-class Representation:
+class Representation(object):
     def to_yaml(self, x):
         pass
 

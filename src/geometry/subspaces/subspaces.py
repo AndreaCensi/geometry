@@ -1,6 +1,7 @@
-from . import np, contract
 from .. import assert_allclose
 
+from contracts import contract
+import numpy as np
 
 @contract(A='array[NxK]')
 def normalize_columns(A):

@@ -1,5 +1,9 @@
-from . import np, MatrixLieAlgebra, contract
+from . import MatrixLieAlgebra
 from .. import extract_pieces, combine_pieces
+
+
+from contracts import contract
+import numpy as np
 
 
 class tran(MatrixLieAlgebra):
@@ -12,11 +16,11 @@ class tran(MatrixLieAlgebra):
         MatrixLieAlgebra.__init__(self, n + 1, dimension=n)
         
     def norm(self, X):
-        W, v, zero, zero = extract_pieces(X) #@UnusedVariable
+        W, v, zero, zero = extract_pieces(X)  # @UnusedVariable
         return np.linalg.norm(v)
 
     def project(self, X):
-        W, v, zero, zero = extract_pieces(X) #@UnusedVariable
+        W, v, zero, zero = extract_pieces(X)  # @UnusedVariable
         return combine_pieces(W * 0, v, v * 0, 0)
 
     def __repr__(self):
@@ -29,7 +33,7 @@ class tran(MatrixLieAlgebra):
        
     @contract(a='belongs')
     def vector_from_algebra(self, a):
-        W, v, zero, zero = extract_pieces(a) #@UnusedVariable
+        W, v, zero, zero = extract_pieces(a)  # @UnusedVariable
         if v.shape == ():
             v = v.reshape(1)
         assert v.size == self.n - 1

@@ -1,6 +1,5 @@
-from . import contract, np
-
-from contracts import check
+from contracts import check, contract
+import numpy as np
 
 
 # TODO: write tests

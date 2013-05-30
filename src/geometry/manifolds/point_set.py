@@ -4,7 +4,7 @@ from . import DifferentiableManifold
 
 # TODO: do some testing
 
-class PointSet:
+class PointSet(object):
     """ A set of points on a differentiable manifold. """
     
     @contract(manifold=DifferentiableManifold)

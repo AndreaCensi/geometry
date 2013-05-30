@@ -1,9 +1,10 @@
-from abc import ABCMeta, abstractmethod
+from abc import abstractmethod
+from contracts import ContractsMeta
 
 __all__ = ['Group']
 
 class Group(object):
-    __metaclass__ = ABCMeta
+    __metaclass__ = ContractsMeta
     
     @abstractmethod
     def multiply(self, g, h):

@@ -36,8 +36,8 @@ class TorusW(RandomManifold):
     def logmap(self, base, p):
         a1 = self.normalize(base)
         b1 = self.normalize(p)
-        printm('a1', a1)
-        printm('b1', b1)
+        # printm('a1', a1)
+        # printm('b1', b1)
         vel = b1 - a1  # between -self.widths[i] and +self.widths[i]
         # if any component v is |v| > 0.5, then we can reach the same
         # point in the other direction more efficiently

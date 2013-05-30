@@ -1,5 +1,5 @@
 from .. import assert_allclose, formatm, printm, contract, new_contract, logger
-from abc import ABCMeta, abstractmethod
+from abc import  abstractmethod
 from collections import namedtuple
 from geometry.utils.numpy_backport import check_allclose
 from geometry import GEOMETRY_DO_EXTRA_CHECKS
@@ -13,7 +13,7 @@ Embedding = namedtuple('Embedding',
 
 # Before: we used A._embedding[B]; now we use an external variable
 # so that we use _IsomorphismRels[A][B]
-class ManifoldRelations:
+class ManifoldRelations(object):
     _isomorphism_rels = defaultdict(dict)
     _embedding_rels = defaultdict(dict)
     _projection_rels = defaultdict(dict)
