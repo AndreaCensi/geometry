@@ -87,9 +87,10 @@ class MatrixLieGroup(Group, DifferentiableManifold):
             logmap, and using the norm defined in the Lie Algebra object.
 
         '''
-        x = self.multiply(a, self.inverse(b))
-        xt = self.algebra_from_group(x)
-        return self.algebra.norm(xt)
+#         x = self.multiply(a, self.inverse(b))
+#         xt = self.algebra_from_group(x)
+        _, vel = self.logmap(a, b)
+        return self.algebra.norm(vel)
 
     @contract(base='belongs', p='belongs', returns='belongs_ts')
     def logmap(self, base, p):
