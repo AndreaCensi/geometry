@@ -1,8 +1,8 @@
-from geometry.manifolds import MatrixLinearSpace
+from .matrix_linear_space import MatrixLinearSpace
 from contracts import contract
+from geometry.utils import assert_allclose
 import numpy as np
 
-from . import (assert_allclose)
 
 __all__ = ['Euclidean']
 

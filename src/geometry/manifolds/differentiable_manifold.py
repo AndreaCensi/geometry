@@ -1,98 +1,12 @@
-from .. import assert_allclose, formatm, printm, contract, new_contract, logger
-from abc import  abstractmethod
-from collections import namedtuple
-from geometry.utils.numpy_backport import check_allclose
-from geometry import GEOMETRY_DO_EXTRA_CHECKS
-from collections import defaultdict
-from contracts.metaclass import ContractsMeta
+from .manifold_relations import Isomorphism, Embedding, ManifoldRelations
+from abc import abstractmethod
+from contracts import ContractsMeta, contract, new_contract
+from geometry import GEOMETRY_DO_EXTRA_CHECKS, logger
+from geometry.formatting import formatm, printm
+from geometry.utils import check_allclose, assert_allclose
 
-Isomorphism = namedtuple('Isomorphism',
-                         'A B A_to_B B_to_A steps type desc')
-Embedding = namedtuple('Embedding',
-                       'A B A_to_B B_to_A steps type desc')
+__all__ = ['DifferentiableManifold', 'RandomManifold']
 
-# Before: we used A._embedding[B]; now we use an external variable
-# so that we use _IsomorphismRels[A][B]
-class ManifoldRelations(object):
-    _isomorphism_rels = defaultdict(dict)
-    _embedding_rels = defaultdict(dict)
-    _projection_rels = defaultdict(dict)
-
-    @staticmethod
-    def set_isomorphism(A, B, iso):
-        assert iso.A == A
-        assert iso.B == B
-        ManifoldRelations._isomorphism_rels[A][B] = iso
-
-    @staticmethod
-    def get_isomorphism(A, B):
-        return ManifoldRelations._isomorphism_rels[A][B] 
-
-    @staticmethod
-    def exists_isomorphism(A, B):
-        return B in ManifoldRelations._isomorphism_rels[A]
-
-    @staticmethod
-    def all_isomorphisms(A):
-        return list(ManifoldRelations._isomorphism_rels[A].keys())
-    
-    # emabedding
-    @staticmethod
-    def set_embedding(A, B, em):
-        assert em.A == A
-        assert em.B == B
-        ManifoldRelations._embedding_rels[A][B] = em
-        
-    @staticmethod
-    def get_embedding(A, B):
-        return ManifoldRelations._embedding_rels[A][B] 
-
-    @staticmethod
-    def exists_embedding(A, B):
-        return B in ManifoldRelations._embedding_rels[A]
-
-    @staticmethod
-    def all_embeddings(A):
-        return list(ManifoldRelations._embedding_rels[A].keys())
-    
-    
-    # projections
-    @staticmethod
-    def set_projection(A, B, proj):
-        assert proj.A == A
-        assert proj.B == B
-        ManifoldRelations._projection_rels[A][B] = proj
-    
-    @staticmethod
-    def get_projection(A, B):
-        return  ManifoldRelations._projection_rels[A][B] 
-  
-    @staticmethod
-    def exists_projection(A, B):
-        return B in ManifoldRelations._projection_rels[A]
-    
-    @staticmethod
-    def all_projections(A):
-        return list(ManifoldRelations._projection_rels[A].keys())
-    
-    
-    @staticmethod
-    def relations_descriptions(M):
-        _embedding = ManifoldRelations._embedding_rels[M]
-        _isomorphism = ManifoldRelations._isomorphism_rels[M]
-        _projection = ManifoldRelations._projection_rels[M]
-        s = ('[= %s  >= %s  <= %s]' % 
-                (" ".join([str(a) for a in _isomorphism]),
-                    " ".join([str(a) for a in _projection]),
-                    " ".join([str(a) for a in _embedding])))
-        return s
-
-    @staticmethod
-    def project(A, B, a_point):
-        projection = ManifoldRelations.get_projection(A, B)
-        x = projection.A_to_B(a_point)
-        return x
-            
 
 class DifferentiableManifold(object):
     ''' This is the base class for differentiable manifolds. '''
@@ -172,7 +86,7 @@ class DifferentiableManifold(object):
             which is implemented by the subclasses. 
             
         '''
-
+        
     @contract(returns='list(belongs)')
     def interesting_points(self):
         ''' 

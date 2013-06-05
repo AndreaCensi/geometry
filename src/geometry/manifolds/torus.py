@@ -1,6 +1,9 @@
-from . import DifferentiableManifold, np, contract
+from .differentiable_manifold import DifferentiableManifold
+import numpy as np
+from contracts import  contract
 from .. import normalize_pi
 
+__all__ = ['Torus']
 
 class Torus(DifferentiableManifold):
 

@@ -1,6 +1,5 @@
-from . import DifferentiableManifold
-from geometry.manifolds.differentiable_manifold import ManifoldRelations as MR
-
+from .differentiable_manifold import DifferentiableManifold
+from .manifold_relations import ManifoldRelations as MR
 
 SYMBOL_ISOMORPHISM = '~'  # XXX: not used
 SYMBOL_EMBEDDING = '<'

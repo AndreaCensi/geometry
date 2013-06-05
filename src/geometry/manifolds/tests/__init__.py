@@ -1,11 +1,9 @@
-from .. import np, logger
-
 from .checks_generation import *
-from geometry.manifolds import all_manifolds
-import itertools
-from geometry.manifolds.differentiable_manifold import RandomManifold
-from geometry.manifolds.matrix_lie_group import MatrixLieGroup
+from geometry import MatrixLieGroup, RandomManifold, all_manifolds, logger
 from nose.tools import nottest
+import itertools
+import numpy as np
+
 
 
 def list_manifolds():
