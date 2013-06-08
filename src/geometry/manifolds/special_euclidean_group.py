@@ -35,14 +35,14 @@ class SE_group(MatrixLieGroup):
     def __repr__(self):
         return 'SE%s' % (self.n - 1)
 
-    @contract(returns='array[2](>0)')
+    @contract(returns='array[2](>=0)')
     def distances(self, a, b):
         """ Returns linear, angular distance. """
         _, vel = self.logmap(a, b)
         W, v, _, _ = extract_pieces(vel)
         dist1 = np.linalg.norm(v) 
         dist2 = self.algebra.son.norm(W)
-        return dist1, dist2
+        return np.array([dist1, dist2])
         
     def norm(self, X):
         W, v, zero, zero = extract_pieces(X)  # @UnusedVariable

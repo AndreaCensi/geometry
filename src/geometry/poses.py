@@ -6,7 +6,7 @@ from geometry.constants import GeometryConstants
 
 def check_SE(M):
     ''' Checks that the argument is in the special euclidean group. '''
-    R, t, zero, one = extract_pieces(M) #@UnusedVariable
+    R, t, zero, one = extract_pieces(M)  # @UnusedVariable
     check_SO(R)
     assert_allclose(one, 1, err_msg='I expect the lower-right to be 1')
     assert_allclose(zero, 0, err_msg='I expect the bottom component to be 0.')
@@ -14,7 +14,7 @@ def check_SE(M):
 
 def check_se(M):
     ''' Checks that the input is in the special euclidean Lie algebra. '''
-    omega, v, Z, zero = extract_pieces(M) #@UnusedVariable
+    omega, v, Z, zero = extract_pieces(M)  # @UnusedVariable
     check_skew_symmetric(omega)
     assert_allclose(Z, 0, err_msg='I expect the lower-right to be 0.')
     assert_allclose(zero, 0, err_msg='I expect the bottom component to be 0.')
@@ -52,11 +52,9 @@ def combine_pieces(a, b, c, d):
 
 # TODO: specialize for SE2, SE3
 
-
 @contract(returns='SE2')
 def SE2_identity():
     return np.eye(3)
-
 
 @contract(returns='SE3')
 def SE3_identity():
@@ -74,7 +72,7 @@ SE3_from_rotation_translation = pose_from_rotation_translation
 
 @contract(pose='array[NxN],SE', returns='tuple(array[MxM], array[M]),M=N-1')
 def rotation_translation_from_pose(pose):
-    R, t, zero, one = extract_pieces(pose) #@UnusedVariable
+    R, t, zero, one = extract_pieces(pose)  # @UnusedVariable
     return R.copy(), t.copy()
 
 # TODO: make more efficient
@@ -85,7 +83,7 @@ rotation_translation_from_SE3 = rotation_translation_from_pose
 @contract(pose='SE2', returns='array[2]')
 def translation_from_SE2(pose):
     # TODO: make it more efficient
-    R, t, zero, one = extract_pieces(pose) #@UnusedVariable
+    R, t, zero, one = extract_pieces(pose)  # @UnusedVariable
     return t.copy()
 
 
@@ -123,14 +121,14 @@ def SE2_from_xytheta(xytheta):
     return SE2_from_translation_angle([xytheta[0], xytheta[1]], xytheta[2])
 
 
-@contract(returns='array[3]|seq[3](number)', pose='SE2')
+@contract(returns='array[3],finite', pose='SE2')
 def xytheta_from_SE2(pose):
     ''' Returns an element of SE2 from translation and rotation. '''
     t, alpha = translation_angle_from_SE2(pose)
     return np.array([t[0], t[1], alpha])
 
 
-@contract(linear='array[2]|seq[2](number)', angular='number', returns='se2')
+@contract(linear='(array[2],finite)|seq[2](number,finite)', angular='number,finite', returns='se2')
 def se2_from_linear_angular(linear, angular):
     ''' Returns an element of se2 from linear and angular velocity. '''
     linear = np.array(linear)
@@ -138,23 +136,28 @@ def se2_from_linear_angular(linear, angular):
     return combine_pieces(M, linear, linear * 0, 0)
 
 
-@contract(vel='se2', returns='tuple(array[2],float)')
+@contract(vel='se2', returns='tuple((array[2],finite),Float)')
 def linear_angular_from_se2(vel):
-    M, v, Z, zero = extract_pieces(vel) #@UnusedVariable
-    omega = M[1, 0]
+    M, v, Z, zero = extract_pieces(vel)  # @UnusedVariable
+    omega = float(M[1, 0])
     return v, omega
+
+
+@contract(vel='se2', returns='Float')
+def angular_from_se2(vel):
+    return linear_angular_from_se2(vel)[1]
 
 
 # TODO: add to docs
 @contract(pose='SE2', returns='se2')
 def se2_from_SE2_slow(pose):
     ''' Converts a pose to its Lie algebra representation. '''
-    R, t, zero, one = extract_pieces(pose) #@UnusedVariable
+    R, t, zero, one = extract_pieces(pose)  # @UnusedVariable
     # FIXME: this still doesn't work well for singularity
     W = np.array(logm(pose).real)
-    M, v, Z, zero = extract_pieces(W) #@UnusedVariable
+    M, v, Z, zero = extract_pieces(W)  # @UnusedVariable
     M = 0.5 * (M - M.T)
-    if np.abs(R[0, 0] - (-1)) < 1e-10: # XXX: threshold
+    if np.abs(R[0, 0] - (-1)) < 1e-10:  # XXX: threshold
         # cannot use logarithm for log(-I), it gives imaginary solution
         M = hat_map_2d(np.pi)
 
@@ -168,12 +171,12 @@ def se2_from_SE2(pose):
         
         See Bullo, Murray "PD control on the euclidean group" for proofs.
     '''
-    R, t, zero, one = extract_pieces(pose) #@UnusedVariable
+    R, t, zero, one = extract_pieces(pose)  # @UnusedVariable
     w = angle_from_rot2d(R)
 
     w_abs = np.abs(w)
     # FIXME: singularity
-    if w_abs < 1e-8: # XXX: threshold
+    if w_abs < 1e-8:  # XXX: threshold
         a = 1
     else:
         a = (w_abs / 2) / np.tan(w_abs / 2)
@@ -193,7 +196,7 @@ def SE2_from_se2(vel):
     w = vel[1, 0]
     R = rot2d(w)
     v = vel[0:2, 2]
-    if np.abs(w) < 1e-8: # XXX threshold
+    if np.abs(w) < 1e-8:  # XXX threshold
         R = np.eye(2)
         t = v
     else:
@@ -247,7 +250,7 @@ def SE2_from_SE3(pose, check_exact=True, z_atol=1e-6):
 
         assert_allclose(axis2, [0, 0, 1],
                         rtol=GeometryConstants.rtol_SE2_from_SE3,
-                        atol=GeometryConstants.rtol_SE2_from_SE3, # XXX
+                        atol=GeometryConstants.rtol_SE2_from_SE3,  # XXX
                         err_msg=err_msg)
 
     angle = angle * np.sign(axis[2])
