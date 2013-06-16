@@ -279,6 +279,7 @@ class DifferentiableManifold(object):
         return to_yaml('%s' % self, x)
 
 
+
 class RandomManifold(DifferentiableManifold):
     ''' This is the base class for manifolds that have the ability 
         to sample random points. '''
