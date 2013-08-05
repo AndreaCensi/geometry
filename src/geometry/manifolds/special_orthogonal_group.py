@@ -1,7 +1,9 @@
-from . import DifferentiableManifold, MatrixLieGroup, np, S2, so, contract
+from . import DifferentiableManifold, MatrixLieGroup, S2, so
 from .. import (assert_allclose, rot2d, random_rotation,
     axis_angle_from_rotation, rotation_from_axis_angle)
 from contracts import check
+from contracts import contract
+import numpy as np
 
 
 class SO_group(MatrixLieGroup):

@@ -1,5 +1,8 @@
-from . import (map_hat_2d, contract, np, angle_from_rot2d,
+from . import (map_hat_2d, angle_from_rot2d,
     rotation_from_axis_angle, hat_map, rot2d)
+
+from contracts import contract
+import numpy as np
 
 
 @contract(returns='SO3', a='SO2')
@@ -13,7 +16,7 @@ def SO2_project_from_SO3(b):
     direction = np.array([1, 0, 0])
     vector = np.dot(b, direction)
     n = np.linalg.norm(vector)
-    atol = 1e-8 # XXX: make common
+    atol = 1e-8  # XXX: make common
     if n < atol:
         return rot2d(0)
     else:

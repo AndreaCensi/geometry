@@ -1,14 +1,14 @@
-from . import (safe_arccos, normalize_length, contract, new_contract,
-     np)
-
+from . import safe_arccos, normalize_length
 from .utils import assert_allclose
+from contracts import contract, new_contract
+import numpy as np
 
 
 @new_contract
 @contract(x='array[N],N>0')
 def unit_length(x):
     ''' Checks that the value is a 1D vector with unit length in the 2 norm.'''
-    assert_allclose(1, np.linalg.norm(x), rtol=1e-5) # XXX:
+    assert_allclose(1, np.linalg.norm(x), rtol=1e-5)  # XXX:
 
 new_contract('direction', 'array[3], unit_length')
 
@@ -21,7 +21,7 @@ new_contract('S2', 'array[3],unit_length')
 def directions(X):
     ''' Checks that every column has unit length. '''
     norm = (X * X).sum(axis=0)
-    assert_allclose(1, norm, rtol=1e-5) # XXX:
+    assert_allclose(1, norm, rtol=1e-5)  # XXX:
 
 
 @contract(s='array[K],K>=2', v='array[K]')
@@ -38,14 +38,14 @@ def assert_orthogonal(s, v):
 @contract(x='array[N]', returns='array[N](>=-pi,<pi)')
 def normalize_pi(x):
     ''' Normalizes the entries in *x* in the interval :math:`[-pi,pi)`. '''
-    angle = np.arctan2(np.sin(x), np.cos(x)) # in [-pi, pi]
+    angle = np.arctan2(np.sin(x), np.cos(x))  # in [-pi, pi]
     angle[angle == np.pi] = -np.pi
     return angle
 
 
 @contract(x='float', returns='>=-pi,<pi')
-def normalize_pi_scalar(x): # TODO: is this the best solution
-    angle = np.arctan2(np.sin(x), np.cos(x)) # in [-pi, pi]
+def normalize_pi_scalar(x):  # TODO: is this the best solution
+    angle = np.arctan2(np.sin(x), np.cos(x))  # in [-pi, pi]
     if angle == np.pi:
         return -np.pi
     return angle
@@ -98,7 +98,7 @@ def distribution_radius(S):
         .. math:: \\textsf{radius} = \\min \\{ r | \\exists s : 
                   \\forall x \\in S : d(s,x) <= r \\}
     '''
-    D = np.arccos(np.clip(np.dot(S.T, S), -1, 1)) # XXX: repeated
+    D = np.arccos(np.clip(np.dot(S.T, S), -1, 1))  # XXX: repeated
     distances = D.max(axis=0)
     center = np.argmin(distances)
     return distances[center]
@@ -112,7 +112,7 @@ def distances_from(S, s):
         points *S* to a given point *s*. 
         
     '''
-    return np.arccos(np.clip(np.dot(s, S), -1, 1)) # XXX: repeated
+    return np.arccos(np.clip(np.dot(s, S), -1, 1))  # XXX: repeated
 
 
 @contract(ndim='(2|3),K', returns='array[K],unit_length')
@@ -194,7 +194,7 @@ def slerp(s1, s2, t):
     ''' Spherical interpolation between two points on a hypersphere. '''
     omega = np.arccos(np.dot(s1 / np.linalg.norm(s1), s2 / np.linalg.norm(s2)))
     so = np.sin(omega)
-    if np.abs(so) < 1e-18: # XXX thresholds
+    if np.abs(so) < 1e-18:  # XXX thresholds
         return s1
     return np.sin((1.0 - t) * omega) / so * s1 + np.sin(t * omega) / so * s2
 

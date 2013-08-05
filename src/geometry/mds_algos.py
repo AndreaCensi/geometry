@@ -1,9 +1,11 @@
-from . import (best_similarity_transform, contract, np, assert_allclose,
+from . import (best_similarity_transform, assert_allclose,
     project_vectors_onto_sphere, eigh)
 from contracts import check_multiple
 import itertools
 from geometry.formatting import formatm
 from geometry import logger
+from contracts import contract
+import numpy as np
 
 
 @contract(S='array[KxN]', returns='array[NxN](>=0)')

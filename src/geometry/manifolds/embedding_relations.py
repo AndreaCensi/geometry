@@ -1,5 +1,5 @@
 from . import (DifferentiableManifold, SO3, SO2, R1, R2, R3, SE2, SE3, S2, S1,
-    T1, T2, T3, so2, so3, se2, se3, np, Tran2, tran2, tran3, Tran3, tran1)
+    T1, T2, T3, so2, so3, se2, se3, Tran2, tran2, tran3, Tran3, tran1)
 from .. import (S1_project_from_S2, S2_from_S1, S1_project_from_R2,
     S2_project_from_R3, se2_from_so2, so2_project_from_se2, se3_from_so3,
     so3_project_from_se3, SE3_from_SO3, SE2_from_SO2, SO2_project_from_SE2,
@@ -10,6 +10,7 @@ from .. import (S1_project_from_S2, S2_from_S1, S1_project_from_R2,
     SE3_from_SE2, SO2_from_angle, angle_from_SO2)
 from geometry.spheres import normalize_pi
 
+import numpy as np
 
 def embedding(small, big, embed_in, project_from, desc=None):
     DifferentiableManifold.embedding(small, big, embed_in, project_from,
@@ -23,6 +24,31 @@ def isomorphism(A, B, a_to_b, b_to_a, desc=None):
 
 def identity(x):
     return x
+
+def tran1_project_from_tran2(b):
+    return np.array([[0, b[0, -1]],
+                    [0, 0]])
+
+
+def tran2_from_tran1(b):
+    return np.array([[0, 0, b[0, -1]],
+                      [0, 0, 0],
+                      [0, 0, 0]])
+                                         
+
+def tran2_project_from_se2(b):
+    return np.array([[0, 0, b[0, -1]],
+                     [0, 0, b[1, -1]],
+                     [0, 0, 0]])
+
+
+def tran3_project_from_se3(b):
+    return np.array([[0, 0, 0, b[0, -1]],
+                     [0, 0, 0, b[1, -1]],
+                     [0, 0, 0, b[2, -1]],
+                     [0, 0, 0, 0]])
+
+
 
 
 embedding(R1, R2, lambda a: np.array([a[0], 0]),
@@ -82,16 +108,6 @@ embedding(T2, R2, identity, lambda x: T2.normalize(x))
 embedding(T3, R3, identity, lambda x: T3.normalize(x))
 
 
-def tran1_project_from_tran2(b):
-    return np.array([[0, b[0, -1]],
-                    [0, 0]])
-
-
-def tran2_from_tran1(b):
-    return np.array([[0, 0, b[0, -1]],
-                      [0, 0, 0],
-                      [0, 0, 0]])
-                                         
 embedding(tran1, tran2, tran2_from_tran1, tran1_project_from_tran2)
                 
 
@@ -103,18 +119,6 @@ embedding(tran2, tran3, lambda b: np.array([[0, 0, 0, b[0, -1]],
                                          [0, 0, b[1, -1]],
                                          [0, 0, 0]]))
 
-
-def tran2_project_from_se2(b):
-    return np.array([[0, 0, b[0, -1]],
-                     [0, 0, b[1, -1]],
-                     [0, 0, 0]])
-
-
-def tran3_project_from_se3(b):
-    return np.array([[0, 0, 0, b[0, -1]],
-                     [0, 0, 0, b[1, -1]],
-                     [0, 0, 0, b[2, -1]],
-                     [0, 0, 0, 0]])
                     
 embedding(tran2, se2, identity, tran2_project_from_se2)
 

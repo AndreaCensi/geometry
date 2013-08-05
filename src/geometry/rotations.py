@@ -1,10 +1,13 @@
-''' Contains all about rotation matrices, quaternions, and various conversions.
+''' 
+    Contains all about rotation matrices, quaternions, and various conversions.
 
-     conventions: q=( a + bi + cj + dk), with a>0
+    conventions: q=( a + bi + cj + dk), with a>0
 '''
-from . import (assert_allclose, new_contract, contract, safe_arccos, np,
+from . import (assert_allclose, safe_arccos,
     default_axis, normalize_length)
 import itertools
+from contracts import contract, new_contract
+import numpy as np
 
 
 new_contract('unit_quaternion', 'array[4], unit_length')
@@ -17,7 +20,7 @@ new_contract('axis_angle_canonical', 'tuple(direction, (float,>=0, <=pi))')
 def check_SO(x):
     ''' Checks that the given value is a rotation matrix of arbitrary size. '''
     check_orthogonal(x)
-    determinant = np.linalg.det(x * 1.0) # XXX: voodoo
+    determinant = np.linalg.det(x * 1.0)  # XXX: voodoo
     # lapack_lite.LapackError: 
     # Parameter a has non-native byte order in lapack_lite.dgetrf
     assert_allclose(determinant, 1.0)
@@ -28,7 +31,7 @@ def check_orthogonal(x):
     ''' Check that the argument is an orthogonal matrix. '''
     N = x.shape[0]
     I = np.eye(N)
-    rtol = 10E-10 # XXX:
+    rtol = 10E-10  # XXX:
     atol = 10E-7  # XXX:
     assert_allclose(I, np.dot(x, x.T), rtol=rtol, atol=atol)
     assert_allclose(I, np.dot(x.T, x), rtol=rtol, atol=atol)
@@ -48,7 +51,7 @@ def check_skew_symmetric(x):
             if i < j:
                 continue
             if x[i, j] != -x[j, i]:
-                raise ValueError('Expected skew symmetric, but ' +
+                raise ValueError('Expected skew symmetric, but ' + 
                                  'a[%d][%d] = %f, a[%d][%d] = %f' % \
                                  (i, j, x[i, j], j, i, x[j, i]))
 
@@ -103,8 +106,8 @@ def hat_map_2d(omega):
 def map_hat_2d(W):
     return W[1, 0]
 
-rot2d = SO2_from_angle # TODO: deprecated 
-rot2d_from_angle = SO2_from_angle# TODO: deprecated 
+rot2d = SO2_from_angle  # TODO: deprecated 
+rot2d_from_angle = SO2_from_angle  # TODO: deprecated 
 angle_from_rot2d = angle_from_SO2
 
 
@@ -159,7 +162,7 @@ def geodesic_distance_for_rotations(R1, R2):
     
     '''
     R = np.dot(R1, R2.T)
-    axis1, angle1 = axis_angle_from_rotation(R) #@UnusedVariable
+    axis1, angle1 = axis_angle_from_rotation(R)  # @UnusedVariable
     return angle1
 
 
@@ -226,7 +229,7 @@ def quaternion_from_rotation(R):
     rr = 1 + R[u, u] - R[v, v] - R[w, w]
     assert rr >= 0
     r = np.sqrt(rr)
-    if r == 0: # TODO: add tolerance
+    if r == 0:  # TODO: add tolerance
         return quaternion_from_axis_angle(default_axis(), 0.0)
     else:
         q0 = (R[w, v] - R[v, w]) / (2 * r)
@@ -268,7 +271,7 @@ def axis_angle_from_quaternion(q):
         This is the inverse of :py:func:`quaternion_from_axis_angle`.
     '''
     angle = 2 * safe_arccos(q[0])
-    if angle == 0: # XXX: use tolerance
+    if angle == 0:  # XXX: use tolerance
         axis = default_axis()
     else:
         axis = q[1:] / np.sin(angle / 2)
@@ -343,7 +346,7 @@ def rotation_from_axis_angle2(axis, angle):
 
 @contract(x_axis='direction', vector_on_xy_plane='direction',
           returns='rotation_matrix')
-def rotation_from_axes_spec(x_axis, vector_on_xy_plane): # TODO: docs
+def rotation_from_axes_spec(x_axis, vector_on_xy_plane):  # TODO: docs
     """ 
         Creates a rotation matrix from the axes. 
         ``x_axis`` is the new direction of the (1,0,0) vector

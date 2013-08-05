@@ -1,4 +1,6 @@
-from . import DifferentiableManifold, contract, np
+from . import DifferentiableManifold
+from contracts import contract
+import numpy as np
 
 __all__ = ['ProductManifold']
 

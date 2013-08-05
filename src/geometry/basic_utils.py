@@ -1,5 +1,8 @@
-from . import GeometryConstants, contract, np, new_contract
+from .constants import GeometryConstants
+from contracts import contract, new_contract
+import numpy as np
 import warnings
+
 
 new_contract('R1', 'array[1]')
 new_contract('R2', 'array[2]')

@@ -1,4 +1,4 @@
-from contracts import contracts
+from contracts import contract
 from geometry import (random_direction, random_quaternion, random_rotation,
     assert_allclose)
 import numpy as np
@@ -11,7 +11,7 @@ N = 20
 def rotations_sequence():
     yield np.eye(3)
     # TODO: add special values
-    for i in range(N): #@UnusedVariable
+    for i in range(N):  # @UnusedVariable
         yield random_rotation()
 
 
@@ -24,23 +24,23 @@ def directions_sequence():
     yield np.array([0.0, -1.0, 0.0])
     yield np.array([0.0, 0.0, -1.0])
     # TODO: add special values
-    for i in range(N): #@UnusedVariable
+    for i in range(N):  # @UnusedVariable
         yield random_direction(3)
 
 
 def quaternions_sequence():
     # TODO: add special values
-    for i in range(N): #@UnusedVariable
+    for i in range(N):  # @UnusedVariable
         yield random_quaternion()
 
 
 def axis_angle_sequence():
     # TODO: add special
-    for i in range(N): #@UnusedVariable
+    for i in range(N):  # @UnusedVariable
         yield random_axis_angle()
 
 
-@contracts(returns='tuple(direction, (float,<3.15))')
+@contract(returns='tuple(direction, (float,<3.15))')
 def random_axis_angle():
     max_angle = np.pi * 0.9
     angle = np.random.uniform() * max_angle
@@ -72,6 +72,6 @@ class GeoTestCase(unittest.TestCase):
             as distinct parameters. '''
 
         for x in sequence:
-            #yield self.check_one, x, op1, op2
+            # yield self.check_one, x, op1, op2
             self.check_one(x, op1, op2)
 

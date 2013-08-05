@@ -1,5 +1,7 @@
+import numpy as np
+from contracts import contract
 from . import (SE3_from_rotation_translation, combine_pieces, extract_pieces,
-    contract, np, SE2_from_rotation_translation, rotation_translation_from_SE2,
+    SE2_from_rotation_translation, rotation_translation_from_SE2,
     rotation_translation_from_SE3, hat_map, map_hat_2d, SO2_project_from_SO3,
     so2_project_from_so3, so3_from_so2)
 
@@ -67,7 +69,7 @@ def R3_project_from_SE3(b):
 
 @contract(returns='se3', a='se2')
 def se3_from_se2(a):
-    W, v, zero, one = extract_pieces(a) #@UnusedVariable
+    W, v, zero, one = extract_pieces(a)  # @UnusedVariable
     W = so3_from_so2(W)
     v = np.array([v[0], v[1], 0])
     return combine_pieces(W, v, v * 0, 0)
@@ -75,7 +77,7 @@ def se3_from_se2(a):
 
 @contract(returns='SE2', b='SE3')
 def SE2_project_from_SE3(b):
-    R, t, zero, one = extract_pieces(b) #@UnusedVariable
+    R, t, zero, one = extract_pieces(b)  # @UnusedVariable
     R = SO2_project_from_SO3(R)
     t = t[0:2]
     return combine_pieces(R, t, t * 0, 1)
@@ -83,7 +85,7 @@ def SE2_project_from_SE3(b):
 
 @contract(returns='se2', b='se3')
 def se2_project_from_se3(b):
-    W, v, zero, one = extract_pieces(b) #@UnusedVariable
+    W, v, zero, one = extract_pieces(b)  # @UnusedVariable
     W = so2_project_from_so3(W)
     v = v[0:2]
     return combine_pieces(W, v, v * 0, 0)

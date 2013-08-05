@@ -1,8 +1,9 @@
-from . import DifferentiableManifold, MatrixLieGroup, SO, se, R, contract, np
+from . import DifferentiableManifold, MatrixLieGroup, SO, se, R
 from .. import (SE3_from_SE2, assert_allclose, pose_from_rotation_translation,
     rotation_translation_from_pose, extract_pieces, se2_from_SE2, SE2_from_se2,
     SE2_from_translation_angle)
-from contracts import describe_type
+from contracts import contract, describe_type
+import numpy as np
 
 __all__ = ['SE_group']
 

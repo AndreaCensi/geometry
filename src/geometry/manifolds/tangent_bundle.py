@@ -1,4 +1,7 @@
-from . import DifferentiableManifold, contract
+from . import DifferentiableManifold
+from contracts import contract
+
+__all__ = ['TangentBundle']
 
 
 class TangentBundle(DifferentiableManifold):
@@ -25,7 +28,7 @@ class TangentBundle(DifferentiableManifold):
         # XXX: can we make it recursive?
         raise ValueError('Not supported')
 
-    def project_ts(self, bv): # TODO: test
+    def project_ts(self, bv):  # TODO: test
         # XXX: can we make it recursive?
         raise ValueError('Not supported')
 
