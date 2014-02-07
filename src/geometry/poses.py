@@ -1,8 +1,10 @@
-from . import (angle_from_rot2d, rotz, axis_angle_from_rotation, hat_map_2d,
-    assert_allclose, rot2d, new_contract, check_SO, check_skew_symmetric, expm, logm)
-from .constants import GeometryConstants
-from contracts import contract
+from contracts import contract, new_contract
+
 import numpy as np
+
+from . import (angle_from_rot2d, rotz, axis_angle_from_rotation, hat_map_2d,
+    assert_allclose, rot2d, check_SO, check_skew_symmetric, expm, logm)
+from .constants import GeometryConstants
 
 
 def check_SE(M):

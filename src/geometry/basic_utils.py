@@ -1,7 +1,10 @@
-from .constants import GeometryConstants
-from contracts import contract, new_contract
-import numpy as np
 import warnings
+
+from contracts import contract, new_contract
+
+import numpy as np
+
+from .constants import GeometryConstants
 
 
 new_contract('R1', 'array[1]')

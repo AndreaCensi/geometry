@@ -3,11 +3,13 @@
 
     conventions: q=( a + bi + cj + dk), with a>0
 '''
-from . import (assert_allclose, safe_arccos,
-    default_axis, normalize_length)
 import itertools
+
 from contracts import contract, new_contract
+
 import numpy as np
+
+from . import assert_allclose, safe_arccos, default_axis, normalize_length
 
 
 new_contract('unit_quaternion', 'array[4], unit_length')

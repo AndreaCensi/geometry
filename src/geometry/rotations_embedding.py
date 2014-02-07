@@ -1,8 +1,9 @@
-from . import (map_hat_2d, angle_from_rot2d,
-    rotation_from_axis_angle, hat_map, rot2d)
-
 from contracts import contract
+
 import numpy as np
+
+from . import (map_hat_2d, angle_from_rot2d, rotation_from_axis_angle, hat_map,
+    rot2d)
 
 
 @contract(returns='SO3', a='SO2')

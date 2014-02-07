@@ -1,7 +1,9 @@
-from . import safe_arccos, normalize_length
-from .utils import assert_allclose
 from contracts import contract, new_contract
+
 import numpy as np
+
+from .basic_utils import safe_arccos, normalize_length
+from .utils import assert_allclose
 
 
 @new_contract

@@ -1,8 +1,10 @@
 
-from .manifolds import DifferentiableManifold
 from contracts import contract, describe_value, describe_type
+
 from geometry import logger
 import numpy as np
+
+from .manifolds import DifferentiableManifold
 
 
 #
@@ -25,8 +27,6 @@ import numpy as np
 #    pose, vel = x    
 #    return packet('TSE3', 'base-tangent',
 #                  [yaml_from_SE3(pose), yaml_from_se3(vel)])
-
-
 converters = {}
 default_representation = {}
 

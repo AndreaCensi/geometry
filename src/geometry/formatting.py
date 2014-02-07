@@ -1,7 +1,8 @@
-from contracts import contract
-import numpy as np
 from string import ljust
-from contracts import describe_type, describe_value
+
+from contracts import contract, describe_type, describe_value
+
+import numpy as np
 
 
 def printm(*args):
