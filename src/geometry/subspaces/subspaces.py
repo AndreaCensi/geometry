@@ -1,7 +1,8 @@
-from .. import assert_allclose
-
 from contracts import contract
+
+from geometry.utils import assert_allclose
 import numpy as np
+
 
 @contract(A='array[NxK]')
 def normalize_columns(A):

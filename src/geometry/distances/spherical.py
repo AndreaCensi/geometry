@@ -1,6 +1,7 @@
-
 from contracts import contract, new_contract
+
 import numpy as np
+
 
 new_contract('cosines', 'array[NxN](>=-1,<=+1)')
 new_contract('angles', 'array[N](>=-pi,<=pi)')

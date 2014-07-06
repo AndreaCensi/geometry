@@ -1,5 +1,7 @@
 from contracts import new_contract, contract
+
 import numpy as np
+
 
 @new_contract
 @contract(D='array[NxN](>=0)')
