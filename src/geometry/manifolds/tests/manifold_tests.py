@@ -80,7 +80,6 @@ def check_logmap3(M, a, b):
 def check_friendly(M, a):
     M.friendly(a)
     
-    
 @for_all_manifold_point
 def check_normalize(M, a):
     """ normalize() must be idempotent. """
