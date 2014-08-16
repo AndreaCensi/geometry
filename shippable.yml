@@ -9,9 +9,7 @@ python:
   # - pypy
   
 install:
-  - sudo apt-get install python-numpy
-  - "python -c 'import numpy'"
-  - sudo apt-get install python-scipy
+  - pip install scipy
   - "python -c 'import scipy'"
   - pip install -r requirements.txt
 
