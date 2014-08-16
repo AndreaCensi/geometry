@@ -1,0 +1,142 @@
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls todo
+parmake *skin*
+ls
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls todo
+parmake *skin*
+parmake *plot*
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls todo
+parmake *skin*
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls *report_plot*
+clean *report_plot*
+parmake
+ls *report_plot*
+clean *report_plot*
+parmake
+make
+parmake new_process=1
+ls todo
+parmake *skin*
+parmake *plot*
+ls
+make not *custom*

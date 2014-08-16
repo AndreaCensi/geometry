@@ -9,3 +9,4 @@ src/coverage_information
 .noseids
 coverage_information
 *.py,cover
+out-comptests
