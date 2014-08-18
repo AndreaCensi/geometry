@@ -224,7 +224,17 @@ def SE3_from_SE2(pose):
     t, angle = translation_angle_from_SE2(pose)
     return pose_from_rotation_translation(rotz(angle),
                                           np.array([t[0], t[1], 0]))
-
+# 
+@contract(vel='se3', returns='se2')
+def se2_from_se3(vel, check_exact=True, z_atol=1e-6):
+    # TODO: testing this
+    M, v, Z, zero = extract_pieces(vel)  # @UnusedVariable
+    M1 = M[:2,:2]
+    v1 = v[:2]
+    if check_exact:
+        assert_allclose(v[2], 0, atol=z_atol)
+    
+    return combine_pieces(M1, v1, Z[:2], zero) 
 
 @contract(pose='SE3', returns='SE2')
 def SE2_from_SE3(pose, check_exact=True, z_atol=1e-6):

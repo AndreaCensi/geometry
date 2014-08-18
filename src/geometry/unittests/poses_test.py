@@ -6,6 +6,8 @@ from geometry import (translation_angle_from_SE2, SE2_from_translation_angle,
     se2_from_SE2_slow,
     assert_allclose)
 import numpy as np
+from geometry.poses import SE3_from_SE2, se2_from_se3
+from geometry.manifolds import SE3
 
 
 class PosesTest(GeoTestCase):
@@ -63,7 +65,14 @@ def comparison_test():
         assert_allclose(SE2a, pose, atol=1e-8, err_msg='SE2a != pose')
         assert_allclose(SE2b, pose, atol=1e-8, err_msg='SE2b != pose')
 
-
+def test_se3_se2():
+    for pose in SE2.interesting_points():
+        pose3 = SE3_from_SE2(pose)
+        vel3 = SE3.algebra_from_group(pose3)
+        vel2 = se2_from_se3(vel3)
+        pose2= SE2.group_from_algebra(vel2)
+        assert_allclose(pose2, pose, atol=1e-8)
+    
 def comparison_test_2():
     ''' Compares between se2_from_SE2 and se2_from_SE2_slow. '''
     for pose in SE2.interesting_points():
