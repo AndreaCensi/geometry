@@ -89,6 +89,9 @@ def translation_from_SE2(pose):
     R, t, zero, one = extract_pieces(pose)  # @UnusedVariable
     return t.copy()
 
+def rotation_from_SE2(pose):
+    from geometry.poses_embedding import SO2_project_from_SE2
+    return SO2_project_from_SE2(pose)
 
 @contract(pose='SE3', returns='array[3]')
 def translation_from_SE3(pose):
