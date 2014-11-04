@@ -8,6 +8,8 @@ python:
   - 3.4
   - pypy
   
+build_image: shippableimages/ubuntu1204_python
+
 install:
   - pip install -r requirements.txt
 
