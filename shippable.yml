@@ -10,6 +10,7 @@ python:
   
 build_image: shippableimages/ubuntu1204_python
 
+# remember -y
 before_install:
     - shippable_retry apt-get update
     - shippable_retry apt-get install -y python-numpy python-scipy
