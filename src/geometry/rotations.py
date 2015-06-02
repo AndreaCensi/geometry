@@ -82,6 +82,25 @@ def rotz(theta):
             [np.sin(theta), +np.cos(theta), 0],
             [0, 0, 1]])
 
+@contract(w='array[3]', returns='SO3')
+def SO3_from_R3(w): # untested
+    from geometry.manifolds import so3, SO3
+    R = SO3.group_from_algebra(so3.algebra_from_vector(w))
+    return R
+
+@contract(theta='number', returns='SO3')
+def rotx(theta):
+    ''' Returns a 3x3 rotation matrix corresponding 
+        to rotation around the *x* axis. '''
+    w = np.array([theta, 0, 0])
+    return SO3_from_R3(w)
+
+@contract(theta='number', returns='SO3')
+def roty(theta):
+    ''' Returns a 3x3 rotation matrix corresponding 
+        to rotation around the *x* axis. '''
+    w = np.array([0, theta, 0])
+    return SO3_from_R3(w)
 
 @contract(theta='number', returns='SO2')
 def SO2_from_angle(theta):
