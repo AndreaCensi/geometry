@@ -10,3 +10,4 @@ src/coverage_information
 coverage_information
 *.py,cover
 out-comptests
+.eggs
