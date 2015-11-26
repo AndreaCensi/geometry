@@ -1,4 +1,3 @@
-from string import ljust
 
 from contracts import contract, describe_type, describe_value
 
@@ -63,7 +62,7 @@ def join_columns(cols):
         srow = ''
         for i, col in enumerate(cols):
             cell = get_cell(col, j)
-            cell = ljust(cell, col_widths[i])
+            cell = cell.ljust(col_widths[i])
             srow += cell
         s += srow + '\n'
     return s
