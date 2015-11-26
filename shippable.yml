@@ -14,7 +14,7 @@ build_image: shippableimages/ubuntu1204_python
 before_install:
     - shippable_retry apt-get update
     - shippable_retry apt-get install -y python-numpy python-scipy
-    - virtualenv --system-site-packages -p /usr/bin/python$VIRTUALENV_PYTHON $HOME/new_ve
+    - virtualenv --system-site-packages $HOME/new_ve
     - . $HOME/new_ve/bin/activate
 
 install:
