@@ -2,7 +2,7 @@ from contracts import check
 from contracts import contract
 from geometry.rotations import rot2d, random_rotation, axis_angle_from_rotation, \
     rotation_from_axis_angle
-from geometry.utils.numpy_backport import assert_allclose
+from geometry.utils import assert_allclose
 import numpy as np
 
 from .differentiable_manifold import DifferentiableManifold
