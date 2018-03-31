@@ -5,7 +5,7 @@ version = '1.4dev1'
 setup(name='PyGeometry',
       version=version,
       author="Andrea Censi",
-      author_email="censi@mit.edu",
+      author_email="acensi@idsc.mavt.ethz.ch",
       url='http://andreacensi.github.com/geometry/',
       license="LGPL",
       classifiers=[
@@ -13,7 +13,7 @@ setup(name='PyGeometry',
       ],
       package_dir={'':'src'},
       packages=find_packages('src'),
-      install_requires=['PyContracts>=1.5,<2'],
+      install_requires=['PyContracts>=1.5,<2', 'numpy'],
       extras_require={
         'algorithms':  ["scipy"],
       },
