@@ -8,17 +8,17 @@ development = False
 # Reactivate if some strange bug is suspected.
 GEOMETRY_DO_EXTRA_CHECKS = False
 
+import logging  #@NoMove
+logger = logging.getLogger(__name__)  #@NoMove
+
 import os
+
 if 'CIRCLE' in os.environ:
-    print('activating extra checks')
+    logger.info('Activating extra checks.')
     development = True
     GEOMETRY_DO_EXTRA_CHECKS = True
     import numpy as np
     np.seterr(all='raise')
-
-# If you want to be safe, use in your code:
-#   import numpy as np
-#   np.seterr(all='err')
 
 try:
     from scipy.linalg import logm, expm, eigh
@@ -43,9 +43,6 @@ except ImportError:
     eigh = make_warning('eigh')
     scipy_found = False
     development = False
-
-import logging  #@NoMove
-logger = logging.getLogger(__name__)  #@NoMove
 
 from .basic_utils import *
 from .constants import *

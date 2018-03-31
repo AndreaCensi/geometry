@@ -52,7 +52,7 @@ def list_mgroup():
 def list_mgroup_point():
     """ Yields all possible (M, point, i, num) tests we have """
     for M in list_mgroup():
-        interesting = get_test_points(M, num_random=0)
+        interesting = get_test_points(M)
         num_examples = len(interesting)
         for i in range(num_examples):
             point = interesting[i]
