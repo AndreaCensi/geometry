@@ -1,13 +1,14 @@
 from contracts import contract
-from geometry.manifolds.differentiable_manifold import DifferentiableManifold
 import numpy as np
+
+from .differentiable_manifold import DifferentiableManifold
 
 __all__ = ['ProductManifold']
 
 
 class ProductManifold(DifferentiableManifold):
 
-    @contract(components='seq[>=2,N](DifferentiableManifold)',
+    @contract(components='seq[>=2,N]($DifferentiableManifold)',
               weights='None|array[N](>0)')
     def __init__(self, components, weights=None):
         dim = sum([m.dimension for m in components])

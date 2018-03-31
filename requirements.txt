@@ -1,4 +1,4 @@
 numpy
-PyContracts
+PyContracts==1.8.3
 nose
 scipy
