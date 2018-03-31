@@ -8,6 +8,14 @@ development = False
 # Reactivate if some strange bug is suspected.
 GEOMETRY_DO_EXTRA_CHECKS = False
 
+import os
+if 'CIRCLE' in os.environ:
+    print('activating extra checks')
+    development = True
+    GEOMETRY_DO_EXTRA_CHECKS = True
+    import numpy as np
+    np.seterr(all='raise')
+
 # If you want to be safe, use in your code:
 #   import numpy as np
 #   np.seterr(all='err')
@@ -38,8 +46,6 @@ except ImportError:
 
 import logging  #@NoMove
 logger = logging.getLogger(__name__)  #@NoMove
-#from contracts import new_contract, contract  #@NoMove
-#from geometry.utils.numpy_backport import assert_allclose  #@NoMove
 
 from .basic_utils import *
 from .constants import *
