@@ -1,16 +1,18 @@
+from contracts import contract
+
+import numpy as np
+
 from . import MatrixLieAlgebra, so
 from .. import extract_pieces, combine_pieces, hat_map_2d, hat_map
 
-from contracts import contract
-import numpy as np
-
 __all__ = ['se_algebra']
 
+
 class se_algebra(MatrixLieAlgebra):
-    ''' This is the Lie algebra se(n) for the Special Euclidean group SE(n). 
-    
+    ''' This is the Lie algebra se(n) for the Special Euclidean group SE(n).
+
         Note that you have to supply a coefficient *alpha* that
-        weights rotation and translation when defining distances. 
+        weights rotation and translation when defining distances.
     '''
 
     def __init__(self, N, alpha):
@@ -51,12 +53,9 @@ class se_algebra(MatrixLieAlgebra):
         else:
             assert False, 'Not implemented for n>=4.'
 
-
-
-        
     @contract(v='array[N]', returns='belongs')
     def algebra_from_vector(self, v):
-        """ Note that the first element is (omega, vx, vy) or 
+        """ Note that the first element is (omega, vx, vy) or
             (w1,w2,w3,vx,vy,vz) """
 
         if self.n == 3:
@@ -75,22 +74,22 @@ class se_algebra(MatrixLieAlgebra):
 
     @contract(returns='belongs')
     def algebra_from_velocities(self, avel, lvel):
-        """ 
-            A convenience function that builds an element 
-            of the algebra from linear/angular velocities. 
+        """
+            A convenience function that builds an element
+            of the algebra from linear/angular velocities.
         """
         # TODO: test this
-        
+
         if self.n == 3:
             return self.algebra_from_velocities_2d(avel=avel, lvel=lvel)
         else:
             raise NotImplemented
-        
+
     @contract(avel='number', lvel='seq[2](number)')
     def algebra_from_velocities_2d(self, avel, lvel):
         W = hat_map_2d(avel)
-        return combine_pieces(W, lvel, lvel * 0, 0)
-    
+        return combine_pieces(W, lvel, np.array(lvel) * 0, 0)
+
     def interesting_points(self):
         points = []
         points.append(self.zero())

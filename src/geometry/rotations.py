@@ -75,18 +75,22 @@ new_contract('rotation_matrix', 'SO3')
 def rotz(theta):
     ''' Returns a 3x3 rotation matrix corresponding 
         to rotation around the *z* axis. '''
+    C = np.cos(theta)
+    S = np.sin(theta)
     return np.array([
-            [np.cos(theta), -np.sin(theta), 0],
-            [np.sin(theta), +np.cos(theta), 0],
+            [C, -S, 0],
+            [S, +S, 0],
             [0, 0, 1]])
 
 
 @contract(theta='number', returns='SO2')
 def SO2_from_angle(theta):
     ''' Returns a 2x2 rotation matrix. '''
+    C = np.cos(theta)
+    S = np.sin(theta)
     return np.array([
-            [+np.cos(theta), -np.sin(theta)],
-            [+np.sin(theta), +np.cos(theta)]])
+            [+C, -S],
+            [+S, +C]])
 
 
 @contract(R='SO2', returns='float')
