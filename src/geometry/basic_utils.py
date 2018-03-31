@@ -1,6 +1,7 @@
 import warnings
 
 from contracts import contract, new_contract
+
 import numpy as np
 
 from .constants import GeometryConstants

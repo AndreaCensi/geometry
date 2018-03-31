@@ -1,2 +1,1 @@
-from .. import np, contract
-
+from .subspaces import *

@@ -74,7 +74,8 @@ def inner_product_embedding(C, ndim):
     print n, eigvals
     S, V = eigh(C, eigvals=eigvals)
 
-    assert S[0] <= S[1]  # eigh returns in ascending order
+    if S.size >= 2:
+        assert S[0] <= S[1]  # eigh returns in ascending order
 
     if np.any(S < 0):
         msg = 'The cosine matrix singular values are not all positive: \n'
@@ -182,4 +183,3 @@ def place(references, distances):
     result = Sm_aligned[:, N]
 
     return result
-

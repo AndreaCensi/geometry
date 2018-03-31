@@ -62,7 +62,7 @@ def join_columns(cols):
         srow = ''
         for i, col in enumerate(cols):
             cell = get_cell(col, j)
-            cell = ljust(cell, col_widths[i])
+            cell = cell.ljust(col_widths[i])
             srow += cell
         s += srow + '\n'
     return s
@@ -91,4 +91,3 @@ if __name__ == '__main__':
     A = np.eye(3)
     B = np.random.randn(3, 4)
     printm('A (identity):', A, 'B (random):', B)
-

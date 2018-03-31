@@ -1,0 +1,20 @@
+language: python
+reset_minion: true
+
+python:
+  - 2.7
+  # - 3.2
+  # - 3.3
+  # - 3.4
+  # - pypy
+  
+install:
+  # first install dependencies (like BLAS/ATLAS)
+  - sudo apt-get install python-numpy python-scipy libblas-dev liblapack-dev gfortran
+  - pip install scipy
+  - "python -c 'import scipy'"
+  - pip install -r requirements.txt
+
+script:
+  - nosetests geometry 
+  

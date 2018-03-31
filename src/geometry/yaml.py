@@ -1,5 +1,6 @@
 
 from contracts import contract, describe_value, describe_type
+
 from geometry import logger
 import numpy as np
 

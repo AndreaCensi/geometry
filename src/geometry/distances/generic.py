@@ -1,4 +1,5 @@
 from contracts import new_contract, contract
+
 import numpy as np
 
 

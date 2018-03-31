@@ -2,6 +2,7 @@ from contracts import contract, new_contract
 from geometry.spheres import directions  #@NoMove @UnusedImport # for contract
 import numpy as np
 
+
 new_contract('cosines', 'array[NxN](>=-1,<=+1)')
 new_contract('angles', 'array[N](>=-pi,<=pi)')
 new_contract('distances', 'array[NxN](>=0,<=pi)')

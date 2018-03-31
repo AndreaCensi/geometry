@@ -94,6 +94,9 @@ def translation_from_SE2(pose):
     R, t, zero, one = extract_pieces(pose)  # @UnusedVariable
     return t.copy()
 
+def rotation_from_SE2(pose):
+    from geometry.poses_embedding import SO2_project_from_SE2
+    return SO2_project_from_SE2(pose)
 
 @contract(pose='SE3', returns='array[3]')
 def translation_from_SE3(pose):
@@ -229,7 +232,17 @@ def SE3_from_SE2(pose):
     t, angle = translation_angle_from_SE2(pose)
     return pose_from_rotation_translation(rotz(angle),
                                           np.array([t[0], t[1], 0]))
+#
+@contract(vel='se3', returns='se2')
+def se2_from_se3(vel, check_exact=True, z_atol=1e-6):
+    # TODO: testing this
+    M, v, Z, zero = extract_pieces(vel)  # @UnusedVariable
+    M1 = M[:2,:2]
+    v1 = v[:2]
+    if check_exact:
+        assert_allclose(v[2], 0, atol=z_atol)
 
+    return combine_pieces(M1, v1, Z[:2], zero)
 
 @contract(pose='SE3', returns='SE2')
 def SE2_from_SE3(pose, check_exact=True, z_atol=1e-6):
@@ -263,4 +276,3 @@ def SE2_from_SE3(pose, check_exact=True, z_atol=1e-6):
 
     angle = angle * np.sign(axis[2])
     return SE2_from_translation_angle(translation[0:2], angle)
-
