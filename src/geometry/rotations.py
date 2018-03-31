@@ -1,14 +1,15 @@
-''' 
+'''
     Contains all about rotation matrices, quaternions, and various conversions.
 
     conventions: q=( a + bi + cj + dk), with a>0
 '''
-from . import (assert_allclose, safe_arccos,
-    default_axis, normalize_length)
 import itertools
+
 from contracts import contract, new_contract
 import numpy as np
 
+from . import (assert_allclose, safe_arccos,
+    default_axis, normalize_length)
 
 new_contract('unit_quaternion', 'array[4], unit_length')
 new_contract('axis_angle', 'tuple(direction, float)')
@@ -21,7 +22,7 @@ def check_SO(x):
     ''' Checks that the given value is a rotation matrix of arbitrary size. '''
     check_orthogonal(x)
     determinant = np.linalg.det(x * 1.0)  # XXX: voodoo
-    # lapack_lite.LapackError: 
+    # lapack_lite.LapackError:
     # Parameter a has non-native byte order in lapack_lite.dgetrf
     assert_allclose(determinant, 1.0)
 
@@ -51,7 +52,7 @@ def check_skew_symmetric(x):
             if i < j:
                 continue
             if x[i, j] != -x[j, i]:
-                raise ValueError('Expected skew symmetric, but ' + 
+                raise ValueError('Expected skew symmetric, but ' +
                                  'a[%d][%d] = %f, a[%d][%d] = %f' % \
                                  (i, j, x[i, j], j, i, x[j, i]))
 
@@ -73,13 +74,13 @@ new_contract('rotation_matrix', 'SO3')
 
 @contract(theta='number', returns='SO3')
 def rotz(theta):
-    ''' Returns a 3x3 rotation matrix corresponding 
+    ''' Returns a 3x3 rotation matrix corresponding
         to rotation around the *z* axis. '''
     C = np.cos(theta)
     S = np.sin(theta)
     return np.array([
             [C, -S, 0],
-            [S, +S, 0],
+            [S, +C, 0],
             [0, 0, 1]])
 
 
@@ -110,15 +111,16 @@ def hat_map_2d(omega):
 def map_hat_2d(W):
     return W[1, 0]
 
-rot2d = SO2_from_angle  # TODO: deprecated 
-rot2d_from_angle = SO2_from_angle  # TODO: deprecated 
+
+rot2d = SO2_from_angle  # TODO: deprecated
+rot2d_from_angle = SO2_from_angle  # TODO: deprecated
 angle_from_rot2d = angle_from_SO2
 
 
 @contract(returns='unit_quaternion')
 def random_quaternion():
     ''' Generate a random quaternion.
-        
+
         Uses the algorithm used in Kuffner, ICRA'04.
     '''
     s = np.random.uniform()
@@ -138,8 +140,8 @@ def random_quaternion():
 
 @contract(returns='array[2x2]|rotation_matrix', ndim='2|3')
 def random_rotation(ndim=3):
-    ''' Generate a random rotation matrix. 
-        
+    ''' Generate a random rotation matrix.
+
         This is a wrapper around :py:func:`random_quaternion`.
     '''
     if ndim == 3:
@@ -159,11 +161,11 @@ def random_orthogonal_transform():
 
 @contract(R1='rotation_matrix', R2='rotation_matrix', returns='float,>=0,<=pi')
 def geodesic_distance_for_rotations(R1, R2):
-    ''' 
+    '''
         Returns the geodesic distance between two rotation matrices.
-        
+
         It is computed as the angle of the rotation :math:`R_1^{*} R_2^{-1}``.
-    
+
     '''
     R = np.dot(R1, R2.T)
     axis1, angle1 = axis_angle_from_rotation(R)  # @UnusedVariable
@@ -195,7 +197,7 @@ def map_hat(H):
 def rotation_from_quaternion(x):
     '''
         Converts a quaternion to a rotation matrix.
-        
+
     '''
     # Documented in <http://en.wikipedia.org/w/index.php?title=
     # Quaternions_and_spatial_rotation&oldid=402924915>
@@ -216,13 +218,13 @@ def rotation_from_quaternion(x):
 
 @contract(R='rotation_matrix', returns='unit_quaternion')
 def quaternion_from_rotation(R):
-    ''' 
+    '''
         Converts a rotation matrix to a quaternion.
-    
+
         This is the robust method mentioned on wikipedia:
-    
+
         <http://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation>
-        
+
         TODO: add the more robust method with 4x4 matrix and eigenvector
     '''
     largest = np.argmax(R.diagonal())
@@ -253,10 +255,10 @@ def quaternion_from_rotation(R):
 
 @contract(axis='direction', angle='float', returns='unit_quaternion')
 def quaternion_from_axis_angle(axis, angle):
-    ''' 
+    '''
         Computes a quaternion corresponding to the rotation of *angle* radians
         around the given *axis*.
-        
+
         This is the inverse of :py:func:`axis_angle_from_quaternion`.
     '''
     Q = np.array([
@@ -271,7 +273,7 @@ def quaternion_from_axis_angle(axis, angle):
 
 @contract(q='unit_quaternion', returns='axis_angle_canonical')
 def axis_angle_from_quaternion(q):
-    ''' 
+    '''
         This is the inverse of :py:func:`quaternion_from_axis_angle`.
     '''
     angle = 2 * safe_arccos(q[0])
@@ -290,9 +292,9 @@ def axis_angle_from_quaternion(q):
 
 @contract(axis='direction', angle='float', returns='rotation_matrix')
 def rotation_from_axis_angle(axis, angle):
-    ''' 
+    '''
         Computes the rotation matrix from the *(axis,angle)* representation
-        using Rodriguez's formula. 
+        using Rodriguez's formula.
     '''
     w = axis
     w_hat = hat_map(w)
@@ -303,16 +305,16 @@ def rotation_from_axis_angle(axis, angle):
 
 @contract(R='rotation_matrix', returns='axis_angle_canonical')
 def axis_angle_from_rotation(R):
-    ''' 
+    '''
         Returns the *(axis,angle)* representation of a given rotation.
-        
+
         There are a couple of symmetries:
-    
+
         * By convention, the angle returned is nonnegative.
-         
-        * If the angle is 0, any axis will do. 
-          In that case, :py:func:`default_axis` will be returned. 
-          
+
+        * If the angle is 0, any axis will do.
+          In that case, :py:func:`default_axis` will be returned.
+
     '''
     angle = safe_arccos((R.trace() - 1) / 2)
 
@@ -337,9 +339,9 @@ def axis_angle_from_rotation(R):
 
 @contract(axis='direction', angle='float', returns='rotation_matrix')
 def rotation_from_axis_angle2(axis, angle):
-    ''' 
+    '''
         Get the rotation from the *(axis,angle)* representation.
-        
+
         This is an alternative to :py:func:`rotation_from_axis_angle` which
         goes through the quaternion representation instead of using Rodrigues'
         formula.
@@ -351,18 +353,18 @@ def rotation_from_axis_angle2(axis, angle):
 @contract(x_axis='direction', vector_on_xy_plane='direction',
           returns='rotation_matrix')
 def rotation_from_axes_spec(x_axis, vector_on_xy_plane):  # TODO: docs
-    """ 
-        Creates a rotation matrix from the axes. 
+    """
+        Creates a rotation matrix from the axes.
         ``x_axis`` is the new direction of the (1,0,0) vector
         after this rotation. ``vector_on_xy_plane`` is a vector
-        that must end up in the (x,y) plane after the rotation. 
-        
+        that must end up in the (x,y) plane after the rotation.
+
         That is, it holds that: ::
-        
+
             R = rotation_from_axes_spec(x, v)
             dot(R,x) == [1,0,0]
             dot(R,v) == [?,?,0]
-     
+
         TODO: add exception if vectors are too close.
     """
     z_axis = normalize_length(np.cross(x_axis, vector_on_xy_plane))

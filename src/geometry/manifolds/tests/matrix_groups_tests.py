@@ -8,13 +8,13 @@ def algebra1(M, m):
     M.algebra.belongs(v)
     m2 = M.group_from_algebra(v)
     M.assert_close(m, m2)
-        
-        
+
+
 @for_all_mgroup
 def algebra2(M):
     algebra = M.get_algebra()
     for a in algebra.interesting_points():
-        #printm('Checked %s' % M, a) 
+        #printm('Checked %s' % M, a)
         M.algebra.belongs(a)
         g = M.group_from_algebra(a)
         M.belongs(g)
@@ -24,7 +24,7 @@ def algebra2(M):
 def group_vector_isomorphism(M, p):
     algebra = M.get_algebra()
     expected = (algebra.get_dimension(),)
-    
+
     M.belongs(p)
     # convert point to algebra
     a = M.algebra_from_group(p)
@@ -33,7 +33,7 @@ def group_vector_isomorphism(M, p):
     v = algebra.vector_from_algebra(a)
 
     if v.shape != expected:
-        raise ValueError('%s: expected %s, got %s ' % 
+        raise ValueError('%s: expected %s, got %s ' %
                          (algebra, expected, v.shape))
 
     # Now back to algebra
@@ -48,5 +48,4 @@ def algebra_enough(M):
     points = list(algebra.interesting_points())
     if not points:
         raise ValueError('No test points for algebra of %s.' % M)
-
 
