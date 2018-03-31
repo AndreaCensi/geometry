@@ -1,34 +1,42 @@
-from .utils import directions_sequence
+import unittest
+
+from nose.plugins.attrib import attr
+
 from contracts import check, fail
+from contracts.enabling import all_disabled
 from geometry import (random_rotation, random_quaternion, random_direction,
     random_directions_bounded, any_distant_direction, any_orthogonal_direction,
     distribution_radius, geodesic_distance_on_sphere, assert_orthogonal,
     rotation_from_axis_angle, default_axis, default_axis_orthogonal,
     random_orthogonal_direction, random_directions, assert_allclose)
-from nose.plugins.attrib import attr
 import numpy as np
-import unittest
 
+from .utils import directions_sequence
 
 N = 20
 
 
 class GeometryTests(unittest.TestCase):
 
+    def is_contracts_active(self):
+        return not all_disabled()
+
     # TODO: add statistics test
     def test_random_quaternions(self):
-        for i in range(N): #@UnusedVariable
+        for i in range(N):  #@UnusedVariable
             random_quaternion()
 
     def test_random_rotations(self):
-        for i in range(N): #@UnusedVariable
+        for i in range(N):  #@UnusedVariable
             random_rotation()
 
     def test_random_direction(self):
-        for i in range(N): #@UnusedVariable
+        for i in range(N):  #@UnusedVariable
             random_direction()
 
     def test_checks(self):
+        if not self.is_contracts_active():
+            return
         R = np.zeros((10, 10))
         fail('rotation_matrix', R)
         R = random_rotation()
@@ -40,6 +48,8 @@ class GeometryTests(unittest.TestCase):
         fail('rotation_matrix', R)
 
     def test_unit_length(self):
+        if not self.is_contracts_active():
+            return
         check('unit_length', np.array([1]))
         check('unit_length', np.array([0, 1]))
         fail('unit_length', np.array([0, 2]))
@@ -50,7 +60,7 @@ class GeometryTests(unittest.TestCase):
         assert x.shape == (3, N)
 
     def test_distances(self):
-        for i in range(N): #@UnusedVariable
+        for i in range(N):  #@UnusedVariable
             s = random_direction()
             dist = geodesic_distance_on_sphere
             assert_allclose(dist(s, s), 0)
@@ -70,8 +80,8 @@ def random_directions_bounded_test_1():
                               center=random_direction(3))
 
 
-def check_reasonable_radius(r, r2, N): #@UnusedVariable
-    bounds = [0.8, 1.2] # TODO: make it depend on N
+def check_reasonable_radius(r, r2, N):  #@UnusedVariable
+    bounds = [0.8, 1.2]  # TODO: make it depend on N
     if not (r * bounds[0] <= r2 <= r * bounds[1]):
         msg = 'Constructed distribution with radius %f, got %f.' % (r, r2)
         assert False, msg
@@ -104,7 +114,7 @@ def distribution_radius_test():
     radius = [np.pi, np.pi / 2, np.pi / 6]
     N = 300
     for r in radius:
-        for i in range(5): #@UnusedVariable
+        for i in range(5):  #@UnusedVariable
             center = np.random.rand() * 2 * np.pi
             yield distribution_radius_check, center, r, N
 
@@ -118,14 +128,14 @@ def any_distant_direction_test():
 
 def any_orthogonal_direction_test():
     for s in directions_sequence():
-        for i in range(5): #@UnusedVariable
+        for i in range(5):  #@UnusedVariable
             z = any_orthogonal_direction(s)
             assert_orthogonal(z, s)
 
 
 def random_orthogonal_direction_test():
     for s in directions_sequence():
-        for i in range(5): #@UnusedVariable
+        for i in range(5):  #@UnusedVariable
             z = random_orthogonal_direction(s)
             assert_orthogonal(z, s)
 
