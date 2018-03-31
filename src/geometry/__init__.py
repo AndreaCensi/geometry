@@ -1,4 +1,4 @@
-__version__ = '1.4.3'
+__version__ = '1.4.4'
 
 # If True, additional checks are done at runtime
 development = False
