@@ -1,6 +1,7 @@
+import itertools
+
 from geometry import (euclidean_distances, assert_allclose, double_center, mds,
     mds_randomized, place, eigh)
-import itertools
 import numpy as np
 
 
@@ -21,8 +22,8 @@ def rank_test():
             P = np.random.rand(k, n)
             D = euclidean_distances(P)
             B = double_center(D * D)
-            w, v = eigh(B) #@UnusedVariable
-            w = w[::-1] # descending
+            w, v = eigh(B)  #@UnusedVariable
+            w = w[::-1]  # descending
             # normalize
             wn = w / w[0]
             small = np.abs(wn[k])
@@ -44,7 +45,7 @@ def mds_test():
             P2 = mds(D, ndim=k)
             error = evaluate_error(P, P2)
             assert_allclose(0, error, atol=1e-7)
-#            print('k = %d n = %d  mean_error = %s' % (k, n, error)) 
+#            print('k = %d n = %d  mean_error = %s' % (k, n, error))
 
 
 def mds_fast_test():
@@ -57,12 +58,12 @@ def mds_fast_test():
 #                t0 = time.clock()
                 P2 = algo(D, ndim=k)
 #                t1 = time.clock()
-                #t_mds = t1 - t0            
+                #t_mds = t1 - t0
                 #            D2 = euclidean_distances(P2)
                 error = evaluate_error(P, P2)
                 assert_allclose(0, error, atol=1e-7)
-                #print('k = %d n = %d  %-20s  %7d ms   mean_error = %s' % 
-                #      (k, n, algo.__name__, t_mds * 1000, error)) 
+                #print('k = %d n = %d  %-20s  %7d ms   mean_error = %s' %
+                #      (k, n, algo.__name__, t_mds * 1000, error))
 
 
 def place_test():
@@ -74,5 +75,4 @@ def place_test():
             distances = np.array([ref(S[:, i]) for i in range(n)])
             p2 = place(S, distances)
             assert_allclose(p, p2)
-
 

@@ -1,16 +1,20 @@
-from . import MatrixLieGroup, R, tran, DifferentiableManifold
-from .. import (assert_allclose, pose_from_rotation_translation,
-    rotation_translation_from_pose, extract_pieces)
-
-import numpy as np
 from contracts import contract
+from geometry.poses import extract_pieces, pose_from_rotation_translation, \
+    rotation_translation_from_pose
+from geometry.utils.numpy_backport import assert_allclose
+import numpy as np
 
-__all__ = ['Tran']
+from .differentiable_manifold import DifferentiableManifold
+from .euclidean import R
+from .matrix_lie_group import MatrixLieGroup
+from .translation_algebra import tran
+
+__all__ = ['TranG', 'Tran', 'Tran1', 'Tran2', 'Tran3']
 
 
-class Tran(MatrixLieGroup):
-    ''' 
-        The translation subgroup of SE(n). 
+class TranG(MatrixLieGroup):
+    '''
+        The translation subgroup of SE(n).
     '''
 
     @contract(n='1|2|3')
@@ -67,3 +71,9 @@ class Tran(MatrixLieGroup):
             points.append(p)
 
         return points
+
+
+Tran1 = TranG(1)
+Tran2 = TranG(2)
+Tran3 = TranG(3)
+Tran = {1: Tran1, 2: Tran2, 3: Tran3}

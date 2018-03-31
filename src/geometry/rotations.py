@@ -6,10 +6,10 @@
 import itertools
 
 from contracts import contract, new_contract
+from geometry.basic_utils import safe_arccos, normalize_length
+from geometry.spheres import default_axis
+from geometry.utils.numpy_backport import assert_allclose
 import numpy as np
-
-from . import (assert_allclose, safe_arccos,
-    default_axis, normalize_length)
 
 new_contract('unit_quaternion', 'array[4], unit_length')
 new_contract('axis_angle', 'tuple(direction, float)')

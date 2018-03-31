@@ -1,8 +1,9 @@
 from contracts import contract, describe_value, new_contract
-
 from geometry import logger, logm, expm
-from geometry.manifolds import DifferentiableManifold, Group
 import numpy as np
+
+from .differentiable_manifold import DifferentiableManifold
+from .group import Group
 
 __all__ = ['MatrixLieGroup']
 
@@ -30,7 +31,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
         self.algebra = algebra
         assert self.algebra.n == self.n
 
-        from . import MatrixLieGroupTangent
+        from .matrix_lie_group_tangent import MatrixLieGroupTangent
         self._tangent_bundle_algebra_rep = MatrixLieGroupTangent(self)
 
     def tangent_bundle(self):

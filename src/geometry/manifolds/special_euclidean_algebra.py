@@ -1,11 +1,12 @@
 from contracts import contract
-
+from geometry.poses import extract_pieces, combine_pieces
+from geometry.rotations import hat_map, hat_map_2d
 import numpy as np
 
-from . import MatrixLieAlgebra, so
-from .. import extract_pieces, combine_pieces, hat_map_2d, hat_map
+from .matrix_lie_algebra import MatrixLieAlgebra
+from .special_orthogonal_algebra import so
 
-__all__ = ['se_algebra']
+__all__ = ['se_algebra', 'se', 'se2', 'se3']
 
 
 class se_algebra(MatrixLieAlgebra):
@@ -104,3 +105,8 @@ class se_algebra(MatrixLieAlgebra):
         else:
             assert False, 'Not implemented for n=%s' % self.n
         return points
+
+
+se2 = se_algebra(2, alpha=1)
+se3 = se_algebra(3, alpha=1)
+se = {2: se2, 3: se3}

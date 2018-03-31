@@ -1,15 +1,16 @@
-from . import DifferentiableManifold
 from contracts import contract
-from geometry.formatting import printm
-from geometry.manifolds.differentiable_manifold import RandomManifold
 import numpy as np
 
-__all__ = ['TorusW']
+from .differentiable_manifold import DifferentiableManifold
+from .differentiable_manifold import RandomManifold
+
+__all__ = ['TorusW', 'TorusW', 'Ts', 'Ts1', 'Ts2', 'Ts3']
+
 
 class TorusW(RandomManifold):
     """ This is a torus whose coordinates wrap around in [0, W).
-        All points in R^n belong to the torus.  """ 
-    
+        All points in R^n belong to the torus.  """
+
     @contract(widths='seq[N](>0)', normalize_bias='None|seq[N](number)')
     def __init__(self, widths, normalize_bias=None):
         """
@@ -27,7 +28,7 @@ class TorusW(RandomManifold):
     @contract(a='array[N]')
     def belongs(self, a):
         pass
-        
+
     @contract(a='belongs', b='belongs', returns='>=0')  # returns='>=0,<0.8')
     def distance(self, a, b):
         _, vel = self.logmap(a, b)
@@ -51,7 +52,7 @@ class TorusW(RandomManifold):
         # eg: a=0, b=0.75
         #     vel = 0.75
         #     vel' = vel - 1 = -.25
-        
+
         for i in range(self.n):
             wi = self.widths[i]
             if vel[i] > +wi / 2.0:
@@ -93,7 +94,7 @@ class TorusW(RandomManifold):
     def interesting_points(self):
         interesting = []
         interesting.append(np.zeros(self.n))
-        for _ in range(2): 
+        for _ in range(2):
             interesting.append(self.sample_uniform())
         return interesting
 
@@ -101,3 +102,7 @@ class TorusW(RandomManifold):
         return 'Tn%s' % self.n
 
 
+Ts1 = TorusW([2], [-1])
+Ts2 = TorusW([2, 2], [-1, -1])
+Ts3 = TorusW([2, 2, 2], [-1, -1, -1])
+Ts = {1: Ts1, 2: Ts2, 3: Ts1}

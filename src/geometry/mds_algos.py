@@ -1,10 +1,12 @@
-from . import (best_similarity_transform, assert_allclose,
-    project_vectors_onto_sphere, eigh)
-from contracts import check_multiple
 import itertools
-from geometry.formatting import formatm
-from geometry import logger
+
+from contracts import check_multiple
 from contracts import contract
+from geometry import logger, eigh
+from geometry.formatting import formatm
+from geometry.procrustes import best_similarity_transform
+from geometry.spheres import project_vectors_onto_sphere
+from geometry.utils.numpy_backport import assert_allclose
 import numpy as np
 
 
@@ -65,18 +67,18 @@ def inner_product_embedding_slow(C, ndim):
 def inner_product_embedding(C, ndim):
     n = C.shape[0]
     if ndim > n:
-        msg = 'Number of points: %s  Dimensions: %s' % (n, ndim) 
+        msg = 'Number of points: %s  Dimensions: %s' % (n, ndim)
         raise ValueError(msg)
 
     eigvals = (n - ndim, n - 1)
     print n, eigvals
     S, V = eigh(C, eigvals=eigvals)
 
-    assert S[0] <= S[1]  # eigh returns in ascending order 
+    assert S[0] <= S[1]  # eigh returns in ascending order
 
     if np.any(S < 0):
         msg = 'The cosine matrix singular values are not all positive: \n'
-        msg += formatm('S', S) 
+        msg += formatm('S', S)
         msg += 'I assume it is rounding error and approximate with:\n'
         S[S < 0] = 0
         msg += formatm('S\'', S)
@@ -107,9 +109,9 @@ def truncated_svd_randomized(M, k):
 
 @contract(C='array[NxN]', ndim='int,>0,K', returns='array[KxN]')
 def inner_product_embedding_randomized(C, ndim):
-    ''' 
-        Best embedding of inner product matrix based on 
-        randomized projections. 
+    '''
+        Best embedding of inner product matrix based on
+        randomized projections.
     '''
     U, S, V = truncated_svd_randomized(C, ndim)  # @UnusedVariable.
     check_multiple([('K', ndim),
@@ -153,6 +155,7 @@ def spherical_mds(C, ndim, embed=inner_product_embedding):
 
 # TODO: spherical_mds_randomized
 
+
 best_embedding_on_sphere = spherical_mds
 
 
@@ -169,15 +172,14 @@ def place(references, distances):
     D[:N, N] = distances
     Sm = mds(D, K)
 
-    # Only if perfect  
+    # Only if perfect
     # Dm = euclidean_distances(Sm)
     # assert_almost_equal(D[:N, :N], Dm[:N, :N])
-    # new in other frame 
+    # new in other frame
     R, t = best_similarity_transform(Sm[:, :N], references)
 
     Sm_aligned = np.dot(R, Sm) + t
     result = Sm_aligned[:, N]
 
     return result
-
 

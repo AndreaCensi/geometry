@@ -1,9 +1,11 @@
-from .differentiable_manifold import DifferentiableManifold
-import numpy as np
 from contracts import  contract
-from .. import normalize_pi
+from geometry.spheres import normalize_pi
+import numpy as np
 
-__all__ = ['Torus']
+from .differentiable_manifold import DifferentiableManifold
+
+__all__ = ['Torus', 'T', 'T1', 'T2']
+
 
 class Torus(DifferentiableManifold):
 
@@ -15,7 +17,7 @@ class Torus(DifferentiableManifold):
         ok = np.logical_and(a >= -np.pi, a < np.pi)
         if not np.all(ok):
             raise ValueError("Not all are ok in %s" % a)
-        
+
     def distance(self, a, b):
         b = self.normalize(b - a)
         return np.linalg.norm(b)
@@ -46,12 +48,15 @@ class Torus(DifferentiableManifold):
     def interesting_points(self):
         interesting = []
         interesting.append(np.zeros(self.n))
-        for _ in range(2): 
+        for _ in range(2):
             interesting.append(self.sample_uniform())
         return interesting
-        
+
     def __repr__(self):
         return 'T%s' % self.n
 
 
-
+T1 = Torus(1)
+T2 = Torus(2)
+T3 = Torus(3)
+T = {1: T1, 2: T2, 3: T3}

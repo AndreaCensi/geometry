@@ -1,8 +1,11 @@
-from . import (angle_from_rot2d, rotz, axis_angle_from_rotation, hat_map_2d,
-    assert_allclose, rot2d, new_contract, check_SO, check_skew_symmetric, expm, logm)
-from .constants import GeometryConstants
-from contracts import contract
+from contracts import contract, new_contract
+from geometry import logm, expm
+from geometry.rotations import check_SO, check_skew_symmetric, rot2d, \
+    angle_from_rot2d, hat_map_2d, rotz, axis_angle_from_rotation
+from geometry.utils.numpy_backport import assert_allclose
 import numpy as np
+
+from .constants import GeometryConstants
 
 
 def check_SE(M):
@@ -53,9 +56,11 @@ def combine_pieces(a, b, c, d):
 
 # TODO: specialize for SE2, SE3
 
+
 @contract(returns='SE2')
 def SE2_identity():
     return np.eye(3)
+
 
 @contract(returns='SE3')
 def SE3_identity():
@@ -66,7 +71,8 @@ def SE3_identity():
 def pose_from_rotation_translation(R, t):
     return combine_pieces(R, t, t * 0, 1)
 
-# TODO: make specialized    
+
+# TODO: make specialized
 SE2_from_rotation_translation = pose_from_rotation_translation
 SE3_from_rotation_translation = pose_from_rotation_translation
 
@@ -75,6 +81,7 @@ SE3_from_rotation_translation = pose_from_rotation_translation
 def rotation_translation_from_pose(pose):
     R, t, zero, one = extract_pieces(pose)  # @UnusedVariable
     return R.copy(), t.copy()
+
 
 # TODO: make more efficient
 rotation_translation_from_SE2 = rotation_translation_from_pose
@@ -169,7 +176,7 @@ def se2_from_SE2_slow(pose):
 def se2_from_SE2(pose):
     '''
         Converts a pose to its Lie algebra representation.
-        
+
         See Bullo, Murray "PD control on the euclidean group" for proofs.
     '''
     R, t, zero, one = extract_pieces(pose)  # @UnusedVariable
@@ -190,8 +197,8 @@ def se2_from_SE2(pose):
 
 @contract(returns='SE2', vel='se2')
 def SE2_from_se2(vel):
-    ''' Converts from Lie algebra representation to pose. 
-            
+    ''' Converts from Lie algebra representation to pose.
+
         See Bullo, Murray "PD control on the euclidean group" for proofs.
     '''
     w = vel[1, 0]
@@ -226,9 +233,9 @@ def SE3_from_SE2(pose):
 
 @contract(pose='SE3', returns='SE2')
 def SE2_from_SE3(pose, check_exact=True, z_atol=1e-6):
-    ''' 
+    '''
         Projects a pose in SE3 to SE2.
-    
+
         If check_exact is True, it will check that z = 0 and axis ~= [0,0,1].
     '''
     rotation, translation = rotation_translation_from_pose(pose)
@@ -256,5 +263,4 @@ def SE2_from_SE3(pose, check_exact=True, z_atol=1e-6):
 
     angle = angle * np.sign(axis[2])
     return SE2_from_translation_angle(translation[0:2], angle)
-
 

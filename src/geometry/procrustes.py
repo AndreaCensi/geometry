@@ -43,4 +43,3 @@ def best_similarity_transform(X, Y):
     t = Ym - np.dot(R, Xm)
     return R, t
 
-

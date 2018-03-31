@@ -1,12 +1,16 @@
-from . import DifferentiableManifold
-from .. import (any_orthogonal_direction, geodesic_distance_on_sphere,
-    random_direction, normalize_length, normalize_length_or_zero,
-    rotation_from_axis_angle, rot2d)
-from contracts import contract, check
 from numpy.core.numeric import outer
+
+from contracts import contract, check
+from geometry.basic_utils import normalize_length, normalize_length_or_zero
+from geometry.rotations import rot2d, rotation_from_axis_angle
+from geometry.spheres import any_orthogonal_direction, \
+    geodesic_distance_on_sphere, random_direction
 import numpy as np
 
-__all__ = ['Sphere', 'Sphere1']
+from .differentiable_manifold import DifferentiableManifold
+
+__all__ = ['Sphere', 'Sphere1', 'S', 'S1', 'S2']
+
 
 class Sphere(DifferentiableManifold):
     ''' These are hyperspheres of unit radius. '''
@@ -176,3 +180,8 @@ class Sphere1(DifferentiableManifold):
     def friendly(self, a):
         theta = np.arctan2(a[1], a[0])
         return 'Dir(%6.1fdeg)' % np.degrees(theta)
+
+
+S1 = Sphere1()
+S2 = Sphere(2)
+S = {1: S1, 2: S2}

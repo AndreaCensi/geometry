@@ -1,5 +1,5 @@
-from . import DifferentiableManifold
 from contracts import contract
+from .differentiable_manifold import DifferentiableManifold
 
 __all__ = ['TangentBundle']
 
@@ -7,7 +7,7 @@ __all__ = ['TangentBundle']
 class TangentBundle(DifferentiableManifold):
     ''' This class represents the tangent bundle of a generic manifold
         using a tuple (base, vel) where vel is tangent at base.
-        
+
         (MatrixLieGroup has different representation)
     '''
 
@@ -53,9 +53,8 @@ class TangentBundle(DifferentiableManifold):
 
     @contract(a='belongs')
     def friendly(self, a):
-        ''' 
-            Returns a friendly description string for a point on the manifold. 
+        '''
+            Returns a friendly description string for a point on the manifold.
         '''
         return "%s" % a
-
 

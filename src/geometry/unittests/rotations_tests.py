@@ -1,16 +1,17 @@
-from .utils import (rotations_sequence, axis_angle_sequence, GeoTestCase,
-    directions_sequence)
+import itertools
+
 from geometry import (axis_angle_from_rotation, rotation_from_axis_angle,
     random_direction, hat_map, geodesic_distance_on_sphere, assert_allclose)
 from geometry.rotations import (quaternion_from_rotation,
     rotation_from_axes_spec)
 from geometry.spheres import slerp, any_distant_direction
-import itertools
 import numpy as np
+
+from .utils import (rotations_sequence, axis_angle_sequence, GeoTestCase,
+    directions_sequence)
 
 
 # XXX:
-
 class RotationsTest(GeoTestCase):
 
     def test_conversions1(self):
@@ -63,5 +64,4 @@ def rotation_from_axes_spec__test():
         assert_allclose(x_, [1, 0, 0], atol=1e-8)
         v_ = np.dot(R, v)
         assert_allclose(v_[2], 0, atol=1e-8)
-
 

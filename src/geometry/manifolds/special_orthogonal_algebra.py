@@ -1,11 +1,14 @@
-from . import MatrixLieAlgebra
-from .. import hat_map, hat_map_2d, map_hat_2d, map_hat
-
 from contracts import contract
+from geometry.rotations import hat_map_2d, hat_map, map_hat_2d, map_hat
 import numpy as np
 
+from .matrix_lie_algebra import MatrixLieAlgebra
+
+__all__ = ['so_algebra', 'so2', 'so3', 'so']
+
+
 class so_algebra(MatrixLieAlgebra):
-    ''' 
+    '''
         This is the Lie algebra of skew-symmetric matrices so(n),
         for the Special Orthogonal group SO(n).
     '''
@@ -57,3 +60,7 @@ class so_algebra(MatrixLieAlgebra):
         else:
             assert False, 'Not implemented for n=%s.' % self.n
 
+
+so2 = so_algebra(2)
+so3 = so_algebra(3)
+so = {2: so2, 3: so3}

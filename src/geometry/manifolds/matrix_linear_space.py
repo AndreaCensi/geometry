@@ -1,7 +1,8 @@
-from . import DifferentiableManifold
-from .. import assert_allclose
 from abc import abstractmethod
+
 from contracts import check, contract
+from geometry.manifolds.differentiable_manifold import DifferentiableManifold
+from geometry.utils.numpy_backport import assert_allclose
 import numpy as np
 
 __all__ = ['MatrixLinearSpace']
@@ -23,7 +24,7 @@ class MatrixLinearSpace(DifferentiableManifold):
     def norm(self, v):
         ''' Return the norm of a vector in the algebra.
             This is used in :py:class:`MatrixLieGroup` to measure
-            distances between points in the Lie group. 
+            distances between points in the Lie group.
         '''
         return np.linalg.norm(v, 2)
 
@@ -43,7 +44,7 @@ class MatrixLinearSpace(DifferentiableManifold):
     @contract(x='array')
     def belongs(self, x):
         if x.shape != self.shape:
-            raise ValueError('Expected shape %r, not %r.' % 
+            raise ValueError('Expected shape %r, not %r.' %
                              (self.shape, x.shape))
 
         # TODO: make contract

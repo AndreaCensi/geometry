@@ -1,16 +1,23 @@
-from . import DifferentiableManifold, MatrixLieGroup, S2, so
-from .. import (assert_allclose, rot2d, random_rotation,
-    axis_angle_from_rotation, rotation_from_axis_angle)
 from contracts import check
 from contracts import contract
+from geometry.rotations import rot2d, random_rotation, axis_angle_from_rotation, \
+    rotation_from_axis_angle
+from geometry.utils.numpy_backport import assert_allclose
 import numpy as np
+
+from .differentiable_manifold import DifferentiableManifold
+from .matrix_lie_group import MatrixLieGroup
+from .special_orthogonal_algebra import so
+from .sphere import S2
+
+__all__ = ['SO_group', 'SO', 'SO2', 'SO3']
 
 
 class SO_group(MatrixLieGroup):
-    ''' 
+    '''
         This is the Special Orthogonal group SO(n) describing rotations
         of Euclidean space; implemented for n=2,3.
-        
+
         TODO: do SO2 and SO3 separately
     '''
 
@@ -76,4 +83,8 @@ class SO_group(MatrixLieGroup):
 
         return points
 
+
+SO2 = SO_group(2)
+SO3 = SO_group(3)
+SO = {2: SO2, 3: SO3}
 

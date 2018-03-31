@@ -4,6 +4,7 @@ from geometry.formatting import formatm
 class DoesNotBelong(Exception):
     ''' Exception thrown when a point does not belong
         to a certain manifold *M*. '''
+
     def __init__(self, M, point, e, context=None):
         self.M = M
         self.point = point

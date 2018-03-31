@@ -6,4 +6,5 @@ tex_symbols = '''
 '''
 
 # Load this when building documentation
-pngmath_latex_preamble = tex_symbols 
+pngmath_latex_preamble = tex_symbols
+

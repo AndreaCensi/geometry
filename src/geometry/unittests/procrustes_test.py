@@ -29,18 +29,18 @@ def closest_orthogonal_matrix_test1():
 
 def best_similarity_transform_test():
     N = 20
-    for K in [3]: # TODO: multiple dimensions
+    for K in [3]:  # TODO: multiple dimensions
         X = np.random.randn(K, N)
 
         R = random_rotation()
 #        R = np.eye(K)
         t = np.random.randn(K, 1)
-#        print 'R: %s' % R 
+#        print 'R: %s' % R
 #        print 't: %s' % t
 
         Y = np.dot(R, X) + t
         R2, t2 = best_similarity_transform(X, Y)
-#        print 'R2: %s' % R2 
+#        print 'R2: %s' % R2
 #        print 't2: %s' % t2
         Y2 = np.dot(R2, X) + t2
 

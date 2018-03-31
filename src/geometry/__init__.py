@@ -1,4 +1,4 @@
-__version__ = '1.4dev1'
+__version__ = '1.4.1'
 
 # If True, additional checks are done at runtime
 development = False
@@ -18,9 +18,11 @@ except ImportError:
     warnings.warn(msg)
 
     def make_warning(s):
+
         def f(*args, **kwargs):
             raise Exception('Scipy not installed --- function %r not found.'
                             % s)
+
         return f
 
     logm = make_warning('logm')
@@ -34,24 +36,23 @@ except ImportError:
 # Reactivate if some strange bug is suspected.
 GEOMETRY_DO_EXTRA_CHECKS = False
 
-import numpy as np
-from contracts import new_contract, contract
+import logging  #@NoMove
+logger = logging.getLogger(__name__)  #@NoMove
+from contracts import new_contract, contract  #@NoMove
+from geometry.utils.numpy_backport import assert_allclose  #@NoMove
+import numpy as np  #@NoMove
 
-import logging
-logger = logging.getLogger(__name__)
-
-
-from .constants import *
-
-from .formatting import *
 from .basic_utils import *
-from .spheres import *
-from .spheres_embedding import *
-from .rotations import *
-from .rotations_embedding import *
+from .constants import *
+from .distances import *
+from .formatting import *
+from .manifolds import *
+from .mds_algos import *
 from .poses import *
 from .poses_embedding import *
 from .procrustes import *
-from .manifolds import *
-from .distances import *
-from .mds_algos import *
+from .rotations import *
+from .rotations_embedding import *
+from .spheres import *
+from .spheres_embedding import *
+

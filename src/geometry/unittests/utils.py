@@ -1,9 +1,9 @@
+import unittest
+
 from contracts import contract
 from geometry import (random_direction, random_quaternion, random_rotation,
     assert_allclose)
 import numpy as np
-import unittest
-
 
 N = 20
 
@@ -51,6 +51,7 @@ def random_axis_angle():
 class GeoTestCase(unittest.TestCase):
 
     def check_one(self, x, op1, op2):
+
         def call(function, param):
             if isinstance(param, tuple):
                 return function(*param)

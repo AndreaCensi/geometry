@@ -1,19 +1,20 @@
 
 from contracts import contract
-import numpy as np
+from geometry.manifolds.differentiable_manifold import DifferentiableManifold
 
-def NonCompactStiefel(DifferentiableManifold):
+
+class NonCompactStiefel(DifferentiableManifold):
     ''' INCOMPLETE -- Matrices of fixed rank. '''
 
     @contract(n='N,N>0', p='P,P>0,P<=N')
     def __init__(self, p, n):
-        ''' 
-            Initializes the manifold structure. 
-            
+        '''
+            Initializes the manifold structure.
+
             :param n: dimension of space
             :param p: rank of subspace
         '''
-        DifferentiableManifold.__init_(self)
+        DifferentiableManifold.__init__(self)
         self.n = n
         self.p = p
 

@@ -1,4 +1,3 @@
-from .utils import GeoTestCase
 from geometry import (translation_angle_from_SE2, SE2_from_translation_angle,
     se2_from_linear_angular, linear_angular_from_se2, SE2_from_se2,
     se2_from_SE2,
@@ -7,12 +6,15 @@ from geometry import (translation_angle_from_SE2, SE2_from_translation_angle,
     assert_allclose)
 import numpy as np
 
+from .utils import GeoTestCase
+
 
 class PosesTest(GeoTestCase):
 
     def test_conversions_SE2(self):
+
         def sequence():
-            for i in range(4): #@UnusedVariable
+            for i in range(4):  #@UnusedVariable
                 t = np.random.rand(2)
                 theta = np.random.rand()
                 yield t, theta
@@ -22,8 +24,9 @@ class PosesTest(GeoTestCase):
                               translation_angle_from_SE2)
 
     def test_conversions_se2(self):
+
         def sequence():
-            for i in range(4): #@UnusedVariable
+            for i in range(4):  #@UnusedVariable
                 t = np.random.rand(2)
                 theta = np.random.rand()
                 yield t, theta
@@ -33,9 +36,11 @@ class PosesTest(GeoTestCase):
                               linear_angular_from_se2)
 
     def test_conversions_rot2d(self):
+
         def sequence():
-            for i in range(5): #@UnusedVariable
+            for i in range(5):  #@UnusedVariable
                 yield np.random.uniform(-np.pi, np.pi)
+
         self.check_conversion(sequence(),
                               rot2d_from_angle,
                               angle_from_rot2d)
@@ -72,10 +77,11 @@ def comparison_test_2():
         #printm('pose', pose, 'se2a', se2a, 'se2b', se2b)
         assert_allclose(se2a, se2b, atol=1e-8)
 
+
 # Known pairs of pose, algebra
 known_pairs = [
     (SE2_from_translation_angle([0, 0], np.pi),
-     np.array([[0, +np.pi, 0], # Note:  should be - if normalize_pi is changed
+     np.array([[0, +np.pi, 0],  # Note:  should be - if normalize_pi is changed
                [-np.pi, 0, 0],
                [0, 0, 0]])),
     (np.array([[-1, 0, 0],

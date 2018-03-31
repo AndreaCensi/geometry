@@ -1,8 +1,8 @@
+from nose.plugins.attrib import attr
+
 from geometry import (random_direction, random_directions_bounded,
     distances_from, spherical_cap_area, spherical_cap_with_area)
-from nose.plugins.attrib import attr
 import numpy as np
-
 
 try:
     from stochastic_testing import (DiscreteUniformDistribution,
@@ -58,7 +58,6 @@ if not skip:
     @attr('density')
     def test_stochastic():
         StochasticTestManager.main.run(time_limit=10)
-
 
 if __name__ == '__main__':
     random_directions_bounded_density_test()

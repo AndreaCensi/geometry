@@ -7,10 +7,9 @@ new_contract('angles', 'array[N](>=-pi,<=pi)')
 new_contract('distances', 'array[NxN](>=0,<=pi)')
 
 
-
 @contract(theta='array[N]', returns='array[2xN], directions')
 def directions_from_angles(theta):
-    """ Creates directions (elements of S1) from angles. """ 
+    """ Creates directions (elements of S1) from angles. """
     return np.vstack((np.cos(theta), np.sin(theta)))
 
 

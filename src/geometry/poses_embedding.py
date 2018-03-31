@@ -1,9 +1,11 @@
-import numpy as np
 from contracts import contract
-from . import (SE3_from_rotation_translation, combine_pieces, extract_pieces,
-    SE2_from_rotation_translation, rotation_translation_from_SE2,
-    rotation_translation_from_SE3, hat_map, map_hat_2d, SO2_project_from_SO3,
-    so2_project_from_so3, so3_from_so2)
+from geometry.poses import SE2_from_rotation_translation, \
+    rotation_translation_from_SE2, extract_pieces, SE3_from_rotation_translation, \
+    rotation_translation_from_SE3, combine_pieces
+from geometry.rotations import map_hat_2d, hat_map
+from geometry.rotations_embedding import so3_from_so2, SO2_project_from_SO3, \
+    so2_project_from_so3
+import numpy as np
 
 
 @contract(returns='SE2', a='SO2')

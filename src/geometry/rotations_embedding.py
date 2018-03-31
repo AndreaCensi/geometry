@@ -1,7 +1,6 @@
-from . import (map_hat_2d, angle_from_rot2d,
-    rotation_from_axis_angle, hat_map, rot2d)
-
 from contracts import contract
+from geometry.rotations import angle_from_rot2d, rotation_from_axis_angle, rot2d, \
+    map_hat_2d, hat_map
 import numpy as np
 
 

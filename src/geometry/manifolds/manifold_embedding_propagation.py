@@ -4,6 +4,7 @@ from .manifold_relations import ManifoldRelations as MR
 SYMBOL_ISOMORPHISM = '~'  # XXX: not used
 SYMBOL_EMBEDDING = '<'
 SYMBOL_PROJECTION = '>'
+__all__ = ['compute_manifold_relations']
 
 
 def compute_manifold_relations(manifolds):
@@ -26,6 +27,7 @@ def find_embedding_relations(manifolds):
     visited = set()
 
     class AutoVivification(dict):
+
         def __getitem__(self, item):
             try:
                 return dict.__getitem__(self, item)
@@ -48,7 +50,7 @@ def find_embedding_relations(manifolds):
             visit(m2)
             for m3 in isomorphisms[m2]:
                 if not m3 in isomorphisms[m1] and m3 != m1:
-                    isomorphisms[m1][m3] = (isomorphisms[m1][m2] + 
+                    isomorphisms[m1][m3] = (isomorphisms[m1][m2] +
                                             isomorphisms[m2][m3])
         # first level
         for m2 in MR.all_embeddings(m1):
@@ -58,14 +60,14 @@ def find_embedding_relations(manifolds):
             visit(m2)
             for m3 in embeddings[m2]:
                 if not m3 in embeddings[m1]:
-                    embeddings[m1][m3] = (embeddings[m1][m2] + 
+                    embeddings[m1][m3] = (embeddings[m1][m2] +
                                           embeddings[m2][m3])
         # second level (with iso)
         for m2 in list(isomorphisms[m1].keys()):
             visit(m2)
             for m3 in embeddings[m2]:
                 if not m3 in embeddings[m1]:
-                    embeddings[m1][m3] = (isomorphisms[m1][m2] + 
+                    embeddings[m1][m3] = (isomorphisms[m1][m2] +
                                           embeddings[m2][m3])
 #            # finally, each isomorphism is an embedding
 #            if not m2 in embeddings[m1]:
@@ -113,12 +115,14 @@ def create_embeddings(embeddings):
 
 
 def reverse_steps(steps):
+
     def reverse_step(step):
         A, op, B = step
         rev_op = {SYMBOL_EMBEDDING: SYMBOL_PROJECTION,
                   SYMBOL_PROJECTION: SYMBOL_EMBEDDING,
                   SYMBOL_ISOMORPHISM: SYMBOL_ISOMORPHISM}[op]
         return B, rev_op, A
+
     return [reverse_step(step) for step in reversed(steps)]
 
 

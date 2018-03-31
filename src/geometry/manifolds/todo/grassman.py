@@ -1,22 +1,23 @@
 from contracts import contract
-import numpy as np
+from geometry.manifolds.differentiable_manifold import DifferentiableManifold
 
 
-def Grassman(DifferentiableManifold):
-    ''' 
-        INCOMPLETE -- The Grassman manifold Grass(n,p) is the set of rank-p 
+class Grassman(DifferentiableManifold):
+    '''
+        INCOMPLETE -- The Grassman manifold Grass(n,p) is the set of rank-p
         subspaces in R^n. It is seen here as Grass(n,p) = ST(n,p)/GL_p.
-    
+
         For a reference, see the paper by Absil, Mahony, and Sepulchre (2004)
         where all these operations are explained. Also their book should
         contain essentially the same info, but with more background.
-        
+
     '''
+
     @contract(n='N,N>0', p='P,P>0,P<=N')
     def __init__(self, p, n):
-        ''' 
-            Initializes the manifold structure. 
-            
+        '''
+            Initializes the manifold structure.
+
             :param n: dimension of space
             :param p: rank of subspace
         '''
