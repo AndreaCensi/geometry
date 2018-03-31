@@ -9,7 +9,7 @@ PyGeometry
 ===========
 
 |pygeometry| is a Python package that implements common operations on the differentiable manifolds usually encountered in computer vision and robotics.
-Implemented manifolds: :math:`R^n`, :math:`S^n`,  :math:`SO(n)`, :math:`SE(n)`, 
+Implemented manifolds: :math:`R^n`, :math:`S^n`,  :math:`SO(n)`, :math:`SE(n)`,
 :math:`T(n)`.
 Implemented operations: conversion between representations, geodesic distances, interpolation, random sampling.
 
@@ -18,12 +18,14 @@ The design goal is to have a set of well-tested primitives: I've been burned too
 Download
 --------
 
-|pygeometry| is currently an alpha release and not available on PyPi. 
+Use:
+
+    pip install PyGeometry
 
 
 .. raw:: html
-   :file: download.html 
-   
+   :file: download.html
+
 Documentation
 -------------
 
@@ -43,25 +45,28 @@ News
 
 2011-01-27: Started documentation.
 
-.. 
+2011 to 2018: Used in production in many projects.
+
+2018-03-27: Refreshed documentation.
+
+..
 ..     **Reference documentation**
-.. 
-..     * :ref:`creating_new_blocks`    
-..     * :ref:`running`    
-..     * :ref:`packaging`    
-.. 
-.. 
-.. 
+..
+..     * :ref:`creating_new_blocks`
+..     * :ref:`running`
+..     * :ref:`packaging`
+..
+..
+..
 ..     **Block libraries documentation**
-.. 
+..
 ..     * :ref:`Included blocks <library>`
-.. 
+..
 ..     * Additional libraries (separate packages):
-..       
+..
 ..       * procgraph_rawseeds_
 
 
 .. raw:: html
- 
-   <div style='clear:both'></div>
 
+   <div style='clear:both'></div>

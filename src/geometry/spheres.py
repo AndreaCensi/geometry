@@ -120,7 +120,7 @@ def distances_from(S, s):
 @contract(ndim='(2|3),K', returns='array[K],unit_length')
 def random_direction(ndim=3):
     '''
-        Generates a random direction in :math:`\\sphere^{\\ndim-1}`.
+        Generates a random direction in :math:`S^{n-1}`.
 
         Currently only implemented for 2D and 3D.
     '''
@@ -208,7 +208,7 @@ def slerp(s1, s2, t):
            returns='array[KxN],directions')
 def random_directions_bounded(ndim, radius, num_points, center=None):
     '''
-        Returns a random distribution of points in :math:`\\sphere^{\\ndim-1}`.
+        Returns a random distribution of points in :math:`S^{n-1}`.
         within a certain radius from the point *center*.
 
         The points will be distributed uniformly in that area of the sphere.
@@ -321,4 +321,3 @@ def project_vectors_onto_sphere(S, atol=1e-7):
             raise ValueError('Vector too small: %s' % v)
         coords_proj[:, i] = v / nv
     return coords_proj
-
