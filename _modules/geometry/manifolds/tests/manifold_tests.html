@@ -1,0 +1,283 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry.manifolds.tests.manifold_tests &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../tests.html" accesskey="U">geometry.manifolds.tests</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geometry.manifolds.tests.manifold_tests</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">...utils</span> <span class="k">import</span> <span class="n">check_allclose</span>
+<span class="kn">from</span> <span class="nn">geometry.manifolds.tests</span> <span class="k">import</span> <span class="p">(</span><span class="n">for_all_manifold_point</span><span class="p">,</span>
+    <span class="n">for_all_manifold_pairs</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">geometry.formatting</span> <span class="k">import</span> <span class="n">formatm</span>
+
+
+<div class="viewcode-block" id="check_geodesic_consistency"><a class="viewcode-back" href="../../../../api/geometry.manifolds.tests.html#geometry.manifolds.tests.manifold_tests.check_geodesic_consistency">[docs]</a><span class="nd">@for_all_manifold_pairs</span>
+<span class="k">def</span> <span class="nf">check_geodesic_consistency</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Check that there is consistency in the geodesics. </span>
+<span class="sd">    </span>
+<span class="sd">        This is a test that </span>
+<span class="sd">        </span>
+<span class="sd">            x(t) = geodesic( a, b, t) </span>
+<span class="sd">            </span>
+<span class="sd">        interpolates between a and b, checking </span>
+<span class="sd">            </span>
+<span class="sd">            d(a, x(t)) + d(x(t), b) = d(a,b)</span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">divisions</span> <span class="o">=</span> <span class="mi">5</span>
+    
+    <span class="n">check_geodesic_consistency</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: Checking geodesic consistency. &#39;</span>
+        <span class="s1">&#39;(a: </span><span class="si">%s</span><span class="s1">, b: </span><span class="si">%s</span><span class="s1">)&#39;</span>
+        <span class="o">%</span> <span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">friendly</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">M</span><span class="o">.</span><span class="n">friendly</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">divisions</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ts</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">geodesic</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">M</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">d1</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+        <span class="n">check_allclose</span><span class="p">(</span><span class="n">d1</span> <span class="o">+</span> <span class="n">d2</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="check_logmap1"><a class="viewcode-back" href="../../../../api/geometry.manifolds.tests.html#geometry.manifolds.tests.manifold_tests.check_logmap1">[docs]</a><span class="nd">@for_all_manifold_pairs</span>
+<span class="k">def</span> <span class="nf">check_logmap1</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; This is a test that:</span>
+<span class="sd">    </span>
+<span class="sd">            Exp_a( Log_a(b) ) = b</span>
+<span class="sd">            </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">check_logmap1</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: Checking that logmap/expmap work. &#39;</span>
+        <span class="s1">&#39;(a: </span><span class="si">%s</span><span class="s1">, b: </span><span class="si">%s</span><span class="s1">)&#39;</span>
+        <span class="o">%</span> <span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">friendly</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">M</span><span class="o">.</span><span class="n">friendly</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+
+    <span class="n">bv</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">logmap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">expmap</span><span class="p">(</span><span class="n">bv</span><span class="p">)</span>
+    
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">msg</span> <span class="o">+=</span> <span class="n">formatm</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">msg</span> <span class="o">+=</span> <span class="n">formatm</span><span class="p">(</span><span class="s1">&#39;M.logmap(a,b) base = &#39;</span><span class="p">,</span> <span class="n">bv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;vel&#39;</span><span class="p">,</span> <span class="n">bv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">msg</span> <span class="o">+=</span> <span class="n">formatm</span><span class="p">(</span><span class="s1">&#39;b2&#39;</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
+    <span class="n">check_allclose</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">b2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span></div>
+        
+
+<div class="viewcode-block" id="check_logmap3"><a class="viewcode-back" href="../../../../api/geometry.manifolds.tests.html#geometry.manifolds.tests.manifold_tests.check_logmap3">[docs]</a><span class="nd">@for_all_manifold_pairs</span>
+<span class="k">def</span> <span class="nf">check_logmap3</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">base</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">logmap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">ratios</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">ratio</span> <span class="ow">in</span> <span class="n">ratios</span><span class="p">:</span>
+        <span class="n">b2</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">expmap</span><span class="p">((</span><span class="n">base</span><span class="p">,</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">))</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Checking that distance is consistent with logmap/expmap&quot;</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="n">formatm</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="n">formatm</span><span class="p">(</span><span class="s1">&#39;base&#39;</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="s1">&#39;vel&#39;</span><span class="p">,</span> <span class="n">vel</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="n">formatm</span><span class="p">(</span><span class="s1">&#39;b2&#39;</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="n">formatm</span><span class="p">(</span><span class="s1">&#39;d2&#39;</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+        <span class="n">check_allclose</span><span class="p">(</span><span class="n">d</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="check_friendly"><a class="viewcode-back" href="../../../../api/geometry.manifolds.tests.html#geometry.manifolds.tests.manifold_tests.check_friendly">[docs]</a><span class="nd">@for_all_manifold_point</span>
+<span class="k">def</span> <span class="nf">check_friendly</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="n">M</span><span class="o">.</span><span class="n">friendly</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
+    
+    
+<div class="viewcode-block" id="check_normalize"><a class="viewcode-back" href="../../../../api/geometry.manifolds.tests.html#geometry.manifolds.tests.manifold_tests.check_normalize">[docs]</a><span class="nd">@for_all_manifold_point</span>
+<span class="k">def</span> <span class="nf">check_normalize</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; normalize() must be idempotent. &quot;&quot;&quot;</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">M</span><span class="o">.</span><span class="n">assert_close</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+    <span class="n">a3</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span>
+    <span class="c1"># Not only it must be close intrinsically</span>
+    <span class="n">M</span><span class="o">.</span><span class="n">assert_close</span><span class="p">(</span><span class="n">a2</span><span class="p">,</span> <span class="n">a3</span><span class="p">)</span>
+    <span class="c1"># but it must be the same coordinates</span>
+    <span class="n">check_allclose</span><span class="p">(</span><span class="n">a2</span><span class="p">,</span> <span class="n">a3</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="check_interesting_point_in_manifold"><a class="viewcode-back" href="../../../../api/geometry.manifolds.tests.html#geometry.manifolds.tests.manifold_tests.check_interesting_point_in_manifold">[docs]</a><span class="nd">@for_all_manifold_point</span>
+<span class="k">def</span> <span class="nf">check_interesting_point_in_manifold</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="c1">#check_interesting_point_in_manifold.description = &#39;%s: %s&#39; % (M, p)</span>
+    <span class="n">M</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">p</span><span class="p">)</span></div>
+
+
+<span class="c1">#@for_all_manifolds</span>
+<span class="c1">#def check_enough_points(M):</span>
+<span class="c1">#    points = list(M.interesting_points())</span>
+<span class="c1">#    if not points:</span>
+<span class="c1">#        raise ValueError(&#39;No test points for %s.&#39; % M)</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#@for_all_manifolds</span>
+<span class="c1">#</span>
+<span class="c1">#def check_manifold_suite(M, num_random=5):</span>
+<span class="c1">#</span>
+<span class="c1">#    yield check_enough_points, M</span>
+<span class="c1">#</span>
+<span class="c1">#    points = M.interesting_points()</span>
+<span class="c1">#</span>
+<span class="c1">#    if isinstance(M, RandomManifold):</span>
+<span class="c1">#        for i in range(num_random): #@UnusedVariable</span>
+<span class="c1">#            points.append(M.sample_uniform())</span>
+<span class="c1">#</span>
+<span class="c1">#    one_point_functions = [check_friendly, check_interesting_point_in_manifold]</span>
+<span class="c1">#    two_point_functions = [check_geodesic_consistency, check_logmap1,</span>
+<span class="c1">#                           check_logmap3]</span>
+<span class="c1">#</span>
+<span class="c1">#    for f in one_point_functions:</span>
+<span class="c1">#        for a in points:</span>
+<span class="c1">#            yield f, M, a</span>
+<span class="c1">#</span>
+<span class="c1">#    for f in two_point_functions:</span>
+<span class="c1">#        for a, b in itertools.product(points, points):</span>
+<span class="c1">#            yield f, M, a, b</span>
+
+
+<span class="c1">#def manifolds_to_check():</span>
+<span class="c1">## import warnings</span>
+<span class="c1">##    warnings.warn(&#39;Some checks disabled&#39;)</span>
+<span class="c1">#    return  [</span>
+<span class="c1">#        SO3, SO2,</span>
+<span class="c1">#        R1, R2, R3,</span>
+<span class="c1">#        T1, T2, T3,</span>
+<span class="c1">#        Tran1, Tran2, Tran3,</span>
+<span class="c1">#        SE2, SE3,</span>
+<span class="c1">#        S1, S2,</span>
+<span class="c1">#        se2, se3,</span>
+<span class="c1">#        so2, so3,</span>
+<span class="c1">#        tran1, tran2, tran3,</span>
+<span class="c1">#    ]</span>
+
+
+<div class="viewcode-block" id="test_dimensions"><a class="viewcode-back" href="../../../../api/geometry.manifolds.tests.html#geometry.manifolds.tests.manifold_tests.test_dimensions">[docs]</a><span class="k">def</span> <span class="nf">test_dimensions</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">geometry</span> <span class="k">import</span> <span class="p">(</span><span class="n">tran1</span><span class="p">,</span> <span class="n">tran2</span><span class="p">,</span> <span class="n">tran3</span><span class="p">,</span> <span class="n">so2</span><span class="p">,</span> <span class="n">so3</span><span class="p">,</span> <span class="n">se2</span><span class="p">,</span> <span class="n">se3</span><span class="p">,</span> <span class="n">S1</span><span class="p">,</span> <span class="n">SE2</span><span class="p">,</span> <span class="n">SE3</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span>
+    <span class="n">Tran1</span><span class="p">,</span> <span class="n">Tran2</span><span class="p">,</span> <span class="n">Tran3</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">T3</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">SO2</span><span class="p">,</span> <span class="n">SO3</span><span class="p">,</span> <span class="n">R3</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">SO3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">SO2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">R1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">R2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">R3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">T1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">T2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">T3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">Tran1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">Tran2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">Tran3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">SE2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">SE3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">S1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">S2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">se2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">se3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">so2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">so3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">tran1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">tran2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">tran3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">M</span><span class="p">,</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="n">actual</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">get_dimension</span><span class="p">()</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Expected </span><span class="si">%d</span><span class="s1"> for </span><span class="si">%s</span><span class="s1">, got </span><span class="si">%d</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">actual</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">dim</span><span class="p">,</span> <span class="n">msg</span></div>
+
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../tests.html" >geometry.manifolds.tests</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>

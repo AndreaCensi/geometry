@@ -1,0 +1,246 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry.yaml &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geometry.yaml</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">contracts</span> <span class="k">import</span> <span class="n">contract</span><span class="p">,</span> <span class="n">describe_value</span><span class="p">,</span> <span class="n">describe_type</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="k">import</span> <span class="n">logger</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">.manifolds</span> <span class="k">import</span> <span class="n">DifferentiableManifold</span>
+
+<span class="c1">#</span>
+<span class="c1"># def array_to_lists(x):</span>
+<span class="c1">#    return x.tolist()</span>
+<span class="c1">#</span>
+<span class="c1"># def packet(space, rep, value):</span>
+<span class="c1">#    return {&#39;space&#39;: space, &#39;repr&#39;: rep, &#39;value&#39;: value}</span>
+<span class="c1">#</span>
+<span class="c1"># @contract(x=&#39;SE3&#39;)</span>
+<span class="c1"># def yaml_from_SE3(x):</span>
+<span class="c1">#    return packet(&#39;SE3&#39;, &#39;matrix&#39;, array_to_lists(x))</span>
+<span class="c1">#</span>
+<span class="c1"># @contract(x=&#39;se3&#39;)</span>
+<span class="c1"># def yaml_from_se3(x):</span>
+<span class="c1">#    return packet(&#39;se3&#39;, &#39;matrix&#39;, array_to_lists(x))</span>
+<span class="c1">#</span>
+<span class="c1"># # what about user-centered?</span>
+<span class="c1"># def yaml_from_TSE3(x):</span>
+<span class="c1">#    pose, vel = x</span>
+<span class="c1">#    return packet(&#39;TSE3&#39;, &#39;base-tangent&#39;,</span>
+<span class="c1">#                  [yaml_from_SE3(pose), yaml_from_se3(vel)])</span>
+<span class="n">converters</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">default_representation</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+<div class="viewcode-block" id="register_yaml_converter"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.register_yaml_converter">[docs]</a><span class="k">def</span> <span class="nf">register_yaml_converter</span><span class="p">(</span><span class="n">manifold_name</span><span class="p">,</span> <span class="n">representation</span><span class="p">,</span> <span class="n">converter</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">manifold_name</span> <span class="ow">in</span> <span class="n">default_representation</span><span class="p">:</span>
+        <span class="n">default_representation</span><span class="p">[</span><span class="n">manifold_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">representation</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">manifold_name</span><span class="p">,</span> <span class="n">representation</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">converters</span>
+    <span class="n">converters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">converter</span></div>
+
+
+<div class="viewcode-block" id="get_default_representation"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.get_default_representation">[docs]</a><span class="k">def</span> <span class="nf">get_default_representation</span><span class="p">(</span><span class="n">manifold</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">manifold</span><span class="p">,</span> <span class="n">DifferentiableManifold</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">manifold</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">manifold</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">default_representation</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Cannot find representation for </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="n">manifold</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">default_representation</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="to_yaml"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.to_yaml">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s1">&#39;list[2]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">to_yaml</span><span class="p">(</span><span class="n">manifold</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">representation</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">representation</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">representation</span> <span class="o">=</span> <span class="n">get_default_representation</span><span class="p">(</span><span class="n">manifold</span><span class="p">)</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">manifold</span><span class="p">,</span> <span class="n">representation</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">converters</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown format </span><span class="si">%s</span><span class="s1">; I know </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span>
+                         <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">converters</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="n">conv</span> <span class="o">=</span> <span class="n">converters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">to_yaml</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Error while trying to convert </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">describe_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">raise</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">manifold</span><span class="p">,</span> <span class="n">representation</span><span class="p">),</span> <span class="n">x</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="from_yaml"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.from_yaml">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;list[2]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">from_yaml</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;I expect a list with two elements.&#39;</span><span class="p">)</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">form</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;I expect a string describing the format,&#39;</span>
+                         <span class="s1">&#39; not </span><span class="si">%s</span><span class="s1">, while decoding </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span>
+                         <span class="p">(</span><span class="n">describe_type</span><span class="p">(</span><span class="n">form</span><span class="p">),</span> <span class="n">describe_value</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">space</span><span class="p">,</span> <span class="n">representation</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+
+    <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">space</span><span class="p">,</span> <span class="n">representation</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">converters</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown format </span><span class="si">%s</span><span class="s1">; I know </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span>
+                         <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">converters</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="n">conv</span> <span class="o">=</span> <span class="n">converters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">conv</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Representation"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.Representation">[docs]</a><span class="k">class</span> <span class="nc">Representation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Representation.to_yaml"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.Representation.to_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">to_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Representation.from_yaml"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.Representation.from_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">from_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="k">pass</span></div></div>
+
+
+<div class="viewcode-block" id="SE3_m44"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.SE3_m44">[docs]</a><span class="k">class</span> <span class="nc">SE3_m44</span><span class="p">(</span><span class="n">Representation</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SE3_m44.to_yaml"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.SE3_m44.to_yaml">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;SE3&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;list[4](list[4](float))&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">to_yaml</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="SE3_m44.from_yaml"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.SE3_m44.from_yaml">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;list[4](list[4](float))&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;SE3&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">from_yaml</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span></div></div>
+
+
+<span class="n">register_yaml_converter</span><span class="p">(</span><span class="s1">&#39;SE3&#39;</span><span class="p">,</span> <span class="s1">&#39;m44&#39;</span><span class="p">,</span> <span class="n">SE3_m44</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="se3_m44"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.se3_m44">[docs]</a><span class="k">class</span> <span class="nc">se3_m44</span><span class="p">(</span><span class="n">Representation</span><span class="p">):</span>
+
+<div class="viewcode-block" id="se3_m44.to_yaml"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.se3_m44.to_yaml">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">to_yaml</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="se3_m44.from_yaml"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.se3_m44.from_yaml">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_yaml</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="TSE3_bt"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.TSE3_bt">[docs]</a><span class="k">class</span> <span class="nc">TSE3_bt</span><span class="p">(</span><span class="n">Representation</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TSE3_bt.to_yaml"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.TSE3_bt.to_yaml">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">to_yaml</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">SE3_m44</span><span class="o">.</span><span class="n">to_yaml</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">se3_m44</span><span class="o">.</span><span class="n">to_yaml</span><span class="p">(</span><span class="n">b</span><span class="p">)]</span></div>
+
+<div class="viewcode-block" id="TSE3_bt.from_yaml"><a class="viewcode-back" href="../../api/geometry.html#geometry.yaml.TSE3_bt.from_yaml">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_yaml</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">SE3_m44</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="n">se3_m44</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></div></div>
+
+
+<span class="n">register_yaml_converter</span><span class="p">(</span><span class="s1">&#39;TSE3&#39;</span><span class="p">,</span> <span class="s1">&#39;bt&#39;</span><span class="p">,</span> <span class="n">TSE3_bt</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>

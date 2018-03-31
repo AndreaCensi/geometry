@@ -1,0 +1,269 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry.manifolds.matrix_lie_group &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geometry.manifolds.matrix_lie_group</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">contracts</span> <span class="k">import</span> <span class="n">contract</span><span class="p">,</span> <span class="n">describe_value</span><span class="p">,</span> <span class="n">new_contract</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="k">import</span> <span class="n">logger</span><span class="p">,</span> <span class="n">logm</span><span class="p">,</span> <span class="n">expm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">.differentiable_manifold</span> <span class="k">import</span> <span class="n">DifferentiableManifold</span>
+<span class="kn">from</span> <span class="nn">.group</span> <span class="k">import</span> <span class="n">Group</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MatrixLieGroup&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="MatrixLieGroup"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup">[docs]</a><span class="k">class</span> <span class="nc">MatrixLieGroup</span><span class="p">(</span><span class="n">Group</span><span class="p">,</span> <span class="n">DifferentiableManifold</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This is the base class for matrix Lie groups.</span>
+
+<span class="sd">        Subclasses should provide a MatrixLieAlgebra</span>
+<span class="sd">        object. Given the Lie algebra, we can compute everything.</span>
+<span class="sd">        However, subclasses can choose to overload</span>
+<span class="sd">        some functions if they know a more numerically stable implementation.</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">dimension</span><span class="p">,</span> <span class="n">algebra</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Initializes the Lie group.</span>
+
+<span class="sd">            :param n: dimension of the matrix group.</span>
+<span class="sd">            :param algebra: instance of :py:class:MatrixLieAlgebra</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">DifferentiableManifold</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="n">dimension</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">algebra</span> <span class="o">=</span> <span class="n">algebra</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">algebra</span><span class="o">.</span><span class="n">n</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+
+        <span class="kn">from</span> <span class="nn">.matrix_lie_group_tangent</span> <span class="k">import</span> <span class="n">MatrixLieGroupTangent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tangent_bundle_algebra_rep</span> <span class="o">=</span> <span class="n">MatrixLieGroupTangent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MatrixLieGroup.tangent_bundle"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle">[docs]</a>    <span class="k">def</span> <span class="nf">tangent_bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tangent_bundle_algebra_rep</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroup.get_algebra"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup.get_algebra">[docs]</a>    <span class="k">def</span> <span class="nf">get_algebra</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns the interface to the corresponding Lie algebra. &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">algebra</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroup.unity"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup.unity">[docs]</a>    <span class="k">def</span> <span class="nf">unity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroup.multiply"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">g</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroup.inverse"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">g</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1">#self.belongs(g)</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Tried to invert </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">describe_value</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+            <span class="k">raise</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroup.belongs_algebra"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup.belongs_algebra">[docs]</a>    <span class="nd">@new_contract</span>
+    <span class="k">def</span> <span class="nf">belongs_algebra</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">algebra</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroup.project_ts"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">bv</span><span class="o">=</span><span class="s1">&#39;tuple(belongs, *)&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">project_ts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bv</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Projects the vector *x* to the tangent space at point *base*.</span>
+
+<span class="sd">            In the case of Lie Groups, we do this by translating the</span>
+<span class="sd">            vector to the origin, projecting it to the Lie Algebra,</span>
+<span class="sd">            and then translating it back.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># get it to the origin</span>
+        <span class="n">base</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span> <span class="n">bv</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">(</span><span class="n">base</span><span class="p">),</span> <span class="n">vel</span><span class="p">)</span>
+        <span class="c1"># project it to the algebra</span>
+        <span class="n">ty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">algebra</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="c1"># get it back where it belonged</span>
+        <span class="n">tty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">ty</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">base</span><span class="p">,</span> <span class="n">tty</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroup.distance"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Computes the distance between two points.</span>
+
+<span class="sd">            In the case of Lie groups, this is done by</span>
+<span class="sd">            translating everything to the origin, computing the</span>
+<span class="sd">            logmap, and using the norm defined in the Lie Algebra object.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="c1">#         x = self.multiply(a, self.inverse(b))</span>
+<span class="c1">#         xt = self.algebra_from_group(x)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logmap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">algebra</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroup.logmap"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;belongs_ts&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">logmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Returns the direction from base to target.</span>
+
+<span class="sd">            In the case of Lie groups, this is implemented</span>
+<span class="sd">            by using the usual matrix logarithm at the origin.</span>
+
+<span class="sd">            Here the :py:func:`MatrixLieAlgebra.project` function</span>
+<span class="sd">            is used to mitigate numerical errors.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">(</span><span class="n">base</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">algebra_from_group</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
+        <span class="n">bX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">bX</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroup.expmap"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">bv</span><span class="o">=</span><span class="s1">&#39;belongs_ts&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">expmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bv</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            This is the inverse of :py:func:`logmap_`.</span>
+
+<span class="sd">            In the case of Lie groups, this is implemented using</span>
+<span class="sd">            the usual matrix exponential.</span>
+
+<span class="sd">            Here the :py:func:`MatrixLieAlgebra.project` function</span>
+<span class="sd">            is used to mitigate numerical errors.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">base</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span> <span class="n">bv</span>
+        <span class="n">tv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">(</span><span class="n">base</span><span class="p">),</span> <span class="n">vel</span><span class="p">)</span>
+        <span class="n">tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">algebra</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">tv</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_from_algebra</span><span class="p">(</span><span class="n">tv</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroup.algebra_from_group"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">g</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;belongs_algebra&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">algebra_from_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Converts an element of the group to the algebra.</span>
+<span class="sd">            Uses generic matrix logarithm plus projection.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">logm</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+        <span class="c1"># mitigate numerical errors</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">algebra</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">X</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroup.group_from_algebra"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;belongs_algebra&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">group_from_algebra</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Converts an element of the algebra to the group.</span>
+
+<span class="sd">            Uses generic matrix exponential.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">expm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
+
+    <span class="c1"># TODO: write tests for this</span>
+<div class="viewcode-block" id="MatrixLieGroup.velocity_from_points"><a class="viewcode-back" href="../../../api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup.velocity_from_points">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;belongs_ts&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">velocity_from_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Find the velocity in local frame to go from *a* to *b* in</span>
+<span class="sd">            *delta* time.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">xt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">algebra_from_group</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1">#        xt = self.logmap(self.unity(), x) # XXX</span>
+<span class="c1">#        xt = self.algebra.project(xt)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">identity</span><span class="p">(),</span> <span class="n">xt</span> <span class="o">/</span> <span class="n">delta</span></div></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>

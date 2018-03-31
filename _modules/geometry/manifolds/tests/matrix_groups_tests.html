@@ -1,0 +1,160 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry.manifolds.tests.matrix_groups_tests &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../tests.html" accesskey="U">geometry.manifolds.tests</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geometry.manifolds.tests.matrix_groups_tests</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">for_all_mgroup_point</span><span class="p">,</span> <span class="n">for_all_mgroup</span>
+
+
+<div class="viewcode-block" id="algebra1"><a class="viewcode-back" href="../../../../api/geometry.manifolds.tests.html#geometry.manifolds.tests.matrix_groups_tests.algebra1">[docs]</a><span class="nd">@for_all_mgroup_point</span>
+<span class="k">def</span> <span class="nf">algebra1</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">M</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">algebra_from_group</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">M</span><span class="o">.</span><span class="n">algebra</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">m2</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">group_from_algebra</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">M</span><span class="o">.</span><span class="n">assert_close</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">m2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="algebra2"><a class="viewcode-back" href="../../../../api/geometry.manifolds.tests.html#geometry.manifolds.tests.matrix_groups_tests.algebra2">[docs]</a><span class="nd">@for_all_mgroup</span>
+<span class="k">def</span> <span class="nf">algebra2</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="n">algebra</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">get_algebra</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">algebra</span><span class="o">.</span><span class="n">interesting_points</span><span class="p">():</span>
+        <span class="c1">#printm(&#39;Checked %s&#39; % M, a)</span>
+        <span class="n">M</span><span class="o">.</span><span class="n">algebra</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">group_from_algebra</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">M</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">g</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="group_vector_isomorphism"><a class="viewcode-back" href="../../../../api/geometry.manifolds.tests.html#geometry.manifolds.tests.matrix_groups_tests.group_vector_isomorphism">[docs]</a><span class="nd">@for_all_mgroup_point</span>
+<span class="k">def</span> <span class="nf">group_vector_isomorphism</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="n">algebra</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">get_algebra</span><span class="p">()</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="p">(</span><span class="n">algebra</span><span class="o">.</span><span class="n">get_dimension</span><span class="p">(),)</span>
+
+    <span class="n">M</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="c1"># convert point to algebra</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">algebra_from_group</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">algebra</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="c1"># convert algebra to vector</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">algebra</span><span class="o">.</span><span class="n">vector_from_algebra</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">expected</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: expected </span><span class="si">%s</span><span class="s1">, got </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span>
+                         <span class="p">(</span><span class="n">algebra</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+    <span class="c1"># Now back to algebra</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="n">algebra</span><span class="o">.</span><span class="n">algebra_from_vector</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">algebra</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span>
+    <span class="n">algebra</span><span class="o">.</span><span class="n">assert_close</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="algebra_enough"><a class="viewcode-back" href="../../../../api/geometry.manifolds.tests.html#geometry.manifolds.tests.matrix_groups_tests.algebra_enough">[docs]</a><span class="nd">@for_all_mgroup</span>
+<span class="k">def</span> <span class="nf">algebra_enough</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="n">algebra</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">get_algebra</span><span class="p">()</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">algebra</span><span class="o">.</span><span class="n">interesting_points</span><span class="p">())</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">points</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;No test points for algebra of </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="n">M</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../tests.html" >geometry.manifolds.tests</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>

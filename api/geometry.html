@@ -1,0 +1,1236 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry package &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="geometry-package">
+<h1>geometry package<a class="headerlink" href="#geometry-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="geometry.distances.html">geometry.distances package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="geometry.distances.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.distances.html#module-geometry.distances.generic">geometry.distances.generic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.distances.html#module-geometry.distances.spherical">geometry.distances.spherical module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.distances.html#module-geometry.distances">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.manifolds.html">geometry.manifolds package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="geometry.manifolds.tests.html">geometry.manifolds.tests package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.tests.html#module-geometry.manifolds.tests.checks_generation">geometry.manifolds.tests.checks_generation module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.tests.html#module-geometry.manifolds.tests.embedding_test">geometry.manifolds.tests.embedding_test module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.tests.html#module-geometry.manifolds.tests.manifold_tests">geometry.manifolds.tests.manifold_tests module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.tests.html#module-geometry.manifolds.tests.matrix_groups_tests">geometry.manifolds.tests.matrix_groups_tests module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.tests.html#module-geometry.manifolds.tests.pickling_tests">geometry.manifolds.tests.pickling_tests module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.tests.html#module-geometry.manifolds.tests.sphere_tests">geometry.manifolds.tests.sphere_tests module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.tests.html#module-geometry.manifolds.tests">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="geometry.manifolds.todo.html">geometry.manifolds.todo package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.todo.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.todo.html#module-geometry.manifolds.todo.grassman">geometry.manifolds.todo.grassman module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.todo.html#module-geometry.manifolds.todo.moebius">geometry.manifolds.todo.moebius module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.todo.html#module-geometry.manifolds.todo.orthogonal_group">geometry.manifolds.todo.orthogonal_group module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.todo.html#module-geometry.manifolds.todo.posdef_matrices">geometry.manifolds.todo.posdef_matrices module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.todo.html#module-geometry.manifolds.todo.stiefel">geometry.manifolds.todo.stiefel module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="geometry.manifolds.todo.html#module-geometry.manifolds.todo">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.differentiable_manifold">geometry.manifolds.differentiable_manifold module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.embedding_relations">geometry.manifolds.embedding_relations module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.euclidean">geometry.manifolds.euclidean module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.exceptions">geometry.manifolds.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.group">geometry.manifolds.group module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.manifold_embedding_propagation">geometry.manifolds.manifold_embedding_propagation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.manifold_relations">geometry.manifolds.manifold_relations module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.matrix_lie_algebra">geometry.manifolds.matrix_lie_algebra module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.matrix_lie_group">geometry.manifolds.matrix_lie_group module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.matrix_lie_group_tangent">geometry.manifolds.matrix_lie_group_tangent module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.matrix_linear_space">geometry.manifolds.matrix_linear_space module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.point_set">geometry.manifolds.point_set module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.product_manifold">geometry.manifolds.product_manifold module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.special_euclidean_algebra">geometry.manifolds.special_euclidean_algebra module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.special_euclidean_group">geometry.manifolds.special_euclidean_group module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.special_orthogonal_algebra">geometry.manifolds.special_orthogonal_algebra module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.special_orthogonal_group">geometry.manifolds.special_orthogonal_group module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.sphere">geometry.manifolds.sphere module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.square">geometry.manifolds.square module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.tangent_bundle">geometry.manifolds.tangent_bundle module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.torus">geometry.manifolds.torus module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.torus01">geometry.manifolds.torus01 module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.translation_algebra">geometry.manifolds.translation_algebra module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds.translation_group">geometry.manifolds.translation_group module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.manifolds.html#module-geometry.manifolds">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.subspaces.html">geometry.subspaces package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="geometry.subspaces.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.subspaces.html#module-geometry.subspaces.subspaces">geometry.subspaces.subspaces module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.subspaces.html#module-geometry.subspaces">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.unittests.html">geometry.unittests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#module-geometry.unittests.distances_test">geometry.unittests.distances_test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#module-geometry.unittests.mds_test">geometry.unittests.mds_test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#module-geometry.unittests.misc_tests">geometry.unittests.misc_tests module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#module-geometry.unittests.poses_test">geometry.unittests.poses_test module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#module-geometry.unittests.procrustes_test">geometry.unittests.procrustes_test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#module-geometry.unittests.quaternions_test">geometry.unittests.quaternions_test module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#module-geometry.unittests.random_geometry_density_tests">geometry.unittests.random_geometry_density_tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#module-geometry.unittests.random_geometry_tests">geometry.unittests.random_geometry_tests module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#module-geometry.unittests.rotations_tests">geometry.unittests.rotations_tests module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#module-geometry.unittests.spheres_tests">geometry.unittests.spheres_tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#geometry-unittests-uniform-dist-pvalue-paranoia-module">geometry.unittests.uniform_dist_pvalue_paranoia module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#module-geometry.unittests.utils">geometry.unittests.utils module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#module-geometry.unittests.utils_test">geometry.unittests.utils_test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.unittests.html#module-geometry.unittests">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.utils.html">geometry.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="geometry.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.utils.html#module-geometry.utils.numpy_backport">geometry.utils.numpy_backport module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.utils.html#module-geometry.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-geometry.basic_utils">
+<span id="geometry-basic-utils-module"></span><h2>geometry.basic_utils module<a class="headerlink" href="#module-geometry.basic_utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.basic_utils.deprecated">
+<code class="descclassname">geometry.basic_utils.</code><code class="descname">deprecated</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/basic_utils.html#deprecated"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.basic_utils.deprecated" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a decorator which can be used to mark functions
+as deprecated. It will result in a warning being emitted
+when the function is used.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.basic_utils.finite">
+<code class="descclassname">geometry.basic_utils.</code><code class="descname">finite</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/basic_utils.html#finite"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.basic_utils.finite" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.basic_utils.normalize_length">
+<code class="descclassname">geometry.basic_utils.</code><code class="descname">normalize_length</code><span class="sig-paren">(</span><em>s</em>, <em>norm=2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/basic_utils.html#normalize_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.basic_utils.normalize_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize an array such that it has unit length in the given norm.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.basic_utils.normalize_length_or_zero">
+<code class="descclassname">geometry.basic_utils.</code><code class="descname">normalize_length_or_zero</code><span class="sig-paren">(</span><em>s</em>, <em>norm=2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/basic_utils.html#normalize_length_or_zero"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.basic_utils.normalize_length_or_zero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize an array such that it has unit length in the given norm;
+if the norm is close to zero, the zero vector is returned.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.basic_utils.safe_arccos">
+<code class="descclassname">geometry.basic_utils.</code><code class="descname">safe_arccos</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/basic_utils.html#safe_arccos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.basic_utils.safe_arccos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the arcosine of x, clipped between -1 and 1.</p>
+<p>Use this when you know x is a cosine, but it might be
+slightly over 1 or below -1 due to numerical errors.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-geometry.constants">
+<span id="geometry-constants-module"></span><h2>geometry.constants module<a class="headerlink" href="#module-geometry.constants" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="geometry.constants.GeometryConstants">
+<em class="property">class </em><code class="descclassname">geometry.constants.</code><code class="descname">GeometryConstants</code><a class="reference internal" href="../_modules/geometry/constants.html#GeometryConstants"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.constants.GeometryConstants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="geometry.constants.GeometryConstants.atol_zero_norm">
+<code class="descname">atol_zero_norm</code><em class="property"> = 1e-07</em><a class="headerlink" href="#geometry.constants.GeometryConstants.atol_zero_norm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="geometry.constants.GeometryConstants.rtol_SE2_from_SE3">
+<code class="descname">rtol_SE2_from_SE3</code><em class="property"> = 0.0001</em><a class="headerlink" href="#geometry.constants.GeometryConstants.rtol_SE2_from_SE3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-geometry.formatting">
+<span id="geometry-formatting-module"></span><h2>geometry.formatting module<a class="headerlink" href="#module-geometry.formatting" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.formatting.add_spacer">
+<code class="descclassname">geometry.formatting.</code><code class="descname">add_spacer</code><span class="sig-paren">(</span><em>cols</em>, <em>spacer=' '</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/formatting.html#add_spacer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.formatting.add_spacer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.formatting.format_matrix">
+<code class="descclassname">geometry.formatting.</code><code class="descname">format_matrix</code><span class="sig-paren">(</span><em>matrix</em>, <em>fsize=8</em>, <em>format_str='%g'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/formatting.html#format_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.formatting.format_matrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.formatting.formatm">
+<code class="descclassname">geometry.formatting.</code><code class="descname">formatm</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/formatting.html#formatm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.formatting.formatm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.formatting.join_columns">
+<code class="descclassname">geometry.formatting.</code><code class="descname">join_columns</code><span class="sig-paren">(</span><em>cols</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/formatting.html#join_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.formatting.join_columns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.formatting.printm">
+<code class="descclassname">geometry.formatting.</code><code class="descname">printm</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/formatting.html#printm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.formatting.printm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-geometry.mds_algos">
+<span id="geometry-mds-algos-module"></span><h2>geometry.mds_algos module<a class="headerlink" href="#module-geometry.mds_algos" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.mds_algos.best_embedding_on_sphere">
+<code class="descclassname">geometry.mds_algos.</code><code class="descname">best_embedding_on_sphere</code><span class="sig-paren">(</span><em>C</em>, <em>ndim</em>, <em>embed=&lt;function inner_product_embedding&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#geometry.mds_algos.best_embedding_on_sphere" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.mds_algos.double_center">
+<code class="descclassname">geometry.mds_algos.</code><code class="descname">double_center</code><span class="sig-paren">(</span><em>P</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/mds_algos.html#double_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.mds_algos.double_center" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.mds_algos.euclidean_distances">
+<code class="descclassname">geometry.mds_algos.</code><code class="descname">euclidean_distances</code><span class="sig-paren">(</span><em>S</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/mds_algos.html#euclidean_distances"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.mds_algos.euclidean_distances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the euclidean distance matrix for the given points.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.mds_algos.inner_product_embedding">
+<code class="descclassname">geometry.mds_algos.</code><code class="descname">inner_product_embedding</code><span class="sig-paren">(</span><em>C</em>, <em>ndim</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/mds_algos.html#inner_product_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.mds_algos.inner_product_embedding" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.mds_algos.inner_product_embedding_randomized">
+<code class="descclassname">geometry.mds_algos.</code><code class="descname">inner_product_embedding_randomized</code><span class="sig-paren">(</span><em>C</em>, <em>ndim</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/mds_algos.html#inner_product_embedding_randomized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.mds_algos.inner_product_embedding_randomized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Best embedding of inner product matrix based on
+randomized projections.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.mds_algos.inner_product_embedding_slow">
+<code class="descclassname">geometry.mds_algos.</code><code class="descname">inner_product_embedding_slow</code><span class="sig-paren">(</span><em>C</em>, <em>ndim</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/mds_algos.html#inner_product_embedding_slow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.mds_algos.inner_product_embedding_slow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.mds_algos.mds">
+<code class="descclassname">geometry.mds_algos.</code><code class="descname">mds</code><span class="sig-paren">(</span><em>D</em>, <em>ndim</em>, <em>embed=&lt;function inner_product_embedding&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/mds_algos.html#mds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.mds_algos.mds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.mds_algos.mds_randomized">
+<code class="descclassname">geometry.mds_algos.</code><code class="descname">mds_randomized</code><span class="sig-paren">(</span><em>D</em>, <em>ndim</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/mds_algos.html#mds_randomized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.mds_algos.mds_randomized" title="Permalink to this definition">¶</a></dt>
+<dd><p>MDS based on randomized projections.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.mds_algos.place">
+<code class="descclassname">geometry.mds_algos.</code><code class="descname">place</code><span class="sig-paren">(</span><em>references</em>, <em>distances</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/mds_algos.html#place"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.mds_algos.place" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.mds_algos.spherical_mds">
+<code class="descclassname">geometry.mds_algos.</code><code class="descname">spherical_mds</code><span class="sig-paren">(</span><em>C</em>, <em>ndim</em>, <em>embed=&lt;function inner_product_embedding&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/mds_algos.html#spherical_mds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.mds_algos.spherical_mds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.mds_algos.truncated_svd_randomized">
+<code class="descclassname">geometry.mds_algos.</code><code class="descname">truncated_svd_randomized</code><span class="sig-paren">(</span><em>M</em>, <em>k</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/mds_algos.html#truncated_svd_randomized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.mds_algos.truncated_svd_randomized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Truncated SVD based on randomized projections.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-geometry.poses">
+<span id="geometry-poses-module"></span><h2>geometry.poses module<a class="headerlink" href="#module-geometry.poses" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.poses.SE2_from_SE3">
+<code class="descclassname">geometry.poses.</code><code class="descname">SE2_from_SE3</code><span class="sig-paren">(</span><em>pose</em>, <em>check_exact=True</em>, <em>z_atol=1e-06</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#SE2_from_SE3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.SE2_from_SE3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects a pose in SE3 to SE2.</p>
+<p>If check_exact is True, it will check that z = 0 and axis ~= [0,0,1].</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.SE2_from_rotation_translation">
+<code class="descclassname">geometry.poses.</code><code class="descname">SE2_from_rotation_translation</code><span class="sig-paren">(</span><em>R</em>, <em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#geometry.poses.SE2_from_rotation_translation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.SE2_from_se2">
+<code class="descclassname">geometry.poses.</code><code class="descname">SE2_from_se2</code><span class="sig-paren">(</span><em>vel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#SE2_from_se2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.SE2_from_se2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from Lie algebra representation to pose.</p>
+<p>See Bullo, Murray “PD control on the euclidean group” for proofs.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.SE2_from_se2_slow">
+<code class="descclassname">geometry.poses.</code><code class="descname">SE2_from_se2_slow</code><span class="sig-paren">(</span><em>vel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#SE2_from_se2_slow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.SE2_from_se2_slow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.SE2_from_translation_angle">
+<code class="descclassname">geometry.poses.</code><code class="descname">SE2_from_translation_angle</code><span class="sig-paren">(</span><em>t</em>, <em>theta</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#SE2_from_translation_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.SE2_from_translation_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an element of SE2 from translation and rotation.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.SE2_from_xytheta">
+<code class="descclassname">geometry.poses.</code><code class="descname">SE2_from_xytheta</code><span class="sig-paren">(</span><em>xytheta</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#SE2_from_xytheta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.SE2_from_xytheta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an element of SE2 from translation and rotation.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.SE2_identity">
+<code class="descclassname">geometry.poses.</code><code class="descname">SE2_identity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#SE2_identity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.SE2_identity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.SE3_from_SE2">
+<code class="descclassname">geometry.poses.</code><code class="descname">SE3_from_SE2</code><span class="sig-paren">(</span><em>pose</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#SE3_from_SE2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.SE3_from_SE2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Embeds a pose in SE2 to SE3, setting z=0 and upright.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.SE3_from_rotation_translation">
+<code class="descclassname">geometry.poses.</code><code class="descname">SE3_from_rotation_translation</code><span class="sig-paren">(</span><em>R</em>, <em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#geometry.poses.SE3_from_rotation_translation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.SE3_identity">
+<code class="descclassname">geometry.poses.</code><code class="descname">SE3_identity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#SE3_identity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.SE3_identity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.angle_from_SE2">
+<code class="descclassname">geometry.poses.</code><code class="descname">angle_from_SE2</code><span class="sig-paren">(</span><em>pose</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#angle_from_SE2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.angle_from_SE2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.angular_from_se2">
+<code class="descclassname">geometry.poses.</code><code class="descname">angular_from_se2</code><span class="sig-paren">(</span><em>vel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#angular_from_se2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.angular_from_se2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.check_SE">
+<code class="descclassname">geometry.poses.</code><code class="descname">check_SE</code><span class="sig-paren">(</span><em>M</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#check_SE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.check_SE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that the argument is in the special euclidean group.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.check_se">
+<code class="descclassname">geometry.poses.</code><code class="descname">check_se</code><span class="sig-paren">(</span><em>M</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#check_se"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.check_se" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that the input is in the special euclidean Lie algebra.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.combine_pieces">
+<code class="descclassname">geometry.poses.</code><code class="descname">combine_pieces</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>c</em>, <em>d</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#combine_pieces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.combine_pieces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.extract_pieces">
+<code class="descclassname">geometry.poses.</code><code class="descname">extract_pieces</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#extract_pieces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.extract_pieces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.linear_angular_from_se2">
+<code class="descclassname">geometry.poses.</code><code class="descname">linear_angular_from_se2</code><span class="sig-paren">(</span><em>vel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#linear_angular_from_se2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.linear_angular_from_se2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.pose_from_rotation_translation">
+<code class="descclassname">geometry.poses.</code><code class="descname">pose_from_rotation_translation</code><span class="sig-paren">(</span><em>R</em>, <em>t</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#pose_from_rotation_translation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.pose_from_rotation_translation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.rotation_translation_from_SE2">
+<code class="descclassname">geometry.poses.</code><code class="descname">rotation_translation_from_SE2</code><span class="sig-paren">(</span><em>pose</em><span class="sig-paren">)</span><a class="headerlink" href="#geometry.poses.rotation_translation_from_SE2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.rotation_translation_from_SE3">
+<code class="descclassname">geometry.poses.</code><code class="descname">rotation_translation_from_SE3</code><span class="sig-paren">(</span><em>pose</em><span class="sig-paren">)</span><a class="headerlink" href="#geometry.poses.rotation_translation_from_SE3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.rotation_translation_from_pose">
+<code class="descclassname">geometry.poses.</code><code class="descname">rotation_translation_from_pose</code><span class="sig-paren">(</span><em>pose</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#rotation_translation_from_pose"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.rotation_translation_from_pose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.se2_from_SE2">
+<code class="descclassname">geometry.poses.</code><code class="descname">se2_from_SE2</code><span class="sig-paren">(</span><em>pose</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#se2_from_SE2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.se2_from_SE2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a pose to its Lie algebra representation.</p>
+<p>See Bullo, Murray “PD control on the euclidean group” for proofs.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.se2_from_SE2_slow">
+<code class="descclassname">geometry.poses.</code><code class="descname">se2_from_SE2_slow</code><span class="sig-paren">(</span><em>pose</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#se2_from_SE2_slow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.se2_from_SE2_slow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a pose to its Lie algebra representation.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.se2_from_linear_angular">
+<code class="descclassname">geometry.poses.</code><code class="descname">se2_from_linear_angular</code><span class="sig-paren">(</span><em>linear</em>, <em>angular</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#se2_from_linear_angular"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.se2_from_linear_angular" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an element of se2 from linear and angular velocity.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.translation_angle_from_SE2">
+<code class="descclassname">geometry.poses.</code><code class="descname">translation_angle_from_SE2</code><span class="sig-paren">(</span><em>pose</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#translation_angle_from_SE2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.translation_angle_from_SE2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.translation_from_SE2">
+<code class="descclassname">geometry.poses.</code><code class="descname">translation_from_SE2</code><span class="sig-paren">(</span><em>pose</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#translation_from_SE2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.translation_from_SE2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.translation_from_SE3">
+<code class="descclassname">geometry.poses.</code><code class="descname">translation_from_SE3</code><span class="sig-paren">(</span><em>pose</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#translation_from_SE3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.translation_from_SE3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses.xytheta_from_SE2">
+<code class="descclassname">geometry.poses.</code><code class="descname">xytheta_from_SE2</code><span class="sig-paren">(</span><em>pose</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses.html#xytheta_from_SE2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses.xytheta_from_SE2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an element of SE2 from translation and rotation.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-geometry.poses_embedding">
+<span id="geometry-poses-embedding-module"></span><h2>geometry.poses_embedding module<a class="headerlink" href="#module-geometry.poses_embedding" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.poses_embedding.R2_project_from_SE2">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">R2_project_from_SE2</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#R2_project_from_SE2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.R2_project_from_SE2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.R3_project_from_SE3">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">R3_project_from_SE3</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#R3_project_from_SE3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.R3_project_from_SE3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.SE2_from_R2">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">SE2_from_R2</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#SE2_from_R2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.SE2_from_R2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.SE2_from_SO2">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">SE2_from_SO2</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#SE2_from_SO2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.SE2_from_SO2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.SE2_project_from_SE3">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">SE2_project_from_SE3</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#SE2_project_from_SE3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.SE2_project_from_SE3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.SE3_from_R3">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">SE3_from_R3</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#SE3_from_R3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.SE3_from_R3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.SE3_from_SO3">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">SE3_from_SO3</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#SE3_from_SO3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.SE3_from_SO3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.SO2_project_from_SE2">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">SO2_project_from_SE2</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#SO2_project_from_SE2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.SO2_project_from_SE2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.SO3_project_from_SE3">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">SO3_project_from_SE3</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#SO3_project_from_SE3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.SO3_project_from_SE3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.se2_from_so2">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">se2_from_so2</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#se2_from_so2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.se2_from_so2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.se2_project_from_se3">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">se2_project_from_se3</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#se2_project_from_se3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.se2_project_from_se3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.se3_from_se2">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">se3_from_se2</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#se3_from_se2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.se3_from_se2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.se3_from_so3">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">se3_from_so3</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#se3_from_so3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.se3_from_so3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.so2_project_from_se2">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">so2_project_from_se2</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#so2_project_from_se2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.so2_project_from_se2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.poses_embedding.so3_project_from_se3">
+<code class="descclassname">geometry.poses_embedding.</code><code class="descname">so3_project_from_se3</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/poses_embedding.html#so3_project_from_se3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.poses_embedding.so3_project_from_se3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-geometry.procrustes">
+<span id="geometry-procrustes-module"></span><h2>geometry.procrustes module<a class="headerlink" href="#module-geometry.procrustes" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.procrustes.best_orthogonal_transform">
+<code class="descclassname">geometry.procrustes.</code><code class="descname">best_orthogonal_transform</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/procrustes.html#best_orthogonal_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.procrustes.best_orthogonal_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the best orthogonal transform R  between X and Y,
+such that R X ~= Y.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.procrustes.best_similarity_transform">
+<code class="descclassname">geometry.procrustes.</code><code class="descname">best_similarity_transform</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/procrustes.html#best_similarity_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.procrustes.best_similarity_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the best transform (R,t)  between X and Y,
+such that R X + t ~= Y.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.procrustes.closest_orthogonal_matrix">
+<code class="descclassname">geometry.procrustes.</code><code class="descname">closest_orthogonal_matrix</code><span class="sig-paren">(</span><em>M</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/procrustes.html#closest_orthogonal_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.procrustes.closest_orthogonal_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the closest orthogonal matrix to M.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-geometry.rotations">
+<span id="geometry-rotations-module"></span><h2>geometry.rotations module<a class="headerlink" href="#module-geometry.rotations" title="Permalink to this headline">¶</a></h2>
+<p>Contains all about rotation matrices, quaternions, and various conversions.</p>
+<p>conventions: q=( a + bi + cj + dk), with a&gt;0</p>
+<dl class="function">
+<dt id="geometry.rotations.SO2_from_angle">
+<code class="descclassname">geometry.rotations.</code><code class="descname">SO2_from_angle</code><span class="sig-paren">(</span><em>theta</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#SO2_from_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.SO2_from_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a 2x2 rotation matrix.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.angle_from_SO2">
+<code class="descclassname">geometry.rotations.</code><code class="descname">angle_from_SO2</code><span class="sig-paren">(</span><em>R</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#angle_from_SO2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.angle_from_SO2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.angle_from_rot2d">
+<code class="descclassname">geometry.rotations.</code><code class="descname">angle_from_rot2d</code><span class="sig-paren">(</span><em>R</em><span class="sig-paren">)</span><a class="headerlink" href="#geometry.rotations.angle_from_rot2d" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.axis_angle_from_quaternion">
+<code class="descclassname">geometry.rotations.</code><code class="descname">axis_angle_from_quaternion</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#axis_angle_from_quaternion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.axis_angle_from_quaternion" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the inverse of <a class="reference internal" href="geometry.rotations.quaternion_from_axis_angle.html#geometry.rotations.quaternion_from_axis_angle" title="geometry.rotations.quaternion_from_axis_angle"><code class="xref py py-func docutils literal notranslate"><span class="pre">quaternion_from_axis_angle()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.axis_angle_from_rotation">
+<code class="descclassname">geometry.rotations.</code><code class="descname">axis_angle_from_rotation</code><span class="sig-paren">(</span><em>R</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#axis_angle_from_rotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.axis_angle_from_rotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <em>(axis,angle)</em> representation of a given rotation.</p>
+<p>There are a couple of symmetries:</p>
+<ul class="simple">
+<li>By convention, the angle returned is nonnegative.</li>
+<li>If the angle is 0, any axis will do.
+In that case, <code class="xref py py-func docutils literal notranslate"><span class="pre">default_axis()</span></code> will be returned.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.check_SO">
+<code class="descclassname">geometry.rotations.</code><code class="descname">check_SO</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#check_SO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.check_SO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that the given value is a rotation matrix of arbitrary size.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.check_orthogonal">
+<code class="descclassname">geometry.rotations.</code><code class="descname">check_orthogonal</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#check_orthogonal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.check_orthogonal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that the argument is an orthogonal matrix.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.check_skew_symmetric">
+<code class="descclassname">geometry.rotations.</code><code class="descname">check_skew_symmetric</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#check_skew_symmetric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.check_skew_symmetric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that the argument is a skew-symmetric matrix.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.geodesic_distance_for_rotations">
+<code class="descclassname">geometry.rotations.</code><code class="descname">geodesic_distance_for_rotations</code><span class="sig-paren">(</span><em>R1</em>, <em>R2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#geodesic_distance_for_rotations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.geodesic_distance_for_rotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the geodesic distance between two rotation matrices.</p>
+<p>It is computed as the angle of the rotation <img class="math" src="../_images/math/7eff4c7ecc72d51746efc31eca2d08c4bb7549f9.png" alt="R_1^{*} R_2^{-1}`"/>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.hat_map">
+<code class="descclassname">geometry.rotations.</code><code class="descname">hat_map</code><span class="sig-paren">(</span><em>v</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#hat_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.hat_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maps a vector to a 3x3 skew symmetric matrix.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.hat_map_2d">
+<code class="descclassname">geometry.rotations.</code><code class="descname">hat_map_2d</code><span class="sig-paren">(</span><em>omega</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#hat_map_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.hat_map_2d" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.map_hat">
+<code class="descclassname">geometry.rotations.</code><code class="descname">map_hat</code><span class="sig-paren">(</span><em>H</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#map_hat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.map_hat" title="Permalink to this definition">¶</a></dt>
+<dd><p>The inverse of <a class="reference internal" href="geometry.rotations.hat_map.html#geometry.rotations.hat_map" title="geometry.rotations.hat_map"><code class="xref py py-func docutils literal notranslate"><span class="pre">hat_map()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.map_hat_2d">
+<code class="descclassname">geometry.rotations.</code><code class="descname">map_hat_2d</code><span class="sig-paren">(</span><em>W</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#map_hat_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.map_hat_2d" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.quaternion_from_axis_angle">
+<code class="descclassname">geometry.rotations.</code><code class="descname">quaternion_from_axis_angle</code><span class="sig-paren">(</span><em>axis</em>, <em>angle</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#quaternion_from_axis_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.quaternion_from_axis_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes a quaternion corresponding to the rotation of <em>angle</em> radians
+around the given <em>axis</em>.</p>
+<p>This is the inverse of <a class="reference internal" href="geometry.rotations.axis_angle_from_quaternion.html#geometry.rotations.axis_angle_from_quaternion" title="geometry.rotations.axis_angle_from_quaternion"><code class="xref py py-func docutils literal notranslate"><span class="pre">axis_angle_from_quaternion()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.quaternion_from_rotation">
+<code class="descclassname">geometry.rotations.</code><code class="descname">quaternion_from_rotation</code><span class="sig-paren">(</span><em>R</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#quaternion_from_rotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.quaternion_from_rotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a rotation matrix to a quaternion.</p>
+<p>This is the robust method mentioned on wikipedia:</p>
+<p>&lt;<a class="reference external" href="http://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation">http://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation</a>&gt;</p>
+<p>TODO: add the more robust method with 4x4 matrix and eigenvector</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.random_orthogonal_transform">
+<code class="descclassname">geometry.rotations.</code><code class="descname">random_orthogonal_transform</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#random_orthogonal_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.random_orthogonal_transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.random_quaternion">
+<code class="descclassname">geometry.rotations.</code><code class="descname">random_quaternion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#random_quaternion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.random_quaternion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a random quaternion.</p>
+<p>Uses the algorithm used in Kuffner, ICRA‘04.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.random_rotation">
+<code class="descclassname">geometry.rotations.</code><code class="descname">random_rotation</code><span class="sig-paren">(</span><em>ndim=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#random_rotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.random_rotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a random rotation matrix.</p>
+<p>This is a wrapper around <a class="reference internal" href="geometry.rotations.random_quaternion.html#geometry.rotations.random_quaternion" title="geometry.rotations.random_quaternion"><code class="xref py py-func docutils literal notranslate"><span class="pre">random_quaternion()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.rot2d">
+<code class="descclassname">geometry.rotations.</code><code class="descname">rot2d</code><span class="sig-paren">(</span><em>theta</em><span class="sig-paren">)</span><a class="headerlink" href="#geometry.rotations.rot2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a 2x2 rotation matrix.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.rot2d_from_angle">
+<code class="descclassname">geometry.rotations.</code><code class="descname">rot2d_from_angle</code><span class="sig-paren">(</span><em>theta</em><span class="sig-paren">)</span><a class="headerlink" href="#geometry.rotations.rot2d_from_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a 2x2 rotation matrix.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.rotation_from_axes_spec">
+<code class="descclassname">geometry.rotations.</code><code class="descname">rotation_from_axes_spec</code><span class="sig-paren">(</span><em>x_axis</em>, <em>vector_on_xy_plane</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#rotation_from_axes_spec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.rotation_from_axes_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a rotation matrix from the axes.
+<code class="docutils literal notranslate"><span class="pre">x_axis</span></code> is the new direction of the (1,0,0) vector
+after this rotation. <code class="docutils literal notranslate"><span class="pre">vector_on_xy_plane</span></code> is a vector
+that must end up in the (x,y) plane after the rotation.</p>
+<p>That is, it holds that:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>R = rotation_from_axes_spec(x, v)
+dot(R,x) == [1,0,0]
+dot(R,v) == [?,?,0]
+</pre></div>
+</div>
+<p>TODO: add exception if vectors are too close.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.rotation_from_axis_angle">
+<code class="descclassname">geometry.rotations.</code><code class="descname">rotation_from_axis_angle</code><span class="sig-paren">(</span><em>axis</em>, <em>angle</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#rotation_from_axis_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.rotation_from_axis_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the rotation matrix from the <em>(axis,angle)</em> representation
+using Rodriguez’s formula.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.rotation_from_axis_angle2">
+<code class="descclassname">geometry.rotations.</code><code class="descname">rotation_from_axis_angle2</code><span class="sig-paren">(</span><em>axis</em>, <em>angle</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#rotation_from_axis_angle2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.rotation_from_axis_angle2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the rotation from the <em>(axis,angle)</em> representation.</p>
+<p>This is an alternative to <a class="reference internal" href="geometry.rotations.rotation_from_axis_angle.html#geometry.rotations.rotation_from_axis_angle" title="geometry.rotations.rotation_from_axis_angle"><code class="xref py py-func docutils literal notranslate"><span class="pre">rotation_from_axis_angle()</span></code></a> which
+goes through the quaternion representation instead of using Rodrigues’
+formula.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.rotation_from_quaternion">
+<code class="descclassname">geometry.rotations.</code><code class="descname">rotation_from_quaternion</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#rotation_from_quaternion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.rotation_from_quaternion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a quaternion to a rotation matrix.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations.rotz">
+<code class="descclassname">geometry.rotations.</code><code class="descname">rotz</code><span class="sig-paren">(</span><em>theta</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations.html#rotz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations.rotz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a 3x3 rotation matrix corresponding
+to rotation around the <em>z</em> axis.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-geometry.rotations_embedding">
+<span id="geometry-rotations-embedding-module"></span><h2>geometry.rotations_embedding module<a class="headerlink" href="#module-geometry.rotations_embedding" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.rotations_embedding.SO2_project_from_SO3">
+<code class="descclassname">geometry.rotations_embedding.</code><code class="descname">SO2_project_from_SO3</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations_embedding.html#SO2_project_from_SO3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations_embedding.SO2_project_from_SO3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations_embedding.SO3_from_SO2">
+<code class="descclassname">geometry.rotations_embedding.</code><code class="descname">SO3_from_SO2</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations_embedding.html#SO3_from_SO2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations_embedding.SO3_from_SO2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations_embedding.so2_project_from_so3">
+<code class="descclassname">geometry.rotations_embedding.</code><code class="descname">so2_project_from_so3</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations_embedding.html#so2_project_from_so3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations_embedding.so2_project_from_so3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.rotations_embedding.so3_from_so2">
+<code class="descclassname">geometry.rotations_embedding.</code><code class="descname">so3_from_so2</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/rotations_embedding.html#so3_from_so2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.rotations_embedding.so3_from_so2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-geometry.spheres">
+<span id="geometry-spheres-module"></span><h2>geometry.spheres module<a class="headerlink" href="#module-geometry.spheres" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.spheres.any_distant_direction">
+<code class="descclassname">geometry.spheres.</code><code class="descname">any_distant_direction</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#any_distant_direction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.any_distant_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a direction distant from both <em>s</em> and <em>-s</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.any_orthogonal_direction">
+<code class="descclassname">geometry.spheres.</code><code class="descname">any_orthogonal_direction</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#any_orthogonal_direction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.any_orthogonal_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns any axis orthogonal to <em>s</em> (not necessarily random).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.assert_orthogonal">
+<code class="descclassname">geometry.spheres.</code><code class="descname">assert_orthogonal</code><span class="sig-paren">(</span><em>s</em>, <em>v</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#assert_orthogonal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.assert_orthogonal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that two vectors are orthogonal.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.default_axis">
+<code class="descclassname">geometry.spheres.</code><code class="descname">default_axis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#default_axis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.default_axis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the axis to use when any will do.</p>
+<p>For example, the identity is represented by
+a rotation of 0 degrees around <em>any</em> axis. If an <em>(axis,angle)</em>
+representation is requested, the axis will be given by
+<em>default_axis()</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.default_axis_orthogonal">
+<code class="descclassname">geometry.spheres.</code><code class="descname">default_axis_orthogonal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#default_axis_orthogonal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.default_axis_orthogonal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an axis orthogonal to the one returned
+by <a class="reference internal" href="#geometry.spheres.default_axis" title="geometry.spheres.default_axis"><code class="xref py py-func docutils literal notranslate"><span class="pre">default_axis()</span></code></a>.</p>
+<p>Use this when you need a couple of arbitrary orthogonal axes.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.directions">
+<code class="descclassname">geometry.spheres.</code><code class="descname">directions</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#directions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.directions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that every column has unit length.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.distances_from">
+<code class="descclassname">geometry.spheres.</code><code class="descname">distances_from</code><span class="sig-paren">(</span><em>S</em>, <em>s</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#distances_from"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.distances_from" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the geodesic distances on the sphere from a set of
+points <em>S</em> to a given point <em>s</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.distribution_radius">
+<code class="descclassname">geometry.spheres.</code><code class="descname">distribution_radius</code><span class="sig-paren">(</span><em>S</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#distribution_radius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.distribution_radius" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the radius of the given directions distribution.</p>
+<p>The radius is defined as the minimum <em>r</em> such that there exists a
+point <em>s</em> in <em>S</em> such that all distances are within <em>r</em> from <em>s</em>.</p>
+<div class="math">
+<p><img src="../_images/math/b1caea1ec7b6d48115ac62b5d4e82aeee7a4443b.png" alt="\textsf{radius} = \min \{ r | \exists s :
+\forall x \in S : d(s,x) &lt;= r \}"/></p>
+</div></dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.geodesic_distance_on_sphere">
+<code class="descclassname">geometry.spheres.</code><code class="descname">geodesic_distance_on_sphere</code><span class="sig-paren">(</span><em>s1</em>, <em>s2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#geodesic_distance_on_sphere"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.geodesic_distance_on_sphere" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the geodesic distance between two points on the sphere.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.normalize_pi">
+<code class="descclassname">geometry.spheres.</code><code class="descname">normalize_pi</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#normalize_pi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.normalize_pi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalizes the entries in <em>x</em> in the interval <img class="math" src="../_images/math/c5b46a2944b174981cec3b2e403bd963f6a2c826.png" alt="[-pi,pi)"/>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.normalize_pi_scalar">
+<code class="descclassname">geometry.spheres.</code><code class="descname">normalize_pi_scalar</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#normalize_pi_scalar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.normalize_pi_scalar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.project_vectors_onto_sphere">
+<code class="descclassname">geometry.spheres.</code><code class="descname">project_vectors_onto_sphere</code><span class="sig-paren">(</span><em>S</em>, <em>atol=1e-07</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#project_vectors_onto_sphere"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.project_vectors_onto_sphere" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.random_direction">
+<code class="descclassname">geometry.spheres.</code><code class="descname">random_direction</code><span class="sig-paren">(</span><em>ndim=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#random_direction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.random_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a random direction in <img class="math" src="../_images/math/364e7b11da49277918fbc75db5788d95fbbab265.png" alt="S^{n-1}"/>.</p>
+<p>Currently only implemented for 2D and 3D.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.random_directions">
+<code class="descclassname">geometry.spheres.</code><code class="descname">random_directions</code><span class="sig-paren">(</span><em>N</em>, <em>ndim=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#random_directions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.random_directions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a set of random directions.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.random_directions_bounded">
+<code class="descclassname">geometry.spheres.</code><code class="descname">random_directions_bounded</code><span class="sig-paren">(</span><em>ndim</em>, <em>radius</em>, <em>num_points</em>, <em>center=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#random_directions_bounded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.random_directions_bounded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a random distribution of points in <img class="math" src="../_images/math/364e7b11da49277918fbc75db5788d95fbbab265.png" alt="S^{n-1}"/>.
+within a certain radius from the point <em>center</em>.</p>
+<p>The points will be distributed uniformly in that area of the sphere.
+If <em>center</em> is not passed, it will be a random direction.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.random_orthogonal_direction">
+<code class="descclassname">geometry.spheres.</code><code class="descname">random_orthogonal_direction</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#random_orthogonal_direction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.random_orthogonal_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a random axis orthogonal to <em>s</em>
+(only implemented for circle and sphere).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.slerp">
+<code class="descclassname">geometry.spheres.</code><code class="descname">slerp</code><span class="sig-paren">(</span><em>s1</em>, <em>s2</em>, <em>t</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#slerp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.slerp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spherical interpolation between two points on a hypersphere.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.sorted_directions">
+<code class="descclassname">geometry.spheres.</code><code class="descname">sorted_directions</code><span class="sig-paren">(</span><em>S</em>, <em>num_around=15</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#sorted_directions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.sorted_directions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rearranges the directions in <em>S</em> in a better order for visualization.</p>
+<p>In 2D, sorts the directions using their angle.</p>
+<p>In 3D, it tries to do a pleasant elicoidal arrangement
+with <strong>num_around</strong> spires.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.sphere_area">
+<code class="descclassname">geometry.spheres.</code><code class="descname">sphere_area</code><span class="sig-paren">(</span><em>r=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#sphere_area"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.sphere_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the area of a sphere of the given radius.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.spherical_cap_area">
+<code class="descclassname">geometry.spheres.</code><code class="descname">spherical_cap_area</code><span class="sig-paren">(</span><em>cap_radius</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#spherical_cap_area"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.spherical_cap_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the area of a spherical cap on the unit sphere
+of the given radius.</p>
+<p>See figure at <a class="reference external" href="http://mathworld.wolfram.com/SphericalCap.html">http://mathworld.wolfram.com/SphericalCap.html</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.spherical_cap_with_area">
+<code class="descclassname">geometry.spheres.</code><code class="descname">spherical_cap_with_area</code><span class="sig-paren">(</span><em>cap_area</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#spherical_cap_with_area"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.spherical_cap_with_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the radius of a spherical cap of the given area.</p>
+<p>See <a class="reference external" href="http://www.springerlink.com/content/3521h167300g7v62/">http://www.springerlink.com/content/3521h167300g7v62/</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres.unit_length">
+<code class="descclassname">geometry.spheres.</code><code class="descname">unit_length</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres.html#unit_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres.unit_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that the value is a 1D vector with unit length in the 2 norm.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-geometry.spheres_embedding">
+<span id="geometry-spheres-embedding-module"></span><h2>geometry.spheres_embedding module<a class="headerlink" href="#module-geometry.spheres_embedding" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.spheres_embedding.S1_project_from_R2">
+<code class="descclassname">geometry.spheres_embedding.</code><code class="descname">S1_project_from_R2</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres_embedding.html#S1_project_from_R2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres_embedding.S1_project_from_R2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres_embedding.S1_project_from_S2">
+<code class="descclassname">geometry.spheres_embedding.</code><code class="descname">S1_project_from_S2</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres_embedding.html#S1_project_from_S2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres_embedding.S1_project_from_S2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres_embedding.S2_from_S1">
+<code class="descclassname">geometry.spheres_embedding.</code><code class="descname">S2_from_S1</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres_embedding.html#S2_from_S1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres_embedding.S2_from_S1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.spheres_embedding.S2_project_from_R3">
+<code class="descclassname">geometry.spheres_embedding.</code><code class="descname">S2_project_from_R3</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/spheres_embedding.html#S2_project_from_R3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.spheres_embedding.S2_project_from_R3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-geometry.tex">
+<span id="geometry-tex-module"></span><h2>geometry.tex module<a class="headerlink" href="#module-geometry.tex" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-geometry.yaml">
+<span id="geometry-yaml-module"></span><h2>geometry.yaml module<a class="headerlink" href="#module-geometry.yaml" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="geometry.yaml.Representation">
+<em class="property">class </em><code class="descclassname">geometry.yaml.</code><code class="descname">Representation</code><a class="reference internal" href="../_modules/geometry/yaml.html#Representation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.Representation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="43%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>from_yaml</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>to_yaml</strong></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geometry.yaml.Representation.from_yaml">
+<code class="descname">from_yaml</code><span class="sig-paren">(</span><em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/yaml.html#Representation.from_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.Representation.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.yaml.Representation.to_yaml">
+<code class="descname">to_yaml</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/yaml.html#Representation.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.Representation.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geometry.yaml.SE3_m44">
+<em class="property">class </em><code class="descclassname">geometry.yaml.</code><code class="descname">SE3_m44</code><a class="reference internal" href="../_modules/geometry/yaml.html#SE3_m44"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.SE3_m44" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#geometry.yaml.Representation" title="geometry.yaml.Representation"><code class="xref py py-class docutils literal notranslate"><span class="pre">geometry.yaml.Representation</span></code></a></p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="43%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>from_yaml</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>to_yaml</strong></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="geometry.yaml.SE3_m44.from_yaml">
+<em class="property">static </em><code class="descname">from_yaml</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/yaml.html#SE3_m44.from_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.SE3_m44.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="geometry.yaml.SE3_m44.to_yaml">
+<em class="property">static </em><code class="descname">to_yaml</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/yaml.html#SE3_m44.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.SE3_m44.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geometry.yaml.TSE3_bt">
+<em class="property">class </em><code class="descclassname">geometry.yaml.</code><code class="descname">TSE3_bt</code><a class="reference internal" href="../_modules/geometry/yaml.html#TSE3_bt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.TSE3_bt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#geometry.yaml.Representation" title="geometry.yaml.Representation"><code class="xref py py-class docutils literal notranslate"><span class="pre">geometry.yaml.Representation</span></code></a></p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="43%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>from_yaml</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>to_yaml</strong></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="geometry.yaml.TSE3_bt.from_yaml">
+<em class="property">static </em><code class="descname">from_yaml</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/yaml.html#TSE3_bt.from_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.TSE3_bt.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="geometry.yaml.TSE3_bt.to_yaml">
+<em class="property">static </em><code class="descname">to_yaml</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/yaml.html#TSE3_bt.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.TSE3_bt.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.yaml.from_yaml">
+<code class="descclassname">geometry.yaml.</code><code class="descname">from_yaml</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/yaml.html#from_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.yaml.get_default_representation">
+<code class="descclassname">geometry.yaml.</code><code class="descname">get_default_representation</code><span class="sig-paren">(</span><em>manifold</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/yaml.html#get_default_representation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.get_default_representation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.yaml.register_yaml_converter">
+<code class="descclassname">geometry.yaml.</code><code class="descname">register_yaml_converter</code><span class="sig-paren">(</span><em>manifold_name</em>, <em>representation</em>, <em>converter</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/yaml.html#register_yaml_converter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.register_yaml_converter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="geometry.yaml.se3_m44">
+<em class="property">class </em><code class="descclassname">geometry.yaml.</code><code class="descname">se3_m44</code><a class="reference internal" href="../_modules/geometry/yaml.html#se3_m44"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.se3_m44" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#geometry.yaml.Representation" title="geometry.yaml.Representation"><code class="xref py py-class docutils literal notranslate"><span class="pre">geometry.yaml.Representation</span></code></a></p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="43%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>from_yaml</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>to_yaml</strong></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="geometry.yaml.se3_m44.from_yaml">
+<em class="property">static </em><code class="descname">from_yaml</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/yaml.html#se3_m44.from_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.se3_m44.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="geometry.yaml.se3_m44.to_yaml">
+<em class="property">static </em><code class="descname">to_yaml</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/yaml.html#se3_m44.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.se3_m44.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.yaml.to_yaml">
+<code class="descclassname">geometry.yaml.</code><code class="descname">to_yaml</code><span class="sig-paren">(</span><em>manifold</em>, <em>value</em>, <em>representation=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/yaml.html#to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.yaml.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-geometry">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-geometry" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">geometry package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-geometry.basic_utils">geometry.basic_utils module</a></li>
+<li><a class="reference internal" href="#module-geometry.constants">geometry.constants module</a></li>
+<li><a class="reference internal" href="#module-geometry.formatting">geometry.formatting module</a></li>
+<li><a class="reference internal" href="#module-geometry.mds_algos">geometry.mds_algos module</a></li>
+<li><a class="reference internal" href="#module-geometry.poses">geometry.poses module</a></li>
+<li><a class="reference internal" href="#module-geometry.poses_embedding">geometry.poses_embedding module</a></li>
+<li><a class="reference internal" href="#module-geometry.procrustes">geometry.procrustes module</a></li>
+<li><a class="reference internal" href="#module-geometry.rotations">geometry.rotations module</a></li>
+<li><a class="reference internal" href="#module-geometry.rotations_embedding">geometry.rotations_embedding module</a></li>
+<li><a class="reference internal" href="#module-geometry.spheres">geometry.spheres module</a></li>
+<li><a class="reference internal" href="#module-geometry.spheres_embedding">geometry.spheres_embedding module</a></li>
+<li><a class="reference internal" href="#module-geometry.tex">geometry.tex module</a></li>
+<li><a class="reference internal" href="#module-geometry.yaml">geometry.yaml module</a></li>
+<li><a class="reference internal" href="#module-geometry">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geometry.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>

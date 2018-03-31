@@ -1,0 +1,224 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry.manifolds.tests.checks_generation &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../tests.html" accesskey="U">geometry.manifolds.tests</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geometry.manifolds.tests.checks_generation</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    These are very &quot;meta&quot; utils for creating nose tests on the fly.</span>
+
+<span class="sd">    Here is an example use: ::</span>
+
+<span class="sd">        thinghies = {&#39;banana&#39;: &#39;yellow&#39;, &#39;apple&#39;: &#39;red&#39;, &#39;sky&#39;: &#39;blue&#39;}</span>
+
+<span class="sd">        def thinghies_list():</span>
+<span class="sd">            return thinghies.keys()</span>
+
+<span class="sd">        def thinghies_args(x):</span>
+<span class="sd">            return (x, thinghies[x])</span>
+
+<span class="sd">        def thinghies_attrs(x):</span>
+<span class="sd">            return dict(thinghy_name=&#39;%s&#39; % x, flavor=thinghies[x])</span>
+
+<span class="sd">        for_all_thinghies = fancy_test_decorator(lister=thinghies_list,</span>
+<span class="sd">                                                 arguments=thinghies_args,</span>
+<span class="sd">                                                 attributes=thinghies_attrs)</span>
+
+
+<span class="sd">    And this is the proper test: ::</span>
+
+<span class="sd">        @for_all_thinghies</span>
+<span class="sd">        def check_good_flavor(id_thinghy, flavor):</span>
+<span class="sd">            print(&#39;test for %s %s&#39; % (id_thinghy, flavor))</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">nose.tools</span> <span class="k">import</span> <span class="n">istest</span><span class="p">,</span> <span class="n">nottest</span>
+
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="k">import</span> <span class="n">logger</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;fancy_test_decorator&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">add_to_module</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">module_name</span><span class="p">):</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">module_name</span><span class="p">]</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="vm">__name__</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;test&#39;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;No &quot;test&quot; in function name </span><span class="si">%r</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;test&#39;</span> <span class="ow">in</span> <span class="n">module_name</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;While adding </span><span class="si">%r</span><span class="s1"> in </span><span class="si">%r</span><span class="s1">: module does not have &quot;test&quot;&#39;</span>
+                        <span class="s1">&#39; in it, so nose will not find the test.&#39;</span> <span class="o">%</span>
+                        <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">module_name</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Already created test </span><span class="si">%r</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="n">module</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">function</span>
+
+    <span class="c1"># logger.debug(&#39;Added test %s:%s&#39; % (module.__name__, name))</span>
+
+
+<span class="k">def</span> <span class="nf">add_checker_f</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">arguments</span><span class="p">,</span> <span class="n">attributes</span><span class="p">,</span> <span class="n">naming</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;test_</span><span class="si">%s</span><span class="s1">_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">naming</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+    <span class="nd">@istest</span>
+    <span class="k">def</span> <span class="nf">caller</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="n">arguments</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="ne">AssertionError</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Error while executing test </span><span class="si">%r</span><span class="s1">.</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">name</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s1">&#39; f = </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">f</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s1">&#39; f.__module__ = </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">f</span><span class="o">.</span><span class="vm">__module__</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s1">&#39; x = </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s1">&#39; arguments() = </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s1">&#39; arguments(x) = </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s1">&#39; attributes = </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+    <span class="n">caller</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">attributes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">caller</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="n">caller</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="vm">__name__</span>
+
+    <span class="n">add_to_module</span><span class="p">(</span><span class="n">caller</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="vm">__module__</span><span class="p">)</span>
+
+
+<span class="c1"># TODO: add debug info function</span>
+<div class="viewcode-block" id="fancy_test_decorator"><a class="viewcode-back" href="../../../../api/geometry.manifolds.tests.html#geometry.manifolds.tests.checks_generation.fancy_test_decorator">[docs]</a><span class="nd">@nottest</span>
+<span class="k">def</span> <span class="nf">fancy_test_decorator</span><span class="p">(</span><span class="n">lister</span><span class="p">,</span>
+                       <span class="n">arguments</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+                       <span class="n">attributes</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)},</span>
+                       <span class="n">naming</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+                       <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Creates a fancy decorator for adding checks.</span>
+
+<span class="sd">        :param lister: a function that should give a list of objects</span>
+<span class="sd">        :param arguments: from object to arguments</span>
+<span class="sd">        :param attributes: (optional) set of attributes for the test</span>
+
+<span class="sd">        Returns a function that can be used as a decorator.</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">for_all_stuff</span><span class="p">(</span><span class="n">check</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lister</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;add test </span><span class="si">%s</span><span class="s1"> / </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">check</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+            <span class="n">add_checker_f</span><span class="p">(</span><span class="n">check</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">arguments</span><span class="p">,</span> <span class="n">attributes</span><span class="p">,</span> <span class="n">naming</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">check</span>
+
+    <span class="k">return</span> <span class="n">for_all_stuff</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../tests.html" >geometry.manifolds.tests</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>

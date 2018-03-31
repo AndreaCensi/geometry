@@ -1,0 +1,185 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry.unittests.utils &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geometry.unittests.utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="kn">from</span> <span class="nn">contracts</span> <span class="k">import</span> <span class="n">contract</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="k">import</span> <span class="p">(</span><span class="n">random_direction</span><span class="p">,</span> <span class="n">random_quaternion</span><span class="p">,</span> <span class="n">random_rotation</span><span class="p">,</span>
+    <span class="n">assert_allclose</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">20</span>
+
+
+<div class="viewcode-block" id="rotations_sequence"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.utils.rotations_sequence">[docs]</a><span class="k">def</span> <span class="nf">rotations_sequence</span><span class="p">():</span>
+    <span class="k">yield</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="c1"># TODO: add special values</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>  <span class="c1"># @UnusedVariable</span>
+        <span class="k">yield</span> <span class="n">random_rotation</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="directions_sequence"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.utils.directions_sequence">[docs]</a><span class="k">def</span> <span class="nf">directions_sequence</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39; Sequence of directions in S^2. &#39;&#39;&#39;</span>
+    <span class="k">yield</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+    <span class="k">yield</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+    <span class="k">yield</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+    <span class="k">yield</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+    <span class="k">yield</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+    <span class="k">yield</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">])</span>
+    <span class="c1"># TODO: add special values</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>  <span class="c1"># @UnusedVariable</span>
+        <span class="k">yield</span> <span class="n">random_direction</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="quaternions_sequence"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.utils.quaternions_sequence">[docs]</a><span class="k">def</span> <span class="nf">quaternions_sequence</span><span class="p">():</span>
+    <span class="c1"># TODO: add special values</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>  <span class="c1"># @UnusedVariable</span>
+        <span class="k">yield</span> <span class="n">random_quaternion</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="axis_angle_sequence"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.utils.axis_angle_sequence">[docs]</a><span class="k">def</span> <span class="nf">axis_angle_sequence</span><span class="p">():</span>
+    <span class="c1"># TODO: add special</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>  <span class="c1"># @UnusedVariable</span>
+        <span class="k">yield</span> <span class="n">random_axis_angle</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="random_axis_angle"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.utils.random_axis_angle">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s1">&#39;tuple(direction, (float,&lt;3.15))&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">random_axis_angle</span><span class="p">():</span>
+    <span class="n">max_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mf">0.9</span>
+    <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span> <span class="o">*</span> <span class="n">max_angle</span>
+    <span class="n">axis</span> <span class="o">=</span> <span class="n">random_direction</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">axis</span><span class="p">,</span> <span class="n">angle</span></div>
+
+
+<div class="viewcode-block" id="GeoTestCase"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.utils.GeoTestCase">[docs]</a><span class="k">class</span> <span class="nc">GeoTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="GeoTestCase.check_one"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.utils.GeoTestCase.check_one">[docs]</a>    <span class="k">def</span> <span class="nf">check_one</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">param</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">function</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="n">call</span><span class="p">(</span><span class="n">op1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">call</span><span class="p">(</span><span class="n">op2</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+                <span class="n">assert_allclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">assert_allclose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GeoTestCase.check_conversion"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.utils.GeoTestCase.check_conversion">[docs]</a>    <span class="k">def</span> <span class="nf">check_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Checks that  x = op2(op1(x)) for all x in sequence.</span>
+<span class="sd">            If intermediate results are tuples, they are passed</span>
+<span class="sd">            as distinct parameters. &#39;&#39;&#39;</span>
+
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+            <span class="c1"># yield self.check_one, x, op1, op2</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">check_one</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">op1</span><span class="p">,</span> <span class="n">op2</span><span class="p">)</span></div></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,321 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry.manifolds.tests package &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="geometry-manifolds-tests-package">
+<h1>geometry.manifolds.tests package<a class="headerlink" href="#geometry-manifolds-tests-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-geometry.manifolds.tests.checks_generation">
+<span id="geometry-manifolds-tests-checks-generation-module"></span><h2>geometry.manifolds.tests.checks_generation module<a class="headerlink" href="#module-geometry.manifolds.tests.checks_generation" title="Permalink to this headline">¶</a></h2>
+<p>These are very “meta” utils for creating nose tests on the fly.</p>
+<p>Here is an example use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">thinghies</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;banana&#39;</span><span class="p">:</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;sky&#39;</span><span class="p">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">thinghies_list</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">thinghies</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">thinghies_args</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">thinghies</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">thinghies_attrs</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">thinghy_name</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">x</span><span class="p">,</span> <span class="n">flavor</span><span class="o">=</span><span class="n">thinghies</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+
+<span class="n">for_all_thinghies</span> <span class="o">=</span> <span class="n">fancy_test_decorator</span><span class="p">(</span><span class="n">lister</span><span class="o">=</span><span class="n">thinghies_list</span><span class="p">,</span>
+                                         <span class="n">arguments</span><span class="o">=</span><span class="n">thinghies_args</span><span class="p">,</span>
+                                         <span class="n">attributes</span><span class="o">=</span><span class="n">thinghies_attrs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And this is the proper test:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@for_all_thinghies</span>
+<span class="k">def</span> <span class="nf">check_good_flavor</span><span class="p">(</span><span class="n">id_thinghy</span><span class="p">,</span> <span class="n">flavor</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;test for </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">id_thinghy</span><span class="p">,</span> <span class="n">flavor</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="geometry.manifolds.tests.checks_generation.fancy_test_decorator">
+<code class="descclassname">geometry.manifolds.tests.checks_generation.</code><code class="descname">fancy_test_decorator</code><span class="sig-paren">(</span><em>lister</em>, <em>arguments=&lt;function &lt;lambda&gt;&gt;</em>, <em>attributes=&lt;function &lt;lambda&gt;&gt;</em>, <em>naming=&lt;function &lt;lambda&gt;&gt;</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/checks_generation.html#fancy_test_decorator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.checks_generation.fancy_test_decorator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a fancy decorator for adding checks.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lister</strong> – a function that should give a list of objects</li>
+<li><strong>arguments</strong> – from object to arguments</li>
+<li><strong>attributes</strong> – (optional) set of attributes for the test</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a function that can be used as a decorator.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-geometry.manifolds.tests.embedding_test">
+<span id="geometry-manifolds-tests-embedding-test-module"></span><h2>geometry.manifolds.tests.embedding_test module<a class="headerlink" href="#module-geometry.manifolds.tests.embedding_test" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.manifolds.tests.embedding_test.check_embed_relation">
+<code class="descclassname">geometry.manifolds.tests.embedding_test.</code><code class="descname">check_embed_relation</code><span class="sig-paren">(</span><em>A</em>, <em>B</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/embedding_test.html#check_embed_relation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.embedding_test.check_embed_relation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.embedding_test.check_embed_relation_cond">
+<code class="descclassname">geometry.manifolds.tests.embedding_test.</code><code class="descname">check_embed_relation_cond</code><span class="sig-paren">(</span><em>A</em>, <em>B</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/embedding_test.html#check_embed_relation_cond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.embedding_test.check_embed_relation_cond" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.embedding_test.test_embed_relations">
+<code class="descclassname">geometry.manifolds.tests.embedding_test.</code><code class="descname">test_embed_relations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/embedding_test.html#test_embed_relations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.embedding_test.test_embed_relations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-geometry.manifolds.tests.manifold_tests">
+<span id="geometry-manifolds-tests-manifold-tests-module"></span><h2>geometry.manifolds.tests.manifold_tests module<a class="headerlink" href="#module-geometry.manifolds.tests.manifold_tests" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.manifolds.tests.manifold_tests.check_friendly">
+<code class="descclassname">geometry.manifolds.tests.manifold_tests.</code><code class="descname">check_friendly</code><span class="sig-paren">(</span><em>M</em>, <em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/manifold_tests.html#check_friendly"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.manifold_tests.check_friendly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.manifold_tests.check_geodesic_consistency">
+<code class="descclassname">geometry.manifolds.tests.manifold_tests.</code><code class="descname">check_geodesic_consistency</code><span class="sig-paren">(</span><em>M</em>, <em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/manifold_tests.html#check_geodesic_consistency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.manifold_tests.check_geodesic_consistency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that there is consistency in the geodesics.</p>
+<p>This is a test that</p>
+<blockquote>
+<div>x(t) = geodesic( a, b, t)</div></blockquote>
+<p>interpolates between a and b, checking</p>
+<blockquote>
+<div>d(a, x(t)) + d(x(t), b) = d(a,b)</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.manifold_tests.check_interesting_point_in_manifold">
+<code class="descclassname">geometry.manifolds.tests.manifold_tests.</code><code class="descname">check_interesting_point_in_manifold</code><span class="sig-paren">(</span><em>M</em>, <em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/manifold_tests.html#check_interesting_point_in_manifold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.manifold_tests.check_interesting_point_in_manifold" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.manifold_tests.check_logmap1">
+<code class="descclassname">geometry.manifolds.tests.manifold_tests.</code><code class="descname">check_logmap1</code><span class="sig-paren">(</span><em>M</em>, <em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/manifold_tests.html#check_logmap1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.manifold_tests.check_logmap1" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a test that:</p>
+<p>Exp_a( Log_a(b) ) = b</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.manifold_tests.check_logmap3">
+<code class="descclassname">geometry.manifolds.tests.manifold_tests.</code><code class="descname">check_logmap3</code><span class="sig-paren">(</span><em>M</em>, <em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/manifold_tests.html#check_logmap3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.manifold_tests.check_logmap3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.manifold_tests.check_normalize">
+<code class="descclassname">geometry.manifolds.tests.manifold_tests.</code><code class="descname">check_normalize</code><span class="sig-paren">(</span><em>M</em>, <em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/manifold_tests.html#check_normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.manifold_tests.check_normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>normalize() must be idempotent.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.manifold_tests.test_dimensions">
+<code class="descclassname">geometry.manifolds.tests.manifold_tests.</code><code class="descname">test_dimensions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/manifold_tests.html#test_dimensions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.manifold_tests.test_dimensions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-geometry.manifolds.tests.matrix_groups_tests">
+<span id="geometry-manifolds-tests-matrix-groups-tests-module"></span><h2>geometry.manifolds.tests.matrix_groups_tests module<a class="headerlink" href="#module-geometry.manifolds.tests.matrix_groups_tests" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.manifolds.tests.matrix_groups_tests.algebra1">
+<code class="descclassname">geometry.manifolds.tests.matrix_groups_tests.</code><code class="descname">algebra1</code><span class="sig-paren">(</span><em>M</em>, <em>m</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/matrix_groups_tests.html#algebra1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.matrix_groups_tests.algebra1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.matrix_groups_tests.algebra2">
+<code class="descclassname">geometry.manifolds.tests.matrix_groups_tests.</code><code class="descname">algebra2</code><span class="sig-paren">(</span><em>M</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/matrix_groups_tests.html#algebra2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.matrix_groups_tests.algebra2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.matrix_groups_tests.algebra_enough">
+<code class="descclassname">geometry.manifolds.tests.matrix_groups_tests.</code><code class="descname">algebra_enough</code><span class="sig-paren">(</span><em>M</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/matrix_groups_tests.html#algebra_enough"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.matrix_groups_tests.algebra_enough" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.matrix_groups_tests.group_vector_isomorphism">
+<code class="descclassname">geometry.manifolds.tests.matrix_groups_tests.</code><code class="descname">group_vector_isomorphism</code><span class="sig-paren">(</span><em>M</em>, <em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/matrix_groups_tests.html#group_vector_isomorphism"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.matrix_groups_tests.group_vector_isomorphism" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-geometry.manifolds.tests.pickling_tests">
+<span id="geometry-manifolds-tests-pickling-tests-module"></span><h2>geometry.manifolds.tests.pickling_tests module<a class="headerlink" href="#module-geometry.manifolds.tests.pickling_tests" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.manifolds.tests.pickling_tests.check_manifold_pickable">
+<code class="descclassname">geometry.manifolds.tests.pickling_tests.</code><code class="descname">check_manifold_pickable</code><span class="sig-paren">(</span><em>M</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/pickling_tests.html#check_manifold_pickable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.pickling_tests.check_manifold_pickable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-geometry.manifolds.tests.sphere_tests">
+<span id="geometry-manifolds-tests-sphere-tests-module"></span><h2>geometry.manifolds.tests.sphere_tests module<a class="headerlink" href="#module-geometry.manifolds.tests.sphere_tests" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.manifolds.tests.sphere_tests.test_wrap_around">
+<code class="descclassname">geometry.manifolds.tests.sphere_tests.</code><code class="descname">test_wrap_around</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests/sphere_tests.html#test_wrap_around"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.sphere_tests.test_wrap_around" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-geometry.manifolds.tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-geometry.manifolds.tests" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="geometry.manifolds.tests.get_test_points">
+<code class="descclassname">geometry.manifolds.tests.</code><code class="descname">get_test_points</code><span class="sig-paren">(</span><em>M</em>, <em>num_random=2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests.html#get_test_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.get_test_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.list_manifold_point">
+<code class="descclassname">geometry.manifolds.tests.</code><code class="descname">list_manifold_point</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests.html#list_manifold_point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.list_manifold_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields all possible (M, point, i, num) tests we have</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.list_manifold_points">
+<code class="descclassname">geometry.manifolds.tests.</code><code class="descname">list_manifold_points</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests.html#list_manifold_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.list_manifold_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields all possible (M, point1, point2, i, num) tests we have</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.list_manifolds">
+<code class="descclassname">geometry.manifolds.tests.</code><code class="descname">list_manifolds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests.html#list_manifolds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.list_manifolds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.list_mgroup">
+<code class="descclassname">geometry.manifolds.tests.</code><code class="descname">list_mgroup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests.html#list_mgroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.list_mgroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields all possible (M, point, i, num) tests we have</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geometry.manifolds.tests.list_mgroup_point">
+<code class="descclassname">geometry.manifolds.tests.</code><code class="descname">list_mgroup_point</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/tests.html#list_mgroup_point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.tests.list_mgroup_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields all possible (M, point, i, num) tests we have</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">geometry.manifolds.tests package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-geometry.manifolds.tests.checks_generation">geometry.manifolds.tests.checks_generation module</a></li>
+<li><a class="reference internal" href="#module-geometry.manifolds.tests.embedding_test">geometry.manifolds.tests.embedding_test module</a></li>
+<li><a class="reference internal" href="#module-geometry.manifolds.tests.manifold_tests">geometry.manifolds.tests.manifold_tests module</a></li>
+<li><a class="reference internal" href="#module-geometry.manifolds.tests.matrix_groups_tests">geometry.manifolds.tests.matrix_groups_tests module</a></li>
+<li><a class="reference internal" href="#module-geometry.manifolds.tests.pickling_tests">geometry.manifolds.tests.pickling_tests module</a></li>
+<li><a class="reference internal" href="#module-geometry.manifolds.tests.sphere_tests">geometry.manifolds.tests.sphere_tests module</a></li>
+<li><a class="reference internal" href="#module-geometry.manifolds.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geometry.manifolds.tests.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>

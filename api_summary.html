@@ -1,31 +1,20 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>PyGeometry API &mdash; PyGeometry 1.2 documentation</title>
-    
-    <link rel="stylesheet" href="static/default.css" type="text/css" />
-    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '1.2',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="static/jquery.js"></script>
-    <script type="text/javascript" src="static/underscore.js"></script>
-    <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="PyGeometry 1.2 documentation" href="index.html" />
+    <title>PyGeometry API &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
 	 
 
    <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
@@ -35,22 +24,24 @@
    </style>
 
 
-  </head>
-  <body>
-    <div class="related">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="index.html">PyGeometry 1.2 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">PyGeometry 1.4.5 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="pygeometry-api">
 <span id="api"></span><h1>PyGeometry API<a class="headerlink" href="#pygeometry-api" title="Permalink to this headline">¶</a></h1>
@@ -58,32 +49,33 @@
 <h2>Design notes<a class="headerlink" href="#design-notes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>No fancy OO-overdose here. Geometric objects (rotation matrices, poses, etc.) are represented using vanilla
-Numpy array: there&#8217;s no class Rotation, Pose, etc. If you don&#8217;t think this is a good
+Numpy array: there’s no class Rotation, Pose, etc. If you don’t think this is a good
 idea, your mind has been spoiled by C++ or Java classes taught by clueless professors.</li>
 <li>The main procedures are implemented as simple functions accepting and returning numpy arrays.
 Manifolds are implemented using classes that wrap the simple functions.</li>
-<li>Manifolds objects &#8220;know&#8221; how to compute distances, interpolate, etc. This makes sense: for example, the interpolation between the identity and a rotation matrix depends on whether you are considering them as elements of <em>GL(n)</em> or <em>SO(n)</em>.</li>
-<li>Most functions declare contracts among parameters and return values using the <a class="reference external" href="http://andreacensi.github.com/contracts/">PyContracts</a> library. This is slightly paranoid. You can disable all those checks using  <tt class="docutils literal"><span class="pre">contracts.disable_all()</span></tt>.</li>
+<li>Manifolds objects “know” how to compute distances, interpolate, etc. This makes sense: for example, the interpolation between the identity and a rotation matrix depends on whether you are considering them as elements of <em>GL(n)</em> or <em>SO(n)</em>.</li>
+<li>Most functions declare contracts among parameters and return values using the <a class="reference external" href="http://andreacensi.github.com/contracts/">PyContracts</a> library. This is slightly paranoid. You can disable all those checks using  <code class="docutils literal notranslate"><span class="pre">contracts.disable_all()</span></code>.</li>
 </ul>
 <div class="section" id="namespace">
 <h3>Namespace<a class="headerlink" href="#namespace" title="Permalink to this headline">¶</a></h3>
-<p>Every symbol is imported in the <tt class="docutils literal"><span class="pre">geometry</span></tt> module.</p>
-<p>However, in this API documentation, the full path to the module is shown. For example, <tt class="docutils literal"><span class="pre">rotation_from_axis_angle</span></tt> is defined in the module <tt class="docutils literal"><span class="pre">geometry.rotations</span></tt>, but you can import it as such:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">rotation_from_axis_angle</span>
+<p>Every symbol is imported in the <code class="docutils literal notranslate"><span class="pre">geometry</span></code> module.</p>
+<p>However, in this API documentation, the full path to the module is shown. For example, <code class="docutils literal notranslate"><span class="pre">rotation_from_axis_angle</span></code> is defined in the module <code class="docutils literal notranslate"><span class="pre">geometry.rotations</span></code>, but you can import it as such:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geometry</span> <span class="k">import</span> <span class="n">rotation_from_axis_angle</span>
 </pre></div>
 </div>
 <p>In fact, this will import all functions and classes:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">geometry</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="naming-conventions">
 <h3>Naming conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h3>
 <p>The naming conventions for conversion operations is:</p>
-<div class="highlight-python"><pre>x = &lt;X&gt;_from_&lt;Y&gt;(y)</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">X</span><span class="o">&gt;</span><span class="n">_from_</span><span class="o">&lt;</span><span class="n">Y</span><span class="o">&gt;</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
 </div>
 <p>For example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">R</span> <span class="o">=</span> <span class="n">rotation_from_axis_angle</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="n">rotation_from_axis_angle</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
 <span class="n">axis</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">axis_angle_from_rotation</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
 <span class="n">R</span> <span class="o">=</span> <span class="n">rotation_from_quaternion</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
 </pre></div>
@@ -98,16 +90,16 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.base.DifferentiableManifold</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.manifolds.base.DifferentiableManifold</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.base.Group</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.manifolds.base.Group</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.matrix_lie_group.MatrixLieAlgebra</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.manifolds.matrix_lie_group.MatrixLieAlgebra</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.matrix_lie_group.MatrixLieGroup</span></tt></a>(n,&nbsp;...)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.html#geometry.manifolds.matrix_lie_group.MatrixLieGroup" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.manifolds.matrix_lie_group.MatrixLieGroup</span></code></a>(n,&nbsp;…)</td>
 <td>This is the base class for matrix Lie groups.</td>
 </tr>
 </tbody>
@@ -122,7 +114,7 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere" title="geometry.manifolds.sphere.Sphere"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.sphere.Sphere</span></tt></a>(order)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere" title="geometry.manifolds.sphere.Sphere"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.manifolds.sphere.Sphere</span></code></a>(order)</td>
 <td>These are hyperspheres of unit radius.</td>
 </tr>
 </tbody>
@@ -130,13 +122,13 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <p>Instances of the manifold class:</p>
 <dl class="data">
 <dt id="geometry.manifolds.S1">
-<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">S1</tt><a class="headerlink" href="#geometry.manifolds.S1" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">geometry.manifolds.</code><code class="descname">S1</code><a class="headerlink" href="#geometry.manifolds.S1" title="Permalink to this definition">¶</a></dt>
 <dd><p>S1: Unit circle (2D vectors of norm 1).</p>
 </dd></dl>
 
 <dl class="data">
 <dt id="geometry.manifolds.S2">
-<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">S2</tt><a class="headerlink" href="#geometry.manifolds.S2" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">geometry.manifolds.</code><code class="descname">S2</code><a class="headerlink" href="#geometry.manifolds.S2" title="Permalink to this definition">¶</a></dt>
 <dd><p>S2: Unit sphere (3D vectors of norm 1)</p>
 </dd></dl>
 
@@ -147,13 +139,13 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.assert_orthogonal.html#geometry.spheres.assert_orthogonal" title="geometry.spheres.assert_orthogonal"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.spheres.assert_orthogonal</span></tt></a>(s,&nbsp;v)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.assert_orthogonal.html#geometry.spheres.assert_orthogonal" title="geometry.spheres.assert_orthogonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.spheres.assert_orthogonal</span></code></a>(s,&nbsp;v)</td>
 <td>Checks that two vectors are orthogonal.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.spheres.unit_length.html#geometry.spheres.unit_length" title="geometry.spheres.unit_length"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.spheres.unit_length</span></tt></a>(x)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.spheres.unit_length.html#geometry.spheres.unit_length" title="geometry.spheres.unit_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.spheres.unit_length</span></code></a>(x)</td>
 <td>Checks that the value is a 1D vector with unit length in the 2 norm.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.directions.html#geometry.spheres.directions" title="geometry.spheres.directions"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.spheres.directions</span></tt></a>(X)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.directions.html#geometry.spheres.directions" title="geometry.spheres.directions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.spheres.directions</span></code></a>(X)</td>
 <td>Checks that every column has unit length.</td>
 </tr>
 </tbody>
@@ -165,23 +157,23 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.random_direction.html#geometry.spheres.random_direction" title="geometry.spheres.random_direction"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.spheres.random_direction</span></tt></a>([ndim])</td>
-<td>Generates a random direction in <span class="math">\sphere^{\ndim-1}</span>.</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.random_direction.html#geometry.spheres.random_direction" title="geometry.spheres.random_direction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.spheres.random_direction</span></code></a>([ndim])</td>
+<td>Generates a random direction in <img class="math" src="_images/math/364e7b11da49277918fbc75db5788d95fbbab265.png" alt="S^{n-1}"/>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.spheres.random_directions.html#geometry.spheres.random_directions" title="geometry.spheres.random_directions"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.spheres.random_directions</span></tt></a>(N[,&nbsp;ndim])</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.spheres.random_directions.html#geometry.spheres.random_directions" title="geometry.spheres.random_directions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.spheres.random_directions</span></code></a>(N[,&nbsp;ndim])</td>
 <td>Returns a set of random directions.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.any_distant_direction.html#geometry.spheres.any_distant_direction" title="geometry.spheres.any_distant_direction"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.spheres.any_distant_direction</span></tt></a>(s)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.any_distant_direction.html#geometry.spheres.any_distant_direction" title="geometry.spheres.any_distant_direction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.spheres.any_distant_direction</span></code></a>(s)</td>
 <td>Returns a direction distant from both <em>s</em> and <em>-s</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.spheres.any_orthogonal_direction.html#geometry.spheres.any_orthogonal_direction" title="geometry.spheres.any_orthogonal_direction"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.spheres.any_orthogonal_direction</span></tt></a>(s)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.spheres.any_orthogonal_direction.html#geometry.spheres.any_orthogonal_direction" title="geometry.spheres.any_orthogonal_direction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.spheres.any_orthogonal_direction</span></code></a>(s)</td>
 <td>Returns any axis orthogonal to <em>s</em> (not necessarily random).</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.random_orthogonal_direction.html#geometry.spheres.random_orthogonal_direction" title="geometry.spheres.random_orthogonal_direction"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.spheres.random_orthogonal_direction</span></tt></a>(s)</td>
-<td>Returns a random axis orthogonal to <em>s</em>         (only implemented for circle and sphere).</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.random_orthogonal_direction.html#geometry.spheres.random_orthogonal_direction" title="geometry.spheres.random_orthogonal_direction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.spheres.random_orthogonal_direction</span></code></a>(s)</td>
+<td>Returns a random axis orthogonal to <em>s</em> (only implemented for circle and sphere).</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.spheres.random_directions_bounded.html#geometry.spheres.random_directions_bounded" title="geometry.spheres.random_directions_bounded"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.spheres.random_directions_bounded</span></tt></a>(...)</td>
-<td>Returns a random distribution of points in <span class="math">\sphere^{\ndim-1}</span>.</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.spheres.random_directions_bounded.html#geometry.spheres.random_directions_bounded" title="geometry.spheres.random_directions_bounded"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.spheres.random_directions_bounded</span></code></a>(…)</td>
+<td>Returns a random distribution of points in <img class="math" src="_images/math/364e7b11da49277918fbc75db5788d95fbbab265.png" alt="S^{n-1}"/>.</td>
 </tr>
 </tbody>
 </table>
@@ -192,23 +184,23 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.geodesic_distance_on_sphere.html#geometry.spheres.geodesic_distance_on_sphere" title="geometry.spheres.geodesic_distance_on_sphere"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.spheres.geodesic_distance_on_sphere</span></tt></a>(s1,&nbsp;s2)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.geodesic_distance_on_sphere.html#geometry.spheres.geodesic_distance_on_sphere" title="geometry.spheres.geodesic_distance_on_sphere"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.spheres.geodesic_distance_on_sphere</span></code></a>(s1,&nbsp;s2)</td>
 <td>Returns the geodesic distance between two points on the sphere.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.spheres.distribution_radius.html#geometry.spheres.distribution_radius" title="geometry.spheres.distribution_radius"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.spheres.distribution_radius</span></tt></a>(S)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.spheres.distribution_radius.html#geometry.spheres.distribution_radius" title="geometry.spheres.distribution_radius"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.spheres.distribution_radius</span></code></a>(S)</td>
 <td>Returns the radius of the given directions distribution.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.distances_from.html#geometry.spheres.distances_from" title="geometry.spheres.distances_from"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.spheres.distances_from</span></tt></a>(S,&nbsp;s)</td>
-<td>Returns the geodesic distances on the sphere from a set of</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.spheres.distances_from.html#geometry.spheres.distances_from" title="geometry.spheres.distances_from"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.spheres.distances_from</span></code></a>(S,&nbsp;s)</td>
+<td>Returns the geodesic distances on the sphere from a set of points <em>S</em> to a given point <em>s</em>.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.spheres.sorted_directions.html#geometry.spheres.sorted_directions" title="geometry.spheres.sorted_directions"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.spheres.sorted_directions</span></tt></a>(S[,&nbsp;...])</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.spheres.sorted_directions.html#geometry.spheres.sorted_directions" title="geometry.spheres.sorted_directions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.spheres.sorted_directions</span></code></a>(S[,&nbsp;…])</td>
 <td>Rearranges the directions in <em>S</em> in a better order for visualization.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="so-n-rotations">
-<h2>SO(n) &#8211; rotations<a class="headerlink" href="#so-n-rotations" title="Permalink to this headline">¶</a></h2>
+<h2>SO(n) – rotations<a class="headerlink" href="#so-n-rotations" title="Permalink to this headline">¶</a></h2>
 <p>Manifold classes:</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -216,10 +208,10 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.special_orthogonal.SO</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.manifolds.special_orthogonal.SO</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.special_orthogonal.so</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.manifolds.special_orthogonal.so</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -227,25 +219,25 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <p>Instances:</p>
 <dl class="data">
 <dt id="geometry.manifolds.SO2">
-<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">SO2</tt><a class="headerlink" href="#geometry.manifolds.SO2" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">geometry.manifolds.</code><code class="descname">SO2</code><a class="headerlink" href="#geometry.manifolds.SO2" title="Permalink to this definition">¶</a></dt>
 <dd><p>SO(2): 2x2 rotation matrices</p>
 </dd></dl>
 
 <dl class="data">
 <dt id="geometry.manifolds.SO3">
-<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">SO3</tt><a class="headerlink" href="#geometry.manifolds.SO3" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">geometry.manifolds.</code><code class="descname">SO3</code><a class="headerlink" href="#geometry.manifolds.SO3" title="Permalink to this definition">¶</a></dt>
 <dd><p>SO(3): 3x3 rotation matrices</p>
 </dd></dl>
 
 <dl class="data">
 <dt id="geometry.manifolds.so2">
-<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">so2</tt><a class="headerlink" href="#geometry.manifolds.so2" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">geometry.manifolds.</code><code class="descname">so2</code><a class="headerlink" href="#geometry.manifolds.so2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lie algebra for SO(2): 2x2 skew-symmetric matrices</p>
 </dd></dl>
 
 <dl class="data">
 <dt id="geometry.manifolds.so3">
-<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">so3</tt><a class="headerlink" href="#geometry.manifolds.so3" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">geometry.manifolds.</code><code class="descname">so3</code><a class="headerlink" href="#geometry.manifolds.so3" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lie algebra for SO(3): 3x3 skew-symmetric matrices</p>
 </dd></dl>
 
@@ -256,13 +248,13 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.rotation_matrix</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.rotation_matrix</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.skew_symmetric</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.skew_symmetric</span></code></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.orthogonal</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.orthogonal</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -274,32 +266,32 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.hat_map.html#geometry.rotations.hat_map" title="geometry.rotations.hat_map"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.hat_map</span></tt></a>(v)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.hat_map.html#geometry.rotations.hat_map" title="geometry.rotations.hat_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.hat_map</span></code></a>(v)</td>
 <td>Maps a vector to a 3x3 skew symmetric matrix.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.rotations.map_hat.html#geometry.rotations.map_hat" title="geometry.rotations.map_hat"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.map_hat</span></tt></a>(H)</td>
-<td>The inverse of <tt class="xref py py-func docutils literal"><span class="pre">hat_map()</span></tt>.</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.rotations.map_hat.html#geometry.rotations.map_hat" title="geometry.rotations.map_hat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.map_hat</span></code></a>(H)</td>
+<td>The inverse of <code class="xref py py-func docutils literal notranslate"><span class="pre">hat_map()</span></code>.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.rotation_from_quaternion.html#geometry.rotations.rotation_from_quaternion" title="geometry.rotations.rotation_from_quaternion"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.rotation_from_quaternion</span></tt></a>(x)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.rotation_from_quaternion.html#geometry.rotations.rotation_from_quaternion" title="geometry.rotations.rotation_from_quaternion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.rotation_from_quaternion</span></code></a>(x)</td>
 <td>Converts a quaternion to a rotation matrix.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.rotations.rotation_from_axis_angle.html#geometry.rotations.rotation_from_axis_angle" title="geometry.rotations.rotation_from_axis_angle"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.rotation_from_axis_angle</span></tt></a>(...)</td>
-<td>Computes the rotation matrix from the <em>(axis,angle)</em> representation</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.rotations.rotation_from_axis_angle.html#geometry.rotations.rotation_from_axis_angle" title="geometry.rotations.rotation_from_axis_angle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.rotation_from_axis_angle</span></code></a>(…)</td>
+<td>Computes the rotation matrix from the <em>(axis,angle)</em> representation using Rodriguez’s formula.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.rotation_from_axis_angle2.html#geometry.rotations.rotation_from_axis_angle2" title="geometry.rotations.rotation_from_axis_angle2"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.rotation_from_axis_angle2</span></tt></a>(...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.rotation_from_axis_angle2.html#geometry.rotations.rotation_from_axis_angle2" title="geometry.rotations.rotation_from_axis_angle2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.rotation_from_axis_angle2</span></code></a>(…)</td>
 <td>Get the rotation from the <em>(axis,angle)</em> representation.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.rotations.axis_angle_from_quaternion.html#geometry.rotations.axis_angle_from_quaternion" title="geometry.rotations.axis_angle_from_quaternion"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.axis_angle_from_quaternion</span></tt></a>(q)</td>
-<td>This is the inverse of <tt class="xref py py-func docutils literal"><span class="pre">quaternion_from_axis_angle()</span></tt>.</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.rotations.axis_angle_from_quaternion.html#geometry.rotations.axis_angle_from_quaternion" title="geometry.rotations.axis_angle_from_quaternion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.axis_angle_from_quaternion</span></code></a>(q)</td>
+<td>This is the inverse of <code class="xref py py-func docutils literal notranslate"><span class="pre">quaternion_from_axis_angle()</span></code>.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.axis_angle_from_rotation.html#geometry.rotations.axis_angle_from_rotation" title="geometry.rotations.axis_angle_from_rotation"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.axis_angle_from_rotation</span></tt></a>(R)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.axis_angle_from_rotation.html#geometry.rotations.axis_angle_from_rotation" title="geometry.rotations.axis_angle_from_rotation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.axis_angle_from_rotation</span></code></a>(R)</td>
 <td>Returns the <em>(axis,angle)</em> representation of a given rotation.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.rotations.quaternion_from_rotation.html#geometry.rotations.quaternion_from_rotation" title="geometry.rotations.quaternion_from_rotation"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.quaternion_from_rotation</span></tt></a>(R)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.rotations.quaternion_from_rotation.html#geometry.rotations.quaternion_from_rotation" title="geometry.rotations.quaternion_from_rotation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.quaternion_from_rotation</span></code></a>(R)</td>
 <td>Converts a rotation matrix to a quaternion.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.quaternion_from_axis_angle.html#geometry.rotations.quaternion_from_axis_angle" title="geometry.rotations.quaternion_from_axis_angle"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.quaternion_from_axis_angle</span></tt></a>(...)</td>
-<td>Computes a quaternion corresponding to the rotation of <em>angle</em> radians        around the given <em>axis</em>.</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.quaternion_from_axis_angle.html#geometry.rotations.quaternion_from_axis_angle" title="geometry.rotations.quaternion_from_axis_angle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.quaternion_from_axis_angle</span></code></a>(…)</td>
+<td>Computes a quaternion corresponding to the rotation of <em>angle</em> radians around the given <em>axis</em>.</td>
 </tr>
 </tbody>
 </table>
@@ -310,22 +302,14 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.random_quaternion.html#geometry.rotations.random_quaternion" title="geometry.rotations.random_quaternion"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.random_quaternion</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.random_quaternion.html#geometry.rotations.random_quaternion" title="geometry.rotations.random_quaternion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.random_quaternion</span></code></a>()</td>
 <td>Generate a random quaternion.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.rotations.random_rotation.html#geometry.rotations.random_rotation" title="geometry.rotations.random_rotation"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.random_rotation</span></tt></a>([ndim])</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.rotations.random_rotation.html#geometry.rotations.random_rotation" title="geometry.rotations.random_rotation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.random_rotation</span></code></a>([ndim])</td>
 <td>Generate a random rotation matrix.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.random_orthogonal_transform.html#geometry.rotations.random_orthogonal_transform" title="geometry.rotations.random_orthogonal_transform"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.random_orthogonal_transform</span></tt></a>()</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body"><tt class="docutils literal"><span class="pre">array[3x3],orthogonal</span></tt></td>
-</tr>
-</tbody>
-</table>
-</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.random_orthogonal_transform.html#geometry.rotations.random_orthogonal_transform" title="geometry.rotations.random_orthogonal_transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.random_orthogonal_transform</span></code></a>()</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -336,14 +320,14 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.rotations.geodesic_distance_for_rotations</span></tt>(R1,&nbsp;R2)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.rotations.geodesic_distance_for_rotations.html#geometry.rotations.geodesic_distance_for_rotations" title="geometry.rotations.geodesic_distance_for_rotations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.rotations.geodesic_distance_for_rotations</span></code></a>(R1,&nbsp;R2)</td>
 <td>Returns the geodesic distance between two rotation matrices.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="se-n-poses">
-<h2>SE(n) &#8211; poses<a class="headerlink" href="#se-n-poses" title="Permalink to this headline">¶</a></h2>
+<h2>SE(n) – poses<a class="headerlink" href="#se-n-poses" title="Permalink to this headline">¶</a></h2>
 <p>Manifold classes:</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -351,10 +335,10 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.special_euclidean.SE</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.manifolds.special_euclidean.SE</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.special_euclidean.se</span></tt></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.manifolds.special_euclidean.se</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -362,25 +346,25 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <p>Instances:</p>
 <dl class="data">
 <dt id="geometry.manifolds.SE2">
-<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">SE2</tt><a class="headerlink" href="#geometry.manifolds.SE2" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">geometry.manifolds.</code><code class="descname">SE2</code><a class="headerlink" href="#geometry.manifolds.SE2" title="Permalink to this definition">¶</a></dt>
 <dd><p>SE(2): 2D poses</p>
 </dd></dl>
 
 <dl class="data">
 <dt id="geometry.manifolds.SE3">
-<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">SE3</tt><a class="headerlink" href="#geometry.manifolds.SE3" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">geometry.manifolds.</code><code class="descname">SE3</code><a class="headerlink" href="#geometry.manifolds.SE3" title="Permalink to this definition">¶</a></dt>
 <dd><p>SE(3): 3D poses</p>
 </dd></dl>
 
 <dl class="data">
 <dt id="geometry.manifolds.se2">
-<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">se2</tt><a class="headerlink" href="#geometry.manifolds.se2" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">geometry.manifolds.</code><code class="descname">se2</code><a class="headerlink" href="#geometry.manifolds.se2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lie algebra for SE(2).</p>
 </dd></dl>
 
 <dl class="data">
 <dt id="geometry.manifolds.se3">
-<tt class="descclassname">geometry.manifolds.</tt><tt class="descname">se3</tt><a class="headerlink" href="#geometry.manifolds.se3" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">geometry.manifolds.</code><code class="descname">se3</code><a class="headerlink" href="#geometry.manifolds.se3" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lie algebra for SE(3).</p>
 </dd></dl>
 
@@ -391,58 +375,26 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.poses.pose_from_rotation_translation.html#geometry.poses.pose_from_rotation_translation" title="geometry.poses.pose_from_rotation_translation"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.poses.pose_from_rotation_translation</span></tt></a>(R,&nbsp;t)</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param R:</th><td class="field-body"></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.poses.pose_from_rotation_translation.html#geometry.poses.pose_from_rotation_translation" title="geometry.poses.pose_from_rotation_translation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.poses.pose_from_rotation_translation</span></code></a>(R,&nbsp;t)</td>
+<td></td>
 </tr>
-</tbody>
-</table>
-</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.poses.rotation_translation_from_pose.html#geometry.poses.rotation_translation_from_pose" title="geometry.poses.rotation_translation_from_pose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.poses.rotation_translation_from_pose</span></code></a>(pose)</td>
+<td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.poses.rotation_translation_from_pose.html#geometry.poses.rotation_translation_from_pose" title="geometry.poses.rotation_translation_from_pose"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.poses.rotation_translation_from_pose</span></tt></a>(pose)</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param pose:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.poses.SE2_from_translation_angle</span></tt>(t,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.poses.SE2_from_translation_angle.html#geometry.poses.SE2_from_translation_angle" title="geometry.poses.SE2_from_translation_angle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.poses.SE2_from_translation_angle</span></code></a>(t,&nbsp;…)</td>
 <td>Returns an element of SE2 from translation and rotation.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.poses.translation_angle_from_SE2</span></tt>(pose)</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param pose:</th><td class="field-body"></td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.poses.translation_angle_from_SE2.html#geometry.poses.translation_angle_from_SE2" title="geometry.poses.translation_angle_from_SE2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.poses.translation_angle_from_SE2</span></code></a>(pose)</td>
+<td></td>
 </tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.poses.SE2_from_xytheta</span></tt>(xytheta)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.poses.SE2_from_xytheta.html#geometry.poses.SE2_from_xytheta" title="geometry.poses.SE2_from_xytheta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.poses.SE2_from_xytheta</span></code></a>(xytheta)</td>
 <td>Returns an element of SE2 from translation and rotation.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.poses.se2_from_linear_angular</span></tt>(...)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.poses.se2_from_linear_angular.html#geometry.poses.se2_from_linear_angular" title="geometry.poses.se2_from_linear_angular"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.poses.se2_from_linear_angular</span></code></a>(…)</td>
 <td>Returns an element of se2 from linear and angular velocity.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.poses.linear_angular_from_se2</span></tt>(vel)</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param vel:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.poses.linear_angular_from_se2.html#geometry.poses.linear_angular_from_se2" title="geometry.poses.linear_angular_from_se2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.poses.linear_angular_from_se2</span></code></a>(vel)</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -453,27 +405,11 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.poses.extract_pieces.html#geometry.poses.extract_pieces" title="geometry.poses.extract_pieces"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.poses.extract_pieces</span></tt></a>(x)</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param x:</th><td class="field-body"></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.poses.extract_pieces.html#geometry.poses.extract_pieces" title="geometry.poses.extract_pieces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.poses.extract_pieces</span></code></a>(x)</td>
+<td></td>
 </tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.poses.combine_pieces.html#geometry.poses.combine_pieces" title="geometry.poses.combine_pieces"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.poses.combine_pieces</span></tt></a>(a,&nbsp;b,&nbsp;c,&nbsp;d)</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param a:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.poses.combine_pieces.html#geometry.poses.combine_pieces" title="geometry.poses.combine_pieces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.poses.combine_pieces</span></code></a>(a,&nbsp;b,&nbsp;c,&nbsp;d)</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -486,10 +422,10 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.procrustes.best_orthogonal_transform.html#geometry.procrustes.best_orthogonal_transform" title="geometry.procrustes.best_orthogonal_transform"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.procrustes.best_orthogonal_transform</span></tt></a>(X,&nbsp;Y)</td>
-<td>Finds the best orthogonal transform R  between X and Y,</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.procrustes.best_orthogonal_transform.html#geometry.procrustes.best_orthogonal_transform" title="geometry.procrustes.best_orthogonal_transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.procrustes.best_orthogonal_transform</span></code></a>(X,&nbsp;Y)</td>
+<td>Finds the best orthogonal transform R  between X and Y, such that R X ~= Y.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.procrustes.closest_orthogonal_matrix.html#geometry.procrustes.closest_orthogonal_matrix" title="geometry.procrustes.closest_orthogonal_matrix"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.procrustes.closest_orthogonal_matrix</span></tt></a>(M)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.procrustes.closest_orthogonal_matrix.html#geometry.procrustes.closest_orthogonal_matrix" title="geometry.procrustes.closest_orthogonal_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.procrustes.closest_orthogonal_matrix</span></code></a>(M)</td>
 <td>Finds the closest orthogonal matrix to M.</td>
 </tr>
 </tbody>
@@ -503,28 +439,20 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.basic_utils.assert_allclose</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.basic_utils.assert_allclose</span></code></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.basic_utils.normalize_length.html#geometry.basic_utils.normalize_length" title="geometry.basic_utils.normalize_length"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.basic_utils.normalize_length</span></tt></a>(s[,&nbsp;norm])</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.basic_utils.normalize_length.html#geometry.basic_utils.normalize_length" title="geometry.basic_utils.normalize_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.basic_utils.normalize_length</span></code></a>(s[,&nbsp;norm])</td>
 <td>Normalize an array such that it has unit length in the given norm.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.basic_utils.normalize_length_or_zero.html#geometry.basic_utils.normalize_length_or_zero" title="geometry.basic_utils.normalize_length_or_zero"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.basic_utils.normalize_length_or_zero</span></tt></a>(s)</td>
-<td>Normalize an array such that it has unit length in the given norm;         if the norm is close to zero, the zero vector is returned.</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.basic_utils.normalize_length_or_zero.html#geometry.basic_utils.normalize_length_or_zero" title="geometry.basic_utils.normalize_length_or_zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.basic_utils.normalize_length_or_zero</span></code></a>(s)</td>
+<td>Normalize an array such that it has unit length in the given norm; if the norm is close to zero, the zero vector is returned.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.basic_utils.safe_arccos.html#geometry.basic_utils.safe_arccos" title="geometry.basic_utils.safe_arccos"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.basic_utils.safe_arccos</span></tt></a>(x)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.basic_utils.safe_arccos.html#geometry.basic_utils.safe_arccos" title="geometry.basic_utils.safe_arccos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.basic_utils.safe_arccos</span></code></a>(x)</td>
 <td>Returns the arcosine of x, clipped between -1 and 1.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.basic_utils.finite.html#geometry.basic_utils.finite" title="geometry.basic_utils.finite"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.basic_utils.finite</span></tt></a>(x)</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param x:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.basic_utils.finite.html#geometry.basic_utils.finite" title="geometry.basic_utils.finite"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.basic_utils.finite</span></code></a>(x)</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -537,13 +465,13 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="api/geometry.manifolds.euclidean.Euclidean.html#geometry.manifolds.euclidean.Euclidean" title="geometry.manifolds.euclidean.Euclidean"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.euclidean.Euclidean</span></tt></a>(dimension)</td>
-<td>This is the usual Euclidean space of finite dimension;</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/geometry.manifolds.euclidean.Euclidean.html#geometry.manifolds.euclidean.Euclidean" title="geometry.manifolds.euclidean.Euclidean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.manifolds.euclidean.Euclidean</span></code></a>(dimension)</td>
+<td>This is the usual Euclidean space of finite dimension; this is mostly used for debugging.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/geometry.manifolds.torus.Torus.html#geometry.manifolds.torus.Torus" title="geometry.manifolds.torus.Torus"><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.torus.Torus</span></tt></a>(n)</td>
+<tr class="row-even"><td><a class="reference internal" href="api/geometry.manifolds.torus.Torus.html#geometry.manifolds.torus.Torus" title="geometry.manifolds.torus.Torus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.manifolds.torus.Torus</span></code></a>(n)</td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">geometry.manifolds.moebius.Moebius</span></tt></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry.manifolds.moebius.Moebius</span></code></td>
 <td></td>
 </tr>
 </tbody>
@@ -555,7 +483,7 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
@@ -565,66 +493,62 @@ Manifolds are implemented using classes that wrap the simple functions.</li>
 <li><a class="reference internal" href="#naming-conventions">Naming conventions</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#manifolds-interface">Manifolds interface</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#manifolds-interface">Manifolds interface</a></li>
 <li><a class="reference internal" href="#hyperspheres">Hyperspheres</a><ul>
 </ul>
 </li>
-<li><a class="reference internal" href="#so-n-rotations">SO(n) &#8211; rotations</a><ul>
+<li><a class="reference internal" href="#so-n-rotations">SO(n) – rotations</a><ul>
 </ul>
 </li>
-<li><a class="reference internal" href="#se-n-poses">SE(n) &#8211; poses</a><ul>
+<li><a class="reference internal" href="#se-n-poses">SE(n) – poses</a><ul>
 </ul>
 </li>
-<li><a class="reference internal" href="#procrustes-analysis">Procrustes analysis</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#basic-utils">Basic utils</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#other-manifolds">Other manifolds</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#procrustes-analysis">Procrustes analysis</a></li>
+<li><a class="reference internal" href="#basic-utils">Basic utils</a></li>
+<li><a class="reference internal" href="#other-manifolds">Other manifolds</a></li>
 </ul>
 </li>
 </ul>
 
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="sources/api_summary.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api_summary.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="index.html">PyGeometry 1.2 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">PyGeometry 1.4.5 documentation</a> &#187;</li> 
       </ul>
     </div>
 	
-    <div class="footer">
-        &copy; Copyright 2011, Andrea Censi.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
     </div>
 	
   <script type="text/javascript">

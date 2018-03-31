@@ -1,31 +1,20 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>PyGeometry &mdash; PyGeometry 1.2 documentation</title>
-    
-    <link rel="stylesheet" href="static/default.css" type="text/css" />
-    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '1.2',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="static/jquery.js"></script>
-    <script type="text/javascript" src="static/underscore.js"></script>
-    <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="PyGeometry 1.2 documentation" href="#" />
+    <title>PyGeometry &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
 	 
 
    <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
@@ -35,34 +24,38 @@
    </style>
 
 
-  </head>
-  <body>
-    <div class="related">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="#">PyGeometry 1.2 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">PyGeometry 1.4.5 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <a href="http://github.com/AndreaCensi/geometry"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 <div class="section" id="pygeometry">
 <h1>PyGeometry<a class="headerlink" href="#pygeometry" title="Permalink to this headline">¶</a></h1>
 <p><span class="brand">PyGeometry</span> is a Python package that implements common operations on the differentiable manifolds usually encountered in computer vision and robotics.
-Implemented manifolds: <span class="math">R^n</span>, <span class="math">S^n</span>,  <span class="math">SO(n)</span>, <span class="math">SE(n)</span>,
-<span class="math">T(n)</span>.
+Implemented manifolds: <img class="math" src="_images/math/b975f81c5760b40a5c41656485644a6b0e4e258f.png" alt="R^n"/>, <img class="math" src="_images/math/8b1accf69549a84626d619e3dcead389de69c834.png" alt="S^n"/>,  <img class="math" src="_images/math/9923a43b98d523d14471fc53c2098688feea3b16.png" alt="SO(n)"/>, <img class="math" src="_images/math/6abf09066dd898d391f713b1b7d10dc7f0e6654b.png" alt="SE(n)"/>,
+<img class="math" src="_images/math/8ef0c17d8e3b58d14e72340bce78fced209b586a.png" alt="T(n)"/>.
 Implemented operations: conversion between representations, geodesic distances, interpolation, random sampling.</p>
-<p>The design goal is to have a set of well-tested primitives: I&#8217;ve been burned too many times from having used buggy functions. <span class="brand">PyGeometry</span> is paranoid on program correctness. It uses <a class="reference external" href="http://andreacensi.github.com/contracts/">PyContracts</a> to validate input and return values. <a class="reference external" href="http://github.com/AndreaCensi/stochastic_testing">stochastic_testing</a> (another experimental library) is used to check the correctness of the random sampling operations.</p>
+<p>The design goal is to have a set of well-tested primitives: I’ve been burned too many times from having used buggy functions. <span class="brand">PyGeometry</span> is paranoid on program correctness. It uses <a class="reference external" href="http://andreacensi.github.com/contracts/">PyContracts</a> to validate input and return values. <a class="reference external" href="http://github.com/AndreaCensi/stochastic_testing">stochastic_testing</a> (another experimental library) is used to check the correctness of the random sampling operations.</p>
 <div class="section" id="download">
 <h2>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
-<p><span class="brand">PyGeometry</span> is currently an alpha release and not available on PyPi.</p>
+<p>Use:</p>
+<blockquote>
+<div>pip install PyGeometry</div></blockquote>
 
 <div style="float:right; margin-left: 2em" class="download">
   <a href="http://github.com/AndreaCensi/geometry/zipball/master">
@@ -82,7 +75,7 @@ Implemented operations: conversion between representations, geodesic distances, 
 <div class="section" id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference internal" href="api_summary.html#api"><em>Manually written API description</em></a></li>
+<li><a class="reference internal" href="api_summary.html#api"><span class="std std-ref">Manually written API description</span></a></li>
 <li><a class="reference external" href="static/apidocs/index.html">Automatically generated API docs (epydoc)</a>.</li>
 </ul>
 <p>Manifolds known by PyGeometry with embedding relations:</p>
@@ -91,6 +84,8 @@ Implemented operations: conversion between representations, geodesic distances, 
 <div class="section" id="news">
 <h2>News<a class="headerlink" href="#news" title="Permalink to this headline">¶</a></h2>
 <p>2011-01-27: Started documentation.</p>
+<p>2011 to 2018: Used in production in many projects.</p>
+<p>2018-03-27: Refreshed documentation.</p>
 <div style='clear:both'></div></div>
 </div>
 
@@ -98,7 +93,7 @@ Implemented operations: conversion between representations, geodesic distances, 
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
@@ -110,41 +105,45 @@ Implemented operations: conversion between representations, geodesic distances, 
 </li>
 </ul>
 
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="sources/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="#">PyGeometry 1.2 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">PyGeometry 1.4.5 documentation</a> &#187;</li> 
       </ul>
     </div>
 	
-    <div class="footer">
-        &copy; Copyright 2011, Andrea Censi.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
     </div>
 	
   <script type="text/javascript">

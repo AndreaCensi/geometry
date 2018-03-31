@@ -1,0 +1,618 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry.manifolds.todo package &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="geometry-manifolds-todo-package">
+<h1>geometry.manifolds.todo package<a class="headerlink" href="#geometry-manifolds-todo-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-geometry.manifolds.todo.grassman">
+<span id="geometry-manifolds-todo-grassman-module"></span><h2>geometry.manifolds.todo.grassman module<a class="headerlink" href="#module-geometry.manifolds.todo.grassman" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="geometry.manifolds.todo.grassman.Grassman">
+<em class="property">class </em><code class="descclassname">geometry.manifolds.todo.grassman.</code><code class="descname">Grassman</code><span class="sig-paren">(</span><em>p</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/grassman.html#Grassman"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.grassman.Grassman" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="geometry.manifolds.html#geometry.manifolds.differentiable_manifold.DifferentiableManifold" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold"><code class="xref py py-class docutils literal notranslate"><span class="pre">geometry.manifolds.differentiable_manifold.DifferentiableManifold</span></code></a></p>
+<p>INCOMPLETE – The Grassman manifold Grass(n,p) is the set of rank-p
+subspaces in R^n. It is seen here as Grass(n,p) = ST(n,p)/GL_p.</p>
+<p>For a reference, see the paper by Absil, Mahony, and Sepulchre (2004)
+where all these operations are explained. Also their book should
+contain essentially the same info, but with more background.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_close</span></code>(a,&nbsp;b[,&nbsp;atol,&nbsp;msg])</td>
+<td>Asserts that two points on the manifold are close to the given tolerance.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">belongs_ts</span></code>(bv)</td>
+<td>Checks that a vector <em>vx</em> belongs to the tangent space at the given point <em>base</em>.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">embed_in</span></code>(M,&nbsp;my_point)</td>
+<td>Embeds a point on this manifold to the target manifold M.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">friendly</span></code>(a)</td>
+<td>Returns a friendly description string for a point on the manifold.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_yaml</span></code>(yaml_structure)</td>
+<td>Recovers a value from a Yaml structure.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geodesic</span></code>(a,&nbsp;b,&nbsp;t)</td>
+<td>Returns the point interpolated along the geodesic.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dimension</span></code>()</td>
+<td>Returns the intrinsic dimension of this manifold.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">interesting_points</span></code>()</td>
+<td>Returns a list of “interesting points” on this manifold that should be used for testing various properties.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">project_from</span></code>(M,&nbsp;his_point)</td>
+<td>Projects a point on a bigger manifold to this manifold.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">riemannian_mean</span></code>(points)</td>
+<td>TODO: work out exceptions</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">tangent_bundle</span></code>()</td>
+<td>Returns the manifold corresponding to the tangent bundle.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="72%" />
+<col width="28%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>belongs</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>can_convert_to</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>can_represent</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>convert_to</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>distance</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>embeddable_in</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>embedding</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>expmap</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>isomorphism</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>logmap</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>normalize</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>project_to</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>project_ts</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>relations_descriptions</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>sample_uniform</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>to_yaml</strong></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geometry.manifolds.todo.grassman.Grassman.belongs">
+<code class="descname">belongs</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/grassman.html#Grassman.belongs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.grassman.Grassman.belongs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raises an Exception if the point does not belong to this manifold.</p>
+<p>This function wraps some checks around <code class="xref py py-func docutils literal notranslate"><span class="pre">belongs_()</span></code>,
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.grassman.Grassman.distance">
+<code class="descname">distance</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/grassman.html#Grassman.distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.grassman.Grassman.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the geodesic distance between two points.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.grassman.Grassman.expmap">
+<code class="descname">expmap</code><span class="sig-paren">(</span><em>a</em>, <em>vel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/grassman.html#Grassman.expmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.grassman.Grassman.expmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the exponential map from <em>base</em> for the velocity
+vector <em>v</em>.</p>
+<p>This function wraps some checks around <code class="xref py py-func docutils literal notranslate"><span class="pre">expmap_()</span></code>,
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.grassman.Grassman.logmap">
+<code class="descname">logmap</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/grassman.html#Grassman.logmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.grassman.Grassman.logmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the logarithmic map from base point <em>base</em> to target <em>b</em>.
+# XXX: what should we do in the case there is more than one logmap?</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.grassman.Grassman.normalize">
+<code class="descname">normalize</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/grassman.html#Grassman.normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.grassman.Grassman.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalizes the coordinates to the canonical representation
+for this manifold. See TorusW.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.grassman.Grassman.project_ts">
+<code class="descname">project_ts</code><span class="sig-paren">(</span><em>base</em>, <em>vx</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/grassman.html#Grassman.project_ts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.grassman.Grassman.project_ts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects a vector <em>bv</em> in the ambient space
+to the tangent space at point <em>base</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.grassman.Grassman.sample_uniform">
+<code class="descname">sample_uniform</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/grassman.html#Grassman.sample_uniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.grassman.Grassman.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-geometry.manifolds.todo.moebius">
+<span id="geometry-manifolds-todo-moebius-module"></span><h2>geometry.manifolds.todo.moebius module<a class="headerlink" href="#module-geometry.manifolds.todo.moebius" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="geometry.manifolds.todo.moebius.Moebius">
+<em class="property">class </em><code class="descclassname">geometry.manifolds.todo.moebius.</code><code class="descname">Moebius</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/moebius.html#Moebius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.moebius.Moebius" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="geometry.manifolds.html#geometry.manifolds.differentiable_manifold.DifferentiableManifold" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold"><code class="xref py py-class docutils literal notranslate"><span class="pre">geometry.manifolds.differentiable_manifold.DifferentiableManifold</span></code></a></p>
+<p>INCOMPLETE - The Moebius strip – still to be implemented.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_close</span></code>(a,&nbsp;b[,&nbsp;atol,&nbsp;msg])</td>
+<td>Asserts that two points on the manifold are close to the given tolerance.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">belongs</span></code>(x)</td>
+<td>Raises an Exception if the point does not belong to this manifold.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">belongs_ts</span></code>(bv)</td>
+<td>Checks that a vector <em>vx</em> belongs to the tangent space at the given point <em>base</em>.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">distance</span></code>(a,&nbsp;b)</td>
+<td>Computes the geodesic distance between two points.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">embed_in</span></code>(M,&nbsp;my_point)</td>
+<td>Embeds a point on this manifold to the target manifold M.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">expmap</span></code>(bv)</td>
+<td>Computes the exponential map from <em>base</em> for the velocity vector <em>v</em>.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">friendly</span></code>(a)</td>
+<td>Returns a friendly description string for a point on the manifold.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_yaml</span></code>(yaml_structure)</td>
+<td>Recovers a value from a Yaml structure.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geodesic</span></code>(a,&nbsp;b,&nbsp;t)</td>
+<td>Returns the point interpolated along the geodesic.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dimension</span></code>()</td>
+<td>Returns the intrinsic dimension of this manifold.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">interesting_points</span></code>()</td>
+<td>Returns a list of “interesting points” on this manifold that should be used for testing various properties.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">logmap</span></code>(base,&nbsp;p)</td>
+<td>Computes the logarithmic map from base point <em>base</em> to target <em>b</em>.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">project_from</span></code>(M,&nbsp;his_point)</td>
+<td>Projects a point on a bigger manifold to this manifold.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">project_ts</span></code>(bv)</td>
+<td>Projects a vector <em>bv</em> in the ambient space to the tangent space at point <em>base</em>.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">riemannian_mean</span></code>(points)</td>
+<td>TODO: work out exceptions</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">tangent_bundle</span></code>()</td>
+<td>Returns the manifold corresponding to the tangent bundle.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="72%" />
+<col width="28%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>belongs_</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>can_convert_to</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>can_represent</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>convert_to</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>distance_</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>embeddable_in</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>embedding</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>expmap_</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>isomorphism</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>logmap_</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>normalize</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>project_to</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>project_ts_</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>relations_descriptions</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>sample_uniform</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>to_yaml</strong></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geometry.manifolds.todo.moebius.Moebius.belongs_">
+<code class="descname">belongs_</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/moebius.html#Moebius.belongs_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.moebius.Moebius.belongs_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.moebius.Moebius.distance_">
+<code class="descname">distance_</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/moebius.html#Moebius.distance_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.moebius.Moebius.distance_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.moebius.Moebius.expmap_">
+<code class="descname">expmap_</code><span class="sig-paren">(</span><em>a</em>, <em>vel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/moebius.html#Moebius.expmap_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.moebius.Moebius.expmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.moebius.Moebius.logmap_">
+<code class="descname">logmap_</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/moebius.html#Moebius.logmap_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.moebius.Moebius.logmap_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.moebius.Moebius.normalize">
+<code class="descname">normalize</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/moebius.html#Moebius.normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.moebius.Moebius.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalizes the coordinates to the canonical representation
+for this manifold. See TorusW.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.moebius.Moebius.project_ts_">
+<code class="descname">project_ts_</code><span class="sig-paren">(</span><em>base</em>, <em>vx</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/moebius.html#Moebius.project_ts_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.moebius.Moebius.project_ts_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.moebius.Moebius.sample_uniform">
+<code class="descname">sample_uniform</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/moebius.html#Moebius.sample_uniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.moebius.Moebius.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-geometry.manifolds.todo.orthogonal_group">
+<span id="geometry-manifolds-todo-orthogonal-group-module"></span><h2>geometry.manifolds.todo.orthogonal_group module<a class="headerlink" href="#module-geometry.manifolds.todo.orthogonal_group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-geometry.manifolds.todo.posdef_matrices">
+<span id="geometry-manifolds-todo-posdef-matrices-module"></span><h2>geometry.manifolds.todo.posdef_matrices module<a class="headerlink" href="#module-geometry.manifolds.todo.posdef_matrices" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-geometry.manifolds.todo.stiefel">
+<span id="geometry-manifolds-todo-stiefel-module"></span><h2>geometry.manifolds.todo.stiefel module<a class="headerlink" href="#module-geometry.manifolds.todo.stiefel" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="geometry.manifolds.todo.stiefel.NonCompactStiefel">
+<em class="property">class </em><code class="descclassname">geometry.manifolds.todo.stiefel.</code><code class="descname">NonCompactStiefel</code><span class="sig-paren">(</span><em>p</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/stiefel.html#NonCompactStiefel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.stiefel.NonCompactStiefel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="geometry.manifolds.html#geometry.manifolds.differentiable_manifold.DifferentiableManifold" title="geometry.manifolds.differentiable_manifold.DifferentiableManifold"><code class="xref py py-class docutils literal notranslate"><span class="pre">geometry.manifolds.differentiable_manifold.DifferentiableManifold</span></code></a></p>
+<p>INCOMPLETE – Matrices of fixed rank.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_close</span></code>(a,&nbsp;b[,&nbsp;atol,&nbsp;msg])</td>
+<td>Asserts that two points on the manifold are close to the given tolerance.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">belongs_ts</span></code>(bv)</td>
+<td>Checks that a vector <em>vx</em> belongs to the tangent space at the given point <em>base</em>.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">embed_in</span></code>(M,&nbsp;my_point)</td>
+<td>Embeds a point on this manifold to the target manifold M.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">friendly</span></code>(a)</td>
+<td>Returns a friendly description string for a point on the manifold.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_yaml</span></code>(yaml_structure)</td>
+<td>Recovers a value from a Yaml structure.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geodesic</span></code>(a,&nbsp;b,&nbsp;t)</td>
+<td>Returns the point interpolated along the geodesic.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dimension</span></code>()</td>
+<td>Returns the intrinsic dimension of this manifold.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">interesting_points</span></code>()</td>
+<td>Returns a list of “interesting points” on this manifold that should be used for testing various properties.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">project_from</span></code>(M,&nbsp;his_point)</td>
+<td>Projects a point on a bigger manifold to this manifold.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">riemannian_mean</span></code>(points)</td>
+<td>TODO: work out exceptions</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">tangent_bundle</span></code>()</td>
+<td>Returns the manifold corresponding to the tangent bundle.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="72%" />
+<col width="28%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>belongs</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>can_convert_to</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>can_represent</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>convert_to</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>distance</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>embeddable_in</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>embedding</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>expmap</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>isomorphism</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>logmap</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>normalize</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>project_to</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>project_ts</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>relations_descriptions</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>sample_uniform</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>to_yaml</strong></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geometry.manifolds.todo.stiefel.NonCompactStiefel.belongs">
+<code class="descname">belongs</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/stiefel.html#NonCompactStiefel.belongs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.stiefel.NonCompactStiefel.belongs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raises an Exception if the point does not belong to this manifold.</p>
+<p>This function wraps some checks around <code class="xref py py-func docutils literal notranslate"><span class="pre">belongs_()</span></code>,
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.stiefel.NonCompactStiefel.distance">
+<code class="descname">distance</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/stiefel.html#NonCompactStiefel.distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.stiefel.NonCompactStiefel.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the geodesic distance between two points.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.stiefel.NonCompactStiefel.expmap">
+<code class="descname">expmap</code><span class="sig-paren">(</span><em>a</em>, <em>vel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/stiefel.html#NonCompactStiefel.expmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.stiefel.NonCompactStiefel.expmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the exponential map from <em>base</em> for the velocity
+vector <em>v</em>.</p>
+<p>This function wraps some checks around <code class="xref py py-func docutils literal notranslate"><span class="pre">expmap_()</span></code>,
+which is implemented by the subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.stiefel.NonCompactStiefel.logmap">
+<code class="descname">logmap</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/stiefel.html#NonCompactStiefel.logmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.stiefel.NonCompactStiefel.logmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the logarithmic map from base point <em>base</em> to target <em>b</em>.
+# XXX: what should we do in the case there is more than one logmap?</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.stiefel.NonCompactStiefel.normalize">
+<code class="descname">normalize</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/stiefel.html#NonCompactStiefel.normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.stiefel.NonCompactStiefel.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalizes the coordinates to the canonical representation
+for this manifold. See TorusW.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.stiefel.NonCompactStiefel.project_ts">
+<code class="descname">project_ts</code><span class="sig-paren">(</span><em>base</em>, <em>vx</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/stiefel.html#NonCompactStiefel.project_ts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.stiefel.NonCompactStiefel.project_ts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects a vector <em>bv</em> in the ambient space
+to the tangent space at point <em>base</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geometry.manifolds.todo.stiefel.NonCompactStiefel.sample_uniform">
+<code class="descname">sample_uniform</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/todo/stiefel.html#NonCompactStiefel.sample_uniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.todo.stiefel.NonCompactStiefel.sample_uniform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-geometry.manifolds.todo">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-geometry.manifolds.todo" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">geometry.manifolds.todo package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-geometry.manifolds.todo.grassman">geometry.manifolds.todo.grassman module</a></li>
+<li><a class="reference internal" href="#module-geometry.manifolds.todo.moebius">geometry.manifolds.todo.moebius module</a></li>
+<li><a class="reference internal" href="#module-geometry.manifolds.todo.orthogonal_group">geometry.manifolds.todo.orthogonal_group module</a></li>
+<li><a class="reference internal" href="#module-geometry.manifolds.todo.posdef_matrices">geometry.manifolds.todo.posdef_matrices module</a></li>
+<li><a class="reference internal" href="#module-geometry.manifolds.todo.stiefel">geometry.manifolds.todo.stiefel module</a></li>
+<li><a class="reference internal" href="#module-geometry.manifolds.todo">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geometry.manifolds.todo.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>

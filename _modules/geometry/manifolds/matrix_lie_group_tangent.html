@@ -1,0 +1,175 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry.manifolds.matrix_lie_group_tangent &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geometry.manifolds.matrix_lie_group_tangent</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">contracts</span> <span class="k">import</span> <span class="n">contract</span>
+<span class="kn">from</span> <span class="nn">.differentiable_manifold</span> <span class="k">import</span> <span class="n">DifferentiableManifold</span>
+<span class="kn">from</span> <span class="nn">.matrix_lie_group</span> <span class="k">import</span> <span class="n">MatrixLieGroup</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MatrixLieGroupTangent&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="MatrixLieGroupTangent"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent">[docs]</a><span class="k">class</span> <span class="nc">MatrixLieGroupTangent</span><span class="p">(</span><span class="n">DifferentiableManifold</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; This class represents the tangent bundle of a matrix Lie group</span>
+<span class="sd">        using a tuble (base, v0), where v0 is in the algebra.</span>
+
+<span class="sd">        Compare with the generic TangentBundle that uses the representation</span>
+<span class="sd">        (base, vel) where vel is tangent at base (it holds that vel=base*v0).</span>
+
+<span class="sd">        (MatrixLieGroup has different representation)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># TODO: the tangent bundle of a matrix Lie group has more properties than</span>
+    <span class="c1"># this.</span>
+    <span class="c1"># TODO: create tests for all of this</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_group</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">base_group</span><span class="p">,</span> <span class="n">MatrixLieGroup</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base</span> <span class="o">=</span> <span class="n">base_group</span>
+        <span class="n">dimension</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">base_group</span><span class="o">.</span><span class="n">get_dimension</span><span class="p">()</span>
+        <span class="n">DifferentiableManifold</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="n">dimension</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;T</span><span class="si">%s</span><span class="s2">e&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span>
+
+<div class="viewcode-block" id="MatrixLieGroupTangent.belongs"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.belongs">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;tuple[2]&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">belongs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">get_algebra</span><span class="p">()</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroupTangent.belongs_ts"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.belongs_ts">[docs]</a>    <span class="k">def</span> <span class="nf">belongs_ts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bv</span><span class="p">):</span>
+        <span class="c1"># TODO: implement</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Not supported&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroupTangent.project_ts"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.project_ts">[docs]</a>    <span class="k">def</span> <span class="nf">project_ts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bv</span><span class="p">):</span>  <span class="c1"># TODO: test</span>
+        <span class="c1"># TODO: implement</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Not supported&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroupTangent.distance"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.distance">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;&gt;=0&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="c1"># TODO: implement</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Not supported&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroupTangent.logmap"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.logmap">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;belongs_ts&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">logmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Not supported&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroupTangent.expmap"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.expmap">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">bv</span><span class="o">=</span><span class="s1">&#39;belongs_ts&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">expmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bv</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Not supported&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroupTangent.interesting_points"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.interesting_points">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s1">&#39;list(belongs)&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">interesting_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># TODO: write this</span>
+        <span class="k">return</span> <span class="p">[]</span></div>
+
+<div class="viewcode-block" id="MatrixLieGroupTangent.friendly"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.matrix_lie_group_tangent.MatrixLieGroupTangent.friendly">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">friendly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Returns a friendly description string for a point on the manifold.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">get_algebra</span><span class="p">()</span><span class="o">.</span><span class="n">vector_from_algebra</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="s2">&quot;V(</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">friendly</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">v</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span></div></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>

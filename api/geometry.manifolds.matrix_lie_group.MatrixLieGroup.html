@@ -1,31 +1,20 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>geometry.manifolds.matrix_lie_group.MatrixLieGroup &mdash; PyGeometry 1.2 documentation</title>
-    
-    <link rel="stylesheet" href="../static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '1.2',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../static/jquery.js"></script>
-    <script type="text/javascript" src="../static/underscore.js"></script>
-    <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="PyGeometry 1.2 documentation" href="../index.html" />
+    <title>geometry.manifolds.matrix_lie_group.MatrixLieGroup &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
 	 
 
    <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
@@ -35,28 +24,30 @@
    </style>
 
 
-  </head>
-  <body>
-    <div class="related">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../index.html">PyGeometry 1.2 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="geometry-manifolds-matrix-lie-group-matrixliegroup">
 <h1>geometry.manifolds.matrix_lie_group.MatrixLieGroup<a class="headerlink" href="#geometry-manifolds-matrix-lie-group-matrixliegroup" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup">
-<em class="property">class </em><tt class="descclassname">geometry.manifolds.matrix_lie_group.</tt><tt class="descname">MatrixLieGroup</tt><big>(</big><em>n</em>, <em>dimension</em>, <em>algebra</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">geometry.manifolds.matrix_lie_group.</code><code class="descname">MatrixLieGroup</code><span class="sig-paren">(</span><em>n</em>, <em>dimension</em>, <em>algebra</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the base class for matrix Lie groups.</p>
 <p>Subclasses should provide a MatrixLieAlgebra
 object. Given the Lie algebra, we can compute everything.
@@ -69,354 +60,215 @@ some functions if they know a more numerically stable implementation.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">Embedding</span></tt></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">Isomorphism</span></tt></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group"><tt class="xref py py-obj docutils literal"><span class="pre">algebra_from_group</span></tt></a>(g)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">algebra_from_group</span></code></a>(g)</td>
 <td>Converts an element of the group to the algebra.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">assert_close</span></tt>(a,&nbsp;b[,&nbsp;atol,&nbsp;msg])</td>
-<td>Asserts that two points on the manifold are close to the given            tolerance.</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_close</span></code>(a,&nbsp;b[,&nbsp;atol,&nbsp;msg])</td>
+<td>Asserts that two points on the manifold are close to the given tolerance.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs</span></tt>(x)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">belongs</span></code>(x)</td>
 <td>Raises an Exception if the point does not belong to this manifold.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.belongs_algebra" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.belongs_algebra"><tt class="xref py py-obj docutils literal"><span class="pre">belongs_algebra</span></tt></a>(x)</td>
-<td></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">belongs_ts</span></code>(bv)</td>
+<td>Checks that a vector <em>vx</em> belongs to the tangent space at the given point <em>base</em>.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">belongs_ts</span></tt>(bv)</td>
-<td>Checks that a vector <em>vx</em> belongs to the tangent space            at the given point <em>base</em>.</td>
-</tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">can_convert_to</span></tt>(manifold)</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">can_represent</span></tt>(manifold)</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">convert_to</span></tt>(m,&nbsp;my_point)</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param my_point:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance"><tt class="xref py py-obj docutils literal"><span class="pre">distance</span></tt></a>(a,&nbsp;b)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">distance</span></code></a>(a,&nbsp;b)</td>
 <td>Computes the distance between two points.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">embed_in</span></tt>(M,&nbsp;my_point)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">embed_in</span></code>(M,&nbsp;my_point)</td>
 <td>Embeds a point on this manifold to the target manifold M.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">embeddable_in</span></tt>(manifold)</td>
-<td></td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expmap</span></code></a>(bv)</td>
+<td>This is the inverse of <code class="xref py py-func docutils literal notranslate"><span class="pre">logmap_()</span></code>.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">embedding</span></tt>(A,&nbsp;B,&nbsp;A_to_B,&nbsp;B_to_A[,&nbsp;itype,&nbsp;...])</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap"><tt class="xref py py-obj docutils literal"><span class="pre">expmap</span></tt></a>(bv)</td>
-<td>This is the inverse of <tt class="xref py py-func docutils literal"><span class="pre">logmap_()</span></tt>.</td>
-</tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">friendly</span></tt>(a)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">friendly</span></code>(a)</td>
 <td>Returns a friendly description string for a point on the manifold.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">from_yaml</span></tt>(yaml_structure)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_yaml</span></code>(yaml_structure)</td>
 <td>Recovers a value from a Yaml structure.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">geodesic</span></tt>(a,&nbsp;b,&nbsp;t)</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">geodesic</span></code>(a,&nbsp;b,&nbsp;t)</td>
 <td>Returns the point interpolated along the geodesic.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.get_algebra" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.get_algebra"><tt class="xref py py-obj docutils literal"><span class="pre">get_algebra</span></tt></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.get_algebra" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.get_algebra"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_algebra</span></code></a>()</td>
 <td>Returns the interface to the corresponding Lie algebra.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">get_dimension</span></tt>()</td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dimension</span></code>()</td>
 <td>Returns the intrinsic dimension of this manifold.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra"><tt class="xref py py-obj docutils literal"><span class="pre">group_from_algebra</span></tt></a>(a)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra"><code class="xref py py-obj docutils literal notranslate"><span class="pre">group_from_algebra</span></code></a>(a)</td>
 <td>Converts an element of the algebra to the group.</td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">identity</span></tt>()</td>
-<td></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">interesting_points</span></code>()</td>
+<td>Returns a list of “interesting points” on this manifold that should be used for testing various properties.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">interesting_points</span></tt>()</td>
-<td>Returns a list of &#8220;interesting points&#8221; on this manifold that            should be used for testing various properties.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse"><tt class="xref py py-obj docutils literal"><span class="pre">inverse</span></tt></a>(g)</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param g:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">isomorphism</span></tt>(A,&nbsp;B,&nbsp;A_to_B,&nbsp;B_to_A[,&nbsp;itype,&nbsp;...])</td>
-<td></td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap"><tt class="xref py py-obj docutils literal"><span class="pre">logmap</span></tt></a>(base,&nbsp;target)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logmap</span></code></a>(base,&nbsp;p)</td>
 <td>Returns the direction from base to target.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply"><tt class="xref py py-obj docutils literal"><span class="pre">multiply</span></tt></a>(g,&nbsp;h)</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param h:</th><td class="field-body"></td>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize</span></code>(a)</td>
+<td>Normalizes the coordinates to the canonical representation for this manifold.</td>
 </tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr class="row-even"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_from</span></tt>(M,&nbsp;his_point)</td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">project_from</span></code>(M,&nbsp;his_point)</td>
 <td>Projects a point on a bigger manifold to this manifold.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">project_to</span></tt>(m,&nbsp;my_point)</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param my_point:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts"><tt class="xref py py-obj docutils literal"><span class="pre">project_ts</span></tt></a>(bv)</td>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">project_ts</span></code></a>(bv)</td>
 <td>Projects the vector <em>x</em> to the tangent space at point <em>base</em>.</td>
 </tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">relations_descriptions</span></tt>()</td>
-<td></td>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">riemannian_mean</span></code>(points)</td>
+<td>TODO: work out exceptions</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle"><tt class="xref py py-obj docutils literal"><span class="pre">tangent_bundle</span></tt></a>()</td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><tt class="xref py py-obj docutils literal"><span class="pre">to_yaml</span></tt>(x)</td>
-<td><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">param x:</th><td class="field-body"></td>
+<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.velocity_from_points" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.velocity_from_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">velocity_from_points</span></code></a>(a,&nbsp;b[,&nbsp;delta])</td>
+<td>Find the velocity in local frame to go from <em>a</em> to <em>b</em> in <em>delta</em> time.</td>
 </tr>
 </tbody>
 </table>
-</td>
+<table border="1" class="docutils">
+<colgroup>
+<col width="72%" />
+<col width="28%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>belongs_algebra</strong></td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.unity" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.unity"><tt class="xref py py-obj docutils literal"><span class="pre">unity</span></tt></a>()</td>
-<td></td>
+<tr class="row-even"><td><strong>can_convert_to</strong></td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.velocity_from_points" title="geometry.manifolds.matrix_lie_group.MatrixLieGroup.velocity_from_points"><tt class="xref py py-obj docutils literal"><span class="pre">velocity_from_points</span></tt></a>(a,&nbsp;b[,&nbsp;delta])</td>
-<td>Find the velocity in local frame to go from <em>a</em> to <em>b</em> in             <em>delta</em> time.</td>
+<tr class="row-odd"><td><strong>can_represent</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>convert_to</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>embeddable_in</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>embedding</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>identity</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>inverse</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>isomorphism</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>multiply</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>project_to</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>relations_descriptions</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>tangent_bundle</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>to_yaml</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>unity</strong></td>
+<td>&#160;</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group">
-<tt class="descname">algebra_from_group</tt><big>(</big><em>g</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.algebra_from_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Converts an element of the group to the algebra. </dt>
-<dd>Uses generic matrix logarithm plus projection.</dd>
-</dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>g</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">belongs_algebra</span></tt></td>
-</tr>
-</tbody>
-</table>
+<code class="descname">algebra_from_group</code><span class="sig-paren">(</span><em>g</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.algebra_from_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.algebra_from_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an element of the group to the algebra.
+Uses generic matrix logarithm plus projection.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.belongs_algebra">
-<tt class="descname">belongs_algebra</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.belongs_algebra"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.belongs_algebra" title="Permalink to this definition">¶</a></dt>
+<code class="descname">belongs_algebra</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.belongs_algebra"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.belongs_algebra" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance">
-<tt class="descname">distance</tt><big>(</big><em>a</em>, <em>b</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance" title="Permalink to this definition">¶</a></dt>
+<code class="descname">distance</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.distance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the distance between two points.</p>
-<blockquote>
-<div>In the case of Lie groups, this is done by 
+<p>In the case of Lie groups, this is done by
 translating everything to the origin, computing the
-logmap, and using the norm defined in the Lie Algebra object.</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>a</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </li>
-<li><strong>b</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
+logmap, and using the norm defined in the Lie Algebra object.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap">
-<tt class="descname">expmap</tt><big>(</big><em>bv</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.expmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is the inverse of <tt class="xref py py-func docutils literal"><span class="pre">logmap_()</span></tt>.</p>
-<blockquote>
-<div><p>In the case of Lie groups, this is implemented using
+<code class="descname">expmap</code><span class="sig-paren">(</span><em>bv</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.expmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.expmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the inverse of <code class="xref py py-func docutils literal notranslate"><span class="pre">logmap_()</span></code>.</p>
+<p>In the case of Lie groups, this is implemented using
 the usual matrix exponential.</p>
-<p>Here the <tt class="xref py py-func docutils literal"><span class="pre">MatrixLieAlgebra.project()</span></tt> function
+<p>Here the <code class="xref py py-func docutils literal notranslate"><span class="pre">MatrixLieAlgebra.project()</span></code> function
 is used to mitigate numerical errors.</p>
-</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>bv</strong> (<tt class="docutils literal"><span class="pre">belongs_ts</span></tt>) &#8211; </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">belongs</span></tt></td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.get_algebra">
-<tt class="descname">get_algebra</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.get_algebra"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.get_algebra" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_algebra</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.get_algebra"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.get_algebra" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the interface to the corresponding Lie algebra.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra">
-<tt class="descname">group_from_algebra</tt><big>(</big><em>a</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.group_from_algebra"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra" title="Permalink to this definition">¶</a></dt>
+<code class="descname">group_from_algebra</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.group_from_algebra"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.group_from_algebra" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an element of the algebra to the group.</p>
-<blockquote>
-<div>Uses generic matrix exponential.</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<tt class="docutils literal"><span class="pre">belongs_algebra</span></tt>) &#8211; </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">belongs</span></tt></td>
-</tr>
-</tbody>
-</table>
+<p>Uses generic matrix exponential.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse">
-<tt class="descname">inverse</tt><big>(</big><em>g</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.inverse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>g</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">belongs</span></tt></td>
-</tr>
-</tbody>
-</table>
+<code class="descname">inverse</code><span class="sig-paren">(</span><em>g</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.inverse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements the group inversion.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap">
-<tt class="descname">logmap</tt><big>(</big><em>base</em>, <em>target</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.logmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">logmap</code><span class="sig-paren">(</span><em>base</em>, <em>p</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.logmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.logmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the direction from base to target.</p>
-<blockquote>
-<div><p>In the case of Lie groups, this is implemented
+<p>In the case of Lie groups, this is implemented
 by using the usual matrix logarithm at the origin.</p>
-<p>Here the <tt class="xref py py-func docutils literal"><span class="pre">MatrixLieAlgebra.project()</span></tt> function
+<p>Here the <code class="xref py py-func docutils literal notranslate"><span class="pre">MatrixLieAlgebra.project()</span></code> function
 is used to mitigate numerical errors.</p>
-</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>base</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </li>
-<li><strong>target</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">belongs_ts</span></tt></p>
-</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply">
-<tt class="descname">multiply</tt><big>(</big><em>g</em>, <em>h</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.multiply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>h</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </li>
-<li><strong>g</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
+<code class="descname">multiply</code><span class="sig-paren">(</span><em>g</em>, <em>h</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.multiply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.multiply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements the group operation.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts">
-<tt class="descname">project_ts</tt><big>(</big><em>bv</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.project_ts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts" title="Permalink to this definition">¶</a></dt>
+<code class="descname">project_ts</code><span class="sig-paren">(</span><em>bv</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.project_ts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.project_ts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Projects the vector <em>x</em> to the tangent space at point <em>base</em>.</p>
-<blockquote>
-<div>In the case of Lie Groups, we do this by translating the
+<p>In the case of Lie Groups, we do this by translating the
 vector to the origin, projecting it to the Lie Algebra,
-and then translating it back.</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>bv</strong> (<tt class="docutils literal"><span class="pre">tuple(belongs,*)</span></tt>) &#8211; </td>
-</tr>
-</tbody>
-</table>
+and then translating it back.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle">
-<tt class="descname">tangent_bundle</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.tangent_bundle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">tangent_bundle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.tangent_bundle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.tangent_bundle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the manifold corresponding to the tangent bundle.
+The default gives a generic implementation.
+MatrixLieGroup have a different one.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.unity">
-<tt class="descname">unity</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.unity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.unity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">unity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.unity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.unity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the group unity.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="geometry.manifolds.matrix_lie_group.MatrixLieGroup.velocity_from_points">
-<tt class="descname">velocity_from_points</tt><big>(</big><em>a</em>, <em>b</em>, <em>delta=1</em><big>)</big><a class="reference internal" href="../modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.velocity_from_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.velocity_from_points" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Find the velocity in local frame to go from <em>a</em> to <em>b</em> in </dt>
-<dd><em>delta</em> time.</dd>
-</dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>a</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </li>
-<li><strong>b</strong> (<tt class="docutils literal"><span class="pre">belongs</span></tt>) &#8211; </li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">belongs_ts</span></tt></p>
-</td>
-</tr>
-</tbody>
-</table>
+<code class="descname">velocity_from_points</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>delta=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geometry/manifolds/matrix_lie_group.html#MatrixLieGroup.velocity_from_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geometry.manifolds.matrix_lie_group.MatrixLieGroup.velocity_from_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the velocity in local frame to go from <em>a</em> to <em>b</em> in
+<em>delta</em> time.</p>
 </dd></dl>
 
 </dd></dl>
@@ -427,43 +279,47 @@ and then translating it back.</div></blockquote>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geometry.manifolds.matrix_lie_group.MatrixLieGroup.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../index.html">PyGeometry 1.2 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li> 
       </ul>
     </div>
 	
-    <div class="footer">
-        &copy; Copyright 2011, Andrea Censi.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
     </div>
 	
   <script type="text/javascript">

@@ -1,0 +1,373 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry.poses &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geometry.poses</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">contracts</span> <span class="k">import</span> <span class="n">contract</span><span class="p">,</span> <span class="n">new_contract</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="k">import</span> <span class="n">logm</span><span class="p">,</span> <span class="n">expm</span>
+<span class="kn">from</span> <span class="nn">geometry.rotations</span> <span class="k">import</span> <span class="n">check_SO</span><span class="p">,</span> <span class="n">check_skew_symmetric</span><span class="p">,</span> <span class="n">rot2d</span><span class="p">,</span> \
+    <span class="n">angle_from_rot2d</span><span class="p">,</span> <span class="n">hat_map_2d</span><span class="p">,</span> <span class="n">rotz</span><span class="p">,</span> <span class="n">axis_angle_from_rotation</span>
+<span class="kn">from</span> <span class="nn">geometry.utils.numpy_backport</span> <span class="k">import</span> <span class="n">assert_allclose</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">.constants</span> <span class="k">import</span> <span class="n">GeometryConstants</span>
+
+
+<div class="viewcode-block" id="check_SE"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.check_SE">[docs]</a><span class="k">def</span> <span class="nf">check_SE</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Checks that the argument is in the special euclidean group. &#39;&#39;&#39;</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>  <span class="c1"># @UnusedVariable</span>
+    <span class="n">check_SO</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+    <span class="n">assert_allclose</span><span class="p">(</span><span class="n">one</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="s1">&#39;I expect the lower-right to be 1&#39;</span><span class="p">)</span>
+    <span class="n">assert_allclose</span><span class="p">(</span><span class="n">zero</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="s1">&#39;I expect the bottom component to be 0.&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="check_se"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.check_se">[docs]</a><span class="k">def</span> <span class="nf">check_se</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Checks that the input is in the special euclidean Lie algebra. &#39;&#39;&#39;</span>
+    <span class="n">omega</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">zero</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>  <span class="c1"># @UnusedVariable</span>
+    <span class="n">check_skew_symmetric</span><span class="p">(</span><span class="n">omega</span><span class="p">)</span>
+    <span class="n">assert_allclose</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="s1">&#39;I expect the lower-right to be 0.&#39;</span><span class="p">)</span>
+    <span class="n">assert_allclose</span><span class="p">(</span><span class="n">zero</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="s1">&#39;I expect the bottom component to be 0.&#39;</span><span class="p">)</span></div>
+
+
+<span class="n">new_contract</span><span class="p">(</span><span class="s1">&#39;se&#39;</span><span class="p">,</span> <span class="n">check_se</span><span class="p">)</span>
+<span class="n">new_contract</span><span class="p">(</span><span class="s1">&#39;SE&#39;</span><span class="p">,</span> <span class="n">check_SE</span><span class="p">)</span>
+<span class="n">new_contract</span><span class="p">(</span><span class="s1">&#39;SE2&#39;</span><span class="p">,</span> <span class="s1">&#39;array[3x3], SE&#39;</span><span class="p">)</span>
+<span class="n">new_contract</span><span class="p">(</span><span class="s1">&#39;se2&#39;</span><span class="p">,</span> <span class="s1">&#39;array[3x3], se&#39;</span><span class="p">)</span>
+<span class="n">new_contract</span><span class="p">(</span><span class="s1">&#39;SE3&#39;</span><span class="p">,</span> <span class="s1">&#39;array[4x4], SE&#39;</span><span class="p">)</span>
+<span class="n">new_contract</span><span class="p">(</span><span class="s1">&#39;se3&#39;</span><span class="p">,</span> <span class="s1">&#39;array[4x4], se&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="extract_pieces"><a class="viewcode-back" href="../../api/geometry.poses.extract_pieces.html#geometry.poses.extract_pieces">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;array[NxN]&#39;</span><span class="p">,</span>
+          <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;tuple(array[MxM],array[M],array[M],number),M=N-1&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">extract_pieces</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">M</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">M</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">M</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">M</span><span class="p">]</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span></div>
+
+
+<div class="viewcode-block" id="combine_pieces"><a class="viewcode-back" href="../../api/geometry.poses.combine_pieces.html#geometry.poses.combine_pieces">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;array[MxM]&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s1">&#39;array[M]&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;array[M]&#39;</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">,</span>
+          <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;array[NxN],N=M+1&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">combine_pieces</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">M</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">M</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">M</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">M</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">M</span><span class="p">,</span> <span class="n">M</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
+<span class="c1"># TODO: specialize for SE2, SE3</span>
+
+
+<div class="viewcode-block" id="SE2_identity"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.SE2_identity">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s1">&#39;SE2&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">SE2_identity</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SE3_identity"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.SE3_identity">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s1">&#39;SE3&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">SE3_identity</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="pose_from_rotation_translation"><a class="viewcode-back" href="../../api/geometry.poses.pose_from_rotation_translation.html#geometry.poses.pose_from_rotation_translation">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="s1">&#39;array[NxN],SO&#39;</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="s1">&#39;array[N]&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;array[MxM],M=N+1,SE&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">pose_from_rotation_translation</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">combine_pieces</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">t</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
+
+
+<span class="c1"># TODO: make specialized</span>
+<span class="n">SE2_from_rotation_translation</span> <span class="o">=</span> <span class="n">pose_from_rotation_translation</span>
+<span class="n">SE3_from_rotation_translation</span> <span class="o">=</span> <span class="n">pose_from_rotation_translation</span>
+
+
+<div class="viewcode-block" id="rotation_translation_from_pose"><a class="viewcode-back" href="../../api/geometry.poses.rotation_translation_from_pose.html#geometry.poses.rotation_translation_from_pose">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s1">&#39;array[NxN],SE&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;tuple(array[MxM], array[M]),M=N-1&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">rotation_translation_from_pose</span><span class="p">(</span><span class="n">pose</span><span class="p">):</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>  <span class="c1"># @UnusedVariable</span>
+    <span class="k">return</span> <span class="n">R</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">t</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+
+
+<span class="c1"># TODO: make more efficient</span>
+<span class="n">rotation_translation_from_SE2</span> <span class="o">=</span> <span class="n">rotation_translation_from_pose</span>
+<span class="n">rotation_translation_from_SE3</span> <span class="o">=</span> <span class="n">rotation_translation_from_pose</span>
+
+
+<div class="viewcode-block" id="translation_from_SE2"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.translation_from_SE2">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s1">&#39;SE2&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;array[2]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">translation_from_SE2</span><span class="p">(</span><span class="n">pose</span><span class="p">):</span>
+    <span class="c1"># TODO: make it more efficient</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>  <span class="c1"># @UnusedVariable</span>
+    <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="translation_from_SE3"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.translation_from_SE3">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s1">&#39;SE3&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;array[3]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">translation_from_SE3</span><span class="p">(</span><span class="n">pose</span><span class="p">):</span>
+    <span class="c1"># TODO: make it more efficient</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SE2_from_translation_angle"><a class="viewcode-back" href="../../api/geometry.poses.SE2_from_translation_angle.html#geometry.poses.SE2_from_translation_angle">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="s1">&#39;array[2]|seq[2](number)&#39;</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;SE2&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">SE2_from_translation_angle</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Returns an element of SE2 from translation and rotation. &#39;&#39;&#39;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">combine_pieces</span><span class="p">(</span><span class="n">rot2d</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">t</span><span class="p">,</span> <span class="n">t</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="translation_angle_from_SE2"><a class="viewcode-back" href="../../api/geometry.poses.translation_angle_from_SE2.html#geometry.poses.translation_angle_from_SE2">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s1">&#39;SE2&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;tuple(array[2],float)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">translation_angle_from_SE2</span><span class="p">(</span><span class="n">pose</span><span class="p">):</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">angle_from_rot2d</span><span class="p">(</span><span class="n">R</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="angle_from_SE2"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.angle_from_SE2">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s1">&#39;SE2&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">angle_from_SE2</span><span class="p">(</span><span class="n">pose</span><span class="p">):</span>
+    <span class="c1"># XXX: untested</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">angle_from_rot2d</span><span class="p">(</span><span class="n">R</span><span class="p">)</span></div>
+
+
+<span class="c1"># TODO: write tests for this, and other function</span>
+<div class="viewcode-block" id="SE2_from_xytheta"><a class="viewcode-back" href="../../api/geometry.poses.SE2_from_xytheta.html#geometry.poses.SE2_from_xytheta">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">xytheta</span><span class="o">=</span><span class="s1">&#39;array[3]|seq[3](number)&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;SE2&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">SE2_from_xytheta</span><span class="p">(</span><span class="n">xytheta</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Returns an element of SE2 from translation and rotation. &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">SE2_from_translation_angle</span><span class="p">([</span><span class="n">xytheta</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xytheta</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">xytheta</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="xytheta_from_SE2"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.xytheta_from_SE2">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s1">&#39;array[3],finite&#39;</span><span class="p">,</span> <span class="n">pose</span><span class="o">=</span><span class="s1">&#39;SE2&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">xytheta_from_SE2</span><span class="p">(</span><span class="n">pose</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Returns an element of SE2 from translation and rotation. &#39;&#39;&#39;</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">translation_angle_from_SE2</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="se2_from_linear_angular"><a class="viewcode-back" href="../../api/geometry.poses.se2_from_linear_angular.html#geometry.poses.se2_from_linear_angular">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">linear</span><span class="o">=</span><span class="s1">&#39;(array[2],finite)|seq[2](number,finite)&#39;</span><span class="p">,</span> <span class="n">angular</span><span class="o">=</span><span class="s1">&#39;number,finite&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;se2&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">se2_from_linear_angular</span><span class="p">(</span><span class="n">linear</span><span class="p">,</span> <span class="n">angular</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Returns an element of se2 from linear and angular velocity. &#39;&#39;&#39;</span>
+    <span class="n">linear</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">linear</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">hat_map_2d</span><span class="p">(</span><span class="n">angular</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">combine_pieces</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">linear</span><span class="p">,</span> <span class="n">linear</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="linear_angular_from_se2"><a class="viewcode-back" href="../../api/geometry.poses.linear_angular_from_se2.html#geometry.poses.linear_angular_from_se2">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">vel</span><span class="o">=</span><span class="s1">&#39;se2&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;tuple((array[2],finite),Float)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">linear_angular_from_se2</span><span class="p">(</span><span class="n">vel</span><span class="p">):</span>
+    <span class="n">M</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">zero</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span>  <span class="c1"># @UnusedVariable</span>
+    <span class="n">omega</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">v</span><span class="p">,</span> <span class="n">omega</span></div>
+
+
+<div class="viewcode-block" id="angular_from_se2"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.angular_from_se2">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">vel</span><span class="o">=</span><span class="s1">&#39;se2&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;Float&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">angular_from_se2</span><span class="p">(</span><span class="n">vel</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">linear_angular_from_se2</span><span class="p">(</span><span class="n">vel</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+<span class="c1"># TODO: add to docs</span>
+<div class="viewcode-block" id="se2_from_SE2_slow"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.se2_from_SE2_slow">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s1">&#39;SE2&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;se2&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">se2_from_SE2_slow</span><span class="p">(</span><span class="n">pose</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Converts a pose to its Lie algebra representation. &#39;&#39;&#39;</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>  <span class="c1"># @UnusedVariable</span>
+    <span class="c1"># FIXME: this still doesn&#39;t work well for singularity</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">logm</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+    <span class="n">M</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">zero</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>  <span class="c1"># @UnusedVariable</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="n">M</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">:</span>  <span class="c1"># XXX: threshold</span>
+        <span class="c1"># cannot use logarithm for log(-I), it gives imaginary solution</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">hat_map_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">combine_pieces</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">v</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="se2_from_SE2"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.se2_from_SE2">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s1">&#39;SE2&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;se2&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">se2_from_SE2</span><span class="p">(</span><span class="n">pose</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Converts a pose to its Lie algebra representation.</span>
+
+<span class="sd">        See Bullo, Murray &quot;PD control on the euclidean group&quot; for proofs.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">one</span> <span class="o">=</span> <span class="n">extract_pieces</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>  <span class="c1"># @UnusedVariable</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">angle_from_rot2d</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+
+    <span class="n">w_abs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="c1"># FIXME: singularity</span>
+    <span class="k">if</span> <span class="n">w_abs</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">:</span>  <span class="c1"># XXX: threshold</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">w_abs</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">w_abs</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">a</span><span class="p">,</span> <span class="n">w</span> <span class="o">/</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="n">w</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">a</span><span class="p">]])</span>
+
+    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">w_hat</span> <span class="o">=</span> <span class="n">hat_map_2d</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">combine_pieces</span><span class="p">(</span><span class="n">w_hat</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">v</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SE2_from_se2"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.SE2_from_se2">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s1">&#39;SE2&#39;</span><span class="p">,</span> <span class="n">vel</span><span class="o">=</span><span class="s1">&#39;se2&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">SE2_from_se2</span><span class="p">(</span><span class="n">vel</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Converts from Lie algebra representation to pose.</span>
+
+<span class="sd">        See Bullo, Murray &quot;PD control on the euclidean group&quot; for proofs.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">vel</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">rot2d</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">vel</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">:</span>  <span class="c1"># XXX threshold</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+            <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">w</span><span class="p">)]</span>
+        <span class="p">])</span> <span class="o">/</span> <span class="n">w</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">combine_pieces</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">t</span> <span class="o">*</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SE2_from_se2_slow"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.SE2_from_se2_slow">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s1">&#39;SE2&#39;</span><span class="p">,</span> <span class="n">vel</span><span class="o">=</span><span class="s1">&#39;se2&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">SE2_from_se2_slow</span><span class="p">(</span><span class="n">vel</span><span class="p">):</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">expm</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">X</span></div>
+
+
+<div class="viewcode-block" id="SE3_from_SE2"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.SE3_from_SE2">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s1">&#39;SE2&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;SE3&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">SE3_from_SE2</span><span class="p">(</span><span class="n">pose</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Embeds a pose in SE2 to SE3, setting z=0 and upright. &#39;&#39;&#39;</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">translation_angle_from_SE2</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pose_from_rotation_translation</span><span class="p">(</span><span class="n">rotz</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span>
+                                          <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="SE2_from_SE3"><a class="viewcode-back" href="../../api/geometry.html#geometry.poses.SE2_from_SE3">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s1">&#39;SE3&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;SE2&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">SE2_from_SE3</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">check_exact</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">z_atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Projects a pose in SE3 to SE2.</span>
+
+<span class="sd">        If check_exact is True, it will check that z = 0 and axis ~= [0,0,1].</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">rotation</span><span class="p">,</span> <span class="n">translation</span> <span class="o">=</span> <span class="n">rotation_translation_from_pose</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+    <span class="n">axis</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">axis_angle_from_rotation</span><span class="p">(</span><span class="n">rotation</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">check_exact</span><span class="p">:</span>
+        <span class="n">sit</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> pose </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">pose</span>
+        <span class="n">sit</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> axis: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">axis</span>
+        <span class="n">sit</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> angle: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">angle</span>
+
+        <span class="n">err_msg</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;I expect that z=0 when projecting to SE2 &#39;</span>
+                   <span class="s1">&#39;(check_exact=True).&#39;</span><span class="p">)</span>
+        <span class="n">err_msg</span> <span class="o">+=</span> <span class="n">sit</span>
+
+        <span class="n">assert_allclose</span><span class="p">(</span><span class="n">translation</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">z_atol</span><span class="p">,</span> <span class="n">err_msg</span><span class="o">=</span><span class="n">err_msg</span><span class="p">)</span>
+        <span class="c1"># normalize angle z</span>
+        <span class="n">axis2</span> <span class="o">=</span> <span class="n">axis</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">axis</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">err_msg</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;I expect that the rotation is around [0,0,1] &#39;</span>
+                  <span class="s1">&#39;when projecting to SE2 (check_exact=True).&#39;</span><span class="p">)</span>
+        <span class="n">err_msg</span> <span class="o">+=</span> <span class="n">sit</span>
+
+        <span class="n">assert_allclose</span><span class="p">(</span><span class="n">axis2</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                        <span class="n">rtol</span><span class="o">=</span><span class="n">GeometryConstants</span><span class="o">.</span><span class="n">rtol_SE2_from_SE3</span><span class="p">,</span>
+                        <span class="n">atol</span><span class="o">=</span><span class="n">GeometryConstants</span><span class="o">.</span><span class="n">rtol_SE2_from_SE3</span><span class="p">,</span>  <span class="c1"># XXX</span>
+                        <span class="n">err_msg</span><span class="o">=</span><span class="n">err_msg</span><span class="p">)</span>
+
+    <span class="n">angle</span> <span class="o">=</span> <span class="n">angle</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">axis</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">SE2_from_translation_angle</span><span class="p">(</span><span class="n">translation</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">angle</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>

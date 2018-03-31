@@ -1,0 +1,294 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry.manifolds.sphere &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geometry.manifolds.sphere</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">numpy.core.numeric</span> <span class="k">import</span> <span class="n">outer</span>
+
+<span class="kn">from</span> <span class="nn">contracts</span> <span class="k">import</span> <span class="n">contract</span><span class="p">,</span> <span class="n">check</span>
+<span class="kn">from</span> <span class="nn">geometry.basic_utils</span> <span class="k">import</span> <span class="n">normalize_length</span><span class="p">,</span> <span class="n">normalize_length_or_zero</span>
+<span class="kn">from</span> <span class="nn">geometry.rotations</span> <span class="k">import</span> <span class="n">rot2d</span><span class="p">,</span> <span class="n">rotation_from_axis_angle</span>
+<span class="kn">from</span> <span class="nn">geometry.spheres</span> <span class="k">import</span> <span class="n">any_orthogonal_direction</span><span class="p">,</span> \
+    <span class="n">geodesic_distance_on_sphere</span><span class="p">,</span> <span class="n">random_direction</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">.differentiable_manifold</span> <span class="k">import</span> <span class="n">DifferentiableManifold</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Sphere&#39;</span><span class="p">,</span> <span class="s1">&#39;Sphere1&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;S1&#39;</span><span class="p">,</span> <span class="s1">&#39;S2&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Sphere"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere">[docs]</a><span class="k">class</span> <span class="nc">Sphere</span><span class="p">(</span><span class="n">DifferentiableManifold</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; These are hyperspheres of unit radius. &#39;&#39;&#39;</span>
+
+    <span class="n">norm_rtol</span> <span class="o">=</span> <span class="mf">1e-5</span>
+    <span class="n">atol_geodesic_distance</span> <span class="o">=</span> <span class="mf">1e-8</span>
+
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;(1|2)&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="n">DifferentiableManifold</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">order</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;S</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Sphere.distance"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.distance">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;&gt;=0&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">geodesic_distance_on_sphere</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sphere.logmap"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.logmap">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;belongs_ts&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">logmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="c1"># TODO: create S1_logmap(base, target)</span>
+        <span class="c1"># XXX: what should we do in the case there is more than one logmap?</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">geodesic_distance_on_sphere</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atol_geodesic_distance</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">base</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">base</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">xp</span> <span class="o">=</span> <span class="n">any_orthogonal_direction</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="n">base</span>
+            <span class="n">base</span><span class="p">,</span> <span class="n">xp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_ts</span><span class="p">((</span><span class="n">base</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+        <span class="n">xp</span> <span class="o">=</span> <span class="n">normalize_length_or_zero</span><span class="p">(</span><span class="n">xp</span><span class="p">)</span>
+        <span class="n">xp</span> <span class="o">*=</span> <span class="n">geodesic_distance_on_sphere</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">base</span><span class="p">,</span> <span class="n">xp</span></div>
+
+<div class="viewcode-block" id="Sphere.expmap"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.expmap">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">bv</span><span class="o">=</span><span class="s1">&#39;belongs_ts&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">expmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bv</span><span class="p">):</span>
+        <span class="n">base</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span> <span class="n">bv</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">angle</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># XXX: tolerance</span>
+            <span class="k">return</span> <span class="n">base</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">direction</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">vel</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">base</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">base</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">vel</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">R</span> <span class="o">=</span> <span class="n">rot2d</span><span class="p">(</span><span class="n">angle</span> <span class="o">*</span> <span class="n">direction</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">axis</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">normalize_length</span><span class="p">(</span><span class="n">vel</span><span class="p">),</span> <span class="n">base</span><span class="p">)</span>
+            <span class="n">axis</span> <span class="o">=</span> <span class="n">normalize_length</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+            <span class="n">R</span> <span class="o">=</span> <span class="n">rotation_from_axis_angle</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="Sphere.project_ts"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.project_ts">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">bv</span><span class="o">=</span><span class="s1">&#39;tuple(belongs, *)&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">project_ts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bv</span><span class="p">):</span>  <span class="c1"># TODO: test</span>
+        <span class="n">base</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span> <span class="n">bv</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">)</span> <span class="o">-</span> <span class="n">outer</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">base</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">vel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sphere.belongs"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.belongs">[docs]</a>    <span class="k">def</span> <span class="nf">belongs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">check</span><span class="p">(</span><span class="s1">&#39;array[N],unit_length&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sphere.sample_uniform"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.sample_uniform">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">random_direction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sphere.interesting_points"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.interesting_points">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s1">&#39;list(belongs)&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">interesting_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+            <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+            <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+            <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]))</span>
+            <span class="k">return</span> <span class="n">points</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+            <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+            <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+            <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+            <span class="k">return</span> <span class="n">points</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Sphere.friendly"><a class="viewcode-back" href="../../../api/geometry.manifolds.sphere.Sphere.html#geometry.manifolds.sphere.Sphere.friendly">[docs]</a>    <span class="k">def</span> <span class="nf">friendly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">return</span> <span class="s1">&#39;Dir(</span><span class="si">%6.1f</span><span class="s1">deg)&#39;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">elevation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="k">return</span> <span class="s1">&#39;Dir(</span><span class="si">%6.1f</span><span class="s1">deg,el:</span><span class="si">%5.1f</span><span class="s1">deg)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span>
+                                                      <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">elevation</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="kc">False</span></div></div>
+
+
+<div class="viewcode-block" id="Sphere1"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.sphere.Sphere1">[docs]</a><span class="k">class</span> <span class="nc">Sphere1</span><span class="p">(</span><span class="n">DifferentiableManifold</span><span class="p">):</span>
+
+    <span class="n">norm_rtol</span> <span class="o">=</span> <span class="mf">1e-5</span>
+    <span class="n">atol_geodesic_distance</span> <span class="o">=</span> <span class="mf">1e-8</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">DifferentiableManifold</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;S1&#39;</span>
+
+<div class="viewcode-block" id="Sphere1.distance"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.sphere.Sphere1.distance">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;S1&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s1">&#39;S1&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;&gt;=0&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">geodesic_distance_on_sphere</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sphere1.logmap"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.sphere.Sphere1.logmap">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="s1">&#39;S1&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="s1">&#39;S1&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;belongs_ts&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">logmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="c1"># TODO: create S1_logmap(base, target)</span>
+        <span class="c1"># XXX: what should we do in the case there is more than one logmap?</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">geodesic_distance_on_sphere</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atol_geodesic_distance</span><span class="p">):</span>
+            <span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">base</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">base</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="n">base</span>
+            <span class="n">base</span><span class="p">,</span> <span class="n">xp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_ts</span><span class="p">((</span><span class="n">base</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+        <span class="n">xp</span> <span class="o">=</span> <span class="n">normalize_length_or_zero</span><span class="p">(</span><span class="n">xp</span><span class="p">)</span>
+        <span class="n">xp</span> <span class="o">*=</span> <span class="n">geodesic_distance_on_sphere</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">base</span><span class="p">,</span> <span class="n">xp</span></div>
+
+<div class="viewcode-block" id="Sphere1.expmap"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.sphere.Sphere1.expmap">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">bv</span><span class="o">=</span><span class="s1">&#39;belongs_ts&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;belongs&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">expmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bv</span><span class="p">):</span>
+        <span class="n">base</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span> <span class="n">bv</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">angle</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># XXX: tolerance</span>
+            <span class="k">return</span> <span class="n">base</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">vel</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">base</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">base</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">vel</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">rot2d</span><span class="p">(</span><span class="n">angle</span> <span class="o">*</span> <span class="n">direction</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="Sphere1.project_ts"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.sphere.Sphere1.project_ts">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">bv</span><span class="o">=</span><span class="s1">&#39;tuple(belongs, *)&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">project_ts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bv</span><span class="p">):</span>  <span class="c1"># TODO: test</span>
+        <span class="n">base</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">bv</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">outer</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">base</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sphere1.belongs"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.sphere.Sphere1.belongs">[docs]</a>    <span class="nd">@contract</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;S1&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">belongs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Sphere1.sample_uniform"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.sphere.Sphere1.sample_uniform">[docs]</a>    <span class="k">def</span> <span class="nf">sample_uniform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">random_direction</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sphere1.interesting_points"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.sphere.Sphere1.interesting_points">[docs]</a>    <span class="k">def</span> <span class="nf">interesting_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+        <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+        <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+        <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="n">points</span></div>
+
+<div class="viewcode-block" id="Sphere1.friendly"><a class="viewcode-back" href="../../../api/geometry.manifolds.html#geometry.manifolds.sphere.Sphere1.friendly">[docs]</a>    <span class="k">def</span> <span class="nf">friendly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="s1">&#39;Dir(</span><span class="si">%6.1f</span><span class="s1">deg)&#39;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span></div></div>
+
+
+<span class="n">S1</span> <span class="o">=</span> <span class="n">Sphere1</span><span class="p">()</span>
+<span class="n">S2</span> <span class="o">=</span> <span class="n">Sphere</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">S1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="n">S2</span><span class="p">}</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>

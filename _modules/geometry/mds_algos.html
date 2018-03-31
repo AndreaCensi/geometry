@@ -1,0 +1,292 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry.mds_algos &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geometry.mds_algos</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="kn">from</span> <span class="nn">contracts</span> <span class="k">import</span> <span class="n">check_multiple</span>
+<span class="kn">from</span> <span class="nn">contracts</span> <span class="k">import</span> <span class="n">contract</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="k">import</span> <span class="n">logger</span><span class="p">,</span> <span class="n">eigh</span>
+<span class="kn">from</span> <span class="nn">geometry.formatting</span> <span class="k">import</span> <span class="n">formatm</span>
+<span class="kn">from</span> <span class="nn">geometry.procrustes</span> <span class="k">import</span> <span class="n">best_similarity_transform</span>
+<span class="kn">from</span> <span class="nn">geometry.spheres</span> <span class="k">import</span> <span class="n">project_vectors_onto_sphere</span>
+<span class="kn">from</span> <span class="nn">geometry.utils.numpy_backport</span> <span class="k">import</span> <span class="n">assert_allclose</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="euclidean_distances"><a class="viewcode-back" href="../../api/geometry.html#geometry.mds_algos.euclidean_distances">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="s1">&#39;array[KxN]&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;array[NxN](&gt;=0)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">euclidean_distances</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Computes the euclidean distance matrix for the given points. &#39;&#39;&#39;</span>
+    <span class="n">K</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">S</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">pp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+        <span class="k">assert</span> <span class="n">pp</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="p">((</span><span class="n">S</span> <span class="o">-</span> <span class="n">pp</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">S</span> <span class="o">-</span> <span class="n">pp</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">d2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">D</span></div>
+
+
+<div class="viewcode-block" id="double_center"><a class="viewcode-back" href="../../api/geometry.html#geometry.mds_algos.double_center">[docs]</a><span class="k">def</span> <span class="nf">double_center</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">grand_mean</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">row_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">col_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">row_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">col_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">P</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="n">R</span> <span class="o">=</span> <span class="n">row_mean</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">R</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">col_mean</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">C</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="n">B2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">P</span> <span class="o">-</span> <span class="n">R</span> <span class="o">-</span> <span class="n">C</span> <span class="o">+</span> <span class="n">grand_mean</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+            <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">col_mean</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">row_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">grand_mean</span><span class="p">)</span>
+        <span class="n">assert_allclose</span><span class="p">(</span><span class="n">B2</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">B2</span></div>
+
+
+<div class="viewcode-block" id="inner_product_embedding_slow"><a class="viewcode-back" href="../../api/geometry.html#geometry.mds_algos.inner_product_embedding_slow">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="s1">&#39;array[NxN]&#39;</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="s1">&#39;int,&gt;0,K&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;array[KxN]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">inner_product_embedding_slow</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">ndim</span><span class="p">):</span>
+    <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">check_multiple</span><span class="p">([(</span><span class="s1">&#39;array[NxN]&#39;</span><span class="p">,</span> <span class="n">U</span><span class="p">),</span>
+                    <span class="p">(</span><span class="s1">&#39;array[N]&#39;</span><span class="p">,</span> <span class="n">S</span><span class="p">),</span>
+                    <span class="p">(</span><span class="s1">&#39;array[NxN]&#39;</span><span class="p">,</span> <span class="n">V</span><span class="p">)])</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">V</span><span class="p">[:</span><span class="n">ndim</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">):</span>
+        <span class="n">coords</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">coords</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">coords</span></div>
+
+
+<div class="viewcode-block" id="inner_product_embedding"><a class="viewcode-back" href="../../api/geometry.html#geometry.mds_algos.inner_product_embedding">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="s1">&#39;array[NxN]&#39;</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="s1">&#39;int,&gt;1,K&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;array[KxN]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">inner_product_embedding</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">ndim</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">ndim</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Number of points: </span><span class="si">%s</span><span class="s1">  Dimensions: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="n">eigvals</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="n">n</span><span class="p">,</span> <span class="n">eigvals</span>
+    <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">eigh</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">eigvals</span><span class="o">=</span><span class="n">eigvals</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># eigh returns in ascending order</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">S</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;The cosine matrix singular values are not all positive: </span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="n">formatm</span><span class="p">(</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="s1">&#39;I assume it is rounding error and approximate with:</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">S</span><span class="p">[</span><span class="n">S</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="n">formatm</span><span class="p">(</span><span class="s1">&#39;S</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">V</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">S</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">ndim</span><span class="p">,)</span>
+    <span class="c1">#    check_multiple([(&#39;K&#39;, ndim),</span>
+    <span class="c1">#                    (&#39;array[NxK]&#39;, V),</span>
+    <span class="c1">#                    (&#39;array[K]&#39;, S)])</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">V</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="n">coords</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">coords</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">coords</span></div>
+
+
+<div class="viewcode-block" id="truncated_svd_randomized"><a class="viewcode-back" href="../../api/geometry.html#geometry.mds_algos.truncated_svd_randomized">[docs]</a><span class="k">def</span> <span class="nf">truncated_svd_randomized</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Truncated SVD based on randomized projections. &#39;&#39;&#39;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">5</span>  <span class="c1"># TODO: add parameter</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">)))</span>
+    <span class="n">Q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>  <span class="c1"># @UnusedVariable</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+    <span class="n">Uhat</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">Uhat</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">U</span><span class="o">.</span><span class="n">T</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">s</span><span class="p">[:</span><span class="n">k</span><span class="p">],</span> <span class="n">v</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="inner_product_embedding_randomized"><a class="viewcode-back" href="../../api/geometry.html#geometry.mds_algos.inner_product_embedding_randomized">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="s1">&#39;array[NxN]&#39;</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="s1">&#39;int,&gt;0,K&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;array[KxN]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">inner_product_embedding_randomized</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">ndim</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Best embedding of inner product matrix based on</span>
+<span class="sd">        randomized projections.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">truncated_svd_randomized</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>  <span class="c1"># @UnusedVariable.</span>
+    <span class="n">check_multiple</span><span class="p">([(</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">ndim</span><span class="p">),</span>
+                    <span class="p">(</span><span class="s1">&#39;array[KxN]&#39;</span><span class="p">,</span> <span class="n">V</span><span class="p">),</span>
+                    <span class="p">(</span><span class="s1">&#39;array[K]&#39;</span><span class="p">,</span> <span class="n">S</span><span class="p">)])</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">V</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">):</span>
+        <span class="n">coords</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">coords</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">coords</span></div>
+
+
+<div class="viewcode-block" id="mds"><a class="viewcode-back" href="../../api/geometry.html#geometry.mds_algos.mds">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">D</span><span class="o">=</span><span class="s1">&#39;distance_matrix,array[MxM](&gt;=0)&#39;</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="s1">&#39;K,int,&gt;=1&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;array[KxM]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">mds</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">embed</span><span class="o">=</span><span class="n">inner_product_embedding</span><span class="p">):</span>
+<span class="c1">#    if D.dtype != np.float64:</span>
+<span class="c1">#        D = D.astype(np.float64)</span>
+    <span class="n">diag</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">diagonal</span><span class="p">()</span>
+    <span class="c1"># the diagonal should be zero</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">diag</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;The diagonal of the distance matrix should be zero.&#39;</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="s1">&#39;Here are all the entries: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">diag</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">diag</span><span class="p">)</span>
+    <span class="c1"># assert_allclose(diag, 0, atol=1e-09)</span>
+    <span class="c1"># Find centered cosine matrix</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">D</span> <span class="o">*</span> <span class="n">D</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">double_center</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">embed</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="mds_randomized"><a class="viewcode-back" href="../../api/geometry.html#geometry.mds_algos.mds_randomized">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">D</span><span class="o">=</span><span class="s1">&#39;distance_matrix,array[MxM](&gt;=0)&#39;</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="s1">&#39;K,int,&gt;=1&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;array[KxM]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">mds_randomized</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">ndim</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; MDS based on randomized projections. &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">mds</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">embed</span><span class="o">=</span><span class="n">inner_product_embedding_randomized</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="spherical_mds"><a class="viewcode-back" href="../../api/geometry.html#geometry.mds_algos.spherical_mds">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="s1">&#39;array[NxN]&#39;</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="s1">&#39;int,&gt;0,K&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s1">&#39;array[KxN],directions&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">spherical_mds</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">embed</span><span class="o">=</span><span class="n">inner_product_embedding</span><span class="p">):</span>
+    <span class="c1"># TODO: check cosines</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">embed</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">project_vectors_onto_sphere</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">proj</span></div>
+
+<span class="c1"># TODO: spherical_mds_randomized</span>
+
+
+<span class="n">best_embedding_on_sphere</span> <span class="o">=</span> <span class="n">spherical_mds</span>
+
+
+<div class="viewcode-block" id="place"><a class="viewcode-back" href="../../api/geometry.html#geometry.mds_algos.place">[docs]</a><span class="nd">@contract</span><span class="p">(</span><span class="n">references</span><span class="o">=</span><span class="s1">&#39;array[KxN]&#39;</span><span class="p">,</span> <span class="n">distances</span><span class="o">=</span><span class="s1">&#39;array[N](&gt;=0)&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">place</span><span class="p">(</span><span class="n">references</span><span class="p">,</span> <span class="n">distances</span><span class="p">):</span>
+    <span class="c1"># TODO: docs</span>
+    <span class="n">K</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">references</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># First do MDS on all data</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">D</span><span class="p">[:</span><span class="n">N</span><span class="p">,</span> <span class="p">:</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">references</span><span class="p">)</span>
+    <span class="n">D</span><span class="p">[</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">D</span><span class="p">[</span><span class="n">N</span><span class="p">,</span> <span class="p">:</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="n">distances</span>
+    <span class="n">D</span><span class="p">[:</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="n">distances</span>
+    <span class="n">Sm</span> <span class="o">=</span> <span class="n">mds</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+
+    <span class="c1"># Only if perfect</span>
+    <span class="c1"># Dm = euclidean_distances(Sm)</span>
+    <span class="c1"># assert_almost_equal(D[:N, :N], Dm[:N, :N])</span>
+    <span class="c1"># new in other frame</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">best_similarity_transform</span><span class="p">(</span><span class="n">Sm</span><span class="p">[:,</span> <span class="p">:</span><span class="n">N</span><span class="p">],</span> <span class="n">references</span><span class="p">)</span>
+
+    <span class="n">Sm_aligned</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Sm</span><span class="p">)</span> <span class="o">+</span> <span class="n">t</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">Sm_aligned</span><span class="p">[:,</span> <span class="n">N</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>

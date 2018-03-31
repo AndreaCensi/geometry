@@ -1,0 +1,152 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry.unittests.quaternions_test &#8212; PyGeometry 1.4.5 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+	 
+
+   <meta name="google-site-verification" content="Wu274srIjeOWKp_9iWmydewgQsd8zyTuNSYFZ36fQd4" />
+    
+   <style type="text/css">
+   
+   </style>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geometry.unittests.quaternions_test</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">geometry</span> <span class="k">import</span> <span class="n">quaternion_from_rotation</span><span class="p">,</span> \
+    <span class="n">rotation_from_quaternion</span><span class="p">,</span> <span class="n">axis_angle_from_quaternion</span><span class="p">,</span> \
+    <span class="n">quaternion_from_axis_angle</span><span class="p">,</span> <span class="n">rotation_from_axis_angle</span><span class="p">,</span> \
+    <span class="n">rotation_from_axis_angle2</span><span class="p">,</span> <span class="n">axis_angle_from_rotation</span><span class="p">,</span> \
+    <span class="n">assert_allclose</span>
+
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">GeoTestCase</span><span class="p">,</span> <span class="n">rotations_sequence</span><span class="p">,</span> \
+    <span class="n">quaternions_sequence</span><span class="p">,</span> <span class="n">axis_angle_sequence</span>
+
+
+<div class="viewcode-block" id="TestQuaternions"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.quaternions_test.TestQuaternions">[docs]</a><span class="k">class</span> <span class="nc">TestQuaternions</span><span class="p">(</span><span class="n">GeoTestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestQuaternions.test_rotation_conversion1"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.quaternions_test.TestQuaternions.test_rotation_conversion1">[docs]</a>    <span class="k">def</span> <span class="nf">test_rotation_conversion1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_conversion</span><span class="p">(</span><span class="n">rotations_sequence</span><span class="p">(),</span>
+                              <span class="n">quaternion_from_rotation</span><span class="p">,</span>
+                              <span class="n">rotation_from_quaternion</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestQuaternions.test_rotation_conversion2"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.quaternions_test.TestQuaternions.test_rotation_conversion2">[docs]</a>    <span class="k">def</span> <span class="nf">test_rotation_conversion2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_conversion</span><span class="p">(</span><span class="n">quaternions_sequence</span><span class="p">(),</span>
+                              <span class="n">rotation_from_quaternion</span><span class="p">,</span>
+                              <span class="n">quaternion_from_rotation</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestQuaternions.test_conversions"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.quaternions_test.TestQuaternions.test_conversions">[docs]</a>    <span class="k">def</span> <span class="nf">test_conversions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_conversion</span><span class="p">(</span><span class="n">quaternions_sequence</span><span class="p">(),</span>
+                              <span class="n">axis_angle_from_quaternion</span><span class="p">,</span>
+                              <span class="n">quaternion_from_axis_angle</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestQuaternions.test_conversions2"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.quaternions_test.TestQuaternions.test_conversions2">[docs]</a>    <span class="k">def</span> <span class="nf">test_conversions2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_conversion</span><span class="p">(</span><span class="n">axis_angle_sequence</span><span class="p">(),</span>
+                              <span class="n">quaternion_from_axis_angle</span><span class="p">,</span>
+                              <span class="n">axis_angle_from_quaternion</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestQuaternions.test_rotation_from_axis_angle2"><a class="viewcode-back" href="../../../api/geometry.unittests.html#geometry.unittests.quaternions_test.TestQuaternions.test_rotation_from_axis_angle2">[docs]</a>    <span class="k">def</span> <span class="nf">test_rotation_from_axis_angle2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">axis</span><span class="p">,</span> <span class="n">angle</span> <span class="ow">in</span> <span class="n">axis_angle_sequence</span><span class="p">():</span>
+            <span class="n">R1</span> <span class="o">=</span> <span class="n">rotation_from_axis_angle</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+            <span class="n">R2</span> <span class="o">=</span> <span class="n">rotation_from_axis_angle2</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="n">s1</span><span class="p">,</span> <span class="n">a1</span> <span class="o">=</span> <span class="n">axis_angle_from_rotation</span><span class="p">(</span><span class="n">R1</span><span class="p">)</span>
+                <span class="n">s2</span><span class="p">,</span> <span class="n">a2</span> <span class="o">=</span> <span class="n">axis_angle_from_rotation</span><span class="p">(</span><span class="n">R2</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Origi: </span><span class="si">%s</span><span class="s1"> around </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">axis</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First: </span><span class="si">%s</span><span class="s1"> around </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">s1</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Secnd: </span><span class="si">%s</span><span class="s1"> around </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a2</span><span class="p">,</span> <span class="n">s2</span><span class="p">))</span>
+
+            <span class="n">assert_allclose</span><span class="p">(</span><span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PyGeometry 1.4.5 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011-2018, Andrea Censi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-155626-15']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
+
+
+  </body>
+</html>
