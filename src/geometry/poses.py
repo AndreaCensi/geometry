@@ -1,3 +1,4 @@
+# coding=utf-8
 from contracts import contract, new_contract
 from geometry import logm, expm
 from geometry.rotations import check_SO, check_skew_symmetric, rot2d, \

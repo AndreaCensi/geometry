@@ -1,3 +1,4 @@
+# coding=utf-8
 from contracts import new_contract
 
 from .differentiable_manifold import *

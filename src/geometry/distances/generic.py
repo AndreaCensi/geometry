@@ -1,3 +1,4 @@
+# coding=utf-8
 from contracts import new_contract, contract
 
 import numpy as np

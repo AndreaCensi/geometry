@@ -1,3 +1,4 @@
+# coding=utf-8
 from contracts import contract
 from geometry.rotations import hat_map_2d, hat_map, map_hat_2d, map_hat
 import numpy as np

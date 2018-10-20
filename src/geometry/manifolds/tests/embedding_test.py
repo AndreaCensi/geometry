@@ -1,3 +1,4 @@
+# coding=utf-8
 from geometry.manifolds import (SO3, SO2, R1, R2, R3, SE2, SE3, S2, S1, T1, T2,
     T3, so2, so3, se2, se3, Tran3, Tran2, Tran1, tran2, tran1, tran3)
 from nose.plugins.attrib import attr

@@ -1,3 +1,4 @@
+# coding=utf-8
 from collections import defaultdict, namedtuple
 
 __all__ = ['ManifoldRelations', 'Isomorphism', 'Embedding']
@@ -120,9 +121,9 @@ class ManifoldRelations(object):
         _isomorphism = ManifoldRelations._isomorphism_rels[M]
         _projection = ManifoldRelations._projection_rels[M]
         s = ('[= %s  >= %s  <= %s]' %
-                (" ".join([str(a) for a in _isomorphism]),
-                    " ".join([str(a) for a in _projection]),
-                    " ".join([str(a) for a in _embedding])))
+             (" ".join([str(a) for a in _isomorphism]),
+              " ".join([str(a) for a in _projection]),
+              " ".join([str(a) for a in _embedding])))
         return s
 
     @staticmethod

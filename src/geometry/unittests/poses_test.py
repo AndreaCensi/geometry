@@ -1,3 +1,4 @@
+# coding=utf-8
 from geometry import (translation_angle_from_SE2, SE2_from_translation_angle,
     se2_from_linear_angular, linear_angular_from_se2, SE2_from_se2,
     se2_from_SE2,

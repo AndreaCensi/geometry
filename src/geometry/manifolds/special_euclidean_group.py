@@ -1,3 +1,4 @@
+# coding=utf-8
 from contracts import contract, describe_type
 from geometry.poses import extract_pieces, pose_from_rotation_translation, \
     rotation_translation_from_pose, SE2_from_se2, se2_from_SE2, \

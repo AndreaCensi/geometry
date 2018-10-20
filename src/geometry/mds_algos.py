@@ -1,3 +1,4 @@
+# coding=utf-8
 import itertools
 
 from contracts import check_multiple
@@ -71,7 +72,7 @@ def inner_product_embedding(C, ndim):
         raise ValueError(msg)
 
     eigvals = (n - ndim, n - 1)
-    print n, eigvals
+    print(n, eigvals)
     S, V = eigh(C, eigvals=eigvals)
 
     if S.size >= 2:
