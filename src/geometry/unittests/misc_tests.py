@@ -1,4 +1,4 @@
-
+# coding=utf-8
 from geometry import map_hat, hat_map
 
 from .utils import GeoTestCase, directions_sequence

@@ -1,4 +1,6 @@
+# coding=utf-8
 from contracts import contract, new_contract
+# noinspection PyUnresolvedReferences
 from geometry.spheres import directions  #@NoMove @UnusedImport # for contract
 import numpy as np
 

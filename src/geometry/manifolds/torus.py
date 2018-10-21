@@ -1,10 +1,11 @@
+# coding=utf-8
 from contracts import  contract
 from geometry.spheres import normalize_pi
 import numpy as np
 
 from .differentiable_manifold import DifferentiableManifold
 
-__all__ = ['Torus', 'T', 'T1', 'T2']
+__all__ = ['Torus', 'T', 'T1', 'T2', 'T3']
 
 
 class Torus(DifferentiableManifold):

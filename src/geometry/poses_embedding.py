@@ -1,3 +1,4 @@
+# coding=utf-8
 from contracts import contract
 from geometry.poses import SE2_from_rotation_translation, \
     rotation_translation_from_SE2, extract_pieces, SE3_from_rotation_translation, \

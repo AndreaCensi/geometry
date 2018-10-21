@@ -1,3 +1,4 @@
+# coding=utf-8
 from numpy.core.numeric import outer
 
 from contracts import contract, check
@@ -109,8 +110,8 @@ class Sphere(DifferentiableManifold):
         elif self.N == 3:
             theta = np.arctan2(a[1], a[0])
             elevation = np.arcsin(a[2])
-            return 'Dir(%6.1fdeg,el:%5.1fdeg)' % (np.degrees(theta),
-                                                      np.degrees(elevation))
+            return 'Dir(%6.1fdeg,el:%5.1fdeg)' % (float(np.degrees(theta)),
+                                                      float(np.degrees(elevation)))
         else:
             assert False
 

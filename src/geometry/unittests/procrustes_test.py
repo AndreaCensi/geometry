@@ -1,3 +1,4 @@
+# coding=utf-8
 from geometry import (random_directions, random_rotation, np,
                       best_orthogonal_transform, assert_allclose,
                       closest_orthogonal_matrix)

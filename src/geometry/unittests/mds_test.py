@@ -1,3 +1,4 @@
+# coding=utf-8
 import itertools
 
 from geometry import (euclidean_distances, assert_allclose, double_center, mds,

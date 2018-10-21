@@ -1,3 +1,4 @@
+# coding=utf-8
 """
     These are very "meta" utils for creating nose tests on the fly.
 
@@ -61,8 +62,8 @@ def add_checker_f(f, x, arguments, attributes, naming):
 
     @istest
     def caller():
+        args = None
         try:
-            args = None
             args = arguments(x)
             f(*args)
         except (Exception, AssertionError):

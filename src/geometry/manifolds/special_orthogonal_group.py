@@ -1,3 +1,4 @@
+# coding=utf-8
 from contracts import check
 from contracts import contract
 from geometry.rotations import rot2d, random_rotation, axis_angle_from_rotation, \
@@ -58,7 +59,7 @@ class SO_group(MatrixLieGroup):
         elif self.n == 3:
             axis, angle = axis_angle_from_rotation(a)
             axisf = S2.friendly(axis)
-            return 'Rot(%.1fdeg, %s)' % (np.degrees(angle), axisf)
+            return 'Rot(%.1fdeg, %s)' % (float(np.degrees(angle)), axisf)
         else:
             raise ValueError('Not implemented for n>=4.')
 

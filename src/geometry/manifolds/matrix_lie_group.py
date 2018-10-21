@@ -1,3 +1,4 @@
+# coding=utf-8
 from contracts import contract, describe_value, new_contract
 from geometry import logger, logm, expm
 import numpy as np

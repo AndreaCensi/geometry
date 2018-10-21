@@ -1,3 +1,4 @@
+# coding=utf-8
 import warnings
 
 from contracts import contract, new_contract

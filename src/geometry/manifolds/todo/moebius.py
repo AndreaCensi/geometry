@@ -1,3 +1,4 @@
+# coding=utf-8
 from . import DifferentiableManifold
 
 
@@ -5,7 +6,7 @@ class Moebius(DifferentiableManifold):
     ''' INCOMPLETE - The Moebius strip -- still to be implemented. '''
 
     def __init__(self, n):
-        DifferentiableManifold.__init__()
+        DifferentiableManifold.__init__(self, 2)
         self.n = n
 
     def belongs_(self, a):

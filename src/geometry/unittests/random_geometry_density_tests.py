@@ -1,3 +1,4 @@
+# coding=utf-8
 from nose.plugins.attrib import attr
 
 from geometry import (random_direction, random_directions_bounded,
@@ -59,6 +60,6 @@ if not skip:
     def test_stochastic():
         StochasticTestManager.main.run(time_limit=10)
 
-if __name__ == '__main__':
-    random_directions_bounded_density_test()
-    random_orthogonal_direction_density_test()
+    if __name__ == '__main__':
+        random_directions_bounded_density_test()
+        random_orthogonal_direction_density_test()
