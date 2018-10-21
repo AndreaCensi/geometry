@@ -12,7 +12,7 @@ def formatm(*args, **kwargs):
     assert len(args) > 0
     assert len(args) % 2 == 0
     cols = []
-    for i in range(len(args) / 2):
+    for i in range(int(len(args) / 2)):
         name = args[i * 2]
         matrix = args[i * 2 + 1]
         if not isinstance(name, str):
