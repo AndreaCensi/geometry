@@ -1,3 +1,4 @@
+# coding=utf-8
 from geometry.poses import SE3_from_SE2
 from geometry.poses_embedding import SE2_from_SO2, SO2_project_from_SE2, \
     SE3_from_SO3, SO3_project_from_SE3, se2_from_so2, so2_project_from_se2, \

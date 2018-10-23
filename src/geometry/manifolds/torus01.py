@@ -1,3 +1,4 @@
+# coding=utf-8
 from contracts import contract
 import numpy as np
 
@@ -14,7 +15,7 @@ class TorusW(RandomManifold):
     @contract(widths='seq[N](>0)', normalize_bias='None|seq[N](number)')
     def __init__(self, widths, normalize_bias=None):
         """
-            :param bias: Only relevant for normalize(). If None, the normalization
+            :param normalize_bias: Only relevant for normalize(). If None, the normalization
             will be in [0,W[0]], [0,W[1]], etc. If given a bias, the normalization
             will be in [b[0],W[0]+b[0]], etc.
         """

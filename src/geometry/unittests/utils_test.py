@@ -1,3 +1,4 @@
+# coding=utf-8
 from geometry import (sphere_area, spherical_cap_area, assert_allclose, np,
                           spherical_cap_with_area)
 

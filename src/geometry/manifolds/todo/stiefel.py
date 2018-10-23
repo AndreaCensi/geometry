@@ -1,4 +1,4 @@
-
+# coding=utf-8
 from contracts import contract
 from geometry.manifolds.differentiable_manifold import DifferentiableManifold
 
@@ -14,7 +14,7 @@ class NonCompactStiefel(DifferentiableManifold):
             :param n: dimension of space
             :param p: rank of subspace
         '''
-        DifferentiableManifold.__init__(self)
+        DifferentiableManifold.__init__(self, 42)
         self.n = n
         self.p = p
 

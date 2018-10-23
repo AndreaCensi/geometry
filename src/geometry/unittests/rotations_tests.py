@@ -1,3 +1,4 @@
+# coding=utf-8
 import itertools
 
 from geometry import (axis_angle_from_rotation, rotation_from_axis_angle,

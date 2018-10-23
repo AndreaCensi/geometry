@@ -1,3 +1,4 @@
+# coding=utf-8
 from numpy.ma.core import allclose
 
 import numpy as np

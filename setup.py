@@ -25,15 +25,17 @@ setup(name='PyGeometry',
       url='http://andreacensi.github.com/geometry/',
       license="LGPL",
       classifiers=[
-        'Development Status :: 4 - Beta',
+          'Development Status :: 4 - Beta',
       ],
-      package_dir={'':'src'},
+      package_dir={'': 'src'},
       packages=find_packages('src'),
-      install_requires=['PyContracts>=1.5,<2', 'numpy'],
+      install_requires=[
+          'PyContracts>=1.8.5,<2', 'numpy',
+          'six'],
       extras_require={
-        'algorithms':  ["scipy"],
+          'algorithms': ["scipy"],
       },
       setup_requires=['nose>=1.0'],
       tests_require=['nose>=1.0', 'rudolf', 'nose-progressive', 'nose-cov'],
       download_url='http://github.com/AndreaCensi/geometry/tarball/%s' % version,
-)
+      )

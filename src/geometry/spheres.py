@@ -1,3 +1,4 @@
+# coding=utf-8
 from contracts import contract, new_contract
 
 import numpy as np
@@ -34,7 +35,7 @@ def assert_orthogonal(s, v):
     if not np.allclose(dot, 0):
         angle = np.arccos(dot / (np.linalg.norm(v) * np.linalg.norm(s)))
         msg = ('Angle is %.2f deg between %s and %s.'
-               % (np.degrees(angle), s, v))
+               % (float(np.degrees(angle)), s, v))
         assert_allclose(dot, 0, err_msg=msg)
 
 

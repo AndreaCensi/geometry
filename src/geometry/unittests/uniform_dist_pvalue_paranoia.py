@@ -1,10 +1,10 @@
-from scipy.stats.distributions import random_integers  #@UnresolvedImport
-
+# coding=utf-8
 import numpy as np
+from scipy.stats.distributions import random_integers  # @UnresolvedImport
 
 
 def main():
-    from  stochastic_testing import uniform_dist_pvalue  #@UnresolvedImport
+    from stochastic_testing import uniform_dist_pvalue  # @UnresolvedImport
     for N in [10, 100, 1000, 10000, 100000]:
         pvalues = np.empty(N)
         for i in range(N):
@@ -26,4 +26,3 @@ def sample_uniform_dist(bins, N):
 
 if __name__ == '__main__':
     main()
-

@@ -1,9 +1,10 @@
+# coding=utf-8
+import numpy as np
 from contracts import contract, new_contract
 from geometry import logm, expm
 from geometry.rotations import check_SO, check_skew_symmetric, rot2d, \
     angle_from_rot2d, hat_map_2d, rotz, axis_angle_from_rotation
 from geometry.utils.numpy_backport import assert_allclose
-import numpy as np
 
 from .constants import GeometryConstants
 
@@ -54,6 +55,7 @@ def combine_pieces(a, b, c, d):
     x[M, M] = d
     return x
 
+
 # TODO: specialize for SE2, SE3
 
 
@@ -94,9 +96,11 @@ def translation_from_SE2(pose):
     R, t, zero, one = extract_pieces(pose)  # @UnusedVariable
     return t.copy()
 
+
 def rotation_from_SE2(pose):
     from geometry.poses_embedding import SO2_project_from_SE2
     return SO2_project_from_SE2(pose)
+
 
 @contract(pose='SE3', returns='array[3]')
 def translation_from_SE3(pose):
@@ -232,17 +236,20 @@ def SE3_from_SE2(pose):
     t, angle = translation_angle_from_SE2(pose)
     return pose_from_rotation_translation(rotz(angle),
                                           np.array([t[0], t[1], 0]))
+
+
 #
 @contract(vel='se3', returns='se2')
 def se2_from_se3(vel, check_exact=True, z_atol=1e-6):
     # TODO: testing this
     M, v, Z, zero = extract_pieces(vel)  # @UnusedVariable
-    M1 = M[:2,:2]
+    M1 = M[:2, :2]
     v1 = v[:2]
     if check_exact:
         assert_allclose(v[2], 0, atol=z_atol)
 
     return combine_pieces(M1, v1, Z[:2], zero)
+
 
 @contract(pose='SE3', returns='SE2')
 def SE2_from_SE3(pose, check_exact=True, z_atol=1e-6):
@@ -266,7 +273,7 @@ def SE2_from_SE3(pose, check_exact=True, z_atol=1e-6):
         # normalize angle z
         axis2 = axis * np.sign(axis[2])
         err_msg = ('I expect that the rotation is around [0,0,1] '
-                  'when projecting to SE2 (check_exact=True).')
+                   'when projecting to SE2 (check_exact=True).')
         err_msg += sit
 
         assert_allclose(axis2, [0, 0, 1],

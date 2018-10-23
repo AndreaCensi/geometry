@@ -1,9 +1,10 @@
+# coding=utf-8
+import numpy as np
 from contracts import contract, describe_type
 from geometry.poses import extract_pieces, pose_from_rotation_translation, \
     rotation_translation_from_pose, SE2_from_se2, se2_from_SE2, \
     SE2_from_translation_angle, SE3_from_SE2
 from geometry.utils.numpy_backport import assert_allclose
-import numpy as np
 
 from .differentiable_manifold import DifferentiableManifold
 from .euclidean import R
@@ -63,7 +64,7 @@ class SE_group(MatrixLieGroup):
             raise ValueError(msg)
         if not x.shape == (self.n, self.n):
             msg = ('Expected shape %dx%d instead of (%s)' %
-                    (self.n, self.n, x.shape))
+                   (self.n, self.n, x.shape))
             raise ValueError(msg)
         R, t, zero, one = extract_pieces(x)  # @UnusedVariable
         self.SOn.belongs(R)

@@ -1,3 +1,4 @@
+# coding=utf-8
 from contracts import  contract
 from geometry.spheres import normalize_pi
 import numpy as np

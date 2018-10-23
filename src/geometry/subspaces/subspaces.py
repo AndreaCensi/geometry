@@ -1,7 +1,6 @@
-from contracts import contract
-
-from geometry.utils import assert_allclose
+# coding=utf-8
 import numpy as np
+from contracts import contract
 
 from .. import assert_allclose
 

@@ -1,3 +1,4 @@
+# coding=utf-8
 from numpy.core.numeric import outer
 
 from contracts import contract, check
@@ -43,6 +44,7 @@ class Sphere(DifferentiableManifold):
         else:
             x = p - base
             base, xp = self.project_ts((base, x))
+        # noinspection PyUnboundLocalVariable
         xp = normalize_length_or_zero(xp)
         xp *= geodesic_distance_on_sphere(p, base)
         return base, xp
@@ -109,8 +111,8 @@ class Sphere(DifferentiableManifold):
         elif self.N == 3:
             theta = np.arctan2(a[1], a[0])
             elevation = np.arcsin(a[2])
-            return 'Dir(%6.1fdeg,el:%5.1fdeg)' % (np.degrees(theta),
-                                                      np.degrees(elevation))
+            return 'Dir(%6.1fdeg,el:%5.1fdeg)' % (float(np.degrees(theta)),
+                                                      float(np.degrees(elevation)))
         else:
             assert False
 

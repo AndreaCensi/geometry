@@ -1,7 +1,6 @@
-from string import ljust
-
-from contracts import contract, describe_type, describe_value
+# coding=utf-8
 import numpy as np
+from contracts import contract, describe_type, describe_value
 
 
 def printm(*args):
@@ -9,7 +8,7 @@ def printm(*args):
 
 
 def formatm(*args, **kwargs):
-    #name_len = 10
+    # name_len = 10
     assert len(args) > 0
     assert len(args) % 2 == 0
     cols = []
@@ -19,12 +18,12 @@ def formatm(*args, **kwargs):
         if not isinstance(name, str):
             raise ValueError('I expect a string for label, not %s.'
                              % describe_type(name))
-#        varname = '  %s:' % rjust(name, name_len)
+        #        varname = '  %s:' % rjust(name, name_len)
         varname = '  %s:' % name
 
-        if  isinstance(matrix, np.ndarray):
-#            raise ValueError('I expect a numpy array for value, not %s.' %
-#                             describe_type(matrix))
+        if isinstance(matrix, np.ndarray):
+            #            raise ValueError('I expect a numpy array for value, not %s.' %
+            #                             describe_type(matrix))
             value = format_matrix(matrix, **kwargs)
             if matrix.ndim > 1:
                 varname = '\n' + varname
@@ -68,7 +67,7 @@ def join_columns(cols):
     return s
 
 
-def format_matrix(matrix, fsize=8, format_str='%g'):  #@UnusedVariable
+def format_matrix(matrix, fsize=8, format_str='%g'):  # @UnusedVariable
     if matrix.ndim == 2:
         nrows, ncols = matrix.shape
         cols = [[] for _ in range(ncols)]
@@ -87,7 +86,6 @@ def format_matrix(matrix, fsize=8, format_str='%g'):  #@UnusedVariable
 
 
 if __name__ == '__main__':
-
     A = np.eye(3)
     B = np.random.randn(3, 4)
     printm('A (identity):', A, 'B (random):', B)

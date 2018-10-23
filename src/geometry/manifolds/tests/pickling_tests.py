@@ -1,11 +1,14 @@
+# coding=utf-8
 from geometry.manifolds.tests import for_all_manifolds
-from StringIO import StringIO
 import pickle
+
+from six import BytesIO
+
 
 @for_all_manifolds
 def check_manifold_pickable(M):
-    s = StringIO()
+    s = BytesIO()
     pickle.dump(M, s)
 
     # TODO: read
-    
+

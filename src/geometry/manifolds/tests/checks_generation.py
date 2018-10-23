@@ -1,3 +1,4 @@
+# coding=utf-8
 """
     These are very "meta" utils for creating nose tests on the fly.
 
@@ -29,9 +30,8 @@
 """
 import sys
 
-from nose.tools import istest, nottest
-
 from geometry import logger
+from nose.tools import istest, nottest
 
 __all__ = ['fancy_test_decorator']
 
@@ -61,8 +61,9 @@ def add_checker_f(f, x, arguments, attributes, naming):
 
     @istest
     def caller():
+        args = None
         try:
-            args = None
+
             args = arguments(x)
             f(*args)
         except (Exception, AssertionError):
@@ -89,10 +90,10 @@ def add_checker_f(f, x, arguments, attributes, naming):
 # TODO: add debug info function
 @nottest
 def fancy_test_decorator(lister,
-                       arguments=lambda x: x,
-                       attributes=lambda x: {'id': str(x)},
-                       naming=lambda x: str(x),
-                       debug=False):
+                         arguments=lambda x: x,
+                         attributes=lambda x: {'id': str(x)},
+                         naming=lambda x: str(x),
+                         debug=False):
     '''
         Creates a fancy decorator for adding checks.
 
@@ -112,4 +113,3 @@ def fancy_test_decorator(lister,
         return check
 
     return for_all_stuff
-

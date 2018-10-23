@@ -1,19 +1,19 @@
-from nose.plugins.attrib import attr
-
-from geometry import (random_direction, random_directions_bounded,
-    distances_from, spherical_cap_area, spherical_cap_with_area)
+# coding=utf-8
 import numpy as np
+from geometry import (random_direction, random_directions_bounded,
+                      distances_from, spherical_cap_area, spherical_cap_with_area)
+from nose.plugins.attrib import attr
 
 try:
     from stochastic_testing import (DiscreteUniformDistribution,
                                     StochasticTestManager, stochastic)
-    skip = False
+
 except ImportError:
     print('Warning: skipping stochastic testing,'
           ' because package "stochastic_testing" not installed.')
-    skip = True
 
-if not skip:
+
+else:
 
     def random_directions_bounded_density_3d(center, radius, N):
 
@@ -41,7 +41,8 @@ if not skip:
 
         assert dist.sum() == N
         return DiscreteUniformDistribution(dist,
-                                    'Distribution of distances from center')
+                                           'Distribution of distances from center')
+
 
     @stochastic
     def random_directions_bounded_density_test():
@@ -51,14 +52,17 @@ if not skip:
             center = random_direction()
             yield random_directions_bounded_density_3d, center, r, N
 
+
     def random_orthogonal_direction_density_test():
         # TODO
         pass
+
 
     @attr('density')
     def test_stochastic():
         StochasticTestManager.main.run(time_limit=10)
 
-if __name__ == '__main__':
-    random_directions_bounded_density_test()
-    random_orthogonal_direction_density_test()
+
+    if __name__ == '__main__':
+        random_directions_bounded_density_test()
+        random_orthogonal_direction_density_test()

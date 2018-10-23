@@ -1,3 +1,4 @@
+# coding=utf-8
 from contracts import contract
 from geometry.manifolds import DifferentiableManifold, RandomManifold
 import numpy as np
@@ -40,7 +41,7 @@ class Square(RandomManifold):
 
     @contract(returns='belongs_ts')
     def sample_velocity(self, a):  # @UnusedVariable
-        b = self.sample_uniform(a)
+        b = self.sample_uniform()
         _, vel = self.logmap(a, b)
         return vel
 
