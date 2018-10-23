@@ -8,14 +8,12 @@ import numpy as np
 try:
     from stochastic_testing import (DiscreteUniformDistribution,
                                     StochasticTestManager, stochastic)
-    skip = False
+
 except ImportError:
     print('Warning: skipping stochastic testing,'
           ' because package "stochastic_testing" not installed.')
-    skip = True
 
-if not skip:
-
+else:
     def random_directions_bounded_density_3d(center, radius, N):
 
         S = random_directions_bounded(3, radius, N, center=center)
