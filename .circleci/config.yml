@@ -19,6 +19,7 @@ jobs:
           command: |
             pip install --user --upgrade -r requirements.txt
             python setup.py develop --prefix ~/.local --no-deps
+            pip freeze
 
       - run:
           name: Run tests

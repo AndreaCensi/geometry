@@ -1,5 +1,5 @@
-# coding=utf-8 
-__version__ = '1.5.1'  
+# coding=utf-8
+__version__ = '1.5.1'
 
 # If True, additional checks are done at runtime
 development = False
@@ -14,47 +14,7 @@ logger = logging.getLogger(__name__)  #@NoMove
 
 import os
 
-if 'CIRCLE' in os.enviroversion: 2
-workflows:
-  version: 2
-  test:
-    jobs:
-      - test-3.6
-      - test-3.7
-      - test-3.5
-      - test-2.7
-jobs:
-  test-3.6: &test-template
-    docker:
-      - image: python:3.6
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run:
-          name: Install deps
-          command: |
-            pip install --user --upgrade -r requirements.txt
-            python setup.py develop --prefix ~/.local --no-deps
-
-      - run:
-          name: Run tests
-          command: |
-            pip install --user nose
-            PATH=~/.local/bin:$PATH ~/.local/bin/nosetests conf_tools
-
-  test-3.5:
-    <<: *test-template
-    docker:
-      - image: python:3.5
-  test-2.7:
-    <<: *test-template
-    docker:
-      - image: python:2.7
-  test-3.7:
-    <<: *test-template
-    docker:
-      - image: python:3.7
-n:
+if 'CIRCLE' in os.environ:
     logger.info('Activating extra checks.')
     development = True
     GEOMETRY_DO_EXTRA_CHECKS = True
