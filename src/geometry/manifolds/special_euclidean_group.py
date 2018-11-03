@@ -67,7 +67,11 @@ class SE_group(MatrixLieGroup):
                     (self.n, self.n, x.shape))
             raise ValueError(msg)
         R, t, zero, one = extract_pieces(x)  # @UnusedVariable
-        self.SOn.belongs(R)
+        try:
+            self.SOn.belongs(R)
+        except:
+            msg = 'The rotation is not a rotation:\n%s' % R
+            raise ValueError(msg)
         assert_allclose(zero, 0, err_msg='I expect the lower row to be 0.')
         assert_allclose(one, 1)
 

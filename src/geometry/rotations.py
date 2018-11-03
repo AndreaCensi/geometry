@@ -6,11 +6,11 @@
 '''
 import itertools
 
-from contracts import contract, new_contract
-from geometry.basic_utils import safe_arccos, normalize_length
-from geometry.spheres import default_axis
-from geometry.utils.numpy_backport import assert_allclose
 import numpy as np
+from contracts import contract, new_contract, raise_wrapped, raise_desc
+
+from .basic_utils import safe_arccos, normalize_length
+from .spheres import default_axis
 
 new_contract('unit_quaternion', 'array[4], unit_length')
 new_contract('axis_angle', 'tuple(direction, float)')
@@ -21,22 +21,39 @@ new_contract('axis_angle_canonical', 'tuple(direction, (float,>=0, <=pi))')
 @contract(x='array[NxN],N>0')
 def check_SO(x):
     ''' Checks that the given value is a rotation matrix of arbitrary size. '''
-    check_orthogonal(x)
+    try:
+        check_orthogonal(x)
+    except ValueError as e:
+        msg = 'It is not orthogonal.'
+        raise_wrapped(ValueError, e, msg, x=x, compact=True)
     determinant = np.linalg.det(x * 1.0)  # XXX: voodoo
     # lapack_lite.LapackError:
     # Parameter a has non-native byte order in lapack_lite.dgetrf
-    assert_allclose(determinant, 1.0)
+    if not np.allclose(determinant, 1.0):
+        msg = 'The determinant is %s not 1.' % determinant
+        raise_desc(ValueError, msg, x=x)
 
 
 @contract(x='array[NxN],N>0')
 def check_orthogonal(x):
     ''' Check that the argument is an orthogonal matrix. '''
-    N = x.shape[0]
-    I = np.eye(N)
-    rtol = 10E-10  # XXX:
-    atol = 10E-7  # XXX:
-    assert_allclose(I, np.dot(x, x.T), rtol=rtol, atol=atol)
-    assert_allclose(I, np.dot(x.T, x), rtol=rtol, atol=atol)
+    a = np.dot(x, x.T)
+    b = np.dot(x.T, x)
+    try:
+        check_diagonal(a)
+        check_diagonal(b)
+    except ValueError as e:
+        msg = 'It looks like it is not orthonal'
+        raise_wrapped(ValueError, e, msg, a=a, b=b)
+
+
+def check_diagonal(m, rtol=10E-10, atol=10E-7):
+    shape = m.shape
+    for i, j in itertools.product(range(shape[0]), range(shape[1])):
+        if i != j:
+            if not np.allclose(m[i, j], 0, rtol=rtol, atol=atol):
+                msg = 'The element %s, %s is %s not equal to zero.' % (i, j, m[i, j])
+                raise ValueError(msg)
 
 
 @contract(x='array[NxN]')
@@ -80,15 +97,17 @@ def rotz(theta):
     C = np.cos(theta)
     S = np.sin(theta)
     return np.array([
-            [C, -S, 0],
-            [S, +C, 0],
-            [0, 0, 1]])
+        [C, -S, 0],
+        [S, +C, 0],
+        [0, 0, 1]])
+
 
 @contract(w='array[3]', returns='SO3')
-def SO3_from_R3(w): # untested
+def SO3_from_R3(w):  # untested
     from geometry.manifolds import so3, SO3
     R = SO3.group_from_algebra(so3.algebra_from_vector(w))
     return R
+
 
 @contract(theta='number', returns='SO3')
 def rotx(theta):
@@ -97,6 +116,7 @@ def rotx(theta):
     w = np.array([theta, 0, 0])
     return SO3_from_R3(w)
 
+
 @contract(theta='number', returns='SO3')
 def roty(theta):
     ''' Returns a 3x3 rotation matrix corresponding
@@ -104,14 +124,26 @@ def roty(theta):
     w = np.array([0, theta, 0])
     return SO3_from_R3(w)
 
+
 @contract(theta='number', returns='SO2')
 def SO2_from_angle(theta):
     ''' Returns a 2x2 rotation matrix. '''
     C = np.cos(theta)
     S = np.sin(theta)
     return np.array([
-            [+C, -S],
-            [+S, +C]])
+        [+C, -S],
+        [+S, +C]])
+
+
+@contract(# M='O2',
+          returns='tuple(float, float)')
+def angle_scale_from_O2(M):
+    p = np.dot(M, [1, 0])
+    angle = np.arctan2(p[1], p[0])
+    scale = np.linalg.norm(p)
+    if angle == np.pi:
+        angle = -np.pi
+    return angle, scale
 
 
 @contract(R='SO2', returns='float')
@@ -282,11 +314,11 @@ def quaternion_from_axis_angle(axis, angle):
         This is the inverse of :py:func:`axis_angle_from_quaternion`.
     '''
     Q = np.array([
-            np.cos(angle / 2),
-            axis[0] * np.sin(angle / 2),
-            axis[1] * np.sin(angle / 2),
-            axis[2] * np.sin(angle / 2)
-        ])
+        np.cos(angle / 2),
+        axis[0] * np.sin(angle / 2),
+        axis[1] * np.sin(angle / 2),
+        axis[2] * np.sin(angle / 2)
+    ])
     Q *= np.sign(Q[0])
     return Q
 
@@ -342,8 +374,8 @@ def axis_angle_from_rotation(R):
         return default_axis(), 0.0
     else:
         v = np.array([R[2, 1] - R[1, 2],
-                   R[0, 2] - R[2, 0],
-                   R[1, 0] - R[0, 1]])
+                      R[0, 2] - R[2, 0],
+                      R[1, 0] - R[0, 1]])
 
         computer_with_infinite_precision = False
         if computer_with_infinite_precision:

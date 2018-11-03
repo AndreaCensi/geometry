@@ -1,11 +1,10 @@
 # coding=utf-8
-from contracts import check
-from contracts import contract
+import numpy as np
+from contracts import check, contract
+
 from geometry.rotations import rot2d, random_rotation, axis_angle_from_rotation, \
     rotation_from_axis_angle
 from geometry.utils import assert_allclose
-import numpy as np
-
 from .differentiable_manifold import DifferentiableManifold
 from .matrix_lie_group import MatrixLieGroup
 from .special_orthogonal_algebra import so
@@ -29,12 +28,12 @@ class SO_group(MatrixLieGroup):
         MatrixLieGroup.__init__(self, n=N, algebra=algebra,
                                 dimension=dimension)
         DifferentiableManifold.embedding(self, algebra,
-                                          self.algebra_from_group,
-                                    self.group_from_algebra,
-                                    itype='lie')
+                                         self.algebra_from_group,
+                                         self.group_from_algebra,
+                                         itype='lie')
 
     def __repr__(self):
-        return 'SO%s' % (self.n)
+        return 'SO%s' % self.n
 
     def belongs(self, x):
         # TODO: make this much more efficient
@@ -88,4 +87,3 @@ class SO_group(MatrixLieGroup):
 SO2 = SO_group(2)
 SO3 = SO_group(3)
 SO = {2: SO2, 3: SO3}
-

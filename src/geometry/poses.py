@@ -1,18 +1,35 @@
 # coding=utf-8
+from collections import namedtuple
+
 import numpy as np
-from contracts import contract, new_contract
+from contracts import contract, new_contract, raise_wrapped
 
 from geometry import logm, expm
-from geometry.rotations import check_SO, check_skew_symmetric, rot2d, \
-    angle_from_rot2d, hat_map_2d, rotz, axis_angle_from_rotation
-from geometry.utils.numpy_backport import assert_allclose
 from .constants import GeometryConstants
+from .rotations import check_SO, check_skew_symmetric, rot2d, \
+    angle_from_rot2d, hat_map_2d, rotz, axis_angle_from_rotation, check_orthogonal, angle_scale_from_O2
+from .utils.numpy_backport import assert_allclose
+
+
+def check_E(M):
+    R, t, zero, one = extract_pieces(M)  # @UnusedVariable
+    try:
+        check_orthogonal(R)
+    except ValueError as e:
+        msg = 'The rotation is not a rotation.'
+        raise_wrapped(ValueError, e, msg, M=M, compact=True)
+    assert_allclose(one, 1, err_msg='I expect the lower-right to be 1')
+    assert_allclose(zero, 0, err_msg='I expect the bottom component to be 0.')
 
 
 def check_SE(M):
     ''' Checks that the argument is in the special euclidean group. '''
     R, t, zero, one = extract_pieces(M)  # @UnusedVariable
-    check_SO(R)
+    try:
+        check_SO(R)
+    except ValueError as e:
+        msg = 'The rotation is not a rotation.'
+        raise_wrapped(ValueError, e, msg, M=M, compact=True)
     assert_allclose(one, 1, err_msg='I expect the lower-right to be 1')
     assert_allclose(zero, 0, err_msg='I expect the bottom component to be 0.')
 
@@ -28,6 +45,9 @@ def check_se(M):
 new_contract('se', check_se)
 new_contract('SE', check_SE)
 new_contract('SE2', 'array[3x3], SE')
+
+new_contract('euclidean', check_E)
+new_contract('euclidean2', 'array[3x3], euclidean')
 
 new_contract('se2', 'array[3x3], se')
 new_contract('SE3', 'array[4x4], SE')
@@ -123,6 +143,17 @@ def SE2_from_translation_angle(t, theta):
 def translation_angle_from_SE2(pose):
     R, t, _, _ = extract_pieces(pose)
     return t, angle_from_rot2d(R)
+
+
+TranslationAngleScale = namedtuple('TranslationAngleScale', 'translation angle scale')
+
+
+@contract(pose='euclidean2', returns=TranslationAngleScale)
+def translation_angle_scale_from_E2(pose):
+    R, t, _, _ = extract_pieces(pose)
+    angle, scale = angle_scale_from_O2(R)
+    # scale = np.linalg.det(R)
+    return TranslationAngleScale(translation=t, angle=angle, scale=scale)
 
 
 @contract(pose='SE2', returns='float')
