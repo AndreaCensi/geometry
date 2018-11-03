@@ -24,11 +24,13 @@ class se_algebra(MatrixLieAlgebra):
         self.son = so[N]
 
     def norm(self, X):
-        W, v, zero, zero = extract_pieces(X)  # @UnusedVariable
+        W, v, _, zero = extract_pieces(X)  # @UnusedVariable
         return np.linalg.norm(v) + self.alpha * self.son.norm(W)
 
     def project(self, X):
-        W, v, zero, zero = extract_pieces(X)  # @UnusedVariable
+        W, v, _, zero = extract_pieces(X)  # @UnusedVariable
+
+        # v2 = (v + (-mv))
         W = self.son.project(W)
         return combine_pieces(W, v, v * 0, 0)
 

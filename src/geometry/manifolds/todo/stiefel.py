@@ -1,6 +1,11 @@
 # coding=utf-8
 from contracts import contract
+
 from geometry.manifolds.differentiable_manifold import DifferentiableManifold
+
+__all__ = [
+    'NonCompactStiefel',
+]
 
 
 class NonCompactStiefel(DifferentiableManifold):
@@ -38,4 +43,3 @@ class NonCompactStiefel(DifferentiableManifold):
 
     def normalize(self, x):
         assert False
-

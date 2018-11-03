@@ -1,6 +1,10 @@
 # coding=utf-8
 from geometry.formatting import formatm
 
+__all__ = [
+    'DoesNotBelong',
+]
+
 
 class DoesNotBelong(Exception):
     ''' Exception thrown when a point does not belong
@@ -21,5 +25,5 @@ class DoesNotBelong(Exception):
                   (self.M, formatm('p', self.point)))
             s += self.e
             return s
-        except Exception as e:
+        except BaseException as e:
             return "(%s) %s: %s" % (e, self.M, self.point)

@@ -1,12 +1,30 @@
 # coding=utf-8
+import numpy as np
 from contracts import contract
-from geometry.poses import SE2_from_rotation_translation, \
+
+from .poses import SE2_from_rotation_translation, \
     rotation_translation_from_SE2, extract_pieces, SE3_from_rotation_translation, \
     rotation_translation_from_SE3, combine_pieces
-from geometry.rotations import map_hat_2d, hat_map
-from geometry.rotations_embedding import so3_from_so2, SO2_project_from_SO3, \
+from .rotations import map_hat_2d, hat_map
+from .rotations_embedding import so3_from_so2, SO2_project_from_SO3, \
     so2_project_from_so3
-import numpy as np
+
+__all__ = [
+    'SE2_from_SO2',
+    'SO2_project_from_SE2',
+    'se2_from_so2',
+    'so2_project_from_se2',
+    'SE3_from_SO3',
+    'SO3_project_from_SE3',
+    'se3_from_so3',
+    'so3_project_from_se3',
+    'SE2_from_R2',
+    'SE3_from_R3',
+    'R2_project_from_SE2',
+    'R3_project_from_SE3',
+    'se2_project_from_se3',
+    'se3_from_se2',
+]
 
 
 @contract(returns='SE2', a='SO2')
@@ -92,4 +110,3 @@ def se2_project_from_se3(b):
     W = so2_project_from_so3(W)
     v = v[0:2]
     return combine_pieces(W, v, v * 0, 0)
-

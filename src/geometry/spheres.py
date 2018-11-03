@@ -1,10 +1,34 @@
 # coding=utf-8
-from contracts import contract, new_contract
-
 import numpy as np
+from contracts import contract, new_contract
 
 from .basic_utils import safe_arccos, normalize_length
 from .utils import assert_allclose
+
+__all__ = [
+    'any_distant_direction',
+    'any_orthogonal_direction',
+    'assert_orthogonal',
+    'default_axis',
+    'default_axis_orthogonal',
+    'directions',
+    'distances_from',
+    'distribution_radius',
+    'geodesic_distance_on_sphere',
+    'normalize_pi',
+    'normalize_pi_scalar',
+    'project_vectors_onto_sphere',
+    'random_direction',
+    'random_directions',
+    'random_directions_bounded',
+    'random_orthogonal_direction',
+    'slerp',
+    'sorted_directions',
+    'sphere_area',
+    'spherical_cap_area',
+    'spherical_cap_with_area',
+    'unit_length',
+]
 
 
 @new_contract
@@ -80,7 +104,7 @@ def default_axis_orthogonal():
 
 
 @contract(s1='array[K],unit_length',
-           s2='array[K],unit_length', returns='float,>=0,<=pi')
+          s2='array[K],unit_length', returns='float,>=0,<=pi')
 def geodesic_distance_on_sphere(s1, s2):
     ''' Returns the geodesic distance between two points on the sphere. '''
     # special case: return a 0 (no precision issues)
@@ -109,7 +133,7 @@ def distribution_radius(S):
 
 
 @contract(S='array[3xK],directions', s='direction',
-           returns='array[K](>=0,<=pi)')
+          returns='array[K](>=0,<=pi)')
 def distances_from(S, s):
     '''
         Returns the geodesic distances on the sphere from a set of
@@ -204,10 +228,10 @@ def slerp(s1, s2, t):
 
 
 @contract(ndim='(2|3),K',
-           radius='number,>0,<=pi',
-           num_points='int,>0',
-           center='None|(array[K],unit_length)',
-           returns='array[KxN],directions')
+          radius='number,>0,<=pi',
+          num_points='int,>0',
+          center='None|(array[K],unit_length)',
+          returns='array[KxN],directions')
 def random_directions_bounded(ndim, radius, num_points, center=None):
     '''
         Returns a random distribution of points in :math:`S^{n-1}`.

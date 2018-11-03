@@ -1,7 +1,10 @@
 # coding=utf-8
+import numpy as np
 from contracts import new_contract, contract
 
-import numpy as np
+__all__ = [
+    'distance_matrix',
+]
 
 
 @new_contract

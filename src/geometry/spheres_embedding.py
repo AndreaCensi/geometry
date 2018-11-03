@@ -1,6 +1,13 @@
 # coding=utf-8
-from contracts import contract
 import numpy as np
+from contracts import contract
+
+__all__ = [
+    'S2_from_S1',
+    'S1_project_from_S2',
+    'S1_project_from_R2',
+    'S2_project_from_R3',
+]
 
 
 @contract(returns='S2', a='S1')
@@ -32,4 +39,3 @@ def S2_project_from_R3(b):
     if norm <= atol:
         return np.array([1, 0, 0])
     return b / norm
-

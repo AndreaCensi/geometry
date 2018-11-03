@@ -17,6 +17,39 @@ new_contract('axis_angle', 'tuple(direction, float)')
 # Canonically, we return a positive angle.
 new_contract('axis_angle_canonical', 'tuple(direction, (float,>=0, <=pi))')
 
+__all__ = [
+    'SO2_from_angle',
+    'SO3_from_R3',
+    'angle_from_SO2',
+    'angle_scale_from_O2',
+    'axis_angle_from_quaternion',
+    'axis_angle_from_rotation',
+    'check_SO',
+    'check_diagonal',
+    'check_orthogonal',
+    'check_skew_symmetric',
+    'geodesic_distance_for_rotations',
+    'hat_map',
+    'hat_map_2d',
+    'map_hat',
+    'map_hat_2d',
+    'quaternion_from_axis_angle',
+    'quaternion_from_rotation',
+    'random_orthogonal_transform',
+    'random_quaternion',
+    'random_rotation',
+    'rotation_from_axes_spec',
+    'rotation_from_axis_angle',
+    'rotation_from_axis_angle2',
+    'rotation_from_quaternion',
+    'rotx',
+    'roty',
+    'rotz',
+    'rot2d',
+    'rot2d_from_angle',
+    'angle_from_rot2d',
+]
+
 
 @contract(x='array[NxN],N>0')
 def check_SO(x):
@@ -135,8 +168,8 @@ def SO2_from_angle(theta):
         [+S, +C]])
 
 
-@contract(# M='O2',
-          returns='tuple(float, float)')
+@contract(  # M='O2',
+        returns='tuple(float, float)')
 def angle_scale_from_O2(M):
     p = np.dot(M, [1, 0])
     angle = np.arctan2(p[1], p[0])

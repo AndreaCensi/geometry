@@ -1,13 +1,23 @@
 # coding=utf-8
-from contracts import contract, new_contract
-# noinspection PyUnresolvedReferences
-from geometry.spheres import directions  #@NoMove @UnusedImport # for contract
 import numpy as np
+from contracts import contract, new_contract
 
+# noinspection PyUnresolvedReferences
+from geometry.spheres import directions  # @NoMove @UnusedImport # for contract
 
 new_contract('cosines', 'array[NxN](>=-1,<=+1)')
 new_contract('angles', 'array[N](>=-pi,<=pi)')
 new_contract('distances', 'array[NxN](>=0,<=pi)')
+
+__all__ = [
+    'directions_from_angles',
+    'angles_from_directions',
+    'cosines_from_directions',
+    'distances_from_cosines',
+    'cosines_from_distances',
+    'distances_from_angles',
+    'distances_from_directions',
+]
 
 
 @contract(theta='array[N]', returns='array[2xN], directions')

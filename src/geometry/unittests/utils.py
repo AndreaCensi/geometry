@@ -3,8 +3,9 @@ import unittest
 
 from contracts import contract
 from geometry import (random_direction, random_quaternion, random_rotation,
-    assert_allclose)
+    )
 import numpy as np
+from geometry.utils import assert_allclose
 
 N = 20
 

@@ -1,14 +1,27 @@
 # coding=utf-8
 import itertools
 
-from contracts import check_multiple
-from contracts import contract
-from geometry import logger, eigh
-from geometry.formatting import formatm
-from geometry.procrustes import best_similarity_transform
-from geometry.spheres import project_vectors_onto_sphere
-from geometry.utils.numpy_backport import assert_allclose
 import numpy as np
+from contracts import check_multiple, contract
+
+from . import logger, eigh
+from .formatting import formatm
+from .procrustes import best_similarity_transform
+from .spheres import project_vectors_onto_sphere
+from .utils import assert_allclose
+
+__all__ = [
+    'euclidean_distances',
+    'double_center',
+    'inner_product_embedding_slow',
+    'inner_product_embedding',
+    'truncated_svd_randomized',
+    'inner_product_embedding_randomized',
+    'mds',
+    'spherical_mds',
+    'mds_randomized',
+    'place',
+]
 
 
 @contract(S='array[KxN]', returns='array[NxN](>=0)')
@@ -127,8 +140,8 @@ def inner_product_embedding_randomized(C, ndim):
 
 @contract(D='distance_matrix,array[MxM](>=0)', ndim='K,int,>=1', returns='array[KxM]')
 def mds(D, ndim, embed=inner_product_embedding):
-#    if D.dtype != np.float64:
-#        D = D.astype(np.float64)
+    #    if D.dtype != np.float64:
+    #        D = D.astype(np.float64)
     diag = D.diagonal()
     # the diagonal should be zero
     if not np.allclose(diag, 0):
@@ -154,6 +167,7 @@ def spherical_mds(C, ndim, embed=inner_product_embedding):
     coords = embed(C, ndim)
     proj = project_vectors_onto_sphere(coords)
     return proj
+
 
 # TODO: spherical_mds_randomized
 

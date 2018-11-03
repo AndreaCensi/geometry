@@ -1,5 +1,5 @@
 # coding=utf-8
-from ...utils import check_allclose
+from geometry. utils import check_allclose
 from geometry.manifolds.tests import (for_all_manifold_point,
     for_all_manifold_pairs)
 import numpy as np

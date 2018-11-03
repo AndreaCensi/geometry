@@ -1,7 +1,9 @@
 # coding=utf-8
 from . import DifferentiableManifold
 
-
+__all__ = [
+    'Moebius',
+]
 class Moebius(DifferentiableManifold):
     ''' INCOMPLETE - The Moebius strip -- still to be implemented. '''
 

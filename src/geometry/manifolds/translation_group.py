@@ -1,10 +1,10 @@
 # coding=utf-8
+import numpy as np
 from contracts import contract
+
 from geometry.poses import extract_pieces, pose_from_rotation_translation, \
     rotation_translation_from_pose
-from geometry.utils.numpy_backport import assert_allclose
-import numpy as np
-
+from geometry.utils import assert_allclose
 from .differentiable_manifold import DifferentiableManifold
 from .euclidean import R
 from .matrix_lie_group import MatrixLieGroup
@@ -24,9 +24,9 @@ class TranG(MatrixLieGroup):
         MatrixLieGroup.__init__(self, n=n + 1, algebra=algebra, dimension=n)
         self.En = R[n]
         DifferentiableManifold.isomorphism(self, algebra,
-                            self.algebra_from_group,
-                            self.group_from_algebra,
-                            itype='lie')
+                                           self.algebra_from_group,
+                                           self.group_from_algebra,
+                                           itype='lie')
 
     def __repr__(self):
         # return 'Tran(%s)' % (self.n - 1)

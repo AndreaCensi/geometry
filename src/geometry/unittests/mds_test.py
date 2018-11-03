@@ -1,8 +1,9 @@
 # coding=utf-8
 import itertools
 
-from geometry import (euclidean_distances, assert_allclose, double_center, mds,
+from geometry import (euclidean_distances, double_center, mds,
     mds_randomized, place, eigh)
+from geometry.utils import assert_allclose
 import numpy as np
 
 

@@ -1,6 +1,11 @@
 # coding=utf-8
 from contracts import contract
-from geometry.manifolds.differentiable_manifold import DifferentiableManifold
+
+from geometry.manifolds import DifferentiableManifold
+
+__all__ = [
+    'Grassman',
+]
 
 
 class Grassman(DifferentiableManifold):
@@ -45,4 +50,3 @@ class Grassman(DifferentiableManifold):
 
     def normalize(self, x):
         assert False
-

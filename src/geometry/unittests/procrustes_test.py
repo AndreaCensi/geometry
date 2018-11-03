@@ -1,8 +1,11 @@
 # coding=utf-8
-from geometry import (random_directions, random_rotation, np,
-                      best_orthogonal_transform, assert_allclose,
+import numpy as np
+
+from geometry import (random_directions, random_rotation,
+                      best_orthogonal_transform,
                       closest_orthogonal_matrix)
 from geometry.procrustes import best_similarity_transform
+from geometry.utils import assert_allclose
 
 
 def best_orthogonal_transform_test1():
@@ -34,19 +37,18 @@ def best_similarity_transform_test():
         X = np.random.randn(K, N)
 
         R = random_rotation()
-#        R = np.eye(K)
+        #        R = np.eye(K)
         t = np.random.randn(K, 1)
-#        print 'R: %s' % R
-#        print 't: %s' % t
+        #        print 'R: %s' % R
+        #        print 't: %s' % t
 
         Y = np.dot(R, X) + t
         R2, t2 = best_similarity_transform(X, Y)
-#        print 'R2: %s' % R2
-#        print 't2: %s' % t2
+        #        print 'R2: %s' % R2
+        #        print 't2: %s' % t2
         Y2 = np.dot(R2, X) + t2
 
         assert_allclose(R, R2, atol=1e-10)
         assert_allclose(t, t2)
 
         assert_allclose(Y, Y2)
-

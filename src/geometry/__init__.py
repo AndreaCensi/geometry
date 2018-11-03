@@ -9,27 +9,45 @@ development = False
 # Reactivate if some strange bug is suspected.
 GEOMETRY_DO_EXTRA_CHECKS = False
 
-import logging  #@NoMove
-logger = logging.getLogger(__name__)  #@NoMove
 
-import os
+def create_logger():
+    import logging
+    logging.basicConfig()
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+    return logger
 
-if 'CIRCLE' in os.environ:
-    logger.info('Activating extra checks.')
-    development = True
-    GEOMETRY_DO_EXTRA_CHECKS = True
+
+logger = create_logger()
+
+
+def in_circle():
+    import os
+    return 'CIRCLE' in os.environ
+
+
+def set_numpy_errors_to_raise():
     import numpy as np
     np.seterr(all='raise')
 
+
+if in_circle():
+    logger.info('Activating extra checks.')
+    development = True
+    GEOMETRY_DO_EXTRA_CHECKS = True
+    set_numpy_errors_to_raise()
+
 try:
     from scipy.linalg import logm, expm, eigh
+
     scipy_found = True
 except ImportError:
     msg = 'Scipy not found -- needed for functions logm, expm, eigh. '
     msg += 'I will go on without it, but later an error will be thrown '
     msg += 'if those functions are used.'
-    import warnings
-    warnings.warn(msg)
+
+    logger.warn(msg)
+
 
     def make_warning(s):
 
@@ -38,6 +56,7 @@ except ImportError:
                             % s)
 
         return f
+
 
     logm = make_warning('logm')
     expm = make_warning('expm')
@@ -58,4 +77,3 @@ from .rotations import *
 from .rotations_embedding import *
 from .spheres import *
 from .spheres_embedding import *
-

@@ -4,11 +4,74 @@ from collections import namedtuple
 import numpy as np
 from contracts import contract, new_contract, raise_wrapped
 
-from geometry import logm, expm
+from . import logm, expm
 from .constants import GeometryConstants
 from .rotations import check_SO, check_skew_symmetric, rot2d, \
     angle_from_rot2d, hat_map_2d, rotz, axis_angle_from_rotation, check_orthogonal, angle_scale_from_O2
-from .utils.numpy_backport import assert_allclose
+from .utils import assert_allclose
+
+__all__ = [
+    'check_E',
+    'check_SE',
+    'check_se',
+    'extract_pieces',
+    'combine_pieces',
+    'SE2_identity',
+    'SE3_identity',
+    'SE2_from_xytheta',
+    'rotation_translation_from_SE2',
+    'rotation_translation_from_SE3',
+    'translation_from_SE2',
+    'rotation_from_SE2',
+    'translation_from_SE3',
+    'SE2_from_translation_angle',
+    'translation_angle_from_SE2',
+    'TranslationAngleScale',
+    'translation_angle_scale_from_E2',
+    'angle_from_SE2',
+    'SE2_from_xytheta',
+    'se2_from_linear_angular',
+    'xytheta_from_SE2',
+    'se2_from_linear_angular',
+    'linear_angular_from_se2',
+    'angular_from_se2',
+    'se2_from_SE2_slow',
+    'se2_from_SE2',
+    'SE2_from_se2',
+    'SE2_from_se2_slow',
+    'SE3_from_SE2',
+    'se2_from_se3',
+    'SE2_from_SE3',
+    'SE2_from_se2',
+    'SE2_from_se2_slow',
+    'SE2_from_translation_angle',
+    'SE2_from_xytheta',
+
+    'SE2_identity',
+    'SE3_from_SE2',
+    'SE3_identity',
+    'TranslationAngleScale',
+    'angle_from_SE2',
+    'angular_from_se2',
+    'check_SE',
+    'check_se',
+    'combine_pieces',
+    'extract_pieces',
+    'linear_angular_from_se2',
+    'rotation_from_SE2',
+    'rotation_translation_from_SE2',
+    'rotation_translation_from_SE3',
+    'se2_from_SE2',
+    'se2_from_SE2_slow',
+    'se2_from_linear_angular',
+    'se2_from_se3',
+    'translation_angle_from_SE2',
+    'translation_angle_scale_from_E2',
+    'translation_from_SE2',
+    'translation_from_SE3',
+    'xytheta_from_SE2',
+
+]
 
 
 def check_E(M):
@@ -272,7 +335,6 @@ def SE3_from_SE2(pose):
                                           np.array([t[0], t[1], 0]))
 
 
-#
 @contract(vel='se3', returns='se2')
 def se2_from_se3(vel, check_exact=True, z_atol=1e-6):
     # TODO: testing this

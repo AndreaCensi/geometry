@@ -1,7 +1,10 @@
 # coding=utf-8
-from contracts import contract
-from geometry.manifolds.differentiable_manifold import DifferentiableManifold
 import numpy as np
+from contracts import contract
+
+from .differentiable_manifold import DifferentiableManifold
+
+__all__ = ['PointSet']
 
 
 # TODO: do some testing
@@ -55,4 +58,3 @@ class PointSet(object):
         """ REturns the point which is closest to the average """
         i = self.centroid_index()
         return self.points[i]
-

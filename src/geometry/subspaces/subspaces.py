@@ -1,9 +1,15 @@
 # coding=utf-8
+import numpy as np
 from contracts import contract
 
-import numpy as np
+from geometry.utils import assert_allclose
 
-from .. import assert_allclose
+__all__ = [
+    'normalize_columns',
+    'proj_from_subspace',
+    'get_random_proj',
+    'assert_projection',
+]
 
 
 @contract(A='array[NxK]')

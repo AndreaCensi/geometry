@@ -1,9 +1,8 @@
 # coding=utf-8
 import warnings
 
-from contracts import contract, new_contract
-
 import numpy as np
+from contracts import contract, new_contract
 
 from .constants import GeometryConstants
 
@@ -21,6 +20,13 @@ try:
 
 except:
     pass
+
+__all__ = [
+    'normalize_length',
+    'normalize_length_or_zero',
+    'deprecated',
+    'safe_arccos',
+]
 
 
 @contract(s='array')

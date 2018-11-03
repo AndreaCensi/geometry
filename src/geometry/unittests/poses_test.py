@@ -3,9 +3,9 @@ from geometry import (translation_angle_from_SE2, SE2_from_translation_angle,
     se2_from_linear_angular, linear_angular_from_se2, SE2_from_se2,
     se2_from_SE2,
     rot2d_from_angle, angle_from_rot2d, SE2, SE2_from_se2_slow,
-    se2_from_SE2_slow,
-    assert_allclose)
+    se2_from_SE2_slow)
 import numpy as np
+from geometry.utils import assert_allclose
 from geometry.poses import SE3_from_SE2, se2_from_se3
 from geometry.manifolds import SE3
 

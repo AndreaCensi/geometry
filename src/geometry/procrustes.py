@@ -1,7 +1,13 @@
 # coding=utf-8
+import numpy as np
 from contracts import check, contract
 
-import numpy as np
+__all__ = [
+
+    'best_orthogonal_transform',
+    'closest_orthogonal_matrix',
+    'best_similarity_transform',
+]
 
 
 # TODO: write tests
@@ -36,12 +42,11 @@ def best_similarity_transform(X, Y):
     Ym = Y.mean(axis=1).reshape(K, 1)
     X = X - Xm
     Y = Y - Ym
-#    assert_allclose(X.mean(axis=1), 0, atol=1e-8)
-#    assert_allclose(Y.mean(axis=1), 0, atol=1e-8)
+    #    assert_allclose(X.mean(axis=1), 0, atol=1e-8)
+    #    assert_allclose(Y.mean(axis=1), 0, atol=1e-8)
     YX = np.dot(Y, X.T)
     check('array[KxK]', YX)
     U, _, V = np.linalg.svd(YX)
     R = np.dot(U, V)
     t = Ym - np.dot(R, Xm)
     return R, t
-

@@ -2,7 +2,8 @@
 import itertools
 
 from geometry import (axis_angle_from_rotation, rotation_from_axis_angle,
-    random_direction, hat_map, geodesic_distance_on_sphere, assert_allclose)
+    random_direction, hat_map, geodesic_distance_on_sphere)
+from geometry.utils import assert_allclose
 from geometry.rotations import (quaternion_from_rotation,
     rotation_from_axes_spec)
 from geometry.spheres import slerp, any_distant_direction
