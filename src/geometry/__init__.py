@@ -1,5 +1,5 @@
 # coding=utf-8
-__version__ = '1.5.5'
+__version__ = '1.5.6'
 
 # If True, additional checks are done at runtime
 development = False
