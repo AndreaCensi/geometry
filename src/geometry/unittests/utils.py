@@ -1,10 +1,10 @@
 # coding=utf-8
 import unittest
 
-from contracts import contract
-from geometry import (random_direction, random_quaternion, random_rotation,
-    )
 import numpy as np
+from contracts import contract
+
+from geometry import random_direction, random_quaternion, random_rotation
 from geometry.utils import assert_allclose
 
 N = 20
@@ -77,4 +77,3 @@ class GeoTestCase(unittest.TestCase):
         for x in sequence:
             # yield self.check_one, x, op1, op2
             self.check_one(x, op1, op2)
-

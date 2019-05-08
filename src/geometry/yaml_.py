@@ -90,10 +90,12 @@ def from_yaml(x):
 
 class Representation(object):
 
-    def to_yaml(self, x):
+    @staticmethod
+    def to_yaml(x):
         pass
 
-    def from_yaml(self, y):
+    @staticmethod
+    def from_yaml(y):
         pass
 
 

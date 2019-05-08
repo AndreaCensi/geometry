@@ -1,10 +1,8 @@
 # coding=utf-8
 import numpy as np
 
-from geometry import (random_directions, random_rotation,
-                      best_orthogonal_transform,
-                      closest_orthogonal_matrix)
-from geometry.procrustes import best_similarity_transform
+from geometry import random_directions, random_rotation, best_orthogonal_transform, closest_orthogonal_matrix, \
+    best_similarity_transform
 from geometry.utils import assert_allclose
 
 
