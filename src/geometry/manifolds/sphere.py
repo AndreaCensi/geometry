@@ -24,7 +24,7 @@ class Sphere(DifferentiableManifold):
         DifferentiableManifold.__init__(self, dimension=order)
         self.N = order + 1
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return 'S%s' % (self.dimension)
 
     @contract(a='belongs', b='belongs', returns='>=0')
@@ -124,7 +124,7 @@ class Sphere1(DifferentiableManifold):
     def __init__(self):
         DifferentiableManifold.__init__(self, dimension=1)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return 'S1'
 
     @contract(a='S1', b='S1', returns='>=0')

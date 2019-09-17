@@ -1,3 +1,14 @@
+pytz
+decorator
+termcolor
+mypy_extensions
+base58
+frozendict
+cbor2
+networkx
+bs4
+pygments
+dill
 numpy
 PyContracts
 nose

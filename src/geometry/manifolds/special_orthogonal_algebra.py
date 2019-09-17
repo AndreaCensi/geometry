@@ -22,7 +22,7 @@ class so_algebra(MatrixLieAlgebra):
         ''' Projects *v* to the closest skew-symmetric matrix. '''
         return 0.5 * (v - v.T)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return 'so%s' % (self.n)
 
     def interesting_points(self):

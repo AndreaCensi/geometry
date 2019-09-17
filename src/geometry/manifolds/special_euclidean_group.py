@@ -40,7 +40,7 @@ class SE_group(MatrixLieGroup):
                                          self.group_from_algebra,
                                          itype='lie')
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return 'SE%s' % (self.n - 1)
 
     @contract(returns='array[2](>=0)')

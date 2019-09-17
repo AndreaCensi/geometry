@@ -25,7 +25,7 @@ class trana(MatrixLieAlgebra):
         W, v, zero, zero = extract_pieces(X)  # @UnusedVariable
         return combine_pieces(W * 0, v, v * 0, 0)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return 'tr%s' % (self.n - 1)
 
     def interesting_points(self):

@@ -23,7 +23,7 @@ class Euclidean(MatrixLinearSpace):
         MatrixLinearSpace.__init__(self, dimension=dimension,
                                         shape=(dimension,))
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return 'R%s' % (self.dimension)
 
     @contract(x='array')

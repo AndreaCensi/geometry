@@ -43,6 +43,6 @@ class ProductManifold(DifferentiableManifold):
     def project_ts(self, bv):
         raise ValueError('Not implemented')  # FIXME: finish this
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return 'P(%s)' % "x".join([str(x) for x in self.components])
 

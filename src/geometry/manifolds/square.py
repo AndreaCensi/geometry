@@ -58,7 +58,7 @@ class Square(RandomManifold):
             interesting.append(z)
         return interesting
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return 'Sq%s' % self.n
 
 

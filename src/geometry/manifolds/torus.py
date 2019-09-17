@@ -53,7 +53,7 @@ class Torus(DifferentiableManifold):
             interesting.append(self.sample_uniform())
         return interesting
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return 'T%s' % self.n
 
 

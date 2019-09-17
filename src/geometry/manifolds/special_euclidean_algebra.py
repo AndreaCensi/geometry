@@ -34,7 +34,7 @@ class se_algebra(MatrixLieAlgebra):
         W = self.son.project(W)
         return combine_pieces(W, v, v * 0, 0)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return 'se%s' % (self.n - 1)
 
     @contract(a='belongs')
