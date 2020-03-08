@@ -2,9 +2,8 @@ pytz
 decorator
 termcolor
 mypy_extensions
-base58
+base58<2.0,>=1.0.2
 frozendict
-cbor2
 networkx
 bs4
 pygments
