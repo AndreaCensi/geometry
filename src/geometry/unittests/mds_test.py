@@ -62,9 +62,9 @@ def mds_fast_test():
             D = euclidean_distances(P)
 
             for algo in [mds, mds_randomized]:
-                #                t0 = time.clock()
+                #                t0 = time.process_time()
                 P2 = algo(D, ndim=k)
-                #                t1 = time.clock()
+                #                t1 = time.process_time()
                 # t_mds = t1 - t0
                 #            D2 = euclidean_distances(P2)
                 error = evaluate_error(P, P2)

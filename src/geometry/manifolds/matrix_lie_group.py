@@ -20,7 +20,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
 
     '''
 
-    def __init__(self, n, dimension, algebra):
+    def __init__(self, n: int, dimension: int, algebra):
         '''
             Initializes the Lie group.
 
