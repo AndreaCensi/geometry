@@ -27,6 +27,8 @@ class Grassman(DifferentiableManifold):
             :param n: dimension of space
             :param p: rank of subspace
         """
+        # TODO: what is the dimension?
+        # DifferentiableManifold.__init__(self, dimension)
         self.n = n
         self.p = p
 

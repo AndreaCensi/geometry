@@ -67,7 +67,7 @@ def double_center(P):
 
 @contract(C="array[NxN]", ndim="int,>0,K", returns="array[KxN]")
 def inner_product_embedding_slow(C, ndim):
-    U, S, V = np.linalg.svd(C, full_matrices=0)
+    U, S, V = np.linalg.svd(C, full_matrices=False)
     check_multiple([("array[NxN]", U), ("array[N]", S), ("array[NxN]", V)])
     coords = V[:ndim, :]
     for i in range(ndim):

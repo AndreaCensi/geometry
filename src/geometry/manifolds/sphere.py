@@ -40,6 +40,8 @@ class Sphere(DifferentiableManifold):
                 xp = np.array([base[1], -base[0]])
             elif self.N == 3:
                 xp = any_orthogonal_direction(base)
+            else:
+                raise NotImplementedError(self.N)
         else:
             x = p - base
             base, xp = self.project_ts((base, x))

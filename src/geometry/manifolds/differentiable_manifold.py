@@ -11,7 +11,7 @@ from .manifold_relations import Isomorphism, Embedding, ManifoldRelations
 __all__ = ["DifferentiableManifold", "RandomManifold"]
 
 
-class DifferentiableManifold(object):
+class DifferentiableManifold:
     """ This is the base class for differentiable manifolds. """
 
     __metaclass__ = ContractsMeta

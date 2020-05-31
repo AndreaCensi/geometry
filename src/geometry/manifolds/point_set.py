@@ -1,7 +1,9 @@
 # coding=utf-8
-import numpy as np
-from contracts import contract
+from typing import Collection
 
+import numpy as np
+
+from contracts import contract
 from .differentiable_manifold import DifferentiableManifold
 
 __all__ = ["PointSet"]
@@ -12,7 +14,9 @@ class PointSet:
     """ A set of points on a differentiable manifold. """
 
     @contract(manifold=DifferentiableManifold)
-    def __init__(self, manifold: DifferentiableManifold, points=[]):
+    def __init__(self, manifold: DifferentiableManifold, points: Collection = None):
+        if points is None:
+            points = []
         self.points = list(points)
         self.manifold = manifold
 
