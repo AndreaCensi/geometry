@@ -1,12 +1,10 @@
 # coding=utf-8
 from collections import defaultdict, namedtuple
 
-__all__ = ['ManifoldRelations', 'Isomorphism', 'Embedding']
+__all__ = ["ManifoldRelations", "Isomorphism", "Embedding"]
 
-Isomorphism = namedtuple('Isomorphism',
-                         'A B A_to_B B_to_A steps type desc')
-Embedding = namedtuple('Embedding',
-                       'A B A_to_B B_to_A steps type desc')
+Isomorphism = namedtuple("Isomorphism", "A B A_to_B B_to_A steps type desc")
+Embedding = namedtuple("Embedding", "A B A_to_B B_to_A steps type desc")
 
 
 # Before: we used A._embedding[B]; now we use an external variable
@@ -40,8 +38,7 @@ class ManifoldRelations(object):
     @staticmethod
     def all_isomorphisms(A):
         A = ManifoldRelations._get_key(A)
-        return map(ManifoldRelations._manifold_from_key,
-                   ManifoldRelations._isomorphism_rels[A].keys())
+        return map(ManifoldRelations._manifold_from_key, ManifoldRelations._isomorphism_rels[A].keys())
 
     # emabedding
     @staticmethod
@@ -67,8 +64,7 @@ class ManifoldRelations(object):
     @staticmethod
     def all_embeddings(A):
         A = ManifoldRelations._get_key(A)
-        return map(ManifoldRelations._manifold_from_key,
-                   ManifoldRelations._embedding_rels[A].keys())
+        return map(ManifoldRelations._manifold_from_key, ManifoldRelations._embedding_rels[A].keys())
 
     # projections
     @staticmethod
@@ -94,13 +90,13 @@ class ManifoldRelations(object):
     @staticmethod
     def all_projections(A):
         A = ManifoldRelations._get_key(A)
-        return map(ManifoldRelations._manifold_from_key,
-                   ManifoldRelations._projection_rels[A].keys())
+        return map(ManifoldRelations._manifold_from_key, ManifoldRelations._projection_rels[A].keys())
 
     @staticmethod
     def _get_key(M):
         """ Returns the string used for identifying a manifold """
         from .differentiable_manifold import DifferentiableManifold
+
         assert isinstance(M, DifferentiableManifold)
         k = str(M)
         if not k in ManifoldRelations._key_to_manifold:
@@ -111,6 +107,7 @@ class ManifoldRelations(object):
     def _manifold_from_key(k):
         M = ManifoldRelations._key_to_manifold[k]
         from .differentiable_manifold import DifferentiableManifold
+
         assert isinstance(M, DifferentiableManifold)
         return M
 
@@ -120,10 +117,11 @@ class ManifoldRelations(object):
         _embedding = ManifoldRelations._embedding_rels[M]
         _isomorphism = ManifoldRelations._isomorphism_rels[M]
         _projection = ManifoldRelations._projection_rels[M]
-        s = ('[= %s  >= %s  <= %s]' %
-             (" ".join([str(a) for a in _isomorphism]),
-              " ".join([str(a) for a in _projection]),
-              " ".join([str(a) for a in _embedding])))
+        s = "[= %s  >= %s  <= %s]" % (
+            " ".join([str(a) for a in _isomorphism]),
+            " ".join([str(a) for a in _projection]),
+            " ".join([str(a) for a in _embedding]),
+        )
         return s
 
     @staticmethod

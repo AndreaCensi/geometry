@@ -4,12 +4,12 @@ from contracts import contract
 from geometry.manifolds import DifferentiableManifold
 
 __all__ = [
-    'Grassman',
+    "Grassman",
 ]
 
 
 class Grassman(DifferentiableManifold):
-    '''
+    """
         INCOMPLETE -- The Grassman manifold Grass(n,p) is the set of rank-p
         subspaces in R^n. It is seen here as Grass(n,p) = ST(n,p)/GL_p.
 
@@ -17,16 +17,16 @@ class Grassman(DifferentiableManifold):
         where all these operations are explained. Also their book should
         contain essentially the same info, but with more background.
 
-    '''
+    """
 
-    @contract(n='N,N>0', p='P,P>0,P<=N')
+    @contract(n="N,N>0", p="P,P>0,P<=N")
     def __init__(self, p, n):
-        '''
+        """
             Initializes the manifold structure.
 
             :param n: dimension of space
             :param p: rank of subspace
-        '''
+        """
         self.n = n
         self.p = p
 

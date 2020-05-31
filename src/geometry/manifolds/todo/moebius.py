@@ -2,10 +2,12 @@
 from . import DifferentiableManifold
 
 __all__ = [
-    'Moebius',
+    "Moebius",
 ]
+
+
 class Moebius(DifferentiableManifold):
-    ''' INCOMPLETE - The Moebius strip -- still to be implemented. '''
+    """ INCOMPLETE - The Moebius strip -- still to be implemented. """
 
     def __init__(self, n):
         DifferentiableManifold.__init__(self, 2)
@@ -31,4 +33,3 @@ class Moebius(DifferentiableManifold):
 
     def normalize(self, x):
         assert False
-

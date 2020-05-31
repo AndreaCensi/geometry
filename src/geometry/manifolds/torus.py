@@ -1,15 +1,14 @@
 # coding=utf-8
-from contracts import  contract
+from contracts import contract
 from geometry.spheres import normalize_pi
 import numpy as np
 
 from .differentiable_manifold import DifferentiableManifold
 
-__all__ = ['Torus', 'T', 'T1', 'T2', 'T3']
+__all__ = ["Torus", "T", "T1", "T2", "T3"]
 
 
 class Torus(DifferentiableManifold):
-
     def __init__(self, n):
         DifferentiableManifold.__init__(self, dimension=n)
         self.n = n
@@ -35,7 +34,7 @@ class Torus(DifferentiableManifold):
     def project_ts(self, bv):
         return bv  # XXX: more checks
 
-    @contract(returns='belongs')
+    @contract(returns="belongs")
     def sample_uniform(self):
         return np.random.rand(self.n) * 2 * np.pi - np.pi
 
@@ -43,9 +42,9 @@ class Torus(DifferentiableManifold):
         return normalize_pi(a)
 
     def friendly(self, a):
-        return 'point(%s)' % a
+        return "point(%s)" % a
 
-    @contract(returns='list(belongs)')
+    @contract(returns="list(belongs)")
     def interesting_points(self):
         interesting = []
         interesting.append(np.zeros(self.n))
@@ -54,7 +53,7 @@ class Torus(DifferentiableManifold):
         return interesting
 
     def __repr__(self) -> str:
-        return 'T%s' % self.n
+        return "T%s" % self.n
 
 
 T1 = Torus(1)

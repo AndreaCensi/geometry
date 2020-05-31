@@ -2,51 +2,49 @@
 import numpy as np
 from contracts import contract
 
-from geometry.poses import extract_pieces, pose_from_rotation_translation, \
-    rotation_translation_from_pose
+from geometry.poses import extract_pieces, pose_from_rotation_translation, rotation_translation_from_pose
 from geometry.utils import assert_allclose
 from .differentiable_manifold import DifferentiableManifold
 from .euclidean import R
 from .matrix_lie_group import MatrixLieGroup
 from .translation_algebra import tran
 
-__all__ = ['TranG', 'Tran', 'Tran1', 'Tran2', 'Tran3']
+__all__ = ["TranG", "Tran", "Tran1", "Tran2", "Tran3"]
 
 
 class TranG(MatrixLieGroup):
-    '''
+    """
         The translation subgroup of SE(n).
-    '''
+    """
 
-    @contract(n='1|2|3')
+    @contract(n="1|2|3")
     def __init__(self, n):
         algebra = tran[n]
         MatrixLieGroup.__init__(self, n=n + 1, algebra=algebra, dimension=n)
         self.En = R[n]
-        DifferentiableManifold.isomorphism(self, algebra,
-                                           self.algebra_from_group,
-                                           self.group_from_algebra,
-                                           itype='lie')
+        DifferentiableManifold.isomorphism(
+            self, algebra, self.algebra_from_group, self.group_from_algebra, itype="lie"
+        )
 
     def __repr__(self) -> str:
         # return 'Tran(%s)' % (self.n - 1)
-        return 'Tr%s' % (self.n - 1)
+        return "Tr%s" % (self.n - 1)
 
     def belongs(self, x):
         # TODO: explicit
         R, t, zero, one = extract_pieces(x)  # @UnusedVariable
         assert_allclose(R, np.eye(self.n - 1))
-        assert_allclose(zero, 0, err_msg='I expect the lower row to be 0.')
-        assert_allclose(one, 1, err_msg='Bottom-right must be 1.')
+        assert_allclose(zero, 0, err_msg="I expect the lower row to be 0.")
+        assert_allclose(one, 1, err_msg="Bottom-right must be 1.")
 
-    @contract(returns='belongs')
+    @contract(returns="belongs")
     def sample_uniform(self):
         t = self.En.sample_uniform()
         return pose_from_rotation_translation(np.eye(self.n - 1), t)
 
     def friendly(self, a):
         t = rotation_translation_from_pose(a)[1]
-        return 'Tran(%s)' % (self.En.friendly(t))
+        return "Tran(%s)" % (self.En.friendly(t))
 
     def logmap(self, base, p):
         return base, p - base

@@ -7,15 +7,15 @@ import numpy as np
 from .matrix_lie_algebra import MatrixLieAlgebra
 from .special_orthogonal_algebra import so
 
-__all__ = ['se_algebra', 'se', 'se2', 'se3']
+__all__ = ["se_algebra", "se", "se2", "se3"]
 
 
 class se_algebra(MatrixLieAlgebra):
-    ''' This is the Lie algebra se(n) for the Special Euclidean group SE(n).
+    """ This is the Lie algebra se(n) for the Special Euclidean group SE(n).
 
         Note that you have to supply a coefficient *alpha* that
         weights rotation and translation when defining distances.
-    '''
+    """
 
     def __init__(self, N, alpha):
         dimension = {2: 3, 3: 6}[N]
@@ -35,9 +35,9 @@ class se_algebra(MatrixLieAlgebra):
         return combine_pieces(W, v, v * 0, 0)
 
     def __repr__(self) -> str:
-        return 'se%s' % (self.n - 1)
+        return "se%s" % (self.n - 1)
 
-    @contract(a='belongs')
+    @contract(a="belongs")
     def vector_from_algebra(self, a):
         """ Note that it returns (omega, vx, vy) or (w1,w2,w3,vx,vy,vz) """
         W, v, zero, zero = extract_pieces(a)  # @UnusedVariable
@@ -55,9 +55,9 @@ class se_algebra(MatrixLieAlgebra):
             V[3:6] = v
             return V
         else:
-            assert False, 'Not implemented for n>=4.'
+            assert False, "Not implemented for n>=4."
 
-    @contract(v='array[N]', returns='belongs')
+    @contract(v="array[N]", returns="belongs")
     def algebra_from_vector(self, v):
         """ Note that the first element is (omega, vx, vy) or
             (w1,w2,w3,vx,vy,vz) """
@@ -74,9 +74,9 @@ class se_algebra(MatrixLieAlgebra):
             W = hat_map(omega)
             return combine_pieces(W, vel, vel * 0, 0)
         else:
-            assert False, 'Not implemented for n=%d.' % self.n
+            assert False, "Not implemented for n=%d." % self.n
 
-    @contract(returns='belongs')
+    @contract(returns="belongs")
     def algebra_from_velocities(self, avel, lvel):
         """
             A convenience function that builds an element
@@ -89,7 +89,7 @@ class se_algebra(MatrixLieAlgebra):
         else:
             raise NotImplemented
 
-    @contract(avel='number', lvel='seq[2](number)')
+    @contract(avel="number", lvel="seq[2](number)")
     def algebra_from_velocities_2d(self, avel, lvel):
         W = hat_map_2d(avel)
         return combine_pieces(W, lvel, np.array(lvel) * 0, 0)
@@ -99,14 +99,14 @@ class se_algebra(MatrixLieAlgebra):
         points.append(self.zero())
         if self.n == 3:
             from . import SE2
-            points.extend([SE2.algebra_from_group(p)
-                           for p in SE2.interesting_points()])
+
+            points.extend([SE2.algebra_from_group(p) for p in SE2.interesting_points()])
         elif self.n == 4:
             from . import SE3
-            points.extend([SE3.algebra_from_group(p)
-                           for p in SE3.interesting_points()])
+
+            points.extend([SE3.algebra_from_group(p) for p in SE3.interesting_points()])
         else:
-            assert False, 'Not implemented for n=%s' % self.n
+            assert False, "Not implemented for n=%s" % self.n
         return points
 
 

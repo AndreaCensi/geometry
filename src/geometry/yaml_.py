@@ -45,51 +45,49 @@ def get_default_representation(manifold):
         key = manifold
 
     if not key in default_representation:
-        raise Exception('Cannot find representation for %s.' % manifold)
+        raise Exception("Cannot find representation for %s." % manifold)
 
     return default_representation[key]
 
 
-@contract(returns='list[2]')
+@contract(returns="list[2]")
 def to_yaml(manifold, value, representation=None):
     if representation is None:
         representation = get_default_representation(manifold)
     key = (manifold, representation)
     if not key in converters:
-        raise ValueError('Unknown format %s; I know %s.' %
-                         (key, converters.keys()))
+        raise ValueError("Unknown format %s; I know %s." % (key, converters.keys()))
     conv = converters[key]
     try:
         x = conv.to_yaml(value)
     except:
-        msg = 'Error while trying to convert %s' % describe_value(value)
+        msg = "Error while trying to convert %s" % describe_value(value)
         logger.error(msg)
         raise
-    return ['%s:%s' % (manifold, representation), x]
+    return ["%s:%s" % (manifold, representation), x]
 
 
-@contract(x='list[2]')
+@contract(x="list[2]")
 def from_yaml(x):
     if not isinstance(x, list):
-        raise ValueError('I expect a list with two elements.')
+        raise ValueError("I expect a list with two elements.")
     form = x[0]
     if not isinstance(form, str):
-        raise ValueError('I expect a string describing the format,'
-                         ' not %s, while decoding %s' %
-                         (describe_type(form), describe_value(x)))
+        raise ValueError(
+            "I expect a string describing the format,"
+            " not %s, while decoding %s" % (describe_type(form), describe_value(x))
+        )
     value = x[1]
-    space, representation = form.split(':')
+    space, representation = form.split(":")
 
     key = (space, representation)
     if not key in converters:
-        raise ValueError('Unknown format %s; I know %s.' %
-                         (key, converters.keys()))
+        raise ValueError("Unknown format %s; I know %s." % (key, converters.keys()))
     conv = converters[key]
     return conv.from_yaml(value)
 
 
 class Representation(object):
-
     @staticmethod
     def to_yaml(x):
         pass
@@ -100,23 +98,21 @@ class Representation(object):
 
 
 class SE3_m44(Representation):
-
     @staticmethod
-    @contract(x='SE3', returns='list[4](list[4](float))')
+    @contract(x="SE3", returns="list[4](list[4](float))")
     def to_yaml(x):
         return x.tolist()
 
     @staticmethod
-    @contract(y='list[4](list[4](float))', returns='SE3')
+    @contract(y="list[4](list[4](float))", returns="SE3")
     def from_yaml(y):
         return np.array(y)
 
 
-register_yaml_converter('SE3', 'm44', SE3_m44)
+register_yaml_converter("SE3", "m44", SE3_m44)
 
 
 class se3_m44(Representation):
-
     @staticmethod
     def to_yaml(x):
         return x.tolist()
@@ -127,7 +123,6 @@ class se3_m44(Representation):
 
 
 class TSE3_bt(Representation):
-
     @staticmethod
     def to_yaml(x):
         a, b = x
@@ -135,8 +130,7 @@ class TSE3_bt(Representation):
 
     @staticmethod
     def from_yaml(y):
-        return (SE3_m44.from_yaml(y[0]),
-                se3_m44.from_yaml(y[1]))
+        return (SE3_m44.from_yaml(y[0]), se3_m44.from_yaml(y[1]))
 
 
-register_yaml_converter('TSE3', 'bt', TSE3_bt)
+register_yaml_converter("TSE3", "bt", TSE3_bt)

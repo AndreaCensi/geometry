@@ -5,32 +5,32 @@ import numpy as np
 from .differentiable_manifold import DifferentiableManifold
 from .differentiable_manifold import RandomManifold
 
-__all__ = ['TorusW', 'TorusW', 'Ts', 'Ts1', 'Ts2', 'Ts3']
+__all__ = ["TorusW", "TorusW", "Ts", "Ts1", "Ts2", "Ts3"]
 
 
 class TorusW(RandomManifold):
     """ This is a torus whose coordinates wrap around in [0, W).
         All points in R^n belong to the torus.  """
 
-    @contract(widths='seq[N](>0)', normalize_bias='None|seq[N](number)')
+    @contract(widths="seq[N](>0)", normalize_bias="None|seq[N](number)")
     def __init__(self, widths, normalize_bias=None):
         """
             :param normalize_bias: Only relevant for normalize(). If None, the normalization
             will be in [0,W[0]], [0,W[1]], etc. If given a bias, the normalization
             will be in [b[0],W[0]+b[0]], etc.
         """
-        self.widths = np.array(widths, dtype='float')
+        self.widths = np.array(widths, dtype="float")
         self.n = self.widths.size
         if normalize_bias is None:
             normalize_bias = np.zeros(self.n)
         self.normalize_bias = normalize_bias
         DifferentiableManifold.__init__(self, dimension=self.n)
 
-    @contract(a='array[N]')
+    @contract(a="array[N]")
     def belongs(self, a):
         pass
 
-    @contract(a='belongs', b='belongs', returns='>=0')  # returns='>=0,<0.8')
+    @contract(a="belongs", b="belongs", returns=">=0")  # returns='>=0,<0.8')
     def distance(self, a, b):
         _, vel = self.logmap(a, b)
         return np.linalg.norm(vel)
@@ -62,22 +62,22 @@ class TorusW(RandomManifold):
                 vel[i] = vel[i] + wi
         return base, vel
 
-    @contract(bv='belongs_ts', returns='belongs')
+    @contract(bv="belongs_ts", returns="belongs")
     def expmap(self, bv):
         a, vel = bv
         # b = self.normalize(a + vel)
         b = a + vel
         return b
 
-    @contract(bv='tuple(belongs, *)')
+    @contract(bv="tuple(belongs, *)")
     def project_ts(self, bv):
         return bv  # XXX: more checks
 
-    @contract(returns='belongs')
+    @contract(returns="belongs")
     def sample_uniform(self):
         return (np.random.rand(self.n) - 0.5) * 10 * self.widths
 
-    @contract(returns='belongs_ts')
+    @contract(returns="belongs_ts")
     def sample_velocity(self, a):  # @UnusedVariable
         vel = np.random.randn(self.n)
         vel = vel / np.linalg.norm(vel)  # XXX
@@ -89,9 +89,9 @@ class TorusW(RandomManifold):
         return y * self.widths + self.normalize_bias
 
     def friendly(self, a):
-        return 'point(%s)' % a
+        return "point(%s)" % a
 
-    @contract(returns='list(belongs)')
+    @contract(returns="list(belongs)")
     def interesting_points(self):
         interesting = []
         interesting.append(np.zeros(self.n))
@@ -100,7 +100,7 @@ class TorusW(RandomManifold):
         return interesting
 
     def __repr__(self) -> str:
-        return 'Tn%s' % self.n
+        return "Tn%s" % self.n
 
 
 Ts1 = TorusW([2], [-1])

@@ -26,3 +26,7 @@ test-python3-install:
 	pip install nose
 	python setup.py develop --no-deps
 
+
+
+black:
+	black -l 110 --target-version py37 src

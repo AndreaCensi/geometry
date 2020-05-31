@@ -5,13 +5,13 @@ import numpy as np
 
 from .matrix_lie_algebra import MatrixLieAlgebra
 
-__all__ = ['trana', 'tran', 'tran1', 'tran2', 'tran3']
+__all__ = ["trana", "tran", "tran1", "tran2", "tran3"]
 
 
 class trana(MatrixLieAlgebra):
-    '''
+    """
         lie algebra for translation
-    '''
+    """
 
     @contract(n="1|2|3")
     def __init__(self, n):
@@ -26,14 +26,14 @@ class trana(MatrixLieAlgebra):
         return combine_pieces(W * 0, v, v * 0, 0)
 
     def __repr__(self) -> str:
-        return 'tr%s' % (self.n - 1)
+        return "tr%s" % (self.n - 1)
 
     def interesting_points(self):
         points = []
         points.append(self.zero())
         return points
 
-    @contract(a='belongs')
+    @contract(a="belongs")
     def vector_from_algebra(self, a):
         W, v, zero, zero = extract_pieces(a)  # @UnusedVariable
         if v.shape == ():
@@ -41,7 +41,7 @@ class trana(MatrixLieAlgebra):
         assert v.size == self.n - 1
         return v
 
-    @contract(returns='belongs', v='array[K]')
+    @contract(returns="belongs", v="array[K]")
     def algebra_from_vector(self, v):
         assert v.size == self.n - 1
         return combine_pieces(np.zeros((self.n - 1, self.n - 1)), v, v * 0, 0)

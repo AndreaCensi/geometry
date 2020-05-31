@@ -4,7 +4,7 @@ from contracts import contract
 
 from .differentiable_manifold import DifferentiableManifold
 
-__all__ = ['PointSet']
+__all__ = ["PointSet"]
 
 
 # TODO: do some testing

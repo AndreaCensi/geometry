@@ -26,23 +26,41 @@ from .torus01 import *
 from .translation_algebra import *
 from .translation_group import *
 
-new_contract('DifferentiableManifold', DifferentiableManifold)
+new_contract("DifferentiableManifold", DifferentiableManifold)
 
 # keep at the end   #@NoMove
 
 all_manifolds = [
-    SO3, SO2,
-    R1, R2, R3,
-    T1, T2, T3,
-    Tran1, Tran2, Tran3,
-    SE2, SE3,
-    S1, S2,
-    se2, se3,
-    so2, so3,
-    tran1, tran2, tran3,
-    TSE2, TSE3,
-    Ts1, Ts2, Ts3,
-    Sq1, Sq2, Sq3
+    SO3,
+    SO2,
+    R1,
+    R2,
+    R3,
+    T1,
+    T2,
+    T3,
+    Tran1,
+    Tran2,
+    Tran3,
+    SE2,
+    SE3,
+    S1,
+    S2,
+    se2,
+    se3,
+    so2,
+    so3,
+    tran1,
+    tran2,
+    tran3,
+    TSE2,
+    TSE3,
+    Ts1,
+    Ts2,
+    Ts3,
+    Sq1,
+    Sq2,
+    Sq3,
 ]
 
 compute_manifold_relations(all_manifolds)
