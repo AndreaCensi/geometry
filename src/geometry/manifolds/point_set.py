@@ -1,5 +1,4 @@
 # coding=utf-8
-from typing import Collection
 
 import numpy as np
 
@@ -14,7 +13,7 @@ class PointSet:
     """ A set of points on a differentiable manifold. """
 
     @contract(manifold=DifferentiableManifold)
-    def __init__(self, manifold: DifferentiableManifold, points: Collection = None):
+    def __init__(self, manifold: DifferentiableManifold, points = None):
         if points is None:
             points = []
         self.points = list(points)
