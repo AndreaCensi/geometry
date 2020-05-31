@@ -1,13 +1,16 @@
 # coding=utf-8
 from collections import namedtuple
+from numbers import Number
+from typing import List, Tuple, Union
 
 import numpy as np
-from contracts import contract, new_contract, raise_wrapped
 
-from . import logm, expm
+from contracts import contract, new_contract, raise_wrapped
+from . import expm, logm
 from .constants import GeometryConstants
-from .rotations import check_SO, check_skew_symmetric, rot2d, \
-    angle_from_rot2d, hat_map_2d, rotz, axis_angle_from_rotation, check_orthogonal, angle_scale_from_O2
+from .rotations import (angle_from_rot2d, angle_scale_from_O2, axis_angle_from_rotation, check_orthogonal,
+                        check_skew_symmetric, check_SO, hat_map_2d, rot2d, rotz)
+from .types import se2value, SE2value, SE3value, SO2value, T2value, T3value
 from .utils import assert_allclose
 
 __all__ = [
@@ -70,7 +73,6 @@ __all__ = [
     'translation_from_SE2',
     'translation_from_SE3',
     'xytheta_from_SE2',
-
 ]
 
 
@@ -146,12 +148,12 @@ def combine_pieces(a, b, c, d):
 
 
 @contract(returns='SE2')
-def SE2_identity():
+def SE2_identity() -> se2value:
     return np.eye(3)
 
 
 @contract(returns='SE3')
-def SE3_identity():
+def SE3_identity() -> SE3value:
     return np.eye(4)
 
 
@@ -177,33 +179,33 @@ rotation_translation_from_SE3 = rotation_translation_from_pose
 
 
 @contract(pose='SE2', returns='array[2]')
-def translation_from_SE2(pose):
+def translation_from_SE2(pose: SE2value) -> T2value:
     # TODO: make it more efficient
     R, t, zero, one = extract_pieces(pose)  # @UnusedVariable
     return t.copy()
 
 
-def rotation_from_SE2(pose):
+def rotation_from_SE2(pose: SE2value) -> SO2value:
     from geometry.poses_embedding import SO2_project_from_SE2
     return SO2_project_from_SE2(pose)
 
 
 @contract(pose='SE3', returns='array[3]')
-def translation_from_SE3(pose):
+def translation_from_SE3(pose: SE2value) -> T3value:
     # TODO: make it more efficient
     _, t, _, _ = extract_pieces(pose)
     return t.copy()
 
 
 @contract(t='array[2]|seq[2](number)', theta='number', returns='SE2')
-def SE2_from_translation_angle(t, theta):
+def SE2_from_translation_angle(t, theta: Number) -> SE2value:
     ''' Returns an element of SE2 from translation and rotation. '''
     t = np.array(t)
     return combine_pieces(rot2d(theta), t, t * 0, 1)
 
 
 @contract(pose='SE2', returns='tuple(array[2],float)')
-def translation_angle_from_SE2(pose):
+def translation_angle_from_SE2(pose: SE2value):
     R, t, _, _ = extract_pieces(pose)
     return t, angle_from_rot2d(R)
 
@@ -228,20 +230,20 @@ def angle_from_SE2(pose):
 
 # TODO: write tests for this, and other function
 @contract(xytheta='array[3]|seq[3](number)', returns='SE2')
-def SE2_from_xytheta(xytheta):
+def SE2_from_xytheta(xytheta: Union[List[Number], Tuple[Number, Number, Number]]) -> SE2value:
     ''' Returns an element of SE2 from translation and rotation. '''
     return SE2_from_translation_angle([xytheta[0], xytheta[1]], xytheta[2])
 
 
 @contract(returns='array[3],finite', pose='SE2')
-def xytheta_from_SE2(pose):
+def xytheta_from_SE2(pose: SE2value):
     ''' Returns an element of SE2 from translation and rotation. '''
     t, alpha = translation_angle_from_SE2(pose)
     return np.array([t[0], t[1], alpha])
 
 
 @contract(linear='(array[2],finite)|seq[2](number,finite)', angular='number,finite', returns='se2')
-def se2_from_linear_angular(linear, angular):
+def se2_from_linear_angular(linear, angular) -> SE2value:
     ''' Returns an element of se2 from linear and angular velocity. '''
     linear = np.array(linear)
     M = hat_map_2d(angular)
@@ -249,7 +251,7 @@ def se2_from_linear_angular(linear, angular):
 
 
 @contract(vel='se2', returns='tuple((array[2],finite),Float)')
-def linear_angular_from_se2(vel):
+def linear_angular_from_se2(vel: se2value):
     M, v, Z, zero = extract_pieces(vel)  # @UnusedVariable
     omega = float(M[1, 0])
     return v, omega

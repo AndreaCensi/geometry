@@ -11,6 +11,7 @@ from contracts import contract, new_contract, raise_wrapped, raise_desc
 
 from .basic_utils import safe_arccos, normalize_length
 from .spheres import default_axis
+from .types import se2value
 
 new_contract('unit_quaternion', 'array[4], unit_length')
 new_contract('axis_angle', 'tuple(direction, float)')
@@ -258,7 +259,7 @@ def geodesic_distance_for_rotations(R1, R2):
 
 
 @contract(v='array[3]', returns='array[3x3],skew_symmetric')
-def hat_map(v):
+def hat_map(v) -> se2value:
     ''' Maps a vector to a 3x3 skew symmetric matrix. '''
     h = np.zeros((3, 3))
     h[0, 1] = -v[2]
@@ -269,7 +270,7 @@ def hat_map(v):
 
 
 @contract(H='array[3x3],skew_symmetric', returns='array[3]')
-def map_hat(H):
+def map_hat(H: se2value):
     ''' The inverse of :py:func:`hat_map`. '''
     v = np.zeros(3)
     v[2] = -H[0, 1]

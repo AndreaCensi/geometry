@@ -8,11 +8,11 @@ __all__ = ['PointSet']
 
 
 # TODO: do some testing
-class PointSet(object):
+class PointSet:
     """ A set of points on a differentiable manifold. """
 
     @contract(manifold=DifferentiableManifold)
-    def __init__(self, manifold, points=[]):
+    def __init__(self, manifold: DifferentiableManifold, points=[]):
         self.points = list(points)
         self.manifold = manifold
 

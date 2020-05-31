@@ -1,13 +1,11 @@
 # coding=utf-8
 import numpy as np
-from contracts import contract
 
-from .poses import SE2_from_rotation_translation, \
-    rotation_translation_from_SE2, extract_pieces, SE3_from_rotation_translation, \
-    rotation_translation_from_SE3, combine_pieces
-from .rotations import map_hat_2d, hat_map
-from .rotations_embedding import so3_from_so2, SO2_project_from_SO3, \
-    so2_project_from_so3
+from contracts import contract
+from .poses import (combine_pieces, extract_pieces, rotation_translation_from_SE2, rotation_translation_from_SE3,
+                    SE2_from_rotation_translation, SE3_from_rotation_translation)
+from .rotations import hat_map, map_hat_2d
+from .rotations_embedding import SO2_project_from_SO3, so2_project_from_so3, so3_from_so2
 
 __all__ = [
     'SE2_from_SO2',
@@ -26,25 +24,28 @@ __all__ = [
     'se3_from_se2',
 ]
 
+from .types import SE2value, se2value, SO2value, so2value
+
 
 @contract(returns='SE2', a='SO2')
-def SE2_from_SO2(a):
+def SE2_from_SO2(a: SO2value) -> SE2value:
     return SE2_from_rotation_translation(a, np.array([0, 0]))
 
 
 @contract(returns='SO2', b='SE2')
-def SO2_project_from_SE2(b):
-    return rotation_translation_from_SE2(b)[0]
+def SO2_project_from_SE2(b: SE2value) -> SO2value:
+    r, _ = rotation_translation_from_SE2(b)
+    return r
 
 
 @contract(returns='se2', a='so2')
-def se2_from_so2(a):
+def se2_from_so2(a: so2value) -> se2value:
     omega = map_hat_2d(a)
     return hat_map(np.array([0, 0, omega]))
 
 
 @contract(returns='so2', b='se2')
-def so2_project_from_se2(b):
+def so2_project_from_se2(b: so2value) -> SO2value:
     return extract_pieces(b)[0]
 
 

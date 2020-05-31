@@ -64,6 +64,7 @@ except ImportError:
     scipy_found = False
     development = False
 
+from .types import *
 from .basic_utils import *
 from .constants import *
 from .distances import *

@@ -2,7 +2,7 @@
 from abc import abstractmethod
 
 from contracts import check, contract
-from geometry.manifolds.differentiable_manifold import DifferentiableManifold
+from .differentiable_manifold import DifferentiableManifold
 from geometry.utils.numpy_backport import assert_allclose
 import numpy as np
 
@@ -12,7 +12,7 @@ __all__ = ['MatrixLinearSpace']
 class MatrixLinearSpace(DifferentiableManifold):
 
     @contract(dimension='int,>0')
-    def __init__(self, dimension, shape):
+    def __init__(self, dimension: int, shape):
         ''' Note dimension is the intrinsic dimension. '''
         # TODO: give basis?
         self.shape = shape
