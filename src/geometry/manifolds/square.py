@@ -3,7 +3,7 @@ from contracts import contract
 from geometry.manifolds import DifferentiableManifold, RandomManifold
 import numpy as np
 
-__all__ = ['Square', 'Sq', 'Sq1', 'Sq2', 'Sq3']
+__all__ = ["Square", "Sq", "Sq1", "Sq2", "Sq3"]
 
 
 class Square(RandomManifold):
@@ -14,7 +14,7 @@ class Square(RandomManifold):
         DifferentiableManifold.__init__(self, dimension=n)
         self.n = n
 
-    @contract(a='array[N]')
+    @contract(a="array[N]")
     def belongs(self, a):
         ok = np.logical_and(a >= 0, a <= 1)
         if not np.all(ok):
@@ -39,16 +39,16 @@ class Square(RandomManifold):
     def sample_uniform(self):
         return np.random.rand(self.n)
 
-    @contract(returns='belongs_ts')
+    @contract(returns="belongs_ts")
     def sample_velocity(self, a):  # @UnusedVariable
         b = self.sample_uniform()
         _, vel = self.logmap(a, b)
         return vel
 
     def friendly(self, a):
-        return 'point(%s)' % a
+        return "point(%s)" % a
 
-    @contract(returns='list(belongs)')
+    @contract(returns="list(belongs)")
     def interesting_points(self):
         interesting = []
         interesting.append(np.zeros(self.n))
@@ -58,8 +58,8 @@ class Square(RandomManifold):
             interesting.append(z)
         return interesting
 
-    def __repr__(self):
-        return 'Sq%s' % self.n
+    def __repr__(self) -> str:
+        return "Sq%s" % self.n
 
 
 Sq1 = Square(1)

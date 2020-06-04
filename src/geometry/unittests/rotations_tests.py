@@ -1,29 +1,30 @@
 # coding=utf-8
 import itertools
 
-from geometry import (axis_angle_from_rotation, rotation_from_axis_angle,
-    random_direction, hat_map, geodesic_distance_on_sphere, assert_allclose)
-from geometry.rotations import (quaternion_from_rotation,
-    rotation_from_axes_spec)
+from geometry import (
+    axis_angle_from_rotation,
+    rotation_from_axis_angle,
+    random_direction,
+    hat_map,
+    geodesic_distance_on_sphere,
+)
+from geometry.utils import assert_allclose
+from geometry.rotations import quaternion_from_rotation, rotation_from_axes_spec
 from geometry.spheres import slerp, any_distant_direction
 import numpy as np
 
-from .utils import (rotations_sequence, axis_angle_sequence, GeoTestCase,
-    directions_sequence)
+from .utils import rotations_sequence, axis_angle_sequence, GeoTestCase, directions_sequence
 
 
 # XXX:
 class RotationsTest(GeoTestCase):
-
     def test_conversions1(self):
-        return self.check_conversion(rotations_sequence(),
-                              axis_angle_from_rotation,
-                              rotation_from_axis_angle)
+        return self.check_conversion(rotations_sequence(), axis_angle_from_rotation, rotation_from_axis_angle)
 
     def test_conversions2(self):
-        return self.check_conversion(axis_angle_sequence(),
-                              rotation_from_axis_angle,
-                              axis_angle_from_rotation)
+        return self.check_conversion(
+            axis_angle_sequence(), rotation_from_axis_angle, axis_angle_from_rotation
+        )
 
     def test_distances_rotations(self):
         for axis, angle in axis_angle_sequence():
@@ -35,8 +36,7 @@ class RotationsTest(GeoTestCase):
             assert dist <= angle
 
     def test_slerp(self):
-        for r1, r2 in itertools.product(rotations_sequence(),
-                                        rotations_sequence()):
+        for r1, r2 in itertools.product(rotations_sequence(), rotations_sequence()):
             q1 = quaternion_from_rotation(r1)
             q2 = quaternion_from_rotation(r2)
             for t in [0, 0.1, 0.5, 0.75, 1]:
@@ -65,4 +65,3 @@ def rotation_from_axes_spec__test():
         assert_allclose(x_, [1, 0, 0], atol=1e-8)
         v_ = np.dot(R, v)
         assert_allclose(v_[2], 0, atol=1e-8)
-

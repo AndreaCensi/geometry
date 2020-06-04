@@ -1,20 +1,42 @@
 # coding=utf-8
-from geometry.manifolds import (SO3, SO2, R1, R2, R3, SE2, SE3, S2, S1, T1, T2,
-    T3, so2, so3, se2, se3, Tran3, Tran2, Tran1, tran2, tran1, tran3)
+from geometry.manifolds import (
+    SO3,
+    SO2,
+    R1,
+    R2,
+    R3,
+    SE2,
+    SE3,
+    S2,
+    S1,
+    T1,
+    T2,
+    T3,
+    so2,
+    so3,
+    se2,
+    se3,
+    Tran3,
+    Tran2,
+    Tran1,
+    tran2,
+    tran1,
+    tran3,
+)
 from nose.plugins.attrib import attr
 
 
 def check_embed_relation_cond(A, B):
-    check_embed_relation_cond.description = 'Checking %s < %s' % (A, B)
+    check_embed_relation_cond.description = "Checking %s < %s" % (A, B)
     msg = None
     if not A.embeddable_in(B):
-        msg = '%s is not embeddable in %s' % (A, B)
+        msg = "%s is not embeddable in %s" % (A, B)
     if not B.can_represent(A):
-        msg = '%s cannot represent %s' % (B, A)
+        msg = "%s cannot represent %s" % (B, A)
     if msg:
-        raise Exception('%s;\n %s: %s\n %s: %s' %
-                        (msg, A, A.relations_descriptions(),
-                          B, B.relations_descriptions()))
+        raise Exception(
+            "%s;\n %s: %s\n %s: %s" % (msg, A, A.relations_descriptions(), B, B.relations_descriptions())
+        )
 
 
 def check_embed_relation(A, B):
@@ -23,8 +45,7 @@ def check_embed_relation(A, B):
 
     points = list(A.interesting_points())
     if not points:
-        msg = ('Cannot test because manifold %s does '
-               'not have interesting points' % A)
+        msg = "Cannot test because manifold %s does " "not have interesting points" % A
         raise Exception(msg)
 
     for a1 in points:
@@ -39,7 +60,7 @@ def check_embed_relation(A, B):
         A.assert_close(a1, a3)
 
 
-@attr('embed')
+@attr("embed")
 def test_embed_relations():
     couples = []
 

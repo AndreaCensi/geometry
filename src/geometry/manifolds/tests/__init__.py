@@ -20,7 +20,7 @@ def get_test_points(M, num_random=2):
             interesting.append(M.sample_uniform())
 
     if len(interesting) == 0:
-        logger.warning('No test points for %s and not random.' % M)
+        logger.warning("No test points for %s and not random." % M)
     return interesting
 
 
@@ -34,7 +34,7 @@ def list_manifold_point():
             try:
                 M.belongs(point)
             except Exception as e:
-                msg = 'M %s does not contain %s: %s' % (M, point, e)
+                msg = "M %s does not contain %s: %s" % (M, point, e)
                 raise_wrapped(Exception, e, msg)
 
             yield M, point, i, num_examples
@@ -58,7 +58,7 @@ def list_mgroup_point():
             try:
                 M.belongs(point)
             except Exception as e:
-                msg = 'M %s does not contain %s: %s' % (M, point, e)
+                msg = "M %s does not contain %s: %s" % (M, point, e)
                 raise_wrapped(Exception, e, msg)
             yield M, point, i, num_examples
 
@@ -74,9 +74,11 @@ def list_manifold_points():
             k += 1
 
 
-for_all_manifolds = fancy_test_decorator(lister=lambda: all_manifolds,
-                                         arguments=lambda M: (M,),
-                                         attributes=lambda M: dict(manifolds=1, manifold=str(M)))
+for_all_manifolds = fancy_test_decorator(
+    lister=lambda: all_manifolds,
+    arguments=lambda M: (M,),
+    attributes=lambda M: dict(manifolds=1, manifold=str(M)),
+)
 
 
 def _args0(x):
@@ -86,14 +88,12 @@ def _args0(x):
 
 def _attrs0(x):
     (M, p, i, n) = x
-    return dict(manifolds=1,
-                manifold=M,
-                point=p)
+    return dict(manifolds=1, manifold=M, point=p)
 
 
-for_all_manifold_point = fancy_test_decorator(lister=list_manifold_point,
-                                              arguments=_args0,
-                                              attributes=_attrs0)
+for_all_manifold_point = fancy_test_decorator(
+    lister=list_manifold_point, arguments=_args0, attributes=_attrs0
+)
 
 
 def _args1(x):
@@ -103,19 +103,16 @@ def _args1(x):
 
 def _attrs1(x):
     (M, p, i, n) = x
-    return dict(manifolds=1,
-                matrixgroups=1,
-                manifold=M, point=p)
+    return dict(manifolds=1, matrixgroups=1, manifold=M, point=p)
 
 
-for_all_mgroup_point = fancy_test_decorator(lister=list_mgroup_point,
-                                            arguments=_args1,
-                                            attributes=_attrs1)
+for_all_mgroup_point = fancy_test_decorator(lister=list_mgroup_point, arguments=_args1, attributes=_attrs1)
 
-for_all_mgroup = fancy_test_decorator(lister=list_mgroup,
-                                      arguments=lambda M: (M,),
-                                      attributes=lambda M: dict(manifolds=1, matrixgroups=1,
-                                                                manifold=M))
+for_all_mgroup = fancy_test_decorator(
+    lister=list_mgroup,
+    arguments=lambda M: (M,),
+    attributes=lambda M: dict(manifolds=1, matrixgroups=1, manifold=M),
+)
 
 
 def _args(x):
@@ -125,9 +122,7 @@ def _args(x):
 
 def _attrs(x):
     (M, p1, p2, k, n) = x
-    return dict(type='manifolds', manifold=M, point1=p1, point2=p2)
+    return dict(type="manifolds", manifold=M, point1=p1, point2=p2)
 
 
-for_all_manifold_pairs = fancy_test_decorator(lister=list_manifold_points,
-                                              arguments=_args,
-                                              attributes=_attrs)
+for_all_manifold_pairs = fancy_test_decorator(lister=list_manifold_points, arguments=_args, attributes=_attrs)

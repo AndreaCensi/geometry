@@ -9,6 +9,7 @@ bump-upload:
 	git push --tags
 	git push --all
 	rm -f dist/*
+	rm -rf src/*.egg-info
 	python setup.py sdist
 	twine upload dist/*
 
@@ -25,3 +26,7 @@ test-python3-install:
 	pip install nose
 	python setup.py develop --no-deps
 
+
+
+black:
+	black -l 110 --target-version py37 src

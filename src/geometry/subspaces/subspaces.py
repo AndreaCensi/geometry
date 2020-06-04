@@ -1,12 +1,18 @@
 # coding=utf-8
+import numpy as np
 from contracts import contract
 
-import numpy as np
+from geometry.utils import assert_allclose
 
-from .. import assert_allclose
+__all__ = [
+    "normalize_columns",
+    "proj_from_subspace",
+    "get_random_proj",
+    "assert_projection",
+]
 
 
-@contract(A='array[NxK]')
+@contract(A="array[NxK]")
 def normalize_columns(A):
     A = A.copy()
     _, k = A.shape
@@ -15,7 +21,7 @@ def normalize_columns(A):
     return A
 
 
-@contract(A='array[NxK]')
+@contract(A="array[NxK]")
 def proj_from_subspace(A):
     An = normalize_columns(A)
     return np.dot(An, An.T)
@@ -26,7 +32,7 @@ def get_random_proj(n, k):
     return proj_from_subspace(A)
 
 
-@contract(P='array[NxN]')
+@contract(P="array[NxN]")
 def assert_projection(P):
     assert_allclose(P.T, P)
     assert_allclose(np.dot(P, P), P)

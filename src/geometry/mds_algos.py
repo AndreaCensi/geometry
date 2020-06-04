@@ -1,19 +1,32 @@
 # coding=utf-8
 import itertools
 
-from contracts import check_multiple
-from contracts import contract
-from geometry import logger, eigh
-from geometry.formatting import formatm
-from geometry.procrustes import best_similarity_transform
-from geometry.spheres import project_vectors_onto_sphere
-from geometry.utils.numpy_backport import assert_allclose
 import numpy as np
+from contracts import check_multiple, contract
+
+from . import logger, eigh
+from .formatting import formatm
+from .procrustes import best_similarity_transform
+from .spheres import project_vectors_onto_sphere
+from .utils import assert_allclose
+
+__all__ = [
+    "euclidean_distances",
+    "double_center",
+    "inner_product_embedding_slow",
+    "inner_product_embedding",
+    "truncated_svd_randomized",
+    "inner_product_embedding_randomized",
+    "mds",
+    "spherical_mds",
+    "mds_randomized",
+    "place",
+]
 
 
-@contract(S='array[KxN]', returns='array[NxN](>=0)')
+@contract(S="array[KxN]", returns="array[NxN](>=0)")
 def euclidean_distances(S):
-    ''' Computes the euclidean distance matrix for the given points. '''
+    """ Computes the euclidean distance matrix for the given points. """
     K, N = S.shape
     D = np.zeros((N, N))
     for i in range(N):
@@ -52,23 +65,21 @@ def double_center(P):
     return B2
 
 
-@contract(C='array[NxN]', ndim='int,>0,K', returns='array[KxN]')
+@contract(C="array[NxN]", ndim="int,>0,K", returns="array[KxN]")
 def inner_product_embedding_slow(C, ndim):
-    U, S, V = np.linalg.svd(C, full_matrices=0)
-    check_multiple([('array[NxN]', U),
-                    ('array[N]', S),
-                    ('array[NxN]', V)])
+    U, S, V = np.linalg.svd(C, full_matrices=False)
+    check_multiple([("array[NxN]", U), ("array[N]", S), ("array[NxN]", V)])
     coords = V[:ndim, :]
     for i in range(ndim):
         coords[i, :] = coords[i, :] * np.sqrt(S[i])
     return coords
 
 
-@contract(C='array[NxN]', ndim='int,>1,K', returns='array[KxN]')
+@contract(C="array[NxN]", ndim="int,>1,K", returns="array[KxN]")
 def inner_product_embedding(C, ndim):
     n = C.shape[0]
     if ndim > n:
-        msg = 'Number of points: %s  Dimensions: %s' % (n, ndim)
+        msg = "Number of points: %s  Dimensions: %s" % (n, ndim)
         raise ValueError(msg)
 
     eigvals = (n - ndim, n - 1)
@@ -79,11 +90,11 @@ def inner_product_embedding(C, ndim):
         assert S[0] <= S[1]  # eigh returns in ascending order
 
     if np.any(S < 0):
-        msg = 'The cosine matrix singular values are not all positive: \n'
-        msg += formatm('S', S)
-        msg += 'I assume it is rounding error and approximate with:\n'
+        msg = "The cosine matrix singular values are not all positive: \n"
+        msg += formatm("S", S)
+        msg += "I assume it is rounding error and approximate with:\n"
         S[S < 0] = 0
-        msg += formatm('S\'', S)
+        msg += formatm("S'", S)
         logger.warning(msg)
 
     assert V.shape == (n, ndim)
@@ -99,7 +110,7 @@ def inner_product_embedding(C, ndim):
 
 
 def truncated_svd_randomized(M, k):
-    ''' Truncated SVD based on randomized projections. '''
+    """ Truncated SVD based on randomized projections. """
     p = k + 5  # TODO: add parameter
     Y = np.dot(M, np.random.normal(size=(M.shape[1], p)))
     Q, r = np.linalg.qr(Y)  # @UnusedVariable
@@ -109,31 +120,29 @@ def truncated_svd_randomized(M, k):
     return U.T[:k].T, s[:k], v[:k]
 
 
-@contract(C='array[NxN]', ndim='int,>0,K', returns='array[KxN]')
+@contract(C="array[NxN]", ndim="int,>0,K", returns="array[KxN]")
 def inner_product_embedding_randomized(C, ndim):
-    '''
+    """
         Best embedding of inner product matrix based on
         randomized projections.
-    '''
+    """
     U, S, V = truncated_svd_randomized(C, ndim)  # @UnusedVariable.
-    check_multiple([('K', ndim),
-                    ('array[KxN]', V),
-                    ('array[K]', S)])
+    check_multiple([("K", ndim), ("array[KxN]", V), ("array[K]", S)])
     coords = V
     for i in range(ndim):
         coords[i, :] = coords[i, :] * np.sqrt(S[i])
     return coords
 
 
-@contract(D='distance_matrix,array[MxM](>=0)', ndim='K,int,>=1', returns='array[KxM]')
+@contract(D="distance_matrix,array[MxM](>=0)", ndim="K,int,>=1", returns="array[KxM]")
 def mds(D, ndim, embed=inner_product_embedding):
-#    if D.dtype != np.float64:
-#        D = D.astype(np.float64)
+    #    if D.dtype != np.float64:
+    #        D = D.astype(np.float64)
     diag = D.diagonal()
     # the diagonal should be zero
     if not np.allclose(diag, 0):
-        msg = 'The diagonal of the distance matrix should be zero.'
-        msg += 'Here are all the entries: %s' % diag.tolist()
+        msg = "The diagonal of the distance matrix should be zero."
+        msg += "Here are all the entries: %s" % diag.tolist()
         raise ValueError(diag)
     # assert_allclose(diag, 0, atol=1e-09)
     # Find centered cosine matrix
@@ -142,18 +151,19 @@ def mds(D, ndim, embed=inner_product_embedding):
     return embed(B, ndim)
 
 
-@contract(D='distance_matrix,array[MxM](>=0)', ndim='K,int,>=1', returns='array[KxM]')
+@contract(D="distance_matrix,array[MxM](>=0)", ndim="K,int,>=1", returns="array[KxM]")
 def mds_randomized(D, ndim):
-    ''' MDS based on randomized projections. '''
+    """ MDS based on randomized projections. """
     return mds(D, ndim, embed=inner_product_embedding_randomized)
 
 
-@contract(C='array[NxN]', ndim='int,>0,K', returns='array[KxN],directions')
+@contract(C="array[NxN]", ndim="int,>0,K", returns="array[KxN],directions")
 def spherical_mds(C, ndim, embed=inner_product_embedding):
     # TODO: check cosines
     coords = embed(C, ndim)
     proj = project_vectors_onto_sphere(coords)
     return proj
+
 
 # TODO: spherical_mds_randomized
 
@@ -161,7 +171,7 @@ def spherical_mds(C, ndim, embed=inner_product_embedding):
 best_embedding_on_sphere = spherical_mds
 
 
-@contract(references='array[KxN]', distances='array[N](>=0)')
+@contract(references="array[KxN]", distances="array[N](>=0)")
 def place(references, distances):
     # TODO: docs
     K, N = references.shape

@@ -13,5 +13,5 @@ def test_wrap_around():
     b2 = S1.expmap(bv)
     d = S1.distance(b, b2)
 
-    printm('a', a, 'b', b, 'vel', bv[1], 'd', np.array(d))
+    printm("a", a, "b", b, "vel", bv[1], "d", np.array(d))
     check_allclose(d, 0, atol=1e-7)

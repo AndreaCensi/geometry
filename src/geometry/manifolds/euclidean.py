@@ -5,11 +5,11 @@ import numpy as np
 
 from .matrix_linear_space import MatrixLinearSpace
 
-__all__ = ['Euclidean', 'R', 'R1', 'R2', 'R3']
+__all__ = ["Euclidean", "R", "R1", "R2", "R3"]
 
 
 class Euclidean(MatrixLinearSpace):
-    '''
+    """
         This is the usual Euclidean space of finite dimension;
         this is mostly used for debugging.
 
@@ -17,16 +17,15 @@ class Euclidean(MatrixLinearSpace):
         the :py:func:`sample_uniform`
         returns a sample from a Gaussian distribution centered at 0.
 
-    '''
+    """
 
     def __init__(self, dimension):
-        MatrixLinearSpace.__init__(self, dimension=dimension,
-                                        shape=(dimension,))
+        MatrixLinearSpace.__init__(self, dimension=dimension, shape=(dimension,))
 
-    def __repr__(self):
-        return 'R%s' % (self.dimension)
+    def __repr__(self) -> str:
+        return "R%s" % (self.dimension)
 
-    @contract(x='array')
+    @contract(x="array")
     def belongs(self, x):
         assert_allclose(x.size, self.dimension)
         assert np.all(np.isreal(x)), "Expected real vector"
@@ -40,7 +39,7 @@ class Euclidean(MatrixLinearSpace):
         points.append(np.ones(self.dimension))
         return points
 
-    @contract(returns='belongs')
+    @contract(returns="belongs")
     def riemannian_mean(self, points):
         return np.mean(points, axis=0)
 

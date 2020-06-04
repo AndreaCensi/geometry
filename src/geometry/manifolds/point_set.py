@@ -1,15 +1,21 @@
 # coding=utf-8
-from contracts import contract
-from geometry.manifolds.differentiable_manifold import DifferentiableManifold
+
 import numpy as np
+
+from contracts import contract
+from .differentiable_manifold import DifferentiableManifold
+
+__all__ = ["PointSet"]
 
 
 # TODO: do some testing
-class PointSet(object):
+class PointSet:
     """ A set of points on a differentiable manifold. """
 
     @contract(manifold=DifferentiableManifold)
-    def __init__(self, manifold, points=[]):
+    def __init__(self, manifold: DifferentiableManifold, points = None):
+        if points is None:
+            points = []
         self.points = list(points)
         self.manifold = manifold
 
@@ -55,4 +61,3 @@ class PointSet(object):
         """ REturns the point which is closest to the average """
         i = self.centroid_index()
         return self.points[i]
-

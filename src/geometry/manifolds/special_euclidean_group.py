@@ -1,8 +1,14 @@
 # coding=utf-8
 from contracts import contract, describe_type
-from geometry.poses import extract_pieces, pose_from_rotation_translation, \
-    rotation_translation_from_pose, SE2_from_se2, se2_from_SE2, \
-    SE2_from_translation_angle, SE3_from_SE2
+from geometry.poses import (
+    extract_pieces,
+    pose_from_rotation_translation,
+    rotation_translation_from_pose,
+    SE2_from_se2,
+    se2_from_SE2,
+    SE2_from_translation_angle,
+    SE3_from_SE2,
+)
 from geometry.utils.numpy_backport import assert_allclose
 import numpy as np
 
@@ -12,38 +18,35 @@ from .matrix_lie_group import MatrixLieGroup
 from .special_euclidean_algebra import se
 from .special_orthogonal_group import SO
 
-__all__ = ['SE_group', 'SE', 'SE2', 'SE3', 'TSE', 'TSE2', 'TSE3']
+__all__ = ["SE_group", "SE", "SE2", "SE3", "TSE", "TSE2", "TSE3"]
 
 
 class SE_group(MatrixLieGroup):
-    '''
+    """
         This is the Special Euclidean group SE(n)
         describing roto-translations of Euclidean space.
         Implemented only for n=2,3.
 
         Note that you have to supply a coefficient *alpha* that
         weights rotation and translation when defining distances.
-    '''
+    """
 
-    @contract(N='int,(2|3)')
+    @contract(N="int,(2|3)")
     def __init__(self, N):
         algebra = se[N]
         self.SOn = SO[N]
         self.En = R[N]
         dimension = {2: 3, 3: 6}[N]
-        MatrixLieGroup.__init__(self, n=N + 1,
-                                algebra=algebra, dimension=dimension)
+        MatrixLieGroup.__init__(self, n=N + 1, algebra=algebra, dimension=dimension)
 
-        DifferentiableManifold.embedding(self,
-                                         algebra,
-                                         self.algebra_from_group,
-                                         self.group_from_algebra,
-                                         itype='lie')
+        DifferentiableManifold.embedding(
+            self, algebra, self.algebra_from_group, self.group_from_algebra, itype="lie"
+        )
 
-    def __repr__(self):
-        return 'SE%s' % (self.n - 1)
+    def __repr__(self) -> str:
+        return "SE%s" % (self.n - 1)
 
-    @contract(returns='array[2](>=0)')
+    @contract(returns="array[2](>=0)")
     def distances(self, a, b):
         """ Returns linear, angular distance. """
         _, vel = self.logmap(a, b)
@@ -56,19 +59,22 @@ class SE_group(MatrixLieGroup):
         W, v, zero, zero = extract_pieces(X)  # @UnusedVariable
         return np.linalg.norm(v) + self.alpha * self.son.norm(W)
 
-    @contract(x='array[NxN]')
+    @contract(x="array[NxN]")
     def belongs(self, x):
         # TODO: more checks
         if not isinstance(x, np.ndarray):
-            msg = 'Expected a numpy array (%s)' % describe_type(x)
+            msg = "Expected a numpy array (%s)" % describe_type(x)
             raise ValueError(msg)
         if not x.shape == (self.n, self.n):
-            msg = ('Expected shape %dx%d instead of (%s)' %
-                    (self.n, self.n, x.shape))
+            msg = "Expected shape %dx%d instead of (%s)" % (self.n, self.n, x.shape)
             raise ValueError(msg)
         R, t, zero, one = extract_pieces(x)  # @UnusedVariable
-        self.SOn.belongs(R)
-        assert_allclose(zero, 0, err_msg='I expect the lower row to be 0.')
+        try:
+            self.SOn.belongs(R)
+        except:
+            msg = "The rotation is not a rotation:\n%s" % R
+            raise ValueError(msg)
+        assert_allclose(zero, 0, err_msg="I expect the lower row to be 0.")
         assert_allclose(one, 1)
 
     def sample_uniform(self):
@@ -79,7 +85,7 @@ class SE_group(MatrixLieGroup):
 
     def friendly(self, a):
         R, t = rotation_translation_from_pose(a)
-        return 'Pose(%s,%s)' % (self.SOn.friendly(R), self.En.friendly(t))
+        return "Pose(%s,%s)" % (self.SOn.friendly(R), self.En.friendly(t))
 
     # TODO: make explicit inverse
     # TODO: make specialization for SE(3)

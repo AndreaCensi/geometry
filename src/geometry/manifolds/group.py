@@ -2,7 +2,7 @@
 from abc import abstractmethod
 from contracts import ContractsMeta
 
-__all__ = ['Group']
+__all__ = ["Group"]
 
 
 class Group(object):
@@ -10,19 +10,18 @@ class Group(object):
 
     @abstractmethod
     def multiply(self, g, h):
-        ''' Implements the group operation. '''
+        """ Implements the group operation. """
         pass
 
     @abstractmethod
     def inverse(self, g):
-        ''' Implements the group inversion. '''
+        """ Implements the group inversion. """
         pass
 
     @abstractmethod
     def unity(self):
-        ''' Returns the group unity. '''
+        """ Returns the group unity. """
         pass
 
     def identity(self):
         return self.unity()
-

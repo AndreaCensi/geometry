@@ -1,3 +1,13 @@
+pytz
+decorator
+termcolor
+mypy_extensions
+base58<2.0,>=1.0.2
+frozendict
+networkx
+bs4
+pygments
+dill
 numpy
 PyContracts
 nose
