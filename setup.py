@@ -17,8 +17,10 @@ def get_version(filename):
 
 
 version = get_version(filename='src/geometry/__init__.py')
+line = 'z6'
+install_requires = ['PyContracts3', 'numpy', 'scipy']
 
-setup(name='PyGeometry',
+setup(name=f'PyGeometry-{line}',
       version=version,
       author="Andrea Censi",
       author_email="acensi@idsc.mavt.ethz.ch",
@@ -29,10 +31,10 @@ setup(name='PyGeometry',
       ],
       package_dir={'':'src'},
       packages=find_packages('src'),
-      install_requires=['PyContracts>=1.5,<2', 'numpy'],
-      extras_require={
-        'algorithms':  ["scipy"],
-      },
+      install_requires=install_requires,
+      # extras_require={
+      #   'algorithms':  ["scipy"],
+      # },
       setup_requires=['nose>=1.0'],
       tests_require=['nose>=1.0', 'rudolf', 'nose-progressive', 'nose-cov'],
       download_url='http://github.com/AndreaCensi/geometry/tarball/%s' % version,

@@ -9,6 +9,6 @@ bs4
 pygments
 dill
 numpy
-PyContracts>2,<3
+PyContracts3
 nose
 scipy
