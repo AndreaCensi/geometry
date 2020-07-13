@@ -9,6 +9,6 @@ bs4
 pygments
 dill
 numpy
-PyContracts3==3.0.2
+PyContracts3>=3.0.2
 nose
 scipy
