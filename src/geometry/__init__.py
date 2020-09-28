@@ -20,7 +20,7 @@ def create_logger():
 
 
 logger = create_logger()
-
+logger.debug(f'version: {__version__}')
 
 def in_circle():
     import os
