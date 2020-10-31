@@ -17,9 +17,11 @@ from .rotations import (
     check_SO,
     hat_map_2d,
     rot2d,
+    rotx,
+    roty,
     rotz,
 )
-from .types import se2value, SE2value, SE3value, SO2value, T2value, T3value
+from .types import E2value, se2value, SE2value, SE3value, se3value, SO2value, SO3value, T2value, T3value
 from .utils import assert_allclose
 
 __all__ = [
@@ -81,6 +83,14 @@ __all__ = [
     "translation_from_SE2",
     "translation_from_SE3",
     "xytheta_from_SE2",
+    "SE3_from_rotation_translation",
+    "SE2_from_rotation_translation",
+    "SE3_trans",
+    "SE3_rotx",
+    "SE3_rotz",
+    "SE3_roty",
+    "pose_from_rotation_translation",
+    "rotation_translation_from_pose",
 ]
 
 
@@ -154,7 +164,7 @@ def combine_pieces(a, b, c, d):
 
 
 @contract(returns="SE2")
-def SE2_identity() -> se2value:
+def SE2_identity() -> SE2value:
     return np.eye(3)
 
 
@@ -169,8 +179,14 @@ def pose_from_rotation_translation(R, t):
 
 
 # TODO: make specialized
-SE2_from_rotation_translation = pose_from_rotation_translation
-SE3_from_rotation_translation = pose_from_rotation_translation
+
+
+def SE2_from_rotation_translation(R: SO2value, t: T2value) -> SE2value:
+    return combine_pieces(R, t, t * 0, 1)
+
+
+def SE3_from_rotation_translation(R: SO3value, t: T3value) -> SE3value:
+    return combine_pieces(R, t, t * 0, 1)
 
 
 @contract(pose="array[NxN],SE", returns="tuple(array[MxM], array[M]),M=N-1")
@@ -179,9 +195,12 @@ def rotation_translation_from_pose(pose):
     return R.copy(), t.copy()
 
 
-# TODO: make more efficient
-rotation_translation_from_SE2 = rotation_translation_from_pose
-rotation_translation_from_SE3 = rotation_translation_from_pose
+def rotation_translation_from_SE2(pose: SE2value) -> Tuple[SO2value, T2value]:
+    return rotation_translation_from_pose(pose)
+
+
+def rotation_translation_from_SE3(pose: SE3value) -> Tuple[SO3value, T3value]:
+    return rotation_translation_from_pose(pose)
 
 
 @contract(pose="SE2", returns="array[2]")
@@ -198,7 +217,7 @@ def rotation_from_SE2(pose: SE2value) -> SO2value:
 
 
 @contract(pose="SE3", returns="array[3]")
-def translation_from_SE3(pose: SE2value) -> T3value:
+def translation_from_SE3(pose: SE3value) -> T3value:
     # TODO: make it more efficient
     _, t, _, _ = extract_pieces(pose)
     return t.copy()
@@ -221,7 +240,7 @@ TranslationAngleScale = namedtuple("TranslationAngleScale", "translation angle s
 
 
 @contract(pose="euclidean2", returns=TranslationAngleScale)
-def translation_angle_scale_from_E2(pose):
+def translation_angle_scale_from_E2(pose: E2value) -> TranslationAngleScale:
     R, t, _, _ = extract_pieces(pose)
     angle, scale = angle_scale_from_O2(R)
     # scale = np.linalg.det(R)
@@ -271,10 +290,11 @@ def angular_from_se2(vel):
 
 # TODO: add to docs
 @contract(pose="SE2", returns="se2")
-def se2_from_SE2_slow(pose):
+def se2_from_SE2_slow(pose: SE2value) -> se2value:
     """ Converts a pose to its Lie algebra representation. """
     R, t, zero, one = extract_pieces(pose)  # @UnusedVariable
     # FIXME: this still doesn't work well for singularity
+    # noinspection PyUnresolvedReferences
     W = np.array(logm(pose).real)
     M, v, Z, zero = extract_pieces(W)  # @UnusedVariable
     M = 0.5 * (M - M.T)
@@ -286,7 +306,7 @@ def se2_from_SE2_slow(pose):
 
 
 @contract(pose="SE2", returns="se2")
-def se2_from_SE2(pose):
+def se2_from_SE2(pose: SE2value) -> se2value:
     """
         Converts a pose to its Lie algebra representation.
 
@@ -309,7 +329,7 @@ def se2_from_SE2(pose):
 
 
 @contract(returns="SE2", vel="se2")
-def SE2_from_se2(vel):
+def SE2_from_se2(vel: se2value) -> SE2value:
     """ Converts from Lie algebra representation to pose.
 
         See Bullo, Murray "PD control on the euclidean group" for proofs.
@@ -327,21 +347,21 @@ def SE2_from_se2(vel):
 
 
 @contract(returns="SE2", vel="se2")
-def SE2_from_se2_slow(vel):
+def SE2_from_se2_slow(vel: se2value) -> SE2value:
     X = expm(vel)
     X[2, :] = [0, 0, 1]
     return X
 
 
 @contract(pose="SE2", returns="SE3")
-def SE3_from_SE2(pose):
+def SE3_from_SE2(pose: SE2value) -> SE3value:
     """ Embeds a pose in SE2 to SE3, setting z=0 and upright. """
     t, angle = translation_angle_from_SE2(pose)
     return pose_from_rotation_translation(rotz(angle), np.array([t[0], t[1], 0]))
 
 
 @contract(vel="se3", returns="se2")
-def se2_from_se3(vel, check_exact=True, z_atol=1e-6):
+def se2_from_se3(vel: se3value, check_exact=True, z_atol=1e-6) -> se2value:
     # TODO: testing this
     M, v, Z, zero = extract_pieces(vel)  # @UnusedVariable
     M1 = M[:2, :2]
@@ -353,7 +373,7 @@ def se2_from_se3(vel, check_exact=True, z_atol=1e-6):
 
 
 @contract(pose="SE3", returns="SE2")
-def SE2_from_SE3(pose, check_exact=True, z_atol=1e-6):
+def SE2_from_SE3(pose: SE3value, check_exact=True, z_atol=1e-6) -> SE2value:
     """
         Projects a pose in SE3 to SE2.
 
@@ -385,3 +405,25 @@ def SE2_from_SE3(pose, check_exact=True, z_atol=1e-6):
 
     angle = angle * np.sign(axis[2])
     return SE2_from_translation_angle(translation[0:2], angle)
+
+
+def SE3_rotz(alpha: float) -> SE3value:
+    from . import SE3_from_SO3
+
+    return SE3_from_SO3(rotz(alpha))
+
+
+def SE3_roty(alpha: float) -> SE3value:
+    from . import SE3_from_SO3
+
+    return SE3_from_SO3(roty(alpha))
+
+
+def SE3_rotx(alpha: float) -> SE3value:
+    from . import SE3_from_SO3
+
+    return SE3_from_SO3(rotx(alpha))
+
+
+def SE3_trans(t: np.ndarray) -> SE3value:
+    return SE3_from_rotation_translation(np.eye(3), np.array(t))

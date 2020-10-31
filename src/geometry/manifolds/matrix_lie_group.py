@@ -135,6 +135,7 @@ class MatrixLieGroup(Group, DifferentiableManifold):
             Converts an element of the group to the algebra.
             Uses generic matrix logarithm plus projection.
         """
+        # noinspection PyUnresolvedReferences
         X = np.array(logm(g).real)
         # mitigate numerical errors
         X = self.algebra.project(X)

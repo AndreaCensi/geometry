@@ -267,14 +267,14 @@ class DifferentiableManifold:
         """ Recovers a value from a Yaml structure. """
         # TODO: explicit check
         # TODO: add testing
-        from geometry.yaml import from_yaml
+        from geometry.yaml_ import from_yaml
 
         return from_yaml(yaml_structure)
 
     @contract(x="belongs")
     def to_yaml(self, x):
         # TODO: add testing
-        from geometry.yaml import to_yaml
+        from geometry.yaml_ import to_yaml
 
         return to_yaml("%s" % self, x)
 

@@ -56,7 +56,7 @@ class SE_group(MatrixLieGroup):
         return np.array([dist1, dist2])
 
     def norm(self, X):
-        W, v, zero, zero = extract_pieces(X)  # @UnusedVariable
+        W, v, zero, zero = extract_pieces(X)
         return np.linalg.norm(v) + self.alpha * self.son.norm(W)
 
     @contract(x="array[NxN]")
@@ -68,7 +68,7 @@ class SE_group(MatrixLieGroup):
         if not x.shape == (self.n, self.n):
             msg = "Expected shape %dx%d instead of (%s)" % (self.n, self.n, x.shape)
             raise ValueError(msg)
-        R, t, zero, one = extract_pieces(x)  # @UnusedVariable
+        R, t, zero, one = extract_pieces(x)
         try:
             self.SOn.belongs(R)
         except:

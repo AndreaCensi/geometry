@@ -1,11 +1,11 @@
 # coding=utf-8
-from scipy.stats.distributions import random_integers  # @UnresolvedImport
+from scipy.stats.distributions import random_integers
 
 import numpy as np
 
 
 def main():
-    from stochastic_testing import uniform_dist_pvalue  # @UnresolvedImport
+    from stochastic_testing import uniform_dist_pvalue
 
     for N in [10, 100, 1000, 10000, 100000]:
         pvalues = np.empty(N)

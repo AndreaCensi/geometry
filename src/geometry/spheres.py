@@ -1,5 +1,7 @@
 # coding=utf-8
 import numpy as np
+from typing import List
+
 from contracts import contract, new_contract
 
 from .basic_utils import safe_arccos, normalize_length
@@ -131,7 +133,7 @@ def distribution_radius(S):
 
 
 @contract(S="array[3xK],directions", s="direction", returns="array[K](>=0,<=pi)")
-def distances_from(S, s):
+def distances_from(S: List[np.ndarray], s) -> np.ndarray:
     """
         Returns the geodesic distances on the sphere from a set of
         points *S* to a given point *s*.
@@ -141,7 +143,7 @@ def distances_from(S, s):
 
 
 @contract(ndim="(2|3),K", returns="array[K],unit_length")
-def random_direction(ndim=3):
+def random_direction(ndim: int = 3) -> np.ndarray:
     """
         Generates a random direction in :math:`S^{n-1}`.
 
