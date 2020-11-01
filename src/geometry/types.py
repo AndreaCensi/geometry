@@ -19,7 +19,21 @@ __all__ = [
     "e2value",
     "E3value",
     "e3value",
+    "V1D",
+    "V1DN",
 ]
+
+
+V1D = NewType("V1D", np.ndarray)
+""" Vector 1D """
+V1DN = NewType("V1DN", V1D)
+""" Vector 1D normalized """
+
+
+# MSquare = NewType('MSquare', np.ndarray)
+
+""" Square matrix """
+
 
 if TYPE_CHECKING:
 
@@ -41,8 +55,8 @@ if TYPE_CHECKING:
     SE3value = NewType("SE3value", E3value)
     se3value = NewType("se3value", e3value)
 
-    T3value = NewType("T3value", np.ndarray)  # (3,) float64 arrat
-    T2value = NewType("T2value", np.ndarray)  # (2,) float64 arrat
+    T3value = NewType("T3value", V1D)  # (3,) float64 arrat
+    T2value = NewType("T2value", V1D)  # (2,) float64 arrat
 
 else:
     SO2value = (

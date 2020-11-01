@@ -14,13 +14,13 @@ def create_logger():
     import logging
 
     logging.basicConfig()
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.DEBUG)
-    return logger
+    l = logging.getLogger(__name__)
+    l.setLevel(logging.DEBUG)
+    return l
 
 
 logger = create_logger()
-logger.debug(f"version: {__version__}")
+logger.info(f"version: {__version__}")
 
 
 def in_circle():
@@ -64,7 +64,6 @@ except ImportError:
     scipy_found = False
     development = False
 
-from .types import *
 from .basic_utils import *
 from .constants import *
 from .distances import *
@@ -78,3 +77,4 @@ from .rotations import *
 from .rotations_embedding import *
 from .spheres import *
 from .spheres_embedding import *
+from .types import *

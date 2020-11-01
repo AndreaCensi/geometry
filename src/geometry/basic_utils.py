@@ -2,9 +2,10 @@
 import warnings
 
 import numpy as np
-from contracts import contract, new_contract
 
+from contracts import contract, new_contract
 from .constants import GeometryConstants
+from .types import V1D, V1DN
 
 new_contract("R1", "array[1]")
 new_contract("R2", "array[2]")
@@ -31,7 +32,7 @@ __all__ = [
 
 
 @contract(s="array")
-def normalize_length(s, norm=2):
+def normalize_length(s: V1D, norm: int = 2) -> V1DN:
     """ Normalize an array such that it has unit length in the given norm. """
     sn = np.linalg.norm(s, norm)
     if np.allclose(sn, 0, atol=GeometryConstants.atol_zero_norm):
@@ -41,7 +42,7 @@ def normalize_length(s, norm=2):
 
 
 @contract(s="array")
-def normalize_length_or_zero(s, norm=2):
+def normalize_length_or_zero(s: V1D, norm: int = 2) -> V1D:
     """
         Normalize an array such that it has unit length in the given norm;
         if the norm is close to zero, the zero vector is returned.
