@@ -3,13 +3,29 @@ workflows:
   version: 2
   test:
     jobs:
-      - test-3.8
-      - test-3.7
-      - test-3.6
+      - test-3.9-staging:
+          context: pip-staging
+      - test-3.8-staging:
+          context: pip-staging
+      - test-3.7-staging:
+          context: pip-staging
+      - test-3.6-staging:
+          context: pip-staging
+      - test-3.9-prod:
+          context: production
+      - test-3.8-prod:
+          context: production
+      - test-3.7-prod:
+          context: production
+      - test-3.6-prod:
+          context: production
 jobs:
-  test-3.6: &test-template
+  template: &test-template
     docker:
       - image: python:3.6
+        auth: &auth
+          username: $DOCKER_HUB_USERNAME
+          password: $DOCKER_HUB_PASSWORD
     working_directory: ~/repo
     steps:
       - checkout
@@ -26,13 +42,43 @@ jobs:
             pip install --user nose
             DISABLE_CONTRACTS=1 PATH=~/.local/bin:$PATH nosetests geometry
             PATH=~/.local/bin:$PATH nosetests geometry
-
-  test-3.8:
+  test-3.9-staging:
       <<: *test-template
       docker:
       - image: python:3.8
-  test-3.7:
+        auth: *auth
+  test-3.8-staging:
+      <<: *test-template
+      docker:
+      - image: python:3.8
+        auth: *auth
+  test-3.7-staging:
       <<: *test-template
       docker:
       - image: python:3.7
-
+        auth: *auth
+  test-3.6-staging:
+      <<: *test-template
+      docker:
+      - image: python:3.7
+        auth: *auth
+  test-3.9-prod:
+      <<: *test-template
+      docker:
+      - image: python:3.8
+        auth: *auth
+  test-3.8-prod:
+      <<: *test-template
+      docker:
+      - image: python:3.8
+        auth: *auth
+  test-3.7-prod:
+      <<: *test-template
+      docker:
+      - image: python:3.7
+        auth: *auth
+  test-3.6-prod:
+      <<: *test-template
+      docker:
+      - image: python:3.7
+        auth: *auth

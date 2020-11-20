@@ -59,6 +59,9 @@ class SE_group(MatrixLieGroup):
         W, v, zero, zero = extract_pieces(X)
         return np.linalg.norm(v) + self.alpha * self.son.norm(W)
 
+    def riemannian_mean(self, points):
+        raise NotImplementedError()
+
     @contract(x="array[NxN]")
     def belongs(self, x):
         # TODO: more checks

@@ -19,8 +19,11 @@ class Grassman(DifferentiableManifold):
 
     """
 
+    p: int
+    n: int
+
     @contract(n="N,N>0", p="P,P>0,P<=N")
-    def __init__(self, p, n):
+    def __init__(self, p: int, n: int):
         """
             Initializes the manifold structure.
 

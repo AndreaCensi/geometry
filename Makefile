@@ -9,6 +9,11 @@ bump:
 	git push --tags
 	git push --all
 
+env=-e PIP_INDEX_URL=$(PIP_INDEX_URL) -e DOCKER_HUB_USERNAME=$(DOCKER_HUB_USERNAME) -e DOCKER_HUB_PASSWORD=$(DOCKER_HUB_PASSWORD)
+
+test-circleci-local-staging:
+	circleci local execute --job test-3.8-staging $(env)
+
 upload:
 	rm -f dist/*
 	rm -rf src/*.egg-info

@@ -19,21 +19,16 @@ __all__ = [
     "e2value",
     "E3value",
     "e3value",
+    "t2value",
+    "t3value",
     "V1D",
     "V1DN",
 ]
-
 
 V1D = NewType("V1D", np.ndarray)
 """ Vector 1D """
 V1DN = NewType("V1DN", V1D)
 """ Vector 1D normalized """
-
-
-# MSquare = NewType('MSquare', np.ndarray)
-
-""" Square matrix """
-
 
 if TYPE_CHECKING:
 
@@ -57,6 +52,8 @@ if TYPE_CHECKING:
 
     T3value = NewType("T3value", V1D)  # (3,) float64 arrat
     T2value = NewType("T2value", V1D)  # (2,) float64 arrat
+    t3value = NewType("t3value", V1D)  # velocity
+    t2value = NewType("t2value", V1D)  # velocity
 
 else:
     SO2value = (
@@ -70,6 +67,7 @@ else:
     ) = (
         se2value
     ) = SE3value = se3value = T3value = T2value = e3value = e2value = E3value = E2value = np.ndarray
+    t3value = t2value = np.ndarray
 
 TSE2value = Tuple[SE2value, se2value]
 TSE3value = Tuple[SE3value, se3value]

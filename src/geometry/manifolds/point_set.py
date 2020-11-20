@@ -2,7 +2,6 @@
 
 import numpy as np
 
-from contracts import contract
 from .differentiable_manifold import DifferentiableManifold
 
 __all__ = ["PointSet"]
@@ -12,7 +11,6 @@ __all__ = ["PointSet"]
 class PointSet:
     """ A set of points on a differentiable manifold. """
 
-    @contract(manifold=DifferentiableManifold)
     def __init__(self, manifold: DifferentiableManifold, points=None):
         if points is None:
             points = []
@@ -48,11 +46,11 @@ class PointSet:
         # TODO: generalize
         return self.manifold.riemannian_mean(self.points)
 
-    def closest_index_to(self, p):
+    def closest_index_to(self, p) -> int:
         dists = self.distances_to_point(p)
-        return np.argmin(dists)
+        return int(np.argmin(dists))
 
-    def centroid_index(self):
+    def centroid_index(self) -> int:
         avg = self.average()
         closest = self.closest_index_to(avg)
         return closest

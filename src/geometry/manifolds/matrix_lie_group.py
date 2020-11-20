@@ -1,4 +1,6 @@
 # coding=utf-8
+from abc import ABC
+
 from contracts import contract, describe_value, new_contract
 from geometry import logger, logm, expm
 import numpy as np
@@ -9,7 +11,7 @@ from .group import Group
 __all__ = ["MatrixLieGroup"]
 
 
-class MatrixLieGroup(Group, DifferentiableManifold):
+class MatrixLieGroup(Group, DifferentiableManifold, ABC):
     """
         This is the base class for matrix Lie groups.
 

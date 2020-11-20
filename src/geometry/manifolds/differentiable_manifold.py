@@ -16,7 +16,10 @@ class DifferentiableManifold:
 
     __metaclass__ = ContractsMeta
 
-    def __init__(self, dimension):
+    dimension: int
+    atol_distance: float
+
+    def __init__(self, dimension: int):
         self.dimension = dimension
 
         self.atol_distance = 1e-8

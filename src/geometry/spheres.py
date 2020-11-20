@@ -105,7 +105,7 @@ def default_axis_orthogonal():
 
 
 @contract(s1="array[K],unit_length", s2="array[K],unit_length", returns="float,>=0,<=pi")
-def geodesic_distance_on_sphere(s1, s2):
+def geodesic_distance_on_sphere(s1: np.ndarray, s2: np.ndarray) -> float:
     """ Returns the geodesic distance between two points on the sphere. """
     # special case: return a 0 (no precision issues)
     # if the vectors are the same

@@ -223,15 +223,15 @@ def translation_from_SE3(pose: SE3value) -> T3value:
     return t.copy()
 
 
-@contract(t="array[2]|seq[2](number)", theta="number", returns="SE2")
-def SE2_from_translation_angle(t, theta: Number) -> SE2value:
+# @contract(t="array[2]|seq[2](number)", theta="number", returns="SE2")
+def SE2_from_translation_angle(t: T2value, theta: Number) -> SE2value:
     """ Returns an element of SE2 from translation and rotation. """
     t = np.array(t)
     return combine_pieces(rot2d(theta), t, t * 0, 1)
 
 
 @contract(pose="SE2", returns="tuple(array[2],float)")
-def translation_angle_from_SE2(pose: SE2value):
+def translation_angle_from_SE2(pose: SE2value) -> Tuple[T2value, float]:
     R, t, _, _ = extract_pieces(pose)
     return t, angle_from_rot2d(R)
 
@@ -248,7 +248,7 @@ def translation_angle_scale_from_E2(pose: E2value) -> TranslationAngleScale:
 
 
 @contract(pose="SE2", returns="float")
-def angle_from_SE2(pose):
+def angle_from_SE2(pose: SE2value) -> float:
     # XXX: untested
     R, _, _, _ = extract_pieces(pose)
     return angle_from_rot2d(R)
@@ -262,14 +262,14 @@ def SE2_from_xytheta(xytheta: Union[List[Number], Tuple[Number, Number, Number]]
 
 
 @contract(returns="array[3],finite", pose="SE2")
-def xytheta_from_SE2(pose: SE2value):
+def xytheta_from_SE2(pose: SE2value) -> np.ndarray:
     """ Returns an element of SE2 from translation and rotation. """
     t, alpha = translation_angle_from_SE2(pose)
     return np.array([t[0], t[1], alpha])
 
 
 @contract(linear="(array[2],finite)|seq[2](number,finite)", angular="number,finite", returns="se2")
-def se2_from_linear_angular(linear, angular) -> SE2value:
+def se2_from_linear_angular(linear: T2value, angular: float) -> SE2value:
     """ Returns an element of se2 from linear and angular velocity. """
     linear = np.array(linear)
     M = hat_map_2d(angular)
