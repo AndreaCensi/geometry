@@ -2,6 +2,8 @@
 __version__ = "2.0.5"
 
 # If True, additional checks are done at runtime
+from zuper_commons.logs import ZLogger
+
 development = False
 
 # Does extra checks to make sure things are ok.
@@ -9,18 +11,13 @@ development = False
 # Reactivate if some strange bug is suspected.
 GEOMETRY_DO_EXTRA_CHECKS = False
 
+logger = ZLogger(__name__)
 
-def create_logger():
-    import logging
+import os
 
-    logging.basicConfig()
-    l = logging.getLogger(__name__)
-    l.setLevel(logging.DEBUG)
-    return l
+path = os.path.dirname(os.path.dirname(__file__))
 
-
-logger = create_logger()
-logger.info(f"version: {__version__}")
+logger.debug(f"PyGeometry-z6 version {__version__} path {path}")
 
 
 def in_circle():

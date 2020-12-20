@@ -4,8 +4,8 @@ from numbers import Number
 from typing import List, Tuple, Union
 
 import numpy as np
-
 from contracts import contract, new_contract, raise_wrapped
+
 from . import expm, logm
 from .constants import GeometryConstants
 from .rotations import (
@@ -224,7 +224,7 @@ def translation_from_SE3(pose: SE3value) -> T3value:
 
 
 # @contract(t="array[2]|seq[2](number)", theta="number", returns="SE2")
-def SE2_from_translation_angle(t: T2value, theta: Number) -> SE2value:
+def SE2_from_translation_angle(t: Union[T2value, List[float]], theta: Number) -> SE2value:
     """ Returns an element of SE2 from translation and rotation. """
     t = np.array(t)
     return combine_pieces(rot2d(theta), t, t * 0, 1)
@@ -269,7 +269,7 @@ def xytheta_from_SE2(pose: SE2value) -> np.ndarray:
 
 
 @contract(linear="(array[2],finite)|seq[2](number,finite)", angular="number,finite", returns="se2")
-def se2_from_linear_angular(linear: T2value, angular: float) -> SE2value:
+def se2_from_linear_angular(linear: Union[T2value, List[float]], angular: float) -> SE2value:
     """ Returns an element of se2 from linear and angular velocity. """
     linear = np.array(linear)
     M = hat_map_2d(angular)
@@ -284,7 +284,7 @@ def linear_angular_from_se2(vel: se2value):
 
 
 @contract(vel="se2", returns="Float")
-def angular_from_se2(vel):
+def angular_from_se2(vel: se2value) -> float:
     return linear_angular_from_se2(vel)[1]
 
 
@@ -373,7 +373,7 @@ def se2_from_se3(vel: se3value, check_exact=True, z_atol=1e-6) -> se2value:
 
 
 @contract(pose="SE3", returns="SE2")
-def SE2_from_SE3(pose: SE3value, check_exact=True, z_atol=1e-6) -> SE2value:
+def SE2_from_SE3(pose: SE3value, check_exact: bool = True, z_atol: float = 1e-6) -> SE2value:
     """
         Projects a pose in SE3 to SE2.
 
@@ -382,6 +382,7 @@ def SE2_from_SE3(pose: SE3value, check_exact=True, z_atol=1e-6) -> SE2value:
     rotation, translation = rotation_translation_from_pose(pose)
     axis, angle = axis_angle_from_rotation(rotation)
     if check_exact:
+        # XXX: expensive prints before check
         sit = "\n pose %s" % pose
         sit += "\n axis: %s" % axis
         sit += "\n angle: %s" % angle
