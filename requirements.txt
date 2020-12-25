@@ -1,4 +1,4 @@
-pytz
+pytz>=2020.4
 decorator
 termcolor
 mypy_extensions

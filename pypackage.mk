@@ -3,13 +3,13 @@
 # (common version)
 
 .PHONY: docs all develop test
-	
+
 all: develop
 
 develop:
 	python setup.py develop
 
-docs: 
+docs:
 	make -C docs
 
 coverage_dir=coverage_information
@@ -39,11 +39,10 @@ test-failed:
 	$(nose) $(package) $(NOSE_PARAMS) --failed
 
 test-parallel:
-	$(nose) $(package) $(NOSE_PARAMS) $(nose_parallel) 
+	$(nose) $(package) $(NOSE_PARAMS) $(nose_parallel)
 
 test-parallel-stop:
-	$(nose) $(package) $(NOSE_PARAMS) $(nose_parallel) -x 
+	$(nose) $(package) $(NOSE_PARAMS) $(nose_parallel) -x
 
 test-coverage:
-	$(nose) $(package) $(NOSE_PARAMS) $(nose_coverage) 
-
+	$(nose) $(package) $(NOSE_PARAMS) $(nose_coverage)

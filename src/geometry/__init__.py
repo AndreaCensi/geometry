@@ -17,7 +17,7 @@ import os
 
 path = os.path.dirname(os.path.dirname(__file__))
 
-logger.debug(f"PyGeometry-z6 version {__version__} path {path}")
+logger.debug(f"PyGeometry-z7 version {__version__} path {path}")
 
 
 def in_circle():

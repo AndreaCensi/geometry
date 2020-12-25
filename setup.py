@@ -3,39 +3,39 @@ from setuptools import setup, find_packages
 
 def get_version(filename):
     import ast
+
     version = None
     with open(filename) as f:
         for line in f:
-            if line.startswith('__version__'):
+            if line.startswith("__version__"):
                 version = ast.parse(line).body[0].value.s
                 break
         else:
-            raise ValueError('No version found in %r.' % filename)
+            raise ValueError("No version found in %r." % filename)
     if version is None:
         raise ValueError(filename)
     return version
 
 
-version = get_version(filename='src/geometry/__init__.py')
-line = 'z6'
-install_requires = ['PyContracts3', 'numpy', 'scipy']
+version = get_version(filename="src/geometry/__init__.py")
+line = "z7"
+install_requires = ["PyContracts3", "numpy", "scipy"]
 
-setup(name=f'PyGeometry-{line}',
-      version=version,
-      author="Andrea Censi",
-      author_email="acensi@idsc.mavt.ethz.ch",
-      url='http://andreacensi.github.com/geometry/',
-      license="LGPL",
-      classifiers=[
-        'Development Status :: 4 - Beta',
-      ],
-      package_dir={'':'src'},
-      packages=find_packages('src'),
-      install_requires=install_requires,
-      # extras_require={
-      #   'algorithms':  ["scipy"],
-      # },
-      setup_requires=['nose>=1.0'],
-      tests_require=['nose>=1.0', 'rudolf', 'nose-progressive', 'nose-cov'],
-      download_url='http://github.com/AndreaCensi/geometry/tarball/%s' % version,
+setup(
+    name=f"PyGeometry-{line}",
+    version=version,
+    author="Andrea Censi",
+    author_email="acensi@idsc.mavt.ethz.ch",
+    url="http://andreacensi.github.com/geometry/",
+    license="LGPL",
+    classifiers=["Development Status :: 4 - Beta",],
+    package_dir={"": "src"},
+    packages=find_packages("src"),
+    install_requires=install_requires,
+    # extras_require={
+    #   'algorithms':  ["scipy"],
+    # },
+    setup_requires=["nose>=1.0"],
+    tests_require=["nose>=1.0", "rudolf", "nose-progressive", "nose-cov"],
+    download_url="http://github.com/AndreaCensi/geometry/tarball/%s" % version,
 )

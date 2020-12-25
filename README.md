@@ -6,7 +6,7 @@ PyGeometry
 This is a library for performing all common operations with geometric entities belonging to the most common
 differentiable manifolds.
 
-Documentation is available at: 
+Documentation is available at:
 
 http://andreacensi.github.com/geometry/
 
@@ -20,4 +20,3 @@ Install Numpy and Scipy:
 Install PyGeometry:
 
     python setup.py install   # or "develop"
-
