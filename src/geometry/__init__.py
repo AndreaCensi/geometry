@@ -1,6 +1,6 @@
 # coding=utf-8
 __version__ = "2.0.5"
-
+__date__ = ""
 # If True, additional checks are done at runtime
 from zuper_commons.logs import ZLogger
 
@@ -16,8 +16,7 @@ logger = ZLogger(__name__)
 import os
 
 path = os.path.dirname(os.path.dirname(__file__))
-
-logger.debug(f"PyGeometry-z7 version {__version__} path {path}")
+logger.hello_module(name=__name__, filename=__file__, version=__version__, date=__date__)
 
 
 def in_circle():

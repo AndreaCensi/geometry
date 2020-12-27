@@ -14,11 +14,20 @@ env=-e PIP_INDEX_URL=$(PIP_INDEX_URL) -e DOCKER_HUB_USERNAME=$(DOCKER_HUB_USERNA
 test-circleci-local-staging:
 	circleci local execute --job test-3.8-staging $(env)
 
-upload:
+upload-twine:
 	rm -f dist/*
 	rm -rf src/*.egg-info
 	python3 setup.py sdist
 	twine upload dist/*
+
+
+upload:
+	rm -f dist/*
+	rm -rf src/*.egg-info
+	python3 setup.py sdist
+	devpi use $(TWINE_REPOSITORY_URL)
+	devpi login $(TWINE_USERNAME) --password $(TWINE_PASSWORD)
+	devpi upload --verbose dist/*
 
 name=geometry-python3
 
