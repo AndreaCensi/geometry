@@ -1,0 +1,35 @@
+package_name: PyGeometry-z7
+srcdir: src
+version_file: "1"
+modules:
+  - geometry
+
+install_requires:
+  - zuper-commons-z7
+
+install_conflicts: [ 'zuper-docker*' ]
+tests_require: [ ]
+
+console_scripts: {}
+  # zt-demo: zuper_utils_asyncio:zt_demo
+nose:
+  modules:
+    - MODULENAME_tests
+  python_versions:
+    - '3.7'
+    - '3.8'
+
+pypi:
+  upload: [ ]
+
+circleci:
+  active: true
+  test_python_versions: [ '3.7', '3.8' ]
+
+python_syntax_version: '3.7'
+
+url: http://github.com/zupermind/PACKAGENAME
+author: ''
+author_email: 'info@zupermind.com'
+short_description: ''
+full_description: ''
