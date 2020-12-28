@@ -14,7 +14,7 @@ console_scripts: {}
   # zt-demo: zuper_utils_asyncio:zt_demo
 nose:
   modules:
-    - MODULENAME_tests
+    - "*_tests"
   python_versions:
     - '3.7'
     - '3.8'
