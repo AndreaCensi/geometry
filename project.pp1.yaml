@@ -6,15 +6,17 @@ modules:
 
 install_requires:
   - zuper-commons-z7
-
+  - PyContracts3
+  - numpy
+  - scipy
+  - nose
 install_conflicts: [ 'zuper-docker*' ]
 tests_require: [ ]
 
 console_scripts: {}
-  # zt-demo: zuper_utils_asyncio:zt_demo
 nose:
   modules:
-    - "*_tests"
+    - "geometry.unittests"
   python_versions:
     - '3.7'
     - '3.8'

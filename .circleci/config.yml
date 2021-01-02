@@ -39,7 +39,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            pip install --user nose
+            pip install -q --user nose
             DISABLE_CONTRACTS=1 PATH=~/.local/bin:$PATH nosetests geometry
             PATH=~/.local/bin:$PATH nosetests geometry
   test-3.9-staging:
