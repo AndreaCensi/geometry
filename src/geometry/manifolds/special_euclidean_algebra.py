@@ -1,4 +1,3 @@
-# coding=utf-8
 from contracts import contract
 from geometry.poses import extract_pieces, combine_pieces
 from geometry.rotations import hat_map, hat_map_2d

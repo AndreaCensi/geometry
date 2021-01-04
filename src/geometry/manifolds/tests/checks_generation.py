@@ -1,4 +1,3 @@
-# coding=utf-8
 """
     These are very "meta" utils for creating nose tests on the fly.
 

@@ -1,4 +1,3 @@
-# coding=utf-8
 from contracts import contract
 
 from geometry.manifolds import DifferentiableManifold

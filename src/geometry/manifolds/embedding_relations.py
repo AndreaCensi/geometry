@@ -1,4 +1,3 @@
-# coding=utf-8
 from geometry.poses import SE3_from_SE2
 from geometry.poses_embedding import (
     SE2_from_SO2,

@@ -1,4 +1,3 @@
-# coding=utf-8
 from contracts import contract, describe_type
 from geometry.poses import (
     extract_pieces,

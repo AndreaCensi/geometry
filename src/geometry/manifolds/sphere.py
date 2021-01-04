@@ -1,4 +1,3 @@
-# coding=utf-8
 from numpy.core.numeric import outer
 
 from contracts import contract, check

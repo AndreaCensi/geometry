@@ -1,4 +1,3 @@
-# coding=utf-8
 from geometry import (
     quaternion_from_rotation,
     rotation_from_quaternion,

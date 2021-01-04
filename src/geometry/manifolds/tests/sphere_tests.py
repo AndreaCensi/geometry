@@ -1,4 +1,3 @@
-# coding=utf-8
 import numpy as np
 from geometry.manifolds import S1
 from geometry.utils import check_allclose

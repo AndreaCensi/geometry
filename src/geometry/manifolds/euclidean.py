@@ -1,4 +1,3 @@
-# coding=utf-8
 from contracts import contract
 from geometry.utils import assert_allclose
 import numpy as np

@@ -1,4 +1,3 @@
-# coding=utf-8
 from collections import namedtuple
 from numbers import Number
 from typing import List, Tuple, Union

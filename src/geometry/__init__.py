@@ -1,4 +1,3 @@
-# coding=utf-8
 __version__ = "2.0.9"
 __date__ = ""
 # If True, additional checks are done at runtime

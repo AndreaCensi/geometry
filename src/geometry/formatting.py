@@ -1,4 +1,3 @@
-# coding=utf-8
 import numpy as np
 from contracts import contract, describe_type, describe_value
 

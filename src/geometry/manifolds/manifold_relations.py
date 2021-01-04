@@ -1,4 +1,3 @@
-# coding=utf-8
 from collections import defaultdict, namedtuple
 
 __all__ = ["ManifoldRelations", "Isomorphism", "Embedding"]

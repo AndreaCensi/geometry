@@ -1,4 +1,3 @@
-# coding=utf-8
 """
     Contains all about rotation matrices, quaternions, and various conversions.
 

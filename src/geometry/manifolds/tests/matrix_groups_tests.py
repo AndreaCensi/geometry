@@ -1,4 +1,3 @@
-# coding=utf-8
 from . import for_all_mgroup_point, for_all_mgroup
 
 

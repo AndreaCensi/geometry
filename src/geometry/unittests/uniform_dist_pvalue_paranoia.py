@@ -1,4 +1,3 @@
-# coding=utf-8
 from scipy.stats.distributions import random_integers
 
 import numpy as np

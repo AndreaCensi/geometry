@@ -1,4 +1,3 @@
-# coding=utf-8
 from .differentiable_manifold import DifferentiableManifold
 from .manifold_relations import ManifoldRelations as MR
 

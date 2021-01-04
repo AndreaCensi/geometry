@@ -1,4 +1,3 @@
-# coding=utf-8
 from geometry.manifolds import (
     SO3,
     SO2,

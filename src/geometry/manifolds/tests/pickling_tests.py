@@ -1,4 +1,3 @@
-# coding=utf-8
 import pickle
 
 from geometry.manifolds.tests import for_all_manifolds

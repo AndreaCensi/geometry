@@ -1,4 +1,3 @@
-# coding=utf-8
 from nose.plugins.attrib import attr
 
 from geometry import (

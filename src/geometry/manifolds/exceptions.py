@@ -1,4 +1,3 @@
-# coding=utf-8
 from geometry.formatting import formatm
 
 __all__ = [

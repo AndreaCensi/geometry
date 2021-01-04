@@ -1,4 +1,3 @@
-# coding=utf-8
 import numpy as np
 
 from geometry import sphere_area, spherical_cap_area, spherical_cap_with_area
