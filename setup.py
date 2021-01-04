@@ -17,9 +17,11 @@ params = dict(
     packages=data['modules'],
     long_description="",
     version=data['version'],
-    entry_points={"console_scripts": data['console_scripts']},
+    entry_points=data['entry_points'],
+    zip_safe=data['zip_safe'],
+    include_package_data=data['include_package_data'],
 )
 
 setup(**params)
 
-# sigil ddb6022fca3fd7c65be6dd16b702bbf8
+# sigil 785edf5fce85417b0c8d4297bedddf78
