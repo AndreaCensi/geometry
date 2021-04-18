@@ -8,10 +8,10 @@ jobs:
     - run: {command: "mkdir -p  build-stats\nenv | tee  build-stats/env.txt\n", name: Build
           stats (1)}
     - store_artifacts: {destination: build-stats, path: build-stats}
-    - run: {command: "pip3 install pipdeptree coverage\n\npip3 install --user shyaml\n\
-          shyaml get-values install_requires < project.pp1.yaml > .requirements.txt\n\
-          pip3 install --user --upgrade -r .requirements.txt\nrm .requirements.txt\n",
-        name: Install deps}
+    - run: {command: "pip3 install -U pip\npip3 install pipdeptree coverage\n\npip3\
+          \ install --user shyaml\nshyaml get-values install_requires < project.pp1.yaml\
+          \ > .requirements.txt\npip3 install --user --upgrade -r .requirements.txt\n\
+          rm .requirements.txt\n", name: Install deps}
     - run: {command: "pip3 install --user shyaml\nshyaml get-values tests_require\
           \ < project.pp1.yaml > .requirements_tests.txt\npip3 install --user --upgrade\
           \ -r .requirements_tests.txt\nrm .requirements_tests.txt\n\npip install\
@@ -49,10 +49,10 @@ jobs:
     - run: {command: "mkdir -p  build-stats\nenv | tee  build-stats/env.txt\n", name: Build
           stats (1)}
     - store_artifacts: {destination: build-stats, path: build-stats}
-    - run: {command: "pip3 install pipdeptree coverage\n\npip3 install --user shyaml\n\
-          shyaml get-values install_requires < project.pp1.yaml > .requirements.txt\n\
-          pip3 install --user --upgrade -r .requirements.txt\nrm .requirements.txt\n",
-        name: Install deps}
+    - run: {command: "pip3 install -U pip\npip3 install pipdeptree coverage\n\npip3\
+          \ install --user shyaml\nshyaml get-values install_requires < project.pp1.yaml\
+          \ > .requirements.txt\npip3 install --user --upgrade -r .requirements.txt\n\
+          rm .requirements.txt\n", name: Install deps}
     - run: {command: "pip3 install --user shyaml\nshyaml get-values tests_require\
           \ < project.pp1.yaml > .requirements_tests.txt\npip3 install --user --upgrade\
           \ -r .requirements_tests.txt\nrm .requirements_tests.txt\n\npip install\
@@ -95,4 +95,4 @@ workflows:
           branches: {ignore: /z7-stage.*/}
   version: 2
 
-# sigil d997c27f67a252e4a56cc0808ee044c9
+# sigil c2da13cdf8a3f584df2ae228bd5e50c0
