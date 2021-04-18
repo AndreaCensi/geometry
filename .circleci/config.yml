@@ -31,8 +31,8 @@ jobs:
     - run: {command: "xunit_output=out/test-results/nose-${CIRCLE_NODE_INDEX}-xunit.xml\n\
           \n#              --processes=8 --process-timeout=1000 --process-restartworker\
           \ \\\n# --cover-packages=${COVER_PACKAGES} \\\nnosetests \\\n  --rednose\
-          \ --immediate \\\n  --cover-tests --with-coverage \\\n\n  --with-xunitmp\
-          \ --xunitmp-file=${xunit_output} \\\n  src   $(xunitmp)\n", name: Run tests}
+          \ --immediate \\\n  --cover-tests --with-coverage \\\n  --with-xunitmp --xunitmp-file=${xunit_output}\
+          \ \\\n  src\n", name: Run tests}
     - store_test_results: {path: out/test-results, when: always}
     - run: {command: "coverage combine\ncoverage html -d out/coverage\ncoverage xml\n",
         name: Coverage report, when: always}
@@ -72,8 +72,8 @@ jobs:
     - run: {command: "xunit_output=out/test-results/nose-${CIRCLE_NODE_INDEX}-xunit.xml\n\
           \n#              --processes=8 --process-timeout=1000 --process-restartworker\
           \ \\\n# --cover-packages=${COVER_PACKAGES} \\\nnosetests \\\n  --rednose\
-          \ --immediate \\\n  --cover-tests --with-coverage \\\n\n  --with-xunitmp\
-          \ --xunitmp-file=${xunit_output} \\\n  src   $(xunitmp)\n", name: Run tests}
+          \ --immediate \\\n  --cover-tests --with-coverage \\\n  --with-xunitmp --xunitmp-file=${xunit_output}\
+          \ \\\n  src\n", name: Run tests}
     - store_test_results: {path: out/test-results, when: always}
     - run: {command: "coverage combine\ncoverage html -d out/coverage\ncoverage xml\n",
         name: Coverage report, when: always}
@@ -95,4 +95,4 @@ workflows:
           branches: {ignore: /z7-stage.*/}
   version: 2
 
-# sigil c2da13cdf8a3f584df2ae228bd5e50c0
+# sigil 2620ee6eae204bbc728d0bf8133d7096
