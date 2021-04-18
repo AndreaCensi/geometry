@@ -2,20 +2,21 @@ jobs:
   test-3.8-production:
     docker:
     - {image: python:3.8}
-    environment: {COLUMNS: '160', PATH: /root/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin}
+    environment: {COLUMNS: '160', COVER_PACKAGES: 'geometry,geometry.poses_embedding,geometry.formatting,geometry.manifolds.matrix_lie_algebra,geometry.manifolds.exceptions,geometry.tex,geometry.manifolds.special_euclidean_algebra,geometry.manifolds.product_manifold,geometry.manifolds.tests.pickling_tests,geometry.unittests.random_geometry_density_tests,geometry.unittests.distances_test,geometry.manifolds.special_orthogonal_group,geometry.subspaces,geometry.manifolds.tests.embedding_test,geometry.utils.numpy_backport,geometry.manifolds.square,geometry.manifolds.tangent_bundle,geometry.manifolds.euclidean,geometry.unittests.quaternions_test,geometry.utils,geometry.manifolds.tests.manifold_tests,geometry.unittests.utils,geometry.manifolds.tests,geometry.manifolds.todo.stiefel,geometry.manifolds.tests.checks_generation,geometry.constants,geometry.manifolds.special_euclidean_group,geometry.types,geometry.mds_algos,geometry.manifolds.translation_group,geometry.subspaces.subspaces,geometry.manifolds,geometry.manifolds.point_set,geometry.manifolds.torus,geometry.basic_utils,geometry.unittests.uniform_dist_pvalue_paranoia,geometry.distances.generic,geometry.unittests.random_geometry_tests,geometry.poses,geometry.manifolds.differentiable_manifold,geometry.manifolds.tests.matrix_groups_tests,geometry.manifolds.matrix_lie_group_tangent,geometry.manifolds.special_orthogonal_algebra,geometry.manifolds.torus01,geometry.distances,geometry.unittests.procrustes_test,geometry.manifolds.matrix_linear_space,geometry.manifolds.todo.orthogonal_group,geometry.manifolds.todo.moebius,geometry.unittests.spheres_tests,geometry.spheres_embedding,geometry.unittests.mds_test,geometry.manifolds.manifold_relations,geometry.procrustes,geometry.manifolds.group,geometry.manifolds.todo.posdef_matrices,geometry.manifolds.matrix_lie_group,geometry.manifolds.manifold_embedding_propagation,geometry.rotations,geometry.unittests.utils_test,geometry.unittests,geometry.manifolds.translation_algebra,geometry.unittests.rotations_tests,geometry.manifolds.embedding_relations,geometry.unittests.misc_tests,geometry.distances.spherical,geometry.manifolds.tests.sphere_tests,geometry.yaml_,geometry.manifolds.todo.grassman,geometry.unittests.poses_test,geometry,geometry.manifolds.todo,geometry.manifolds.sphere,geometry.spheres,geometry.rotations_embedding',
+      PATH: /root/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin,
+      TEST_PACKAGES: geometry}
     steps:
     - checkout
     - run: {command: "mkdir -p  build-stats\nenv | tee  build-stats/env.txt\n", name: Build
           stats (1)}
     - store_artifacts: {destination: build-stats, path: build-stats}
-    - run: {command: "pip3 install -U pip\npip3 install pipdeptree coverage\n\npip3\
-          \ install --user shyaml\nshyaml get-values install_requires < project.pp1.yaml\
-          \ > .requirements.txt\npip3 install --user --upgrade -r .requirements.txt\n\
-          rm .requirements.txt\n", name: Install deps}
-    - run: {command: "pip3 install --user shyaml\nshyaml get-values tests_require\
-          \ < project.pp1.yaml > .requirements_tests.txt\npip3 install --user --upgrade\
-          \ -r .requirements_tests.txt\nrm .requirements_tests.txt\n\npip install\
-          \ \t\tpipdeptree==0.13.2\t\tbump2version\t\tnose==1.3.7\t\tnose2==0.10\t\
+    - run: {command: "pip3 install -U pip\npip3 install pipdeptree coverage shyaml\n\
+          \nshyaml get-values install_requires < project.pp1.yaml > .requirements.txt\n\
+          pip3 install  -r .requirements.txt\nrm .requirements.txt\n", name: Install
+          deps}
+    - run: {command: "shyaml get-values tests_require < project.pp1.yaml > .requirements_tests.txt\n\
+          pip3 install -r .requirements_tests.txt\nrm .requirements_tests.txt\n\n\
+          pip install \t\tpipdeptree==0.13.2\t\tbump2version\t\tnose==1.3.7\t\tnose2==0.10\t\
           \tnose2-html-report==0.6.0\t\tnose-parallel==0.4.0\t\tnose_xunitmp==0.4.1\t\
           \tpre-commit==2.11.1\t\trednose==1.3.0\t\tcoverage\tsphinx\t\tsphinx-rtd-theme\n",
         name: Install testing deps}
@@ -32,7 +33,8 @@ jobs:
           \n#              --processes=8 --process-timeout=1000 --process-restartworker\
           \ \\\n# --cover-packages=${COVER_PACKAGES} \\\nnosetests \\\n  --rednose\
           \ --immediate \\\n  --cover-tests --with-coverage \\\n  --with-xunitmp --xunitmp-file=${xunit_output}\
-          \ \\\n  src\n", name: Run tests}
+          \ \\\n  --cover-packages=${COVER_PACKAGES} \\\n  ${TEST_PACKAGES}\n", name: Run
+          tests}
     - store_test_results: {path: out/test-results, when: always}
     - run: {command: "coverage combine\ncoverage html -d out/coverage\ncoverage xml\n",
         name: Coverage report, when: always}
@@ -43,20 +45,21 @@ jobs:
   test-3.8-staging:
     docker:
     - {image: python:3.8}
-    environment: {COLUMNS: '160', PATH: /root/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin}
+    environment: {COLUMNS: '160', COVER_PACKAGES: 'geometry,geometry.poses_embedding,geometry.formatting,geometry.manifolds.matrix_lie_algebra,geometry.manifolds.exceptions,geometry.tex,geometry.manifolds.special_euclidean_algebra,geometry.manifolds.product_manifold,geometry.manifolds.tests.pickling_tests,geometry.unittests.random_geometry_density_tests,geometry.unittests.distances_test,geometry.manifolds.special_orthogonal_group,geometry.subspaces,geometry.manifolds.tests.embedding_test,geometry.utils.numpy_backport,geometry.manifolds.square,geometry.manifolds.tangent_bundle,geometry.manifolds.euclidean,geometry.unittests.quaternions_test,geometry.utils,geometry.manifolds.tests.manifold_tests,geometry.unittests.utils,geometry.manifolds.tests,geometry.manifolds.todo.stiefel,geometry.manifolds.tests.checks_generation,geometry.constants,geometry.manifolds.special_euclidean_group,geometry.types,geometry.mds_algos,geometry.manifolds.translation_group,geometry.subspaces.subspaces,geometry.manifolds,geometry.manifolds.point_set,geometry.manifolds.torus,geometry.basic_utils,geometry.unittests.uniform_dist_pvalue_paranoia,geometry.distances.generic,geometry.unittests.random_geometry_tests,geometry.poses,geometry.manifolds.differentiable_manifold,geometry.manifolds.tests.matrix_groups_tests,geometry.manifolds.matrix_lie_group_tangent,geometry.manifolds.special_orthogonal_algebra,geometry.manifolds.torus01,geometry.distances,geometry.unittests.procrustes_test,geometry.manifolds.matrix_linear_space,geometry.manifolds.todo.orthogonal_group,geometry.manifolds.todo.moebius,geometry.unittests.spheres_tests,geometry.spheres_embedding,geometry.unittests.mds_test,geometry.manifolds.manifold_relations,geometry.procrustes,geometry.manifolds.group,geometry.manifolds.todo.posdef_matrices,geometry.manifolds.matrix_lie_group,geometry.manifolds.manifold_embedding_propagation,geometry.rotations,geometry.unittests.utils_test,geometry.unittests,geometry.manifolds.translation_algebra,geometry.unittests.rotations_tests,geometry.manifolds.embedding_relations,geometry.unittests.misc_tests,geometry.distances.spherical,geometry.manifolds.tests.sphere_tests,geometry.yaml_,geometry.manifolds.todo.grassman,geometry.unittests.poses_test,geometry,geometry.manifolds.todo,geometry.manifolds.sphere,geometry.spheres,geometry.rotations_embedding',
+      PATH: /root/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin,
+      TEST_PACKAGES: geometry}
     steps:
     - checkout
     - run: {command: "mkdir -p  build-stats\nenv | tee  build-stats/env.txt\n", name: Build
           stats (1)}
     - store_artifacts: {destination: build-stats, path: build-stats}
-    - run: {command: "pip3 install -U pip\npip3 install pipdeptree coverage\n\npip3\
-          \ install --user shyaml\nshyaml get-values install_requires < project.pp1.yaml\
-          \ > .requirements.txt\npip3 install --user --upgrade -r .requirements.txt\n\
-          rm .requirements.txt\n", name: Install deps}
-    - run: {command: "pip3 install --user shyaml\nshyaml get-values tests_require\
-          \ < project.pp1.yaml > .requirements_tests.txt\npip3 install --user --upgrade\
-          \ -r .requirements_tests.txt\nrm .requirements_tests.txt\n\npip install\
-          \ \t\tpipdeptree==0.13.2\t\tbump2version\t\tnose==1.3.7\t\tnose2==0.10\t\
+    - run: {command: "pip3 install -U pip\npip3 install pipdeptree coverage shyaml\n\
+          \nshyaml get-values install_requires < project.pp1.yaml > .requirements.txt\n\
+          pip3 install  -r .requirements.txt\nrm .requirements.txt\n", name: Install
+          deps}
+    - run: {command: "shyaml get-values tests_require < project.pp1.yaml > .requirements_tests.txt\n\
+          pip3 install -r .requirements_tests.txt\nrm .requirements_tests.txt\n\n\
+          pip install \t\tpipdeptree==0.13.2\t\tbump2version\t\tnose==1.3.7\t\tnose2==0.10\t\
           \tnose2-html-report==0.6.0\t\tnose-parallel==0.4.0\t\tnose_xunitmp==0.4.1\t\
           \tpre-commit==2.11.1\t\trednose==1.3.0\t\tcoverage\tsphinx\t\tsphinx-rtd-theme\n",
         name: Install testing deps}
@@ -73,7 +76,8 @@ jobs:
           \n#              --processes=8 --process-timeout=1000 --process-restartworker\
           \ \\\n# --cover-packages=${COVER_PACKAGES} \\\nnosetests \\\n  --rednose\
           \ --immediate \\\n  --cover-tests --with-coverage \\\n  --with-xunitmp --xunitmp-file=${xunit_output}\
-          \ \\\n  src\n", name: Run tests}
+          \ \\\n  --cover-packages=${COVER_PACKAGES} \\\n  ${TEST_PACKAGES}\n", name: Run
+          tests}
     - store_test_results: {path: out/test-results, when: always}
     - run: {command: "coverage combine\ncoverage html -d out/coverage\ncoverage xml\n",
         name: Coverage report, when: always}
@@ -95,4 +99,4 @@ workflows:
           branches: {ignore: /z7-stage.*/}
   version: 2
 
-# sigil fb93096043bbdbbf196f80475305823d
+# sigil fe37d23f8f3259cc9b03c1d660d4a2d2
