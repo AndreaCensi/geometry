@@ -28,7 +28,7 @@ jobs:
     - run: {command: "FILE=src/conf.py\nmkdir -p out/docs\nif test -f \"$FILE\"; then\n\
           \    sphinx-build src out/docs\nfi\n", name: Make docs}
     - store_artifacts: {destination: docs, path: out/docs, when: always}
-    - run: {command: "xunit_output=out/test-results/nose-${CIRCLE_NODE_INDEX}-xunit.xml\n\
+    - run: {command: "mkdir -p out/test-results\nxunit_output=out/test-results/nose-${CIRCLE_NODE_INDEX}-xunit.xml\n\
           \n#              --processes=8 --process-timeout=1000 --process-restartworker\
           \ \\\n# --cover-packages=${COVER_PACKAGES} \\\nnosetests \\\n  --rednose\
           \ --immediate \\\n  --cover-tests --with-coverage \\\n  --with-xunitmp --xunitmp-file=${xunit_output}\
@@ -69,7 +69,7 @@ jobs:
     - run: {command: "FILE=src/conf.py\nmkdir -p out/docs\nif test -f \"$FILE\"; then\n\
           \    sphinx-build src out/docs\nfi\n", name: Make docs}
     - store_artifacts: {destination: docs, path: out/docs, when: always}
-    - run: {command: "xunit_output=out/test-results/nose-${CIRCLE_NODE_INDEX}-xunit.xml\n\
+    - run: {command: "mkdir -p out/test-results\nxunit_output=out/test-results/nose-${CIRCLE_NODE_INDEX}-xunit.xml\n\
           \n#              --processes=8 --process-timeout=1000 --process-restartworker\
           \ \\\n# --cover-packages=${COVER_PACKAGES} \\\nnosetests \\\n  --rednose\
           \ --immediate \\\n  --cover-tests --with-coverage \\\n  --with-xunitmp --xunitmp-file=${xunit_output}\
@@ -95,4 +95,4 @@ workflows:
           branches: {ignore: /z7-stage.*/}
   version: 2
 
-# sigil 2620ee6eae204bbc728d0bf8133d7096
+# sigil fb93096043bbdbbf196f80475305823d
