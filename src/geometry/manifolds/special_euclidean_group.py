@@ -22,12 +22,12 @@ __all__ = ["SE_group", "SE", "SE2", "SE3", "TSE", "TSE2", "TSE3"]
 
 class SE_group(MatrixLieGroup):
     """
-        This is the Special Euclidean group SE(n)
-        describing roto-translations of Euclidean space.
-        Implemented only for n=2,3.
+    This is the Special Euclidean group SE(n)
+    describing roto-translations of Euclidean space.
+    Implemented only for n=2,3.
 
-        Note that you have to supply a coefficient *alpha* that
-        weights rotation and translation when defining distances.
+    Note that you have to supply a coefficient *alpha* that
+    weights rotation and translation when defining distances.
     """
 
     @contract(N="int,(2|3)")

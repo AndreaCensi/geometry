@@ -6,8 +6,8 @@ __all__ = ["Square", "Sq", "Sq1", "Sq2", "Sq3"]
 
 
 class Square(RandomManifold):
-    """ A cube/square in [0, 1].
-        All points in R^n belong to the torus.  """
+    """A cube/square in [0, 1].
+    All points in R^n belong to the torus."""
 
     def __init__(self, n):
         DifferentiableManifold.__init__(self, dimension=n)

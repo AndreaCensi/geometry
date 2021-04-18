@@ -6,8 +6,8 @@ __all__ = [
 
 
 class DoesNotBelong(Exception):
-    """ Exception thrown when a point does not belong
-        to a certain manifold *M*. """
+    """Exception thrown when a point does not belong
+    to a certain manifold *M*."""
 
     def __init__(self, M, point, e, context=None):
         self.M = M

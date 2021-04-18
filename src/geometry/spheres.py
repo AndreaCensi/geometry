@@ -82,12 +82,12 @@ def normalize_pi_scalar(x):  # TODO: is this the best solution
 @contract(returns="direction")
 def default_axis():
     """
-        Returns the axis to use when any will do.
+    Returns the axis to use when any will do.
 
-        For example, the identity is represented by
-        a rotation of 0 degrees around *any* axis. If an *(axis,angle)*
-        representation is requested, the axis will be given by
-        *default_axis()*.
+    For example, the identity is represented by
+    a rotation of 0 degrees around *any* axis. If an *(axis,angle)*
+    representation is requested, the axis will be given by
+    *default_axis()*.
     """
     return np.array([0.0, 0.0, 1.0])
 
@@ -95,10 +95,10 @@ def default_axis():
 @contract(returns="direction")
 def default_axis_orthogonal():
     """
-        Returns an axis orthogonal to the one returned
-        by :py:func:`default_axis`.
+    Returns an axis orthogonal to the one returned
+    by :py:func:`default_axis`.
 
-        Use this when you need a couple of arbitrary orthogonal axes.
+    Use this when you need a couple of arbitrary orthogonal axes.
     """
     return np.array([0.0, 1.0, 0.0])
 
@@ -117,13 +117,13 @@ def geodesic_distance_on_sphere(s1: np.ndarray, s2: np.ndarray) -> float:
 @contract(S="directions", returns="float,>=0,<=pi")
 def distribution_radius(S):
     """
-        Returns the radius of the given directions distribution.
+    Returns the radius of the given directions distribution.
 
-        The radius is defined as the minimum *r* such that there exists a
-        point *s* in *S* such that all distances are within *r* from *s*.
+    The radius is defined as the minimum *r* such that there exists a
+    point *s* in *S* such that all distances are within *r* from *s*.
 
-        .. math:: \\textsf{radius} = \\min \\{ r | \\exists s :
-                  \\forall x \\in S : d(s,x) <= r \\}
+    .. math:: \\textsf{radius} = \\min \\{ r | \\exists s :
+              \\forall x \\in S : d(s,x) <= r \\}
     """
     D = np.arccos(np.clip(np.dot(S.T, S), -1, 1))  # XXX: repeated
     distances = D.max(axis=0)
@@ -134,8 +134,8 @@ def distribution_radius(S):
 @contract(S="array[3xK],directions", s="direction", returns="array[K](>=0,<=pi)")
 def distances_from(S: List[np.ndarray], s) -> np.ndarray:
     """
-        Returns the geodesic distances on the sphere from a set of
-        points *S* to a given point *s*.
+    Returns the geodesic distances on the sphere from a set of
+    points *S* to a given point *s*.
 
     """
     return np.arccos(np.clip(np.dot(s, S), -1, 1))  # XXX: repeated
@@ -144,9 +144,9 @@ def distances_from(S: List[np.ndarray], s) -> np.ndarray:
 @contract(ndim="(2|3),K", returns="array[K],unit_length")
 def random_direction(ndim: int = 3) -> np.ndarray:
     """
-        Generates a random direction in :math:`S^{n-1}`.
+    Generates a random direction in :math:`S^{n-1}`.
 
-        Currently only implemented for 2D and 3D.
+    Currently only implemented for 2D and 3D.
     """
     if ndim == 3:
         z = np.random.uniform(-1, +1)
@@ -194,8 +194,8 @@ def any_orthogonal_direction(s):
 @contract(s="array[K],unit_length,(K=2|K=3)", returns="array[K],unit_length")
 def random_orthogonal_direction(s):
     """
-        Returns a random axis orthogonal to *s*
-        (only implemented for circle and sphere).
+    Returns a random axis orthogonal to *s*
+    (only implemented for circle and sphere).
     """
     from .rotations import rot2d, rotation_from_axis_angle
 
@@ -233,11 +233,11 @@ def slerp(s1, s2, t):
 )
 def random_directions_bounded(ndim, radius, num_points, center=None):
     """
-        Returns a random distribution of points in :math:`S^{n-1}`.
-        within a certain radius from the point *center*.
+    Returns a random distribution of points in :math:`S^{n-1}`.
+    within a certain radius from the point *center*.
 
-        The points will be distributed uniformly in that area of the sphere.
-        If *center* is not passed, it will be a random direction.
+    The points will be distributed uniformly in that area of the sphere.
+    If *center* is not passed, it will be a random direction.
     """
     from .rotations import rot2d, rotation_from_axis_angle
 
@@ -267,12 +267,12 @@ def random_directions_bounded(ndim, radius, num_points, center=None):
 @contract(S="array[KxN],(K=2|K=3),directions", returns="array[KxN], directions")
 def sorted_directions(S, num_around=15):
     """
-        Rearranges the directions in *S* in a better order for visualization.
+    Rearranges the directions in *S* in a better order for visualization.
 
-        In 2D, sorts the directions using their angle.
+    In 2D, sorts the directions using their angle.
 
-        In 3D, it tries to do a pleasant elicoidal arrangement
-        with **num_around** spires.
+    In 3D, it tries to do a pleasant elicoidal arrangement
+    with **num_around** spires.
 
     """
     if S.shape[0] == 2:
@@ -310,10 +310,10 @@ def sphere_area(r=1):
 
 def spherical_cap_area(cap_radius):
     """
-        Returns the area of a spherical cap on the unit sphere
-        of the given radius.
+    Returns the area of a spherical cap on the unit sphere
+    of the given radius.
 
-        See figure at http://mathworld.wolfram.com/SphericalCap.html
+    See figure at http://mathworld.wolfram.com/SphericalCap.html
     """
     h = 1 - np.cos(cap_radius)
     a = np.sin(cap_radius)
@@ -323,9 +323,9 @@ def spherical_cap_area(cap_radius):
 
 def spherical_cap_with_area(cap_area):
     """
-        Returns the radius of a spherical cap of the given area.
+    Returns the radius of a spherical cap of the given area.
 
-        See http://www.springerlink.com/content/3521h167300g7v62/
+    See http://www.springerlink.com/content/3521h167300g7v62/
     """
     A = cap_area
     L = np.sqrt(A / np.pi)

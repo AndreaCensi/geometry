@@ -9,12 +9,12 @@ __all__ = ["Euclidean", "R", "R1", "R2", "R3"]
 
 class Euclidean(MatrixLinearSpace):
     """
-        This is the usual Euclidean space of finite dimension;
-        this is mostly used for debugging.
+    This is the usual Euclidean space of finite dimension;
+    this is mostly used for debugging.
 
-        There is no proper Haar measure; as an arbitrary choice,
-        the :py:func:`sample_uniform`
-        returns a sample from a Gaussian distribution centered at 0.
+    There is no proper Haar measure; as an arbitrary choice,
+    the :py:func:`sample_uniform`
+    returns a sample from a Gaussian distribution centered at 0.
 
     """
 

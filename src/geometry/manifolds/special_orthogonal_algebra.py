@@ -9,8 +9,8 @@ __all__ = ["so_algebra", "so2", "so3", "so"]
 
 class so_algebra(MatrixLieAlgebra):
     """
-        This is the Lie algebra of skew-symmetric matrices so(n),
-        for the Special Orthogonal group SO(n).
+    This is the Lie algebra of skew-symmetric matrices so(n),
+    for the Special Orthogonal group SO(n).
     """
 
     def __init__(self, n):

@@ -21,9 +21,9 @@ class MatrixLinearSpace(DifferentiableManifold):
         return np.zeros(self.shape)
 
     def norm(self, v):
-        """ Return the norm of a vector in the algebra.
-            This is used in :py:class:`MatrixLieGroup` to measure
-            distances between points in the Lie group.
+        """Return the norm of a vector in the algebra.
+        This is used in :py:class:`MatrixLieGroup` to measure
+        distances between points in the Lie group.
         """
         return np.linalg.norm(v, 2)
 

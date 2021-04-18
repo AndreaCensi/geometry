@@ -13,7 +13,7 @@ __all__ = ["TranG", "Tran", "Tran1", "Tran2", "Tran3"]
 
 class TranG(MatrixLieGroup):
     """
-        The translation subgroup of SE(n).
+    The translation subgroup of SE(n).
     """
 
     @contract(n="1|2|3")

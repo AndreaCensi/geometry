@@ -13,10 +13,10 @@ class NonCompactStiefel(DifferentiableManifold):
     @contract(n="N,N>0", p="P,P>0,P<=N")
     def __init__(self, p, n):
         """
-            Initializes the manifold structure.
+        Initializes the manifold structure.
 
-            :param n: dimension of space
-            :param p: rank of subspace
+        :param n: dimension of space
+        :param p: rank of subspace
         """
         DifferentiableManifold.__init__(self, 42)
         self.n = n

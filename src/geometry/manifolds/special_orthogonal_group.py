@@ -13,10 +13,10 @@ __all__ = ["SO_group", "SO", "SO2", "SO3"]
 
 class SO_group(MatrixLieGroup):
     """
-        This is the Special Orthogonal group SO(n) describing rotations
-        of Euclidean space; implemented for n=2,3.
+    This is the Special Orthogonal group SO(n) describing rotations
+    of Euclidean space; implemented for n=2,3.
 
-        TODO: do SO2 and SO3 separately
+    TODO: do SO2 and SO3 separately
     """
 
     @contract(N="int,(2|3)")

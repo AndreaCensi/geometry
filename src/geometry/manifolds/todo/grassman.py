@@ -9,12 +9,12 @@ __all__ = [
 
 class Grassman(DifferentiableManifold):
     """
-        INCOMPLETE -- The Grassman manifold Grass(n,p) is the set of rank-p
-        subspaces in R^n. It is seen here as Grass(n,p) = ST(n,p)/GL_p.
+    INCOMPLETE -- The Grassman manifold Grass(n,p) is the set of rank-p
+    subspaces in R^n. It is seen here as Grass(n,p) = ST(n,p)/GL_p.
 
-        For a reference, see the paper by Absil, Mahony, and Sepulchre (2004)
-        where all these operations are explained. Also their book should
-        contain essentially the same info, but with more background.
+    For a reference, see the paper by Absil, Mahony, and Sepulchre (2004)
+    where all these operations are explained. Also their book should
+    contain essentially the same info, but with more background.
 
     """
 
@@ -24,10 +24,10 @@ class Grassman(DifferentiableManifold):
     @contract(n="N,N>0", p="P,P>0,P<=N")
     def __init__(self, p: int, n: int):
         """
-            Initializes the manifold structure.
+        Initializes the manifold structure.
 
-            :param n: dimension of space
-            :param p: rank of subspace
+        :param n: dimension of space
+        :param p: rank of subspace
         """
         # TODO: what is the dimension?
         # DifferentiableManifold.__init__(self, dimension)

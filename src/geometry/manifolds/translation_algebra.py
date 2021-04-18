@@ -9,7 +9,7 @@ __all__ = ["trana", "tran", "tran1", "tran2", "tran3"]
 
 class trana(MatrixLieAlgebra):
     """
-        lie algebra for translation
+    lie algebra for translation
     """
 
     @contract(n="1|2|3")

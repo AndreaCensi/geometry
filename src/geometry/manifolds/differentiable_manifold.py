@@ -30,18 +30,18 @@ class DifferentiableManifold:
     @new_contract
     def belongs(self, x):
         """
-            Raises an Exception if the point does not belong to this manifold.
+        Raises an Exception if the point does not belong to this manifold.
 
-            This function wraps some checks around :py:func:`belongs_`,
-            which is implemented by the subclasses.
+        This function wraps some checks around :py:func:`belongs_`,
+        which is implemented by the subclasses.
         """
 
     @new_contract
     @contract(bv="tuple(belongs, *)")
     def belongs_ts(self, bv):
         """
-            Checks that a vector *vx* belongs to the tangent space
-            at the given point *base*.
+        Checks that a vector *vx* belongs to the tangent space
+        at the given point *base*.
 
         """
         bvp = self.project_ts(bv)
@@ -51,22 +51,22 @@ class DifferentiableManifold:
     @contract(bv="tuple(belongs, *)")
     def project_ts(self, bv):  # TODO: test
         """
-            Projects a vector *bv* in the ambient space
-            to the tangent space at point *base*.
+        Projects a vector *bv* in the ambient space
+        to the tangent space at point *base*.
         """
 
     @abstractmethod
     @contract(a="belongs", b="belongs", returns=">=0")
     def distance(self, a, b):
         """
-            Computes the geodesic distance between two points.
+        Computes the geodesic distance between two points.
         """
 
     # @contract(returns='DifferentiableManifold') # Circular ref
     def tangent_bundle(self):
-        """ Returns the manifold corresponding to the tangent bundle.
-            The default gives a generic implementation.
-            MatrixLieGroup have a different one.
+        """Returns the manifold corresponding to the tangent bundle.
+        The default gives a generic implementation.
+        MatrixLieGroup have a different one.
         """
         if self._tangent_bundle is None:
             from . import TangentBundle
@@ -78,27 +78,27 @@ class DifferentiableManifold:
     @contract(base="belongs", p="belongs", returns="belongs_ts")
     def logmap(self, base, p):
         """
-            Computes the logarithmic map from base point *base* to target *b*.
-            # XXX: what should we do in the case there is more than one logmap?
+        Computes the logarithmic map from base point *base* to target *b*.
+        # XXX: what should we do in the case there is more than one logmap?
         """
 
     @abstractmethod
     @contract(bv="belongs_ts", returns="belongs")
     def expmap(self, bv):
         """
-            Computes the exponential map from *base* for the velocity
-            vector *v*.
+        Computes the exponential map from *base* for the velocity
+        vector *v*.
 
-            This function wraps some checks around :py:func:`expmap_`,
-            which is implemented by the subclasses.
+        This function wraps some checks around :py:func:`expmap_`,
+        which is implemented by the subclasses.
 
         """
 
     @contract(returns="list(belongs)")
     def interesting_points(self):
         """
-            Returns a list of "interesting points" on this manifold that
-            should be used for testing various properties.
+        Returns a list of "interesting points" on this manifold that
+        should be used for testing various properties.
         """
         return []
 
@@ -110,8 +110,8 @@ class DifferentiableManifold:
 
     @contract(a="belongs", returns="belongs")
     def normalize(self, a):
-        """ Normalizes the coordinates to the canonical representation
-            for this manifold. See TorusW. """
+        """Normalizes the coordinates to the canonical representation
+        for this manifold. See TorusW."""
         return a
 
     @contract(returns="belongs", points="list[>=1](belongs)")
@@ -123,15 +123,15 @@ class DifferentiableManifold:
     @contract(a="belongs")
     def friendly(self, a):
         """
-            Returns a friendly description string for a point on the manifold.
+        Returns a friendly description string for a point on the manifold.
         """
         return a.__str__()
 
     @contract(a="belongs", b="belongs")
     def assert_close(self, a, b, atol=1e-8, msg=None):
         """
-            Asserts that two points on the manifold are close to the given
-            tolerance.
+        Asserts that two points on the manifold are close to the given
+        tolerance.
         """
         distance = self.distance(a, b)
         if msg is None:
@@ -282,14 +282,14 @@ class DifferentiableManifold:
 
 
 class RandomManifold(DifferentiableManifold):
-    """ This is the base class for manifolds that have the ability
-        to sample random points. """
+    """This is the base class for manifolds that have the ability
+    to sample random points."""
 
     @abstractmethod
     def sample_uniform(self):
         """
-            Samples a random point in this manifold according to the Haar
-            measure. Raises exception if the measure is improper (e.g., R^n).
+        Samples a random point in this manifold according to the Haar
+        measure. Raises exception if the measure is improper (e.g., R^n).
         """
 
     @abstractmethod

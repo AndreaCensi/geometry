@@ -7,15 +7,15 @@ from geometry.formatting import formatm
 @for_all_manifold_pairs
 def check_geodesic_consistency(M, a, b):
     """
-        Check that there is consistency in the geodesics.
+    Check that there is consistency in the geodesics.
 
-        This is a test that
+    This is a test that
 
-            x(t) = geodesic( a, b, t)
+        x(t) = geodesic( a, b, t)
 
-        interpolates between a and b, checking
+    interpolates between a and b, checking
 
-            d(a, x(t)) + d(x(t), b) = d(a,b)
+        d(a, x(t)) + d(x(t), b) = d(a,b)
 
     """
     divisions = 5
@@ -40,9 +40,9 @@ def check_geodesic_consistency(M, a, b):
 
 @for_all_manifold_pairs
 def check_logmap1(M, a, b):
-    """ This is a test that:
+    """This is a test that:
 
-            Exp_a( Log_a(b) ) = b
+    Exp_a( Log_a(b) ) = b
 
     """
     check_logmap1.description = "%s: Checking that logmap/expmap work. " "(a: %s, b: %s)" % (

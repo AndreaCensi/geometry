@@ -307,9 +307,9 @@ def se2_from_SE2_slow(pose: SE2value) -> se2value:
 @contract(pose="SE2", returns="se2")
 def se2_from_SE2(pose: SE2value) -> se2value:
     """
-        Converts a pose to its Lie algebra representation.
+    Converts a pose to its Lie algebra representation.
 
-        See Bullo, Murray "PD control on the euclidean group" for proofs.
+    See Bullo, Murray "PD control on the euclidean group" for proofs.
     """
     R, t, zero, one = extract_pieces(pose)  # @UnusedVariable
     w = angle_from_rot2d(R)
@@ -329,9 +329,9 @@ def se2_from_SE2(pose: SE2value) -> se2value:
 
 @contract(returns="SE2", vel="se2")
 def SE2_from_se2(vel: se2value) -> SE2value:
-    """ Converts from Lie algebra representation to pose.
+    """Converts from Lie algebra representation to pose.
 
-        See Bullo, Murray "PD control on the euclidean group" for proofs.
+    See Bullo, Murray "PD control on the euclidean group" for proofs.
     """
     w = vel[1, 0]
     R = rot2d(w)
@@ -374,9 +374,9 @@ def se2_from_se3(vel: se3value, check_exact=True, z_atol=1e-6) -> se2value:
 @contract(pose="SE3", returns="SE2")
 def SE2_from_SE3(pose: SE3value, check_exact: bool = True, z_atol: float = 1e-6) -> SE2value:
     """
-        Projects a pose in SE3 to SE2.
+    Projects a pose in SE3 to SE2.
 
-        If check_exact is True, it will check that z = 0 and axis ~= [0,0,1].
+    If check_exact is True, it will check that z = 0 and axis ~= [0,0,1].
     """
     rotation, translation = rotation_translation_from_pose(pose)
     axis, angle = axis_angle_from_rotation(rotation)

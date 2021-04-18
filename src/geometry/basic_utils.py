@@ -43,8 +43,8 @@ def normalize_length(s: V1D, norm: int = 2) -> V1DN:
 @contract(s="array")
 def normalize_length_or_zero(s: V1D, norm: int = 2) -> V1D:
     """
-        Normalize an array such that it has unit length in the given norm;
-        if the norm is close to zero, the zero vector is returned.
+    Normalize an array such that it has unit length in the given norm;
+    if the norm is close to zero, the zero vector is returned.
     """
     sn = np.linalg.norm(s, norm)
     if np.allclose(sn, 0, atol=GeometryConstants.atol_zero_norm):
@@ -72,9 +72,9 @@ def deprecated(func):
 
 def safe_arccos(x):
     """
-        Returns the arcosine of x, clipped between -1 and 1.
+    Returns the arcosine of x, clipped between -1 and 1.
 
-        Use this when you know x is a cosine, but it might be
-        slightly over 1 or below -1 due to numerical errors.
+    Use this when you know x is a cosine, but it might be
+    slightly over 1 or below -1 due to numerical errors.
     """
     return np.arccos(np.clip(x, -1.0, 1.0))

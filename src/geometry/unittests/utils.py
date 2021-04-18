@@ -67,9 +67,9 @@ class GeoTestCase(unittest.TestCase):
             assert_allclose(x, x2)
 
     def check_conversion(self, sequence, op1, op2):
-        """ Checks that  x = op2(op1(x)) for all x in sequence.
-            If intermediate results are tuples, they are passed
-            as distinct parameters. """
+        """Checks that  x = op2(op1(x)) for all x in sequence.
+        If intermediate results are tuples, they are passed
+        as distinct parameters."""
 
         for x in sequence:
             # yield self.check_one, x, op1, op2

@@ -10,10 +10,10 @@ __all__ = ["se_algebra", "se", "se2", "se3"]
 
 
 class se_algebra(MatrixLieAlgebra):
-    """ This is the Lie algebra se(n) for the Special Euclidean group SE(n).
+    """This is the Lie algebra se(n) for the Special Euclidean group SE(n).
 
-        Note that you have to supply a coefficient *alpha* that
-        weights rotation and translation when defining distances.
+    Note that you have to supply a coefficient *alpha* that
+    weights rotation and translation when defining distances.
     """
 
     def __init__(self, N, alpha):
@@ -58,8 +58,8 @@ class se_algebra(MatrixLieAlgebra):
 
     @contract(v="array[N]", returns="belongs")
     def algebra_from_vector(self, v):
-        """ Note that the first element is (omega, vx, vy) or
-            (w1,w2,w3,vx,vy,vz) """
+        """Note that the first element is (omega, vx, vy) or
+        (w1,w2,w3,vx,vy,vz)"""
 
         if self.n == 3:
             assert v.size == 3
@@ -78,8 +78,8 @@ class se_algebra(MatrixLieAlgebra):
     @contract(returns="belongs")
     def algebra_from_velocities(self, avel, lvel):
         """
-            A convenience function that builds an element
-            of the algebra from linear/angular velocities.
+        A convenience function that builds an element
+        of the algebra from linear/angular velocities.
         """
         # TODO: test this
 

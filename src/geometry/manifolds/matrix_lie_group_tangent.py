@@ -6,13 +6,13 @@ __all__ = ["MatrixLieGroupTangent"]
 
 
 class MatrixLieGroupTangent(DifferentiableManifold):
-    """ This class represents the tangent bundle of a matrix Lie group
-        using a tuble (base, v0), where v0 is in the algebra.
+    """This class represents the tangent bundle of a matrix Lie group
+    using a tuble (base, v0), where v0 is in the algebra.
 
-        Compare with the generic TangentBundle that uses the representation
-        (base, vel) where vel is tangent at base (it holds that vel=base*v0).
+    Compare with the generic TangentBundle that uses the representation
+    (base, vel) where vel is tangent at base (it holds that vel=base*v0).
 
-        (MatrixLieGroup has different representation)
+    (MatrixLieGroup has different representation)
     """
 
     # TODO: the tangent bundle of a matrix Lie group has more properties than
@@ -62,7 +62,7 @@ class MatrixLieGroupTangent(DifferentiableManifold):
     @contract(a="belongs")
     def friendly(self, a):
         """
-            Returns a friendly description string for a point on the manifold.
+        Returns a friendly description string for a point on the manifold.
         """
         v = self.base.get_algebra().vector_from_algebra(a[1])
         return "V(%s,%s)" % (self.base.friendly(a[0]), v.tolist())

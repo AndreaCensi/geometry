@@ -5,10 +5,10 @@ __all__ = ["TangentBundle"]
 
 
 class TangentBundle(DifferentiableManifold):
-    """ This class represents the tangent bundle of a generic manifold
-        using a tuple (base, vel) where vel is tangent at base.
+    """This class represents the tangent bundle of a generic manifold
+    using a tuple (base, vel) where vel is tangent at base.
 
-        (MatrixLieGroup has different representation)
+    (MatrixLieGroup has different representation)
     """
 
     # TODO: create tests for all of this
@@ -54,6 +54,6 @@ class TangentBundle(DifferentiableManifold):
     @contract(a="belongs")
     def friendly(self, a):
         """
-            Returns a friendly description string for a point on the manifold.
+        Returns a friendly description string for a point on the manifold.
         """
         return "%s" % a

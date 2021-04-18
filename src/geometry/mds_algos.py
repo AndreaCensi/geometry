@@ -122,8 +122,8 @@ def truncated_svd_randomized(M, k):
 @contract(C="array[NxN]", ndim="int,>0,K", returns="array[KxN]")
 def inner_product_embedding_randomized(C, ndim):
     """
-        Best embedding of inner product matrix based on
-        randomized projections.
+    Best embedding of inner product matrix based on
+    randomized projections.
     """
     U, S, V = truncated_svd_randomized(C, ndim)  # @UnusedVariable.
     check_multiple([("K", ndim), ("array[KxN]", V), ("array[K]", S)])

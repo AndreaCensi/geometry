@@ -8,15 +8,15 @@ __all__ = ["TorusW", "TorusW", "Ts", "Ts1", "Ts2", "Ts3"]
 
 
 class TorusW(RandomManifold):
-    """ This is a torus whose coordinates wrap around in [0, W).
-        All points in R^n belong to the torus.  """
+    """This is a torus whose coordinates wrap around in [0, W).
+    All points in R^n belong to the torus."""
 
     @contract(widths="seq[N](>0)", normalize_bias="None|seq[N](number)")
     def __init__(self, widths, normalize_bias=None):
         """
-            :param normalize_bias: Only relevant for normalize(). If None, the normalization
-            will be in [0,W[0]], [0,W[1]], etc. If given a bias, the normalization
-            will be in [b[0],W[0]+b[0]], etc.
+        :param normalize_bias: Only relevant for normalize(). If None, the normalization
+        will be in [0,W[0]], [0,W[1]], etc. If given a bias, the normalization
+        will be in [b[0],W[0]+b[0]], etc.
         """
         self.widths = np.array(widths, dtype="float")
         self.n = self.widths.size
