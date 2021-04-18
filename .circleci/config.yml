@@ -28,10 +28,14 @@ jobs:
     - run: {command: "FILE=src/conf.py\nmkdir -p out/docs\nif test -f \"$FILE\"; then\n\
           \    sphinx-build src out/docs\nfi\n", name: Make docs}
     - store_artifacts: {destination: docs, path: out/docs, when: always}
-    - run: {command: "make test\n", name: Run tests}
+    - run: {command: "xunit_output=out/test-results/nose-${CIRCLE_NODE_INDEX}-xunit.xml\n\
+          \n#              --processes=8 --process-timeout=1000 --process-restartworker\
+          \ \\\n# --cover-packages=${COVER_PACKAGES} \\\nnosetests \\\n  --rednose\
+          \ --immediate \\\n  --cover-tests --with-coverage \\\n\n  --with-xunitmp\
+          \ --xunitmp-file=${xunit_output} \\\n  src   $(xunitmp)\n", name: Run tests}
     - store_test_results: {path: out/test-results, when: always}
-    - run: {command: "coverage combine\ncoverage report -d out/coverage\ncoverage\
-          \ xml\n", name: Coverage report, when: always}
+    - run: {command: "coverage combine\ncoverage html -d out/coverage\ncoverage xml\n",
+        name: Coverage report, when: always}
     - store_artifacts: {destination: coverage, path: out/coverage, when: always}
     - store_artifacts: {destination: tests, path: out/tests, when: always}
     - run: {command: "bash <(curl -s https://codecov.io/bash)\n", name: CodeCov, when: always}
@@ -65,10 +69,14 @@ jobs:
     - run: {command: "FILE=src/conf.py\nmkdir -p out/docs\nif test -f \"$FILE\"; then\n\
           \    sphinx-build src out/docs\nfi\n", name: Make docs}
     - store_artifacts: {destination: docs, path: out/docs, when: always}
-    - run: {command: "make test\n", name: Run tests}
+    - run: {command: "xunit_output=out/test-results/nose-${CIRCLE_NODE_INDEX}-xunit.xml\n\
+          \n#              --processes=8 --process-timeout=1000 --process-restartworker\
+          \ \\\n# --cover-packages=${COVER_PACKAGES} \\\nnosetests \\\n  --rednose\
+          \ --immediate \\\n  --cover-tests --with-coverage \\\n\n  --with-xunitmp\
+          \ --xunitmp-file=${xunit_output} \\\n  src   $(xunitmp)\n", name: Run tests}
     - store_test_results: {path: out/test-results, when: always}
-    - run: {command: "coverage combine\ncoverage report -d out/coverage\ncoverage\
-          \ xml\n", name: Coverage report, when: always}
+    - run: {command: "coverage combine\ncoverage html -d out/coverage\ncoverage xml\n",
+        name: Coverage report, when: always}
     - store_artifacts: {destination: coverage, path: out/coverage, when: always}
     - store_artifacts: {destination: tests, path: out/tests, when: always}
     - run: {command: "bash <(curl -s https://codecov.io/bash)\n", name: CodeCov, when: always}
@@ -80,11 +88,11 @@ workflows:
     - test-3.8-staging:
         context: pip-staging
         filters:
-          branches: {only: /z7-stage-.*/}
+          branches: {only: /z7-stage.*/}
     - test-3.8-production:
         context: z7-production
         filters:
-          branches: {ignore: /z7-stage-.*/}
+          branches: {ignore: /z7-stage.*/}
   version: 2
 
-# sigil 4bd964f7d00296d53871e471a61ba4e1
+# sigil d997c27f67a252e4a56cc0808ee044c9
