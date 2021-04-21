@@ -218,8 +218,10 @@ jobs:
         name: Run tests
         command: |
           mkdir -p out/test-results
+          touch out/test-results/hello
           xunit_output=out/test-results/nose-${CIRCLE_NODE_INDEX}-xunit.xml
-
+          touch ${xunit_output}
+          ls out/test-results
           #              --processes=8 --process-timeout=1000 --process-restartworker \
           # --cover-packages=${COVER_PACKAGES} \
           nosetests \
