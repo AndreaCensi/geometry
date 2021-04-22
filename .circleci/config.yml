@@ -103,7 +103,7 @@ jobs:
           nosetests \
             --rednose --immediate \
             --cover-tests --with-coverage \
-            --with-xunitmp --xunitmp-file=${xunit_output} \
+            --with-xunit --xunit-file=${xunit_output} \
             --cover-package=${COVER_PACKAGES} \
             ${TEST_PACKAGES}
 
@@ -225,7 +225,7 @@ jobs:
           nosetests \
             --rednose --immediate \
             --cover-tests --with-coverage \
-            --with-xunitmp --xunitmp-file=${xunit_output} \
+            --with-xunit --xunit-file=${xunit_output} \
             --cover-package=${COVER_PACKAGES} \
             ${TEST_PACKAGES}
 
@@ -259,4 +259,4 @@ jobs:
         command: |
           bash <(curl -s https://codecov.io/bash)
 
-# sigil 036abe8fb42e414fba00b8307b540c96
+# sigil f3dfbf759ffedca0ff1e0ee841963d73
