@@ -110,8 +110,8 @@ jobs:
     - run:
         name: geometry
         command: |-
-          set -ex
-          mkdir -p out/test-results;
+          set -euxo pipefail
+          mkdir -p out/test-results
           xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry-xunit.xml
           nosetests \
               --rednose --immediate \
@@ -245,8 +245,8 @@ jobs:
     - run:
         name: geometry
         command: |-
-          set -ex
-          mkdir -p out/test-results;
+          set -euxo pipefail
+          mkdir -p out/test-results
           xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry-xunit.xml
           nosetests \
               --rednose --immediate \
@@ -380,8 +380,8 @@ jobs:
     - run:
         name: geometry
         command: |-
-          set -ex
-          mkdir -p out/test-results;
+          set -euxo pipefail
+          mkdir -p out/test-results
           xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry-xunit.xml
           nosetests \
               --rednose --immediate \
@@ -515,8 +515,8 @@ jobs:
     - run:
         name: geometry
         command: |-
-          set -ex
-          mkdir -p out/test-results;
+          set -euxo pipefail
+          mkdir -p out/test-results
           xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry-xunit.xml
           nosetests \
               --rednose --immediate \
@@ -565,4 +565,4 @@ jobs:
           bash <(curl -s https://codecov.io/bash)
     resource_class: medium+
 
-# sigil b08ecd59bdbdc52d85bfde66798c770a
+# sigil feb85b66197e06fea2f066b260e67dae
