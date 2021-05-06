@@ -139,7 +139,7 @@ jobs:
         when: always
         command: |
           coverage combine || true
-          coverage html -d out/coverage
+          coverage html -d out/coverage/${CIRCLE_NODE_INDEX}
           coverage xml
 
 
@@ -274,7 +274,7 @@ jobs:
         when: always
         command: |
           coverage combine || true
-          coverage html -d out/coverage
+          coverage html -d out/coverage/${CIRCLE_NODE_INDEX}
           coverage xml
 
 
@@ -409,7 +409,7 @@ jobs:
         when: always
         command: |
           coverage combine || true
-          coverage html -d out/coverage
+          coverage html -d out/coverage/${CIRCLE_NODE_INDEX}
           coverage xml
 
 
@@ -544,7 +544,7 @@ jobs:
         when: always
         command: |
           coverage combine || true
-          coverage html -d out/coverage
+          coverage html -d out/coverage/${CIRCLE_NODE_INDEX}
           coverage xml
 
 
@@ -565,4 +565,4 @@ jobs:
           bash <(curl -s https://codecov.io/bash)
     resource_class: medium+
 
-# sigil feb85b66197e06fea2f066b260e67dae
+# sigil 907b13734edb4958c6e5cd6a69fc356f
