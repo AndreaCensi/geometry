@@ -1,5 +1,5 @@
-__version__ = "7.1.2105061655"
-__date__ = "2021-05-06T16:55:19.291948+00:00"
+__version__ = "7.1.2105071118"
+__date__ = "2021-05-07T11:18:30.008193+00:00"
 # If True, additional checks are done at runtime
 from zuper_commons.logs import ZLogger
 
