@@ -1,5 +1,5 @@
 # coding=utf-8
-__version__ = "2.1.0"
+__version__ = "2.1.1"
 
 # If True, additional checks are done at runtime
 from zuper_commons.logs import ZLogger
