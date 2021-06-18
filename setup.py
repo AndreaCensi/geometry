@@ -18,7 +18,7 @@ def get_version(filename):
 
 
 version = get_version(filename="src/geometry/__init__.py")
-line = "z7"
+line = "z6"
 install_requires = ["PyContracts3", "numpy", "scipy"]
 
 setup(
