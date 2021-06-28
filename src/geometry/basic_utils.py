@@ -23,9 +23,9 @@ except:
     pass
 
 __all__ = [
+    "deprecated",
     "normalize_length",
     "normalize_length_or_zero",
-    "deprecated",
     "safe_arccos",
 ]
 

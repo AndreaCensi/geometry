@@ -9,12 +9,12 @@ new_contract("angles", "array[N](>=-pi,<=pi)")
 new_contract("distances", "array[NxN](>=0,<=pi)")
 
 __all__ = [
-    "directions_from_angles",
     "angles_from_directions",
     "cosines_from_directions",
-    "distances_from_cosines",
     "cosines_from_distances",
+    "directions_from_angles",
     "distances_from_angles",
+    "distances_from_cosines",
     "distances_from_directions",
 ]
 
