@@ -150,7 +150,9 @@ class MatrixLieGroup(Group, DifferentiableManifold, ABC):
 
             Uses generic matrix exponential.
         """
-        return expm(a)
+        res = expm(a)
+        logger.info(a=a, res=res, res2=res)
+        return res
 
     # TODO: write tests for this
     @contract(a="belongs", b="belongs", returns="belongs_ts")

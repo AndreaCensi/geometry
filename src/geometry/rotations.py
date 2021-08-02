@@ -185,7 +185,7 @@ def angle_from_SO2(R):
 
 @contract(omega="number", returns="so2")
 def hat_map_2d(omega):
-    return np.array([[0, -1], [+1, 0]]) * omega
+    return np.array([[0, -1], [+1, 0]], dtype='float64') * omega
 
 
 @contract(W="so2", returns="float")

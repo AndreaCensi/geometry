@@ -152,7 +152,7 @@ def extract_pieces(x):
 @contract(a="array[MxM]", b="array[M]", c="array[M]", d="number", returns="array[NxN],N=M+1")
 def combine_pieces(a, b, c, d):
     M = a.shape[0]
-    x = np.zeros((M + 1, M + 1))
+    x = np.zeros((M + 1, M + 1), dtype='float64')
     x[0:M, 0:M] = a
     x[0:M, M] = b
     x[M, 0:M] = c
@@ -271,7 +271,7 @@ def xytheta_from_SE2(pose: SE2value) -> np.ndarray:
 @contract(linear="(array[2],finite)|seq[2](number,finite)", angular="number,finite", returns="se2")
 def se2_from_linear_angular(linear: Union[T2value, List[float]], angular: float) -> SE2value:
     """ Returns an element of se2 from linear and angular velocity. """
-    linear = np.array(linear)
+    linear = np.array(linear, dtype='float64')
     M = hat_map_2d(angular)
     return combine_pieces(M, linear, linear * 0, 0)
 
