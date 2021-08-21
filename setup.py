@@ -19,7 +19,7 @@ def get_version(filename):
 
 version = get_version(filename="src/geometry/__init__.py")
 line = "z6"
-install_requires = ["PyContracts3", "numpy", "scipy"]
+install_requires = ["PyContracts3", "numpy", "scipy", "zuper-commons-z6"]
 
 setup(
     name=f"PyGeometry-{line}",
