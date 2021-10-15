@@ -5,28 +5,28 @@ workflows:
   version: 2
   test:
     jobs:
-    - test-3.8-staging:
-        context: pip-staging
+    - test-3.8-stage:
+        context: z7-stage
         filters:
           branches:
             only: /z7-stage.*/
-    - test-3.8-production:
-        context: z7-production
+    - test-3.8-prod:
+        context: z7-prod
         filters:
           branches:
             ignore: /z7-stage.*/
-    - test-3.9-staging:
-        context: pip-staging
+    - test-3.9-stage:
+        context: z7-stage
         filters:
           branches:
             only: /z7-stage.*/
-    - test-3.9-production:
-        context: z7-production
+    - test-3.9-prod:
+        context: z7-prod
         filters:
           branches:
             ignore: /z7-stage.*/
 jobs:
-  test-3.8-staging:
+  test-3.8-stage:
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -167,7 +167,7 @@ jobs:
         command: |
           bash <(curl -s https://codecov.io/bash)
     resource_class: medium
-  test-3.8-production:
+  test-3.8-prod:
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -308,7 +308,7 @@ jobs:
         command: |
           bash <(curl -s https://codecov.io/bash)
     resource_class: medium
-  test-3.9-staging:
+  test-3.9-stage:
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -449,7 +449,7 @@ jobs:
         command: |
           bash <(curl -s https://codecov.io/bash)
     resource_class: medium
-  test-3.9-production:
+  test-3.9-prod:
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -591,4 +591,4 @@ jobs:
           bash <(curl -s https://codecov.io/bash)
     resource_class: medium
 
-# sigil 8dfa225a0870755191a442dabfdbe44d
+# sigil 0dc243bab13f2e4defe67824ee68bd8b
