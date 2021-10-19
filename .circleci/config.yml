@@ -24,8 +24,8 @@ jobs:
     docker:
       - image: python:3.6
         auth: &auth
-          username: $DOCKER_HUB_USERNAME
-          password: $DOCKER_HUB_PASSWORD
+          username: $DOCKER_USERNAME
+          password: $DOCKER_PASSWORD
     working_directory: ~/repo
     steps:
       - checkout
@@ -33,7 +33,7 @@ jobs:
           name: Install deps
           command: |
             #pip install --user --upgrade -r requirements.txt
-            python3 -m pip install -e .  --prefix ~/.local  
+            python3 -m pip install -e .  --prefix ~/.local
             pip freeze
 
       - run:
