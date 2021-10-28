@@ -12,6 +12,7 @@ params = dict(
     author_email=data["author_email"],
     url=data["url"],
     tests_require=data["tests_require"],
+    extras_require={"test": data["tests_require"]},
     install_requires=data["install_requires"],
     package_dir={"": data["srcdir"]},
     packages=data["modules"],
@@ -24,4 +25,4 @@ params = dict(
 
 setup(**params)
 
-# sigil db3b1eaa6e910979b80cf8826d500c83
+# sigil ebaeec93e9da74460961ffce57c36fda
