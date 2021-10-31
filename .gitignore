@@ -11,3 +11,6 @@ coverage_information
 *.py,cover
 out-comptests
 .eggs
+
+# otherwise CI thinks index not clean
+*.resolved

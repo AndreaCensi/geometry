@@ -1,0 +1,35 @@
+{
+  "install_requires": [
+    "PyContracts3",
+    "numpy",
+    "scipy",
+    "zuper-commons-z6"
+  ],
+  "tests_require": [
+    "nose-cov",
+    "nose-progressive",
+    "nose>=1.0",
+    "rudolf"
+  ],
+  "srcdir": "src",
+  "package_name": "PyGeometry-z6",
+  "entry_points": {
+    "console_scripts": []
+  },
+  "zip_safe": true,
+  "include_package_data": true,
+  "modules": [
+    "geometry",
+    "geometry.distances",
+    "geometry.manifolds",
+    "geometry.manifolds.tests",
+    "geometry.manifolds.todo",
+    "geometry.subspaces",
+    "geometry.unittests",
+    "geometry.utils"
+  ],
+  "version": "2.1.2",
+  "author": "",
+  "author_email": "",
+  "url": ""
+}
