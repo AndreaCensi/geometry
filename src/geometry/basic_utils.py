@@ -32,7 +32,7 @@ __all__ = [
 
 @contract(s="array")
 def normalize_length(s: V1D, norm: int = 2) -> V1DN:
-    """ Normalize an array such that it has unit length in the given norm. """
+    """Normalize an array such that it has unit length in the given norm."""
     sn = np.linalg.norm(s, norm)
     if np.allclose(sn, 0, atol=GeometryConstants.atol_zero_norm):
         raise ValueError("Norm is zero")

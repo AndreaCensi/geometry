@@ -22,7 +22,7 @@ def best_orthogonal_transform(X, Y):
 
 @contract(M="array[NxN]", returns="array[NxN],orthogonal")
 def closest_orthogonal_matrix(M):
-    """ Finds the closest orthogonal matrix to M. """
+    """Finds the closest orthogonal matrix to M."""
     U, _, V = np.linalg.svd(M)
     R = np.dot(U, V)
     return R

@@ -38,7 +38,7 @@ class se_algebra(MatrixLieAlgebra):
 
     @contract(a="belongs")
     def vector_from_algebra(self, a):
-        """ Note that it returns (omega, vx, vy) or (w1,w2,w3,vx,vy,vz) """
+        """Note that it returns (omega, vx, vy) or (w1,w2,w3,vx,vy,vz)"""
         W, v, zero, zero = extract_pieces(a)  # @UnusedVariable
 
         if self.n == 3:

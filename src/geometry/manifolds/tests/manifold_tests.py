@@ -84,7 +84,7 @@ def check_friendly(M, a):
 
 @for_all_manifold_point
 def check_normalize(M, a):
-    """ normalize() must be idempotent. """
+    """normalize() must be idempotent."""
     a2 = M.normalize(a)
     M.assert_close(a, a2)
     a3 = M.normalize(a2)

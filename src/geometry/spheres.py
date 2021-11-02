@@ -35,7 +35,7 @@ __all__ = [
 @new_contract
 @contract(x="array[N],N>0")
 def unit_length(x):
-    """ Checks that the value is a 1D vector with unit length in the 2 norm."""
+    """Checks that the value is a 1D vector with unit length in the 2 norm."""
     assert_allclose(1, np.linalg.norm(x), rtol=1e-5)  # XXX:
 
 
@@ -48,14 +48,14 @@ new_contract("S2", "array[3],unit_length")
 @new_contract
 @contract(X="array[KxN],K>0,N>0")
 def directions(X):
-    """ Checks that every column has unit length. """
+    """Checks that every column has unit length."""
     norm = (X * X).sum(axis=0)
     assert_allclose(1, norm, rtol=1e-5)  # XXX:
 
 
 @contract(s="array[K],K>=2", v="array[K]")
 def assert_orthogonal(s, v):
-    """ Checks that two vectors are orthogonal. """
+    """Checks that two vectors are orthogonal."""
     dot = (v * s).sum()
     if not np.allclose(dot, 0):
         angle = np.arccos(dot / (np.linalg.norm(v) * np.linalg.norm(s)))
@@ -65,7 +65,7 @@ def assert_orthogonal(s, v):
 
 @contract(x="array[N]", returns="array[N](>=-pi,<pi)")
 def normalize_pi(x):
-    """ Normalizes the entries in *x* in the interval :math:`[-pi,pi)`. """
+    """Normalizes the entries in *x* in the interval :math:`[-pi,pi)`."""
     angle = np.arctan2(np.sin(x), np.cos(x))  # in [-pi, pi]
     angle[angle == np.pi] = -np.pi
     return angle
@@ -105,7 +105,7 @@ def default_axis_orthogonal():
 
 @contract(s1="array[K],unit_length", s2="array[K],unit_length", returns="float,>=0,<=pi")
 def geodesic_distance_on_sphere(s1: np.ndarray, s2: np.ndarray) -> float:
-    """ Returns the geodesic distance between two points on the sphere. """
+    """Returns the geodesic distance between two points on the sphere."""
     # special case: return a 0 (no precision issues)
     # if the vectors are the same
     if (s1 == s2).all():
@@ -164,13 +164,13 @@ def random_direction(ndim: int = 3) -> np.ndarray:
 
 @contract(N="int,>0,N", ndim="2|3", returns="array[3xN]")
 def random_directions(N, ndim=3):
-    """ Returns a set of random directions. """
+    """Returns a set of random directions."""
     return np.vstack([random_direction(ndim) for _ in range(N)]).T
 
 
 @contract(s="direction", returns="direction")
 def any_distant_direction(s):
-    """ Returns a direction distant from both *s* and *-s*. """
+    """Returns a direction distant from both *s* and *-s*."""
     z = default_axis()
     d = geodesic_distance_on_sphere(s, z)
     # TODO: make this a global parameter
@@ -182,7 +182,7 @@ def any_distant_direction(s):
 
 @contract(s="direction", returns="direction")
 def any_orthogonal_direction(s):
-    """ Returns any axis orthogonal to *s* (not necessarily random). """
+    """Returns any axis orthogonal to *s* (not necessarily random)."""
     # choose a vector far away
     z = any_distant_direction(s)
     # z ^ s is orthogonal to s
@@ -216,7 +216,7 @@ def random_orthogonal_direction(s):
 
 @contract(s1="array[K],unit_length", s2="array[K],unit_length", t="number,>=0,<=1")
 def slerp(s1, s2, t):
-    """ Spherical interpolation between two points on a hypersphere. """
+    """Spherical interpolation between two points on a hypersphere."""
     omega = np.arccos(np.dot(s1 / np.linalg.norm(s1), s2 / np.linalg.norm(s2)))
     so = np.sin(omega)
     if np.abs(so) < 1e-18:  # XXX thresholds
@@ -304,7 +304,7 @@ def sorted_directions(S, num_around=15):
 
 
 def sphere_area(r=1):
-    """ Returns the area of a sphere of the given radius. """
+    """Returns the area of a sphere of the given radius."""
     return 4 * np.pi * (r ** 2)
 
 

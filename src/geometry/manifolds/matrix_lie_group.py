@@ -41,7 +41,7 @@ class MatrixLieGroup(Group, DifferentiableManifold, ABC):
         return self._tangent_bundle_algebra_rep
 
     def get_algebra(self):
-        """ Returns the interface to the corresponding Lie algebra. """
+        """Returns the interface to the corresponding Lie algebra."""
         return self.algebra
 
     def unity(self):

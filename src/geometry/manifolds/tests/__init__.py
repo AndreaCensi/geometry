@@ -24,7 +24,7 @@ def get_test_points(M, num_random=2):
 
 
 def list_manifold_point():
-    """ Yields all possible (M, point, i, num) tests we have """
+    """Yields all possible (M, point, i, num) tests we have"""
     for M in list_manifolds():
         interesting = get_test_points(M)
         num_examples = len(interesting)
@@ -40,7 +40,7 @@ def list_manifold_point():
 
 
 def list_mgroup():
-    """ Yields all possible (M, point, i, num) tests we have """
+    """Yields all possible (M, point, i, num) tests we have"""
     for M in list_manifolds():
         if not isinstance(M, MatrixLieGroup):
             continue
@@ -48,7 +48,7 @@ def list_mgroup():
 
 
 def list_mgroup_point():
-    """ Yields all possible (M, point, i, num) tests we have """
+    """Yields all possible (M, point, i, num) tests we have"""
     for M in list_mgroup():
         interesting = get_test_points(M)
         num_examples = len(interesting)
@@ -63,7 +63,7 @@ def list_mgroup_point():
 
 
 def list_manifold_points():
-    """ Yields all possible (M, point1, point2, i, num) tests we have """
+    """Yields all possible (M, point1, point2, i, num) tests we have"""
     for M in list_manifolds():
         interesting = get_test_points(M)
         num_examples = len(interesting) * len(interesting)

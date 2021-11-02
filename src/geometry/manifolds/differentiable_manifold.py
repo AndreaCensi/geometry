@@ -11,7 +11,7 @@ __all__ = ["DifferentiableManifold", "RandomManifold"]
 
 
 class DifferentiableManifold:
-    """ This is the base class for differentiable manifolds. """
+    """This is the base class for differentiable manifolds."""
 
     __metaclass__ = ContractsMeta
 
@@ -104,7 +104,7 @@ class DifferentiableManifold:
 
     @contract(a="belongs", b="belongs", t=">=0,<=1", returns="belongs")
     def geodesic(self, a, b, t):
-        """ Returns the point interpolated along the geodesic. """
+        """Returns the point interpolated along the geodesic."""
         bv = self.logmap(a, b)
         return self.expmap((bv[0], bv[1] * t))
 
@@ -116,7 +116,7 @@ class DifferentiableManifold:
 
     @contract(returns="belongs", points="list[>=1](belongs)")
     def riemannian_mean(self, points):
-        """ TODO: work out exceptions """
+        """TODO: work out exceptions"""
         raise NotImplementedError
         # return np.mean(self.points, axis=0)
 
@@ -205,7 +205,7 @@ class DifferentiableManifold:
 
     @contract(my_point="belongs")
     def embed_in(self, M, my_point):
-        """ Embeds a point on this manifold to the target manifold M. """
+        """Embeds a point on this manifold to the target manifold M."""
         # self.belongs(my_point)
         if not self.embeddable_in(M):
             msg = "%s is not embeddable in %s; %s" % (self, M, self.relations_descriptions())
@@ -225,7 +225,7 @@ class DifferentiableManifold:
 
     @contract(returns="belongs")
     def project_from(self, M, his_point):
-        """ Projects a point on a bigger manifold to this manifold. """
+        """Projects a point on a bigger manifold to this manifold."""
         if not self.embeddable_in(M):
             msg = "Cannot project from %s to %s; %s" % (self, M, self.relations_descriptions())
             raise ValueError(msg)
@@ -261,12 +261,12 @@ class DifferentiableManifold:
         return ManifoldRelations.exists_embedding(self, manifold)
 
     def get_dimension(self):
-        """ Returns the intrinsic dimension of this manifold. """
+        """Returns the intrinsic dimension of this manifold."""
         return self.dimension
 
     @contract(returns="belongs", yaml_structure="list|dict")
     def from_yaml(self, yaml_structure):
-        """ Recovers a value from a Yaml structure. """
+        """Recovers a value from a Yaml structure."""
         # TODO: explicit check
         # TODO: add testing
         from geometry.yaml_ import from_yaml
@@ -295,4 +295,4 @@ class RandomManifold(DifferentiableManifold):
     @abstractmethod
     @contract(a="belongs")
     def sample_velocity(self, a):
-        """ Samples a random velocity with length 1 at the base point a"""
+        """Samples a random velocity with length 1 at the base point a"""

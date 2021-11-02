@@ -105,7 +105,7 @@ def check_E(M):
 
 
 def check_SE(M):
-    """ Checks that the argument is in the special euclidean group. """
+    """Checks that the argument is in the special euclidean group."""
     R, t, zero, one = extract_pieces(M)  # @UnusedVariable
     try:
         check_SO(R)
@@ -117,7 +117,7 @@ def check_SE(M):
 
 
 def check_se(M):
-    """ Checks that the input is in the special euclidean Lie algebra. """
+    """Checks that the input is in the special euclidean Lie algebra."""
     omega, v, Z, zero = extract_pieces(M)  # @UnusedVariable
     check_skew_symmetric(omega)
     assert_allclose(Z, 0, err_msg="I expect the lower-right to be 0.")
@@ -224,7 +224,7 @@ def translation_from_SE3(pose: SE3value) -> T3value:
 
 # @contract(t="array[2]|seq[2](number)", theta="number", returns="SE2")
 def SE2_from_translation_angle(t: Union[T2value, List[float]], theta: Number) -> SE2value:
-    """ Returns an element of SE2 from translation and rotation. """
+    """Returns an element of SE2 from translation and rotation."""
     t = np.array(t)
     return combine_pieces(rot2d(theta), t, t * 0, 1)
 
@@ -256,20 +256,20 @@ def angle_from_SE2(pose: SE2value) -> float:
 # TODO: write tests for this, and other function
 @contract(xytheta="array[3]|seq[3](number)", returns="SE2")
 def SE2_from_xytheta(xytheta: Union[List[Number], Tuple[Number, Number, Number]]) -> SE2value:
-    """ Returns an element of SE2 from translation and rotation. """
+    """Returns an element of SE2 from translation and rotation."""
     return SE2_from_translation_angle([xytheta[0], xytheta[1]], xytheta[2])
 
 
 @contract(returns="array[3],finite", pose="SE2")
 def xytheta_from_SE2(pose: SE2value) -> np.ndarray:
-    """ Returns an element of SE2 from translation and rotation. """
+    """Returns an element of SE2 from translation and rotation."""
     t, alpha = translation_angle_from_SE2(pose)
     return np.array([t[0], t[1], alpha])
 
 
 @contract(linear="(array[2],finite)|seq[2](number,finite)", angular="number,finite", returns="se2")
 def se2_from_linear_angular(linear: Union[T2value, List[float]], angular: float) -> SE2value:
-    """ Returns an element of se2 from linear and angular velocity. """
+    """Returns an element of se2 from linear and angular velocity."""
     linear = np.array(linear)
     M = hat_map_2d(angular)
     return combine_pieces(M, linear, linear * 0, 0)
@@ -290,7 +290,7 @@ def angular_from_se2(vel: se2value) -> float:
 # TODO: add to docs
 @contract(pose="SE2", returns="se2")
 def se2_from_SE2_slow(pose: SE2value) -> se2value:
-    """ Converts a pose to its Lie algebra representation. """
+    """Converts a pose to its Lie algebra representation."""
     R, t, zero, one = extract_pieces(pose)  # @UnusedVariable
     # FIXME: this still doesn't work well for singularity
     # noinspection PyUnresolvedReferences
@@ -354,7 +354,7 @@ def SE2_from_se2_slow(vel: se2value) -> SE2value:
 
 @contract(pose="SE2", returns="SE3")
 def SE3_from_SE2(pose: SE2value) -> SE3value:
-    """ Embeds a pose in SE2 to SE3, setting z=0 and upright. """
+    """Embeds a pose in SE2 to SE3, setting z=0 and upright."""
     t, angle = translation_angle_from_SE2(pose)
     return pose_from_rotation_translation(rotz(angle), np.array([t[0], t[1], 0]))
 

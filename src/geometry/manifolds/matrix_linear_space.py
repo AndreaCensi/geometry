@@ -11,13 +11,13 @@ __all__ = ["MatrixLinearSpace"]
 class MatrixLinearSpace(DifferentiableManifold):
     @contract(dimension="int,>0")
     def __init__(self, dimension: int, shape):
-        """ Note dimension is the intrinsic dimension. """
+        """Note dimension is the intrinsic dimension."""
         # TODO: give basis?
         self.shape = shape
         DifferentiableManifold.__init__(self, dimension=dimension)
 
     def zero(self):
-        """ Returns the zero element for this algebra. """
+        """Returns the zero element for this algebra."""
         return np.zeros(self.shape)
 
     def norm(self, v):
@@ -59,7 +59,7 @@ class MatrixLinearSpace(DifferentiableManifold):
 
     @abstractmethod
     def project(self, v):  # @UnusedVariable
-        """ Projects a vector onto this Lie Algebra. """
+        """Projects a vector onto this Lie Algebra."""
 
     def project_ts(self, bv):
         base, vel = bv

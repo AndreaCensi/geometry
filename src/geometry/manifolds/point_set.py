@@ -7,7 +7,7 @@ __all__ = ["PointSet"]
 
 # TODO: do some testing
 class PointSet:
-    """ A set of points on a differentiable manifold. """
+    """A set of points on a differentiable manifold."""
 
     def __init__(self, manifold: DifferentiableManifold, points=None):
         if points is None:
@@ -19,7 +19,7 @@ class PointSet:
         return len(self.points)
 
     def get_points(self):
-        """ returns an iterable """
+        """returns an iterable"""
         return list(self.points)
 
     def add(self, p):
@@ -40,7 +40,7 @@ class PointSet:
         return np.min(dists)
 
     def average(self):
-        """ Returns the average point """
+        """Returns the average point"""
         # TODO: generalize
         return self.manifold.riemannian_mean(self.points)
 
@@ -54,6 +54,6 @@ class PointSet:
         return closest
 
     def centroid(self):
-        """ REturns the point which is closest to the average """
+        """REturns the point which is closest to the average"""
         i = self.centroid_index()
         return self.points[i]

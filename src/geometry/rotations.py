@@ -53,7 +53,7 @@ __all__ = [
 
 @contract(x="array[NxN],N>0")
 def check_SO(x):
-    """ Checks that the given value is a rotation matrix of arbitrary size. """
+    """Checks that the given value is a rotation matrix of arbitrary size."""
     try:
         check_orthogonal(x)
     except ValueError as e:
@@ -69,7 +69,7 @@ def check_SO(x):
 
 @contract(x="array[NxN],N>0")
 def check_orthogonal(x):
-    """ Check that the argument is an orthogonal matrix. """
+    """Check that the argument is an orthogonal matrix."""
     a = np.dot(x, x.T)
     b = np.dot(x.T, x)
     try:
@@ -91,7 +91,7 @@ def check_diagonal(m, rtol=10e-10, atol=10e-7):
 
 @contract(x="array[NxN]")
 def check_skew_symmetric(x):
-    """ Check that the argument is a skew-symmetric matrix. """
+    """Check that the argument is a skew-symmetric matrix."""
     n = x.shape[0]
     ok = (np.zeros((n, n)) == x).all()
     if not ok:
@@ -158,7 +158,7 @@ def roty(theta):
 
 @contract(theta="number", returns="SO2")
 def SO2_from_angle(theta):
-    """ Returns a 2x2 rotation matrix. """
+    """Returns a 2x2 rotation matrix."""
     C = np.cos(theta)
     S = np.sin(theta)
     return np.array([[+C, -S], [+S, +C]])
@@ -253,7 +253,7 @@ def geodesic_distance_for_rotations(R1, R2):
 
 @contract(v="array[3]", returns="array[3x3],skew_symmetric")
 def hat_map(v) -> se2value:
-    """ Maps a vector to a 3x3 skew symmetric matrix. """
+    """Maps a vector to a 3x3 skew symmetric matrix."""
     h = np.zeros((3, 3))
     h[0, 1] = -v[2]
     h[0, 2] = v[1]
@@ -264,7 +264,7 @@ def hat_map(v) -> se2value:
 
 @contract(H="array[3x3],skew_symmetric", returns="array[3]")
 def map_hat(H: se2value):
-    """ The inverse of :py:func:`hat_map`. """
+    """The inverse of :py:func:`hat_map`."""
     v = np.zeros(3)
     v[2] = -H[0, 1]
     v[1] = H[0, 2]

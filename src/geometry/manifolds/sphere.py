@@ -12,7 +12,7 @@ __all__ = ["Sphere", "Sphere1", "S", "S1", "S2"]
 
 
 class Sphere(DifferentiableManifold):
-    """ These are hyperspheres of unit radius. """
+    """These are hyperspheres of unit radius."""
 
     norm_rtol = 1e-5
     atol_geodesic_distance = 1e-8

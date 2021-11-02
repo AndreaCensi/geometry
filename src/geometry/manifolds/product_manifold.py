@@ -24,13 +24,13 @@ class ProductManifold(DifferentiableManifold):
             m.belongs(x)
 
     def distance(self, a, b):
-        """ Computes the geodesic distance between two points. """
+        """Computes the geodesic distance between two points."""
         distances = [m.distance(x, y) for x, y, m in zip(a, b, self.components)]
         distances = np.array(distances)
         return (distances * self.weights).sum()
 
     def logmap(self, base, p):
-        """ Computes the logarithmic map from base point *a* to target *b*. """
+        """Computes the logarithmic map from base point *a* to target *b*."""
         raise ValueError("Not implemented")  # FIXME: finish this
 
     def expmap(self, bv):

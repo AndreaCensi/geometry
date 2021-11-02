@@ -25,7 +25,7 @@ __all__ = [
 
 @contract(S="array[KxN]", returns="array[NxN](>=0)")
 def euclidean_distances(S):
-    """ Computes the euclidean distance matrix for the given points. """
+    """Computes the euclidean distance matrix for the given points."""
     K, N = S.shape
     D = np.zeros((N, N))
     for i in range(N):
@@ -109,7 +109,7 @@ def inner_product_embedding(C, ndim):
 
 
 def truncated_svd_randomized(M, k):
-    """ Truncated SVD based on randomized projections. """
+    """Truncated SVD based on randomized projections."""
     p = k + 5  # TODO: add parameter
     Y = np.dot(M, np.random.normal(size=(M.shape[1], p)))
     Q, r = np.linalg.qr(Y)  # @UnusedVariable
@@ -152,7 +152,7 @@ def mds(D, ndim, embed=inner_product_embedding):
 
 @contract(D="distance_matrix,array[MxM](>=0)", ndim="K,int,>=1", returns="array[KxM]")
 def mds_randomized(D, ndim):
-    """ MDS based on randomized projections. """
+    """MDS based on randomized projections."""
     return mds(D, ndim, embed=inner_product_embedding_randomized)
 
 

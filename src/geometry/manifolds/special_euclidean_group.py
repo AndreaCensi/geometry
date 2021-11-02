@@ -47,7 +47,7 @@ class SE_group(MatrixLieGroup):
 
     @contract(returns="array[2](>=0)")
     def distances(self, a, b):
-        """ Returns linear, angular distance. """
+        """Returns linear, angular distance."""
         _, vel = self.logmap(a, b)
         W, v, _, _ = extract_pieces(vel)
         dist1 = np.linalg.norm(v)

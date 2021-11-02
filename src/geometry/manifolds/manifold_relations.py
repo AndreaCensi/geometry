@@ -93,7 +93,7 @@ class ManifoldRelations(object):
 
     @staticmethod
     def _get_key(M):
-        """ Returns the string used for identifying a manifold """
+        """Returns the string used for identifying a manifold"""
         from .differentiable_manifold import DifferentiableManifold
 
         assert isinstance(M, DifferentiableManifold)

@@ -6,7 +6,7 @@ __all__ = [
 
 
 class Moebius(DifferentiableManifold):
-    """ INCOMPLETE - The Moebius strip -- still to be implemented. """
+    """INCOMPLETE - The Moebius strip -- still to be implemented."""
 
     def __init__(self, n):
         DifferentiableManifold.__init__(self, 2)

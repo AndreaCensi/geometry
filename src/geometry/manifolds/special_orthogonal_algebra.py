@@ -18,7 +18,7 @@ class so_algebra(MatrixLieAlgebra):
         MatrixLieAlgebra.__init__(self, n=n, dimension=dimension)
 
     def project(self, v):
-        """ Projects *v* to the closest skew-symmetric matrix. """
+        """Projects *v* to the closest skew-symmetric matrix."""
         return 0.5 * (v - v.T)
 
     def __repr__(self) -> str:

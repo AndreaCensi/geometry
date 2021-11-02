@@ -17,7 +17,7 @@ def euclidean_distances_test():
 
 
 def rank_test():
-    """ Check that the double-centered matrix has small rank. """
+    """Check that the double-centered matrix has small rank."""
     for n in range(5, 50, 5):
         for k in range(1, 5):
             P = np.random.rand(k, n)

@@ -8,7 +8,7 @@ __all__ = [
 
 
 class NonCompactStiefel(DifferentiableManifold):
-    """ INCOMPLETE -- Matrices of fixed rank. """
+    """INCOMPLETE -- Matrices of fixed rank."""
 
     @contract(n="N,N>0", p="P,P>0,P<=N")
     def __init__(self, p, n):

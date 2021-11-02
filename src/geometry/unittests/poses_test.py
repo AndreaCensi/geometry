@@ -52,7 +52,7 @@ class PosesTest(GeoTestCase):
 
 
 def comparison_test():
-    """ Compares between SE2_from_se2_slow and SE2_from_se2. """
+    """Compares between SE2_from_se2_slow and SE2_from_se2."""
     for pose in SE2.interesting_points():
         se2 = se2_from_SE2(pose)
         SE2a = SE2_from_se2_slow(se2)
@@ -78,7 +78,7 @@ def test_se3_se2():
 
 
 def comparison_test_2():
-    """ Compares between se2_from_SE2 and se2_from_SE2_slow. """
+    """Compares between se2_from_SE2 and se2_from_SE2_slow."""
     for pose in SE2.interesting_points():
         se2a = se2_from_SE2(pose)
         se2b = se2_from_SE2_slow(pose)

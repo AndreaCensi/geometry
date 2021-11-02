@@ -17,7 +17,7 @@ def rotations_sequence():
 
 
 def directions_sequence():
-    """ Sequence of directions in S^2. """
+    """Sequence of directions in S^2."""
     yield np.array([1.0, 0.0, 0.0])
     yield np.array([0.0, 1.0, 0.0])
     yield np.array([0.0, 0.0, 1.0])
