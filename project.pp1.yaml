@@ -10,9 +10,9 @@ install_requires:
 - PyContracts3
 - numpy
 - scipy
-- nose
 
-tests_require: []
+tests_require:
+- nose
 
 console_scripts: {}
 nose:
