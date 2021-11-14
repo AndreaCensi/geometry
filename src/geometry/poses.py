@@ -3,8 +3,8 @@ from numbers import Number
 from typing import List, Tuple, Union
 
 import numpy as np
-from contracts import contract, new_contract, raise_wrapped
 
+from contracts import contract, new_contract, raise_wrapped
 from . import expm, logm
 from .constants import GeometryConstants
 from .rotations import (
@@ -210,7 +210,7 @@ def translation_from_SE2(pose: SE2value) -> T2value:
 
 
 def rotation_from_SE2(pose: SE2value) -> SO2value:
-    from geometry.poses_embedding import SO2_project_from_SE2
+    from .poses_embedding import SO2_project_from_SE2
 
     return SO2_project_from_SE2(pose)
 

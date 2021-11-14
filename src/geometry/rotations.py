@@ -6,9 +6,9 @@
 import itertools
 
 import numpy as np
-from contracts import contract, new_contract, raise_wrapped, raise_desc
 
-from .basic_utils import safe_arccos, normalize_length
+from contracts import contract, new_contract, raise_desc, raise_wrapped
+from .basic_utils import normalize_length, safe_arccos
 from .spheres import default_axis
 from .types import se2value
 
@@ -134,7 +134,7 @@ def rotz(theta):
 
 @contract(w="array[3]", returns="SO3")
 def SO3_from_R3(w):  # untested
-    from geometry.manifolds import so3, SO3
+    from .manifolds import so3, SO3
 
     R = SO3.group_from_algebra(so3.algebra_from_vector(w))
     return R

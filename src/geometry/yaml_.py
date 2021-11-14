@@ -1,8 +1,7 @@
-from contracts import contract, describe_value, describe_type
-
-from geometry import logger
 import numpy as np
 
+from contracts import contract, describe_type, describe_value
+from . import logger
 from .manifolds import DifferentiableManifold
 
 #
