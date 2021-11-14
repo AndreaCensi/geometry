@@ -1,12 +1,13 @@
 {
   "install_requires": [
     "PyContracts3",
-    "nose",
     "numpy",
     "scipy",
     "zuper-commons-z7"
   ],
-  "tests_require": [],
+  "tests_require": [
+    "nose"
+  ],
   "srcdir": "src",
   "package_name": "PyGeometry-z7",
   "entry_points": {
