@@ -31,8 +31,8 @@ jobs:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       PATH: /root/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-      COVER_PACKAGES: geometry
-      TEST_PACKAGES: geometry
+      COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
+      TEST_PACKAGES: geometry_manifolds_tests geometry_tests
     docker:
     - image: ${DOCKER_REGISTRY}/zupermind/zuper-ci-3.8:z7
       auth:
@@ -119,17 +119,30 @@ jobs:
 
 
     - run:
-        name: geometry
+        name: geometry_manifolds_tests
         command: |-
           set -euxo pipefail
           mkdir -p out/test-results
-          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry-xunit.xml
+          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry_manifolds_tests-xunit.xml
           nosetests \
               --rednose --immediate \
               --cover-tests --with-coverage \
               --with-xunit --xunit-file=${xunit_output} \
               --cover-package=${COVER_PACKAGES} \
-              geometry
+              geometry_manifolds_tests
+        when: always
+    - run:
+        name: geometry_tests
+        command: |-
+          set -euxo pipefail
+          mkdir -p out/test-results
+          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry_tests-xunit.xml
+          nosetests \
+              --rednose --immediate \
+              --cover-tests --with-coverage \
+              --with-xunit --xunit-file=${xunit_output} \
+              --cover-package=${COVER_PACKAGES} \
+              geometry_tests
         when: always
     - run:
         name: post-circle-tests
@@ -171,8 +184,8 @@ jobs:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       PATH: /root/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-      COVER_PACKAGES: geometry
-      TEST_PACKAGES: geometry
+      COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
+      TEST_PACKAGES: geometry_manifolds_tests geometry_tests
     docker:
     - image: ${DOCKER_REGISTRY}/zupermind/zuper-ci-3.8:z7
       auth:
@@ -259,17 +272,30 @@ jobs:
 
 
     - run:
-        name: geometry
+        name: geometry_manifolds_tests
         command: |-
           set -euxo pipefail
           mkdir -p out/test-results
-          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry-xunit.xml
+          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry_manifolds_tests-xunit.xml
           nosetests \
               --rednose --immediate \
               --cover-tests --with-coverage \
               --with-xunit --xunit-file=${xunit_output} \
               --cover-package=${COVER_PACKAGES} \
-              geometry
+              geometry_manifolds_tests
+        when: always
+    - run:
+        name: geometry_tests
+        command: |-
+          set -euxo pipefail
+          mkdir -p out/test-results
+          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry_tests-xunit.xml
+          nosetests \
+              --rednose --immediate \
+              --cover-tests --with-coverage \
+              --with-xunit --xunit-file=${xunit_output} \
+              --cover-package=${COVER_PACKAGES} \
+              geometry_tests
         when: always
     - run:
         name: post-circle-tests
@@ -311,8 +337,8 @@ jobs:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       PATH: /root/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-      COVER_PACKAGES: geometry
-      TEST_PACKAGES: geometry
+      COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
+      TEST_PACKAGES: geometry_manifolds_tests geometry_tests
     docker:
     - image: ${DOCKER_REGISTRY}/zupermind/zuper-ci-3.9:z7
       auth:
@@ -399,17 +425,30 @@ jobs:
 
 
     - run:
-        name: geometry
+        name: geometry_manifolds_tests
         command: |-
           set -euxo pipefail
           mkdir -p out/test-results
-          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry-xunit.xml
+          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry_manifolds_tests-xunit.xml
           nosetests \
               --rednose --immediate \
               --cover-tests --with-coverage \
               --with-xunit --xunit-file=${xunit_output} \
               --cover-package=${COVER_PACKAGES} \
-              geometry
+              geometry_manifolds_tests
+        when: always
+    - run:
+        name: geometry_tests
+        command: |-
+          set -euxo pipefail
+          mkdir -p out/test-results
+          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry_tests-xunit.xml
+          nosetests \
+              --rednose --immediate \
+              --cover-tests --with-coverage \
+              --with-xunit --xunit-file=${xunit_output} \
+              --cover-package=${COVER_PACKAGES} \
+              geometry_tests
         when: always
     - run:
         name: post-circle-tests
@@ -451,8 +490,8 @@ jobs:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       PATH: /root/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-      COVER_PACKAGES: geometry
-      TEST_PACKAGES: geometry
+      COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
+      TEST_PACKAGES: geometry_manifolds_tests geometry_tests
     docker:
     - image: ${DOCKER_REGISTRY}/zupermind/zuper-ci-3.9:z7
       auth:
@@ -539,17 +578,30 @@ jobs:
 
 
     - run:
-        name: geometry
+        name: geometry_manifolds_tests
         command: |-
           set -euxo pipefail
           mkdir -p out/test-results
-          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry-xunit.xml
+          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry_manifolds_tests-xunit.xml
           nosetests \
               --rednose --immediate \
               --cover-tests --with-coverage \
               --with-xunit --xunit-file=${xunit_output} \
               --cover-package=${COVER_PACKAGES} \
-              geometry
+              geometry_manifolds_tests
+        when: always
+    - run:
+        name: geometry_tests
+        command: |-
+          set -euxo pipefail
+          mkdir -p out/test-results
+          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry_tests-xunit.xml
+          nosetests \
+              --rednose --immediate \
+              --cover-tests --with-coverage \
+              --with-xunit --xunit-file=${xunit_output} \
+              --cover-package=${COVER_PACKAGES} \
+              geometry_tests
         when: always
     - run:
         name: post-circle-tests
@@ -587,4 +639,4 @@ jobs:
           bash <(curl -s https://codecov.io/bash)
     resource_class: medium
 
-# sigil 51bc19757551db8e988a062339ccd3c2
+# sigil 716f25d9db9e8208e9051ece147f092d

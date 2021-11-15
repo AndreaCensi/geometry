@@ -19,10 +19,8 @@
     "geometry",
     "geometry.distances",
     "geometry.manifolds",
-    "geometry.manifolds.tests",
     "geometry.manifolds.todo",
     "geometry.subspaces",
-    "geometry.unittests",
     "geometry.utils"
   ],
   "version": "7.2",
