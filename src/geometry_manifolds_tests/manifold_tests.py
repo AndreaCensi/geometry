@@ -1,7 +1,7 @@
 from geometry.utils import check_allclose
-from geometry.manifolds.tests import for_all_manifold_point, for_all_manifold_pairs
 import numpy as np
 from geometry.formatting import formatm
+from geometry_manifolds_tests import for_all_manifold_pairs, for_all_manifold_point
 
 
 @for_all_manifold_pairs

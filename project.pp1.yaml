@@ -17,7 +17,8 @@ tests_require:
 console_scripts: {}
 nose:
   modules:
-  - geometry.unittests
+  - geometry_tests
+  - geometry_manifolds_tests
 
 pypi:
   upload: []
