@@ -1,4 +1,4 @@
-__version__ = "7.2"
+__version__ = "7.3"
 __date__ = ""
 # If True, additional checks are done at runtime
 from zuper_commons.logs import ZLogger
