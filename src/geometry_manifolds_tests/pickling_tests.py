@@ -1,6 +1,6 @@
 import pickle
 
-from geometry_manifolds_tests import for_all_manifolds
+from . import for_all_manifolds
 
 
 @for_all_manifolds
