@@ -38,7 +38,9 @@ from .torus import T1, T2, T3
 from .translation_algebra import tran3, tran2, tran1
 from .translation_group import Tran2, Tran3
 
-__all__ = []
+from typing import List
+
+__all__: List[str] = []
 
 
 def embedding(small, big, embed_in, project_from, desc=None):
