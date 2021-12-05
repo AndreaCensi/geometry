@@ -4,7 +4,7 @@ from geometry.utils import check_allclose
 from geometry.formatting import printm
 
 
-def test_wrap_around():
+def test_wrap_around() -> None:
     a = np.array([+1, 0])
     b = np.array([-1, 0])
 

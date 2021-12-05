@@ -148,7 +148,7 @@ def check_interesting_point_in_manifold(M, p):
 #    ]
 
 
-def test_dimensions():
+def test_dimensions() -> None:
     from geometry import (
         tran1,
         tran2,

@@ -60,7 +60,7 @@ def check_embed_relation(A, B):
 
 
 @attr("embed")
-def test_embed_relations():
+def test_embed_relations() -> None:
     couples = []
 
     def add(A, B):

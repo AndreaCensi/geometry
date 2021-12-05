@@ -68,7 +68,7 @@ def comparison_test():
         assert_allclose(SE2b, pose, atol=1e-8, err_msg="SE2b != pose")
 
 
-def test_se3_se2():
+def test_se3_se2() -> None:
     for pose in SE2.interesting_points():
         pose3 = SE3_from_SE2(pose)
         vel3 = SE3.algebra_from_group(pose3)

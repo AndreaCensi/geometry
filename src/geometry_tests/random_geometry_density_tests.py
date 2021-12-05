@@ -57,7 +57,7 @@ else:
         pass
 
     @attr("density")
-    def test_stochastic():
+    def test_stochastic() -> None:
         StochasticTestManager.main.run(time_limit=10)
 
     if __name__ == "__main__":
