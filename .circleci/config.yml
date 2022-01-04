@@ -27,6 +27,8 @@ workflows:
             only: /.*z7-prod.*/
 jobs:
   test-3.8-stage:
+#    machine: true
+#    resource_class: zuper-ci-ns/my-resource-class
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -183,6 +185,8 @@ jobs:
           ./codecov -t ${CODECOV_TOKEN}
     resource_class: medium
   test-3.8-prod:
+#    machine: true
+#    resource_class: zuper-ci-ns/my-resource-class
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -339,6 +343,8 @@ jobs:
           ./codecov -t ${CODECOV_TOKEN}
     resource_class: medium
   test-3.9-stage:
+#    machine: true
+#    resource_class: zuper-ci-ns/my-resource-class
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -495,6 +501,8 @@ jobs:
           ./codecov -t ${CODECOV_TOKEN}
     resource_class: medium
   test-3.9-prod:
+#    machine: true
+#    resource_class: zuper-ci-ns/my-resource-class
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -651,4 +659,4 @@ jobs:
           ./codecov -t ${CODECOV_TOKEN}
     resource_class: medium
 
-# sigil e47cb3aecc3a4f9b50fc047ca49953a4
+# sigil 5527c87e4a31e6ec949891205a659def
