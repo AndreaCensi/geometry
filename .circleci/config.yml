@@ -27,8 +27,8 @@ workflows:
             only: /.*z7-prod.*/
 jobs:
   test-3.8-stage:
-#    machine: true
-#    resource_class: zuper-ci-ns/my-resource-class
+    #    machine: true
+    #    resource_class: zuper-ci-ns/my-resource-class
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -68,7 +68,6 @@ jobs:
 
     - run:
         name: Python stats
-        when: always
         command: |
           pipdeptree | tee  build-stats/pipdeptree.txt
           python3 -m pip  list   | sort | tee  build-stats/pip-list.txt
@@ -132,7 +131,6 @@ jobs:
               --with-xunit --xunit-file=${xunit_output} \
               --cover-package=${COVER_PACKAGES} \
               geometry_manifolds_tests
-        when: always
     - run:
         name: geometry_tests
         command: |-
@@ -145,7 +143,6 @@ jobs:
               --with-xunit --xunit-file=${xunit_output} \
               --cover-package=${COVER_PACKAGES} \
               geometry_tests
-        when: always
     - run:
         name: post-circle-tests
         command: |
@@ -185,8 +182,8 @@ jobs:
           ./codecov -t ${CODECOV_TOKEN}
     resource_class: medium
   test-3.8-prod:
-#    machine: true
-#    resource_class: zuper-ci-ns/my-resource-class
+    #    machine: true
+    #    resource_class: zuper-ci-ns/my-resource-class
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -226,7 +223,6 @@ jobs:
 
     - run:
         name: Python stats
-        when: always
         command: |
           pipdeptree | tee  build-stats/pipdeptree.txt
           python3 -m pip  list   | sort | tee  build-stats/pip-list.txt
@@ -290,7 +286,6 @@ jobs:
               --with-xunit --xunit-file=${xunit_output} \
               --cover-package=${COVER_PACKAGES} \
               geometry_manifolds_tests
-        when: always
     - run:
         name: geometry_tests
         command: |-
@@ -303,7 +298,6 @@ jobs:
               --with-xunit --xunit-file=${xunit_output} \
               --cover-package=${COVER_PACKAGES} \
               geometry_tests
-        when: always
     - run:
         name: post-circle-tests
         command: |
@@ -343,8 +337,8 @@ jobs:
           ./codecov -t ${CODECOV_TOKEN}
     resource_class: medium
   test-3.9-stage:
-#    machine: true
-#    resource_class: zuper-ci-ns/my-resource-class
+    #    machine: true
+    #    resource_class: zuper-ci-ns/my-resource-class
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -384,7 +378,6 @@ jobs:
 
     - run:
         name: Python stats
-        when: always
         command: |
           pipdeptree | tee  build-stats/pipdeptree.txt
           python3 -m pip  list   | sort | tee  build-stats/pip-list.txt
@@ -448,7 +441,6 @@ jobs:
               --with-xunit --xunit-file=${xunit_output} \
               --cover-package=${COVER_PACKAGES} \
               geometry_manifolds_tests
-        when: always
     - run:
         name: geometry_tests
         command: |-
@@ -461,7 +453,6 @@ jobs:
               --with-xunit --xunit-file=${xunit_output} \
               --cover-package=${COVER_PACKAGES} \
               geometry_tests
-        when: always
     - run:
         name: post-circle-tests
         command: |
@@ -501,8 +492,8 @@ jobs:
           ./codecov -t ${CODECOV_TOKEN}
     resource_class: medium
   test-3.9-prod:
-#    machine: true
-#    resource_class: zuper-ci-ns/my-resource-class
+    #    machine: true
+    #    resource_class: zuper-ci-ns/my-resource-class
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -542,7 +533,6 @@ jobs:
 
     - run:
         name: Python stats
-        when: always
         command: |
           pipdeptree | tee  build-stats/pipdeptree.txt
           python3 -m pip  list   | sort | tee  build-stats/pip-list.txt
@@ -606,7 +596,6 @@ jobs:
               --with-xunit --xunit-file=${xunit_output} \
               --cover-package=${COVER_PACKAGES} \
               geometry_manifolds_tests
-        when: always
     - run:
         name: geometry_tests
         command: |-
@@ -619,7 +608,6 @@ jobs:
               --with-xunit --xunit-file=${xunit_output} \
               --cover-package=${COVER_PACKAGES} \
               geometry_tests
-        when: always
     - run:
         name: post-circle-tests
         command: |
@@ -659,4 +647,4 @@ jobs:
           ./codecov -t ${CODECOV_TOKEN}
     resource_class: medium
 
-# sigil 5527c87e4a31e6ec949891205a659def
+# sigil 35b50a44cc953908648e379455e1b03c
