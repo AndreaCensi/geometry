@@ -274,7 +274,8 @@ jobs:
           fi
           mkdir -p out/test-results
           xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry_manifolds_tests-xunit.xml
-          nose2 --with-coverage --plugin nose2.plugins.junitxml --junit-xml --junit-xml-path ${xunit_output} $TEST_MODULES
+          nose2 --with-coverage --plugin nose2.plugins.junitxml --junit-xml --junit-xml-path ${xunit_output}
+          $TEST_MODULES
           # TODO: cover packages
     - run:
         name: geometry_tests
@@ -290,7 +291,8 @@ jobs:
           fi
           mkdir -p out/test-results
           xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry_tests-xunit.xml
-          nose2 --with-coverage --plugin nose2.plugins.junitxml --junit-xml --junit-xml-path ${xunit_output} $TEST_MODULES
+          nose2 --with-coverage --plugin nose2.plugins.junitxml --junit-xml --junit-xml-path ${xunit_output}
+          $TEST_MODULES
           # TODO: cover packages
     - run:
         name: post-circle-tests
@@ -331,4 +333,4 @@ jobs:
           ./codecov -t ${CODECOV_TOKEN}
     resource_class: small
 
-# sigil bd6c097211bac0e8cb4efceda78b89b9
+# sigil abf01e381f4d8bf2d63790f1067d7442
