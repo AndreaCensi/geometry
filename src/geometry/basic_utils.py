@@ -18,7 +18,6 @@ try:
         # TODO: make into standard thing
         return np.isfinite(x).all()
 
-
 except:
     pass
 
