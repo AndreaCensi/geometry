@@ -40,14 +40,14 @@ jobs:
         command: |
           shyaml get-values install_requires < project.pp1.yaml > .requirements.txt
           python3 -m pip install -U pip
-          python3 -m pip install -r .requirements.txt
+          python3 -m pip install --no-binary :all: -r .requirements.txt
           rm .requirements.txt
 
     - run:
         name: Install testing deps
         command: |
           shyaml get-values tests_require < project.pp1.yaml > .requirements_tests.txt
-          python3 -m pip  install -r .requirements_tests.txt
+          python3 -m pip install --no-binary :all: -r .requirements_tests.txt
           rm .requirements_tests.txt
 
     - run:
@@ -56,6 +56,7 @@ jobs:
           pipdeptree | tee  build-stats/pipdeptree.txt
           python3 -m pip  list   | sort | tee  build-stats/pip-list.txt
           python3 -m pip  freeze | sort | tee  build-stats/pip-freeze.txt
+          python3 -m pip cache list | tee  build-stats/pip-cache.txt
 
     - store_artifacts:
         path: build-stats
@@ -64,7 +65,7 @@ jobs:
     - run:
         name: setup.py develop
         command: |
-          pip install -e . --prefix ~/.local --no-deps
+          python3 -m pip install -e . --prefix ~/.local --no-deps
 
     - run:
         name: Make docs
@@ -182,4 +183,4 @@ jobs:
           ./codecov -t ${CODECOV_TOKEN}
     resource_class: small
 
-# sigil 55e76d185d0113623cde74a70e34480e
+# sigil 9db9f8931bb9de75960d931a6cdf7bfc
