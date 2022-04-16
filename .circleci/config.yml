@@ -21,7 +21,7 @@ jobs:
       COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
       TEST_PACKAGES: geometry_manifolds_tests geometry_tests
     docker:
-    - image: ${DOCKER_REGISTRY}/zupermind/z7-stage-zuper-ci-3.10:z7
+    - image: ${DOCKER_REGISTRY}/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.10:${Z_DISTRO}
       auth:
         username: $DOCKER_USERNAME
         password: $DOCKER_PASSWORD
@@ -184,4 +184,4 @@ jobs:
           ./codecov -t ${CODECOV_TOKEN}
     resource_class: small
 
-# sigil c6763d1a07696699a7aaa11044932cbf
+# sigil b6843a43d16a168df4936025c5f15c84
