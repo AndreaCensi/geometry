@@ -107,7 +107,7 @@ jobs:
 
     - run:
         name: geometry_manifolds_tests
-        command: |-
+        command: |
           set -euxo pipefail
           TEST_MODULES=$(circleci tests split <.circleci/geometry_manifolds_tests.tests)
           echo "TEST_MODULES=[$TEST_MODULES]"
@@ -127,7 +127,7 @@ jobs:
           # TODO: cover packages
     - run:
         name: geometry_tests
-        command: |-
+        command: |
           set -euxo pipefail
           TEST_MODULES=$(circleci tests split <.circleci/geometry_tests.tests)
           echo "TEST_MODULES=[$TEST_MODULES]"
@@ -184,4 +184,4 @@ jobs:
           ./codecov -t ${CODECOV_TOKEN}
     resource_class: small
 
-# sigil b6843a43d16a168df4936025c5f15c84
+# sigil 62e57a476fd36914541095fc152e1272
