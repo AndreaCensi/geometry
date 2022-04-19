@@ -48,7 +48,7 @@ def add_spacer(cols, spacer=" "):
 @contract(cols="list(str)")
 def join_columns(cols):
     # split lines
-    cols = [x.split("\n") for x in cols]
+    cols = [x.splitlines() for x in cols]
     # count max number of rows
     nrows = max([len(col) for col in cols])
     # get row of one column or empty string
