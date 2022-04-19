@@ -1,5 +1,5 @@
-geometry_manifolds_tests.embedding_test
 geometry_manifolds_tests.manifold_tests
 geometry_manifolds_tests.matrix_groups_tests
 geometry_manifolds_tests.pickling_tests
 geometry_manifolds_tests.sphere_tests
+geometry_manifolds_tests.test_embedding

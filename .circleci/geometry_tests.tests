@@ -1,11 +1,11 @@
-geometry_tests.distances_test
-geometry_tests.mds_test
 geometry_tests.misc_tests
-geometry_tests.poses_test
-geometry_tests.procrustes_test
-geometry_tests.quaternions_test
 geometry_tests.random_geometry_density_tests
 geometry_tests.random_geometry_tests
 geometry_tests.rotations_tests
 geometry_tests.spheres_tests
-geometry_tests.utils_test
+geometry_tests.test_distances
+geometry_tests.test_mds
+geometry_tests.test_poses
+geometry_tests.test_procrustes
+geometry_tests.test_quaternions
+geometry_tests.test_utils
