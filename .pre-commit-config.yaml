@@ -8,16 +8,16 @@ repos:
   - {id: check-merge-conflict}
   - {id: check-symlinks}
   repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.1.0
+  rev: v4.2.0
 - hooks:
   - args: [-l, '110', -t, py310]
     id: black
   repo: https://github.com/psf/black
-  rev: 21.12b0
+  rev: 22.3.0
 - hooks:
   - args: [--mapping, '2', --sequence, '2', --offset, '0', --width, '150', --preserve-quotes]
     id: yamlfmt
   repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
-  rev: 0.1.0
+  rev: 0.1.1
 
-# sigil ac46826215a91cd6e0d8e626efd92253
+# sigil 2a7c8399bd5f4da825d73ce821838953
