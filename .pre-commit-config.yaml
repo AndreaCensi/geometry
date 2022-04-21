@@ -10,7 +10,7 @@ repos:
   repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.1.0
 - hooks:
-  - args: [-l, '110', -t, py38]
+  - args: [-l, '110', -t, py310]
     id: black
   repo: https://github.com/psf/black
   rev: 21.12b0
@@ -20,4 +20,4 @@ repos:
   repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
   rev: 0.1.0
 
-# sigil 1b050e28e72b639bc7781ce39208defb
+# sigil ac46826215a91cd6e0d8e626efd92253
