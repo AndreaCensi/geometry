@@ -151,7 +151,7 @@ def random_direction(ndim: int = 3) -> np.ndarray:
     if ndim == 3:
         z = np.random.uniform(-1, +1)
         t = np.random.uniform(0, 2 * np.pi)
-        r = np.sqrt(1 - z ** 2)
+        r = np.sqrt(1 - z**2)
         x = r * np.cos(t)
         y = r * np.sin(t)
         return np.array([x, y, z])
@@ -305,7 +305,7 @@ def sorted_directions(S, num_around=15):
 
 def sphere_area(r=1):
     """Returns the area of a sphere of the given radius."""
-    return 4 * np.pi * (r ** 2)
+    return 4 * np.pi * (r**2)
 
 
 def spherical_cap_area(cap_radius):
@@ -317,7 +317,7 @@ def spherical_cap_area(cap_radius):
     """
     h = 1 - np.cos(cap_radius)
     a = np.sin(cap_radius)
-    A = np.pi * (a ** 2 + h ** 2)
+    A = np.pi * (a**2 + h**2)
     return A
 
 
@@ -329,7 +329,7 @@ def spherical_cap_with_area(cap_area):
     """
     A = cap_area
     L = np.sqrt(A / np.pi)
-    h = L ** 2 / 2
+    h = L**2 / 2
     r = np.arccos(1 - h)
     return r
 

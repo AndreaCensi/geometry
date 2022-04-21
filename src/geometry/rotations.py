@@ -282,9 +282,9 @@ def rotation_from_quaternion(x):
     # Quaternions_and_spatial_rotation&oldid=402924915>
     a, b, c, d = x
 
-    r1 = [a ** 2 + b ** 2 - c ** 2 - d ** 2, 2 * b * c - 2 * a * d, 2 * b * d + 2 * a * c]
-    r2 = [2 * b * c + 2 * a * d, a ** 2 - b ** 2 + c ** 2 - d ** 2, 2 * c * d - 2 * a * b]
-    r3 = [2 * b * d - 2 * a * c, 2 * c * d + 2 * a * b, a ** 2 - b ** 2 - c ** 2 + d ** 2]
+    r1 = [a**2 + b**2 - c**2 - d**2, 2 * b * c - 2 * a * d, 2 * b * d + 2 * a * c]
+    r2 = [2 * b * c + 2 * a * d, a**2 - b**2 + c**2 - d**2, 2 * c * d - 2 * a * b]
+    r3 = [2 * b * d - 2 * a * c, 2 * c * d + 2 * a * b, a**2 - b**2 - c**2 + d**2]
 
     return np.array([r1, r2, r3])
 
