@@ -19,5 +19,9 @@ repos:
     id: yamlfmt
   repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
   rev: 0.1.1
+- hooks:
+  - {id: sort-all}
+  repo: https://github.com/aio-libs/sort-all
+  rev: v1.2.0
 
-# sigil 2a7c8399bd5f4da825d73ce821838953
+# sigil 82852014b170539fbd97b37270c03260
