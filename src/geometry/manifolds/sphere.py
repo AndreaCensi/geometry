@@ -8,7 +8,7 @@ import numpy as np
 
 from .differentiable_manifold import DifferentiableManifold
 
-__all__ = ["Sphere", "Sphere1", "S", "S1", "S2"]
+__all__ = ["S", "S1", "S2", "Sphere", "Sphere1"]
 
 
 class Sphere(DifferentiableManifold):

@@ -3,8 +3,8 @@ from contracts import check, contract
 
 __all__ = [
     "best_orthogonal_transform",
-    "closest_orthogonal_matrix",
     "best_similarity_transform",
+    "closest_orthogonal_matrix",
 ]
 
 

@@ -8,7 +8,7 @@ from .matrix_lie_group import MatrixLieGroup
 from .special_orthogonal_algebra import so
 from .sphere import S2
 
-__all__ = ["SO_group", "SO", "SO2", "SO3"]
+__all__ = ["SO", "SO2", "SO3", "SO_group"]
 
 
 class SO_group(MatrixLieGroup):

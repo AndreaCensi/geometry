@@ -21,6 +21,7 @@ __all__ = [
     "SO2_from_angle",
     "SO3_from_R3",
     "angle_from_SO2",
+    "angle_from_rot2d",
     "angle_scale_from_O2",
     "axis_angle_from_quaternion",
     "axis_angle_from_rotation",
@@ -38,6 +39,8 @@ __all__ = [
     "random_orthogonal_transform",
     "random_quaternion",
     "random_rotation",
+    "rot2d",
+    "rot2d_from_angle",
     "rotation_from_axes_spec",
     "rotation_from_axis_angle",
     "rotation_from_axis_angle2",
@@ -45,9 +48,6 @@ __all__ = [
     "rotx",
     "roty",
     "rotz",
-    "rot2d",
-    "rot2d_from_angle",
-    "angle_from_rot2d",
 ]
 
 

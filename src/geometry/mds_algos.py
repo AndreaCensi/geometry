@@ -10,16 +10,16 @@ from .spheres import project_vectors_onto_sphere
 from .utils import assert_allclose
 
 __all__ = [
-    "euclidean_distances",
     "double_center",
-    "inner_product_embedding_slow",
+    "euclidean_distances",
     "inner_product_embedding",
-    "truncated_svd_randomized",
     "inner_product_embedding_randomized",
+    "inner_product_embedding_slow",
     "mds",
-    "spherical_mds",
     "mds_randomized",
     "place",
+    "spherical_mds",
+    "truncated_svd_randomized",
 ]
 
 

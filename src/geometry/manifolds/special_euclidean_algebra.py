@@ -6,7 +6,7 @@ import numpy as np
 from .matrix_lie_algebra import MatrixLieAlgebra
 from .special_orthogonal_algebra import so
 
-__all__ = ["se_algebra", "se", "se2", "se3"]
+__all__ = ["se", "se2", "se3", "se_algebra"]
 
 
 class se_algebra(MatrixLieAlgebra):

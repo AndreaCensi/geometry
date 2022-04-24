@@ -13,20 +13,20 @@ from .rotations_embedding import SO2_project_from_SO3, so2_project_from_so3, so3
 from .types import SE3value, se3value, SO3value, so3value, T2value, T3value
 
 __all__ = [
-    "SE2_from_SO2",
-    "SO2_project_from_SE2",
-    "se2_from_so2",
-    "so2_project_from_se2",
-    "SE3_from_SO3",
-    "SO3_project_from_SE3",
-    "se3_from_so3",
-    "so3_project_from_se3",
-    "SE2_from_R2",
-    "SE3_from_R3",
     "R2_project_from_SE2",
     "R3_project_from_SE3",
+    "SE2_from_R2",
+    "SE2_from_SO2",
+    "SE3_from_R3",
+    "SE3_from_SO3",
+    "SO2_project_from_SE2",
+    "SO3_project_from_SE3",
+    "se2_from_so2",
     "se2_project_from_se3",
     "se3_from_se2",
+    "se3_from_so3",
+    "so2_project_from_se2",
+    "so3_project_from_se3",
 ]
 
 from .types import SE2value, se2value, SO2value, so2value

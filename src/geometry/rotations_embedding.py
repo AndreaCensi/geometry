@@ -4,10 +4,10 @@ from contracts import contract
 from .rotations import angle_from_rot2d, rotation_from_axis_angle, rot2d, map_hat_2d, hat_map
 
 __all__ = [
-    "SO3_from_SO2",
     "SO2_project_from_SO3",
-    "so3_from_so2",
+    "SO3_from_SO2",
     "so2_project_from_so3",
+    "so3_from_so2",
 ]
 
 

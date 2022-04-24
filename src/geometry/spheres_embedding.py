@@ -2,9 +2,9 @@ import numpy as np
 from contracts import contract
 
 __all__ = [
-    "S2_from_S1",
-    "S1_project_from_S2",
     "S1_project_from_R2",
+    "S1_project_from_S2",
+    "S2_from_S1",
     "S2_project_from_R3",
 ]
 

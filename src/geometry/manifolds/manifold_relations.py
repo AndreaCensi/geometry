@@ -1,6 +1,6 @@
 from collections import defaultdict, namedtuple
 
-__all__ = ["ManifoldRelations", "Isomorphism", "Embedding"]
+__all__ = ["Embedding", "Isomorphism", "ManifoldRelations"]
 
 Isomorphism = namedtuple("Isomorphism", "A B A_to_B B_to_A steps type desc")
 Embedding = namedtuple("Embedding", "A B A_to_B B_to_A steps type desc")

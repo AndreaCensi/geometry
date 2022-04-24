@@ -4,7 +4,7 @@ import numpy as np
 
 from .matrix_lie_algebra import MatrixLieAlgebra
 
-__all__ = ["so_algebra", "so2", "so3", "so"]
+__all__ = ["so", "so2", "so3", "so_algebra"]
 
 
 class so_algebra(MatrixLieAlgebra):

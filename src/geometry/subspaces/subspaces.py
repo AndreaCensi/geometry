@@ -4,10 +4,10 @@ from contracts import contract
 from geometry.utils import assert_allclose
 
 __all__ = [
+    "assert_projection",
+    "get_random_proj",
     "normalize_columns",
     "proj_from_subspace",
-    "get_random_proj",
-    "assert_projection",
 ]
 
 
