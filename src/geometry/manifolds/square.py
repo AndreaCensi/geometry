@@ -2,7 +2,13 @@ from contracts import contract
 from geometry.manifolds import DifferentiableManifold, RandomManifold
 import numpy as np
 
-__all__ = ["Sq", "Sq1", "Sq2", "Sq3", "Square"]
+__all__ = [
+    "Sq",
+    "Sq1",
+    "Sq2",
+    "Sq3",
+    "Square",
+]
 
 
 class Square(RandomManifold):

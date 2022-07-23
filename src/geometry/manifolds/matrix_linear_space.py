@@ -5,7 +5,9 @@ from .differentiable_manifold import DifferentiableManifold
 from geometry.utils.numpy_backport import assert_allclose
 import numpy as np
 
-__all__ = ["MatrixLinearSpace"]
+__all__ = [
+    "MatrixLinearSpace",
+]
 
 
 class MatrixLinearSpace(DifferentiableManifold):

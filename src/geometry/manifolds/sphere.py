@@ -8,7 +8,13 @@ import numpy as np
 
 from .differentiable_manifold import DifferentiableManifold
 
-__all__ = ["S", "S1", "S2", "Sphere", "Sphere1"]
+__all__ = [
+    "S",
+    "S1",
+    "S2",
+    "Sphere",
+    "Sphere1",
+]
 
 
 class Sphere(DifferentiableManifold):
@@ -116,7 +122,6 @@ class Sphere(DifferentiableManifold):
 
 
 class Sphere1(DifferentiableManifold):
-
     norm_rtol = 1e-5
     atol_geodesic_distance = 1e-8
 

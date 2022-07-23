@@ -4,7 +4,14 @@ import numpy as np
 from .differentiable_manifold import DifferentiableManifold
 from .differentiable_manifold import RandomManifold
 
-__all__ = ["TorusW", "TorusW", "Ts", "Ts1", "Ts2", "Ts3"]
+__all__ = [
+    "TorusW",
+    "TorusW",
+    "Ts",
+    "Ts1",
+    "Ts2",
+    "Ts3",
+]
 
 
 class TorusW(RandomManifold):

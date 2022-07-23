@@ -3,7 +3,9 @@ from abc import abstractmethod
 from contracts import contract
 from .matrix_linear_space import MatrixLinearSpace
 
-__all__ = ["MatrixLieAlgebra"]
+__all__ = [
+    "MatrixLieAlgebra",
+]
 
 
 class MatrixLieAlgebra(MatrixLinearSpace):

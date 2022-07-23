@@ -2,7 +2,10 @@ from numpy.ma.core import allclose
 
 import numpy as np
 
-__all__ = ["assert_allclose", "check_allclose"]
+__all__ = [
+    "assert_allclose",
+    "check_allclose",
+]
 
 try:
     from numpy.testing.utils import assert_allclose  # @UnusedImport

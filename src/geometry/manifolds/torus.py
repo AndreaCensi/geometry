@@ -4,7 +4,13 @@ import numpy as np
 
 from .differentiable_manifold import DifferentiableManifold
 
-__all__ = ["T", "T1", "T2", "T3", "Torus"]
+__all__ = [
+    "T",
+    "T1",
+    "T2",
+    "T3",
+    "Torus",
+]
 
 
 class Torus(DifferentiableManifold):

@@ -1,7 +1,10 @@
 import numpy as np
 from contracts import contract, describe_type, describe_value
 
-__all__ = ["formatm", "printm"]
+__all__ = [
+    "formatm",
+    "printm",
+]
 
 
 def printm(*args):

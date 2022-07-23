@@ -1,7 +1,9 @@
 from abc import abstractmethod
 from contracts import ContractsMeta
 
-__all__ = ["Group"]
+__all__ = [
+    "Group",
+]
 
 
 class Group(object):

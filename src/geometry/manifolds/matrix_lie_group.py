@@ -7,7 +7,9 @@ import numpy as np
 from .differentiable_manifold import DifferentiableManifold
 from .group import Group
 
-__all__ = ["MatrixLieGroup"]
+__all__ = [
+    "MatrixLieGroup",
+]
 
 
 class MatrixLieGroup(Group, DifferentiableManifold, ABC):

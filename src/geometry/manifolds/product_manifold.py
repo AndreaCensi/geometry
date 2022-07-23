@@ -3,7 +3,9 @@ import numpy as np
 
 from .differentiable_manifold import DifferentiableManifold
 
-__all__ = ["ProductManifold"]
+__all__ = [
+    "ProductManifold",
+]
 
 
 class ProductManifold(DifferentiableManifold):

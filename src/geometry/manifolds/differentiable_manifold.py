@@ -7,7 +7,10 @@ from geometry.utils import check_allclose, assert_allclose
 
 from .manifold_relations import Isomorphism, Embedding, ManifoldRelations
 
-__all__ = ["DifferentiableManifold", "RandomManifold"]
+__all__ = [
+    "DifferentiableManifold",
+    "RandomManifold",
+]
 
 
 class DifferentiableManifold:

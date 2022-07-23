@@ -4,7 +4,9 @@ from .manifold_relations import ManifoldRelations as MR
 SYMBOL_ISOMORPHISM = "~"  # XXX: not used
 SYMBOL_EMBEDDING = "<"
 SYMBOL_PROJECTION = ">"
-__all__ = ["compute_manifold_relations"]
+__all__ = [
+    "compute_manifold_relations",
+]
 
 
 def compute_manifold_relations(manifolds):

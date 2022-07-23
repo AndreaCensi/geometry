@@ -17,7 +17,15 @@ from .matrix_lie_group import MatrixLieGroup
 from .special_euclidean_algebra import se
 from .special_orthogonal_group import SO
 
-__all__ = ["SE", "SE2", "SE3", "SE_group", "TSE", "TSE2", "TSE3"]
+__all__ = [
+    "SE",
+    "SE2",
+    "SE3",
+    "SE_group",
+    "TSE",
+    "TSE2",
+    "TSE3",
+]
 
 
 class SE_group(MatrixLieGroup):

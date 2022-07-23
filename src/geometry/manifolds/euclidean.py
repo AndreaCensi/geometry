@@ -4,7 +4,13 @@ import numpy as np
 
 from .matrix_linear_space import MatrixLinearSpace
 
-__all__ = ["Euclidean", "R", "R1", "R2", "R3"]
+__all__ = [
+    "Euclidean",
+    "R",
+    "R1",
+    "R2",
+    "R3",
+]
 
 
 class Euclidean(MatrixLinearSpace):

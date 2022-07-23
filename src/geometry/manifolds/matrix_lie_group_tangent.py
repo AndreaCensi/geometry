@@ -2,7 +2,9 @@ from contracts import contract
 from .differentiable_manifold import DifferentiableManifold
 from .matrix_lie_group import MatrixLieGroup
 
-__all__ = ["MatrixLieGroupTangent"]
+__all__ = [
+    "MatrixLieGroupTangent",
+]
 
 
 class MatrixLieGroupTangent(DifferentiableManifold):

@@ -1,7 +1,9 @@
 from contracts import contract
 from .differentiable_manifold import DifferentiableManifold
 
-__all__ = ["TangentBundle"]
+__all__ = [
+    "TangentBundle",
+]
 
 
 class TangentBundle(DifferentiableManifold):
