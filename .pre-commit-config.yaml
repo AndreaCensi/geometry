@@ -13,15 +13,15 @@ repos:
   - args: [-l, '110', -t, py310]
     id: black
   repo: https://github.com/psf/black
-  rev: 22.3.0
+  rev: 22.6.0
 - hooks:
   - args: [--mapping, '2', --sequence, '2', --offset, '0', --width, '150', --preserve-quotes]
     id: yamlfmt
   repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
-  rev: 0.2.1
+  rev: 0.2.2
 - hooks:
   - {id: sort-all}
   repo: https://github.com/aio-libs/sort-all
   rev: v1.2.0
 
-# sigil fd74db3516698973df97579278aa9c1f
+# sigil 554c2f868f5c328ab83fb53ea0267e60
