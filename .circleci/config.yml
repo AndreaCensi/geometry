@@ -18,6 +18,7 @@ jobs:
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       PATH: /root/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       CONTEXT_NAME: << pipeline.parameters.context_name >>
+      DEPS_INSTALL_TIMEOUT: 10m
       COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
       TEST_PACKAGES: geometry_manifolds_tests geometry_tests
     docker:
@@ -42,14 +43,14 @@ jobs:
         command: |
           shyaml get-values install_requires < project.pp1.yaml > .requirements.txt
           python3 -m pip install -U pip
-          python3 -m pip install  -r .requirements.txt
+          timeout ${DEPS_INSTALL_TIMEOUT} python3 -m pip install  -r .requirements.txt
           rm .requirements.txt
 
     - run:
         name: Install testing deps
         command: |
           shyaml get-values tests_require < project.pp1.yaml > .requirements_tests.txt
-          python3 -m pip install  -r .requirements_tests.txt
+          timeout ${DEPS_INSTALL_TIMEOUT} python3 -m pip install  -r .requirements_tests.txt
           rm .requirements_tests.txt
 
     - run:
@@ -184,4 +185,4 @@ jobs:
           ./codecov  
     resource_class: small
 
-# sigil 2310f25bab20df424ab4de4d140a066a
+# sigil b911499f99aec1ddf861bda08bf097e6
