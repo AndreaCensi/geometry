@@ -93,7 +93,7 @@ def check_reasonable_radius(r, r2, N):  # @UnusedVariable
     bounds = [0.8, 1.2]  # TODO: make it depend on N
     if not (r * bounds[0] <= r2 <= r * bounds[1]):
         msg = "Constructed distribution with radius %f, got %f." % (r, r2)
-        assert False, msg
+        raise AssertionError(msg)
 
 
 def random_directions_bounded_check(ndim, radius, N):
