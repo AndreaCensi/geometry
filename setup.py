@@ -15,7 +15,8 @@ params = dict(
     extras_require={"test": data["tests_require"]},
     install_requires=data["install_requires"],
     package_dir={"": data["srcdir"]},
-    packages=data["modules"],
+    packages=data["packages"],
+    py_modules=data["py_modules"],
     long_description="",
     version=data["version"],
     entry_points=data["entry_points"],
@@ -25,4 +26,4 @@ params = dict(
 
 setup(**params)
 
-# sigil ebaeec93e9da74460961ffce57c36fda
+# sigil 6ac7f7fb30942ed806e916fb2c69995b

@@ -15,7 +15,15 @@
   },
   "zip_safe": true,
   "include_package_data": true,
-  "modules": [
+  "packages": [
+    "geometry",
+    "geometry.distances",
+    "geometry.manifolds",
+    "geometry.manifolds.todo",
+    "geometry.subspaces",
+    "geometry.utils"
+  ],
+  "py_modules": [
     "geometry",
     "geometry.basic_utils",
     "geometry.constants",
