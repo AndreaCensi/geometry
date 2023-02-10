@@ -9,6 +9,8 @@ workflows:
     jobs:
     - test-310:
         context: << pipeline.parameters.context_name >>
+    - test-311:
+        context: << pipeline.parameters.context_name >>
 jobs:
   test-310:
     #    machine: true
@@ -184,5 +186,179 @@ jobs:
           chmod +x codecov
           ./codecov  
     resource_class: small
+  test-311:
+    #    machine: true
+    #    resource_class: zuper-ci-ns/my-resource-class
+    environment:
+      COLUMNS: '160'
+      # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      PATH: /root/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      CONTEXT_NAME: << pipeline.parameters.context_name >>
+      DEPS_INSTALL_TIMEOUT: 10m
+      COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
+      TEST_PACKAGES: geometry_manifolds_tests geometry_tests
+    docker:
+    - image: ${DOCKER_REGISTRY}/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.11:${Z_DISTRO}
+      auth:
+        username: $DOCKER_USERNAME
+        password: $DOCKER_PASSWORD
+    working_directory: ~/repo
+    steps:
+    - checkout
+    - run:
+        name: Build statistics
+        command: |
+          mkdir -p build-stats
+          # env | sort | tee  build-stats/env.txt
+          env | sort
+    - store_artifacts:
+        path: build-stats
+        destination: build-stats
+    - run:
+        name: Install deps
+        command: |
+          shyaml get-values install_requires < project.pp1.yaml > .requirements.txt
+          python3 -m pip install -U pip
+          timeout ${DEPS_INSTALL_TIMEOUT} python3 -m pip install  -r .requirements.txt
+          rm .requirements.txt
 
-# sigil 876b622cd9edacb98fadec6e866d35ad
+    - run:
+        name: Install testing deps
+        command: |
+          shyaml get-values tests_require < project.pp1.yaml > .requirements_tests.txt
+          timeout ${DEPS_INSTALL_TIMEOUT} python3 -m pip install  -r .requirements_tests.txt
+          rm .requirements_tests.txt
+
+    - run:
+        name: Python stats
+        command: |
+          pipdeptree | tee  build-stats/pipdeptree.txt
+          python3 -m pip  list   | sort | tee  build-stats/pip-list.txt
+          python3 -m pip  freeze | sort | tee  build-stats/pip-freeze.txt
+          python3 -m pip cache list | tee  build-stats/pip-cache.txt
+
+    - store_artifacts:
+        path: build-stats
+        destination: build-stats
+
+    - run:
+        name: setup.py develop
+        command: |
+          python3 -m pip install -e . --prefix ~/.local --no-deps
+
+    - run:
+        name: Make docs
+        command: |
+          FILE=src/conf.py
+          mkdir -p out/docs
+          if test -f "$FILE"; then
+              sphinx-build src out/docs
+          fi
+
+    - store_artifacts:
+        path: out/docs
+        destination: docs
+    - run:
+        background: true
+        name: services
+        command: |
+          TARGET=services
+          if make -n $TARGET ; then
+              make $TARGET
+          else
+              echo "Target $TARGET not defined"
+          fi
+    - run:
+        name: pre-circle-tests
+        command: |
+          TARGET=pre-circle-tests
+          if make -n $TARGET ; then
+              make $TARGET
+          else
+              echo "Target $TARGET not defined"
+          fi
+    # - run:
+    #     name: Notebooks
+    #     command: |
+    #       make -C notebooks cleanup all
+
+
+    - run:
+        name: geometry_manifolds_tests
+        command: |
+          set -euxo pipefail
+          TEST_MODULES=$(circleci tests split <.circleci/geometry_manifolds_tests.tests)
+          echo "TEST_MODULES=[$TEST_MODULES]"
+          if [ -z "$TEST_MODULES" ]; then
+            echo "\$TEST_MODULES is empty"
+            exit 0
+          else
+            echo "\$TEST_MODULES is NOT empty"
+          fi
+          mkdir -p out/test-results
+          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry_manifolds_tests-xunit.xml
+          timeout 30m nose2 --with-coverage \
+              --plugin nose2.plugins.junitxml \
+              --junit-xml \
+              --junit-xml-path ${xunit_output} \
+              $TEST_MODULES
+          # TODO: cover packages
+    - run:
+        name: geometry_tests
+        command: |
+          set -euxo pipefail
+          TEST_MODULES=$(circleci tests split <.circleci/geometry_tests.tests)
+          echo "TEST_MODULES=[$TEST_MODULES]"
+          if [ -z "$TEST_MODULES" ]; then
+            echo "\$TEST_MODULES is empty"
+            exit 0
+          else
+            echo "\$TEST_MODULES is NOT empty"
+          fi
+          mkdir -p out/test-results
+          xunit_output=$PWD/out/test-results/nose-${CIRCLE_NODE_INDEX}-geometry_tests-xunit.xml
+          timeout 30m nose2 --with-coverage \
+              --plugin nose2.plugins.junitxml \
+              --junit-xml \
+              --junit-xml-path ${xunit_output} \
+              $TEST_MODULES
+          # TODO: cover packages
+    - run:
+        name: post-circle-tests
+        command: |
+          TARGET=post-circle-tests
+          if make -n $TARGET ; then
+              make $TARGET
+          else
+              echo "Target $TARGET not defined"
+          fi
+
+    - store_test_results:
+        path: out/test-results
+
+    - run:
+        name: Coverage report
+        when: always
+        command: |
+          coverage combine || true
+          coverage html -d out/coverage/${CIRCLE_NODE_INDEX} || true
+          coverage xml || true
+
+    - store_artifacts:
+        path: out/coverage
+        destination: coverage
+
+    - store_artifacts:
+        path: out/tests
+        destination: tests
+
+    - run:
+        name: CodeCov
+        when: always
+        command: |
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov  
+    resource_class: small
+
+# sigil d448d5dfdeb69f0bf306c340193b3a50
