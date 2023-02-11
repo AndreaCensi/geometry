@@ -3,7 +3,7 @@ name = "PyGeometry-z7"
 version = "7.2"
 authors = [{name = "Andrea Censi", email = "info@zupermind.com"}]
 dependencies = [
-    "PyContracts3",
+    "PyContracts3>=7",
     "numpy",
     "scipy",
     "zuper-commons-z7",

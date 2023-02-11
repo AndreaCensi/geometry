@@ -1,6 +1,6 @@
 {
   "install_requires": [
-    "PyContracts3",
+    "PyContracts3>=7",
     "numpy",
     "scipy",
     "zuper-commons-z7"
