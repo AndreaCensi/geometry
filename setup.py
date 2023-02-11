@@ -16,7 +16,7 @@ params = dict(
     install_requires=data["install_requires"],
     package_dir={"": data["srcdir"]},
     packages=data["packages"],
-    py_modules=data["py_modules"],
+    # py_modules=data["py_modules"],
     long_description="",
     version=data["version"],
     entry_points=data["entry_points"],
@@ -26,4 +26,4 @@ params = dict(
 
 setup(**params)
 
-# sigil 6ac7f7fb30942ed806e916fb2c69995b
+# sigil 8668ee96e452bf23787aa653addf1878
