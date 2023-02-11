@@ -23,6 +23,7 @@ jobs:
       DEPS_INSTALL_TIMEOUT: 10m
       COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
       TEST_PACKAGES: geometry_manifolds_tests geometry_tests
+      PIP_INDEX_URL: ${PIP_INDEX_URL_SRC}
     docker:
     - image: ${DOCKER_REGISTRY}/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.10:${Z_DISTRO}
       auth:
@@ -197,6 +198,7 @@ jobs:
       DEPS_INSTALL_TIMEOUT: 10m
       COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
       TEST_PACKAGES: geometry_manifolds_tests geometry_tests
+      PIP_INDEX_URL: ${PIP_INDEX_URL_SRC}
     docker:
     - image: ${DOCKER_REGISTRY}/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.11:${Z_DISTRO}
       auth:
@@ -361,4 +363,4 @@ jobs:
           ./codecov  
     resource_class: small
 
-# sigil d448d5dfdeb69f0bf306c340193b3a50
+# sigil 1fcba40c6a3aa4e9718137ff07064376
