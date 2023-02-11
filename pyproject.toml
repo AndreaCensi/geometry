@@ -2,9 +2,12 @@
 name = "PyGeometry-z7"
 version = "7.2"
 authors = [{name = "Andrea Censi", email = "info@zupermind.com"}]
-dependencies = ["zuper-commons-z7", "PyContracts3", "numpy", "scipy"]
-
-[project.scripts]
+dependencies = [
+    "PyContracts3",
+    "numpy",
+    "scipy",
+    "zuper-commons-z7",
+    ]
 
 [tool]
 [tool.poetry]
@@ -12,8 +15,22 @@ name = "PyGeometry-z7"
 version = "7.2"
 description = ""
 authors = ["Andrea Censi <info@zupermind.com>"]
-packages = [{include = "geometry", from = "src"}, {include = "geometry/distances", from = "src"}, {include = "geometry/manifolds", from = "src"}, {include = "geometry/manifolds/todo", from = "src"}, {include = "geometry/subspaces", from = "src"}, {include = "geometry/utils", from = "src"}]
+packages = [
+    {from = "src", include = "geometry"},
+    {from = "src", include = "geometry/distances"},
+    {from = "src", include = "geometry/manifolds"},
+    {from = "src", include = "geometry/manifolds/todo"},
+    {from = "src", include = "geometry/subspaces"},
+    {from = "src", include = "geometry/utils"},
+    ]
 
 [tool.setuptools]
-packages = ["geometry", "geometry.distances", "geometry.manifolds", "geometry.manifolds.todo", "geometry.subspaces", "geometry.utils"]
+packages = [
+    "geometry",
+    "geometry.distances",
+    "geometry.manifolds",
+    "geometry.manifolds.todo",
+    "geometry.subspaces",
+    "geometry.utils",
+    ]
 package-dir = {"" = "src"}
