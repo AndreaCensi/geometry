@@ -229,7 +229,7 @@ def random_rotation(ndim=3):
     elif ndim == 2:
         return rot2d(np.random.uniform(0, 2 * np.pi))
     else:
-        assert False
+        raise AssertionError
 
 
 @contract(returns="array[3x3], orthogonal")
