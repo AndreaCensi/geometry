@@ -28,10 +28,10 @@ jobs:
       COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
       TEST_PACKAGES: geometry_manifolds_tests geometry_tests
     docker:
-    - image: ${DOCKER_REGISTRY}/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.10:${Z_DISTRO}
-      auth:
-        username: $DOCKER_USERNAME
-        password: $DOCKER_PASSWORD
+    - image: docker.io/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.10:${Z_DISTRO}
+      # auth:
+      #   username: $DOCKER_USERNAME
+      #   password: $DOCKER_PASSWORD
     working_directory: ~/repo
     steps:
     - checkout
@@ -214,10 +214,10 @@ jobs:
       COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
       TEST_PACKAGES: geometry_manifolds_tests geometry_tests
     docker:
-    - image: ${DOCKER_REGISTRY}/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.10:${Z_DISTRO}
-      auth:
-        username: $DOCKER_USERNAME
-        password: $DOCKER_PASSWORD
+    - image: docker.io/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.10:${Z_DISTRO}
+      # auth:
+      #   username: $DOCKER_USERNAME
+      #   password: $DOCKER_PASSWORD
     working_directory: ~/repo
     steps:
     - checkout
@@ -400,10 +400,10 @@ jobs:
       COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
       TEST_PACKAGES: geometry_manifolds_tests geometry_tests
     docker:
-    - image: ${DOCKER_REGISTRY}/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.11:${Z_DISTRO}
-      auth:
-        username: $DOCKER_USERNAME
-        password: $DOCKER_PASSWORD
+    - image: docker.io/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.11:${Z_DISTRO}
+      # auth:
+      #   username: $DOCKER_USERNAME
+      #   password: $DOCKER_PASSWORD
     working_directory: ~/repo
     steps:
     - checkout
@@ -586,10 +586,10 @@ jobs:
       COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
       TEST_PACKAGES: geometry_manifolds_tests geometry_tests
     docker:
-    - image: ${DOCKER_REGISTRY}/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.11:${Z_DISTRO}
-      auth:
-        username: $DOCKER_USERNAME
-        password: $DOCKER_PASSWORD
+    - image: docker.io/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.11:${Z_DISTRO}
+      # auth:
+      #   username: $DOCKER_USERNAME
+      #   password: $DOCKER_PASSWORD
     working_directory: ~/repo
     steps:
     - checkout
@@ -761,4 +761,4 @@ jobs:
           ./codecov  
     resource_class: small
 
-# sigil d17c23b60e65d37a27544e92bc81b21c
+# sigil 691873034df3bfe8130afa0e87b9c488
