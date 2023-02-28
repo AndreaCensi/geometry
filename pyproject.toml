@@ -1,7 +1,7 @@
 [project]
 name = "PyGeometry-z7"
 version = "7.2"
-authors = [{name = "Andrea Censi", email = "info@zupermind.com"}]
+authors = [{name = "Andrea Censi", email = "AndreaCensi@users.noreply.github.com"}]
 dependencies = [
     "PyContracts3>=7",
     "numpy",
@@ -19,7 +19,7 @@ test = [
 name = "PyGeometry-z7"
 version = "7.2"
 description = ""
-authors = ["Andrea Censi <info@zupermind.com>"]
+authors = ["Andrea Censi <AndreaCensi@users.noreply.github.com>"]
 packages = [
     {from = "src", include = "geometry"},
     {from = "src", include = "geometry/distances"},
