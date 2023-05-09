@@ -36,8 +36,16 @@ jobs:
     - run:
         name: Build statistics
         command: |
+          set -x 
           mkdir -p build-stats
-          env | sort  >  build-stats/env.txt
+          image_name=`cat /.circleci-runner-config.json | jq -r .Job.docker[0].Image | envsubst`
+          registry_to_login=`echo ${image_name} | cut -d'/' -f1`
+          #regctl registry login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" "${registry_to_login}"
+          mkdir -p build-stats/jobs/${CIRCLE_JOB}
+          regctl manifest get --format raw-body "${image_name}" > build-stats/jobs/${CIRCLE_JOB}/image-manifest.json
+          regctl image digest "${image_name}" > build-stats/jobs/${CIRCLE_JOB}/image-digest.txt
+          echo ${image_name} > build-stats/jobs/${CIRCLE_JOB}/image-name.txt
+
     - store_artifacts:
         path: build-stats
         destination: build-stats
@@ -220,8 +228,16 @@ jobs:
     - run:
         name: Build statistics
         command: |
+          set -x 
           mkdir -p build-stats
-          env | sort  >  build-stats/env.txt
+          image_name=`cat /.circleci-runner-config.json | jq -r .Job.docker[0].Image | envsubst`
+          registry_to_login=`echo ${image_name} | cut -d'/' -f1`
+          #regctl registry login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" "${registry_to_login}"
+          mkdir -p build-stats/jobs/${CIRCLE_JOB}
+          regctl manifest get --format raw-body "${image_name}" > build-stats/jobs/${CIRCLE_JOB}/image-manifest.json
+          regctl image digest "${image_name}" > build-stats/jobs/${CIRCLE_JOB}/image-digest.txt
+          echo ${image_name} > build-stats/jobs/${CIRCLE_JOB}/image-name.txt
+
     - store_artifacts:
         path: build-stats
         destination: build-stats
@@ -404,8 +420,16 @@ jobs:
     - run:
         name: Build statistics
         command: |
+          set -x 
           mkdir -p build-stats
-          env | sort  >  build-stats/env.txt
+          image_name=`cat /.circleci-runner-config.json | jq -r .Job.docker[0].Image | envsubst`
+          registry_to_login=`echo ${image_name} | cut -d'/' -f1`
+          #regctl registry login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" "${registry_to_login}"
+          mkdir -p build-stats/jobs/${CIRCLE_JOB}
+          regctl manifest get --format raw-body "${image_name}" > build-stats/jobs/${CIRCLE_JOB}/image-manifest.json
+          regctl image digest "${image_name}" > build-stats/jobs/${CIRCLE_JOB}/image-digest.txt
+          echo ${image_name} > build-stats/jobs/${CIRCLE_JOB}/image-name.txt
+
     - store_artifacts:
         path: build-stats
         destination: build-stats
@@ -588,8 +612,16 @@ jobs:
     - run:
         name: Build statistics
         command: |
+          set -x 
           mkdir -p build-stats
-          env | sort  >  build-stats/env.txt
+          image_name=`cat /.circleci-runner-config.json | jq -r .Job.docker[0].Image | envsubst`
+          registry_to_login=`echo ${image_name} | cut -d'/' -f1`
+          #regctl registry login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" "${registry_to_login}"
+          mkdir -p build-stats/jobs/${CIRCLE_JOB}
+          regctl manifest get --format raw-body "${image_name}" > build-stats/jobs/${CIRCLE_JOB}/image-manifest.json
+          regctl image digest "${image_name}" > build-stats/jobs/${CIRCLE_JOB}/image-digest.txt
+          echo ${image_name} > build-stats/jobs/${CIRCLE_JOB}/image-name.txt
+
     - store_artifacts:
         path: build-stats
         destination: build-stats
@@ -753,4 +785,4 @@ jobs:
           ./codecov  
     resource_class: small
 
-# sigil 76b363a8c775553319175c6056c924d2
+# sigil cc7e8cd64618f90e3a0b7bc2300131f5
