@@ -49,8 +49,9 @@ jobs:
           mkdir -p build-stats/envs
           mkdir -p build-stats/jobs/${CIRCLE_JOB}
           mkdir -p build-stats/jobs/${CIRCLE_JOB}/envs
-          echo -n "${Z_REQS_SHA:-not-present}" > build-stats/jobs/${CIRCLE_JOB}/envs/Z_REQS_SHA
-          echo -n "${Z_REQS_SHA:-not-present}" > build-stats/envs/Z_REQS_SHA
+          echo -n "${Z_REQS_SHA:-not-present}"    > build-stats/jobs/${CIRCLE_JOB}/envs/Z_REQS_SHA
+          echo -n "${IMAGE_VCS_SHA:-not-present}" > build-stats/jobs/${CIRCLE_JOB}/envs/IMAGE_VCS_SHA
+          echo -n "${IMAGE_NAME:-not-present}"    > build-stats/jobs/${CIRCLE_JOB}/envs/IMAGE_NAME
 
     - store_artifacts:
         path: build-stats
@@ -247,8 +248,9 @@ jobs:
           mkdir -p build-stats/envs
           mkdir -p build-stats/jobs/${CIRCLE_JOB}
           mkdir -p build-stats/jobs/${CIRCLE_JOB}/envs
-          echo -n "${Z_REQS_SHA:-not-present}" > build-stats/jobs/${CIRCLE_JOB}/envs/Z_REQS_SHA
-          echo -n "${Z_REQS_SHA:-not-present}" > build-stats/envs/Z_REQS_SHA
+          echo -n "${Z_REQS_SHA:-not-present}"    > build-stats/jobs/${CIRCLE_JOB}/envs/Z_REQS_SHA
+          echo -n "${IMAGE_VCS_SHA:-not-present}" > build-stats/jobs/${CIRCLE_JOB}/envs/IMAGE_VCS_SHA
+          echo -n "${IMAGE_NAME:-not-present}"    > build-stats/jobs/${CIRCLE_JOB}/envs/IMAGE_NAME
 
     - store_artifacts:
         path: build-stats
@@ -445,8 +447,9 @@ jobs:
           mkdir -p build-stats/envs
           mkdir -p build-stats/jobs/${CIRCLE_JOB}
           mkdir -p build-stats/jobs/${CIRCLE_JOB}/envs
-          echo -n "${Z_REQS_SHA:-not-present}" > build-stats/jobs/${CIRCLE_JOB}/envs/Z_REQS_SHA
-          echo -n "${Z_REQS_SHA:-not-present}" > build-stats/envs/Z_REQS_SHA
+          echo -n "${Z_REQS_SHA:-not-present}"    > build-stats/jobs/${CIRCLE_JOB}/envs/Z_REQS_SHA
+          echo -n "${IMAGE_VCS_SHA:-not-present}" > build-stats/jobs/${CIRCLE_JOB}/envs/IMAGE_VCS_SHA
+          echo -n "${IMAGE_NAME:-not-present}"    > build-stats/jobs/${CIRCLE_JOB}/envs/IMAGE_NAME
 
     - store_artifacts:
         path: build-stats
@@ -643,8 +646,9 @@ jobs:
           mkdir -p build-stats/envs
           mkdir -p build-stats/jobs/${CIRCLE_JOB}
           mkdir -p build-stats/jobs/${CIRCLE_JOB}/envs
-          echo -n "${Z_REQS_SHA:-not-present}" > build-stats/jobs/${CIRCLE_JOB}/envs/Z_REQS_SHA
-          echo -n "${Z_REQS_SHA:-not-present}" > build-stats/envs/Z_REQS_SHA
+          echo -n "${Z_REQS_SHA:-not-present}"    > build-stats/jobs/${CIRCLE_JOB}/envs/Z_REQS_SHA
+          echo -n "${IMAGE_VCS_SHA:-not-present}" > build-stats/jobs/${CIRCLE_JOB}/envs/IMAGE_VCS_SHA
+          echo -n "${IMAGE_NAME:-not-present}"    > build-stats/jobs/${CIRCLE_JOB}/envs/IMAGE_NAME
 
     - store_artifacts:
         path: build-stats
@@ -809,4 +813,4 @@ jobs:
           ./codecov  
     resource_class: small
 
-# sigil a937b686acc048a11ade4881b571a5d2
+# sigil bf63f3a23971dacec1487f62085e31d9
