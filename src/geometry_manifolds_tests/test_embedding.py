@@ -39,7 +39,6 @@ def check_embed_relation_cond(A, B):
 
 
 def check_embed_relation(A, B):
-
     check_embed_relation_cond(A, B)
 
     points = list(A.interesting_points())

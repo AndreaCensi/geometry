@@ -18,7 +18,6 @@ except ImportError:
 else:
 
     def random_directions_bounded_density_3d(center, radius, N):
-
         S = random_directions_bounded(3, radius, N, center=center)
         distances = distances_from(S, center)
 
@@ -52,7 +51,7 @@ else:
             center = random_direction()
             yield random_directions_bounded_density_3d, center, r, N
 
-    def random_orthogonal_direction_density_test():
+    def random_orthogonal_direction_density_test() -> None:
         # TODO
         pass
 

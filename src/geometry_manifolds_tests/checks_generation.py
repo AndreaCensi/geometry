@@ -29,7 +29,7 @@
 """
 import sys
 
-from nose.tools import istest, nottest
+from zuper_commons.test_utils import nottest, istest
 
 from geometry import logger
 
