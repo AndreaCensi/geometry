@@ -10,7 +10,7 @@ repos:
   repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.4.0
 - hooks:
-  - args: [-l, '110', -t, py310]
+  - args: [-l, '130', -t, py310]
     id: black
   repo: https://github.com/psf/black
   rev: 23.3.0
@@ -24,4 +24,4 @@ repos:
   repo: https://github.com/aio-libs/sort-all
   rev: v1.2.0
 
-# sigil 62e901025431de046bb336a8520580bb
+# sigil 25a5015fafbe7dded05a3e3c316f0b85
