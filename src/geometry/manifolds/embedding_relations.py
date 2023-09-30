@@ -40,7 +40,10 @@ from .translation_group import Tran2, Tran3
 
 from typing import List
 
-__all__ = ["embedding", "isomorphism"]
+__all__ = [
+    "embedding",
+    "isomorphism",
+]
 
 
 def embedding(small, big, embed_in, project_from, desc=None):

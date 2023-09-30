@@ -47,7 +47,6 @@ class PosesTest(GeoTestCase):
         self.check_conversion(sequence(), rot2d_from_angle, angle_from_rot2d)
 
     def test_conversions_se2_SE2(self):
-
         self.check_conversion(SE2.interesting_points(), se2_from_SE2, SE2_from_se2)
 
 

@@ -31,7 +31,6 @@ V1DN = NewType("V1DN", V1D)
 """ Vector 1D normalized """
 
 if TYPE_CHECKING:
-
     SO2value = NewType("SO2value", np.ndarray)
     so2value = NewType("so2value", np.ndarray)
 
