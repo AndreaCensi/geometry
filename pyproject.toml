@@ -2,19 +2,7 @@
 name = "PyGeometry-z7"
 version = "7.2"
 authors = [{name = "Andrea Censi", email = "AndreaCensi@users.noreply.github.com"}]
-dependencies = [
-    "PyContracts3>=7",
-    "numpy",
-    "scipy",
-    "zuper-commons-z7",
-    ]
 
-[project.optional-dependencies]
-test = [
-    "nose",
-    ]
-
-[tool]
 [tool.poetry]
 name = "PyGeometry-z7"
 version = "7.2"
@@ -29,16 +17,14 @@ packages = [
     {from = "src", include = "geometry/utils"},
     ]
 
-[tool.setuptools]
-packages = [
-    "geometry",
-    "geometry.distances",
-    "geometry.manifolds",
-    "geometry.manifolds.todo",
-    "geometry.subspaces",
-    "geometry.utils",
-    ]
-package-dir = {"" = "src"}
+[tool.poetry.dependencies]
+PyContracts3 = ">=7"
+numpy = "*"
+scipy = "*"
+zuper-commons-z7 = "*"
+
+[tool.poetry.group.test.dependencies]
+nose = "*"
 
 [build-system]
 requires = [
