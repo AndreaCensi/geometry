@@ -21,9 +21,7 @@ class RotationsTest(GeoTestCase):
         return self.check_conversion(rotations_sequence(), axis_angle_from_rotation, rotation_from_axis_angle)
 
     def test_conversions2(self):
-        return self.check_conversion(
-            axis_angle_sequence(), rotation_from_axis_angle, axis_angle_from_rotation
-        )
+        return self.check_conversion(axis_angle_sequence(), rotation_from_axis_angle, axis_angle_from_rotation)
 
     def test_distances_rotations(self):
         for axis, angle in axis_angle_sequence():

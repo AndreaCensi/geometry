@@ -61,11 +61,7 @@ else:
         SO3value
     ) = (
         so3value
-    ) = (
-        SE2value
-    ) = (
-        se2value
-    ) = SE3value = se3value = T3value = T2value = e3value = e2value = E3value = E2value = np.ndarray
+    ) = SE2value = se2value = SE3value = se3value = T3value = T2value = e3value = e2value = E3value = E2value = np.ndarray
     t3value = t2value = np.ndarray
 
 TSE2value = Tuple[SE2value, se2value]

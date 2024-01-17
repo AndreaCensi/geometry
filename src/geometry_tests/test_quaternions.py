@@ -18,19 +18,13 @@ class TestQuaternions(GeoTestCase):
         return self.check_conversion(rotations_sequence(), quaternion_from_rotation, rotation_from_quaternion)
 
     def test_rotation_conversion2(self):
-        return self.check_conversion(
-            quaternions_sequence(), rotation_from_quaternion, quaternion_from_rotation
-        )
+        return self.check_conversion(quaternions_sequence(), rotation_from_quaternion, quaternion_from_rotation)
 
     def test_conversions(self):
-        return self.check_conversion(
-            quaternions_sequence(), axis_angle_from_quaternion, quaternion_from_axis_angle
-        )
+        return self.check_conversion(quaternions_sequence(), axis_angle_from_quaternion, quaternion_from_axis_angle)
 
     def test_conversions2(self):
-        return self.check_conversion(
-            axis_angle_sequence(), quaternion_from_axis_angle, axis_angle_from_quaternion
-        )
+        return self.check_conversion(axis_angle_sequence(), quaternion_from_axis_angle, axis_angle_from_quaternion)
 
     def test_rotation_from_axis_angle2(self):
         for axis, angle in axis_angle_sequence():

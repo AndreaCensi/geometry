@@ -33,9 +33,7 @@ def check_embed_relation_cond(A, B):
     if not B.can_represent(A):
         msg = "%s cannot represent %s" % (B, A)
     if msg:
-        raise Exception(
-            "%s;\n %s: %s\n %s: %s" % (msg, A, A.relations_descriptions(), B, B.relations_descriptions())
-        )
+        raise Exception("%s;\n %s: %s\n %s: %s" % (msg, A, A.relations_descriptions(), B, B.relations_descriptions()))
 
 
 def check_embed_relation(A, B):

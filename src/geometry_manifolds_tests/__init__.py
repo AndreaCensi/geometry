@@ -89,9 +89,7 @@ def _attrs0(x):
     return dict(manifolds=1, manifold=M, point=p)
 
 
-for_all_manifold_point = fancy_test_decorator(
-    lister=list_manifold_point, arguments=_args0, attributes=_attrs0
-)
+for_all_manifold_point = fancy_test_decorator(lister=list_manifold_point, arguments=_args0, attributes=_attrs0)
 
 
 def _args1(x):

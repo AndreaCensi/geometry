@@ -103,8 +103,7 @@ def check_skew_symmetric(x):
                 continue
             if x[i, j] != -x[j, i]:
                 raise ValueError(
-                    "Expected skew symmetric, but "
-                    + "a[%d][%d] = %f, a[%d][%d] = %f" % (i, j, x[i, j], j, i, x[j, i])
+                    "Expected skew symmetric, but " + "a[%d][%d] = %f, a[%d][%d] = %f" % (i, j, x[i, j], j, i, x[j, i])
                 )
 
 
@@ -209,9 +208,7 @@ def random_quaternion():
     theta1 = np.random.uniform() * 2 * np.pi
     theta2 = np.random.uniform() * 2 * np.pi
 
-    q = np.array(
-        [np.cos(theta2) * sigma2, np.sin(theta1) * sigma1, np.cos(theta1) * sigma1, np.sin(theta2) * sigma2]
-    )
+    q = np.array([np.cos(theta2) * sigma2, np.sin(theta1) * sigma1, np.cos(theta1) * sigma1, np.sin(theta2) * sigma2])
 
     q *= np.sign(q[0])
     return q

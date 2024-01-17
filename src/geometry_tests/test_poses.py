@@ -89,9 +89,7 @@ def comparison_test_2():
 known_pairs = [
     (
         SE2_from_translation_angle([0, 0], np.pi),
-        np.array(
-            [[0, +np.pi, 0], [-np.pi, 0, 0], [0, 0, 0]]  # Note:  should be - if normalize_pi is changed
-        ),
+        np.array([[0, +np.pi, 0], [-np.pi, 0, 0], [0, 0, 0]]),  # Note:  should be - if normalize_pi is changed
     ),
     (np.array([[-1, 0, 0], [0, -1, 0], [0, 0, 1]]), np.array([[0, np.pi, 0], [-np.pi, 0, 0], [0, 0, 0]])),
     (SE2_from_translation_angle([0, 0], 0), np.zeros((3, 3))),

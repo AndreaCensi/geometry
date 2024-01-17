@@ -27,9 +27,7 @@ class TranG(MatrixLieGroup):
         algebra = tran[n]
         MatrixLieGroup.__init__(self, n=n + 1, algebra=algebra, dimension=n)
         self.En = R[n]
-        DifferentiableManifold.isomorphism(
-            self, algebra, self.algebra_from_group, self.group_from_algebra, itype="lie"
-        )
+        DifferentiableManifold.isomorphism(self, algebra, self.algebra_from_group, self.group_from_algebra, itype="lie")
 
     def __repr__(self) -> str:
         # return 'Tran(%s)' % (self.n - 1)
