@@ -46,9 +46,7 @@ class SE_group(MatrixLieGroup):
         dimension = {2: 3, 3: 6}[N]
         MatrixLieGroup.__init__(self, n=N + 1, algebra=algebra, dimension=dimension)
 
-        DifferentiableManifold.embedding(
-            self, algebra, self.algebra_from_group, self.group_from_algebra, itype="lie"
-        )
+        DifferentiableManifold.embedding(self, algebra, self.algebra_from_group, self.group_from_algebra, itype="lie")
 
     def __repr__(self) -> str:
         return "SE%s" % (self.n - 1)

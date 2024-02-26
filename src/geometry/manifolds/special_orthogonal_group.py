@@ -29,9 +29,7 @@ class SO_group(MatrixLieGroup):
         algebra = so[N]
         dimension = {2: 1, 3: 3}[N]
         MatrixLieGroup.__init__(self, n=N, algebra=algebra, dimension=dimension)
-        DifferentiableManifold.embedding(
-            self, algebra, self.algebra_from_group, self.group_from_algebra, itype="lie"
-        )
+        DifferentiableManifold.embedding(self, algebra, self.algebra_from_group, self.group_from_algebra, itype="lie")
 
     def __repr__(self) -> str:
         return "SO%s" % self.n
