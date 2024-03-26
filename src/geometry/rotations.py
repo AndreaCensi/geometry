@@ -3,6 +3,7 @@
 
     conventions: q=( a + bi + cj + dk), with a>0
 """
+
 import itertools
 
 import numpy as np
