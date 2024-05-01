@@ -13,7 +13,7 @@ repos:
   - args: [-l, '130', -t, py311]
     id: black
   repo: https://github.com/psf/black
-  rev: 24.4.0
+  rev: 24.4.2
 - hooks:
   - args: [--mapping, '2', --sequence, '2', --offset, '0', --width, '150', --preserve-quotes]
     id: yamlfmt
@@ -24,4 +24,4 @@ repos:
   repo: https://github.com/aio-libs/sort-all
   rev: v1.2.0
 
-# sigil d870feaf10fc649dc0b250c0353736b2
+# sigil 2e3890b7864c7a369cc57ea1786c45ba
