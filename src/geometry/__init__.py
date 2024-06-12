@@ -1,8 +1,7 @@
 # coding=utf-8
 __version__ = "2.1.5"
 
-# If True, additional checks are done at runtime
-from zuper_commons.logs import ZLogger
+import logging
 
 development = False
 
@@ -11,7 +10,7 @@ development = False
 # Reactivate if some strange bug is suspected.
 GEOMETRY_DO_EXTRA_CHECKS = False
 
-logger = ZLogger(__name__)
+logger = logging.getLogger(__name__)
 
 import os
 
