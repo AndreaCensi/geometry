@@ -25,9 +25,9 @@ pypi:
 
 circleci:
   active: true
-  test_python_versions: ['3.11']
+  test_python_versions: ['3.12']
 
-python_syntax_version: '3.11'
+python_syntax_version: '3.12'
 
 url: https://github.com/AndreaCensi/geometry
 author: Andrea Censi
