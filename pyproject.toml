@@ -2,6 +2,16 @@
 name = "PyGeometry-z7"
 version = "7.2"
 authors = [{name = "Andrea Censi", email = "AndreaCensi@users.noreply.github.com"}]
+dependencies = [
+    "PyContracts3>=7",
+    "numpy",
+    "scipy",
+    "zuper-commons-z7",]
+
+[project.optional-dependencies]
+test = [
+    "nose",
+    ]
 
 [tool.poetry]
 name = "PyGeometry-z7"
@@ -25,6 +35,7 @@ zuper-commons-z7 = "*"
 
 [tool.poetry.group.test.dependencies]
 nose = "*"
+python = "^3.12"
 
 [build-system]
 requires = [
