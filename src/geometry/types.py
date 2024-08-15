@@ -61,4 +61,4 @@ else:
     t3value = t2value = np.ndarray
 
 TSE2value = tuple[SE2value, se2value]
-TSE3value = str | bytes[SE3value, se3value]
+TSE3value = tuple[SE3value, se3value]
