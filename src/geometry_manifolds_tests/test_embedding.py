@@ -1,5 +1,3 @@
-from nose.plugins.attrib import attr
-
 from geometry.manifolds import (
     R1,
     R2,
@@ -24,6 +22,7 @@ from geometry.manifolds import (
     Tran3,
     tran3,
 )
+from geometry.utils import attr
 
 
 def check_embed_relation_cond(A, B):
