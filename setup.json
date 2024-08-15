@@ -76,6 +76,7 @@
     "geometry.types",
     "geometry.utils",
     "geometry.utils.numpy_backport",
+    "geometry.utils.testing",
     "geometry.yaml_"
   ],
   "version": "7.2",
