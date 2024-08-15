@@ -1,7 +1,7 @@
-from contracts import contract
-from geometry.utils import assert_allclose
 import numpy as np
 
+from contracts import contract
+from geometry.utils import assert_allclose
 from .matrix_linear_space import MatrixLinearSpace
 
 __all__ = [

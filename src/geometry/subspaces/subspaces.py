@@ -1,6 +1,6 @@
 import numpy as np
-from contracts import contract
 
+from contracts import contract
 from geometry.utils import assert_allclose
 
 __all__ = [

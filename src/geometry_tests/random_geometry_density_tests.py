@@ -1,13 +1,7 @@
+import numpy as np
 from nose.plugins.attrib import attr
 
-from geometry import (
-    random_direction,
-    random_directions_bounded,
-    distances_from,
-    spherical_cap_area,
-    spherical_cap_with_area,
-)
-import numpy as np
+from geometry import distances_from, random_direction, random_directions_bounded, spherical_cap_area, spherical_cap_with_area
 
 try:
     from stochastic_testing import DiscreteUniformDistribution, StochasticTestManager, stochastic

@@ -1,4 +1,5 @@
 import numpy as np
+
 from contracts import contract, new_contract
 
 # noinspection PyUnresolvedReferences

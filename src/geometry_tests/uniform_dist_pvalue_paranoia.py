@@ -1,6 +1,5 @@
-from scipy.stats.distributions import random_integers
-
 import numpy as np
+from scipy.stats.distributions import random_integers
 
 
 def main():

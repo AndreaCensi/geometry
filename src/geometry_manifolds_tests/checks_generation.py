@@ -30,9 +30,8 @@
 
 import sys
 
-from zuper_commons.test_utils import nottest, istest
-
 from geometry import logger
+from zuper_commons.test_utils import istest, nottest
 
 __all__ = [
     "fancy_test_decorator",

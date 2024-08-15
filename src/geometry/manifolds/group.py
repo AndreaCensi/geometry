@@ -1,4 +1,5 @@
 from abc import abstractmethod
+
 from contracts import ContractsMeta
 
 __all__ = [

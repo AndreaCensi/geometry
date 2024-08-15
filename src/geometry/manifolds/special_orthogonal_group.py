@@ -1,7 +1,7 @@
 import numpy as np
-from contracts import check, contract
 
-from geometry.rotations import rot2d, random_rotation, axis_angle_from_rotation, rotation_from_axis_angle
+from contracts import check, contract
+from geometry.rotations import axis_angle_from_rotation, random_rotation, rot2d, rotation_from_axis_angle
 from geometry.utils import assert_allclose
 from .differentiable_manifold import DifferentiableManifold
 from .matrix_lie_group import MatrixLieGroup

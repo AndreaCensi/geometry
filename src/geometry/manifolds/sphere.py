@@ -1,11 +1,10 @@
+import numpy as np
 from numpy.core.numeric import outer
 
-from contracts import contract, check
+from contracts import check, contract
 from geometry.basic_utils import normalize_length, normalize_length_or_zero
 from geometry.rotations import rot2d, rotation_from_axis_angle
 from geometry.spheres import any_orthogonal_direction, geodesic_distance_on_sphere, random_direction
-import numpy as np
-
 from .differentiable_manifold import DifferentiableManifold
 
 __all__ = [

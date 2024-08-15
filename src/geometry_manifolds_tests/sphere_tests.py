@@ -1,7 +1,8 @@
 import numpy as np
+
+from geometry.formatting import printm
 from geometry.manifolds import S1
 from geometry.utils import check_allclose
-from geometry.formatting import printm
 
 
 def test_wrap_around() -> None:

@@ -1,7 +1,7 @@
-from contracts import contract
-from geometry.spheres import normalize_pi
 import numpy as np
 
+from contracts import contract
+from geometry.spheres import normalize_pi
 from .differentiable_manifold import DifferentiableManifold
 
 __all__ = [

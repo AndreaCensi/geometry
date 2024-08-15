@@ -1,9 +1,7 @@
 import numpy as np
-from typing import List
 
 from contracts import contract, new_contract
-
-from .basic_utils import safe_arccos, normalize_length
+from .basic_utils import normalize_length, safe_arccos
 from .utils import assert_allclose
 
 __all__ = [
@@ -132,7 +130,7 @@ def distribution_radius(S):
 
 
 @contract(S="array[3xK],directions", s="direction", returns="array[K](>=0,<=pi)")
-def distances_from(S: List[np.ndarray], s) -> np.ndarray:
+def distances_from(S: list[np.ndarray], s) -> np.ndarray:
     """
     Returns the geodesic distances on the sphere from a set of
     points *S* to a given point *s*.

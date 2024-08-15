@@ -1,28 +1,27 @@
 import unittest
 
+import numpy as np
 from nose.plugins.attrib import attr
 
 from contracts import check, fail
 from contracts.enabling import all_disabled
 from geometry import (
-    random_rotation,
-    random_quaternion,
-    random_direction,
-    random_directions_bounded,
     any_distant_direction,
     any_orthogonal_direction,
-    distribution_radius,
-    geodesic_distance_on_sphere,
     assert_orthogonal,
-    rotation_from_axis_angle,
     default_axis,
     default_axis_orthogonal,
-    random_orthogonal_direction,
+    distribution_radius,
+    geodesic_distance_on_sphere,
+    random_direction,
     random_directions,
+    random_directions_bounded,
+    random_orthogonal_direction,
+    random_quaternion,
+    random_rotation,
+    rotation_from_axis_angle,
 )
 from geometry.utils import assert_allclose
-import numpy as np
-
 from .utils import directions_sequence
 
 N = 20

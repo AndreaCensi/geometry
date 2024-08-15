@@ -1,6 +1,7 @@
+import numpy as np
+
 from contracts import contract
 from geometry.manifolds import DifferentiableManifold, RandomManifold
-import numpy as np
 
 __all__ = [
     "Sq",

@@ -1,4 +1,4 @@
-from typing import NewType, Tuple, TYPE_CHECKING
+from typing import NewType, TYPE_CHECKING
 
 import numpy as np
 
@@ -60,5 +60,5 @@ else:
     ) = E3value = E2value = np.ndarray
     t3value = t2value = np.ndarray
 
-TSE2value = Tuple[SE2value, se2value]
-TSE3value = Tuple[SE3value, se3value]
+TSE2value = tuple[SE2value, se2value]
+TSE3value = str | bytes[SE3value, se3value]

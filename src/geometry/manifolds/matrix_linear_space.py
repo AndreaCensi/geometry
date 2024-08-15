@@ -1,9 +1,10 @@
 from abc import abstractmethod
 
-from contracts import check, contract
-from .differentiable_manifold import DifferentiableManifold
-from geometry.utils.numpy_backport import assert_allclose
 import numpy as np
+
+from contracts import check, contract
+from geometry.utils.numpy_backport import assert_allclose
+from .differentiable_manifold import DifferentiableManifold
 
 __all__ = [
     "MatrixLinearSpace",

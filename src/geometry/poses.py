@@ -1,6 +1,6 @@
 from collections import namedtuple
 from numbers import Number
-from typing import List, Tuple, Union
+from typing import Union
 
 import numpy as np
 
@@ -194,11 +194,11 @@ def rotation_translation_from_pose(pose):
     return R.copy(), t.copy()
 
 
-def rotation_translation_from_SE2(pose: SE2value) -> Tuple[SO2value, T2value]:
+def rotation_translation_from_SE2(pose: SE2value) -> tuple[SO2value, T2value]:
     return rotation_translation_from_pose(pose)
 
 
-def rotation_translation_from_SE3(pose: SE3value) -> Tuple[SO3value, T3value]:
+def rotation_translation_from_SE3(pose: SE3value) -> tuple[SO3value, T3value]:
     return rotation_translation_from_pose(pose)
 
 
@@ -223,14 +223,14 @@ def translation_from_SE3(pose: SE3value) -> T3value:
 
 
 # @contract(t="array[2]|seq[2](number)", theta="number", returns="SE2")
-def SE2_from_translation_angle(t: Union[T2value, List[float]], theta: Number) -> SE2value:
+def SE2_from_translation_angle(t: Union[T2value, list[float]], theta: Number) -> SE2value:
     """Returns an element of SE2 from translation and rotation."""
     t = np.array(t)
     return combine_pieces(rot2d(theta), t, t * 0, 1)
 
 
 @contract(pose="SE2", returns="tuple(array[2],float)")
-def translation_angle_from_SE2(pose: SE2value) -> Tuple[T2value, float]:
+def translation_angle_from_SE2(pose: SE2value) -> tuple[T2value, float]:
     R, t, _, _ = extract_pieces(pose)
     return t, angle_from_rot2d(R)
 
@@ -255,7 +255,7 @@ def angle_from_SE2(pose: SE2value) -> float:
 
 # TODO: write tests for this, and other function
 @contract(xytheta="array[3]|seq[3](number)", returns="SE2")
-def SE2_from_xytheta(xytheta: Union[List[Number], Tuple[Number, Number, Number]]) -> SE2value:
+def SE2_from_xytheta(xytheta: Union[list[Number], tuple[Number, Number, Number]]) -> SE2value:
     """Returns an element of SE2 from translation and rotation."""
     return SE2_from_translation_angle([xytheta[0], xytheta[1]], xytheta[2])
 
@@ -268,7 +268,7 @@ def xytheta_from_SE2(pose: SE2value) -> np.ndarray:
 
 
 @contract(linear="(array[2],finite)|seq[2](number,finite)", angular="number,finite", returns="se2")
-def se2_from_linear_angular(linear: Union[T2value, List[float]], angular: float) -> SE2value:
+def se2_from_linear_angular(linear: Union[T2value, list[float]], angular: float) -> SE2value:
     """Returns an element of se2 from linear and angular velocity."""
     linear = np.array(linear)
     M = hat_map_2d(angular)

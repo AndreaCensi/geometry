@@ -1,5 +1,6 @@
 import numpy as np
-from contracts import new_contract, contract
+
+from contracts import contract, new_contract
 
 __all__ = [
     "distance_matrix",

@@ -1,9 +1,9 @@
 import itertools
 
 import numpy as np
-from contracts import check_multiple, contract
 
-from . import logger, eigh
+from contracts import check_multiple, contract
+from . import eigh, logger
 from .formatting import formatm
 from .procrustes import best_similarity_transform
 from .spheres import project_vectors_onto_sphere

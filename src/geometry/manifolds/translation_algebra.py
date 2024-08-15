@@ -1,7 +1,7 @@
-from contracts import contract
-from geometry.poses import extract_pieces, combine_pieces
 import numpy as np
 
+from contracts import contract
+from geometry.poses import combine_pieces, extract_pieces
 from .matrix_lie_algebra import MatrixLieAlgebra
 
 __all__ = [

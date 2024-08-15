@@ -1,4 +1,4 @@
-from . import for_all_mgroup_point, for_all_mgroup
+from . import for_all_mgroup, for_all_mgroup_point
 
 
 @for_all_mgroup_point

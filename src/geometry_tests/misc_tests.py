@@ -1,6 +1,5 @@
-from geometry import map_hat, hat_map
-
-from .utils import GeoTestCase, directions_sequence
+from geometry import hat_map, map_hat
+from .utils import directions_sequence, GeoTestCase
 
 
 class UtilsTests(GeoTestCase):
