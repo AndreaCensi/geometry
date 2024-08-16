@@ -38,7 +38,7 @@ class RotationsTest(GeoTestCase):
     # TODO: add test with orthogonal rotations
 
 
-def hat_map_test():
+def test_hat_map():
     for s in directions_sequence():
         for v in directions_sequence():
             x1 = np.cross(s, v)
@@ -48,7 +48,7 @@ def hat_map_test():
             assert_allclose(x1, x3)
 
 
-def rotation_from_axes_spec__test():
+def test_rotation_from_axes_spec():
     for x in directions_sequence():
         v = any_distant_direction(x)
         R = rotation_from_axes_spec(x, v)

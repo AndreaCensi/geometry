@@ -10,7 +10,7 @@ from geometry import (
 from geometry.utils import assert_allclose
 
 
-def best_orthogonal_transform_test1():
+def test_best_orthogonal_transform1():
     X = random_directions(20)
     R = random_rotation()
     Y = np.dot(R, X)
@@ -18,7 +18,7 @@ def best_orthogonal_transform_test1():
     assert_allclose(R, R2)
 
 
-def best_orthogonal_transform_test2():
+def test_best_orthogonal_transform2():
     N = 20
     X = random_directions(N)
     Y = random_directions(N)
@@ -27,13 +27,13 @@ def best_orthogonal_transform_test2():
     assert_allclose(R1.T, R2)
 
 
-def closest_orthogonal_matrix_test1():
+def test_closest_orthogonal_matrix():
     R = random_rotation()
     R2 = closest_orthogonal_matrix(R)
     assert_allclose(R, R2)
 
 
-def best_similarity_transform_test():
+def test_best_similarity_transform():
     N = 20
     for K in [3]:  # TODO: multiple dimensions
         X = np.random.randn(K, N)

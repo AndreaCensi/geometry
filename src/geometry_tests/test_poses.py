@@ -50,7 +50,7 @@ class PosesTest(GeoTestCase):
         self.check_conversion(SE2.interesting_points(), se2_from_SE2, SE2_from_se2)
 
 
-def comparison_test():
+def test_comparison():
     """Compares between SE2_from_se2_slow and SE2_from_se2."""
     for pose in SE2.interesting_points():
         se2 = se2_from_SE2(pose)
@@ -96,7 +96,7 @@ known_pairs = [
 ]
 
 
-def check_pi_test():
+def test_check_pi():
     for g, w in known_pairs:
         w2 = se2_from_SE2(g)
         # printm('g', g, 'w', w, 'w2', w2)

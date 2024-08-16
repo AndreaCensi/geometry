@@ -38,14 +38,14 @@ else:
         return DiscreteUniformDistribution(dist, "Distribution of distances from center")
 
     @stochastic
-    def random_directions_bounded_density_test():
+    def random_directions_bounded_density():
         radius = [np.pi, np.pi * 3 / 4, np.pi / 2, np.pi / 4, np.pi / 6]
         N = 100
         for r in radius:
             center = random_direction()
             yield random_directions_bounded_density_3d, center, r, N
 
-    def random_orthogonal_direction_density_test() -> None:
+    def random_orthogonal_direction_density() -> None:
         # TODO
         pass
 
@@ -54,5 +54,5 @@ else:
         StochasticTestManager.main.run(time_limit=10)
 
     if __name__ == "__main__":
-        random_directions_bounded_density_test()
-        random_orthogonal_direction_density_test()
+        random_directions_bounded_density()
+        random_orthogonal_direction_density()

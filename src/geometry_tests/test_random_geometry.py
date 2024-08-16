@@ -77,7 +77,7 @@ class GeometryTests(unittest.TestCase):
 
 
 @attr("density")
-def random_directions_bounded_test_1():
+def test_random_directions_bounded():
     # TODO: write actual test
     r = np.pi / 2
     N = 180
@@ -101,12 +101,12 @@ def random_directions_bounded_check(ndim, radius, N):
 
 
 @attr("density")
-def random_directions_bounded_test():
+def test_random_directions_bounded():
     radius = [np.pi, np.pi / 2, np.pi / 6]
     N = 300
     for ndim in [2, 3]:
         for r in radius:
-            yield random_directions_bounded_check, ndim, r, N
+            random_directions_bounded_check(ndim, r, N)
 
 
 def distribution_radius_check(center, radius, N):
@@ -117,49 +117,49 @@ def distribution_radius_check(center, radius, N):
     check_reasonable_radius(radius, r2, N)
 
 
-def distribution_radius_test():
+def test_distribution_radius():
     radius = [np.pi, np.pi / 2, np.pi / 6]
     N = 300
     for r in radius:
         for i in range(5):  # @UnusedVariable
             center = np.random.rand() * 2 * np.pi
-            yield distribution_radius_check, center, r, N
+            distribution_radius_check(center, r, N)
 
 
-def any_distant_direction_test():
+def test_any_distant_direction():
     for s in directions_sequence():
         z = any_distant_direction(s)
         d = geodesic_distance_on_sphere(z, s)
         assert d > np.pi / 6
 
 
-def any_orthogonal_direction_test():
+def test_any_orthogonal_direction():
     for s in directions_sequence():
         for i in range(5):  # @UnusedVariable
             z = any_orthogonal_direction(s)
             assert_orthogonal(z, s)
 
 
-def random_orthogonal_direction_test():
+def test_random_orthogonal_direction():
     for s in directions_sequence():
         for i in range(5):  # @UnusedVariable
             z = random_orthogonal_direction(s)
             assert_orthogonal(z, s)
 
 
-def default_axis_orthogonal_test():
+def test_default_axis_orthogonal():
     z1 = default_axis()
     z2 = default_axis_orthogonal()
     assert_orthogonal(z1, z2)
 
 
-def sorted_directions_test():
+def test_sorted_directions():
     # TODO
     pass
 
 
 # TODO: write tests for ndim=2
-def assert_orthogonal_test():
+def test_assert_orthogonal():
     for s in directions_sequence():
         axis = any_orthogonal_direction(s)
         angle = np.pi / 2

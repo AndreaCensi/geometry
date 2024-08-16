@@ -6,7 +6,7 @@ from geometry import double_center, eigh, euclidean_distances, mds, mds_randomiz
 from geometry.utils import assert_allclose
 
 
-def euclidean_distances_test():
+def test_euclidean_distances():
     n = 5
     P = np.random.rand(3, n)
     D = euclidean_distances(P)
@@ -16,7 +16,7 @@ def euclidean_distances_test():
         assert_allclose(d, D[i, j])
 
 
-def rank_test():
+def test_rank():
     """Check that the double-centered matrix has small rank."""
     for n in range(5, 50, 5):
         for k in range(1, 5):
@@ -40,7 +40,7 @@ def evaluate_error(P1, P2):
     return np.abs(D1 - D2).mean()
 
 
-def mds_test():
+def test_mds():
     for n in [10, 100]:
         for k in [3, 4, 5]:
             P = np.random.rand(k, n)
@@ -53,7 +53,7 @@ def mds_test():
 #            print('k = %d n = %d  mean_error = %s' % (k, n, error))
 
 
-def mds_fast_test():
+def test_mds_fast():
     for n in [10, 100]:
         for k in [2, 3]:
             P = np.random.rand(k, n)
@@ -73,7 +73,7 @@ def mds_fast_test():
 #      (k, n, algo.__name__, t_mds * 1000, error))
 
 
-def place_test():
+def test_place():
     for n in [4, 10]:
         for k in [3]:
             S = np.random.rand(k, n)

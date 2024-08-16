@@ -8,11 +8,11 @@ A = sphere_area()
 couples = [(0, 0), (np.pi / 2, A / 2), (np.pi, A)]
 
 
-def spherical_cap_area_test():
+def test_spherical_cap_area():
     for radius, area in couples:
-        yield assert_allclose, spherical_cap_area(radius), area
+        assert_allclose(spherical_cap_area(radius), area)
 
 
-def spherical_cap_with_area_test():
+def test_spherical_cap_with_area():
     for radius, area in couples:
-        yield assert_allclose, spherical_cap_with_area(area), radius
+        assert_allclose(spherical_cap_with_area(area), radius)
