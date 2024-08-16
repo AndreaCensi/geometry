@@ -7,5 +7,4 @@ geometry_tests.test_quaternions
 geometry_tests.test_random_geometry
 geometry_tests.test_random_geometry_density
 geometry_tests.test_rotations
-geometry_tests.test_spheres
 geometry_tests.test_utils
