@@ -83,7 +83,7 @@ def inner_product_embedding(C, ndim):
 
     eigvals = (n - ndim, n - 1)
     print(n, eigvals)
-    S, V = eigh(C, eigvals=eigvals)
+    S, V = eigh(C, subset_by_index=eigvals)
 
     if S.size >= 2:
         assert S[0] <= S[1]  # eigh returns in ascending order
