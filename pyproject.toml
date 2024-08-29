@@ -10,7 +10,6 @@ dependencies = [
 
 [project.optional-dependencies]
 test = [
-    "nose",
     ]
 
 [tool.poetry]
@@ -34,7 +33,6 @@ scipy = "*"
 zuper-commons-z7 = "*"
 
 [tool.poetry.group.test.dependencies]
-nose = "*"
 python = ">=3.12"
 
 [build-system]

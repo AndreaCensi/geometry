@@ -11,8 +11,7 @@ install_requires:
 - numpy
 - scipy
 
-tests_require:
-- nose
+tests_require: []
 
 console_scripts: {}
 nose:
