@@ -1,29 +1,29 @@
 """
-    These are very "meta" utils for creating nose tests on the fly.
+These are very "meta" utils for creating nose tests on the fly.
 
-    Here is an example use: ::
+Here is an example use: ::
 
-        thinghies = {'banana': 'yellow', 'apple': 'red', 'sky': 'blue'}
+    thinghies = {'banana': 'yellow', 'apple': 'red', 'sky': 'blue'}
 
-        def thinghies_list():
-            return thinghies.keys()
+    def thinghies_list():
+        return thinghies.keys()
 
-        def thinghies_args(x):
-            return (x, thinghies[x])
+    def thinghies_args(x):
+        return (x, thinghies[x])
 
-        def thinghies_attrs(x):
-            return dict(thinghy_name='%s' % x, flavor=thinghies[x])
+    def thinghies_attrs(x):
+        return dict(thinghy_name='%s' % x, flavor=thinghies[x])
 
-        for_all_thinghies = fancy_test_decorator(lister=thinghies_list,
-                                                 arguments=thinghies_args,
-                                                 attributes=thinghies_attrs)
+    for_all_thinghies = fancy_test_decorator(lister=thinghies_list,
+                                             arguments=thinghies_args,
+                                             attributes=thinghies_attrs)
 
 
-    And this is the proper test: ::
+And this is the proper test: ::
 
-        @for_all_thinghies
-        def check_good_flavor(id_thinghy, flavor):
-            print('test for %s %s' % (id_thinghy, flavor))
+    @for_all_thinghies
+    def check_good_flavor(id_thinghy, flavor):
+        print('test for %s %s' % (id_thinghy, flavor))
 
 
 """

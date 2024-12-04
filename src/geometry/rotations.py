@@ -1,7 +1,7 @@
 """
-    Contains all about rotation matrices, quaternions, and various conversions.
+Contains all about rotation matrices, quaternions, and various conversions.
 
-    conventions: q=( a + bi + cj + dk), with a>0
+conventions: q=( a + bi + cj + dk), with a>0
 """
 
 import itertools
