@@ -1,7 +1,11 @@
 import numpy as np
-
 from contracts import contract
-from geometry.rotations import hat_map, hat_map_2d, map_hat, map_hat_2d
+
+from geometry.rotations import hat_map
+from geometry.rotations import hat_map_2d
+from geometry.rotations import map_hat
+from geometry.rotations import map_hat_2d
+
 from .matrix_lie_algebra import MatrixLieAlgebra
 
 __all__ = [

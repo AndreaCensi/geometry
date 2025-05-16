@@ -2,7 +2,12 @@ import itertools
 
 import numpy as np
 
-from geometry import double_center, eigh, euclidean_distances, mds, mds_randomized, place
+from geometry import double_center
+from geometry import eigh
+from geometry import euclidean_distances
+from geometry import mds
+from geometry import mds_randomized
+from geometry import place
 from geometry.utils import assert_allclose
 
 

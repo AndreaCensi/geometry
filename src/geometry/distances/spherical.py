@@ -1,6 +1,6 @@
 import numpy as np
-
-from contracts import contract, new_contract
+from contracts import contract
+from contracts import new_contract
 
 # noinspection PyUnresolvedReferences
 from geometry.spheres import directions  # @NoMove @UnusedImport # for contract

@@ -7,9 +7,13 @@ conventions: q=( a + bi + cj + dk), with a>0
 import itertools
 
 import numpy as np
+from contracts import contract
+from contracts import new_contract
+from contracts import raise_desc
+from contracts import raise_wrapped
 
-from contracts import contract, new_contract, raise_desc, raise_wrapped
-from .basic_utils import normalize_length, safe_arccos
+from .basic_utils import normalize_length
+from .basic_utils import safe_arccos
 from .spheres import default_axis
 from .types import se2value
 
@@ -98,7 +102,7 @@ def check_skew_symmetric(x):
     if not ok:
         diag = x.diagonal()
         if not (diag == 0).all():
-            raise ValueError("Expected skew symmetric, but diagonal is not " "exactly zero: %s." % diag)
+            raise ValueError("Expected skew symmetric, but diagonal is not exactly zero: %s." % diag)
         for i, j in itertools.product(range(n), range(n)):
             if i < j:
                 continue
@@ -134,7 +138,8 @@ def rotz(theta):
 
 @contract(w="array[3]", returns="SO3")
 def SO3_from_R3(w):  # untested
-    from .manifolds import so3, SO3
+    from .manifolds import SO3
+    from .manifolds import so3
 
     R = SO3.group_from_algebra(so3.algebra_from_vector(w))
     return R

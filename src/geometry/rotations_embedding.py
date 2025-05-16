@@ -1,7 +1,11 @@
 import numpy as np
-
 from contracts import contract
-from .rotations import angle_from_rot2d, hat_map, map_hat_2d, rot2d, rotation_from_axis_angle
+
+from .rotations import angle_from_rot2d
+from .rotations import hat_map
+from .rotations import map_hat_2d
+from .rotations import rot2d
+from .rotations import rotation_from_axis_angle
 
 __all__ = [
     "SO2_project_from_SO3",

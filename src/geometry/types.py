@@ -1,4 +1,5 @@
-from typing import NewType, TYPE_CHECKING
+from typing import TYPE_CHECKING
+from typing import NewType
 
 import numpy as np
 

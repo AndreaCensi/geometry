@@ -1,6 +1,7 @@
 import numpy as np
-
-from contracts import contract, describe_type, describe_value
+from contracts import contract
+from contracts import describe_type
+from contracts import describe_value
 
 __all__ = [
     "formatm",

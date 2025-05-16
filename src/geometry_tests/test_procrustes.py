@@ -1,12 +1,10 @@
 import numpy as np
 
-from geometry import (
-    best_orthogonal_transform,
-    best_similarity_transform,
-    closest_orthogonal_matrix,
-    random_directions,
-    random_rotation,
-)
+from geometry import best_orthogonal_transform
+from geometry import best_similarity_transform
+from geometry import closest_orthogonal_matrix
+from geometry import random_directions
+from geometry import random_rotation
 from geometry.utils import assert_allclose
 
 

@@ -3,24 +3,33 @@ from numbers import Number
 from typing import Union
 
 import numpy as np
+from contracts import contract
+from contracts import new_contract
+from contracts import raise_wrapped
 
-from contracts import contract, new_contract, raise_wrapped
-from . import expm, logm
+from . import expm
+from . import logm
 from .constants import GeometryConstants
-from .rotations import (
-    angle_from_rot2d,
-    angle_scale_from_O2,
-    axis_angle_from_rotation,
-    check_orthogonal,
-    check_skew_symmetric,
-    check_SO,
-    hat_map_2d,
-    rot2d,
-    rotx,
-    roty,
-    rotz,
-)
-from .types import E2value, se2value, SE2value, SE3value, se3value, SO2value, SO3value, T2value, T3value
+from .rotations import angle_from_rot2d
+from .rotations import angle_scale_from_O2
+from .rotations import axis_angle_from_rotation
+from .rotations import check_orthogonal
+from .rotations import check_skew_symmetric
+from .rotations import check_SO
+from .rotations import hat_map_2d
+from .rotations import rot2d
+from .rotations import rotx
+from .rotations import roty
+from .rotations import rotz
+from .types import E2value
+from .types import SE2value
+from .types import SE3value
+from .types import SO2value
+from .types import SO3value
+from .types import T2value
+from .types import T3value
+from .types import se2value
+from .types import se3value
 from .utils import assert_allclose
 
 __all__ = [
@@ -386,13 +395,13 @@ def SE2_from_SE3(pose: SE3value, check_exact: bool = True, z_atol: float = 1e-6)
         sit += "\n axis: %s" % axis
         sit += "\n angle: %s" % angle
 
-        err_msg = "I expect that z=0 when projecting to SE2 " "(check_exact=True)."
+        err_msg = "I expect that z=0 when projecting to SE2 (check_exact=True)."
         err_msg += sit
 
         assert_allclose(translation[2], 0, atol=z_atol, err_msg=err_msg)
         # normalize angle z
         axis2 = axis * np.sign(axis[2])
-        err_msg = "I expect that the rotation is around [0,0,1] " "when projecting to SE2 (check_exact=True)."
+        err_msg = "I expect that the rotation is around [0,0,1] when projecting to SE2 (check_exact=True)."
         err_msg += sit
 
         assert_allclose(

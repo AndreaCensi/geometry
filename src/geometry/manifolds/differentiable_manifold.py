@@ -1,10 +1,19 @@
 from abc import abstractmethod
 
-from contracts import contract, ContractsMeta, new_contract
-from geometry import GEOMETRY_DO_EXTRA_CHECKS, logger
-from geometry.formatting import formatm, printm
-from geometry.utils import assert_allclose, check_allclose
-from .manifold_relations import Embedding, Isomorphism, ManifoldRelations
+from contracts import ContractsMeta
+from contracts import contract
+from contracts import new_contract
+
+from geometry import GEOMETRY_DO_EXTRA_CHECKS
+from geometry import logger
+from geometry.formatting import formatm
+from geometry.formatting import printm
+from geometry.utils import assert_allclose
+from geometry.utils import check_allclose
+
+from .manifold_relations import Embedding
+from .manifold_relations import Isomorphism
+from .manifold_relations import ManifoldRelations
 
 __all__ = [
     "DifferentiableManifold",

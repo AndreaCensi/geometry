@@ -2,11 +2,21 @@ import itertools
 
 import numpy as np
 
-from geometry import axis_angle_from_rotation, geodesic_distance_on_sphere, hat_map, random_direction, rotation_from_axis_angle
-from geometry.rotations import quaternion_from_rotation, rotation_from_axes_spec
-from geometry.spheres import any_distant_direction, slerp
+from geometry import axis_angle_from_rotation
+from geometry import geodesic_distance_on_sphere
+from geometry import hat_map
+from geometry import random_direction
+from geometry import rotation_from_axis_angle
+from geometry.rotations import quaternion_from_rotation
+from geometry.rotations import rotation_from_axes_spec
+from geometry.spheres import any_distant_direction
+from geometry.spheres import slerp
 from geometry.utils import assert_allclose
-from .utils import axis_angle_sequence, directions_sequence, GeoTestCase, rotations_sequence
+
+from .utils import GeoTestCase
+from .utils import axis_angle_sequence
+from .utils import directions_sequence
+from .utils import rotations_sequence
 
 
 # XXX:

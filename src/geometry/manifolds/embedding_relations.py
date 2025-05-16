@@ -1,37 +1,55 @@
 import numpy as np
 
 from geometry.poses import SE3_from_SE2
-from geometry.poses_embedding import (
-    R2_project_from_SE2,
-    R3_project_from_SE3,
-    SE2_from_R2,
-    SE2_from_SO2,
-    se2_from_so2,
-    se2_project_from_se3,
-    SE2_project_from_SE3,
-    SE3_from_R3,
-    se3_from_se2,
-    SE3_from_SO3,
-    se3_from_so3,
-    SO2_project_from_SE2,
-    so2_project_from_se2,
-    SO3_project_from_SE3,
-    so3_project_from_se3,
-)
-from geometry.rotations import angle_from_SO2, SO2_from_angle
-from geometry.rotations_embedding import SO2_project_from_SO3, so2_project_from_so3, SO3_from_SO2, so3_from_so2
+from geometry.poses_embedding import R2_project_from_SE2
+from geometry.poses_embedding import R3_project_from_SE3
+from geometry.poses_embedding import SE2_from_R2
+from geometry.poses_embedding import SE2_from_SO2
+from geometry.poses_embedding import SE2_project_from_SE3
+from geometry.poses_embedding import SE3_from_R3
+from geometry.poses_embedding import SE3_from_SO3
+from geometry.poses_embedding import SO2_project_from_SE2
+from geometry.poses_embedding import SO3_project_from_SE3
+from geometry.poses_embedding import se2_from_so2
+from geometry.poses_embedding import se2_project_from_se3
+from geometry.poses_embedding import se3_from_se2
+from geometry.poses_embedding import se3_from_so3
+from geometry.poses_embedding import so2_project_from_se2
+from geometry.poses_embedding import so3_project_from_se3
+from geometry.rotations import SO2_from_angle
+from geometry.rotations import angle_from_SO2
+from geometry.rotations_embedding import SO2_project_from_SO3
+from geometry.rotations_embedding import SO3_from_SO2
+from geometry.rotations_embedding import so2_project_from_so3
+from geometry.rotations_embedding import so3_from_so2
 from geometry.spheres import normalize_pi
-from geometry.spheres_embedding import S1_project_from_R2, S1_project_from_S2, S2_from_S1, S2_project_from_R3
+from geometry.spheres_embedding import S1_project_from_R2
+from geometry.spheres_embedding import S1_project_from_S2
+from geometry.spheres_embedding import S2_from_S1
+from geometry.spheres_embedding import S2_project_from_R3
+
 from .differentiable_manifold import DifferentiableManifold
-from .euclidean import R1, R2, R3
-from .special_euclidean_algebra import se2, se3
-from .special_euclidean_group import SE2, SE3
-from .special_orthogonal_algebra import so2, so3
-from .special_orthogonal_group import SO2, SO3
-from .sphere import S1, S2
-from .torus import T1, T2, T3
-from .translation_algebra import tran1, tran2, tran3
-from .translation_group import Tran2, Tran3
+from .euclidean import R1
+from .euclidean import R2
+from .euclidean import R3
+from .special_euclidean_algebra import se2
+from .special_euclidean_algebra import se3
+from .special_euclidean_group import SE2
+from .special_euclidean_group import SE3
+from .special_orthogonal_algebra import so2
+from .special_orthogonal_algebra import so3
+from .special_orthogonal_group import SO2
+from .special_orthogonal_group import SO3
+from .sphere import S1
+from .sphere import S2
+from .torus import T1
+from .torus import T2
+from .torus import T3
+from .translation_algebra import tran1
+from .translation_algebra import tran2
+from .translation_algebra import tran3
+from .translation_group import Tran2
+from .translation_group import Tran3
 
 __all__ = [
     "embedding",

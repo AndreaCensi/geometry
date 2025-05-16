@@ -1,16 +1,16 @@
 import numpy as np
+from contracts import contract
+from contracts import describe_type
 
-from contracts import contract, describe_type
-from geometry.poses import (
-    extract_pieces,
-    pose_from_rotation_translation,
-    rotation_translation_from_pose,
-    SE2_from_se2,
-    se2_from_SE2,
-    SE2_from_translation_angle,
-    SE3_from_SE2,
-)
+from geometry.poses import SE2_from_se2
+from geometry.poses import SE2_from_translation_angle
+from geometry.poses import SE3_from_SE2
+from geometry.poses import extract_pieces
+from geometry.poses import pose_from_rotation_translation
+from geometry.poses import rotation_translation_from_pose
+from geometry.poses import se2_from_SE2
 from geometry.utils.numpy_backport import assert_allclose
+
 from .differentiable_manifold import DifferentiableManifold
 from .euclidean import R
 from .matrix_lie_group import MatrixLieGroup

@@ -38,7 +38,9 @@ if in_circle():
     set_numpy_errors_to_raise()
 
 try:
-    from scipy.linalg import logm, expm, eigh
+    from scipy.linalg import eigh
+    from scipy.linalg import expm
+    from scipy.linalg import logm
 
     scipy_found = True
 except ImportError:

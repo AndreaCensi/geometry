@@ -1,9 +1,11 @@
 from abc import abstractmethod
 
 import numpy as np
+from contracts import check
+from contracts import contract
 
-from contracts import check, contract
 from geometry.utils.numpy_backport import assert_allclose
+
 from .differentiable_manifold import DifferentiableManifold
 
 __all__ = [

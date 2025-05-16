@@ -2,7 +2,9 @@ import numpy as np
 
 from geometry.formatting import formatm
 from geometry.utils import check_allclose
-from . import for_all_manifold_pairs, for_all_manifold_point
+
+from . import for_all_manifold_pairs
+from . import for_all_manifold_point
 
 
 @for_all_manifold_pairs
@@ -21,7 +23,7 @@ def check_geodesic_consistency(M, a, b):
     """
     divisions = 5
 
-    check_geodesic_consistency.description = "%s: Checking geodesic consistency. " "(a: %s, b: %s)" % (
+    check_geodesic_consistency.description = "%s: Checking geodesic consistency. (a: %s, b: %s)" % (
         M,
         M.friendly(a),
         M.friendly(b),
@@ -46,7 +48,7 @@ def check_logmap1(M, a, b):
     Exp_a( Log_a(b) ) = b
 
     """
-    check_logmap1.description = "%s: Checking that logmap/expmap work. " "(a: %s, b: %s)" % (
+    check_logmap1.description = "%s: Checking that logmap/expmap work. (a: %s, b: %s)" % (
         M,
         M.friendly(a),
         M.friendly(b),
@@ -150,30 +152,28 @@ def check_interesting_point_in_manifold(M, p):
 
 
 def test_dimensions() -> None:
-    from geometry import (
-        tran1,
-        tran2,
-        tran3,
-        so2,
-        so3,
-        se2,
-        se3,
-        S1,
-        SE2,
-        SE3,
-        S2,
-        Tran1,
-        Tran2,
-        Tran3,
-        T1,
-        T2,
-        T3,
-        R1,
-        R2,
-        SO2,
-        SO3,
-        R3,
-    )
+    from geometry import R1
+    from geometry import R2
+    from geometry import R3
+    from geometry import S1
+    from geometry import S2
+    from geometry import SE2
+    from geometry import SE3
+    from geometry import SO2
+    from geometry import SO3
+    from geometry import T1
+    from geometry import T2
+    from geometry import T3
+    from geometry import Tran1
+    from geometry import Tran2
+    from geometry import Tran3
+    from geometry import se2
+    from geometry import se3
+    from geometry import so2
+    from geometry import so3
+    from geometry import tran1
+    from geometry import tran2
+    from geometry import tran3
 
     x = [
         (SO3, 3),

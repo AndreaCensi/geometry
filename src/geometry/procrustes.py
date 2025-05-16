@@ -1,6 +1,6 @@
 import numpy as np
-
-from contracts import check, contract
+from contracts import check
+from contracts import contract
 
 __all__ = [
     "best_orthogonal_transform",

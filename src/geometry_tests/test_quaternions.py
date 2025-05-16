@@ -1,14 +1,16 @@
-from geometry import (
-    axis_angle_from_quaternion,
-    axis_angle_from_rotation,
-    quaternion_from_axis_angle,
-    quaternion_from_rotation,
-    rotation_from_axis_angle,
-    rotation_from_axis_angle2,
-    rotation_from_quaternion,
-)
+from geometry import axis_angle_from_quaternion
+from geometry import axis_angle_from_rotation
+from geometry import quaternion_from_axis_angle
+from geometry import quaternion_from_rotation
+from geometry import rotation_from_axis_angle
+from geometry import rotation_from_axis_angle2
+from geometry import rotation_from_quaternion
 from geometry.utils import assert_allclose
-from .utils import axis_angle_sequence, GeoTestCase, quaternions_sequence, rotations_sequence
+
+from .utils import GeoTestCase
+from .utils import axis_angle_sequence
+from .utils import quaternions_sequence
+from .utils import rotations_sequence
 
 
 class TestQuaternions(GeoTestCase):

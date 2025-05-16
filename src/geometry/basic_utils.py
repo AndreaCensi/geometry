@@ -1,10 +1,12 @@
 import warnings
 
 import numpy as np
+from contracts import contract
+from contracts import new_contract
 
-from contracts import contract, new_contract
 from .constants import GeometryConstants
-from .types import V1D, V1DN
+from .types import V1D
+from .types import V1DN
 
 new_contract("R1", "array[1]")
 new_contract("R2", "array[2]")

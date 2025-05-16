@@ -1,13 +1,19 @@
 import numpy as np
 
-from geometry import distances_from, random_direction, random_directions_bounded, spherical_cap_area, spherical_cap_with_area
+from geometry import distances_from
+from geometry import random_direction
+from geometry import random_directions_bounded
+from geometry import spherical_cap_area
+from geometry import spherical_cap_with_area
 from geometry.utils import attr
 
 try:
-    from stochastic_testing import DiscreteUniformDistribution, StochasticTestManager, stochastic
+    from stochastic_testing import DiscreteUniformDistribution
+    from stochastic_testing import StochasticTestManager
+    from stochastic_testing import stochastic
 
 except ImportError:
-    print("Warning: skipping stochastic testing," ' because package "stochastic_testing" not installed.')
+    print('Warning: skipping stochastic testing, because package "stochastic_testing" not installed.')
 
 else:
 

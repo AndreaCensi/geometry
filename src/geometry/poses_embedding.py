@@ -1,16 +1,22 @@
 import numpy as np
 
-from .poses import (
-    combine_pieces,
-    extract_pieces,
-    rotation_translation_from_SE2,
-    rotation_translation_from_SE3,
-    SE2_from_rotation_translation,
-    SE3_from_rotation_translation,
-)
-from .rotations import hat_map, map_hat_2d
-from .rotations_embedding import SO2_project_from_SO3, so2_project_from_so3, so3_from_so2
-from .types import SE3value, se3value, SO3value, so3value, T2value, T3value
+from .poses import SE2_from_rotation_translation
+from .poses import SE3_from_rotation_translation
+from .poses import combine_pieces
+from .poses import extract_pieces
+from .poses import rotation_translation_from_SE2
+from .poses import rotation_translation_from_SE3
+from .rotations import hat_map
+from .rotations import map_hat_2d
+from .rotations_embedding import SO2_project_from_SO3
+from .rotations_embedding import so2_project_from_so3
+from .rotations_embedding import so3_from_so2
+from .types import SE3value
+from .types import SO3value
+from .types import T2value
+from .types import T3value
+from .types import se3value
+from .types import so3value
 
 __all__ = [
     "R2_project_from_SE2",
@@ -29,7 +35,10 @@ __all__ = [
     "so3_project_from_se3",
 ]
 
-from .types import SE2value, se2value, SO2value, so2value
+from .types import SE2value
+from .types import SO2value
+from .types import se2value
+from .types import so2value
 
 
 def SE2_from_SO2(a: SO2value) -> SE2value:

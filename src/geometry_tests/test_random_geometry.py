@@ -1,26 +1,27 @@
 import unittest
 
 import numpy as np
-
-from contracts import check, fail
+from contracts import check
+from contracts import fail
 from contracts.enabling import all_disabled
-from geometry import (
-    any_distant_direction,
-    any_orthogonal_direction,
-    assert_orthogonal,
-    default_axis,
-    default_axis_orthogonal,
-    distribution_radius,
-    geodesic_distance_on_sphere,
-    random_direction,
-    random_directions,
-    random_directions_bounded,
-    random_orthogonal_direction,
-    random_quaternion,
-    random_rotation,
-    rotation_from_axis_angle,
-)
-from geometry.utils import assert_allclose, attr
+
+from geometry import any_distant_direction
+from geometry import any_orthogonal_direction
+from geometry import assert_orthogonal
+from geometry import default_axis
+from geometry import default_axis_orthogonal
+from geometry import distribution_radius
+from geometry import geodesic_distance_on_sphere
+from geometry import random_direction
+from geometry import random_directions
+from geometry import random_directions_bounded
+from geometry import random_orthogonal_direction
+from geometry import random_quaternion
+from geometry import random_rotation
+from geometry import rotation_from_axis_angle
+from geometry.utils import assert_allclose
+from geometry.utils import attr
+
 from .utils import directions_sequence
 
 N = 20

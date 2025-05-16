@@ -1,6 +1,8 @@
 import numpy as np
+from contracts import contract
+from contracts import describe_type
+from contracts import describe_value
 
-from contracts import contract, describe_type, describe_value
 from . import logger
 from .manifolds import DifferentiableManifold
 
@@ -72,7 +74,7 @@ def from_yaml(x):
     form = x[0]
     if not isinstance(form, str):
         raise ValueError(
-            "I expect a string describing the format," " not %s, while decoding %s" % (describe_type(form), describe_value(x))
+            "I expect a string describing the format, not %s, while decoding %s" % (describe_type(form), describe_value(x))
         )
     value = x[1]
     space, representation = form.split(":")

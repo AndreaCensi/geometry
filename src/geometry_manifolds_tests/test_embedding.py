@@ -1,27 +1,25 @@
-from geometry.manifolds import (
-    R1,
-    R2,
-    R3,
-    S1,
-    S2,
-    SE2,
-    se2,
-    SE3,
-    se3,
-    SO2,
-    so2,
-    SO3,
-    so3,
-    T1,
-    T2,
-    T3,
-    Tran1,
-    tran1,
-    Tran2,
-    tran2,
-    Tran3,
-    tran3,
-)
+from geometry.manifolds import R1
+from geometry.manifolds import R2
+from geometry.manifolds import R3
+from geometry.manifolds import S1
+from geometry.manifolds import S2
+from geometry.manifolds import SE2
+from geometry.manifolds import SE3
+from geometry.manifolds import SO2
+from geometry.manifolds import SO3
+from geometry.manifolds import T1
+from geometry.manifolds import T2
+from geometry.manifolds import T3
+from geometry.manifolds import Tran1
+from geometry.manifolds import Tran2
+from geometry.manifolds import Tran3
+from geometry.manifolds import se2
+from geometry.manifolds import se3
+from geometry.manifolds import so2
+from geometry.manifolds import so3
+from geometry.manifolds import tran1
+from geometry.manifolds import tran2
+from geometry.manifolds import tran3
 from geometry.utils import attr
 
 
@@ -41,7 +39,7 @@ def check_embed_relation(A, B):
 
     points = list(A.interesting_points())
     if not points:
-        msg = "Cannot test because manifold %s does " "not have interesting points" % A
+        msg = "Cannot test because manifold %s does not have interesting points" % A
         raise Exception(msg)
 
     for a1 in points:

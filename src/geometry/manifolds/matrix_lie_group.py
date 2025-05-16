@@ -1,9 +1,14 @@
 from abc import ABC
 
 import numpy as np
+from contracts import contract
+from contracts import describe_value
+from contracts import new_contract
 
-from contracts import contract, describe_value, new_contract
-from geometry import expm, logger, logm
+from geometry import expm
+from geometry import logger
+from geometry import logm
+
 from .differentiable_manifold import DifferentiableManifold
 from .group import Group
 

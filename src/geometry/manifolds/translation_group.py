@@ -1,8 +1,11 @@
 import numpy as np
-
 from contracts import contract
-from geometry.poses import extract_pieces, pose_from_rotation_translation, rotation_translation_from_pose
+
+from geometry.poses import extract_pieces
+from geometry.poses import pose_from_rotation_translation
+from geometry.poses import rotation_translation_from_pose
 from geometry.utils import assert_allclose
+
 from .differentiable_manifold import DifferentiableManifold
 from .euclidean import R
 from .matrix_lie_group import MatrixLieGroup

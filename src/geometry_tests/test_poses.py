@@ -1,22 +1,21 @@
 import numpy as np
 
-from geometry import (
-    angle_from_rot2d,
-    linear_angular_from_se2,
-    rot2d_from_angle,
-    SE2,
-    se2_from_linear_angular,
-    SE2_from_se2,
-    se2_from_SE2,
-    SE2_from_se2_slow,
-    se2_from_SE2_slow,
-    se2_from_se3,
-    SE2_from_translation_angle,
-    SE3,
-    SE3_from_SE2,
-    translation_angle_from_SE2,
-)
+from geometry import SE2
+from geometry import SE3
+from geometry import SE2_from_se2
+from geometry import SE2_from_se2_slow
+from geometry import SE2_from_translation_angle
+from geometry import SE3_from_SE2
+from geometry import angle_from_rot2d
+from geometry import linear_angular_from_se2
+from geometry import rot2d_from_angle
+from geometry import se2_from_linear_angular
+from geometry import se2_from_SE2
+from geometry import se2_from_SE2_slow
+from geometry import se2_from_se3
+from geometry import translation_angle_from_SE2
 from geometry.utils import assert_allclose
+
 from .utils import GeoTestCase
 
 

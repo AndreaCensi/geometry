@@ -14,7 +14,6 @@ from .point_set import *
 from .product_manifold import *
 from .special_euclidean_algebra import *
 from .special_euclidean_group import *
-from .special_euclidean_group import *
 from .special_orthogonal_algebra import *
 from .special_orthogonal_group import *
 from .sphere import *

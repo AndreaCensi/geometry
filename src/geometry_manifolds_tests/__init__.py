@@ -1,8 +1,13 @@
 import itertools
 
 from contracts.utils import raise_wrapped
-from geometry import all_manifolds, logger, MatrixLieGroup, RandomManifold
 from zuper_commons.test_utils import nottest
+
+from geometry import MatrixLieGroup
+from geometry import RandomManifold
+from geometry import all_manifolds
+from geometry import logger
+
 from .checks_generation import *
 
 

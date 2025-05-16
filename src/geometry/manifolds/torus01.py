@@ -1,7 +1,8 @@
 import numpy as np
-
 from contracts import contract
-from .differentiable_manifold import DifferentiableManifold, RandomManifold
+
+from .differentiable_manifold import DifferentiableManifold
+from .differentiable_manifold import RandomManifold
 
 __all__ = [
     "TorusW",

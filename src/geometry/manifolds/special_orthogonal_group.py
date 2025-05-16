@@ -1,8 +1,13 @@
 import numpy as np
+from contracts import check
+from contracts import contract
 
-from contracts import check, contract
-from geometry.rotations import axis_angle_from_rotation, random_rotation, rot2d, rotation_from_axis_angle
+from geometry.rotations import axis_angle_from_rotation
+from geometry.rotations import random_rotation
+from geometry.rotations import rot2d
+from geometry.rotations import rotation_from_axis_angle
 from geometry.utils import assert_allclose
+
 from .differentiable_manifold import DifferentiableManifold
 from .matrix_lie_group import MatrixLieGroup
 from .special_orthogonal_algebra import so

@@ -1,7 +1,9 @@
 import numpy as np
+from contracts import contract
+from contracts import new_contract
 
-from contracts import contract, new_contract
-from .basic_utils import normalize_length, safe_arccos
+from .basic_utils import normalize_length
+from .basic_utils import safe_arccos
 from .utils import assert_allclose
 
 __all__ = [
@@ -195,7 +197,8 @@ def random_orthogonal_direction(s):
     Returns a random axis orthogonal to *s*
     (only implemented for circle and sphere).
     """
-    from .rotations import rot2d, rotation_from_axis_angle
+    from .rotations import rot2d
+    from .rotations import rotation_from_axis_angle
 
     if s.size == 2:
         theta = np.sign(np.random.uniform() - 0.5) * np.pi / 2
@@ -237,7 +240,8 @@ def random_directions_bounded(ndim, radius, num_points, center=None):
     The points will be distributed uniformly in that area of the sphere.
     If *center* is not passed, it will be a random direction.
     """
-    from .rotations import rot2d, rotation_from_axis_angle
+    from .rotations import rot2d
+    from .rotations import rotation_from_axis_angle
 
     if center is None:
         center = random_direction(ndim)
