@@ -1,6 +1,6 @@
 import json
 
-from setuptools import setup
+from setuptools import setup # type: ignore
 
 with open("setup.json") as f:
     data = json.load(f)
@@ -26,4 +26,4 @@ params = dict(
 
 setup(**params)
 
-# sigil 8668ee96e452bf23787aa653addf1878
+# sigil 5bc6bda9986e86ae31d730b7ff5f36fb
