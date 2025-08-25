@@ -8,13 +8,13 @@ workflows:
   version: 2
   test:
     jobs:
-    - test-312-src:
+    - test-313-src:
         context: <<pipeline.parameters.context_name>>
         filters:
           tags:
             ignore: /.*/
 jobs:
-  test-312-src:
+  test-313-src:
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -25,7 +25,8 @@ jobs:
       COVER_PACKAGES: geometry,geometry_manifolds_tests,geometry_tests
       TEST_PACKAGES: geometry_manifolds_tests geometry_tests
     docker:
-    - image: docker.io/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.12:${Z_DISTRO}
+    - image: 
+        docker.io/${DOCKER_TARGET_ORG}/${DOCKER_REPO_PREFIX}zuper-ci-3.13:${Z_DISTRO}
       # auth:
       #   username: $DOCKER_USERNAME
       #   password: $DOCKER_PASSWORD
@@ -228,4 +229,4 @@ jobs:
           timeout 1m ./codecov || true
     resource_class: small
 
-# sigil 6ae4887bbc01aaaa016e35cee69cd5cc
+# sigil acb98c430d18f37d2be13cdb27315392
