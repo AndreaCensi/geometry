@@ -15,6 +15,7 @@ workflows:
             ignore: /.*/
 jobs:
   test-313-src:
+    max_auto_reruns: 0
     environment:
       COLUMNS: '160'
       # default is /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -141,12 +142,6 @@ jobs:
           else
               echo "Target $TARGET not defined"
           fi
-    # - run:
-    #     name: Notebooks
-    #     command: |
-    #       make -C notebooks cleanup all
-
-
     - run:
         name: geometry_manifolds_tests
         command: |
@@ -229,4 +224,4 @@ jobs:
           timeout 1m ./codecov || true
     resource_class: small
 
-# sigil 68f098e00f43bb2de5a05bf654e8cef5
+# sigil 51737c449f2e8323f34ec717045db86b
