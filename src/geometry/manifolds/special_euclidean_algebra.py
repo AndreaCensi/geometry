@@ -52,7 +52,7 @@ class se_algebra(MatrixLieAlgebra):
         if self.n == 3:
             assert v.size == 2
             V = np.zeros(3)
-            V[0] = self.son.vector_from_algebra(W)
+            V[0] = self.son.vector_from_algebra(W)[0]
             V[1:3] = v
             return V
         elif self.n == 4:

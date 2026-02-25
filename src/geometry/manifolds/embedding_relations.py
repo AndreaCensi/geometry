@@ -110,7 +110,7 @@ embedding(R3, SE3, SE3_from_R3, R3_project_from_SE3)
 
 
 def T1_from_S1(a):
-    return np.array([np.cos(float(a)), np.sin(float(a))])
+    return np.array([np.cos(a[0]), np.sin(a[0])])
 
 
 def S1_from_T1(b):
