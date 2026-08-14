@@ -1,8 +1,4 @@
-.PHONY: docs test-circleci-local-staging upload-twine test-python3 test-python3-install
-
-# The repository documentation uses its own docs.mk-based build.
-docs:
-	$(MAKE) -C docs
+.PHONY: test-circleci-local-staging upload-twine test-python3 test-python3-install
 
 circleci-local-env = -e PIP_INDEX_URL=$(PIP_INDEX_URL) -e DOCKER_HUB_USERNAME=$(DOCKER_HUB_USERNAME) -e DOCKER_HUB_PASSWORD=$(DOCKER_HUB_PASSWORD)
 

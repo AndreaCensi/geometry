@@ -2,6 +2,15 @@ all:
 	@echo
 
 out=out
+tested_packages := geometry_manifolds_tests geometry_tests
+deployed_packages := geometry
+test_environment := DISABLE_CONTRACTS=1
+
+ifneq ($(filter contracts,$(deployed_packages)),)
+test_environment :=
+endif
+
+.PHONY: all template bump upload black install-deps install-testing-deps test coverage-combine docs
 
 
 template:
@@ -40,14 +49,19 @@ install-testing-deps:
 		sphinx-rtd-theme
 
 test:
-	DISABLE_CONTRACTS=1 python -m nose2 -v geometry_manifolds_tests geometry_tests
+	$(test_environment) python -m nose2 -v $(tested_packages)
 
 coverage-combine:
 	coverage combine
 
+ifneq (1,)
+docs:
+	$(MAKE) -C docs
+else
 docs:
 	sphinx-build src $(out)/docs
+endif
 
 -include extra.mk
 
-# sigil 7b05953cf209480fb8535acd98dda778
+# sigil 5dc7652c3c684abd34cc7084361ea76c
