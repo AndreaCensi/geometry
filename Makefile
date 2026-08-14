@@ -1,48 +1,67 @@
-package=geometry
+all:
+	@echo
 
-include pypackage.mk
+out=out
+tested_packages := geometry_manifolds_tests geometry_tests
+deployed_packages := geometry
+test_environment := DISABLE_CONTRACTS=1
+
+ifneq ($(filter contracts,$(deployed_packages)),)
+test_environment :=
+endif
+
+.PHONY: all template bump upload black install-deps install-testing-deps test coverage-combine docs
 
 
+template:
+	zuper-cli template
 
 bump:
-	bumpversion patch
-	git push --tags
-	git push --all
-
-env=-e PIP_INDEX_URL=$(PIP_INDEX_URL) -e DOCKER_HUB_USERNAME=$(DOCKER_HUB_USERNAME) -e DOCKER_HUB_PASSWORD=$(DOCKER_HUB_PASSWORD)
-
-test-circleci-local-staging:
-	circleci local execute --job test-3.8-staging $(env)
-
-upload-twine:
-	rm -f dist/*
-	rm -rf src/*.egg-info
-	python3 setup.py sdist
-	twine upload dist/*
-
+	zuper-cli bump
 
 upload:
-	rm -f dist/*
-	rm -rf src/*.egg-info
-	python3 setup.py sdist
-	devpi use $(TWINE_REPOSITORY_URL)
-	devpi login $(TWINE_USERNAME) --password $(TWINE_PASSWORD)
-	devpi upload --verbose dist/*
-
-name=geometry-python3
-
-test-python3:
-	docker stop $(name) || true
-	docker rm $(name) || true
-
-	docker run -it -v "$(shell realpath $(PWD)):/geometry" -w /geometry --name $(name) python:3 /bin/bash
-
-test-python3-install:
-	pip install -r requirements.txt
-	pip install nose
-	python setup.py develop --no-deps
-
-
+	zuper-cli upload
 
 black:
-	black -l 110 --target-version py37 src
+	black -l 110 --target-version py312 src
+
+install-deps:
+	pip3 install --user shyaml
+	shyaml get-values install_requires < project.pp1.yaml > .requirements.txt
+	pip3 install --user --upgrade -r .requirements.txt
+	rm .requirements.txt
+
+install-testing-deps:
+	pip3 install --user shyaml
+	shyaml get-values tests_require < project.pp1.yaml > .requirements_tests.txt
+	pip3 install --user --upgrade -r .requirements_tests.txt
+	rm .requirements_tests.txt
+
+	pip install \
+		pipdeptree\
+		bumpversion\
+		nose2\
+		nose2-html-report\
+		pre-commit\
+		coverage\
+		codecov\
+		sphinx\
+		sphinx-rtd-theme
+
+test:
+	$(test_environment) python -m nose2 -v $(tested_packages)
+
+coverage-combine:
+	coverage combine
+
+ifneq (1,)
+docs:
+	$(MAKE) -C docs
+else
+docs:
+	sphinx-build src $(out)/docs
+endif
+
+-include extra.mk
+
+# sigil 5dc7652c3c684abd34cc7084361ea76c
